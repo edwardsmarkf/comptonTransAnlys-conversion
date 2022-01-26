@@ -1,6 +1,6 @@
 =========== 2021-01-26  ===============
 
-
+                
 
 const knexConnectOptions = {
   client: 'mysql',
@@ -10,8 +10,9 @@ const knexConnectOptions = {
 
 const knex = require('knex')(knexConnectOptions);
 
-                                                                                //async function results() {
-                                                                                //const results = async function(knex)
+                                //      https://javascript.info/promise-basics
+                                //      https://stackoverflow.com/questions/35318442/how-to-pass-parameter-to-a-promise-function
+
 const marksPromise = ( promiseInput )   =>      {
         return new Promise((resolve, reject) => {
                 console.log('parameter passed into promise: ' + promiseInput);
