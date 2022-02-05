@@ -1,3 +1,39 @@
+======== 2022-02-05
+
+
+GET contextAutoIncr using stimwordPosition(clientContextAutoIncr)
+
+    if  ( NEW != <blank> )      {
+        if  ( clientContext(NEW) NOT exists )   {
+            INSERT clientContext(NEW)
+        }
+        if  ( OLD == <blank> ) {
+            INSERT clientStimword(NEW)
+        } else {
+            MODIFY clientStimword(OLD) to clientStimword(NEW)
+            deleteBlankClientContext(OLD)
+        }
+    } else {
+        DELETE clientStimword(OLD)
+        deleteBlankClientContext(OLD)
+    }
+
+
+function deleteBlankClientContext(clientContextAutoIncr)        {
+        if      (       clientContext.clientContextErrorNotes(OLD)      blank?
+                &&      clientContext.clientContextFrequency            blank?
+                &&      clientContext.clientContextErrorSpeakingCount   zero?
+                &&      clientContext(OLD) [clientStimword]             childless?
+                )
+        {
+            DELETE clientContext(OLD)
+        }
+
+}
+
+
+
+
 ========  2022-02-02
 
 //       node  clientStimword.js  '{"clientSessionAutoIncr" : 12345, "stimwordPositionAutoIncr" : 1, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def", "clientStimwordNotes" : "my client stimword notes"}'
