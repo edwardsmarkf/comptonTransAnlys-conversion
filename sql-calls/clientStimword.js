@@ -1,5 +1,4 @@
 
-
 //       node  clientStimword.js  '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 284, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def", "clientStimwordNotes" : "my client stimword notes"}'
 
 //      contextAutoIncr 74
@@ -143,8 +142,15 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                         selectClientContext(contextAutoIncr)
                                 .then(insertClientContext)
                                 .then( val =>  {
-                                                console.log('FINAL RESULT! ' + JSON.stringify(val) )
-                                                let clientContextAutoIncr = val[0]['clientContextAutoIncr'];
+                                                let clientContextAutoIncr;
+                                                if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
+                                                        clientContextAutoIncr = val[0]['clientContextAutoIncr'];
+                                                } else if  ( val[0].length && val[0][0].hasOwnProperty('clientContextAutoIncr')){
+                                                        clientContextAutoIncr = val[0][0]['clientContextAutoIncr'];
+                                                } else {
+                                                        console.log('ERROR!');
+                                                        console.log(JSON.stringify(val));
+                                                }
                                                 console.log(`clientContextAutoIncr: ${clientContextAutoIncr} `);
                                                 if  ( parmClientContextError_OLD != ''  )       {
                                                         console.log('old is NOT blank! ' + parmClientContextError_OLD );
