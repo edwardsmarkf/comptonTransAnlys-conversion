@@ -1,9 +1,11 @@
 
 
+====  2022-02-07
 
 //       node  clientStimword.js  '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 284, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def", "clientStimwordNotes" : "my client stimword notes"}'
 
-//      contextAutoIncr 74
+//      contextAutoIncr = 74 when stimwordPosition is 283/284
+//      contextAutoIncr = 56 when stimwordPosition is 285   !!
 
 console.log(process.argv)       ;
 
@@ -27,98 +29,12 @@ const knex = require('knex')(knexConnectOptions);
                                 //      https://stackoverflow.com/questions/33257412/how-to-handle-the-if-else-in-promise-then?rq=1
 
 
-function returnContextAutoIncr(stimwordPositionAutoIncr)        {
-                                                        //      https://stackoverflow.com/questions/48558183/knex-select-result-return-to-a-variable
-        console.log('aaaaaa  parameter passed into returnContextAutoIncr promise using stimwordPositionAutoIncr : ' + stimwordPositionAutoIncr);
-        return knex.from('stimwordPosition')
-                .select('contextAutoIncr')
-                .where ({ 'stimwordPositionAutoIncr': stimwordPositionAutoIncr })
-                .then( val => { console.log('bbbbbbb returnContextAutoIncr value is: ' + JSON.stringify(val[0])); return val[0]; } )
-                ;
-        console.log('3333 end of returnContextAutoIncr function!');
-}
+
 
 
 const   insertClientContextStatement =  returnInsertClientContextStatement();
 
 const   insertClientStimwordStatement   = returnInsertClientStimwordStatement();
-
-
-
-/*
-SELECT  `clientContext`.`layoutName`
-,               `clientContext`.`teacherEmail`
-,               `clientContext`.`clientMasterEmail`
-,               `clientContext`.`sessionName`
-,               `stimwordPosition`.`soundPhoneme`
-,               `stimwordPosition`.`contextPosition`
-,               `stimwordPosition`.`stimwordPageNbr`
-,               `stimwordPosition`.`stimwordLineNbr`
-,               `stimwordPosition`.`stimwordWord`
-FROM    `clientContext`
-INNER JOIN      `stimwordPosition`
-        ON              1
-        AND              `stimwordPosition`.`stimwordPositionAutoIncr` = 284
-        AND             `clientContext`.`layoutName` = `stimwordPosition`.`layoutName`
-WHERE   1
-AND             `clientContext`.`clientContextAutoIncr` = 3043000
-
-`;
-*/
-
-
-
-function selectClientContext(parmContextAutoIncr)       {
-                                                //      https://stackoverflow.com/questions/21979388/get-count-result-with-knex-js-bookshelf-js
-                                                //      https://stackoverflow.com/questions/53751587/knex-js-or-inside-where
-                                                //      https://stackoverflow.com/questions/54407751/how-to-add-two-bind-params-in-knex/54422388
-                                                //      https://stackoverflow.com/questions/47464078/mysql-insert-with-multiple-selects-with-differing-number-of-returned-columns
-                                                //      https://stackoverflow.com/questions/30945104/db-raw-with-more-than-one-paremter-with-knex
-        console.log('in selectClientContext!  :  ' + contextAutoIncr );
-        console.log('typeof parmClientContextError_NEW: ' + typeof parmClientContextError_NEW);
-        console.log('parmClientContextError_NEW: ' + JSON.stringify( parmClientContextError_NEW));
-        console.log('parmClientSessionAutoIncr: ' + JSON.stringify( parmClientSessionAutoIncr));
-        console.log('right before select! ' );
-
-        var contextAutoIncr = parmContextAutoIncr       ;
-        return knex.from('clientContext')
-                .select         ('clientContextAutoIncr')
-                .where          (true)
-                .andWhere       ({'clientContextError'          : parmClientContextError_NEW    })
-                .andWhere       ({'clientSessionAutoIncr'       : parmClientSessionAutoIncr     })
-                .andWhere       ({'contextAutoIncr'             : parmContextAutoIncr           })
-                ;
-}
-
-function insertClientContext(val)       {
-
-        if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
-                return  val;
-        } else {
-                console.log('about to INSERT!');
-
-                let insertClientContextParms =
-                        {       'clientContextError'                    :       parmClientContextError_NEW
-                        ,       'contextAutoIncr'                       :       74 // contextAutoIncr
-                        ,       'clientSessionAutoIncr'                 :       parmClientSessionAutoIncr
-                        ,       'clientContextErrorSpeakingCount'       :       0
-                        ,       'frequency'                             :       ''
-                        ,       'clientContextErrorNotes'               :       null
-                        }
-                        ;
-                console.log('parms: ' + JSON.stringify(insertClientContextParms));
-                return knex.raw(insertClientContextStatement, insertClientContextParms);
-        }
-}
-
-function insertClientStimword(clientContextAutoIncr)    {
-
-}
-
-
-function nextPromise(result)    {
-        console.log('my nextPromise: ' + result.contextAutoIncr);
-}
 
 
 console.log('Starting run.');
@@ -127,16 +43,12 @@ console.log('000000 calling returnContextAutoIncr using: ' + parmStimwordPositio
 
 returnContextAutoIncr(parmStimwordPositionAutoIncr)
         .then( val =>   {
-                                                                                                        //console.log('111111111 : ' + JSON.stringify(val))     ;
                 let contextAutoIncr = val.contextAutoIncr ;
 
                 if  ( parmClientContextError_NEW != ''  )       {
-                                                                                                        //console.log ('2222222  not blank!');
-
-                        console.log('333333333 returnContextAutoIncr = (74??) ' + JSON.stringify(contextAutoIncr));
 
                         selectClientContext(contextAutoIncr)
-                                .then( val =>  { return insertClientContext(val);})             //.then(insertClientContext)
+                                .then( val =>  { return insertClientContext(val, contextAutoIncr);})            //.then(insertClientContext)
                                 .then( val =>  {
                                         let clientContextAutoIncr;
                                         if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
@@ -147,10 +59,9 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                 console.log('ERROR!');
                                                 console.log(JSON.stringify(val));
                                         }
-                                        console.log(`clientContextAutoIncr: ${clientContextAutoIncr} `);
                                         if  ( parmClientContextError_OLD == ''  )       {
                                                 console.log('old is NOT blank! ' + parmClientContextError_OLD );
-                                                insertClientStimword(val, clientContextAutoIncr)
+                                                insertClientStimword(clientContextAutoIncr)
                                                         .then( val => { console.log(JSON.stringify(val));});
                                         } else {
                                                 console.log('old is blank! ');
@@ -184,9 +95,78 @@ GET contextAutoIncr using stimwordPosition(clientContextAutoIncr)
 */
 
 
+function selectClientContext(parmContextAutoIncr)       {
+                                                //      https://stackoverflow.com/questions/21979388/get-count-result-with-knex-js-bookshelf-js
+                                                //      https://stackoverflow.com/questions/53751587/knex-js-or-inside-where
+                                                //      https://stackoverflow.com/questions/54407751/how-to-add-two-bind-params-in-knex/54422388
+                                                //      https://stackoverflow.com/questions/47464078/mysql-insert-with-multiple-selects-with-differing-number-of-returned-columns
+                                                //      https://stackoverflow.com/questions/30945104/db-raw-with-more-than-one-paremter-with-knex
+        var contextAutoIncr = parmContextAutoIncr       ;
+        return knex.from('clientContext')
+                .select         ('clientContextAutoIncr')
+                .where          (true)
+                .andWhere       ({'clientContextError'          : parmClientContextError_NEW    })
+                .andWhere       ({'clientSessionAutoIncr'       : parmClientSessionAutoIncr     })
+                .andWhere       ({'contextAutoIncr'             : parmContextAutoIncr           })
+                ;
+}
+
+function insertClientContext(val, contextAutoIncr)      {
+
+        if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
+                return  val;
+        } else {
+                let insertClientContextParms =
+                        {       'clientContextError'                    :       parmClientContextError_NEW
+                        ,       'contextAutoIncr'                       :       contextAutoIncr
+                        ,       'clientSessionAutoIncr'                 :       parmClientSessionAutoIncr
+                        ,       'clientContextErrorSpeakingCount'       :       0
+                        ,       'frequency'                             :       ''
+                        ,       'clientContextErrorNotes'               :       null
+                        }
+                        ;
+                console.log('parms: ' + JSON.stringify(insertClientContextParms));
+
+                return knex.raw(insertClientContextStatement, insertClientContextParms);
+        }
+}
+
+function insertClientStimword(clientContextAutoIncr)    {
+
+console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+console.log(JSON.stringify(clientContextAutoIncr));
+console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+
+        let insertClientStimwordParms =
+                {       'clientContextAutoIncr'                 :       clientContextAutoIncr
+                ,       'stimwordPositionAutoIncr'              :       parmStimwordPositionAutoIncr
+                ,       'clientStimwordNotes'                   :       parmClientStimwordNotes
+                }
+                ;
+        console.log('parms: ' + JSON.stringify(insertClientStimwordParms));
+
+        return knex.raw(insertClientStimwordStatement, insertClientStimwordParms);
+}
+
+
+function nextPromise(result)    {
+        console.log('my nextPromise: ' + result.contextAutoIncr);
+}
+
+function returnContextAutoIncr(stimwordPositionAutoIncr)        {
+                                                        //      https://stackoverflow.com/questions/48558183/knex-select-result-return-to-a-variable
+        console.log('aaaaaa  parameter passed into returnContextAutoIncr promise using stimwordPositionAutoIncr : ' + stimwordPositionAutoIncr);
+        return knex.from('stimwordPosition')
+                .select('contextAutoIncr')
+                .where ({ 'stimwordPositionAutoIncr': stimwordPositionAutoIncr })
+                .then( val => { console.log('bbbbbbb returnContextAutoIncr value is: ' + JSON.stringify(val[0])); return val[0]; } )
+                ;
+        console.log('3333 end of returnContextAutoIncr function!');
+}
+
 function returnInsertClientContextStatement()   {
 
-    return
+let returnVar =
         `
         INSERT INTO \`clientContext\`
         (               \`layoutName\`
@@ -224,14 +204,15 @@ function returnInsertClientContextStatement()   {
         )
         RETURNING \`clientContextAutoIncr\`
         ;
-                //   can we use \` on RETURNING variable????????????????????????????//
         `;
+                //   can we use \` on RETURNING variable????????????????????????????//
+    return returnVar;
 };
 
 
 function        returnInsertClientStimwordStatement()   {
 
-    return
+let returnVar =
         `
         INSERT INTO \`clientStimword\`
         (       \`layoutName\`
@@ -275,6 +256,7 @@ function        returnInsertClientStimwordStatement()   {
         )
         RETURNING \`clientStimwordAutoIncr\`
         `;
+    return returnVar;
                 //   can we use \` on RETURNING variable????????????????????????????//
 };
 
@@ -380,15 +362,3 @@ firstPromise('promise input!')
                                                                         })
                                                                 }
                                                                 */
-
-
-
-
-
-
-
-
-
-
-
-
