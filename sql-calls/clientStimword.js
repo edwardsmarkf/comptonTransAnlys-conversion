@@ -1,6 +1,8 @@
 
 
-====  2022-02-07
+====  2022-02-08
+
+
 
 //       node  clientStimword.js  '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 284, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def", "clientStimwordNotes" : "my client stimword notes"}'
 
@@ -47,29 +49,50 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
 
                 if  ( parmClientContextError_NEW != ''  )       {
 
-                        selectClientContext(contextAutoIncr)
-                                .then( val =>  { return insertClientContext(val, contextAutoIncr);})            //.then(insertClientContext)
-                                .then( val =>  {
-                                        let clientContextAutoIncr;
-                                        if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
-                                                clientContextAutoIncr = val[0]['clientContextAutoIncr'];
-                                        } else if  ( val[0].length && val[0][0].hasOwnProperty('clientContextAutoIncr')){
-                                                clientContextAutoIncr = val[0][0]['clientContextAutoIncr'];
+                        countClientStimword(parmClientContextError_NEW, parmClientSessionAutoIncr, parmStimwordPositionAutoIncr)
+                                .then( val =>   {
+                                                                                                                                                        /*
+                                                                                                                                                        console.log('NEW NEW NEW NEW NEW');
+                                                                                                                                                        console.log(JSON.stringify(val))        ;
+                                                                                                                                                        console.log('NEW NEW NEW NEW NEW');
+                                                                                                                                                        */
+                                        let clientStimwordCount = val[0]['clientStimwordCount'] ;
+                                        if  ( clientStimwordCount == 0 )        {
+                                                selectClientContext(parmClinetContextError_NEW, parmClientSessionAutoIncr, contextAutoIncr)
+                                                        .then( val =>  { return insertClientContext(val, contextAutoIncr);})
+                                                        .then( val =>  {
+                                                                let clientContextAutoIncr;
+                                                                if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
+                                                                        clientContextAutoIncr = val[0]['clientContextAutoIncr'];
+                                                                } else if  ( val[0].length && val[0][0].hasOwnProperty('clientContextAutoIncr')){
+                                                                        clientContextAutoIncr = val[0][0]['clientContextAutoIncr'];
+                                                                } else {
+                                                                        console.log('ERROR!');
+                                                                        console.log(JSON.stringify(val));
+                                                                        return 0;
+                                                                }
+                                                                if  ( parmClientContextError_OLD == '' && parmClientContextError_NEW != ''      )       {
+                                                                        console.log('old is blank! INSERT OPERATION ');
+                                                                        insertClientStimword(clientContextAutoIncr)
+                                                                                .then( val => { console.log(JSON.stringify(val));});
+                                                                } else {
+                                                                        console.log('MODIFY OPERATION old is NOT blank! ' + parmClientContextError_OLD );
+                                                                        deleteChildlessClientContext(parmClientContextErrror_OLD)       ;
+                                                                }
+                                                        });
                                         } else {
-                                                console.log('ERROR!');
-                                                console.log(JSON.stringify(val));
+                                                console.log('duplicate error!  returning....');
+                                                return 0;
                                         }
-                                        if  ( parmClientContextError_OLD == ''  )       {
-                                                console.log('old is NOT blank! ' + parmClientContextError_OLD );
-                                                insertClientStimword(clientContextAutoIncr)
-                                                        .then( val => { console.log(JSON.stringify(val));});
-                                        } else {
-                                                console.log('old is blank! ');
-                                        }
-                                });
 
-                } else {
-                        console.log ('is blank!');
+                                })
+                                .catch( err => { console.log(err); return 0; })
+                                ;
+
+                } else if  ( parmClientContextError_OLD != '' && parmClientContextError_NEW == '' ) {
+                        console.log ('OLD is filled in, NEW is blank, DELETE clientStimword~!');
+                        deleteClientStimword(parmClientContextErrror_OLD)       ;
+                        deleteChildlessClientContext(parmClientContextErrror_OLD)       ;
                 }
 
         });
@@ -78,38 +101,75 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
 /*
 GET contextAutoIncr using stimwordPosition(clientContextAutoIncr)
 
-    if  ( NEW != <blank> )      {
-        if  ( clientContext(NEW) NOT exists )   {
-            INSERT clientContext(NEW)
+        if  ( NEW != <blank> )      {
+                if  ( clientStimwordCount(NEW) == 0 )   {
+                        if  ( clientContext(NEW) NOT exists )   {
+                            INSERT clientContext(NEW)
+                        }
+                        if  ( NEW != <blank> && OLD == <blank> ) {
+                                INSERT clientStimword(NEW)
+                        } else {
+                                MODIFY clientStimword(OLD) to clientStimword(NEW)
+                                deleteChildlessClientContext(OLD)
+                        }
+                } else {        // duplicate!!
+                        throw dup error
+                }
+        } else if  ( OLD  != <blank> && NEW == <blank> )  {
+                                                                //      make sure OLD exists ????
+                DELETE clientStimword(OLD)
+                deleteChildlessClientContext(OLD)
         }
-        if  ( OLD == <blank> ) {
-            INSERT clientStimword(NEW)
-        } else {
-            MODIFY clientStimword(OLD) to clientStimword(NEW)
-            deleteBlankClientContext(OLD)
-        }
-    } else {
-        DELETE clientStimword(OLD)
-        deleteBlankClientContext(OLD)
-    }
 */
 
+function countClientStimword(clientContextError, clientSessionAutoIncr, stimwordPositionAutoIncr)       {
 
-function selectClientContext(parmContextAutoIncr)       {
+        console.log('in countClientStimword!');
+        console.log('clientContextError: ' + clientContextError);
+        console.log('clientSessionAutoIncr: ' + clientSessionAutoIncr);
+        console.log('stimwordPositionAutoIncr: ' + stimwordPositionAutoIncr);
+                                                        //      https://stackify.dev/136700-knex-js-how-to-select-columns-from-multiple-tables
+                                                        //      https://stackoverflow.com/questions/65413824/multiple-count-and-left-joins-in-mysql-node-using-knex
+        return knex
+                .count          ('* as clientStimwordCount')
+                .from('clientStimword')
+                .innerJoin('clientContext', 'clientContext.clientContextAutoIncr', 'clientStimword.clientContextAutoIncr')
+                .where          (true)
+                .andWhere       ({'clientContext.clientContextError'            : clientContextError            })
+                .andWhere       ({'clientContext.clientSessionAutoIncr'         : clientSessionAutoIncr         })
+                .andWhere       ({'clientStimword.stimwordPositionAutoIncr'     : stimwordPositionAutoIncr      })
+                                                                                                //.then( val => { console.log('inside of returnClientContextCount()! ' + JSON.stringify(val)); return val[0]; } )
+                ;
+                                /*
+                                        SELECT COUNT(*)
+                                        FROM clientStimword
+                                        INNER JOIN clientContext
+                                        ON clientContext.clientContextAutoIncr = clientStimword.clientContextAutoIncr
+                                        WHERE 1
+                                        AND clientContext.clientSessionAutoIncr = 2349
+                                        AND clientStimword.stimwordPositionAutoIncr = 285
+                                        AND clientContext.clientContextError   = 'def'
+                                */
+}
+
+
+function selectClientContext(clientContextError, clientSessionAutoIncr, contextAutoIncr)        {
                                                 //      https://stackoverflow.com/questions/21979388/get-count-result-with-knex-js-bookshelf-js
                                                 //      https://stackoverflow.com/questions/53751587/knex-js-or-inside-where
                                                 //      https://stackoverflow.com/questions/54407751/how-to-add-two-bind-params-in-knex/54422388
                                                 //      https://stackoverflow.com/questions/47464078/mysql-insert-with-multiple-selects-with-differing-number-of-returned-columns
                                                 //      https://stackoverflow.com/questions/30945104/db-raw-with-more-than-one-paremter-with-knex
         var contextAutoIncr = parmContextAutoIncr       ;
-        return knex.from('clientContext')
+        return knex
+                .from           ('clientContext')
                 .select         ('clientContextAutoIncr')
                 .where          (true)
-                .andWhere       ({'clientContextError'          : parmClientContextError_NEW    })
-                .andWhere       ({'clientSessionAutoIncr'       : parmClientSessionAutoIncr     })
-                .andWhere       ({'contextAutoIncr'             : parmContextAutoIncr           })
+                .andWhere       ({'clientContext.clientContextError'    : clientContextError            })
+                .andWhere       ({'clientContext.clientSessionAutoIncr' : clientSessionAutoIncr         })
+                .andWhere       ({'clientContext.contextAutoIncr'       : ContextAutoIncr               })
                 ;
 }
+
 
 function insertClientContext(val, contextAutoIncr)      {
 
@@ -269,7 +329,7 @@ let returnVar =
 
 
 
-function deleteBlankClientContext(clientContextAutoIncr)        {
+function deleteChildlessClientContext(clientContextAutoIncr)    {
         if      (       clientContext.clientContextErrorNotes(OLD)      blank?
                 &&      clientContext.clientContextFrequency            blank?
                 &&      clientContext.clientContextErrorSpeakingCount   zero?
@@ -362,3 +422,4 @@ firstPromise('promise input!')
                                                                         })
                                                                 }
                                                                 */
+
