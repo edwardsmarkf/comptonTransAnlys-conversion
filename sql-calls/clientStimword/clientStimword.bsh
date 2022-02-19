@@ -1,0 +1,127 @@
+#! /bin/bash -w
+
+
+  ## new ball word "abc"
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "notes ball word --- abc 285"}'          ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## duplicate error!
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "hopefully a duplicate error"}'          ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## another duplicate error!
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"", "clientContextError_NEW" : "XXX"    , "clientStimwordNotes" : "hopefully a duplicate error"}'          ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## new ball sentence "abc"
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 286, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "notes ball sentence abc 286"}'          ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## new seal word "abc"
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 273, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "notes seal word --- abc 273"}'          ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## new seal sentence "abc"
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 274, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "notes seal sentence abc 274"}'          ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## change ball word from "abc" to "def"
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def" , "clientStimwordNotes" : "notes ball word abc -> def"}'           ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## should fail on trying to change item
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def" , "clientStimwordNotes" : "cannot find item to change"}'           ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## delete ball word "def"
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"def", "clientContextError_NEW" : ""   , "clientStimwordNotes" : "deleting ball word def 285"}'            ;
+sleep 1;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## delete ball sentence "abc"
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 286, "clientContextError_OLD" :"abc", "clientContextError_NEW" : ""   , "clientStimwordNotes" : "deleting ball word abc 286"}'            ;
+sleep 1;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## cannot find item to delete
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 286, "clientContextError_OLD" :"abc", "clientContextError_NEW" : ""   , "clientStimwordNotes" : "cannot find item to delete!"}'           ;
+sleep 1;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## make a clientContext record "live"
+mariadb    --verbose  --execute="UPDATE comptonTransAnlys.clientContext SET clientContextErrorSpeakingCount=99, clientContextErrorNotes = 'Notes added!'  WHERE contextAutoIncr=56 AND clientSessionAutoIncr=2349"              ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## new ball word "abc" into existing clientContext
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "notes ball word ---- abc 285"}'         ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## change ball word from "abc" to "def"
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def" , "clientStimwordNotes" : "notes ball word abc ---> def"}'         ;
+sleep 1;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## deleting ball word - abc 273
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 273, "clientContextError_OLD" :"abc", "clientContextError_NEW" : ""    , "clientStimwordNotes" : "deleting ball word - abc 273"}'         ;
+sleep 1;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## adding 'seal' word abc 274
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 274, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "notes 'seal' word ---- abc 274"}'               ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## adding ball word def 285
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"", "clientContextError_NEW" : "def"    , "clientStimwordNotes" : "notes ball word ---- abc 285"}'         ;
+sleep 1;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## make a clientContext record eligible to be deleted
+mariadb    --verbose  --execute="UPDATE comptonTransAnlys.clientContext SET clientContextErrorSpeakingCount= 0, clientContextErrorNotes = NULL  WHERE 1 AND contextAutoIncr=56 AND clientSessionAutoIncr=2349"          ;
+sleep 1;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## creating ball word abck 273
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 273, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "creating ball word - abc 273"}'         ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## deleting ball word abc 273
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 273, "clientContextError_OLD" :"abc", "clientContextError_NEW" : ""    , "clientStimwordNotes" : "deleting seal word - abc 273"}'         ;
+sleep 1;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## deleting 'seal' word abc - 274
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 274, "clientContextError_OLD" :"abc", "clientContextError_NEW" : ""    , "clientStimwordNotes" : "deleting seal word - abc 274"}'         ;
+sleep 1;
+mariadb --execute  "\. ./clientStimword.sql" ;
+
+
+  ## deleting ball word def 285
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"def", "clientContextError_NEW" : ""    , "clientStimwordNotes" : "deleting ball word - def 285"}'         ;
+sleep 1;
+echo 'this should be EMPTY!!' ;
+mariadb --execute  "\. ./clientStimword.sql" ;
+echo 'hopefully it is EMPTY!!' ;
+
+
+
+exit 1;
