@@ -2,6 +2,7 @@
                 ## test display written 2022-02-18
 
         SELECT  `clientContext`.`clientContextError`
+        ,       `clientContext`.`contextPosition`
         ,       `clientContext`.`clientContextErrorSpeakingCount`
         ,       `clientContext`.`clientContextErrorNotes`
         ,       `clientContext`.`clientContextAutoIncr`
@@ -11,9 +12,12 @@
         AND     `clientContext`.`clientSessionAutoIncr`         =       2349
         ;
 
-        SELECT  `clientStimword`.`clientStimwordNotes`
+        SELECT  `clientContext`.`clientContextError`
+        ,       `clientStimword`.`stimwordWord`
+        ,       `clientStimword`.`contextPosition`
+        ,       `clientStimword`.`stimwordPositionSetting`
+        ,       `clientStimword`.`clientStimwordNotes`
         ,       `clientStimword`.`clientStimwordAutoIncr`
-        ,       `clientContext`.`clientContextError`
         ,       `clientStimword`.`stimwordPositionAutoIncr`
         ,       `clientStimword`.`clientStimwordAutoIncr`
         FROM    `comptonTransAnlys`.`clientContext`
