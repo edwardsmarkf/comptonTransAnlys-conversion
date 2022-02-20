@@ -75,14 +75,14 @@ sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## deleting ball word - abc 273
-node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 273, "clientContextError_OLD" :"abc", "clientContextError_NEW" : ""    , "clientStimwordNotes" : "deleting ball word - abc 273"}'         ;
+  ## deleting seal word - abc 273
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 273, "clientContextError_OLD" :"abc", "clientContextError_NEW" : ""    , "clientStimwordNotes" : "deleting seal word - abc 273"}'         ;
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## adding 'seal' word abc 274
-node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 274, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "notes 'seal' word ---- abc 274"}'               ;
+  ## adding 'seal' sentence abc 274
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 274, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "notes 'seal' sentence ---- abc 274"}'   ;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -98,19 +98,19 @@ sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## creating ball word abck 273
-node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 273, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "creating ball word - abc 273"}'         ;
+  ## creating seal word abc 273
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 273, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "creating seal word - abc 273"}'         ;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## deleting ball word abc 273
+  ## deleting seal word abc 273
 node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 273, "clientContextError_OLD" :"abc", "clientContextError_NEW" : ""    , "clientStimwordNotes" : "deleting seal word - abc 273"}'         ;
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## deleting 'seal' word abc - 274
-node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 274, "clientContextError_OLD" :"abc", "clientContextError_NEW" : ""    , "clientStimwordNotes" : "deleting seal word - abc 274"}'         ;
+  ## deleting 'seal' sentence abc - 274
+node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 274, "clientContextError_OLD" :"abc", "clientContextError_NEW" : ""    , "clientStimwordNotes" : "deleting seal sentence - abc 274"}'     ;
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
