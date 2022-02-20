@@ -1,3 +1,5 @@
+[root@localhost knex]# clear
+[root@localhost knex]# cat  clientStimword.js
 
 //       node  clientStimword.js  '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 284, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def", "clientStimwordNotes" : "my client stimword notes"}'
 
@@ -263,8 +265,9 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                                                                                         */
                                                 } else {
                                                         exitScript      (       0
-                                                                        ,       (`Cannot find this one for delete!  \
+                                                                        ,       (`Cannot find   \
                                                                                 parmClientContextError_OLD: ${parmClientContextError_OLD},  \
+                                                                                 to delete!  \
                                                                                 parmClientSessionAutoIncr: ${parmClientSessionAutoIncr},  \
                                                                                 parmStimwordPositionAutoIncr: ${parmStimwordPositionAutoIncr}.\
                                                                                 `).replace(/\t/g, '')
@@ -576,3 +579,4 @@ let returnVar =
 };
 
 //
+[root@localhost knex]#
