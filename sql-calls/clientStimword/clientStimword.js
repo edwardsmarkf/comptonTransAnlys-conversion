@@ -1,10 +1,23 @@
-[root@localhost knex]# clear
-[root@localhost knex]# cat  clientStimword.js
+/*      clientStimword.js
 
-//       node  clientStimword.js  '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 284, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def", "clientStimwordNotes" : "my client stimword notes"}'
 
-//      contextAutoIncr = 74 when stimwordPosition is 283/284
-//      contextAutoIncr = 56 when stimwordPosition is 285   !!
+        to run:
+                node  clientStimword.js  '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 284, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def", "clientStimwordNotes" : "my client stimword notes"}'
+
+        for development/debugging:
+
+                contextAutoIncr = 74 when stimwordPosition is 283/284
+                contextAutoIncr = 56 when stimwordPosition is 285   !!
+
+
+        adapted from            https://stackoverflow.com/questions/70883305/best-way-to-make-a-knex-request-from-inside-a-promise      (mine)
+                                https://stackoverflow.com/questions/71210850/best-way-to-have-a-knex-column-search-be-optional          (mine)
+
+                                https://javascript.info/promise-basics
+                                https://stackoverflow.com/questions/35318442/how-to-pass-parameter-to-a-promise-function
+                                https://stackoverflow.com/questions/33257412/how-to-handle-the-if-else-in-promise-then?rq=1
+*/
+
 
 'use strict';
 
@@ -15,8 +28,8 @@ const   parmClientContextError_OLD      = myArgs.clientContextError_OLD         
 const   parmClientContextError_NEW      = myArgs.clientContextError_NEW         ;
 const   parmClientStimwordNotes         = myArgs.clientStimwordNotes            ;
 
-                                                                        //      mariadb  --host=localhost --user=knexUser  --password=knexPassword    knexDb    ;
-                                                                        //      mariadb  --host=localhost --user=kenxUser  --password=knexPassword    comptonTransAnlys
+
+                                                                //      mariadb  --host=localhost --user=kenxUser  --password=knexPassword    comptonTransAnlys
 const knexConnectOptions =
         {       'client'        :       'mysql'
         ,       'debug'         :       false
@@ -25,9 +38,6 @@ const knexConnectOptions =
 
 const knex = require('knex')(knexConnectOptions);
 
-                                //      https://javascript.info/promise-basics
-                                //      https://stackoverflow.com/questions/35318442/how-to-pass-parameter-to-a-promise-function
-                                //      https://stackoverflow.com/questions/33257412/how-to-handle-the-if-else-in-promise-then?rq=1
 
 
 const   insertClientContextStatement    =       returnInsertClientContextStatement()    ;
@@ -340,8 +350,10 @@ function selectClientContextStimword(clientSessionAutoIncr, stimwordPositionAuto
                 .from           ('clientStimword')
                 .innerJoin      ('clientContext', 'clientContext.clientContextAutoIncr', 'clientStimword.clientContextAutoIncr')
                 .where          (true)
-                .andWhere       ({'clientContext.clientSessionAutoIncr'         : clientSessionAutoIncr         })
-                .andWhere       ({'clientStimword.stimwordPositionAutoIncr'     : stimwordPositionAutoIncr      })
+                .andWhere       (       {       'clientContext.clientSessionAutoIncr'           : clientSessionAutoIncr
+                                        ,       'clientStimword.stimwordPositionAutoIncr'       : stimwordPositionAutoIncr
+                                        }
+                                )
                 .andWhere       ( val =>        {
                                         val.where       (       {       'clientContext.clientContextError'              :       clientContextError              }       )
                                         val.orWhereRaw  (               '(true = ?)'                                    ,       clientContextError                      )
@@ -370,9 +382,11 @@ function selectClientContext(clientContextError, clientSessionAutoIncr, contextA
                 .from           ('clientContext')
                 .select         ('clientContext.clientContextAutoIncr')
                 .where          (true)
-                .andWhere       ({'clientContext.clientContextError'    : clientContextError            })
-                .andWhere       ({'clientContext.clientSessionAutoIncr' : clientSessionAutoIncr         })
-                .andWhere       ({'clientContext.contextAutoIncr'       : contextAutoIncr               })
+                .andWhere       (       {       'clientContext.clientContextError'      : clientContextError
+                                        ,       'clientContext.clientSessionAutoIncr'   : clientSessionAutoIncr
+                                        ,       'clientContext.contextAutoIncr'         : contextAutoIncr
+                                        }
+                                )
                 ;
 }
 
@@ -579,4 +593,3 @@ let returnVar =
 };
 
 //
-[root@localhost knex]#
