@@ -1,6 +1,4 @@
-[root@localhost knex]# clear
-[root@localhost knex]#
-[root@localhost knex]# cat  clientStimword.js
+
 /*      clientStimword.js
 
 
@@ -576,4 +574,3 @@ let returnVar =
 };
 
 //
-[root@localhost knex]#
