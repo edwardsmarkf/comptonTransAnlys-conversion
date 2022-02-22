@@ -453,7 +453,7 @@ function deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, cl
                 ,       'clientContextError'                    :       clientContextError
                 ,       'clientContextErrorNotes'               :       null
                 ,       'frequency'                             :       ''
-                ,       'clientContextErrorSpeakingCount'       :       0
+                ,       'clientContextSpeakingErrors'           :       0
                 };
         return knex
                 .from('clientContext')
