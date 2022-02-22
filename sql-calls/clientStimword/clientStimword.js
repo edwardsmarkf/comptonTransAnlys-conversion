@@ -1,3 +1,6 @@
+[root@localhost knex]# clear
+[root@localhost knex]#
+[root@localhost knex]# cat  clientStimword.js
 /*      clientStimword.js
 
 
@@ -61,7 +64,6 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
 
                         case ( parmClientContextError_OLD  == ''  &&    parmClientContextError_NEW > '' )       :
                         {
-                                                                                                                                                //selectClientContextStimword(parmClientSessionAutoIncr, parmStimwordPositionAutoIncr, parmClientContextError_NEW)
                                 selectClientContextStimword(parmClientSessionAutoIncr, parmStimwordPositionAutoIncr, true)
                                         .then( val =>   {
 
@@ -173,11 +175,9 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                                                                         }
                                                                                                         ;
 
-                                                                                                                                                                                                        //let updateClientStimwordResult;
                                                                         updateClientStimword    (updateClientStimwordParms)
                                                                                 .then( () =>    { return deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr_OLD, parmClientContextError_OLD) })
                                                                                 .then( val =>   {
-                                                                                                                                                                                                        //Object.assign(val, updateClientStimwordResult);
                                                                                         exitScript(1, 'Successful update of clientStimword.', val);
                                                                                 })
                                                                                 ;
@@ -239,40 +239,13 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
 
                                                         let clientContextAutoIncr = val[0]['clientContextAutoIncr'];
 
-                                                                                                                                                                                                        //let deleteClientStimwordResult        ;
                                                         deleteClientStimword(parmStimwordPositionAutoIncr, clientContextAutoIncr, parmClientContextError_OLD)
                                                                 .then( () =>    { return deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, parmClientContextError_OLD) })
                                                                 .then( val =>   {
-                                                                                                                                                                                                        //Object.assign(val, updateClientStimwordResult);
                                                                         exitScript(1, 'Successful delete of clientStimword.', val);
                                                                 })
                                                                 .catch  ( err =>        { exitScript(0, 'Failed deleteClientStimword! - error message:', err); })
                                                                 ;
-                                                                                                                        /*
-                                                                                                                        .then   ( val =>        {
-                                                                                                                                        if  ( typeof val == 'number' )  {
-                                                                                                                                                deleteClientStimwordResult = val ;
-                                                                                                                                        }
-                                                                                                                                        return deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, parmClientContextError_OLD) ;
-                                                                                                                                })
-                                                                                                                        .then   ( val =>        {
-                                                                                                                                        let deleteClientContextResult;
-                                                                                                                                        if  ( typeof val == 'number' )  {
-                                                                                                                                                deleteClientContextResult = val ;
-                                                                                                                                        }
-                                                                                                                                        exitScript      (       1
-                                                                                                                                                        ,       (`Successful delete  of childlessClientContent.  \
-                                                                                                                                                                clientContextAutoIncr: ${clientContextAutoIncr},  \
-                                                                                                                                                                parmClientContextError_OLD: ${parmClientContextError_OLD},  \
-                                                                                                                                                                clientContent deleted: ${deleteClientContextResult},  \
-                                                                                                                                                                clientStimword deleted: ${deleteClientStimwordResult}.\
-                                                                                                                                                                `).replace(/\t/g, '')
-                                                                                                                                                        ,       val
-                                                                                                                                                        )
-                                                                                                                                })
-                                                                                                                        .catch  ( err =>        { exitScript(0, 'Failed deleteClientStimword! - error message:', err); })
-                                                                                                                        ;
-                                                                                                                        */
                                                 } else {
                                                         exitScript      (       0
                                                                         ,       (`Cannot find   \
@@ -345,6 +318,16 @@ function selectClientContextStimword(clientSessionAutoIncr, stimwordPositionAuto
                                                         //      https://stackify.dev/136700-knex-js-how-to-select-columns-from-multiple-tables
                                                         //      https://stackoverflow.com/questions/65413824/multiple-count-and-left-joins-in-mysql-node-using-knex
                                                         //      https://editor.datatables.net/manual/nodejs/conditions
+        let clientContextErrorFlag;
+
+        if  ( typeof clientContextError == 'boolean' )  {
+                clientContextErrorFlag  = clientContextError    ;
+        } else if ( typeof clientContextError == 'number' )   {
+                clientContextErrorFlag  = false ;
+        } else {
+                clientContextErrorFlag  = false ;
+        }
+
         return knex
                 .select         ('clientContext.clientContextAutoIncr')
                 .from           ('clientStimword')
@@ -356,7 +339,7 @@ function selectClientContextStimword(clientSessionAutoIncr, stimwordPositionAuto
                                 )
                 .andWhere       ( val =>        {
                                         val.where       (       {       'clientContext.clientContextError'              :       clientContextError              }       )
-                                        val.orWhereRaw  (               '(true = ?)'                                    ,       clientContextError                      )
+                                        val.orWhereRaw  (               '(true = ?)'                                    ,       clientContextErrorFlag                  )
                                 })
                 ;
                                 /*
@@ -593,3 +576,4 @@ let returnVar =
 };
 
 //
+[root@localhost knex]#
