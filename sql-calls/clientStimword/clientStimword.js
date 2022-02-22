@@ -380,7 +380,7 @@ function insertClientContext(val, clientContextError, contextAutoIncr, clientSes
                 {       'clientContextError'                    :       clientContextError
                 ,       'contextAutoIncr'                       :       contextAutoIncr
                 ,       'clientSessionAutoIncr'                 :       clientSessionAutoIncr
-                ,       'clientContextErrorSpeakingCount'       :       0
+                ,       'clientContextSpeakingErrors'           :       0
                 ,       'frequency'                             :       ''
                 ,       'clientContextErrorNotes'               :       null
                 }
@@ -495,7 +495,7 @@ let returnVar =
         ,               \`contextPosition\`
         ,               \`contextAutoIncr\`
         ,               \`clientContextError\`
-        ,               \`clientContextErrorSpeakingCount\`
+        ,               \`clientContextSpeakingErrors\`
         ,               \`frequency\`
         ,               \`clientContextErrorNotes\`
         )
@@ -508,7 +508,7 @@ let returnVar =
                 ,               \`context\`.\`contextPosition\`
                 ,               \`context\`.\`contextAutoIncr\`
                 ,               :clientContextError
-                ,               :clientContextErrorSpeakingCount
+                ,               :clientContextSpeakingErrors
                 ,               :frequency
                 ,               :clientContextErrorNotes
                 FROM    \`clientSession\`
