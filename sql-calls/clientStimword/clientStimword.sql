@@ -3,7 +3,7 @@
 
         SELECT  `clientContext`.`clientContextError`
         ,       `clientContext`.`contextPosition`
-        ,       `clientContext`.`clientContextErrorSpeakingCount`
+        ,       `clientContext`.`clientContextSpeakingErrors`
         ,       `clientContext`.`clientContextErrorNotes`
         ,       `clientContext`.`clientContextAutoIncr`
         FROM    `comptonTransAnlys`.`clientContext`
