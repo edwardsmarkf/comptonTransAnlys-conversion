@@ -412,7 +412,7 @@ function returnContextAutoIncr(stimwordPositionAutoIncr)        {
 function updateClientStimword   (parmObject)    {
 
 /*
-// try this:  (2022-04-01 )
+// try this:  (2022-04-01 )     https://www.sitepoint.com/community/t/promises-feedback/384246/3
 // function updateClientStimword( {  stimwordPositionAutoIncr
                                    , clientContextAutoIncr_OLD
                                    , clientContextError_OLD
