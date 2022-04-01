@@ -411,6 +411,18 @@ function returnContextAutoIncr(stimwordPositionAutoIncr)        {
 
 function updateClientStimword   (parmObject)    {
 
+/*
+// try this:  (2022-04-01 )
+// function updateClientStimword( {  stimwordPositionAutoIncr
+                                   , clientContextAutoIncr_OLD
+                                   , clientContextError_OLD
+                                   , clientContextAutoIncr_NEW
+                                   , clientContextError_NEW
+                                   , clientStimwordNotes
+                                   }
+                                ) 
+       {
+*/
         let updateClientStimwordWhereParms =
                 {       'stimwordPositionAutoIncr'      :       parmObject.stimwordPositionAutoIncr
                 ,       'clientContextAutoIncr'         :       parmObject.clientContextAutoIncr_OLD
