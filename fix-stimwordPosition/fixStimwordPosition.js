@@ -13,7 +13,8 @@ const knexConnectOptions = {
 const knex = require('knex')(knexConnectOptions);
 
 knex.from('stimwordPosition')
-        .select (       'stimwordPageNbr'
+        .select (       'layoutName'
+                 ,      'stimwordPageNbr'
                 ,       'stimwordLineNbr'
                 ,       'stimwordWord'
                 ,       'stimwordPositionNbr'
@@ -26,16 +27,33 @@ knex.from('stimwordPosition')
         .then( rows => {
                 let saved = {};
                 for (row of rows) {
-                        if      (       JSON.stringify({ stimwordPageNbr : row.stimwordPageNbr, stimwordLineNbr : row.stimwordLineNbr , stimwordWord: row.stimwordWord })
+                        if      (       JSON.stringify({  layoutName      : row.laytoutName
+                                                        , stimwordPageNbr : row.stimwordPageNbr
+                                                        , stimwordLineNbr : row.stimwordLineNbr
+                                                        , stimwordWord    : row.stimwordWord 
+                                                        })
                                 ==      JSON.stringify(saved)
                                 )
                         {
                                 rowCount++;
                         } else {
                                 rowCount = 0;
-                                saved = { stimwordPageNbr : row.stimwordPageNbr, stimwordLineNbr : row.stimwordLineNbr , stimwordWord: row.stimwordWord };
+                                saved = {   layoutName          : row.layoutName
+                                         ,  stimwordPageNbr     : row.stimwordPageNbr
+                                         ,  stimwordLineNbr     : row.stimwordLineNbr
+                                         ,  stimwordWord        : row.stimwordWord
+                                        };
                         }
-                        console.log(rowCount, row.stimwordPageNbr, row.stimwordLineNbr, row.stimwordWord, row.stimwordPositionNbr, row.contextPosition, row.stimwordPositionSetting, row.soundPhoneme);
+                        console.log(    rowCount
+                                   ,    row.layouytName
+                                   ,    row.stimwordPageNbr
+                                   ,    row.stimwordLineNbr
+                                   ,    row.stimwordWord
+                                   ,    row.stimwordPositionNbr
+                                   ,    row.contextPosition
+                                   ,    row.stimwordPositionSetting
+                                   ,    row.soundPhoneme
+                                   );
                                                                         //console.log(JSON.stringify(row));
                 }
             })
