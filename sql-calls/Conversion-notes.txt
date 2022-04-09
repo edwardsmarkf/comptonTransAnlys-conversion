@@ -1,14 +1,6 @@
 
-new anlys drop-down menu:
-    https://codepen.io/edwardsmarkf/pen/ExWxyBq
 
-66 words and reading passage grid interface:
-    https://gridbyexample.com/examples/example1/
-    https://codepen.io/edwardsmarkf/pen/BaWazwp
 
-database:
-    https://github.com/edwardsmarkf/comptonTransAnlys-conversion
-    
 
 required sql calls for new feathers version are in  sql-calls.sql
 
