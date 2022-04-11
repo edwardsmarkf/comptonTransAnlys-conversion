@@ -38,15 +38,16 @@ knex.from('stimwordPosition')
                                 rowCount = 0;
                                 saved = { layoutName : row.layoutName, stimwordPageNbr : row.stimwordPageNbr, stimwordLineNbr : row.stimwordLineNbr , stimwordWord: row.stimwordWord };
                         }
-                        knex.from('stimwordPosition')
-                                .where  ({'stimwordPositionAutoIncr'    : row.stimwordPositionAutoIncr  })
-                                .update ({ 'soundPhonemeOrderNbr'       : rowCount                      })
-                                .then   ( rows => { console.log ('success: ' + JSON.stringify(rows)); } )
-                                .catch((err) => { console.log( err); throw err })
-                                ;
-                        console.log(rowCount, row.layoutName, row.stimwordPageNbr, row.stimwordLineNbr, row.stimwordWord, row.stimwordPositionNbr, row.contextPosition, row.stimwordPositionSetting, row.soundPhoneme);
-
-                                                                        //console.log(JSON.stringify(row));
+                                                                                /*
+                                                                                knex('stimwordPosition')
+                                                                                        .where  ({'stimwordPositionAutoIncr'    : row.stimwordPositionAutoIncr  })
+                                                                                        .update ({ 'soundPhonemeOrderNbr'       : rowCount                      })
+                                                                                        .then   ( rows => { console.log ('success: ' + JSON.stringify(rows)); } )
+                                                                                        .catch  ((err) => { console.log( JSON.stringify(err)); throw err })
+                                                                                        ;
+                                                                                */
+                        //console.log(rowCount, row.layoutName, row.stimwordPageNbr, row.stimwordLineNbr, row.stimwordWord, row.stimwordPositionNbr, row.contextPosition, row.stimwordPositionSetting, row.soundPhoneme);
+                        console.log('UPDATE `stimwrodPosition` SET `soundPhonemeOrderNbr` = ' + rowCount + ' WHERE TRUE AND `stimwordPositionAutoIncr` = ' + row.stimwordPositionAutoIncr ) ;
                 }
             })
         .catch((err) => { console.log( err); throw err })
@@ -54,6 +55,3 @@ knex.from('stimwordPosition')
                 knex.destroy();
                 process.exit();
         });
-~
-~
-~
