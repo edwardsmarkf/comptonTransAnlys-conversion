@@ -6,7 +6,7 @@
 
 const knexConnectOptions = {
   client: 'mysql',
-  debug: true,
+  debug: false,
   connection: 'mysql://knexUser:knexPassword@localhost:3306/comptonTransAnlys'
 };
 
