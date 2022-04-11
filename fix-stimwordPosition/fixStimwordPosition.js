@@ -1,4 +1,5 @@
 
+
 /*      code to produce the literal "row number" for stimwordPosition
 */
 
@@ -14,46 +15,37 @@ const knex = require('knex')(knexConnectOptions);
 
 knex.from('stimwordPosition')
         .select (       'layoutName'
-                 ,      'stimwordPageNbr'
+                ,       'stimwordPageNbr'
                 ,       'stimwordLineNbr'
                 ,       'stimwordWord'
                 ,       'stimwordPositionNbr'
                 ,       'contextPosition'
                 ,       'stimwordPositionSetting'
                 ,       'soundPhoneme'
+                ,       'stimwordPositionAutoIncr'
                 )
         .where  (true)
-        .orderBy('stimwordPositionAutoIncr')
+        .orderBy('layoutName', 'stimwordPageNbr', 'stimwordLineNbr', 'stimwordPositionAutoIncr')
         .then( rows => {
                 let saved = {};
                 for (row of rows) {
-                        if      (       JSON.stringify({  layoutName      : row.laytoutName
-                                                        , stimwordPageNbr : row.stimwordPageNbr
-                                                        , stimwordLineNbr : row.stimwordLineNbr
-                                                        , stimwordWord    : row.stimwordWord 
-                                                        })
+                        if      (       JSON.stringify({ layoutName : row.layoutName, stimwordPageNbr : row.stimwordPageNbr, stimwordLineNbr : row.stimwordLineNbr , stimwordWord: row.stimwordWord })
                                 ==      JSON.stringify(saved)
                                 )
                         {
                                 rowCount++;
                         } else {
                                 rowCount = 0;
-                                saved = {   layoutName          : row.layoutName
-                                         ,  stimwordPageNbr     : row.stimwordPageNbr
-                                         ,  stimwordLineNbr     : row.stimwordLineNbr
-                                         ,  stimwordWord        : row.stimwordWord
-                                        };
+                                saved = { layoutName : row.layoutName, stimwordPageNbr : row.stimwordPageNbr, stimwordLineNbr : row.stimwordLineNbr , stimwordWord: row.stimwordWord };
                         }
-                        console.log(    rowCount
-                                   ,    row.layouytName
-                                   ,    row.stimwordPageNbr
-                                   ,    row.stimwordLineNbr
-                                   ,    row.stimwordWord
-                                   ,    row.stimwordPositionNbr
-                                   ,    row.contextPosition
-                                   ,    row.stimwordPositionSetting
-                                   ,    row.soundPhoneme
-                                   );
+                        knex.from('stimwordPosition')
+                                .where  ({'stimwordPositionAutoIncr'    : row.stimwordPositionAutoIncr  })
+                                .update ({ 'soundPhonemeOrderNbr'       : rowCount                      })
+                                .then   ( rows => { console.log ('success: ' + JSON.stringify(rows)); } )
+                                .catch((err) => { console.log( err); throw err })
+                                ;
+                        console.log(rowCount, row.layoutName, row.stimwordPageNbr, row.stimwordLineNbr, row.stimwordWord, row.stimwordPositionNbr, row.contextPosition, row.stimwordPositionSetting, row.soundPhoneme);
+
                                                                         //console.log(JSON.stringify(row));
                 }
             })
@@ -62,4 +54,6 @@ knex.from('stimwordPosition')
                 knex.destroy();
                 process.exit();
         });
+~
+~
 ~
