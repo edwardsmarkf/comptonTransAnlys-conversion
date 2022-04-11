@@ -1,3 +1,4 @@
+
 /*      code to produce the literal "row number" for stimwordPosition
 */
 
@@ -5,7 +6,7 @@
 
 const knexConnectOptions = {
   client: 'mysql',
-  debug: false,
+  debug: true,
   connection: 'mysql://knexUser:knexPassword@localhost:3306/comptonTransAnlys'
 };
 
@@ -23,7 +24,7 @@ knex.from('stimwordPosition')
                 ,       'stimwordPositionAutoIncr'
                 )
         .where  (true)
-        .orderBy('layoutName', 'stimwordPageNbr', 'stimwordLineNbr', 'stimwordPositionAutoIncr')
+        .orderBy([{ column: 'layoutName' } , { column: 'stimwordPageNbr'} , {column: 'stimwordLineNbr' } , { column: 'stimwordPositionAutoIncr'}])
         .then( rows => {
                 let saved = {};
                 for (row of rows) {
@@ -44,7 +45,7 @@ knex.from('stimwordPosition')
                                                                                         .catch  ((err) => { console.log( JSON.stringify(err)); throw err })
                                                                                         ;
                                                                                 */
-                        //console.log(rowCount, row.layoutName, row.stimwordPageNbr, row.stimwordLineNbr, row.stimwordWord, row.stimwordPositionNbr, row.contextPosition, row.stimwordPositionSetting, row.soundPhoneme);
+                        //console.log(rowCount, row.stimwordPositionAutoIncr, row.layoutName, row.stimwordPageNbr, row.stimwordLineNbr, row.stimwordWord, row.stimwordPositionNbr, row.contextPosition, row.stimwordPositionSetting, row.soundPhoneme);
                         console.log('UPDATE `stimwordPosition` SET `soundPhonemeOrderNbr` = ' + rowCount + ' WHERE TRUE AND `stimwordPositionAutoIncr` = ' + row.stimwordPositionAutoIncr + ';' ) ;
                 }
             })
