@@ -21,9 +21,7 @@
                 ;
 		
 
-
-
-             SELECT  ALL ''
+            SELECT  ALL ''
                 ,	`stimwordPosition`.`layoutName`
                 ,       `stimwordPosition`.`stimwordWord`                   
                 ,       `stimwordPosition`.`contextPosition`
@@ -34,12 +32,15 @@
                 ,       `stimwordPosition`.`stimwordPositionBdrStyle`
                 ,       `stimwordPosition`.`stimwordPositionBdrThickness`
                 ,       `stimwordPosition`.`soundPhoneme`
+		,	`stimwordPosition`.`soundPhonemeOrderNbr`		    'soundPhonemeOrderNbr'
                 ,       `stimwordPosition`.`stimwordPageNbr`      	            'stimwordPositionPageNbr'
                 ,       `stimwordPosition`.`stimwordPositionAutoIncr`               'stimwordPositionAutoIncr'
-                ,	`languageNorms`.`languageNormsError`
+                ,	`languageNorms`.`languageNormsError`			    'languageNormsError'
                 ,       `clientStimwordCURRENT`.`clientContextError`                'clientContextError CURRENT'
                 ,       `clientStimwordREPLICATE`.`clientContextError`              'clientContextError REPLICATE'
-                FROM    
+                ,		`stimword`.`stimwordAutoIncr`
+                FROM    `stimword`
+                ,
                 `context` LEFT OUTER JOIN `languageNorms` ON
                 (		1
                 AND		`context`.`contextAutoIncr`		= `languageNorms`.`contextAutoIncr`
@@ -64,8 +65,8 @@
                 AND	`stimwordPosition`.`soundPhoneme`			= 	`clientStimwordCURRENT`.`soundPhoneme`
 
                 AND     `clientStimwordCURRENT`.`teacherEmail`              	=       'info@englishwithoutaccent.com'
-                AND     `clientStimwordCURRENT`.`clientMasterEmail`         	=       'mark_f_edwards@yahoo.com'
-                AND     `clientStimwordCURRENT`.`sessionName`   				=       'Time2'
+                AND     `clientStimwordCURRENT`.`clientMasterEmail`         	=       'mark_f_edwards@yahoo.com' ## '12yukos@gmail.com'
+                AND     `clientStimwordCURRENT`.`sessionName`   		=       'Time2'
                 AND     `clientStimwordCURRENT`.`layoutName`                	=       'PESL'
                 )
                 LEFT OUTER JOIN `clientStimword` `clientStimwordREPLICATE` ON
@@ -82,23 +83,22 @@
 		AND	`stimwordPosition`.`soundPhoneme`			=	`clientStimwordREPLICATE`.`soundPhoneme`
 
                 AND     `clientStimwordREPLICATE`.`teacherEmail`            	=       'info@englishwithoutaccent.com'
-                AND     `clientStimwordREPLICATE`.`clientMasterEmail`       	=       'mark_f_edwards@yahoo.com'
+                AND     `clientStimwordREPLICATE`.`clientMasterEmail`       	=       'mark_f_edwards@yahoo.com'  ##'12yukos@gmail.com'
                 AND     `clientStimwordREPLICATE`.`sessionName` 		=       'Time1'
                 AND     `clientStimwordREPLICATE`.`layoutName`              	=       'PESL'
                 )
                 WHERE   1                       /* dummy first one */
-                AND		`context`.`contextAutoIncr`  =      `stimwordPosition`.`contextAutoIncr`
-                AND     `stimwordPosition`.`layoutName`                         =       'PESL'
-                AND     `stimwordPosition`.`stimwordPageNbr`                    =       1
-                AND     `stimwordPosition`.`stimwordLineNbr`                    =       1
-                AND     `stimwordPosition`.`stimwordWord`                       =       'Horse'
-                ORDER BY        `stimwordPosition`.`stimwordPositionAutoIncr`
-                ;
-
-
-
-
-
+                AND `stimword`.`stimwordAutoIncr`				=	`stimwordPosition`.`stimwordAutoIncr`
+               	AND	`context`.`contextAutoIncr`  				=	`stimwordPosition`.`contextAutoIncr`
+                AND `stimword`.`stimwordAutoIncr`               		=	2
+						#                AND     `stimwordPosition`.`layoutName`                         =       'PESL'
+						#                AND     `stimwordPosition`.`stimwordPageNbr`                    =       1
+						#                AND     `stimwordPosition`.`stimwordLineNbr`                    =       1
+						#                AND     `stimwordPosition`.`stimwordWord`                       =       'Horse'
+                ORDER BY        `stimwordPosition`.`stimwordPageNbr`
+			,	`stimwordPosition`.`stimwordLineNbr`
+			,	`stimwordPosition`.`soundPhonemeOrderNbr`
+		;
 
 
 
@@ -176,6 +176,82 @@ OLD OLD OLD OLD OLD OLD OLD
 
 
 OLD OLD OLD OLD OLD OLD OLD OLD OLD OLD
+
+
+
+          SELECT  ALL ''
+                ,	`stimwordPosition`.`layoutName`
+                ,       `stimwordPosition`.`stimwordWord`                   
+                ,       `stimwordPosition`.`contextPosition`
+                ,       `stimwordPosition`.`stimwordPositionNbr`                    'stimwordPositionNbr'
+                ,       `stimwordPosition`.`stimwordPositionSetting`
+                ,       `stimwordPosition`.`stimwordPositionBackgroundColor`
+                ,       `stimwordPosition`.`stimwordPositionBdrColor`
+                ,       `stimwordPosition`.`stimwordPositionBdrStyle`
+                ,       `stimwordPosition`.`stimwordPositionBdrThickness`
+                ,       `stimwordPosition`.`soundPhoneme`
+                ,       `stimwordPosition`.`stimwordPageNbr`      	            'stimwordPositionPageNbr'
+                ,       `stimwordPosition`.`stimwordPositionAutoIncr`               'stimwordPositionAutoIncr'
+                ,	`languageNorms`.`languageNormsError`
+                ,       `clientStimwordCURRENT`.`clientContextError`                'clientContextError CURRENT'
+                ,       `clientStimwordREPLICATE`.`clientContextError`              'clientContextError REPLICATE'
+                FROM    
+                `context` LEFT OUTER JOIN `languageNorms` ON
+                (		1
+                AND		`context`.`contextAutoIncr`		= `languageNorms`.`contextAutoIncr`
+                AND		`context`.`layoutName`	      		= `languageNorms`.`layoutName`
+                AND		`context`.`soundPhoneme`		= `languageNorms`.`soundPhoneme`
+                AND		`context`.`contextPosition`		= `languageNorms`.`contextPosition`
+                AND		`languageNorms`.`layoutName`		= 'PESL'
+                AND		`languageNorms`.`languageNormsName` 	= 'Indian-pakistan'
+                )
+                ,
+                `stimwordPosition` LEFT OUTER JOIN `clientStimword` `clientStimwordCURRENT` ON
+                (       1
+                AND     `stimwordPosition`.`stimwordPositionAutoIncr`       	=       `clientStimwordCURRENT`.`stimwordPositionAutoIncr`
+                AND     `stimwordPosition`.`layoutName`                     	=       `clientStimwordCURRENT`.`layoutName`
+                AND     `stimwordPosition`.`stimwordPageNbr`        		=       `clientStimwordCURRENT`.`stimwordPageNbr`
+                AND     `stimwordPosition`.`stimwordLineNbr`        		=       `clientStimwordCURRENT`.`stimwordLineNbr`
+                AND     `stimwordPosition`.`stimwordWord`           		=       `clientStimwordCURRENT`.`stimwordWord`
+
+                AND     `stimwordPosition`.`contextPosition`                	=       `clientStimwordCURRENT`.`contextPosition`
+                AND     `stimwordPosition`.`stimwordPositionNbr`            	=       `clientStimwordCURRENT`.`stimwordPositionNbr`
+                AND     `stimwordPosition`.`stimwordPositionSetting`        	=       `clientStimwordCURRENT`.`stimwordPositionSetting`
+                AND	`stimwordPosition`.`soundPhoneme`			= 	`clientStimwordCURRENT`.`soundPhoneme`
+
+                AND     `clientStimwordCURRENT`.`teacherEmail`              	=       'info@englishwithoutaccent.com'
+                AND     `clientStimwordCURRENT`.`clientMasterEmail`         	=       'mark_f_edwards@yahoo.com'
+                AND     `clientStimwordCURRENT`.`sessionName`   				=       'Time2'
+                AND     `clientStimwordCURRENT`.`layoutName`                	=       'PESL'
+                )
+                LEFT OUTER JOIN `clientStimword` `clientStimwordREPLICATE` ON
+                (       1
+                AND     `stimwordPosition`.`stimwordPositionAutoIncr`       	=       `clientStimwordREPLICATE`.`stimwordPositionAutoIncr`
+                AND     `stimwordPosition`.`layoutName`                     	=	`clientStimwordREPLICATE`.`layoutName`
+                AND     `stimwordPosition`.`stimwordPageNbr`                	=       `clientStimwordREPLICATE`.`stimwordPageNbr`
+                AND     `stimwordPosition`.`stimwordLineNbr`                	=       `clientStimwordREPLICATE`.`stimwordLineNbr`
+                AND     `stimwordPosition`.`stimwordWord`                   	=       `clientStimwordREPLICATE`.`stimwordWord`
+
+                AND     `stimwordPosition`.`contextPosition`                	=       `clientStimwordREPLICATE`.`contextPosition`
+                AND     `stimwordPosition`.`stimwordPositionNbr`            	=       `clientStimwordREPLICATE`.`stimwordPositionNbr`
+                AND     `stimwordPosition`.`stimwordPositionSetting`        	=       `clientStimwordREPLICATE`.`stimwordPositionSetting`
+		AND	`stimwordPosition`.`soundPhoneme`			=	`clientStimwordREPLICATE`.`soundPhoneme`
+
+                AND     `clientStimwordREPLICATE`.`teacherEmail`            	=       'info@englishwithoutaccent.com'
+                AND     `clientStimwordREPLICATE`.`clientMasterEmail`       	=       'mark_f_edwards@yahoo.com'
+                AND     `clientStimwordREPLICATE`.`sessionName` 		=       'Time1'
+                AND     `clientStimwordREPLICATE`.`layoutName`              	=       'PESL'
+                )
+                WHERE   1                       /* dummy first one */
+                AND		`context`.`contextAutoIncr`  =      `stimwordPosition`.`contextAutoIncr`
+                AND     `stimwordPosition`.`layoutName`                         =       'PESL'
+                AND     `stimwordPosition`.`stimwordPageNbr`                    =       1
+                AND     `stimwordPosition`.`stimwordLineNbr`                    =       1
+                AND     `stimwordPosition`.`stimwordWord`                       =       'Horse'
+                ORDER BY        `stimwordPosition`.`stimwordPositionAutoIncr`
+                ;
+
+
         SELECT  Language_norms_error_sound_1
         ,       Language_norms_error_sound_2
         ,       Language_norms_error_sound_3
