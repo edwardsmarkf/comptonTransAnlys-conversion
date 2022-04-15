@@ -1,0 +1,271 @@
+<html>
+
+<head>
+
+<style>
+body {    margin: 40px; }
+
+:root {
+  --shit: 9;
+	  --stimwordWord1:  12;
+}
+
+/*--stimwordWord-count: 0; */
+
+.wrapper {
+    display: grid;
+    max-width: 1000px;
+    grid-gap: 10px;
+		grid-template-columns: 100px 150px 150px 200px ; /* or 100px */
+		background-color: #fff;
+		color: #444;
+    border: 2px dotted red;
+	}
+
+	.box {
+		background-color: #444;
+		color: #fff;
+		border-radius: 5px;
+		padding: 20px;
+		font-size: 150%;
+   display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;center alignment /*     https://stackoverflow.com/questions/9249359/vertically-align-text-within-a-div
+https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-div/13515693#13515693*/
+	}
+
+/*div.stimwordWord {
+	grid-column:  3; 
+}*/
+div.contextPositionSoundPhoneme {
+  display: inline-block;
+	grid-column: 2 ;
+	grid-row: 1 / var(--contextPositionSoundPhoneme-row-count);  
+}
+div.stimwordPositionSetting {
+	grid-column: 3 ;
+	/*	grid-row: 1 / 1;  */
+}
+div.clientContextError {
+	grid-column: 4 ;
+		grid-row: 1 / 1;  
+}
+
+
+
+
+
+.unknown {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+  /*grid-template-rows: repeat(auto, 50px);*/
+  grid-template-rows: 100px 100px;
+  align-items: center;
+  justify-content: space-between;
+  width: 1000px;
+  border: 5px dotted red;
+}
+
+.item {
+  background: red;
+  border: 3px solid gold;
+  text-align: center;
+}
+
+.a {
+		grid-column: 1/ -1;
+		grid-row: 2;
+    background: blue;
+  border: 3px solid gold;
+  text-align: center;
+	}
+
+
+
+</style>
+
+
+<script>
+
+
+'use strict;'
+
+var rowCount = 0;
+//var colCount = 0;
+
+var controlBreak	=	{}	;
+var cssRootRules	=	[]	;
+
+function newRow() { rowCount++; }
+
+
+function addRecord() {
+
+}
+
+
+function addItem() {
+	debugger;
+  let record = data[rowCount] ;
+  for ( let columnNbr in Object.keys(data[rowCount]) ) {
+
+	  let columnName = Object.keys(data[rowCount])[columnNbr];
+
+	   
+	  if  (   ( record[columnName] != controlBreak[columnName] )
+	   //   ||  (isNaN(parseInt(getComputedStyle(document.body).getPropertyValue(cssVarName))))
+	      ) 
+	  { 
+	   controlBreak[columnName] = record[columnName] ;
+	    
+	   let cssVarName = '--' + columnName + (rowCount + 1).toString() ;
+	   let tag = document.createElement("div");
+	   let text = document.createTextNode(record[columnName]);
+	   tag.appendChild(text);
+	   tag.classList.add(columnName, 'box');
+	    
+	   cssRootRules.push	(	{	'columnName'				:	columnName
+					,	'cssVarName'				:	cssVarName
+					,	'rowCount'				:	rowCount
+					}
+		   		);
+
+	   //tag.style.gridRow =  (rowCount + 1 ).toString() +  ' / var(' + cssVarName + ')' ; 
+	   tag.style.gridRow	=	(rowCount + 0 ).toString()		+ ' / ' +  'var(' + cssVarName + ')'	;
+	   tag.style.gridColumn =	(parseInt(columnNbr) + 1).toString()	+ ' / ' +  (parseInt(columnNbr) + 2).toString()	; 
+	 
+	   document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
+	  } else {
+		  for ( let cssRuleIncr in Object.keys(cssRootRules) )	{
+			  if  ( cssRootRules[cssRuleIncr].columnName == columnName )	{
+				  cssRootRules[cssRuleIncr].rowCount++
+				  break;
+			  }
+
+		}
+		  //  this works, supposedly:  document.styleSheets[0].insertRule(":root { --main-bg-color: orange ; }")
+
+
+	  }
+	  //let maxRow = parseInt(getComputedStyle(document.body).getPropertyValue(cssVarName));
+	  //maxRow++;  
+	  	//document.body.style.setProperty(cssVarName, maxRow);
+	  // document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; }");
+			    
+				  //console.log('THREE: setProperty: ' + cssVarName + ' -- ' + getComputedStyle(document.body).getPropertyValue(cssVarName))
+  }
+
+}
+
+	   //document.body.style.setProperty(cssVarName, rowCount + 1);    // ???????????????????????
+
+const data = 
+[ { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h', stimwordPositionSetting:'Word', clientContextError: '0'}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h', stimwordPositionSetting:'Sentence', clientContextError: ''}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe', stimwordPositionSetting:'Word', clientContextError: ''}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong -oe', stimwordPositionSetting:'Sentence', clientContextError: ''}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'final - S', stimwordPositionSetting:'Word', clientContextError: ''}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'final - S', stimwordPositionSetting:'Sentence', clientContextError: ''}
+]
+
+</script>
+
+</head>
+
+<body>
+
+<div id='phoneticTranscriptionInputScreen' class="wrapper">
+  <!--<div class='stimwordWord'>Horse</div>-->
+  <div class='contextPositionSoundPhoneme'>
+    <span id='contextPosition'>Initial</span>
+    <span id='soundPhoneme'>h</span>
+  </div> 
+  <div class='stimwordPositionSetting'>Word</div>
+  <div class='clientContextError'>
+    <input type="text" value='error-11111'></input>
+  </div>
+
+
+<div class='stimwordPositionSetting'>Sentence</div>
+<div class='clientContextError'>
+   <input type="text" value='error-2'></input>
+</div>
+</div>
+
+<br />
+<button onClick="javascript: addItem();">Add column</button>
+<button onClick="javascript: newRow();">next row</button>
+	
+</body>
+</html>
+
+<!--
+/*
+function shit()  {
+
+	// https://stackoverflow.com/questions/70251599/how-to-use-cssstylesheet-insertrule-to-change-a-root-property
+
+	let varOne = '--varOne';
+	let varTwo = '--varTwo';
+
+	debugger;
+
+	console.log('first loopfind: ' );
+	let firstRootVars = loopFind();
+	console.log(firstRootVars);
+	console.log(getComputedStyle(document.body).getPropertyValue(varOne));
+	console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
+
+	document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; }");
+
+	console.log('second loopfind: ' );
+	let secondRootVars = loopFind();
+	console.log(secondRootVars);
+	console.log(getComputedStyle(document.body).getPropertyValue(varOne));
+	console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
+
+	document.styleSheets[0].removeRule(0)
+
+	console.log('third loopfind: ' );
+	let thirdRootVars = loopFind();
+	console.log(thirdRootVars);
+	console.log(getComputedStyle(document.body).getPropertyValue(varOne));
+	console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
+
+	document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; " + varTwo + ": 5678; }");
+
+	console.log('fourth loopfind: ' );
+	let fourthRootVars = loopFind();
+	console.log(fourthRootVars);
+	console.log(getComputedStyle(document.body).getPropertyValue(varOne));
+	console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
+
+
+}
+
+function loopFind() {
+
+	for ( let x = 0 ; x < document.styleSheets[0].cssRules.length ; x++ ) {
+		if ( document.styleSheets[0].cssRules[x].selectorText == ':root' ) {
+			return document.styleSheets[0].cssRules[x].cssText ;
+		}
+	}
+}
+*/
+/*
+var sheet = (function() {
+	// Create the <style> tag
+	var style = document.createElement("style");
+
+	// WebKit hack :(
+	style.appendChild(document.createTextNode(""));
+
+	// Add the <style> element to the page
+	document.head.appendChild(style);
+
+	return style.sheet;
+})();
+*/
+-->
