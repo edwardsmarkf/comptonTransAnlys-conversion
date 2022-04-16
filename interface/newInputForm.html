@@ -5,12 +5,13 @@
 <style>
 body {    margin: 40px; }
 
-:root {
-  --shit: 9;
-	  --stimwordWord1:  12;
-}
 
-/*--stimwordWord-count: 0; */
+/*
+:root {
+	  --stimwordWord1:  22;
+}
+*/
+
 
 .wrapper {
     display: grid;
@@ -20,9 +21,9 @@ body {    margin: 40px; }
 		background-color: #fff;
 		color: #444;
     border: 2px dotted red;
-	}
+}
 
-	.box {
+.box {
 		background-color: #444;
 		color: #fff;
 		border-radius: 5px;
@@ -31,57 +32,10 @@ body {    margin: 40px; }
    display: flex;
   justify-content: center;
   align-content: center;
-  flex-direction: column;center alignment /*     https://stackoverflow.com/questions/9249359/vertically-align-text-within-a-div
+  flex-direction: column;center alignment
+  	/*     https://stackoverflow.com/questions/9249359/vertically-align-text-within-a-div
 https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-div/13515693#13515693*/
-	}
-
-/*div.stimwordWord {
-	grid-column:  3; 
-}*/
-div.contextPositionSoundPhoneme {
-  display: inline-block;
-	grid-column: 2 ;
-	grid-row: 1 / var(--contextPositionSoundPhoneme-row-count);  
 }
-div.stimwordPositionSetting {
-	grid-column: 3 ;
-	/*	grid-row: 1 / 1;  */
-}
-div.clientContextError {
-	grid-column: 4 ;
-		grid-row: 1 / 1;  
-}
-
-
-
-
-
-.unknown {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
-  /*grid-template-rows: repeat(auto, 50px);*/
-  grid-template-rows: 100px 100px;
-  align-items: center;
-  justify-content: space-between;
-  width: 1000px;
-  border: 5px dotted red;
-}
-
-.item {
-  background: red;
-  border: 3px solid gold;
-  text-align: center;
-}
-
-.a {
-		grid-column: 1/ -1;
-		grid-row: 2;
-    background: blue;
-  border: 3px solid gold;
-  text-align: center;
-	}
-
 
 
 </style>
@@ -120,7 +74,7 @@ function addItem() {
 	  { 
 	   controlBreak[columnName] = record[columnName] ;
 	    
-	   let cssVarName = '--' + columnName + (rowCount + 1).toString() ;
+	   let cssVarName = '--' + columnName + '--' + (rowCount + 1).toString() ;
 	   let tag = document.createElement("div");
 	   let text = document.createTextNode(record[columnName]);
 	   tag.appendChild(text);
@@ -133,7 +87,7 @@ function addItem() {
 		   		);
 
 	   //tag.style.gridRow =  (rowCount + 1 ).toString() +  ' / var(' + cssVarName + ')' ; 
-	   tag.style.gridRow	=	(rowCount + 0 ).toString()		+ ' / ' +  'var(' + cssVarName + ')'	;
+	   tag.style.gridRow	=	(rowCount + 1 ).toString()		+ ' / ' +  'var(' + cssVarName + ')'	;
 	   tag.style.gridColumn =	(parseInt(columnNbr) + 1).toString()	+ ' / ' +  (parseInt(columnNbr) + 2).toString()	; 
 	 
 	   document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
@@ -145,7 +99,7 @@ function addItem() {
 			  }
 
 		}
-		  //  this works, supposedly:  document.styleSheets[0].insertRule(":root { --main-bg-color: orange ; }")
+		  //  this works, supposedly:  document.styleSheets[0].insertRule(":root { --stimwordWord--1: 22; }")
 
 
 	  }
@@ -177,21 +131,23 @@ const data =
 <body>
 
 <div id='phoneticTranscriptionInputScreen' class="wrapper">
-  <!--<div class='stimwordWord'>Horse</div>-->
-  <div class='contextPositionSoundPhoneme'>
-    <span id='contextPosition'>Initial</span>
-    <span id='soundPhoneme'>h</span>
-  </div> 
-  <div class='stimwordPositionSetting'>Word</div>
-  <div class='clientContextError'>
-    <input type="text" value='error-11111'></input>
-  </div>
+						<!--
+						  <div class='stimwordWord'>Horse</div>
+						  <div class='contextPositionSoundPhoneme'>
+						    <span id='contextPosition'>Initial</span>
+						    <span id='soundPhoneme'>h</span>
+						  </div> 
+						  <div class='stimwordPositionSetting'>Word</div>
+						  <div class='clientContextError'>
+						    <input type="text" value='error-11111'></input>
+						  </div>
 
 
-<div class='stimwordPositionSetting'>Sentence</div>
-<div class='clientContextError'>
-   <input type="text" value='error-2'></input>
-</div>
+						<div class='stimwordPositionSetting'>Sentence</div>
+						<div class='clientContextError'>
+						   <input type="text" value='error-2'></input>
+						</div>
+						-->
 </div>
 
 <br />
@@ -249,7 +205,8 @@ function loopFind() {
 
 	for ( let x = 0 ; x < document.styleSheets[0].cssRules.length ; x++ ) {
 		if ( document.styleSheets[0].cssRules[x].selectorText == ':root' ) {
-			return document.styleSheets[0].cssRules[x].cssText ;
+			document.styleSheets[0].removeRule(x)
+			break;
 		}
 	}
 }
