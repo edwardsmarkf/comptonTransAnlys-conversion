@@ -66,13 +66,19 @@ function addItem() {
   for ( let columnNbr in Object.keys(data[rowCount]) ) {
 
 	  let columnName = Object.keys(data[rowCount])[columnNbr];
+	
 
 	   
 	  if  (   ( record[columnName] != controlBreak[columnName] )
-	   //   ||  (isNaN(parseInt(getComputedStyle(document.body).getPropertyValue(cssVarName))))
+						   //   ||  (isNaN(parseInt(getComputedStyle(document.body).getPropertyValue(cssVarName))))
 	      ) 
 	  { 
 	   controlBreak[columnName] = record[columnName] ;
+		  // null out all subsequent columns
+	   for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[rowCount]).length; xx++ )
+	   {	console.log(  Object.keys(data[rowCount])[xx] );
+		controlBreak[ Object.keys(data[rowCount])[xx]	] = null;  ;
+  	   }
 	    
 	   let cssVarName = '--' + columnName + '--' + (rowCount + 1).toString() ;
 	   let tag = document.createElement("div");
@@ -82,7 +88,8 @@ function addItem() {
 	    
 	   cssRootRules.push	(	{	'columnName'				:	columnName
 					,	'cssVarName'				:	cssVarName
-					,	'rowCount'				:	rowCount
+		   			,	'startingRowNbr'			:	rowCount
+					,	'endingRowNbr'				:	rowCount
 					}
 		   		);
 
@@ -92,14 +99,16 @@ function addItem() {
 	 
 	   document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
 	  } else {
-		  for ( let cssRuleIncr in Object.keys(cssRootRules) )	{
-			  if  ( cssRootRules[cssRuleIncr].columnName == columnName )	{
-				  cssRootRules[cssRuleIncr].rowCount++
+													  //for ( let cssRuleIncr in Object.keys(cssRootRules).reverse() )
+		  for ( let cssRuleIncr = cssRootRules.length - 1 ; cssRuleIncr >= 0; cssRuleIncr-- )
+		  {	if  ( cssRootRules[cssRuleIncr].columnName == columnName )	{
+				  cssRootRules[cssRuleIncr].endingRowNbr++
 				  break;
-			  }
+			}
 
-		}
+		 }
 		  //  this works, supposedly:  document.styleSheets[0].insertRule(":root { --stimwordWord--1: 22; }")
+		  // document.styleSheets[0].insertRule(":root { --stimwordWord--1: 5; --contextPositionSoundPhoneme--1: 5}");
 
 
 	  }
@@ -107,21 +116,31 @@ function addItem() {
 	  //maxRow++;  
 	  	//document.body.style.setProperty(cssVarName, maxRow);
 	  // document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; }");
-			    
 				  //console.log('THREE: setProperty: ' + cssVarName + ' -- ' + getComputedStyle(document.body).getPropertyValue(cssVarName))
   }
-
 }
-
 	   //document.body.style.setProperty(cssVarName, rowCount + 1);    // ???????????????????????
 
+function createRootRule() {
+	let ruleString = ':root {';
+	for ( let incr in cssRootRules ) 
+	{	let { startingRowNbr, endingRowNbr, cssVarName } = cssRootRules[incr]	;
+		if  ( startingRowNbr != endingRowNbr ) 
+		{   ruleString += (' ' + cssVarName + ': ' + (startingRowNbr + ( endingRowNbr - startingRowNbr ) + 2 ).toString() + ';' ) ; 
+		}
+	}
+	ruleString += '}';
+	document.styleSheets[0].insertRule(ruleString);
+}
+
+
 const data = 
-[ { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h', stimwordPositionSetting:'Word', clientContextError: '0'}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h', stimwordPositionSetting:'Sentence', clientContextError: ''}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe', stimwordPositionSetting:'Word', clientContextError: ''}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong -oe', stimwordPositionSetting:'Sentence', clientContextError: ''}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'final - S', stimwordPositionSetting:'Word', clientContextError: ''}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'final - S', stimwordPositionSetting:'Sentence', clientContextError: ''}
+[ { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Word'	, clientContextError: '0'	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe'	, stimwordPositionSetting:'Word'	, clientContextError: ''	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'	, stimwordPositionSetting:'Word'	, clientContextError: ''	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	}
 ]
 
 </script>
