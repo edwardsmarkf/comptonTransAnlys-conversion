@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -17,7 +18,7 @@ body {    margin: 40px; }
     display: grid;
     max-width: 1000px;
     grid-gap: 10px;
-		grid-template-columns: 100px 150px 150px 200px ; /* or 100px */
+		grid-template-columns: 100px 200px 150px 80px ; 
 		background-color: #fff;
 		color: #444;
     border: 2px dotted red;
@@ -59,22 +60,25 @@ function addRecord() {
 
 }
 
+function valueChanged(int) {
+	console.log(int);
+}
 
 function addItem() {
 	debugger;
   let record = data[rowCount] ;
   for ( let columnNbr in Object.keys(data[rowCount]) ) {
+	  //maxRow++;  
 
 	  let columnName = Object.keys(data[rowCount])[columnNbr];
 	
-
 	   
 	  if  (   ( record[columnName] != controlBreak[columnName] )
 						   //   ||  (isNaN(parseInt(getComputedStyle(document.body).getPropertyValue(cssVarName))))
 	      ) 
 	  { 
 	   controlBreak[columnName] = record[columnName] ;
-		  // null out all subsequent columns
+		  // null out all subsequent control-break columns!
 	   for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[rowCount]).length; xx++ )
 	   {	console.log(  Object.keys(data[rowCount])[xx] );
 		controlBreak[ Object.keys(data[rowCount])[xx]	] = null;  ;
@@ -82,9 +86,16 @@ function addItem() {
 	    
 	   let cssVarName = '--' + columnName + '--' + (rowCount + 1).toString() ;
 	   let tag = document.createElement("div");
-	   let text = document.createTextNode(record[columnName]);
-	   tag.appendChild(text);
-	   tag.classList.add(columnName, 'box');
+	   if  ( columnName == 'clientContextError' ) {
+		let inputElement = document.createElement('input');
+		inputElement.setAttribute('value', record[columnName]);
+		inputElement.setAttribute('id', rowCount);
+		inputElement.setAttribute('onChange' , 'valueChanged(' + rowCount + ');' );
+	        tag.appendChild(inputElement);
+	   } else {
+	       let text = document.createTextNode(record[columnName]);
+	       tag.appendChild(text);
+	   }
 	    
 	   cssRootRules.push	(	{	'columnName'				:	columnName
 					,	'cssVarName'				:	cssVarName
@@ -93,11 +104,12 @@ function addItem() {
 					}
 		   		);
 
-	   //tag.style.gridRow =  (rowCount + 1 ).toString() +  ' / var(' + cssVarName + ')' ; 
+           tag.classList.add(columnName, 'box');
 	   tag.style.gridRow	=	(rowCount + 1 ).toString()		+ ' / ' +  'var(' + cssVarName + ')'	;
 	   tag.style.gridColumn =	(parseInt(columnNbr) + 1).toString()	+ ' / ' +  (parseInt(columnNbr) + 2).toString()	; 
-	 
+
 	   document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
+
 	  } else {
 													  //for ( let cssRuleIncr in Object.keys(cssRootRules).reverse() )
 		  for ( let cssRuleIncr = cssRootRules.length - 1 ; cssRuleIncr >= 0; cssRuleIncr-- )
@@ -107,16 +119,8 @@ function addItem() {
 			}
 
 		 }
-		  //  this works, supposedly:  document.styleSheets[0].insertRule(":root { --stimwordWord--1: 22; }")
-		  // document.styleSheets[0].insertRule(":root { --stimwordWord--1: 5; --contextPositionSoundPhoneme--1: 5}");
-
-
+		  // working code to manipulate ":root"  :  document.styleSheets[0].insertRule(":root { --stimwordWord--1: 5; --contextPositionSoundPhoneme--1: 5}");
 	  }
-	  //let maxRow = parseInt(getComputedStyle(document.body).getPropertyValue(cssVarName));
-	  //maxRow++;  
-	  	//document.body.style.setProperty(cssVarName, maxRow);
-	  // document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; }");
-				  //console.log('THREE: setProperty: ' + cssVarName + ' -- ' + getComputedStyle(document.body).getPropertyValue(cssVarName))
   }
 }
 	   //document.body.style.setProperty(cssVarName, rowCount + 1);    // ???????????????????????
