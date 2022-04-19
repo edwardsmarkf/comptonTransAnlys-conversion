@@ -105,6 +105,7 @@ function addItem() {
 		   		);
 
            tag.classList.add(columnName, 'box');
+	   tag.style.gridRowStart  =	'span var(' + cssVarName + ')'  ;  // 2022-04-19   ?????????????????????????????????	  
 	   tag.style.gridRow	=	(rowCount + 1 ).toString()		+ ' / ' +  'var(' + cssVarName + ')'	;
 	   tag.style.gridColumn =	(parseInt(columnNbr) + 1).toString()	+ ' / ' +  (parseInt(columnNbr) + 2).toString()	; 
 
