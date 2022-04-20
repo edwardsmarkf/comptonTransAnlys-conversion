@@ -5,14 +5,6 @@
 <style>
 body {    margin: 40px; }
 
-
-/*
-:root {
-	  --stimwordWord1:  22;
-}
-*/
-
-
 .wrapper {
     display: grid;
     max-width: 1000px;
@@ -43,9 +35,6 @@ https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-
 
 'use strict;'
 
-var controlBreak	=	{}	;
-var cssRootRules	=	[]	;
-
 function addRecord() {
 
 }
@@ -64,9 +53,13 @@ function replicationValueClicked(thisValue) {
 }
 
 
-var lastDataItemAdded = null;	// save this for replication values
 
 function addItem() {
+
+	var lastDataItemAdded	=	null;			// save this for replication values
+	var controlBreak	=	{}	;		// stores all the control breaks, really just an image of the current record
+	var cssRootRules	=	[]	;		// stores all the 'span rules'
+
 	for ( let rowCount in Object.keys(data) )	{
 		let record = data[rowCount] ;
 		for ( let columnNbr in Object.keys(data[rowCount]) ) {
@@ -148,9 +141,8 @@ function addItem() {
 			} // test for printable column item
 		} // end for each column item
 	} // end for each record
-}
-
-function createRootRule() {
+	
+	//	create the new rule string!
 	let ruleString = ':root {';
 	for ( let incr in cssRootRules ) 
 	{	let { startingRowNbr, endingRowNbr, cssVarName } = cssRootRules[incr]	;
@@ -206,6 +198,19 @@ const data =
 	
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--
 /*
