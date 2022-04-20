@@ -43,14 +43,8 @@ https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-
 
 'use strict;'
 
-var rowCount = 0;
-//var colCount = 0;
-
 var controlBreak	=	{}	;
 var cssRootRules	=	[]	;
-
-function newRow() { rowCount++; }
-
 
 function addRecord() {
 
@@ -65,96 +59,96 @@ function valueChanged(thisValue) {
 }
 
 function replicationValueClicked(thisValue) {
-	let rowNbr = thisValue.getAttribute('data-rowNbr');
-	let clientContextErrorId = 'clientContextError' + '-' + rowNbr;
+	let clientContextErrorId = thisValue.getAttribute('data-lastDataItemAdded');
 	document.getElementById(clientContextErrorId).value = thisValue.textContent;
 }
 
 
+var lastDataItemAdded = null;	// save this for replication values
+
 function addItem() {
-  let record = data[rowCount] ;
-  for ( let columnNbr in Object.keys(data[rowCount]) ) {
+	for ( let rowCount in Object.keys(data) )	{
+		let record = data[rowCount] ;
+		for ( let columnNbr in Object.keys(data[rowCount]) ) {
 
-	let columnName = Object.keys(data[rowCount])[columnNbr];
-	if  (	columnName == 'stimwordWord'
-	    ||	columnName == 'contextPositionSoundPhoneme'
-	    ||	columnName == 'stimwordPositionSetting'
-	    ||	columnName == 'clientContextError'
-	    ||	columnName == 'replicationValue'
-	    )
-	{
+			let columnName = Object.keys(data[rowCount])[columnNbr];
+			if	(	columnName == 'stimwordWord'
+				||	columnName == 'contextPositionSoundPhoneme'
+				||	columnName == 'stimwordPositionSetting'
+				||	columnName == 'clientContextError'
+				||	columnName == 'replicationValue'
+				)
+			{
 
-	  if  (   ( record[columnName] != controlBreak[columnName] )
-						   //   ||  (isNaN(parseInt(getComputedStyle(document.body).getPropertyValue(cssVarName))))
-	      ) 
-	  { 
-	   controlBreak[columnName] = record[columnName] ;
-		  // null out all subsequent control-break columns!
-	   for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[rowCount]).length; xx++ )
-	   {	console.log(  Object.keys(data[rowCount])[xx] );
-		controlBreak[ Object.keys(data[rowCount])[xx]	] = null;  ;
-  	   }
-	    
-	   let cssVarName = '--' + columnName + '--' + (rowCount + 1).toString() ;
-	   let tag = document.createElement("div");
-	   let element = null;
-	   switch ( columnName )	{
-		   case 'stimwordWord'			:
-		   case 'contextPositionSoundPhoneme'	:
-		   case 'stimwordPositionSetting'	:
-		        element = document.createTextNode(record[columnName]);
-			break;
-		   case 'clientContextError' :
-			element = document.createElement('input');
-			element.setAttribute('value', record[columnName]);
-			element.setAttribute('id', columnName + '-' + rowCount);
-			let { stimwordPositionAutoIncr } = record	;
-			element.setAttribute('onChange' , 'valueChanged(this);' );
-			element.setAttribute('data-stimwordPositionAutoIncr', stimwordPositionAutoIncr)			;
-			tag.appendChild(element);
-			break;
-		   case 'replicationValue'		:
-		        let textElement = document.createTextNode(record[columnName])	;
-		        element = document.createElement('span')			;
-			element.appendChild(textElement)				;
-			element.setAttribute('data-rowNbr', rowCount)			;
-			element.setAttribute('onClick' , 'replicationValueClicked(this);' )	;
-			break;
-	   }
-	   tag.appendChild(element);
-	    
-	   cssRootRules.push	(	{	'columnName'				:	columnName
-					,	'cssVarName'				:	cssVarName
-		   			,	'startingRowNbr'			:	rowCount
-					,	'endingRowNbr'				:	rowCount
+				if  (   ( record[columnName] != controlBreak[columnName] )) 
+				{ 
+					controlBreak[columnName] = record[columnName] ;
+					for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[rowCount]).length; xx++ )
+							// null out all subsequent control-break columns!
+					{	console.log(  Object.keys(data[rowCount])[xx] );
+						controlBreak[ Object.keys(data[rowCount])[xx]	] = null;  ;
 					}
-		   		);
 
-           tag.classList.add(columnName, 'box');
-							   //tag.style.gridRow	=	(rowCount + 1 ).toString()		+ ' / ' +  'var(' + cssVarName + ')'	;
-	   tag.style.gridRowStart	=	(rowCount + 1 ).toString()	;
-	   tag.style.gridRowEnd		=	'span var(' + cssVarName + ')'	;
-							   //tag.style.gridColumn 	=	(parseInt(columnNbr) + 1).toString()	+ ' / ' +  (parseInt(columnNbr) + 2).toString()	; 
-	   tag.style.gridColumnStart 	=	(parseInt(columnNbr) + 1).toString()	;
-	   tag.style.gridColumnEnd	=	(parseInt(columnNbr) + 2).toString()	; 
+					let cssVarName = '--' + columnName + '--' + (rowCount + 1).toString() ;
+					let tag = document.createElement("div");
+					let element = null;
+					switch ( columnName )	{
+						case 'stimwordWord'			:
+						case 'contextPositionSoundPhoneme'	:
+						case 'stimwordPositionSetting'	:
+							element = document.createTextNode(record[columnName]);
+							break;
+						case 'clientContextError' :
+							let elementId = columnName + '-' + rowCount;
+							let { stimwordPositionAutoIncr } = record	;
+							lastDataItemAdded = elementId;
+							element = document.createElement('input');
+							element.setAttribute('value'	, record[columnName]			);
+							element.setAttribute('id'	, elementId				);
+							element.setAttribute('onChange' , 'valueChanged(this);'			);
+							element.setAttribute('data-stimwordPositionAutoIncr', stimwordPositionAutoIncr)			;
+							tag.appendChild(element);
+							break;
+						case 'replicationValue'		:
+							let textElement = document.createTextNode(record[columnName])	;
+							element = document.createElement('span')			;
+							element.appendChild(textElement)				;
+							element.setAttribute('data-lastDataItemAdded', lastDataItemAdded)			;
+							element.setAttribute('onClick' , 'replicationValueClicked(this);' )	;
+							break;
+					}
+					tag.appendChild(element);
+	    
+					cssRootRules.push	(	{	'columnName'				:	columnName
+									,	'cssVarName'				:	cssVarName
+									,	'startingRowNbr'			:	rowCount
+									,	'endingRowNbr'				:	rowCount
+									}
+								);
 
-	   document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
+					tag.classList.add(columnName, 'box');
+					tag.style.gridRowStart		=	(parseInt(rowCount) + 1 ).toString()	;
+					tag.style.gridRowEnd		=	'span var(' + cssVarName + ')'		;
+					tag.style.gridColumnStart 	=	(parseInt(columnNbr) + 1).toString()	;
+					tag.style.gridColumnEnd		=	(parseInt(columnNbr) + 2).toString()	; 
 
-	  } else {
+					document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
+
+				} else {
 													  //for ( let cssRuleIncr in Object.keys(cssRootRules).reverse() )
-		  for ( let cssRuleIncr = cssRootRules.length - 1 ; cssRuleIncr >= 0; cssRuleIncr-- )
-		  {	if  ( cssRootRules[cssRuleIncr].columnName == columnName )	{
-				  cssRootRules[cssRuleIncr].endingRowNbr++
-				  break;
-			}
+					for ( let cssRuleIncr = cssRootRules.length - 1 ; cssRuleIncr >= 0; cssRuleIncr-- )
+					{	if  ( cssRootRules[cssRuleIncr].columnName == columnName )
+						{
+							cssRootRules[cssRuleIncr].endingRowNbr++
+							break;
+						}
 
-		 }
-		  // working code to manipulate ":root"  :  document.styleSheets[0].insertRule(":root { --stimwordWord--1: 5; --contextPositionSoundPhoneme--1: 5}");
-	  }
-	} // test for printable column item
-  } // end for each column item
+					}
+				}
+			} // test for printable column item
+		} // end for each column item
+	} // end for each record
 }
-	   //document.body.style.setProperty(cssVarName, rowCount + 1);    // ???????????????????????
 
 function createRootRule() {
 	let ruleString = ':root {';
