@@ -27,103 +27,103 @@ smart-combo-box {
 
 
 
+
+
+
+'use strict'
+
 const maxCharsInPhoneticError = 4;
 
 window.onload = () => {
+  
+    const myTooltip = document.getElementById('myTooltip') ;
 
-   Object.keys(document.getElementsByClassName('smartComboBox')).forEach((key) => {
-        document.getElementsByClassName('smartComboBox')[key]
-                .querySelector('input')
-                .setAttribute('maxlength', maxCharsInPhoneticError)
-                ;
-   });
-   
-   const myTooltip = document.getElementById('myTooltip') ;
+    Object.keys(document.getElementsByTagName("smart-combo-box")).forEach((key) => {
   
-   myTooltip.addEventListener('mouseover', () => { 
-                            //      document.querySelector('smart-tooltip').open();
-   })
-  
-   myTooltip.addEventListener('mouseleave', (event) =>  {
-      document.querySelector('smart-tooltip').close();
-      let thisSmartComboBoxName = myTooltip.selector;
-      let thisSmartComboBox = document.getElementById(thisSmartComboBoxName);
-      processValues   ( thisSmartComboBox.dataset.idNbr
-                      , thisSmartComboBox.dataset.oldValue
-                      , thisSmartComboBox.value
-                      );
-      thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
-   })
-  
-   const tmpArray=  ['mySmartComboBox1', 'mySmartComboBox2'];
-   tmpArray.forEach( element =>  {
-      const comboBoxElement = document.getElementById(element);
-      comboBoxElement.addEventListener
-        ('mouseover', (event) => {   
-          const combobox = document.getElementById(element);
-          if   ( event.target.tagName == 'INPUT' )  {
-              combobox.close();
-              myTooltip.selector = element;  
-              combobox.dataset.oldValue = combobox.value;   // save for future testing!!
-              document.querySelector('smart-tooltip').open();
-          }
+       const comboBoxElement = document.getElementsByTagName('smart-combo-box')[key];
+    
+       comboBoxElement.querySelector('input').setAttribute('maxlength', maxCharsInPhoneticError);
 
-        });
+       comboBoxElement.addEventListener
+          ('mouseover', (event) => {   
+             // const combobox = document.getElementById(element);
+              if   ( event.target.tagName == 'INPUT' )  {
+                   comboBoxElement.close();
+                   myTooltip.selector = comboBoxElement;  
+                   comboBoxElement.dataset.oldValue = comboBoxElement.value;   // save for future testing!!
+                   myTooltip.open();
+              }
+          });
      
        comboBoxElement.addEventListener
-         ('mouseout', (event) => {  
-             //  const combobox = document.getElementById(element);
+           ('mouseout', event => {  
                if  ( event.clientY < (event.currentTarget.offsetTop + event.currentTarget.offsetHeight - 2 ) ) 
                { 
-                //   console.log('closing since mouse was going UP')
-                   document.querySelector('smart-tooltip').close();
-              // } else {
-                 //  console.log('skipping close since mouse was going DOWN');
-                   // debugger;
+                   myTooltip.close();
                }
-         })
+           });
+     
+       comboBoxElement.addEventListener
+           ('opening', () => { 
+                  myTooltip.close();
+           });
 
-      comboBoxElement.addEventListener
-      ('opening', () => { 
-              document.querySelector('smart-tooltip').close();
-      });
-      comboBoxElement.addEventListener
-      ('change', (event) => {  //debugger;
-        if  (!( myTooltip.visible )) {   // ie its CLOSED!
-             processValues ( event.currentTarget.dataset.idNbr
-                           , event.currentTarget.dataset.oldValue
-                           , event.currentTarget.value
-                           );
-            event.currentTarget.dataset.oldValue = event.currentTarget.value;
-        } else {
-            console.log('skipping because tooltip is  visible!')
-        }
-      }); 
-  })
-  
-function  processValues(id, oldValue, newValue)  {
-     console.log('RESULT!! ' + id, 'oldValue:',  (oldValue ? oldValue : 'not yet defined!') , 'newValue: ' , newValue);
-}
-  
-   const tooltipGrid = document.getElementById('tooltipGrid');
-   const descendents = tooltipGrid.getElementsByTagName('*');
-   Object.keys(descendents).forEach( element =>  { 
-       let thisDiv = descendents[element];
+       comboBoxElement.addEventListener
+           ('change', event => {  //debugger;
+                if  (!( myTooltip.visible )) {   // ie its CLOSED!
+                    processValues ( event.currentTarget.dataset.idNbr
+                                  , event.currentTarget.dataset.oldValue
+                                  , event.currentTarget.value
+                                  );
+                    event.currentTarget.dataset.oldValue = event.currentTarget.value;
+                } else {
+                    console.log('skipping because tooltip is  visible!')
+                }
+          });    
+    });
+    
+    myTooltip.addEventListener('mouseleave', (event) =>  {
+        myTooltip.close();
+        let thisSmartComboBox = document.getElementById(myTooltip.selector.id);
+        thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
+        processValues   ( thisSmartComboBox.dataset.idNbr
+                        , thisSmartComboBox.dataset.oldValue
+                        , thisSmartComboBox.value
+                        );
+    })
+
+   const tooltipGridItems = document.getElementById('tooltipGrid').getElementsByTagName('*');
+   Object.keys(tooltipGridItems).forEach( element =>  { 
+       let thisDiv = tooltipGridItems[element];
        thisDiv.classList.add('box');
        thisDiv.style.cursor = "pointer";
        thisDiv.addEventListener('click', event => {
-            clickedValue = event.target.innerHTML;
-            let myComboBoxName = document.getElementById('myTooltip').selector;
-            let myComboBox = document.getElementById(myComboBoxName);
- 
+            let clickedValue = event.target.innerHTML;
+            let myComboBox = document.getElementById(myTooltip.selector.id);
             if  ( clickedValue != '&nbsp;' )  {
-                myComboBox.value += clickedValue;
+                if ( myComboBox.value.length < maxCharsInPhoneticError ) {
+                    myComboBox.value += clickedValue;
+                } else {
+                    console.log('you filled up the phonetic errors input box!')
+                }
             } else {  // delete selected
                 myComboBox.value = myComboBox.value.slice(0, -1)  ;
             }
        });
-   })
+   }); // end Object.keys(descenands).foreach()
+
 } 
+
+function  processValues(id, oldValue, newValue)  {
+     console.log('RESULT!! ' + id, 'oldValue:',  (oldValue ? oldValue : 'not yet defined!') , 'newValue: ' , newValue);
+}
+
+
+
+
+
+
+
 
 
 
@@ -171,35 +171,8 @@ function  processValues(id, oldValue, newValue)  {
         <div>ʒ</div>
         <div>ɪ</div>
     
-</div>
- <!--
-    <span id='tooltipContentUNUSED'>
-        <span style='cursor: pointer;' 
-              onClick="javascript: processPopupClick('A');" >
-              <p>
-              A
-              </p>
-        </span>
-        <span style='cursor: pointer;' 
-              onClick="javascript: processPopupClick('∅');">
-              <p>
-              ∅
-              </p>
-        </span>
-              <span style='cursor: pointer;' 
-              onClick="javascript: processPopupClick('B');">
-              <p>
-              B
-              </p>
-        </span>
-        <span style='cursor: pointer;' 
-              onClick="javascript: processPopupClick('');">
-              <p>
-              Delete!
-              </p>
-        </span>
-  </span>
--->
+    </div>
+
 </smart-tooltip>
 
     <!-- scripts -->  
@@ -208,5 +181,3 @@ function  processValues(id, oldValue, newValue)  {
 <script type="module" src="../../source/modules/smart.button.js"></script> 
 <script type="module" src="index.js"></script>	
 	
-
-
