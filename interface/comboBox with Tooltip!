@@ -1,5 +1,8 @@
 codepen backup:
 
+
+
+
 html, body { 
   padding: 10px; 
 }
@@ -11,7 +14,7 @@ smart-combo-box {
 .wrapper {
   display: grid;
   grid-template-columns:
-         25px 25px 25px 25px;
+         repeat(4, 25px);
   grid-gap: 2px;
   background-color: #fff;
   color: #444;
