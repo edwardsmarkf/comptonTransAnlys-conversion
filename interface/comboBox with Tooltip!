@@ -95,7 +95,7 @@ window.onload = () => {
                         );
     })
 
-   const tooltipGridItems = document.getElementById('tooltipGrid').getElementsByTagName('*');
+   const tooltipGridItems = document.getElementById('tooltipGrid').getElementsByTagName('DIV');
    Object.keys(tooltipGridItems).forEach( element =>  { 
        let thisDiv = tooltipGridItems[element];
        thisDiv.classList.add('box');
