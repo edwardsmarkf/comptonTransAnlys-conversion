@@ -1,0 +1,212 @@
+codepen backup:
+
+html, body { 
+  padding: 10px; 
+}
+
+smart-combo-box {
+  width: 80px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns:
+         25px 25px 25px 25px;
+  grid-gap: 2px;
+  background-color: #fff;
+  color: #444;
+}
+
+.box {
+  background-color: #444;
+  color:  #fff;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 140%;
+}
+
+
+
+const maxCharsInPhoneticError = 4;
+
+window.onload = () => {
+
+   Object.keys(document.getElementsByClassName('smartComboBox')).forEach((key) => {
+        document.getElementsByClassName('smartComboBox')[key]
+                .querySelector('input')
+                .setAttribute('maxlength', maxCharsInPhoneticError)
+                ;
+   });
+   
+   const myTooltip = document.getElementById('myTooltip') ;
+  
+   myTooltip.addEventListener('mouseover', () => { 
+                            //      document.querySelector('smart-tooltip').open();
+   })
+  
+   myTooltip.addEventListener('mouseleave', (event) =>  {
+      document.querySelector('smart-tooltip').close();
+      let thisSmartComboBoxName = myTooltip.selector;
+      let thisSmartComboBox = document.getElementById(thisSmartComboBoxName);
+      processValues   ( thisSmartComboBox.dataset.idNbr
+                      , thisSmartComboBox.dataset.oldValue
+                      , thisSmartComboBox.value
+                      );
+      thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
+   })
+  
+   const tmpArray=  ['mySmartComboBox1', 'mySmartComboBox2'];
+   tmpArray.forEach( element =>  {
+      const comboBoxElement = document.getElementById(element);
+      comboBoxElement.addEventListener
+        ('mouseover', (event) => {   
+          const combobox = document.getElementById(element);
+          if   ( event.target.tagName == 'INPUT' )  {
+              combobox.close();
+              myTooltip.selector = element;  
+              combobox.dataset.oldValue = combobox.value;   // save for future testing!!
+              document.querySelector('smart-tooltip').open();
+          }
+
+        });
+     
+       comboBoxElement.addEventListener
+         ('mouseout', (event) => {  
+             //  const combobox = document.getElementById(element);
+               if  ( event.clientY < (event.currentTarget.offsetTop + event.currentTarget.offsetHeight - 2 ) ) 
+               { 
+                //   console.log('closing since mouse was going UP')
+                   document.querySelector('smart-tooltip').close();
+              // } else {
+                 //  console.log('skipping close since mouse was going DOWN');
+                   // debugger;
+               }
+         })
+
+      comboBoxElement.addEventListener
+      ('opening', () => { 
+              document.querySelector('smart-tooltip').close();
+      });
+      comboBoxElement.addEventListener
+      ('change', (event) => {  //debugger;
+        if  (!( myTooltip.visible )) {   // ie its CLOSED!
+             processValues ( event.currentTarget.dataset.idNbr
+                           , event.currentTarget.dataset.oldValue
+                           , event.currentTarget.value
+                           );
+            event.currentTarget.dataset.oldValue = event.currentTarget.value;
+        } else {
+            console.log('skipping because tooltip is  visible!')
+        }
+      }); 
+  })
+  
+function  processValues(id, oldValue, newValue)  {
+     console.log('RESULT!! ' + id, 'oldValue:',  (oldValue ? oldValue : 'not yet defined!') , 'newValue: ' , newValue);
+}
+  
+   const tooltipGrid = document.getElementById('tooltipGrid');
+   const descendents = tooltipGrid.getElementsByTagName('*');
+   Object.keys(descendents).forEach( element =>  { 
+       let thisDiv = descendents[element];
+       thisDiv.classList.add('box');
+       thisDiv.style.cursor = "pointer";
+       thisDiv.addEventListener('click', event => {
+            clickedValue = event.target.innerHTML;
+            let myComboBoxName = document.getElementById('myTooltip').selector;
+            let myComboBox = document.getElementById(myComboBoxName);
+ 
+            if  ( clickedValue != '&nbsp;' )  {
+                myComboBox.value += clickedValue;
+            } else {  // delete selected
+                myComboBox.value = myComboBox.value.slice(0, -1)  ;
+            }
+       });
+   })
+} 
+
+
+
+<br /></br />
+<smart-combo-box data-id-nbr="1234"  class='smartComboBox' id='mySmartComboBox1' drop-down-position="bottom" label="first"  selection-mode="zeroOrOne"  incremental-search-mode='equals'>
+		<smart-list-item>A∅A</smart-list-item>
+		<smart-list-item>BBB</smart-list-item>
+</smart-combo-box>
+<br /><br /><br /><br />
+<smart-combo-box data-id-nbr="5678" class='smartComboBox' id='mySmartComboBox2' drop-down-position="bottom" label="second"  selection-mode="zeroOrOne" incremental-search-mode='equals' >
+		<smart-list-item>C∅C</smart-list-item>
+		<smart-list-item>BBB</smart-list-item>
+</smart-combo-box>
+
+<smart-tooltip id="myTooltip" style='border: 1px dotted red;' open-mode='manual' position='bottom' arrow>
+  <div class='wrapper' id='tooltipGrid'>
+        <!-- row one  -->
+        <div>&nbsp;</div>
+        <div>∅</div>
+        <div>æ</div>
+        <div>ɜ</div>
+        <!-- row two -->
+        <div>ɚ</div>
+        <div>ʌ</div>   
+        <div>ɔ</div>
+        <div>ɝ</div>
+        <!-- row three -->
+        <div>ʡ</div>
+        <div>═</div>   
+        <div>←</div>
+        <div>ǝ</div>
+        <!--  row four -->
+        <div>Ɒ</div>
+        <div>ɛ</div>
+        <div>ʃ</div>
+        <div>ð</div>
+        <!--  row five -->
+        <div>ŋ</div>
+        <div>θ</div>
+        <div>ʀ</div>
+        <div>ṭ</div>
+        <!--  row six -->
+        <div>ʊ</div>
+        <div>χ</div>
+        <div>ʒ</div>
+        <div>ɪ</div>
+    
+</div>
+ <!--
+    <span id='tooltipContentUNUSED'>
+        <span style='cursor: pointer;' 
+              onClick="javascript: processPopupClick('A');" >
+              <p>
+              A
+              </p>
+        </span>
+        <span style='cursor: pointer;' 
+              onClick="javascript: processPopupClick('∅');">
+              <p>
+              ∅
+              </p>
+        </span>
+              <span style='cursor: pointer;' 
+              onClick="javascript: processPopupClick('B');">
+              <p>
+              B
+              </p>
+        </span>
+        <span style='cursor: pointer;' 
+              onClick="javascript: processPopupClick('');">
+              <p>
+              Delete!
+              </p>
+        </span>
+  </span>
+-->
+</smart-tooltip>
+
+    <!-- scripts -->  
+ <script type="module" src="../../source/modules/smart.combobox.js">
+<script type="module" src="../../source/modules/smart.tooltip.js"></script> 
+<script type="module" src="../../source/modules/smart.button.js"></script> 
+<script type="module" src="index.js"></script>	
+	
+
+
