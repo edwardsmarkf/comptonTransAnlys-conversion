@@ -6,27 +6,27 @@
 body {    margin: 40px; }
 
 .wrapper {
-    display: grid;
-    max-width: 1000px;
-    grid-gap: 10px;
-		grid-template-columns: 100px 200px 150px 80px 120px	; 
-		background-color: #fff;
-		color: #444;
-    border: 2px dotted red;
+	color			: #444					;
+	display			: grid					;
+	max-width		: 1000px				;
+	grid-gap		: 10px					;
+	grid-template-columns	: 100px 200px 150px 80px 120px		; 
+	background-color	: #fff					;
 }
 
 .box {
-		background-color: #444;
-		color: #fff;
-		border-radius: 5px;
-		padding: 20px;
-		font-size: 150%;
-   display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;center alignment
-  	/*     https://stackoverflow.com/questions/9249359/vertically-align-text-within-a-div
-https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-div/13515693#13515693*/
+	background-color	: #444					;
+	color			: #fff					;
+	border-radius		: 5px					;
+	padding			: 20px					;
+	font-size		: 150%					;
+	display			: flex					;
+	justify-content		: center				;
+	align-content		: center				;
+	flex-direction		: column				;
+					/*center alignment */
+				/*     https://stackoverflow.com/questions/9249359/vertically-align-text-within-a-div
+				https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-div/13515693#13515693*/
 }
 
 </style>
@@ -35,12 +35,7 @@ https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-
 
 'use strict;'
 
-function addRecord() {
-
-}
-
 function valueChanged(thisValue) {
-	debugger;
 	let thisId			= thisValue.getAttribute('id')					;
 	let stimwordPositionAutoIncr	= thisValue.getAttribute('data-stimwordPositionAutoIncr')	;
 	let thisValueOf			= document.getElementById(thisId).value				;
@@ -54,42 +49,46 @@ function replicationValueClicked(thisValue) {
 
 
 
-function addItem() {
+function processItem() {
 
 	var lastDataItemAdded	=	null;			// save this for replication values
 	var controlBreak	=	{}	;		// stores all the control breaks, really just an image of the current record
 	var cssRootRules	=	[]	;		// stores all the 'span rules'
+	var rowCount		=	0	;
 
-	for ( let rowCount in Object.keys(data) )	{
-		let record = data[rowCount] ;
-		for ( let columnNbr in Object.keys(data[rowCount]) ) {
+	for ( let recordNbr in Object.keys(data) )	{
+		let record = data[recordNbr] ;
+		for ( let columnNbr in Object.keys(data[recordNbr]) ) {
 
-			let columnName = Object.keys(data[rowCount])[columnNbr];
+			let columnName = Object.keys(data[recordNbr])[columnNbr];
 			if	(	columnName == 'stimwordWord'
 				||	columnName == 'contextPositionSoundPhoneme'
 				||	columnName == 'stimwordPositionSetting'
 				||	columnName == 'clientContextError'
-				||	columnName == 'replicationValue'
+													//||	columnName == 'replicationValue'
+													//||	columnName == 'priorValue'
 				)
 			{
 
 				if  (   ( record[columnName] != controlBreak[columnName] )) 
 				{ 
 					controlBreak[columnName] = record[columnName] ;
-					for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[rowCount]).length; xx++ )
+					for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[recordNbr]).length; xx++ )
 							// null out all subsequent control-break columns!
-					{	console.log(  Object.keys(data[rowCount])[xx] );
-						controlBreak[ Object.keys(data[rowCount])[xx]	] = null;  ;
+					{	console.log(  Object.keys(data[recordNbr])[xx] );
+						controlBreak[ Object.keys(data[recordNbr])[xx]	] = null;  ;
 					}
 
 					let cssVarName = '--' + columnName + '--' + (rowCount + 1).toString() ;
 					let tag = document.createElement("div");
-					let element = null;
+					let element		= null	;
+					let colStartValue	= null	;
 					switch ( columnName )	{
 						case 'stimwordWord'			:
 						case 'contextPositionSoundPhoneme'	:
 						case 'stimwordPositionSetting'	:
 							element = document.createTextNode(record[columnName]);
+							colStartValue =	(parseInt(columnNbr) + 1).toString()	;
 							break;
 						case 'clientContextError' :
 							let elementId = columnName + '-' + rowCount;
@@ -101,14 +100,21 @@ function addItem() {
 							element.setAttribute('onChange' , 'valueChanged(this);'			);
 							element.setAttribute('data-stimwordPositionAutoIncr', stimwordPositionAutoIncr)			;
 							tag.appendChild(element);
+							colStartValue =	(parseInt(columnNbr) + 1).toString()	;
 							break;
-						case 'replicationValue'		:
-							let textElement = document.createTextNode(record[columnName])	;
-							element = document.createElement('span')			;
-							element.appendChild(textElement)				;
-							element.setAttribute('data-lastDataItemAdded', lastDataItemAdded)			;
-							element.setAttribute('onClick' , 'replicationValueClicked(this);' )	;
-							break;
+														/*
+													case 'replicationValue'		:
+														debugger;
+													case 'priorValue'		:
+														debugger;
+														let textElement = document.createTextNode(record[columnName])	;
+														element = document.createElement('span')			;
+														element.appendChild(textElement)				;
+														element.setAttribute('data-lastDataItemAdded', lastDataItemAdded)			;
+														element.setAttribute('onClick' , 'replicationValueClicked(this);' )	;
+														colStartValue	= 5	;
+														break;
+														*/
 					}
 					tag.appendChild(element);
 	    
@@ -120,10 +126,12 @@ function addItem() {
 								);
 
 					tag.classList.add(columnName, 'box');
+
 					tag.style.gridRowStart		=	(parseInt(rowCount) + 1 ).toString()	;
 					tag.style.gridRowEnd		=	'span var(' + cssVarName + ')'		;
-					tag.style.gridColumnStart 	=	(parseInt(columnNbr) + 1).toString()	;
-					tag.style.gridColumnEnd		=	(parseInt(columnNbr) + 2).toString()	; 
+
+					tag.style.gridColumnStart 	=	colStartValue	;
+					tag.style.gridColumnEnd		=	'span 1'	; 
 
 					document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
 
@@ -140,6 +148,7 @@ function addItem() {
 				}
 			} // test for printable column item
 		} // end for each column item
+		rowCount++	;
 	} // end for each record
 	
 	//	create the new rule string!
@@ -157,13 +166,13 @@ function addItem() {
 
 
 const data = 
-[ { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Word'	, clientContextError: '0'	, stimwordPositionAutoIncr: 123123	, replicationValue : 'XYZ'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Word'	, clientContextError: '0'	, stimwordPositionAutoIncr: 123123	, replicationValue : 'WWW'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	, stimwordPositionAutoIncr: 123124	, replicationValue : 'ABC'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe'	, stimwordPositionSetting:'Word'	, clientContextError: ''	, stimwordPositionAutoIncr: 123125	, replicationValue : 'DEF'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	, stimwordPositionAutoIncr: 123126	, replicationValue : 'GHI'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'	, stimwordPositionSetting:'Word'	, clientContextError: ''	, stimwordPositionAutoIncr: 123127	, replicationValue : 'JKL'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	, stimwordPositionAutoIncr: 123128	, replicationValue : 'MNO'	}
+[ { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Word'	, clientContextError: '0'	, stimwordPositionAutoIncr: 123123	, replicationValue : 'XYZ'	, priorValue : 'A00'	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Word'	, clientContextError: '0'	, stimwordPositionAutoIncr: 123123	, replicationValue : 'WWW'	, priorValue : 'A01'	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	, stimwordPositionAutoIncr: 123124	, replicationValue : 'ABC'	, priorValue : 'A02'	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe'	, stimwordPositionSetting:'Word'	, clientContextError: ''	, stimwordPositionAutoIncr: 123125	, replicationValue : 'DEF'	, priorValue : 'A03'	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	, stimwordPositionAutoIncr: 123126	, replicationValue : 'GHI'	, priorValue : 'A04'	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'	, stimwordPositionSetting:'Word'	, clientContextError: ''	, stimwordPositionAutoIncr: 123127	, replicationValue : 'JKL'	, priorValue : 'A05'	}
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	, stimwordPositionAutoIncr: 123128	, replicationValue : 'MNO'	, priorValue : 'A06'	}
 ]
 
 </script>
@@ -172,29 +181,9 @@ const data =
 
 <body>
 
-<div id='phoneticTranscriptionInputScreen' class="wrapper">
-						<!--
-						  <div class='stimwordWord'>Horse</div>
-						  <div class='contextPositionSoundPhoneme'>
-						    <span id='contextPosition'>Initial</span>
-						    <span id='soundPhoneme'>h</span>
-						  </div> 
-						  <div class='stimwordPositionSetting'>Word</div>
-						  <div class='clientContextError'>
-						    <input type="text" value='error-11111'></input>
-						  </div>
-
-
-						<div class='stimwordPositionSetting'>Sentence</div>
-						<div class='clientContextError'>
-						   <input type="text" value='error-2'></input>
-						</div>
-						-->
-</div>
-
+<div id='phoneticTranscriptionInputScreen' class="wrapper"></div>
 <br />
-<button onClick="javascript: addItem();">Add column</button>
-<button onClick="javascript: newRow();">next row</button>
+<button onClick="javascript: processItem();">Add column</button>
 	
 </body>
 </html>
