@@ -3,6 +3,8 @@ codepen backup:
 
 
 
+
+
 html, body { 
   padding: 10px; 
 }
@@ -11,7 +13,7 @@ smart-combo-box {
   width: 80px;
 }
 
-.wrapper {
+.tooltipWrapperClass {
   display: grid;
   grid-template-columns:
          repeat(4, 25px);
@@ -20,13 +22,21 @@ smart-combo-box {
   color: #444;
 }
 
-.box {
+.tooltipElement {
   background-color: #444;
   color:  #fff;
   border-radius: 5px;
   padding: 5px;
   font-size: 140%;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -49,20 +59,20 @@ window.onload = () => {
 
        comboBoxElement.addEventListener
           ('mouseover', (event) => {   
-             // const combobox = document.getElementById(element);
               if   ( event.target.tagName == 'INPUT' )  {
                    comboBoxElement.close();
                    myTooltip.selector = comboBoxElement;  
-                   comboBoxElement.dataset.oldValue = comboBoxElement.value;   // save for future testing!!
+                   comboBoxElement.dataset.oldValue = comboBoxElement.value;   // save old for future testing!!
                    myTooltip.open();
               }
           });
      
        comboBoxElement.addEventListener
            ('mouseout', event => {  
+                             // did the cursor leave this combobox by going DOWN or left/right/up ???
                if  ( event.clientY < (event.currentTarget.offsetTop + event.currentTarget.offsetHeight - 2 ) ) 
                { 
-                   myTooltip.close();
+                   myTooltip.close();  // close this tooltip ONLY if the cursor went left/right/up otherwise leave open
                }
            });
      
@@ -73,32 +83,32 @@ window.onload = () => {
 
        comboBoxElement.addEventListener
            ('change', event => {  //debugger;
-                if  (!( myTooltip.visible )) {   // ie its CLOSED!
+                if  (!( myTooltip.visible )) {   // ie its CLOSED and therefore not visible
                     processValues ( event.currentTarget.dataset.idNbr
                                   , event.currentTarget.dataset.oldValue
                                   , event.currentTarget.value
                                   );
                     event.currentTarget.dataset.oldValue = event.currentTarget.value;
                 } else {
-                    console.log('skipping because tooltip is  visible!')
+                    console.log('Skipping processing because tooltip is still visible, mouseout will trigger closing the tooltip!')
                 }
           });    
     });
     
     myTooltip.addEventListener('mouseleave', (event) =>  {
         myTooltip.close();
-        let thisSmartComboBox = document.getElementById(myTooltip.selector.id);
-        thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
+        let thisSmartComboBox = document.getElementById(myTooltip.selector.id);  
         processValues   ( thisSmartComboBox.dataset.idNbr
                         , thisSmartComboBox.dataset.oldValue
                         , thisSmartComboBox.value
                         );
+        thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
     })
 
    const tooltipGridItems = document.getElementById('tooltipGrid').getElementsByTagName('DIV');
    Object.keys(tooltipGridItems).forEach( element =>  { 
        let thisDiv = tooltipGridItems[element];
-       thisDiv.classList.add('box');
+       thisDiv.classList.add('tooltipElement');
        thisDiv.style.cursor = "pointer";
        thisDiv.addEventListener('click', event => {
             let clickedValue = event.target.innerHTML;
@@ -107,9 +117,9 @@ window.onload = () => {
                 if ( myComboBox.value.length < maxCharsInPhoneticError ) {
                     myComboBox.value += clickedValue;
                 } else {
-                    console.log('you filled up the phonetic errors input box!')
+                    console.log(`You filled up the phonetic errors input box, max size is ${maxCharsInPhoneticError} characters!`)
                 }
-            } else {  // delete selected
+            } else {  // delete selected, so remove character on the far right side
                 myComboBox.value = myComboBox.value.slice(0, -1)  ;
             }
        });
@@ -120,7 +130,6 @@ window.onload = () => {
 function  processValues(id, oldValue, newValue)  {
      console.log('RESULT!! ' + id, 'oldValue:',  (oldValue ? oldValue : 'not yet defined!') , 'newValue: ' , newValue);
 }
-
 
 
 
@@ -142,7 +151,7 @@ function  processValues(id, oldValue, newValue)  {
 </smart-combo-box>
 
 <smart-tooltip id="myTooltip" style='border: 1px dotted red;' open-mode='manual' position='bottom' arrow>
-  <div class='wrapper' id='tooltipGrid'>
+  <div class='tooltipWrapperClass' id='tooltipGrid'>
         <!-- row one  -->
         <div>&nbsp;</div>
         <div>∅</div>
@@ -184,3 +193,5 @@ function  processValues(id, oldValue, newValue)  {
 <script type="module" src="../../source/modules/smart.button.js"></script> 
 <script type="module" src="index.js"></script>	
 	
+
+
