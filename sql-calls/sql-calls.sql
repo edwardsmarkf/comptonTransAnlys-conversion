@@ -74,6 +74,81 @@
 			,	`stimwordPosition`.`soundPhonemeOrderNbr`
 		;
 		
+         SELECT  JSON_ARRAYAGG(JSON_OBJECT
+				(     'stimwordWord'
+                ,       `stimwordPosition`.`stimwordWord`
+                ,     'contextPositionSoundPhoneme'
+                ,       CONCAT( `stimwordPosition`.`contextPosition`, ' -- ' , `stimwordPosition`.`soundPhoneme` )
+                ,       'stimwordPositionSetting'
+                ,       `stimwordPosition`.`stimwordPositionSetting`
+                ,       'stimwordBackgroundColor'
+                ,       IFNULL(`stimwordPosition`.`stimwordPositionBackgroundColor`,'')
+                ,       'clientContextError'
+                ,       IFNULL(`clientStimwordCURRENT`.`clientContextError`, '')
+                ,       'clientContextErrorREPLICATE'
+                ,       IFNULL(`clientStimwordREPLICATE`.`clientContextError`,'')
+                ,       'languageNormsError'
+                ,		IFNULL(`languageNorms`.`languageNormsError`, '')	    		
+                )) ''
+                FROM    `stimword`
+                ,
+                `context` LEFT OUTER JOIN `languageNorms` ON
+                (		1
+                AND		`context`.`contextAutoIncr`		= `languageNorms`.`contextAutoIncr`
+                AND		`context`.`layoutName`	      		= `languageNorms`.`layoutName`
+                AND		`context`.`soundPhoneme`		= `languageNorms`.`soundPhoneme`
+                AND		`context`.`contextPosition`		= `languageNorms`.`contextPosition`
+                AND		`languageNorms`.`layoutName`		= 'PESL'
+                AND		`languageNorms`.`languageNormsName` 	= 'Indian-pakistan'
+                )
+                ,
+                `stimwordPosition` LEFT OUTER JOIN `clientStimword` `clientStimwordCURRENT` ON
+                (       1
+                AND     `stimwordPosition`.`stimwordPositionAutoIncr`       	=       `clientStimwordCURRENT`.`stimwordPositionAutoIncr`
+                AND     `stimwordPosition`.`layoutName`                     	=       `clientStimwordCURRENT`.`layoutName`
+                AND     `stimwordPosition`.`stimwordPageNbr`        		=       `clientStimwordCURRENT`.`stimwordPageNbr`
+                AND     `stimwordPosition`.`stimwordLineNbr`        		=       `clientStimwordCURRENT`.`stimwordLineNbr`
+                AND     `stimwordPosition`.`stimwordWord`           		=       `clientStimwordCURRENT`.`stimwordWord`
+
+                AND     `stimwordPosition`.`contextPosition`                	=       `clientStimwordCURRENT`.`contextPosition`
+                AND     `stimwordPosition`.`stimwordPositionNbr`            	=       `clientStimwordCURRENT`.`stimwordPositionNbr`
+                AND     `stimwordPosition`.`stimwordPositionSetting`        	=       `clientStimwordCURRENT`.`stimwordPositionSetting`
+                AND		`stimwordPosition`.`soundPhoneme`						= 	`clientStimwordCURRENT`.`soundPhoneme`
+
+                AND     `clientStimwordCURRENT`.`teacherEmail`              	=       'info@englishwithoutaccent.com'
+                AND     `clientStimwordCURRENT`.`clientMasterEmail`         	=       'mark_f_edwards@yahoo.com' ## '12yukos@gmail.com'
+                AND     `clientStimwordCURRENT`.`sessionName`   				=       'Time2'
+                AND     `clientStimwordCURRENT`.`layoutName`                	=       'PESL'
+                )
+                LEFT OUTER JOIN `clientStimword` `clientStimwordREPLICATE` ON
+                (       1
+                AND     `stimwordPosition`.`stimwordPositionAutoIncr`       	=       `clientStimwordREPLICATE`.`stimwordPositionAutoIncr`
+                AND     `stimwordPosition`.`layoutName`                     	=	`clientStimwordREPLICATE`.`layoutName`
+                AND     `stimwordPosition`.`stimwordPageNbr`                	=       `clientStimwordREPLICATE`.`stimwordPageNbr`
+                AND     `stimwordPosition`.`stimwordLineNbr`                	=       `clientStimwordREPLICATE`.`stimwordLineNbr`
+                AND     `stimwordPosition`.`stimwordWord`                   	=       `clientStimwordREPLICATE`.`stimwordWord`
+
+                AND     `stimwordPosition`.`contextPosition`                	=       `clientStimwordREPLICATE`.`contextPosition`
+                AND     `stimwordPosition`.`stimwordPositionNbr`            	=       `clientStimwordREPLICATE`.`stimwordPositionNbr`
+                AND     `stimwordPosition`.`stimwordPositionSetting`        	=       `clientStimwordREPLICATE`.`stimwordPositionSetting`
+				AND	`stimwordPosition`.`soundPhoneme`							=		`clientStimwordREPLICATE`.`soundPhoneme`
+
+                AND     `clientStimwordREPLICATE`.`teacherEmail`            	=       'info@englishwithoutaccent.com'
+                AND     `clientStimwordREPLICATE`.`clientMasterEmail`       	=       'mark_f_edwards@yahoo.com'  ##'12yukos@gmail.com'
+                AND     `clientStimwordREPLICATE`.`sessionName` 				=       'Time1'
+                AND     `clientStimwordREPLICATE`.`layoutName`              	=       'PESL'
+                )
+                WHERE   1                       /* dummy first one */
+                AND `stimword`.`stimwordAutoIncr`				=	`stimwordPosition`.`stimwordAutoIncr`
+               	AND	`context`.`contextAutoIncr`  				=	`stimwordPosition`.`contextAutoIncr`
+                AND `stimword`.`layoutName`						=	"PESL"
+                AND `stimword`.`stimwordPageNbr`				=	"1"
+                AND `stimword`.`stimwordLineNbr`				=	"1"
+                ##AND `stimword`.`stimwordAutoIncr`               =	2                     ###  ?????????????????????  better to use this??????
+                ORDER BY        `stimwordPosition`.`stimwordPageNbr`
+			,	`stimwordPosition`.`stimwordLineNbr`
+			,	`stimwordPosition`.`soundPhonemeOrderNbr`
+		;
 		
 		
 
