@@ -1,178 +1,261 @@
+[root@edwardsmarkf comboboxPlay]# clear
+[root@edwardsmarkf comboboxPlay]# cat  phoneticTranscriptionGrid.html
 <html>
 
 <head>
 
+<link rel="stylesheet" type="text/css" href="/js/smartHtmlElements/9.1.0/source/styles/smart.default.css" />
+
 <style>
-body {    margin: 40px; }
+
+
+
+html, body {
+        margin                  : 40px                                  ;
+        padding                 : 10px                                  ;
+}
+
+smart-combo-box {
+        width                   : 80px                                  ;
+}
+
+.tooltipWrapperClass {
+        display                 : grid                                  ;
+        grid-template-columns   : repeat(4, 25px)                       ;
+        grid-gap                : 2px                                   ;
+        background-color        : #fff                                  ;
+        color                   : #444                                  ;
+}
+
+.tooltipElement {
+        background-color        : #444                                  ;
+        color                   : #fff                                  ;
+        border-radius           : 5px                                   ;
+        padding                 : 5px                                   ;
+        font-size               : 140%                                  ;
+}
+
+
 
 .wrapper {
-	color			: #444					;
-	display			: grid					;
-	max-width		: 1000px				;
-	grid-gap		: 10px					;
-	grid-template-columns	: 100px 200px 150px 80px 120px		; 
-	background-color	: #fff					;
+        color                   : #444                                  ;
+        display                 : grid                                  ;
+        max-width               : 1000px                                ;
+        grid-gap                : 10px                                  ;
+        grid-template-columns   : 100px 200px 150px 120px               ;
+        background-color        : #fff                                  ;
 }
 
 .box {
-	background-color	: #444					;
-	color			: #fff					;
-	border-radius		: 5px					;
-	padding			: 20px					;
-	font-size		: 150%					;
-	display			: flex					;
-	justify-content		: center				;
-	align-content		: center				;
-	flex-direction		: column				;
-					/*center alignment */
-				/*     https://stackoverflow.com/questions/9249359/vertically-align-text-within-a-div
-				https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-div/13515693#13515693*/
+        background-color        : #444                                  ;
+        color                   : #fff                                  ;
+        border-radius           : 5px                                   ;
+        padding                 : 20px                                  ;
+        font-size               : 150%                                  ;
+        display                 : flex                                  ;
+        justify-content         : center                                ;
+        align-content           : center                                ;
+        flex-direction          : column                                ;
+                                        /*center alignment */
+                                /*     https://stackoverflow.com/questions/9249359/vertically-align-text-within-a-div
+                                https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-div/13515693#13515693*/
 }
 
 </style>
+
+
+    <!-- scripts -->
+<script type='module' src='/js/smartHtmlElements/9.1.0/source/modules/smart.combobox.js'></script>
+<script type='module' src='/js/smartHtmlElements/9.1.0/source/modules/smart.tooltip.js'></script>
 
 <script>
 
 'use strict;'
 
 function valueChanged(thisValue) {
-	let thisId			= thisValue.getAttribute('id')					;
-	let stimwordPositionAutoIncr	= thisValue.getAttribute('data-stimwordPositionAutoIncr')	;
-	let thisValueOf			= document.getElementById(thisId).value				;
-	alert(thisId + ' -- ' +  stimwordPositionAutoIncr + ' -- ' +  thisValueOf);
+        let thisId                      = thisValue.getAttribute('id')                                  ;
+        let stimwordPositionAutoIncr    = thisValue.getAttribute('data-stimwordPositionAutoIncr')       ;
+        let thisValueOf                 = document.getElementById(thisId).value                         ;
+        console.log(thisId + ' -- ' +  stimwordPositionAutoIncr + ' -- ' +  thisValueOf);
 }
 
 function replicationValueClicked(thisValue) {
-	let clientContextErrorId = thisValue.getAttribute('data-lastDataItemAdded');
-	document.getElementById(clientContextErrorId).value = thisValue.textContent;
+        let clientContextErrorId = thisValue.getAttribute('data-lastDataItemAdded');
+        document.getElementById(clientContextErrorId).value = thisValue.textContent;
 }
 
 
 
 function processItem() {
 
-	var lastDataItemAdded	=	null;			// save this for replication values
-	var controlBreak	=	{}	;		// stores all the control breaks, really just an image of the current record
-	var cssRootRules	=	[]	;		// stores all the 'span rules'
-	var rowCount		=	0	;
+        const   stimwordWord                    =       'stimwordWord'                  ;               // these names are used so often
+        const   contextPositionSoundPhoneme     =       'contextPositionSoundPhoneme'   ;               // that they deserve their own const
 
-	for ( let recordNbr in Object.keys(data) )	{
-		let record = data[recordNbr] ;
-		for ( let columnNbr in Object.keys(data[recordNbr]) ) {
+        var lastDataItemAdded   =       null    ;               // save this for replication values
+        var controlBreak        =       {}      ;               // stores all the control breaks, really just an image of the current record
+        var cssVarHolderObj     =       []      ;               // stores all the 'span rules'
+        var rowCount            =       0       ;
 
-			let columnName = Object.keys(data[recordNbr])[columnNbr];
-			if	(	columnName == 'stimwordWord'
-				||	columnName == 'contextPositionSoundPhoneme'
-				||	columnName == 'stimwordPositionSetting'
-				||	columnName == 'clientContextError'
-													//||	columnName == 'replicationValue'
-													//||	columnName == 'priorValue'
-				)
-			{
+        for ( let recordNbr in Object.keys(data) )      {
+                let record = data[recordNbr] ;
+                let incrRowFlag = false;
 
-				if  (   ( record[columnName] != controlBreak[columnName] )) 
-				{ 
-					controlBreak[columnName] = record[columnName] ;
-					for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[recordNbr]).length; xx++ )
-							// null out all subsequent control-break columns!
-					{	console.log(  Object.keys(data[recordNbr])[xx] );
-						controlBreak[ Object.keys(data[recordNbr])[xx]	] = null;  ;
-					}
 
-					let cssVarName = '--' + columnName + '--' + (rowCount + 1).toString() ;
-					let tag = document.createElement("div");
-					let element		= null	;
-					let colStartValue	= null	;
-					switch ( columnName )	{
-						case 'stimwordWord'			:
-						case 'contextPositionSoundPhoneme'	:
-						case 'stimwordPositionSetting'	:
-							element = document.createTextNode(record[columnName]);
-							colStartValue =	(parseInt(columnNbr) + 1).toString()	;
-							break;
-						case 'clientContextError' :
-							let elementId = columnName + '-' + rowCount;
-							let { stimwordPositionAutoIncr } = record	;
-							lastDataItemAdded = elementId;
-							element = document.createElement('input');
-							element.setAttribute('value'	, record[columnName]			);
-							element.setAttribute('id'	, elementId				);
-							element.setAttribute('onChange' , 'valueChanged(this);'			);
-							element.setAttribute('data-stimwordPositionAutoIncr', stimwordPositionAutoIncr)			;
-							tag.appendChild(element);
-							colStartValue =	(parseInt(columnNbr) + 1).toString()	;
-							break;
-														/*
-													case 'replicationValue'		:
-														debugger;
-													case 'priorValue'		:
-														debugger;
-														let textElement = document.createTextNode(record[columnName])	;
-														element = document.createElement('span')			;
-														element.appendChild(textElement)				;
-														element.setAttribute('data-lastDataItemAdded', lastDataItemAdded)			;
-														element.setAttribute('onClick' , 'replicationValueClicked(this);' )	;
-														colStartValue	= 5	;
-														break;
-														*/
-					}
-					tag.appendChild(element);
-	    
-					cssRootRules.push	(	{	'columnName'				:	columnName
-									,	'cssVarName'				:	cssVarName
-									,	'startingRowNbr'			:	rowCount
-									,	'endingRowNbr'				:	rowCount
-									}
-								);
 
-					tag.classList.add(columnName, 'box');
 
-					tag.style.gridRowStart		=	(parseInt(rowCount) + 1 ).toString()	;
-					tag.style.gridRowEnd		=	'span var(' + cssVarName + ')'		;
 
-					tag.style.gridColumnStart 	=	colStartValue	;
-					tag.style.gridColumnEnd		=	'span 1'	; 
 
-					document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
 
-				} else {
-													  //for ( let cssRuleIncr in Object.keys(cssRootRules).reverse() )
-					for ( let cssRuleIncr = cssRootRules.length - 1 ; cssRuleIncr >= 0; cssRuleIncr-- )
-					{	if  ( cssRootRules[cssRuleIncr].columnName == columnName )
-						{
-							cssRootRules[cssRuleIncr].endingRowNbr++
-							break;
-						}
+                for ( let columnNbr in Object.keys(data[recordNbr]) ) {
 
-					}
-				}
-			} // test for printable column item
-		} // end for each column item
-		rowCount++	;
-	} // end for each record
-	
-	//	create the new rule string!
-	let ruleString = ':root {';
-	for ( let incr in cssRootRules ) 
-	{	let { startingRowNbr, endingRowNbr, cssVarName } = cssRootRules[incr]	;
-		if  ( startingRowNbr != endingRowNbr ) 
-		{   //ruleString += (' ' + cssVarName + ': ' + (startingRowNbr + ( endingRowNbr - startingRowNbr ) + 2 ).toString() + ';' ) ; 
-		   ruleString += (' ' + cssVarName + ': ' + (( endingRowNbr - startingRowNbr ) + 1 ).toString() + ';' ) ; 
-		}
-	}
-	ruleString += '}';
-	document.styleSheets[0].insertRule(ruleString);
+                        let columnName = Object.keys(data[recordNbr])[columnNbr];
+
+                        switch ( columnName )   {
+                            case stimwordWord                   :
+                            case contextPositionSoundPhoneme    :
+                            case 'stimwordPositionSetting'      :
+                            case 'clientContextError'           :
+                            {
+                                if  (   ( record[columnName] != controlBreak[columnName] ))
+                                {
+                                        controlBreak[columnName] = record[columnName] ;
+                                        for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[recordNbr]).length; xx++ )
+                                                        // null out all subsequent control-break columns !!
+                                        {       controlBreak[ Object.keys(data[recordNbr])[xx]  ] = null;  ;
+                                        }
+
+                                        let tag = document.createElement("div");
+                                        let element             = null  ;
+                                        let colStartValue       = null  ;
+                                        switch ( columnName )   {
+                                                case contextPositionSoundPhoneme        :
+
+                                                        let cssVarName          =       '--' + contextPositionSoundPhoneme + '--' + (rowCount + 1).toString()   ;
+                                                        cssVarHolderObj.push    (       {       'cssVarName'            :       cssVarName
+                                                                                        ,       'startingRowNbr'        :       rowCount
+                                                                                        ,       'endingRowNbr'          :       rowCount
+                                                                                        }
+                                                                                );
+                                                                // notice NO break here....
+                                                case stimwordWord                       :
+                                                case 'stimwordPositionSetting'          :
+                                                        element = document.createTextNode(record[columnName]);
+                                                        colStartValue = (parseInt(columnNbr) + 1).toString()    ;
+                                                        break;
+
+                                                case 'clientContextError'               :
+                                                        let elementId = columnName + '-' + rowCount;
+                                                        let { stimwordPositionAutoIncr } = record       ;
+                                                        lastDataItemAdded = elementId;
+                                                        element = document.createElement('smart-combo-box');
+                                                        element.setAttribute('value'    , record[columnName]                    );
+                                                        element.setAttribute('id'       , elementId                             );
+                                                        element.setAttribute('onChange' , 'valueChanged(this);'                 );
+                                                        element.setAttribute('data-stimword-position-auto-incr', stimwordPositionAutoIncr)                      ;
+
+                                                        colStartValue = (parseInt(columnNbr) + 1).toString()    ;
+
+                                                        break;
+                                        }
+
+                                        if  ( element ) {
+                                                tag.appendChild(element);
+
+                                                tag.classList.add(columnName, 'box');
+
+                                                tag.style.gridColumnStart       =       colStartValue   ;
+                                                tag.style.gridRowStart          =       (parseInt(rowCount) + 1 ).toString()    ;
+                                                tag.style.gridColumnEnd         =       'span 1'        ;
+
+                                                switch ( columnName )   {
+                                                        case    stimwordWord                    :
+                                                                tag.style.gridRowEnd            =       'span var(--' + stimwordWord + ')'                      ;
+                                                                break;
+                                                        case    contextPositionSoundPhoneme     :
+
+                                                                let cssVarName  =       '--' + contextPositionSoundPhoneme + '--' + (rowCount + 1).toString()   ;
+                                                                tag.style.gridRowEnd            =       'span var(' + cssVarName + ')'                          ;
+                                                                break;
+                                                        default                                 :
+                                                                tag.style.gridRowEnd            =       'span 1'                                                ;
+                                                }
+
+
+                                                document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
+                                                incrRowFlag = true;
+                                        } else {
+                                                console.log(`Skipping ${columnName} column in grid!`);
+                                        }
+
+                                } else {
+                                                // control break here ! ! ! ! j!
+                                        if      (       ( columnName                                    == contextPositionSoundPhoneme                  )
+                                                &&      ( record['stimwordPositionSetting']             != controlBreak['stimwordPositionSetting']      )
+                                                )
+                                        {
+                                                        cssVarHolderObj[(cssVarHolderObj.length -1)].endingRowNbr++
+                                        }
+
+                                }
+                                break;
+                            }
+                            case 'replicationValue'     :
+                            {
+                                if  ( record[columnName] )      {               // make SURE its not blank
+                                        let nbrOfComboBoxes =  document.getElementsByTagName('smart-combo-box').length          ;
+debugger;
+                                        let tmpComboBox = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
+                                        tmpComboBox.insert(99, record[columnName]);
+                                        tmpComboBox.getItem(record[columnName]).color = '#121212'
+                                        //tmpComboBox.insert(99, '<span style="color: red;">' + record[columnName] + '</span>'  );
+console.log('');
+                                }
+                                break;
+                            }
+                            case 'languageSpec'         :
+                            {   if  ( record[columnName] )      {               // make SURE its not blank
+                                        let nbrOfComboBoxes =  document.getElementsByTagName('smart-combo-box').length          ;
+                                        let tmpComboBox = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
+                                        tmpComboBox.insert(99, record[columnName]);
+                                        tmpComboBox.getItem(record[columnName]).color = '#565656'
+                                }
+                                break;
+                            }
+
+                        } // end switch statement
+                } // end for each column item
+                if  ( incrRowFlag )     {
+                                                console.log('INCR row count!!');
+                        rowCount++      ;
+                } else {
+                                                console.log('SKIPPING INCR row count!!');
+                }
+        } // end for each record
+
+        //      create the new rule string!
+        let ruleString = ':root { ' + '--' + stimwordWord + ': ' + rowCount.toString() + ';'    ;
+        for ( let incr in cssVarHolderObj )
+        {       let { startingRowNbr, endingRowNbr, cssVarName } = cssVarHolderObj[incr]        ;
+                if  ( startingRowNbr != endingRowNbr )
+                {   //ruleString += (' ' + cssVarName + ': ' + (startingRowNbr + ( endingRowNbr - startingRowNbr ) + 2 ).toString() + ';' ) ;
+                   ruleString += (' ' + cssVarName + ': ' + (( endingRowNbr - startingRowNbr ) + 1 ).toString() + ';' ) ;
+                }
+        }
+        ruleString += '}';
+                                        //ruleString = ':root { --stimwordWord--1: 6; --contextPositionSoundPhoneme--1: 2; --contextPositionSoundPhoneme--3: 2; --contextPositionSoundPhoneme--5: 2;}' ;
+        document.styleSheets[0].insertRule(ruleString);
 }
 
 
-const data = 
-[ { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Word'	, clientContextError: '0'	, stimwordPositionAutoIncr: 123123	, replicationValue : 'XYZ'	, priorValue : 'A00'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Word'	, clientContextError: '0'	, stimwordPositionAutoIncr: 123123	, replicationValue : 'WWW'	, priorValue : 'A01'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	, stimwordPositionAutoIncr: 123124	, replicationValue : 'ABC'	, priorValue : 'A02'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe'	, stimwordPositionSetting:'Word'	, clientContextError: ''	, stimwordPositionAutoIncr: 123125	, replicationValue : 'DEF'	, priorValue : 'A03'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	, stimwordPositionAutoIncr: 123126	, replicationValue : 'GHI'	, priorValue : 'A04'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'	, stimwordPositionSetting:'Word'	, clientContextError: ''	, stimwordPositionAutoIncr: 123127	, replicationValue : 'JKL'	, priorValue : 'A05'	}
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'	, stimwordPositionSetting:'Sentence'	, clientContextError: ''	, stimwordPositionAutoIncr: 123128	, replicationValue : 'MNO'	, priorValue : 'A06'	}
+const data =
+[ { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Word'        , clientContextError: '0'       , stimwordPositionAutoIncr: 123123      , replicationValue : 'XYZ'      , languageSpec : 'A00'  }
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Word'        , clientContextError: '0'       , stimwordPositionAutoIncr: 123123      , replicationValue : 'ZEF'      , languageSpec : ''     }
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Word'        , clientContextError: '0'       , stimwordPositionAutoIncr: 123123      , replicationValue : 'WWW'      , languageSpec : 'A01'  }
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Sentence'    , clientContextError: ''        , stimwordPositionAutoIncr: 123124      , replicationValue : 'ABC'      , languageSpec : 'A02'  }
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe' , stimwordPositionSetting:'Word'        , clientContextError: ''        , stimwordPositionAutoIncr: 123125      , replicationValue : 'DEF'      , languageSpec : 'A03'  }
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe' , stimwordPositionSetting:'Sentence'    , clientContextError: ''        , stimwordPositionAutoIncr: 123126      , replicationValue : 'GHI'      , languageSpec : 'A04'  }
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'      , stimwordPositionSetting:'Word'        , clientContextError: ''        , stimwordPositionAutoIncr: 123127      , replicationValue : 'JKL'      , languageSpec : 'A05'  }
+, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'      , stimwordPositionSetting:'Sentence'    , clientContextError: ''        , stimwordPositionAutoIncr: 123128      , replicationValue : 'MNO'      , languageSpec : 'A06'  }
 ]
 
 </script>
@@ -183,8 +266,8 @@ const data =
 
 <div id='phoneticTranscriptionInputScreen' class="wrapper"></div>
 <br />
-<button onClick="javascript: processItem();">Add column</button>
-	
+<button onClick="javascript: processItem();">Add Rows!!!</button>
+
 </body>
 </html>
 
@@ -205,68 +288,68 @@ const data =
 /*
 function shit()  {
 
-	// https://stackoverflow.com/questions/70251599/how-to-use-cssstylesheet-insertrule-to-change-a-root-property
+        // https://stackoverflow.com/questions/70251599/how-to-use-cssstylesheet-insertrule-to-change-a-root-property
 
-	let varOne = '--varOne';
-	let varTwo = '--varTwo';
+        let varOne = '--varOne';
+        let varTwo = '--varTwo';
 
-	debugger;
 
-	console.log('first loopfind: ' );
-	let firstRootVars = loopFind();
-	console.log(firstRootVars);
-	console.log(getComputedStyle(document.body).getPropertyValue(varOne));
-	console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
+        console.log('first loopfind: ' );
+        let firstRootVars = loopFind();
+        console.log(firstRootVars);
+        console.log(getComputedStyle(document.body).getPropertyValue(varOne));
+        console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
 
-	document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; }");
+        document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; }");
 
-	console.log('second loopfind: ' );
-	let secondRootVars = loopFind();
-	console.log(secondRootVars);
-	console.log(getComputedStyle(document.body).getPropertyValue(varOne));
-	console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
+        console.log('second loopfind: ' );
+        let secondRootVars = loopFind();
+        console.log(secondRootVars);
+        console.log(getComputedStyle(document.body).getPropertyValue(varOne));
+        console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
 
-	document.styleSheets[0].removeRule(0)
+        document.styleSheets[0].removeRule(0)
 
-	console.log('third loopfind: ' );
-	let thirdRootVars = loopFind();
-	console.log(thirdRootVars);
-	console.log(getComputedStyle(document.body).getPropertyValue(varOne));
-	console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
+        console.log('third loopfind: ' );
+        let thirdRootVars = loopFind();
+        console.log(thirdRootVars);
+        console.log(getComputedStyle(document.body).getPropertyValue(varOne));
+        console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
 
-	document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; " + varTwo + ": 5678; }");
+        document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; " + varTwo + ": 5678; }");
 
-	console.log('fourth loopfind: ' );
-	let fourthRootVars = loopFind();
-	console.log(fourthRootVars);
-	console.log(getComputedStyle(document.body).getPropertyValue(varOne));
-	console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
+        console.log('fourth loopfind: ' );
+        let fourthRootVars = loopFind();
+        console.log(fourthRootVars);
+        console.log(getComputedStyle(document.body).getPropertyValue(varOne));
+        console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
 
 
 }
 
 function loopFind() {
 
-	for ( let x = 0 ; x < document.styleSheets[0].cssRules.length ; x++ ) {
-		if ( document.styleSheets[0].cssRules[x].selectorText == ':root' ) {
-			document.styleSheets[0].removeRule(x)
-			break;
-		}
-	}
+        for ( let x = 0 ; x < document.styleSheets[0].cssRules.length ; x++ ) {
+                if ( document.styleSheets[0].cssRules[x].selectorText == ':root' ) {
+                        document.styleSheets[0].removeRule(x)
+                        break;
+                }
+        }
 }
 */
 /*
 var sheet = (function() {
-	// Create the <style> tag
-	var style = document.createElement("style");
+        // Create the <style> tag
+        var style = document.createElement("style");
 
-	// WebKit hack :(
-	style.appendChild(document.createTextNode(""));
+        // WebKit hack :(
+        style.appendChild(document.createTextNode(""));
 
-	// Add the <style> element to the page
-	document.head.appendChild(style);
+        // Add the <style> element to the page
+        document.head.appendChild(style);
 
-	return style.sheet;
+        return style.sheet;
 })();
 */
 -->
+[root@edwardsmarkf comboboxPlay]#
