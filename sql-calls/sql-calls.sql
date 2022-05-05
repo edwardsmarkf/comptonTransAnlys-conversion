@@ -1,46 +1,18 @@
 
 
-
-
-
-         SELECT  DISTINCT ''
-                ,       `stimword`.`stimwordPageNbr`
-                ,       `stimword`.`stimwordLineNbr`
-                ,       `stimword`.`stimwordWord`
-                FROM    `stimword`
-		,	`stimwordPosition`
-                WHERE   1
-                AND	`stimword`.`layoutName`		=	`stimwordPosition`.`layoutName`
-                AND	`stimword`.`stimwordPageNbr`	=	`stimwordPosition`.`stimwordPageNbr`
-                AND	`stimword`.`stimwordLineNbr`	=	`stimwordPosition`.`stimwordLineNbr`
-                AND	`stimword`.`stimwordWord`	=	`stimwordPosition`.`stimwordWord`
-                AND     `stimword`.`layoutName`                      = 'PESL'
-                AND     `stimword`.`stimwordPageNbr`                 BETWEEN  0 AND  1000
-                ORDER BY
-                        `stimwordPosition`.`stimwordPositionAutoIncr`
-                ;
-		
-
-
+###  THE BIG ONE!   (several more below)
 
          SELECT  ALL ''
                 ,	`stimwordPosition`.`layoutName`
                 ,       `stimwordPosition`.`stimwordWord`                   
-                ,       CONCAT( `stimwordPosition`.`contextPosition`, ' -- ' , `stimwordPosition`.`soundPhoneme` )
-                ,       `stimwordPosition`.`stimwordPositionNbr`                    'stimwordPositionNbr'
+                ,       CONCAT( `stimwordPosition`.`contextPosition`, ' -- ' , `stimwordPosition`.`soundPhoneme` )	'stimwordPositionContextPosition'
                 ,       `stimwordPosition`.`stimwordPositionSetting`
                 ,       `stimwordPosition`.`stimwordPositionBackgroundColor`
                 ,       `stimwordPosition`.`stimwordPositionBdrColor`
-                ,       `stimwordPosition`.`stimwordPositionBdrStyle`
                 ,       `stimwordPosition`.`stimwordPositionBdrThickness`
-              ##  ,       `stimwordPosition`.`soundPhoneme`
-				,		`stimwordPosition`.`soundPhonemeOrderNbr`		    'soundPhonemeOrderNbr'
-                ,       `stimwordPosition`.`stimwordPageNbr`      	            'stimwordPositionPageNbr'
-                ,       `stimwordPosition`.`stimwordPositionAutoIncr`               'stimwordPositionAutoIncr'
-                ,	`languageNorms`.`languageNormsError`			    'languageNormsError'
                 ,       `clientStimwordCURRENT`.`clientContextError`                'clientContextError CURRENT'
                 ,       `clientStimwordREPLICATE`.`clientContextError`              'clientContextError REPLICATE'
-                ,		`stimword`.`stimwordAutoIncr`
+                ,		`languageNorms`.`languageNormsError`			    		'languageNormsError'
                 FROM    `stimword`
                 ,
                 `context` LEFT OUTER JOIN `languageNorms` ON
@@ -92,9 +64,9 @@
                 WHERE   1                       /* dummy first one */
                 AND `stimword`.`stimwordAutoIncr`				=	`stimwordPosition`.`stimwordAutoIncr`
                	AND	`context`.`contextAutoIncr`  				=	`stimwordPosition`.`contextAutoIncr`
-                AND `stimword`.`layoutName`						=	"PESL"
-                AND `stimword`.`stimwordWord`					=	"Horse"
-                ##AND `stimword`.`stimwordAutoIncr`               =	2                     ###  ?????????????????????  better to use this??????
+                #####AND `stimword`.`layoutName`						=	"PESL"
+                ########AND `stimword`.`stimwordWord`					=	"Horse"
+                AND `stimword`.`stimwordAutoIncr`               =	2                     ###  we need to use stimwordAutoIncr in case of duplicate words!
                 ORDER BY        `stimwordPosition`.`stimwordPageNbr`
 			,	`stimwordPosition`.`stimwordLineNbr`
 			,	`stimwordPosition`.`soundPhonemeOrderNbr`
@@ -103,18 +75,28 @@
 		
 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
 
-
-
+         SELECT  DISTINCT ''
+                ,       `stimword`.`stimwordPageNbr`
+                ,       `stimword`.`stimwordLineNbr`
+                ,       `stimword`.`stimwordWord`
+                FROM    `stimword`
+		,	`stimwordPosition`
+                WHERE   1
+                AND	`stimword`.`layoutName`		=	`stimwordPosition`.`layoutName`
+                AND	`stimword`.`stimwordPageNbr`	=	`stimwordPosition`.`stimwordPageNbr`
+                AND	`stimword`.`stimwordLineNbr`	=	`stimwordPosition`.`stimwordLineNbr`
+                AND	`stimword`.`stimwordWord`	=	`stimwordPosition`.`stimwordWord`
+                AND     `stimword`.`layoutName`                      = 'PESL'
+                AND     `stimword`.`stimwordPageNbr`                 BETWEEN  0 AND  1000
+                ORDER BY
+                        `stimwordPosition`.`stimwordPositionAutoIncr`
+                ;
+		
+		
+		
+          ##  ?? do we even need this one anymor???		
+		
                 SELECT  `sessionNames`.`sessionReplicate`
                 ,       `sessionNames`.`sessionBeginLineNbr`
                 ,       `sessionNames`.`sessionEndLineNbr`
@@ -124,6 +106,8 @@
                 WHERE   1
                 AND     `sessionNames`.`sessionName`              =       'Time1'
                 ;
+
+
 
 
 
