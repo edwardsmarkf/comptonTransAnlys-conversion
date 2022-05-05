@@ -21,18 +21,20 @@
                 ;
 		
 
-            SELECT  ALL ''
+
+
+         SELECT  ALL ''
                 ,	`stimwordPosition`.`layoutName`
                 ,       `stimwordPosition`.`stimwordWord`                   
-                ,       `stimwordPosition`.`contextPosition`
+                ,       CONCAT( `stimwordPosition`.`contextPosition`, ' -- ' , `stimwordPosition`.`soundPhoneme` )
                 ,       `stimwordPosition`.`stimwordPositionNbr`                    'stimwordPositionNbr'
                 ,       `stimwordPosition`.`stimwordPositionSetting`
                 ,       `stimwordPosition`.`stimwordPositionBackgroundColor`
                 ,       `stimwordPosition`.`stimwordPositionBdrColor`
                 ,       `stimwordPosition`.`stimwordPositionBdrStyle`
                 ,       `stimwordPosition`.`stimwordPositionBdrThickness`
-                ,       `stimwordPosition`.`soundPhoneme`
-		,	`stimwordPosition`.`soundPhonemeOrderNbr`		    'soundPhonemeOrderNbr'
+              ##  ,       `stimwordPosition`.`soundPhoneme`
+				,		`stimwordPosition`.`soundPhonemeOrderNbr`		    'soundPhonemeOrderNbr'
                 ,       `stimwordPosition`.`stimwordPageNbr`      	            'stimwordPositionPageNbr'
                 ,       `stimwordPosition`.`stimwordPositionAutoIncr`               'stimwordPositionAutoIncr'
                 ,	`languageNorms`.`languageNormsError`			    'languageNormsError'
@@ -62,11 +64,11 @@
                 AND     `stimwordPosition`.`contextPosition`                	=       `clientStimwordCURRENT`.`contextPosition`
                 AND     `stimwordPosition`.`stimwordPositionNbr`            	=       `clientStimwordCURRENT`.`stimwordPositionNbr`
                 AND     `stimwordPosition`.`stimwordPositionSetting`        	=       `clientStimwordCURRENT`.`stimwordPositionSetting`
-                AND	`stimwordPosition`.`soundPhoneme`			= 	`clientStimwordCURRENT`.`soundPhoneme`
+                AND		`stimwordPosition`.`soundPhoneme`						= 	`clientStimwordCURRENT`.`soundPhoneme`
 
                 AND     `clientStimwordCURRENT`.`teacherEmail`              	=       'info@englishwithoutaccent.com'
                 AND     `clientStimwordCURRENT`.`clientMasterEmail`         	=       'mark_f_edwards@yahoo.com' ## '12yukos@gmail.com'
-                AND     `clientStimwordCURRENT`.`sessionName`   		=       'Time2'
+                AND     `clientStimwordCURRENT`.`sessionName`   				=       'Time2'
                 AND     `clientStimwordCURRENT`.`layoutName`                	=       'PESL'
                 )
                 LEFT OUTER JOIN `clientStimword` `clientStimwordREPLICATE` ON
@@ -80,25 +82,36 @@
                 AND     `stimwordPosition`.`contextPosition`                	=       `clientStimwordREPLICATE`.`contextPosition`
                 AND     `stimwordPosition`.`stimwordPositionNbr`            	=       `clientStimwordREPLICATE`.`stimwordPositionNbr`
                 AND     `stimwordPosition`.`stimwordPositionSetting`        	=       `clientStimwordREPLICATE`.`stimwordPositionSetting`
-		AND	`stimwordPosition`.`soundPhoneme`			=	`clientStimwordREPLICATE`.`soundPhoneme`
+				AND	`stimwordPosition`.`soundPhoneme`							=		`clientStimwordREPLICATE`.`soundPhoneme`
 
                 AND     `clientStimwordREPLICATE`.`teacherEmail`            	=       'info@englishwithoutaccent.com'
                 AND     `clientStimwordREPLICATE`.`clientMasterEmail`       	=       'mark_f_edwards@yahoo.com'  ##'12yukos@gmail.com'
-                AND     `clientStimwordREPLICATE`.`sessionName` 		=       'Time1'
+                AND     `clientStimwordREPLICATE`.`sessionName` 				=       'Time1'
                 AND     `clientStimwordREPLICATE`.`layoutName`              	=       'PESL'
                 )
                 WHERE   1                       /* dummy first one */
                 AND `stimword`.`stimwordAutoIncr`				=	`stimwordPosition`.`stimwordAutoIncr`
                	AND	`context`.`contextAutoIncr`  				=	`stimwordPosition`.`contextAutoIncr`
-                AND `stimword`.`stimwordAutoIncr`               		=	2
-						#                AND     `stimwordPosition`.`layoutName`                         =       'PESL'
-						#                AND     `stimwordPosition`.`stimwordPageNbr`                    =       1
-						#                AND     `stimwordPosition`.`stimwordLineNbr`                    =       1
-						#                AND     `stimwordPosition`.`stimwordWord`                       =       'Horse'
+                AND `stimword`.`layoutName`						=	"PESL"
+                AND `stimword`.`stimwordWord`					=	"Horse"
+                ##AND `stimword`.`stimwordAutoIncr`               =	2                     ###  ?????????????????????  better to use this??????
                 ORDER BY        `stimwordPosition`.`stimwordPageNbr`
 			,	`stimwordPosition`.`stimwordLineNbr`
 			,	`stimwordPosition`.`soundPhonemeOrderNbr`
 		;
+		
+		
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 
