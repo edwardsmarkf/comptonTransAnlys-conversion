@@ -2,6 +2,8 @@
 
 ###  THE BIG ONE!   (several more below)
 
+
+
          SELECT  ALL ''
                 ,	`stimwordPosition`.`layoutName`
                 ,       `stimwordPosition`.`stimwordWord`                   
@@ -9,7 +11,6 @@
                 ,       `stimwordPosition`.`stimwordPositionSetting`
                 ,       `stimwordPosition`.`stimwordPositionBackgroundColor`
                 ,       `stimwordPosition`.`stimwordPositionBdrColor`
-                ,       `stimwordPosition`.`stimwordPositionBdrThickness`
                 ,       `clientStimwordCURRENT`.`clientContextError`                'clientContextError CURRENT'
                 ,       `clientStimwordREPLICATE`.`clientContextError`              'clientContextError REPLICATE'
                 ,		`languageNorms`.`languageNormsError`			    		'languageNormsError'
@@ -64,13 +65,15 @@
                 WHERE   1                       /* dummy first one */
                 AND `stimword`.`stimwordAutoIncr`				=	`stimwordPosition`.`stimwordAutoIncr`
                	AND	`context`.`contextAutoIncr`  				=	`stimwordPosition`.`contextAutoIncr`
-                #####AND `stimword`.`layoutName`						=	"PESL"
-                ########AND `stimword`.`stimwordWord`					=	"Horse"
-                AND `stimword`.`stimwordAutoIncr`               =	2                     ###  we need to use stimwordAutoIncr in case of duplicate words!
+                AND `stimword`.`layoutName`						=	"PESL"
+                AND `stimword`.`stimwordPageNbr`				=	"1"
+                AND `stimword`.`stimwordLineNbr`				=	"1"
+                ##AND `stimword`.`stimwordAutoIncr`               =	2                     ###  ?????????????????????  better to use this??????
                 ORDER BY        `stimwordPosition`.`stimwordPageNbr`
 			,	`stimwordPosition`.`stimwordLineNbr`
 			,	`stimwordPosition`.`soundPhonemeOrderNbr`
 		;
+		
 		
 		
 
