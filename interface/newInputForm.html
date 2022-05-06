@@ -1,6 +1,28 @@
 
 
+login as: root
+root@162.220.165.228's password:
+Access denied
+root@162.220.165.228's password:
+Last failed login: Fri May  6 16:49:49 EDT 2022 from 71.223.140.8 on ssh:notty
+There was 1 failed login attempt since the last successful login.
+Last login: Fri May  6 12:00:00 2022
+
+‘Welcome to kvm301 -- setting vi as your default editor’
+
+Setting custom values in .bashrc
+
+
+[root@edwardsmarkf ~]#
+[root@edwardsmarkf ~]#
+[root@edwardsmarkf ~]#
+[root@edwardsmarkf ~]#
+[root@edwardsmarkf ~]#
+[root@edwardsmarkf ~]#
+[root@edwardsmarkf ~]# cd   /home/comptonpeslonline.com/public_html//comboboxPlay
 [root@edwardsmarkf comboboxPlay]# clear
+[root@edwardsmarkf comboboxPlay]# clar
+-bash: clar: command not found
 [root@edwardsmarkf comboboxPlay]# cat  phoneticTranscriptionGrid.html
 <html>
 
@@ -106,18 +128,6 @@ smart-list-item.languageNormsError      {
 
 const   maxCharsInPhoneticError         = 4     ;
 
-function valueChanged(thisValue) {
-        let thisId                      = thisValue.getAttribute('id')                                  ;
-        let stimwordPositionAutoIncr    = thisValue.getAttribute('data-stimwordPositionAutoIncr')       ;
-        let thisValueOf                 = document.getElementById(thisId).value                         ;
-        console.log(thisId + ' -- ' +  stimwordPositionAutoIncr + ' -- ' +  thisValueOf);
-}
-
-function replicationValueClicked(thisValue) {
-        let clientContextErrorId = thisValue.getAttribute('data-lastDataItemAdded');
-        document.getElementById(clientContextErrorId).value = thisValue.textContent;
-}
-
 
 
 function processItem() {
@@ -197,7 +207,7 @@ function processItem() {
                                                         element.style.setProperty('background' , record['stimwordBackgroundColor'] )            ;
                                                         element.setAttribute('value'    , record[columnName]                    );
                                                         element.setAttribute('id'       , elementId                             );
-                                                        element.setAttribute('onChange' , 'valueChanged(this);'                 );
+                                                                                                                                                                //      element.setAttribute('onChange' , 'clientContextErrorChanged(this);'    );
                                                         element.setAttribute('data-stimword-position-auto-incr', stimwordPositionAutoIncr)      ;
                                                         break;
                                         } // end switch
@@ -283,91 +293,88 @@ function processItem() {
                    ruleString += (' ' + cssVarName + ': ' + (( endingRowNbr - startingRowNbr ) + 1 ).toString() + ';' ) ;
                 }
         }
-        ruleString += String.fromCharCode(125);         // close curly-brace, again so as to not "confuse" vim!
+        ruleString += String.fromCharCode(125);         // close curly-brace (125), again so as to not "confuse" vim!
                                         // example:  ruleString = ':root { --stimwordWord--1: 6; --contextPositionSoundPhoneme--1: 2; --contextPositionSoundPhoneme--3: 2; --contextPositionSoundPhoneme--5: 2;}' ;
         document.styleSheets[0].insertRule(ruleString);
 
 
 
 
+                /********************************
+                        tooltip stuff
+                *********************************/
 
+        const myTooltip = document.getElementById('myTooltip') ;
 
-    const myTooltip = document.getElementById('myTooltip') ;
+        Object.keys(document.getElementsByTagName("smart-combo-box")).forEach((key) => {
 
-    Object.keys(document.getElementsByTagName("smart-combo-box")).forEach((key) => {
+                const comboBoxElement = document.getElementsByTagName('smart-combo-box')[key];
 
-       const comboBoxElement = document.getElementsByTagName('smart-combo-box')[key];
+                comboBoxElement.querySelector('input').setAttribute('maxlength', maxCharsInPhoneticError);
 
-       comboBoxElement.querySelector('input').setAttribute('maxlength', maxCharsInPhoneticError);
+                comboBoxElement.addEventListener('click', (event) => {
+                        if   ( event.target.tagName == 'INPUT' )  {
+                                comboBoxElement.close();
+                                myTooltip.selector = comboBoxElement;
+                                comboBoxElement.dataset.oldValue = comboBoxElement.value;   // save old for future testing!!
+                                myTooltip.open();
+                        }
+                });
 
-       comboBoxElement.addEventListener
-          ('mouseover', (event) => {
-              if   ( event.target.tagName == 'INPUT' )  {
-                   comboBoxElement.close();
-                   myTooltip.selector = comboBoxElement;
-                   comboBoxElement.dataset.oldValue = comboBoxElement.value;   // save old for future testing!!
-                   myTooltip.open();
-              }
-          });
+                comboBoxElement.addEventListener('mouseout', event => {
+                                                                // did the cursor leave this combobox by going DOWN or left/right/up ???
+                        if  ( event.clientY <  comboBoxElement.getBoundingClientRect().bottom - 2 )     // two is the "fugde factor"  !!
+                        {
+                                myTooltip.close();  // close this tooltip ONLY if the cursor went left/right/up otherwise leave open
+                        }
+                });
 
-       comboBoxElement.addEventListener
-           ('mouseout', event => {
-                             // did the cursor leave this combobox by going DOWN or left/right/up ???
-               if  ( event.clientY <  comboBoxElement.getBoundingClientRect().bottom - 2 )      // two is the "fugde factor"  !!
-               {
-                   myTooltip.close();  // close this tooltip ONLY if the cursor went left/right/up otherwise leave open
-               }
-           });
+                comboBoxElement.addEventListener('opening', () => {
+                        myTooltip.close();
+                });
 
-       comboBoxElement.addEventListener
-           ('opening', () => {
-                  myTooltip.close();
-           });
+                comboBoxElement.addEventListener('change', event => {
+                        if  (!( myTooltip.visible )) {   // ie its CLOSED and therefore not visible
+                                processValues   ( event.currentTarget.dataset.idNbr
+                                                , event.currentTarget.dataset.oldValue
+                                                , event.currentTarget.value
+                                                );
+                                event.currentTarget.dataset.oldValue = event.currentTarget.value;
+                        } else {
+                                console.log('Skipping processing because tooltip is still visible, mouseout will trigger closing the tooltip!')
+                        }
+                });
+        });
 
-       comboBoxElement.addEventListener
-           ('change', event => {  //debugger;
-                if  (!( myTooltip.visible )) {   // ie its CLOSED and therefore not visible
-                    processValues ( event.currentTarget.dataset.idNbr
-                                  , event.currentTarget.dataset.oldValue
-                                  , event.currentTarget.value
-                                  );
-                    event.currentTarget.dataset.oldValue = event.currentTarget.value;
-                } else {
-                    console.log('Skipping processing because tooltip is still visible, mouseout will trigger closing the tooltip!')
-                }
-          });
-    });
+        myTooltip.addEventListener('mouseleave', (event) =>  {
+                myTooltip.close();
+                let thisSmartComboBox = document.getElementById(myTooltip.selector.id);
+                processValues   ( thisSmartComboBox.dataset.idNbr
+                                , thisSmartComboBox.dataset.oldValue
+                                , thisSmartComboBox.value
+                                );
+                thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
+        })
 
-    myTooltip.addEventListener('mouseleave', (event) =>  {
-        myTooltip.close();
-        let thisSmartComboBox = document.getElementById(myTooltip.selector.id);
-        processValues   ( thisSmartComboBox.dataset.idNbr
-                        , thisSmartComboBox.dataset.oldValue
-                        , thisSmartComboBox.value
-                        );
-        thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
-    })
-
-   const tooltipGridItems = document.getElementById('tooltipGrid').getElementsByTagName('DIV');
-   Object.keys(tooltipGridItems).forEach( element =>  {
-       let thisDiv = tooltipGridItems[element];
-       thisDiv.classList.add('tooltipElement');
-       thisDiv.style.cursor = "pointer";
-       thisDiv.addEventListener('click', event => {
-            let clickedValue = event.target.innerHTML;
-            let myComboBox = document.getElementById(myTooltip.selector.id);
-            if  ( clickedValue != '&nbsp;' )  {
-                if ( myComboBox.value.length < maxCharsInPhoneticError ) {
-                    myComboBox.value += clickedValue;
-                } else {
-                    console.log(`You filled up the phonetic errors input box, max size is ${maxCharsInPhoneticError} characters!`)
-                }
-            } else {  // delete selected, so remove character on the far right side
-                myComboBox.value = myComboBox.value.slice(0, -1)  ;
-            }
-       });
-   }); // end Object.keys(descenands).foreach()
-
+        const tooltipGridItems = document.getElementById('tooltipGrid').getElementsByTagName('DIV');
+        Object.keys(tooltipGridItems).forEach( element =>  {
+                let thisDiv = tooltipGridItems[element];
+                thisDiv.classList.add('tooltipElement');
+                thisDiv.style.cursor = "pointer";
+                thisDiv.addEventListener('click', event => {
+                        let clickedValue = event.target.innerHTML;
+                        let myComboBox = document.getElementById(myTooltip.selector.id);
+                        if  ( clickedValue != '&nbsp;' )  {
+                                if ( myComboBox.value.length < maxCharsInPhoneticError ) {
+                                        myComboBox.value += clickedValue;
+                                } else {
+                                        console.log(`You filled up the phonetic errors input box, max size is ${maxCharsInPhoneticError} characters!`)
+                                }
+                        } else {  // delete selected, so remove character on the far right side
+                                myComboBox.value = myComboBox.value.slice(0, -1)  ;
+                        }
+                });
+        }); // end Object.keys(descenands).foreach()
 
 
 
@@ -375,6 +382,15 @@ function processItem() {
 
 }
 
+
+                                                                /*
+                                                                function clientContextErrorChanged(thisValue) {
+                                                                        let thisId                      = thisValue.getAttribute('id')                                  ;
+                                                                        let stimwordPositionAutoIncr    = thisValue.getAttribute('data-stimwordPositionAutoIncr')       ;
+                                                                        let thisValueOf                 = document.getElementById(thisId).value                         ;
+                                                                        console.log('PROCESS: ' + thisId + ' -- ' +  stimwordPositionAutoIncr + ' -- ' +  thisValueOf);
+                                                                }
+                                                                */
 
 function  processValues(id, oldValue, newValue)  {
      console.log('RESULT!! ' + id, 'oldValue:',  (oldValue ? oldValue : 'not yet defined!') , 'newValue: ' , newValue);
