@@ -1,3 +1,5 @@
+
+
 [root@edwardsmarkf comboboxPlay]# clear
 [root@edwardsmarkf comboboxPlay]# cat  phoneticTranscriptionGrid.html
 <html>
@@ -61,6 +63,36 @@ smart-combo-box {
                                 https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-div/13515693#13515693*/
 }
 
+smart-list-item.dropDownOptions {
+        border                  : 1px dotted black                      ;
+}
+
+smart-list-item.replicationValue        {
+        opacity                 : 50%                                   ;
+}
+
+smart-list-item.languageNormsError      {
+        background-color        : #333                                  ;
+}
+
+
+.tooltipWrapperClass {
+  display: grid;
+  grid-template-columns:
+         repeat(4, 25px);
+  grid-gap: 2px;
+  background-color: #fff;
+  color: #444;
+}
+
+.tooltipElement {
+  background-color: #444;
+  color:  #fff;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 140%;
+}
+
 </style>
 
 
@@ -71,6 +103,8 @@ smart-combo-box {
 <script>
 
 'use strict;'
+
+const   maxCharsInPhoneticError         = 4     ;
 
 function valueChanged(thisValue) {
         let thisId                      = thisValue.getAttribute('id')                                  ;
@@ -104,8 +138,6 @@ function processItem() {
 
 
 
-
-
                 for ( let columnNbr in Object.keys(data[recordNbr]) ) {
 
                         let columnName = Object.keys(data[recordNbr])[columnNbr];
@@ -115,7 +147,6 @@ function processItem() {
                             case contextPositionSoundPhoneme    :
                             case 'stimwordPositionSetting'      :
                             case 'clientContextError'           :
-                            {
                                 if  (   ( record[columnName] != controlBreak[columnName] ))
                                 {
                                         controlBreak[columnName] = record[columnName] ;
@@ -128,7 +159,15 @@ function processItem() {
                                         let element             = null  ;
                                         let colStartValue       = null  ;
                                         switch ( columnName )   {
+
+                                                case stimwordWord                       :
+                                                        element         =       document.createTextNode(record[columnName])     ;
+                                                        colStartValue   =       '1'                                             ;
+                                                        break;
+
                                                 case contextPositionSoundPhoneme        :
+
+                                                        colStartValue           = '2'                                                   ;
 
                                                         let cssVarName          =       '--' + contextPositionSoundPhoneme + '--' + (rowCount + 1).toString()   ;
                                                         cssVarHolderObj.push    (       {       'cssVarName'            :       cssVarName
@@ -136,32 +175,37 @@ function processItem() {
                                                                                         ,       'endingRowNbr'          :       rowCount
                                                                                         }
                                                                                 );
-                                                                // notice NO break here....
-                                                case stimwordWord                       :
+                                                        element                 = document.createElement('span')                        ;
+                                                        element.innerHTML       = record[columnName]                                    ;
+                                                        element.style.setProperty('background' , record['stimwordBackgroundColor'] )    ;
+                                                        break;
+
                                                 case 'stimwordPositionSetting'          :
-                                                        element = document.createTextNode(record[columnName]);
-                                                        colStartValue = (parseInt(columnNbr) + 1).toString()    ;
+
+                                                        colStartValue           =       '3'                                                     ;
+                                                        element                 =       document.createElement('span')                          ;
+                                                        element.innerHTML       =       record[columnName]                                      ;
+                                                        element.style.setProperty('background' , record['stimwordBackgroundColor'] )            ;
                                                         break;
 
                                                 case 'clientContextError'               :
-                                                        let elementId = columnName + '-' + rowCount;
+                                                        colStartValue                   =       '4'                                             ;
+                                                        let elementId                   =       columnName + '-' + rowCount                     ;
                                                         let { stimwordPositionAutoIncr } = record       ;
-                                                        lastDataItemAdded = elementId;
-                                                        element = document.createElement('smart-combo-box');
+                                                        lastDataItemAdded               =       elementId                                       ;
+                                                        element                         =       document.createElement('smart-combo-box')       ;
+                                                        element.style.setProperty('background' , record['stimwordBackgroundColor'] )            ;
                                                         element.setAttribute('value'    , record[columnName]                    );
                                                         element.setAttribute('id'       , elementId                             );
                                                         element.setAttribute('onChange' , 'valueChanged(this);'                 );
-                                                        element.setAttribute('data-stimword-position-auto-incr', stimwordPositionAutoIncr)                      ;
-
-                                                        colStartValue = (parseInt(columnNbr) + 1).toString()    ;
-
+                                                        element.setAttribute('data-stimword-position-auto-incr', stimwordPositionAutoIncr)      ;
                                                         break;
-                                        }
+                                        } // end switch
 
-                                        if  ( element ) {
+                                        if  ( element && colStartValue )        {
                                                 tag.appendChild(element);
 
-                                                tag.classList.add(columnName, 'box');
+                                                tag.classList.add('box');
 
                                                 tag.style.gridColumnStart       =       colStartValue   ;
                                                 tag.style.gridRowStart          =       (parseInt(rowCount) + 1 ).toString()    ;
@@ -180,7 +224,6 @@ function processItem() {
                                                                 tag.style.gridRowEnd            =       'span 1'                                                ;
                                                 }
 
-
                                                 document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
                                                 incrRowFlag = true;
                                         } else {
@@ -188,7 +231,7 @@ function processItem() {
                                         }
 
                                 } else {
-                                                // control break here ! ! ! ! j!
+                                                // control break triggered
                                         if      (       ( columnName                                    == contextPositionSoundPhoneme                  )
                                                 &&      ( record['stimwordPositionSetting']             != controlBreak['stimwordPositionSetting']      )
                                                 )
@@ -198,42 +241,41 @@ function processItem() {
 
                                 }
                                 break;
-                            }
+
                             case 'replicationValue'     :
-                            {
-                                if  ( record[columnName] )      {               // make SURE its not blank
-                                        let nbrOfComboBoxes =  document.getElementsByTagName('smart-combo-box').length          ;
-debugger;
-                                        let tmpComboBox = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
-                                        tmpComboBox.insert(99, record[columnName]);
-                                        tmpComboBox.getItem(record[columnName]).color = '#121212'
-                                        //tmpComboBox.insert(99, '<span style="color: red;">' + record[columnName] + '</span>'  );
-console.log('');
+
+                                if  ( record[columnName] )      {               // make SURE this is not a blank
+                                        let nbrOfComboBoxes     =  document.getElementsByTagName('smart-combo-box').length              ;
+                                        let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
+                                        tmpComboBox.insert(99, record[columnName])                              ;
+                                        let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1 ;
+                                        let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location] ;
+                                        tmpListItem.classList.add('dropDownOptions', 'replicationValue' )                       ;
+                                        tmpListItem.title       = 'Prior Error'
                                 }
                                 break;
-                            }
-                            case 'languageSpec'         :
-                            {   if  ( record[columnName] )      {               // make SURE its not blank
-                                        let nbrOfComboBoxes =  document.getElementsByTagName('smart-combo-box').length          ;
-                                        let tmpComboBox = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
-                                        tmpComboBox.insert(99, record[columnName]);
-                                        tmpComboBox.getItem(record[columnName]).color = '#565656'
+
+                            case 'languageNormsError'           :
+                                if  ( record[columnName] )      {               // make SURE this is not a blank
+                                        let nbrOfComboBoxes     =  document.getElementsByTagName('smart-combo-box').length              ;
+                                        let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
+                                        tmpComboBox.insert(99, record[columnName])                              ;
+                                        let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1 ;
+                                        let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location] ;
+                                        tmpListItem.classList.add('dropDownOptions', 'languageNormsError'       )                       ;
+                                        tmpListItem.title       = 'Indian Pakistan'
                                 }
                                 break;
-                            }
 
                         } // end switch statement
                 } // end for each column item
                 if  ( incrRowFlag )     {
-                                                console.log('INCR row count!!');
                         rowCount++      ;
-                } else {
-                                                console.log('SKIPPING INCR row count!!');
                 }
         } // end for each record
 
-        //      create the new rule string!
-        let ruleString = ':root { ' + '--' + stimwordWord + ': ' + rowCount.toString() + ';'    ;
+        //      create the new rule string to "extend" the grid rows since there is not way to automate this (weird) !
+        let ruleString = ':root ' + String.fromCharCode(123) + ' --' + stimwordWord + ': ' + rowCount.toString() + ';'  ;       //  using "String.fromCharCode(123)" instead of opening curly-brace for vim!
         for ( let incr in cssVarHolderObj )
         {       let { startingRowNbr, endingRowNbr, cssVarName } = cssVarHolderObj[incr]        ;
                 if  ( startingRowNbr != endingRowNbr )
@@ -241,13 +283,122 @@ console.log('');
                    ruleString += (' ' + cssVarName + ': ' + (( endingRowNbr - startingRowNbr ) + 1 ).toString() + ';' ) ;
                 }
         }
-        ruleString += '}';
-                                        //ruleString = ':root { --stimwordWord--1: 6; --contextPositionSoundPhoneme--1: 2; --contextPositionSoundPhoneme--3: 2; --contextPositionSoundPhoneme--5: 2;}' ;
+        ruleString += String.fromCharCode(125);         // close curly-brace, again so as to not "confuse" vim!
+                                        // example:  ruleString = ':root { --stimwordWord--1: 6; --contextPositionSoundPhoneme--1: 2; --contextPositionSoundPhoneme--3: 2; --contextPositionSoundPhoneme--5: 2;}' ;
         document.styleSheets[0].insertRule(ruleString);
+
+
+
+
+
+
+    const myTooltip = document.getElementById('myTooltip') ;
+
+    Object.keys(document.getElementsByTagName("smart-combo-box")).forEach((key) => {
+
+       const comboBoxElement = document.getElementsByTagName('smart-combo-box')[key];
+
+       comboBoxElement.querySelector('input').setAttribute('maxlength', maxCharsInPhoneticError);
+
+       comboBoxElement.addEventListener
+          ('mouseover', (event) => {
+              if   ( event.target.tagName == 'INPUT' )  {
+                   comboBoxElement.close();
+                   myTooltip.selector = comboBoxElement;
+                   comboBoxElement.dataset.oldValue = comboBoxElement.value;   // save old for future testing!!
+                   myTooltip.open();
+              }
+          });
+
+       comboBoxElement.addEventListener
+           ('mouseout', event => {
+                             // did the cursor leave this combobox by going DOWN or left/right/up ???
+               if  ( event.clientY <  comboBoxElement.getBoundingClientRect().bottom - 2 )      // two is the "fugde factor"  !!
+               {
+                   myTooltip.close();  // close this tooltip ONLY if the cursor went left/right/up otherwise leave open
+               }
+           });
+
+       comboBoxElement.addEventListener
+           ('opening', () => {
+                  myTooltip.close();
+           });
+
+       comboBoxElement.addEventListener
+           ('change', event => {  //debugger;
+                if  (!( myTooltip.visible )) {   // ie its CLOSED and therefore not visible
+                    processValues ( event.currentTarget.dataset.idNbr
+                                  , event.currentTarget.dataset.oldValue
+                                  , event.currentTarget.value
+                                  );
+                    event.currentTarget.dataset.oldValue = event.currentTarget.value;
+                } else {
+                    console.log('Skipping processing because tooltip is still visible, mouseout will trigger closing the tooltip!')
+                }
+          });
+    });
+
+    myTooltip.addEventListener('mouseleave', (event) =>  {
+        myTooltip.close();
+        let thisSmartComboBox = document.getElementById(myTooltip.selector.id);
+        processValues   ( thisSmartComboBox.dataset.idNbr
+                        , thisSmartComboBox.dataset.oldValue
+                        , thisSmartComboBox.value
+                        );
+        thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
+    })
+
+   const tooltipGridItems = document.getElementById('tooltipGrid').getElementsByTagName('DIV');
+   Object.keys(tooltipGridItems).forEach( element =>  {
+       let thisDiv = tooltipGridItems[element];
+       thisDiv.classList.add('tooltipElement');
+       thisDiv.style.cursor = "pointer";
+       thisDiv.addEventListener('click', event => {
+            let clickedValue = event.target.innerHTML;
+            let myComboBox = document.getElementById(myTooltip.selector.id);
+            if  ( clickedValue != '&nbsp;' )  {
+                if ( myComboBox.value.length < maxCharsInPhoneticError ) {
+                    myComboBox.value += clickedValue;
+                } else {
+                    console.log(`You filled up the phonetic errors input box, max size is ${maxCharsInPhoneticError} characters!`)
+                }
+            } else {  // delete selected, so remove character on the far right side
+                myComboBox.value = myComboBox.value.slice(0, -1)  ;
+            }
+       });
+   }); // end Object.keys(descenands).foreach()
+
+
+
+
+
+
+}
+
+
+function  processValues(id, oldValue, newValue)  {
+     console.log('RESULT!! ' + id, 'oldValue:',  (oldValue ? oldValue : 'not yet defined!') , 'newValue: ' , newValue);
 }
 
 
 const data =
+[{"stimwordWord": "horse", "contextPositionSoundPhoneme": "initial -- h", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "ø", "languageNormsError": "ø"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "initial -- h", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "aɚ"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oR"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oǝ"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝR"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝɚ"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "aɚ"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oR"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oǝ"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝR"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝɚ"}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "final -- s", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": ""}
+,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "final -- s", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": ""
+}];
+
+/*
 [ { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Word'        , clientContextError: '0'       , stimwordPositionAutoIncr: 123123      , replicationValue : 'XYZ'      , languageSpec : 'A00'  }
 , { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Word'        , clientContextError: '0'       , stimwordPositionAutoIncr: 123123      , replicationValue : 'ZEF'      , languageSpec : ''     }
 , { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Word'        , clientContextError: '0'       , stimwordPositionAutoIncr: 123123      , replicationValue : 'WWW'      , languageSpec : 'A01'  }
@@ -257,6 +408,7 @@ const data =
 , { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'      , stimwordPositionSetting:'Word'        , clientContextError: ''        , stimwordPositionAutoIncr: 123127      , replicationValue : 'JKL'      , languageSpec : 'A05'  }
 , { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'      , stimwordPositionSetting:'Sentence'    , clientContextError: ''        , stimwordPositionAutoIncr: 123128      , replicationValue : 'MNO'      , languageSpec : 'A06'  }
 ]
+**/
 
 </script>
 
@@ -268,88 +420,44 @@ const data =
 <br />
 <button onClick="javascript: processItem();">Add Rows!!!</button>
 
+
+<smart-tooltip id="myTooltip" style='border: 1px dotted red;' open-mode='manual' position='bottom' arrow>
+  <div class='tooltipWrapperClass' id='tooltipGrid'>
+        <!-- row one  -->
+        <div>&nbsp;</div>
+        <div>∅</div>
+        <div>æ</div>
+        <div>ɜ</div>
+        <!-- row two -->
+        <div>ɚ</div>
+        <div>ʌ</div>
+        <div>ɔ</div>
+        <div>ɝ</div>
+        <!-- row three -->
+        <div>ʡ</div>
+        <div>═</div>
+        <div>←</div>
+        <div>ǝ</div>
+        <!--  row four -->
+        <div>Ɒ</div>
+        <div>ɛ</div>
+        <div>ʃ</div>
+        <div>ð</div>
+        <!--  row five -->
+        <div>ŋ</div>
+        <div>θ</div>
+        <div>ʀ</div>
+        <div>ṭ</div>
+        <!--  row six -->
+        <div>ʊ</div>
+        <div>χ</div>
+        <div>ʒ</div>
+        <div>ɪ</div>
+
+    </div>
+
+</smart-tooltip>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-/*
-function shit()  {
-
-        // https://stackoverflow.com/questions/70251599/how-to-use-cssstylesheet-insertrule-to-change-a-root-property
-
-        let varOne = '--varOne';
-        let varTwo = '--varTwo';
-
-
-        console.log('first loopfind: ' );
-        let firstRootVars = loopFind();
-        console.log(firstRootVars);
-        console.log(getComputedStyle(document.body).getPropertyValue(varOne));
-        console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
-
-        document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; }");
-
-        console.log('second loopfind: ' );
-        let secondRootVars = loopFind();
-        console.log(secondRootVars);
-        console.log(getComputedStyle(document.body).getPropertyValue(varOne));
-        console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
-
-        document.styleSheets[0].removeRule(0)
-
-        console.log('third loopfind: ' );
-        let thirdRootVars = loopFind();
-        console.log(thirdRootVars);
-        console.log(getComputedStyle(document.body).getPropertyValue(varOne));
-        console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
-
-        document.styleSheets[0].insertRule(":root {" + varOne + ": 1234; " + varTwo + ": 5678; }");
-
-        console.log('fourth loopfind: ' );
-        let fourthRootVars = loopFind();
-        console.log(fourthRootVars);
-        console.log(getComputedStyle(document.body).getPropertyValue(varOne));
-        console.log(getComputedStyle(document.body).getPropertyValue(varTwo));
-
-
-}
-
-function loopFind() {
-
-        for ( let x = 0 ; x < document.styleSheets[0].cssRules.length ; x++ ) {
-                if ( document.styleSheets[0].cssRules[x].selectorText == ':root' ) {
-                        document.styleSheets[0].removeRule(x)
-                        break;
-                }
-        }
-}
-*/
-/*
-var sheet = (function() {
-        // Create the <style> tag
-        var style = document.createElement("style");
-
-        // WebKit hack :(
-        style.appendChild(document.createTextNode(""));
-
-        // Add the <style> element to the page
-        document.head.appendChild(style);
-
-        return style.sheet;
-})();
-*/
--->
 [root@edwardsmarkf comboboxPlay]#
