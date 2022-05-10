@@ -8,7 +8,7 @@ ALTER TABLE comptonTransAnlys.stimwordPosition ADD COLUMN IF NOT EXISTS soundPho
 UPDATE `comptonTransAnlys`.`stimwordPosition` 
     SET `stimwordPositionNbr` = '1' 
     WHERE 1
-    AND  (`layoutName` = 'PESL' AND `stimwordPageNbr` = 15 AND `stimwordLineNbr` = 15 AND `stimwordWord` = 'away' AND stimwordPositionAutoIncr` = '735')
+    AND  (`layoutName` = 'PESL' AND `stimwordPageNbr` = 15 AND `stimwordLineNbr` = 15 AND `stimwordWord` = 'away' AND `stimwordPositionAutoIncr` = '735')
     ;
 
 
