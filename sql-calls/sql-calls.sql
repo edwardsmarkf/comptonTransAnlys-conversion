@@ -13,7 +13,8 @@
                 ,       `stimwordPosition`.`stimwordPositionBdrColor`
                 ,       `clientStimwordCURRENT`.`clientContextError`                'clientContextError CURRENT'
                 ,       `clientStimwordREPLICATE`.`clientContextError`              'clientContextError REPLICATE'
-                ,		`languageNorms`.`languageNormsError`			    		'languageNormsError'
+                ,	`languageNorms`.`languageNormsError`			    'languageNormsError'
+		,	COUNT(`context`.`soundPhoneme`)				    'languageNormsError COUNT'
                 FROM    `stimword`
                 ,
                 `context` LEFT OUTER JOIN `languageNorms` ON
@@ -63,32 +64,43 @@
                 AND     `clientStimwordREPLICATE`.`layoutName`              	=       'PESL'
                 )
                 WHERE   1                       /* dummy first one */
-                AND `stimword`.`stimwordAutoIncr`				=	`stimwordPosition`.`stimwordAutoIncr`
+                AND	`stimword`.`stimwordAutoIncr`				=	`stimwordPosition`.`stimwordAutoIncr`
                	AND	`context`.`contextAutoIncr`  				=	`stimwordPosition`.`contextAutoIncr`
-                AND `stimword`.`layoutName`						=	"PESL"
-                AND `stimword`.`stimwordPageNbr`				=	"1"
-                AND `stimword`.`stimwordLineNbr`				=	"1"
+                AND	`stimword`.`layoutName`					=	"PESL"
+                AND	`stimword`.`stimwordPageNbr`				=	"1"
+                AND	`stimword`.`stimwordLineNbr`				=	"1"
                 ##AND `stimword`.`stimwordAutoIncr`               =	2                     ###  ?????????????????????  better to use this??????
+		
+		GROUP BY        `stimwordPosition`.`layoutName`
+		,		`stimwordPosition`.`stimwordWord`
+                ,		`stimwordPosition`.`contextPosition`
+                ,		`stimwordPosition`.`soundPhoneme`
+                ,		`stimwordPosition`.`stimwordPositionSetting`
+                ,		`clientStimwordCURRENT`.`clientContextError`
+                ,		`clientStimwordREPLICATE`.`clientContextError`
+		
                 ORDER BY        `stimwordPosition`.`stimwordPageNbr`
 			,	`stimwordPosition`.`stimwordLineNbr`
 			,	`stimwordPosition`.`soundPhonemeOrderNbr`
 		;
 		
          SELECT  JSON_ARRAYAGG(JSON_OBJECT
-				(     'stimwordWord'
-                ,       `stimwordPosition`.`stimwordWord`
-                ,     'contextPositionSoundPhoneme'
-                ,       CONCAT( `stimwordPosition`.`contextPosition`, ' -- ' , `stimwordPosition`.`soundPhoneme` )
+		(	'stimwordWord'
+                ,       	`stimwordPosition`.`stimwordWord`
+                ,     	'contextPositionSoundPhoneme'
+                ,       	CONCAT( `stimwordPosition`.`contextPosition`, ' -- ' , `stimwordPosition`.`soundPhoneme` )
                 ,       'stimwordPositionSetting'
-                ,       `stimwordPosition`.`stimwordPositionSetting`
+                ,       	`stimwordPosition`.`stimwordPositionSetting`
                 ,       'stimwordBackgroundColor'
-                ,       IFNULL(`stimwordPosition`.`stimwordPositionBackgroundColor`,'')
+                ,       	IFNULL(`stimwordPosition`.`stimwordPositionBackgroundColor`,'')
                 ,       'clientContextError'
-                ,       IFNULL(`clientStimwordCURRENT`.`clientContextError`, '')
+                ,       	IFNULL(`clientStimwordCURRENT`.`clientContextError`, '')
                 ,       'clientContextErrorREPLICATE'
-                ,       IFNULL(`clientStimwordREPLICATE`.`clientContextError`,'')
+                ,       	IFNULL(`clientStimwordREPLICATE`.`clientContextError`,'')
                 ,       'languageNormsError'
-                ,		IFNULL(`languageNorms`.`languageNormsError`, '')	    		
+                ,		IFNULL(`languageNorms`.`languageNormsError`, '')
+		,	 'languageNormsError COUNT'
+		,		COUNT(`context`.`soundPhoneme`)				   
                 )) ''
                 FROM    `stimword`
                 ,
@@ -145,9 +157,18 @@
                 AND `stimword`.`stimwordPageNbr`				=	"1"
                 AND `stimword`.`stimwordLineNbr`				=	"1"
                 ##AND `stimword`.`stimwordAutoIncr`               =	2                     ###  ?????????????????????  better to use this??????
-                ORDER BY        `stimwordPosition`.`stimwordPageNbr`
-			,	`stimwordPosition`.`stimwordLineNbr`
-			,	`stimwordPosition`.`soundPhonemeOrderNbr`
+
+		GROUP BY        `stimwordPosition`.`layoutName`
+		,		`stimwordPosition`.`stimwordWord`
+                ,		`stimwordPosition`.`contextPosition`
+                ,		`stimwordPosition`.`soundPhoneme`
+                ,		`stimwordPosition`.`stimwordPositionSetting`
+                ,		`clientStimwordCURRENT`.`clientContextError`
+                ,		`clientStimwordREPLICATE`.`clientContextError` 
+ 
+ 		ORDER BY        `stimwordPosition`.`stimwordPageNbr`
+		,		`stimwordPosition`.`stimwordLineNbr`
+		,		`stimwordPosition`.`soundPhonemeOrderNbr`
 		;
 		
 		
