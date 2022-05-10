@@ -2,7 +2,7 @@
 
 ###  THE BIG ONE!   (several more below)
 
-
+###	2022-05-10 - added 'COUNT' and 'GROUP BY'
 
          SELECT  ALL ''
                 ,	`stimwordPosition`.`layoutName`
