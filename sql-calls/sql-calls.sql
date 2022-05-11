@@ -84,7 +84,12 @@
 			,	`stimwordPosition`.`soundPhonemeOrderNbr`
 		;
 		
- 
+ https://sebhastian.com/mysql-invalid-use-group-function/
+ SELECT * FROM pets WHERE age < AVG(age);
+To this:
+SELECT * FROM pets WHERE age < (SELECT AVG(age) FROM pets);
+
+
 
         SELECT  #JSON_ARRAYAGG(
                 JSON_OBJECT
