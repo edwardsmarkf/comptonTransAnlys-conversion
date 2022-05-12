@@ -8,7 +8,7 @@
 
 
 
-        SELECT  ##JSONRRAYAGG(
+        SELECT  ##JSON_ARRAYAGG(
                 JSON_OBJECT
                 (       'stimwordWord'
                 ,               `stimword`.`stimwordWord`
@@ -43,7 +43,7 @@
                                         AND     `context_SUBSELECT`.`contextPosition`   = `languageNorms_SUBSELECT`.`contextPosition`
                                 )
                 )
-                ##)
+                ##)  ''   /* to suppress any sort of column heading! */
                 FROM    `stimword`
                 ,
                 `context` LEFT OUTER JOIN `languageNorms` `languageNorms` ON
