@@ -20,7 +20,7 @@
                 ,               IFNULL(`stimwordPosition`.`stimwordPositionBackgroundColor`,'')
                 ,       'clientContextError'
                 ,               IFNULL(`clientStimwordCURRENT`.`clientContextError`, '')
-                ,       'clientContextErrorREPLICATE'
+                ,       'replicationValue'
                 ,               IFNULL(`clientStimwordREPLICATE`.`clientContextError`,'')
                 ,       'languageNormsError'
                 ,               IFNULL(`languageNorms`.`languageNormsError`, '')
