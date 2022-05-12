@@ -24,7 +24,7 @@
                 ,               IFNULL(`clientStimwordREPLICATE`.`clientContextError`,'')
                 ,       'languageNormsError'
                 ,               IFNULL(`languageNorms`.`languageNormsError`, '')
-                ,        'languageNormsError COUNT'
+                ,        'languageNormsErrorCOUNT'
                 ,               (
                                         SELECT  COUNT(`context_SUBSELECT`.`soundPhoneme`)
                                         FROM    `context`               `context_SUBSELECT`
