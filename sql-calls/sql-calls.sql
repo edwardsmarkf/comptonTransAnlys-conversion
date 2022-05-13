@@ -24,6 +24,8 @@
                 ,               IFNULL(`clientStimwordREPLICATE`.`clientContextError`,'')
                 ,       'languageNormsError'
                 ,               IFNULL(`languageNorms`.`languageNormsError`, '')
+                ,       'stimwordPositionAutoIncr'
+                ,               `stimwordPosition`.`stimwordPositionAutoIncr`
                 ,        'languageNormsErrorCOUNT'
                 ,               (
                                         SELECT  COUNT(`context_SUBSELECT`.`soundPhoneme`)
