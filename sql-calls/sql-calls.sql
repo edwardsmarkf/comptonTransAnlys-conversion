@@ -6,7 +6,7 @@
 ###	2022-05-11 - removed "GROUP BY" and added subquery instead
 
 
-
+   ###    mariadb   comptonTransAnlys   <  sql-calls.sql | sed -e 's/},{/}\|,{/g' | tr '|' '\n'   ;
 
         SELECT  ##JSON_ARRAYAGG(
                 JSON_OBJECT
