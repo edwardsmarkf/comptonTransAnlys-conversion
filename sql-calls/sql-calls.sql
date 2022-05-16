@@ -99,7 +99,7 @@
                 AND `context`.`contextAutoIncr`                                 =       `stimwordPosition`.`contextAutoIncr`
                 AND `stimword`.`layoutName`                                     =       "PESL"
                 AND `stimword`.`stimwordPageNbr`                                =       "1"
-                AND `stimword`.`stimwordLineNbr`                                =       "1"
+                AND `stimword`.`stimwordLineNbr`                                =       "1"      /* horse=1 snake=2 clown=3  dog=4 */
 
                 ORDER BY        `stimwordPosition`.`stimwordPageNbr`
                 ,               `stimwordPosition`.`stimwordLineNbr`
