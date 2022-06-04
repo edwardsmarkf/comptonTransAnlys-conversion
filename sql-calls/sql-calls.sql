@@ -11,22 +11,15 @@
 
         SELECT  ##JSON_ARRAYAGG(
                 JSON_OBJECT
-                ( 	'contextPositionSoundPhoneme'
-                ,               CONCAT( `stimwordPosition`.`contextPosition`, ' -- ' , `stimwordPosition`.`soundPhoneme` )
-                ,       'stimwordPositionSetting'
-                ,               `stimwordPosition`.`stimwordPositionSetting`
-                ,       'stimwordBackgroundColor'
-                ,               IFNULL(`stimwordPosition`.`stimwordPositionBackgroundColor`,'')
-                ,       'clientContextError'
-                ,               IFNULL(`clientStimwordCURRENT`.`clientContextError`, '')
-                ,       'replicationValue'
-                ,               IFNULL(`clientStimwordREPLICATE`.`clientContextError`,'')
-                ,       'languageNormsError'
-                ,               IFNULL(`languageNorms`.`languageNormsError`, '')
-                ,       'stimwordPositionAutoIncr'
-                ,               `stimwordPosition`.`stimwordPositionAutoIncr`
-                ,        'languageNormsErrorCOUNT'
-                ,               (
+                ( 	'contextPositionSoundPhoneme'   , CONCAT( `stimwordPosition`.`contextPosition`, ' -- ' , `stimwordPosition`.`soundPhoneme` )
+                ,       'stimwordPositionSetting'       , `stimwordPosition`.`stimwordPositionSetting`
+                ,       'stimwordBackgroundColor'       , IFNULL(`stimwordPosition`.`stimwordPositionBackgroundColor`,'')
+                ,       'clientContextError'            , IFNULL(`clientStimwordCURRENT`.`clientContextError`, '')
+                ,       'replicationValue'              , IFNULL(`clientStimwordREPLICATE`.`clientContextError`,'')
+                ,       'languageNormsError'            , IFNULL(`languageNorms`.`languageNormsError`, '')
+                ,       'stimwordPositionAutoIncr'      , `stimwordPosition`.`stimwordPositionAutoIncr`
+                ,        'languageNormsErrorCOUNT'      ,               
+                                (
                                         SELECT  COUNT(`context_SUBSELECT`.`soundPhoneme`)
                                         FROM    `context`               `context_SUBSELECT`
                                         ,       `languageNorms`         `languageNorms_SUBSELECT`
