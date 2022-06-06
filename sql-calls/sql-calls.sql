@@ -91,7 +91,7 @@
                 AND `stimword`.`stimwordAutoIncr`                               =       `stimwordPosition`.`stimwordAutoIncr`
                 AND `context`.`contextAutoIncr`                                 =       `stimwordPosition`.`contextAutoIncr`
                 AND `stimword`.`layoutName`                                     =       "PESL"
-                AND `stimword`.`stimwordPageNbr`                                =       "1"  // see below
+                AND `stimword`.`stimwordPageNbr`                                =       "1"  ## see below
                 AND `stimword`.`stimwordLineNbr`                                =       "1"    
 
                 ORDER BY        `stimwordPosition`.`stimwordPageNbr`
