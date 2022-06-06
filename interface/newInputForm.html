@@ -1,29 +1,5 @@
 
 
-login as: root
-root@162.220.165.228's password:
-Access denied
-root@162.220.165.228's password:
-Last failed login: Fri May  6 16:49:49 EDT 2022 from 71.223.140.8 on ssh:notty
-There was 1 failed login attempt since the last successful login.
-Last login: Fri May  6 12:00:00 2022
-
-‘Welcome to kvm301 -- setting vi as your default editor’
-
-Setting custom values in .bashrc
-
-
-[root@edwardsmarkf ~]#
-[root@edwardsmarkf ~]#
-[root@edwardsmarkf ~]#
-[root@edwardsmarkf ~]#
-[root@edwardsmarkf ~]#
-[root@edwardsmarkf ~]#
-[root@edwardsmarkf ~]# cd   /home/comptonpeslonline.com/public_html//comboboxPlay
-[root@edwardsmarkf comboboxPlay]# clear
-[root@edwardsmarkf comboboxPlay]# clar
--bash: clar: command not found
-[root@edwardsmarkf comboboxPlay]# cat  phoneticTranscriptionGrid.html
 <html>
 
 <head>
@@ -39,7 +15,7 @@ html, body {
         padding                 : 10px                                  ;
 }
 
-smart-combo-box {
+smart-text-box, smart-combo-box {
         width                   : 80px                                  ;
 }
 
@@ -120,32 +96,85 @@ smart-list-item.languageNormsError      {
 
     <!-- scripts -->
 <script type='module' src='/js/smartHtmlElements/9.1.0/source/modules/smart.combobox.js'></script>
+<script type='module' src='/js/smartHtmlElements/9.1.0/source/modules/smart.textbox.js'></script>
 <script type='module' src='/js/smartHtmlElements/9.1.0/source/modules/smart.tooltip.js'></script>
 
 <script>
 
 'use strict;'
 
+                                                                        //      const   stimwordWord                    = 'Horse'       ;
+
 const   maxCharsInPhoneticError         = 4     ;
 
+var     phoneticPopupMenu               = null  ;       // global to hold the phoentic tooltip
 
 
-function processItem() {
+window.onload = () => {
 
-        const   stimwordWord                    =       'stimwordWord'                  ;               // these names are used so often
+        phoneticPopupMenu = document.getElementById('phoneticPopupMenu') ;
+
+        phoneticPopupMenu.addEventListener('mouseleave', (event) =>  {
+                phoneticPopupMenu.close();
+                let thisSmartComboBox = document.getElementById(phoneticPopupMenu.selector.id);
+                processValues   ( thisSmartComboBox.dataset.idNbr
+                                , thisSmartComboBox.dataset.oldValue
+                                , thisSmartComboBox.value
+                                );
+                thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
+        })
+
+        const tooltipGridItems = document.getElementById('tooltipGrid').getElementsByTagName('DIV');
+        Object.keys(tooltipGridItems).forEach( element =>  {
+                let thisDiv = tooltipGridItems[element];
+                thisDiv.classList.add('tooltipElement');
+                thisDiv.style.cursor = "pointer";
+                thisDiv.addEventListener('click', event => {
+                        let clickedValue = event.target.innerHTML;
+                        let myComboBox = document.getElementById(phoneticPopupMenu.selector.id);
+                        if  ( clickedValue != '&nbsp;' )  {
+                                if ( myComboBox.value.length < maxCharsInPhoneticError ) {
+                                        myComboBox.value += clickedValue;
+                                } else {
+                                        console.log(`You filled up the phonetic errors input box, max size is ${maxCharsInPhoneticError} characters!`)
+                                }
+                        } else {  // delete selected, so remove character on the far right side
+                                myComboBox.value = myComboBox.value.slice(0, -1) ;              // ha ha why is this necessary ???
+                        }
+                });
+        }); // end Object.keys(descenands).foreach()
+}
+
+
+function processItem(event) {
+
         const   contextPositionSoundPhoneme     =       'contextPositionSoundPhoneme'   ;               // that they deserve their own const
+        const   stimwordWordParm = event.innerHTML      ;
 
         var lastDataItemAdded   =       null    ;               // save this for replication values
         var controlBreak        =       {}      ;               // stores all the control breaks, really just an image of the current record
         var cssVarHolderObj     =       []      ;               // stores all the 'span rules'
         var rowCount            =       0       ;
 
+                /* create the first column */
+        let stimwordWordTag     = document.createElement('div')                         ;
+        let stimwordWordElement = document.createTextNode(stimwordWordParm)             ;
+        stimwordWordTag.appendChild(stimwordWordElement)                                ;
+        stimwordWordTag.classList.add('box')                                            ;
+        stimwordWordTag.style.gridColumnStart   =       '1'                             ;
+        stimwordWordTag.style.gridRowStart      =       '1'                             ;
+        stimwordWordTag.style.gridColumnEnd     =       'span 1'                        ;
+        stimwordWordTag.style.gridRowEnd        =       'span var(--stimwordWord)'      ;
+
+        document.getElementById('phoneticTranscriptionInputScreen').appendChild(stimwordWordTag);
+
+        let data = eval( stimwordWordParm + 'Data' ) ;
+
+debugger;
+
         for ( let recordNbr in Object.keys(data) )      {
                 let record = data[recordNbr] ;
                 let incrRowFlag = false;
-
-
-
 
 
                 for ( let columnNbr in Object.keys(data[recordNbr]) ) {
@@ -153,7 +182,7 @@ function processItem() {
                         let columnName = Object.keys(data[recordNbr])[columnNbr];
 
                         switch ( columnName )   {
-                            case stimwordWord                   :
+                            //case stimwordWord                 :
                             case contextPositionSoundPhoneme    :
                             case 'stimwordPositionSetting'      :
                             case 'clientContextError'           :
@@ -170,10 +199,12 @@ function processItem() {
                                         let colStartValue       = null  ;
                                         switch ( columnName )   {
 
-                                                case stimwordWord                       :
-                                                        element         =       document.createTextNode(record[columnName])     ;
-                                                        colStartValue   =       '1'                                             ;
-                                                        break;
+                                                                                        /*
+                                                                                        case stimwordWord                       :
+                                                                                                element         =       document.createTextNode(record[columnName])     ;
+                                                                                                colStartValue   =       '1'                                             ;
+                                                                                                break;
+                                                                                        */
 
                                                 case contextPositionSoundPhoneme        :
 
@@ -185,6 +216,7 @@ function processItem() {
                                                                                         ,       'endingRowNbr'          :       rowCount
                                                                                         }
                                                                                 );
+
                                                         element                 = document.createElement('span')                        ;
                                                         element.innerHTML       = record[columnName]                                    ;
                                                         element.style.setProperty('background' , record['stimwordBackgroundColor'] )    ;
@@ -199,16 +231,22 @@ function processItem() {
                                                         break;
 
                                                 case 'clientContextError'               :
-                                                        colStartValue                   =       '4'                                             ;
-                                                        let elementId                   =       columnName + '-' + rowCount                     ;
-                                                        let { stimwordPositionAutoIncr } = record       ;
-                                                        lastDataItemAdded               =       elementId                                       ;
-                                                        element                         =       document.createElement('smart-combo-box')       ;
-                                                        element.style.setProperty('background' , record['stimwordBackgroundColor'] )            ;
-                                                        element.setAttribute('value'    , record[columnName]                    );
-                                                        element.setAttribute('id'       , elementId                             );
-                                                                                                                                                                //      element.setAttribute('onChange' , 'clientContextErrorChanged(this);'    );
+                                                        colStartValue                   = '4'                                                   ;
+                                                        let elementId                   = columnName + '-' + rowCount                           ;
+                                                        let {stimwordPositionAutoIncr}  = record                                                ;
+                                                        lastDataItemAdded               = elementId                                             ;
+                                                        if  ( Number(record['languageNormsErrorCOUNT']) == 0 ) {
+                                                                                        /*      https://www.htmlelements.com/demos/input/textarea/ */
+                                                                element                         = document.createElement('smart-text-box')              ;
+                                                        } else {
+                                                                element                         = document.createElement('smart-combo-box')             ;
+                                                                element.incrementalSearchMode   = 'equals'                                              ;
+                                                        }
+                                                        element.style.setProperty('background'  , record['stimwordBackgroundColor']     )       ;
+                                                        element.setAttribute('value'            , record[columnName]                    )       ;
+                                                        element.setAttribute('id'               , elementId                             )       ;
                                                         element.setAttribute('data-stimword-position-auto-incr', stimwordPositionAutoIncr)      ;
+                                                        element.setAttribute('class'            , 'phoeticTranscriptionInputField'      )       ;
                                                         break;
                                         } // end switch
 
@@ -222,9 +260,11 @@ function processItem() {
                                                 tag.style.gridColumnEnd         =       'span 1'        ;
 
                                                 switch ( columnName )   {
-                                                        case    stimwordWord                    :
-                                                                tag.style.gridRowEnd            =       'span var(--' + stimwordWord + ')'                      ;
-                                                                break;
+                                                                                                        /*
+                                                                                                        case    stimwordWord                    :
+                                                                                                                tag.style.gridRowEnd            =       'span var(--' + stimwordWord + ')'                      ;
+                                                                                                                break;
+                                                                                                        */
                                                         case    contextPositionSoundPhoneme     :
 
                                                                 let cssVarName  =       '--' + contextPositionSoundPhoneme + '--' + (rowCount + 1).toString()   ;
@@ -255,7 +295,7 @@ function processItem() {
                             case 'replicationValue'     :
 
                                 if  ( record[columnName] )      {               // make SURE this is not a blank
-                                        let nbrOfComboBoxes     =  document.getElementsByTagName('smart-combo-box').length              ;
+                                        let nbrOfComboBoxes     = document.getElementsByTagName('smart-combo-box').length               ;
                                         let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
                                         tmpComboBox.insert(99, record[columnName])                              ;
                                         let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1 ;
@@ -267,7 +307,7 @@ function processItem() {
 
                             case 'languageNormsError'           :
                                 if  ( record[columnName] )      {               // make SURE this is not a blank
-                                        let nbrOfComboBoxes     =  document.getElementsByTagName('smart-combo-box').length              ;
+                                        let nbrOfComboBoxes     = document.getElementsByTagName('smart-combo-box').length               ;
                                         let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
                                         tmpComboBox.insert(99, record[columnName])                              ;
                                         let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1 ;
@@ -285,16 +325,21 @@ function processItem() {
         } // end for each record
 
         //      create the new rule string to "extend" the grid rows since there is not way to automate this (weird) !
-        let ruleString = ':root ' + String.fromCharCode(123) + ' --' + stimwordWord + ': ' + rowCount.toString() + ';'  ;       //  using "String.fromCharCode(123)" instead of opening curly-brace for vim!
+        let ruleString = ':root ' + String.fromCharCode(123) + ' --stimwordWord: ' + rowCount.toString() + ';'  ;       //  using "String.fromCharCode(123)" instead of opening curly-brace for vim!
         for ( let incr in cssVarHolderObj )
         {       let { startingRowNbr, endingRowNbr, cssVarName } = cssVarHolderObj[incr]        ;
                 if  ( startingRowNbr != endingRowNbr )
-                {   //ruleString += (' ' + cssVarName + ': ' + (startingRowNbr + ( endingRowNbr - startingRowNbr ) + 2 ).toString() + ';' ) ;
-                   ruleString += (' ' + cssVarName + ': ' + (( endingRowNbr - startingRowNbr ) + 1 ).toString() + ';' ) ;
+                {
+                   ruleString   += ' '
+                                + cssVarName
+                                + ': '
+                                + (( endingRowNbr - startingRowNbr ) + 1 ).toString()
+                                + ';'
+                                ;
                 }
         }
         ruleString += String.fromCharCode(125);         // close curly-brace (125), again so as to not "confuse" vim!
-                                        // example:  ruleString = ':root { --stimwordWord--1: 6; --contextPositionSoundPhoneme--1: 2; --contextPositionSoundPhoneme--3: 2; --contextPositionSoundPhoneme--5: 2;}' ;
+                                                // example:  ruleString = ':root { --stimwordWord--1: 6; --contextPositionSoundPhoneme--1: 2; --contextPositionSoundPhoneme--3: 2; --contextPositionSoundPhoneme--5: 2;}' ;
         document.styleSheets[0].insertRule(ruleString);
 
 
@@ -304,20 +349,31 @@ function processItem() {
                         tooltip stuff
                 *********************************/
 
-        const myTooltip = document.getElementById('myTooltip') ;
+        Object.keys(document.getElementsByClassName('phoeticTranscriptionInputField')).forEach ( key => {
 
-        Object.keys(document.getElementsByTagName("smart-combo-box")).forEach((key) => {
+                                                        //const comboBoxElement = document.getElementsByTagName('smart-combo-box')[key];
 
-                const comboBoxElement = document.getElementsByTagName('smart-combo-box')[key];
+                const comboBoxElement = document.getElementsByClassName('phoeticTranscriptionInputField')[key];
 
-                comboBoxElement.querySelector('input').setAttribute('maxlength', maxCharsInPhoneticError);
+                if  ( comboBoxElement.querySelector('input') )  {
+                        comboBoxElement.querySelector('input').setAttribute('maxlength', maxCharsInPhoneticError);
+                } else { // if ( comboBoxElement.querySelector('smart-text-box') ) {
+                        comboBoxElement.setAttribute('maxlength', maxCharsInPhoneticError);
+                };
 
-                comboBoxElement.addEventListener('click', (event) => {
-                        if   ( event.target.tagName == 'INPUT' )  {
-                                comboBoxElement.close();
-                                myTooltip.selector = comboBoxElement;
-                                comboBoxElement.dataset.oldValue = comboBoxElement.value;   // save old for future testing!!
-                                myTooltip.open();
+                comboBoxElement.addEventListener('mouseover', (event) => {
+                        if   (  event.target.tagName == 'INPUT' )  {    // ie, cursor is NOT over the arrow
+                                if      (       (!(comboBoxElement.opened))     // ie combobox is actually closed now, NOT OPEN, but closed is not an option, surprisingly
+                                        )
+                                {
+                                        phoneticPopupMenu.selector = comboBoxElement;
+                                        comboBoxElement.dataset.oldValue = comboBoxElement.value;   // save old for future testing!!
+                                        phoneticPopupMenu.open();
+                                } else {
+                                        console.log('!!! skipping because we came in from the RIGHT side and only half way up, and/or from the BOTTOM, ');
+                                        console.log(' 2/3 of the way across on the right, instead of 1/3 of the way from the left');
+                                }
+                                                        //if  ( event.clientX < ( event.currentTarget.getElementsByClassName('smart-drop-down-button')[0].getBoundingClientRect().left -2 )     )
                         }
                 });
 
@@ -325,16 +381,26 @@ function processItem() {
                                                                 // did the cursor leave this combobox by going DOWN or left/right/up ???
                         if  ( event.clientY <  comboBoxElement.getBoundingClientRect().bottom - 2 )     // two is the "fugde factor"  !!
                         {
-                                myTooltip.close();  // close this tooltip ONLY if the cursor went left/right/up otherwise leave open
+                                phoneticPopupMenu.close();  // close this tooltip ONLY if the cursor went left/right/up otherwise leave open
                         }
                 });
 
+
+                comboBoxElement.getElementsByClassName('smart-list-items-inner-container')[0].addEventListener('mouseleave', event => {
+                        if  ( event.clientY > ( comboBoxElement.getElementsByClassName('smart-list-items-inner-container')[0].getBoundingClientRect().top + 0))
+                        {
+                                                                //console.log(event.clientX);
+                                                                // console.log(JSON.stringify(comboBoxElement.getElementsByClassName('smart-list-items-inner-container')[0].getBoundingClientRect() ) );
+                                comboBoxElement.close();
+                        }
+                })
+
                 comboBoxElement.addEventListener('opening', () => {
-                        myTooltip.close();
+                        phoneticPopupMenu.close();
                 });
 
                 comboBoxElement.addEventListener('change', event => {
-                        if  (!( myTooltip.visible )) {   // ie its CLOSED and therefore not visible
+                        if  (!( phoneticPopupMenu.visible )) {   // ie its CLOSED and therefore not visible
                                 processValues   ( event.currentTarget.dataset.idNbr
                                                 , event.currentTarget.dataset.oldValue
                                                 , event.currentTarget.value
@@ -346,85 +412,211 @@ function processItem() {
                 });
         });
 
-        myTooltip.addEventListener('mouseleave', (event) =>  {
-                myTooltip.close();
-                let thisSmartComboBox = document.getElementById(myTooltip.selector.id);
-                processValues   ( thisSmartComboBox.dataset.idNbr
-                                , thisSmartComboBox.dataset.oldValue
-                                , thisSmartComboBox.value
-                                );
-                thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
-        })
 
-        const tooltipGridItems = document.getElementById('tooltipGrid').getElementsByTagName('DIV');
-        Object.keys(tooltipGridItems).forEach( element =>  {
-                let thisDiv = tooltipGridItems[element];
-                thisDiv.classList.add('tooltipElement');
-                thisDiv.style.cursor = "pointer";
-                thisDiv.addEventListener('click', event => {
-                        let clickedValue = event.target.innerHTML;
-                        let myComboBox = document.getElementById(myTooltip.selector.id);
-                        if  ( clickedValue != '&nbsp;' )  {
-                                if ( myComboBox.value.length < maxCharsInPhoneticError ) {
-                                        myComboBox.value += clickedValue;
-                                } else {
-                                        console.log(`You filled up the phonetic errors input box, max size is ${maxCharsInPhoneticError} characters!`)
-                                }
-                        } else {  // delete selected, so remove character on the far right side
-                                myComboBox.value = myComboBox.value.slice(0, -1)  ;
-                        }
-                });
-        }); // end Object.keys(descenands).foreach()
-
-
+                                /*
+                                        for ( let tmp in document.getElementsByTagName('smart-combo-box') )     {
+                                                if (!(isNaN(parseInt(tmp))))    {
+                                                        let comboBox = document.getElementsByTagName('smart-combo-box')[tmp]    ;
+                                                        //if  ( comboBox.getElementsByClassName('smart-list-items-inner-container')[0].getElementsByClassName('smart-list-item').length )
+                                                        if  ( comboBox.items.length )
+                                                        {
+                                                                comboBox.getElementsByClassName('smart-drop-down-button')[0].style.setProperty('display' , 'block' );
+                                                        } else {
+                                                                comboBox.getElementsByClassName('smart-drop-down-button')[0].style.setProperty('display' , 'none' );    // HIDE the drop-down arrows if there are no items to select
+                                                        }
+                                                }
+                                        }
+                                */
 
 
 
 }
 
-
-                                                                /*
-                                                                function clientContextErrorChanged(thisValue) {
-                                                                        let thisId                      = thisValue.getAttribute('id')                                  ;
-                                                                        let stimwordPositionAutoIncr    = thisValue.getAttribute('data-stimwordPositionAutoIncr')       ;
-                                                                        let thisValueOf                 = document.getElementById(thisId).value                         ;
-                                                                        console.log('PROCESS: ' + thisId + ' -- ' +  stimwordPositionAutoIncr + ' -- ' +  thisValueOf);
-                                                                }
-                                                                */
 
 function  processValues(id, oldValue, newValue)  {
      console.log('RESULT!! ' + id, 'oldValue:',  (oldValue ? oldValue : 'not yet defined!') , 'newValue: ' , newValue);
 }
 
+const HorseData =
+[{"contextPositionSoundPhoneme": "initial -- h", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "ø", "languageNormsError": "ø", "stimwordPositionAutoIncr": 1, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "initial -- h", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 2, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "aɚ", "stimwordPositionAutoIncr": 3, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oR", "stimwordPositionAutoIncr": 3, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oǝ", "stimwordPositionAutoIncr": 3, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝR", "stimwordPositionAutoIncr": 3, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝɚ", "stimwordPositionAutoIncr": 3, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "aɚ", "stimwordPositionAutoIncr": 4, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oR", "stimwordPositionAutoIncr": 4, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oǝ", "stimwordPositionAutoIncr": 4, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝR", "stimwordPositionAutoIncr": 4, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝɚ", "stimwordPositionAutoIncr": 4, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "final -- s", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 5, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "final -- s", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 6, "languageNormsErrorCOUNT": "0"}
+];
 
-const data =
-[{"stimwordWord": "horse", "contextPositionSoundPhoneme": "initial -- h", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "ø", "languageNormsError": "ø"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "initial -- h", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "aɚ"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oR"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oǝ"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝR"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝɚ"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "aɚ"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oR"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "oǝ"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝR"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝɚ"}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "final -- s", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": ""}
-,{"stimwordWord": "horse", "contextPositionSoundPhoneme": "final -- s", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": ""
-}];
+const SnakeData =
+[{"contextPositionSoundPhoneme": "blend -- sn", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 7, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "blend -- sn", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 8, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "vowel -- e", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 9, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "vowel -- e", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 10, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "final -- k", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 11, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "final -- k", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 12, "languageNormsErrorCOUNT": "0"}
+];
 
-/*
-[ { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Word'        , clientContextError: '0'       , stimwordPositionAutoIncr: 123123      , replicationValue : 'XYZ'      , languageSpec : 'A00'  }
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Word'        , clientContextError: '0'       , stimwordPositionAutoIncr: 123123      , replicationValue : 'ZEF'      , languageSpec : ''     }
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Word'        , clientContextError: '0'       , stimwordPositionAutoIncr: 123123      , replicationValue : 'WWW'      , languageSpec : 'A01'  }
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Initial - h'    , stimwordPositionSetting:'Sentence'    , clientContextError: ''        , stimwordPositionAutoIncr: 123124      , replicationValue : 'ABC'      , languageSpec : 'A02'  }
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe' , stimwordPositionSetting:'Word'        , clientContextError: ''        , stimwordPositionAutoIncr: 123125      , replicationValue : 'DEF'      , languageSpec : 'A03'  }
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Diphthong - oe' , stimwordPositionSetting:'Sentence'    , clientContextError: ''        , stimwordPositionAutoIncr: 123126      , replicationValue : 'GHI'      , languageSpec : 'A04'  }
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'      , stimwordPositionSetting:'Word'        , clientContextError: ''        , stimwordPositionAutoIncr: 123127      , replicationValue : 'JKL'      , languageSpec : 'A05'  }
-, { stimwordWord: 'Horse', contextPositionSoundPhoneme:'Final - S'      , stimwordPositionSetting:'Sentence'    , clientContextError: ''        , stimwordPositionAutoIncr: 123128      , replicationValue : 'MNO'      , languageSpec : 'A06'  }
-]
-**/
+const ClownData =
+[{"contextPositionSoundPhoneme": "blend -- kl", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "k&l", "stimwordPositionAutoIncr": 13, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "blend -- kl", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "k&l", "stimwordPositionAutoIncr": 14, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "diphthong -- au", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "a", "stimwordPositionAutoIncr": 15, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "diphthong -- au", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "o", "stimwordPositionAutoIncr": 15, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "diphthong -- au", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "a", "stimwordPositionAutoIncr": 16, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "diphthong -- au", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "o", "stimwordPositionAutoIncr": 16, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "final -- n", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 17, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "final -- n", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 18, "languageNormsErrorCOUNT": "1"}
+];
+
+const DogData =
+[{"contextPositionSoundPhoneme": "initial -- d", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 19, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "initial -- d", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 20, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "vowel -- a", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "o", "stimwordPositionAutoIncr": 21, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- a", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 21, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- a", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "o", "stimwordPositionAutoIncr": 22, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- a", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 22, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "final -- g", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "k", "stimwordPositionAutoIncr": 23, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "final -- g", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "k", "stimwordPositionAutoIncr": 24, "languageNormsErrorCOUNT": "1"}
+];
+
+const protectedData =
+[{"contextPositionSoundPhoneme": "blend -- pr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "pR", "stimwordPositionAutoIncr": 949, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "blend -- pr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "p&r", "stimwordPositionAutoIncr": 949, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "blend -- pr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "p&R", "stimwordPositionAutoIncr": 949, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 950, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 950, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 950, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 951, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "t&", "stimwordPositionAutoIncr": 951, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "middle -- k", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 953, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 954, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "t&", "stimwordPositionAutoIncr": 954, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 955, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 955, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 955, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 956, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "t", "stimwordPositionAutoIncr": 956, "languageNormsErrorCOUNT": "2"}
+];
+
+const threadData =
+[{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "θR", "stimwordPositionAutoIncr": 107, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "tr", "stimwordPositionAutoIncr": 107, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "tR", "stimwordPositionAutoIncr": 107, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "θR", "stimwordPositionAutoIncr": 108, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "tr", "stimwordPositionAutoIncr": 108, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "tR", "stimwordPositionAutoIncr": 108, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 109, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 109, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 109, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 109, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 109, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 110, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 110, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 110, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 110, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 110, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 111, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "t", "stimwordPositionAutoIncr": 111, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 112, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "t", "stimwordPositionAutoIncr": 112, "languageNormsErrorCOUNT": "2"}
+];
+
+
+const sixty_sixData =
+[{"contextPositionSoundPhoneme": "initial -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1123, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "vowel -- ɪ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 1124, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- ɪ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 1124, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- k", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1125, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "middle -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "sø", "stimwordPositionAutoIncr": 1126, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 1127, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "t&", "stimwordPositionAutoIncr": 1127, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 1128, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝ", "stimwordPositionAutoIncr": 1128, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "sø", "stimwordPositionAutoIncr": 1129, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "middle -- v", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "f", "stimwordPositionAutoIncr": 1131, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 1132, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 1132, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 1132, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "final -- n", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 1133, "languageNormsErrorCOUNT": "1"}
+];
+
+const RockerfellerData =
+[{"contextPositionSoundPhoneme": "initial -- r", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "R", "stimwordPositionAutoIncr": 396, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "vowel -- a", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "o", "stimwordPositionAutoIncr": 397, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- a", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 397, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- k", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 398, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 399, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 399, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 399, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "middle -- f", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 400, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 401, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 401, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 401, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 401, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 401, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "middle -- l", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 402, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- l", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "&l", "stimwordPositionAutoIncr": 402, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- ɚ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɚR", "stimwordPositionAutoIncr": 403, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ɚ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝR", "stimwordPositionAutoIncr": 403, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ɚ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝ", "stimwordPositionAutoIncr": 403, "languageNormsErrorCOUNT": "3"}
+ ];
+
+const threateningData =
+[{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "tr", "stimwordPositionAutoIncr": 926, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "tR", "stimwordPositionAutoIncr": 926, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "θR", "stimwordPositionAutoIncr": 926, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 927, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 927, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 927, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 927, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 927, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 928, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "t&", "stimwordPositionAutoIncr": 928, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- n", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 929, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- n", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "d", "stimwordPositionAutoIncr": 929, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- ɪ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 930, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- ɪ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 930, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "final -- ŋ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ŋk", "stimwordPositionAutoIncr": 931, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "final -- ŋ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ŋg", "stimwordPositionAutoIncr": 931, "languageNormsErrorCOUNT": "3"}
+,{"contextPositionSoundPhoneme": "final -- ŋ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "n", "stimwordPositionAutoIncr": 931, "languageNormsErrorCOUNT": "3"}
+];
+
+const EventuallyData =
+[{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 578, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝ", "stimwordPositionAutoIncr": 578, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- v", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "f", "stimwordPositionAutoIncr": 579, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 580, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 580, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 580, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 580, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 580, "languageNormsErrorCOUNT": "5"}
+,{"contextPositionSoundPhoneme": "middle -- n", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 581, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- n", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "d", "stimwordPositionAutoIncr": 581, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- tʃ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 582, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "vowel -- ʊ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "u", "stimwordPositionAutoIncr": 583, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- ʊ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "o", "stimwordPositionAutoIncr": 583, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- l", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 584, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- l", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "&l", "stimwordPositionAutoIncr": 584, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 585, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝ", "stimwordPositionAutoIncr": 585, "languageNormsErrorCOUNT": "2"}
+];
+
 
 </script>
 
@@ -434,14 +626,23 @@ const data =
 
 <div id='phoneticTranscriptionInputScreen' class="wrapper"></div>
 <br />
-<button onClick="javascript: processItem();">Add Rows!!!</button>
+<button onClick="javascript: processItem(this);">Horse</button>
+<button onClick="javascript: processItem(this);">Snake</button>
+<button onClick="javascript: processItem(this);">Clown</button>
+<button onClick="javascript: processItem(this);">Dog</button>
+<button onClick="javascript: processItem(this);">protected</button>
+<button onClick="javascript: processItem(this);">thread</button>
+<button onClick="javascript: processItem(this);">sixty_six</button>
+<button onClick="javascript: processItem(this);">RockerFeller</button>
+<button onClick="javascript: processItem(this);">threateningg</button>
+<button onClick="javascript: processItem(this);">Eventually</button>
 
 
-<smart-tooltip id="myTooltip" style='border: 1px dotted red;' open-mode='manual' position='bottom' arrow>
+<smart-tooltip id="phoneticPopupMenu" style='border: 1px dotted red;' open-mode='manual' position='bottom' arrow>
   <div class='tooltipWrapperClass' id='tooltipGrid'>
         <!-- row one  -->
         <div>&nbsp;</div>
-        <div>∅</div>
+        <div title='null character'>ø</div>
         <div>æ</div>
         <div>ɜ</div>
         <!-- row two -->
@@ -476,4 +677,4 @@ const data =
 
 </body>
 </html>
-[root@edwardsmarkf comboboxPlay]#
+
