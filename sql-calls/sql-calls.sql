@@ -91,14 +91,24 @@
                 AND `stimword`.`stimwordAutoIncr`                               =       `stimwordPosition`.`stimwordAutoIncr`
                 AND `context`.`contextAutoIncr`                                 =       `stimwordPosition`.`contextAutoIncr`
                 AND `stimword`.`layoutName`                                     =       "PESL"
-                AND `stimword`.`stimwordPageNbr`                                =       "1"
-                AND `stimword`.`stimwordLineNbr`                                =       "1"      /* horse=1 snake=2 clown=3  dog=4 */
+                AND `stimword`.`stimwordPageNbr`                                =       "1"  // see below
+                AND `stimword`.`stimwordLineNbr`                                =       "1"    
 
                 ORDER BY        `stimwordPosition`.`stimwordPageNbr`
                 ,               `stimwordPosition`.`stimwordLineNbr`
                 ,               `stimwordPosition`.`soundPhonemeOrderNbr`
                 ;
-
+ /* horse         --  1/1 
+    snake         --  1/2
+    clown         --  1/3  
+    dog           --  1/4 
+    protected     --  21/5
+    thread        --  2/19
+    sixty-seven   --  25/9
+    Rockefeller   --  9/3, 16/3
+    threatening   --  20/7
+    Eventually    --  13/1
+  */
 
 
 
