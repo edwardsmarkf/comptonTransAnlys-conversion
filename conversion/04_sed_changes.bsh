@@ -1,6 +1,8 @@
 #!  /bin/bash
 
- 
+ ##  &#8592; and &#9552; do NOT seem to be converting in file comptonTransAnlysSedChanges.sql after run 04_sed_changes.bsh  - why not????
+
+  
  
 #	04_sed_changes.bsh  -- 2018-02-21
 #
