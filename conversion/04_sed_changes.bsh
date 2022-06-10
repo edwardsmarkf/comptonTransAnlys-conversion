@@ -1,6 +1,6 @@
 #!  /bin/bash
 
- ##  &#8592; and &#9552; do NOT seem to be converting in file comptonTransAnlysSedChanges.sql after run 04_sed_changes.bsh  - why not????
+ 
 
   
  
@@ -9,6 +9,7 @@
 # 2021-04-26 -- changed to utf8mb4_unicode_ci and added longer command-line switches
 # 2021-05-09 -- needed to remove extra UNSIGNED value, not sure why this became an issue?
 # 2021-05-09 -- changed all varbinary() to char(1) COLLATE utf8mb4_bin
+# 2022-06-10 -- &#8592; and &#9552; are NOT seem to be converting , missing semicolon
 #
 ##	set fileencoding=ASCII
 ##	set fileformat=unix
@@ -159,12 +160,18 @@ s/\\&\\#673;/ʡ/g;
                           #####  s/\\&\\#7789;/T/g;
 s/\\&\\#7789;/ṭ/g;
                           #####  s/\\&\\#8592;/W/g;
+
 s/\\&\\#8592;/←/g;
                           #####  s/\\&\\#952;/8/g;
+s/'\\&\\#8592'/←/g;       #####  2022-06-10
+
 s/\\&\\#952;/θ/g;
                           #####  s/\\&\\#9552;/A/g;
+
 s/\\&\\#9552;/═/g;
                           #####  s/\\&\\#967;/X/g;
+s/\\&\\#9552;/═/g;        ####   2022-06-10
+
 s/\\&\\#967;/χ/g;
 
                           ### 2021-05-10
