@@ -163,14 +163,14 @@ s/\\&\\#7789;/ṭ/g;
 
 s/\\&\\#8592;/←/g;
                           #####  s/\\&\\#952;/8/g;
-s/'\\&\\#8592'/←/g;       #####  2022-06-10
+s/'\\&\\#8592'/'←'/g;     #####  2022-06-10  -- value missing trailing semicolon, and now inside of single quotes
 
 s/\\&\\#952;/θ/g;
                           #####  s/\\&\\#9552;/A/g;
 
 s/\\&\\#9552;/═/g;
                           #####  s/\\&\\#967;/X/g;
-s/\\&\\#9552;/═/g;        ####   2022-06-10
+s/'\\&\\#9552'/'═'/g;     #####   2022-06-10   -- value missing trailing semicolon, and now inside of single quotes
 
 s/\\&\\#967;/χ/g;
 
