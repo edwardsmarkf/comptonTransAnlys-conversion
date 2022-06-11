@@ -46,7 +46,7 @@ knex.from('stimwordPosition')
                                                                                         ;
                                                                                 */
                         //console.log(rowCount, row.stimwordPositionAutoIncr, row.layoutName, row.stimwordPageNbr, row.stimwordLineNbr, row.stimwordWord, row.stimwordPositionNbr, row.contextPosition, row.stimwordPositionSetting, row.soundPhoneme);
-                        console.log('UPDATE `stimwordPosition` SET `soundPhonemeOrderNbr` = ' + rowCount + ' WHERE TRUE AND `stimwordPositionAutoIncr` = ' + row.stimwordPositionAutoIncr + ';' ) ;
+                        console.log('UPDATE  `comptonTransAnlys`.`stimwordPosition` SET `soundPhonemeOrderNbr` = ' + rowCount + ' WHERE TRUE AND `stimwordPositionAutoIncr` = ' + row.stimwordPositionAutoIncr + ';' ) ;
                 }
             })
         .catch((err) => { console.log( err); throw err })
