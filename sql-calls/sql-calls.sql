@@ -7,7 +7,7 @@
 ###	2022-05-13 - added "stimwordPositionAutoIncr" and removed "stimwordWord"
 
 
-   ###    mariadb  --skip-column-names    comptonTransAnlys   <  sql-calls.sql | sed -e 's/},{/}\|,{/g' | tr '|' '\n'   ;
+   ###   mariadb      --skip-column-names comptonTransAnlys   < x.sql | sed -e 's/},{/}\n,{/g'  ;  ########      | tr '|' '\n'   ;
 
         SELECT  ##JSON_ARRAYAGG(
                 JSON_OBJECT
