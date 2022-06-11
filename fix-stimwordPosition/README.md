@@ -10,8 +10,8 @@ npm  install mysql;
 
 node  fixStimwordPosition.js   > ./temp.sql ;
 
-mariadb --verbose  ./temp.sql ;
+mariadb --verbose   <  ./temp.sql ;
 
-rm  -verbose   ./temp.sql ;
+        ##  rm  -verbose   ./temp.sql ;
 
 
