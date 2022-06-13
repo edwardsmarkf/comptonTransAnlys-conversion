@@ -1,4 +1,3 @@
-
 [root@edwardsmarkf newTranscriptionInterface]# clear
 [root@edwardsmarkf newTranscriptionInterface]# cat  phoneticTranscriptionGrid.html
 <html>
@@ -8,8 +7,6 @@
 <link rel="stylesheet" type="text/css" href="/js/smartHtmlElements/9.1.0/source/styles/smart.default.css" />
 
 <style>
-
-
 
 html, body {
         margin                  : 40px                                  ;
@@ -42,14 +39,14 @@ smart-text-box, smart-combo-box {
         color                   : #444                                  ;
         display                 : grid                                  ;
         max-width               : 1000px                                ;
-        grid-gap                : 10px                                  ;
-        grid-template-columns   : 100px 200px 150px 120px               ;
+        grid-gap                : 5px                                   ;
+        grid-template-columns   : 150px 200px 150px 150px               ;
         background-color        : #fff                                  ;
 }
 
 .box {
         background-color        : #444                                  ;
-        color                   : #fff                                  ;
+        color                   : #ccc                                  ;
         border-radius           : 5px                                   ;
         padding                 : 20px                                  ;
         font-size               : 150%                                  ;
@@ -160,7 +157,6 @@ function processItem(event) {
         var cssVarHolderObj     =       []      ;               // stores all the 'span rules'
         var rowCount            =       0       ;
 
-
                 /* create the first column */
         let stimwordWordTag     = document.createElement('div')                         ;
         let stimwordWordElement = document.createTextNode(stimwordWordParm)             ;
@@ -176,166 +172,207 @@ function processItem(event) {
         let data = eval( stimwordWordParm + 'Data' ) ;
 
 
-                /* count occurences of stimwordPositionSetting - if its just one (like the reading passage) we do not need to dislay them! */
+
+                /* COUNT occurences of stimwordPositionSetting - if its just one occurence (like the reading passage) we do NOT need to dislay this column! */
         let tmpArray = [] ;
         for ( let i in Object.keys(data) )  { tmpArray.push(data[i][stimwordPositionSetting]) ;  } ;
         let stimwordPositionSettingCount = tmpArray.filter((v,i) => tmpArray.indexOf(v) == i ).length;
+                /* end COUNT of occurencs - is there a better way ???  */
 
 
         for ( let recordNbr in Object.keys(data) )      {
                 let record = data[recordNbr] ;
                 let incrRowFlag = false;
 
+                columnLoop:
 
-                for ( let columnNbr in Object.keys(data[recordNbr]) ) {
+                for ( let columnNbr in Object.keys(data[recordNbr]) ) {         // loop over each column!
 
                         let columnName = Object.keys(data[recordNbr])[columnNbr];
 
-                                        /* skip single occurences of stimwordPositionSetting */
-                        if  (!(columnName == stimwordPositionSetting && stimwordPositionSettingCount == 1 ))    {
+                                        /* skip single occurences of stimwordPositionSetting, and all columns that are not directly processed */
+                        if      (       (columnName == stimwordPositionSetting && stimwordPositionSettingCount == 1     )
+                                ||      (columnName == 'stimwordPositionAutoIncr'                                       )
+                                ||      (columnName == 'stimwordBackgroundColor'                                        )
+                                ||      (columnName == 'languageNormsErrorCOUNT'                                        )
+                                )
+                        {
+                                continue columnLoop;
+                        }
 
-                                switch ( columnName )   {
-                                    case contextPositionSoundPhoneme    :
-                                    case 'stimwordPositionSetting'      :
-                                    case 'clientContextError'           :
-                                        if  (   ( record[columnName] != controlBreak[columnName] ))
-                                        {
-                                                controlBreak[columnName] = record[columnName] ;
-                                                for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[recordNbr]).length; xx++ )
-                                                                // null out all subsequent control-break columns !!
-                                                {       controlBreak[ Object.keys(data[recordNbr])[xx]  ] = null;  ;
-                                                }
+                        switch ( columnName )   {
+                            case contextPositionSoundPhoneme    :
+                            case stimwordPositionSetting        :
+                            case 'clientContextError'           :
+                                if  (   record[columnName] != controlBreak[columnName] )
+                                {
+                                        controlBreak[columnName] = record[columnName] ;
+                                        for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[recordNbr]).length; xx++ )
+                                                        // null out all subsequent control-break columns !!
+                                        {       controlBreak[ Object.keys(data[recordNbr])[xx]  ] = null;  ;
+                                        }
 
-                                                let tag = document.createElement("div");
-                                                let element             = null  ;
-                                                let colStartValue       = null  ;
-                                                switch ( columnName )   {
+                                        let tag = document.createElement("div");
+                                        let element             = null  ;
+                                        let colStartValue       = null  ;
+                                        switch ( columnName )   {
 
-                                                                                                /*
-                                                                                                case stimwordWord                       :
-                                                                                                        element         =       document.createTextNode(record[columnName])     ;
-                                                                                                        colStartValue   =       '1'                                             ;
-                                                                                                        break;
-                                                                                                */
+                                                case contextPositionSoundPhoneme        :
 
-                                                        case contextPositionSoundPhoneme        :
+                                                        colStartValue           = '2'                                                   ;
 
-                                                                colStartValue           = '2'                                                   ;
-
-                                                                let cssVarName          =       '--' + contextPositionSoundPhoneme + '--' + (rowCount + 1).toString()   ;
+                                                        if  ( stimwordPositionSettingCount  > 1 )       {
+                                                                let cssVarName          =       '--'
+                                                                                        +       contextPositionSoundPhoneme
+                                                                                        +       '--'
+                                                                                        +       (rowCount + 1).toString()
+                                                                                        ;
                                                                 cssVarHolderObj.push    (       {       'cssVarName'            :       cssVarName
                                                                                                 ,       'startingRowNbr'        :       rowCount
                                                                                                 ,       'endingRowNbr'          :       rowCount
                                                                                                 }
                                                                                         );
-
-                                                                element                 = document.createElement('span')                        ;
-                                                                element.innerHTML       = record[columnName]                                    ;
-                                                                element.style.setProperty('background' , record['stimwordBackgroundColor'] )    ;
-                                                                break;
-
-                                                        case 'stimwordPositionSetting'          :
-
-                                                                colStartValue           =       '3'                                                     ;
-                                                                element                 =       document.createElement('span')                          ;
-                                                                element.innerHTML       =       record[columnName]                                      ;
-                                                                element.style.setProperty('background' , record['stimwordBackgroundColor'] )            ;
-                                                                break;
-
-                                                        case 'clientContextError'               :
-                                                                colStartValue                   = '4'                                                   ;
-                                                                let elementId                   = columnName + '-' + rowCount                           ;
-                                                                let {stimwordPositionAutoIncr}  = record                                                ;
-                                                                lastDataItemAdded               = elementId                                             ;
-                                                                if  ( Number(record['languageNormsErrorCOUNT']) == 0 ) {
-                                                                                                /*      https://www.htmlelements.com/demos/input/textarea/ */
-                                                                        element                         = document.createElement('smart-text-box')              ;
-                                                                } else {
-                                                                        element                         = document.createElement('smart-combo-box')             ;
-                                                                        element.incrementalSearchMode   = 'equals'                                              ;
-                                                                }
-                                                                element.style.setProperty('background'  , record['stimwordBackgroundColor']     )       ;
-                                                                element.setAttribute('value'            , record[columnName]                    )       ;
-                                                                element.setAttribute('id'               , elementId                             )       ;
-                                                                element.setAttribute('data-stimword-position-auto-incr', stimwordPositionAutoIncr)      ;
-                                                                element.setAttribute('class'            , 'phoeticTranscriptionInputField'      )       ;
-                                                                break;
-                                                } // end switch
-
-                                                if  ( element && colStartValue )        {
-                                                        tag.appendChild(element);
-
-                                                        tag.classList.add('box');
-
-                                                        tag.style.gridColumnStart       =       colStartValue   ;
-                                                        tag.style.gridRowStart          =       (parseInt(rowCount) + 1 ).toString()    ;
-                                                        tag.style.gridColumnEnd         =       'span 1'        ;
-
-                                                        switch ( columnName )   {
-                                                                                                                /*
-                                                                                                                case    stimwordWord                    :
-                                                                                                                        tag.style.gridRowEnd            =       'span var(--' + stimwordWord + ')'                      ;
-                                                                                                                        break;
-                                                                                                                */
-                                                                case    contextPositionSoundPhoneme     :
-
-                                                                        let cssVarName  =       '--' + contextPositionSoundPhoneme + '--' + (rowCount + 1).toString()   ;
-                                                                        tag.style.gridRowEnd            =       'span var(' + cssVarName + ')'                          ;
-                                                                        break;
-                                                                default                                 :
-                                                                        tag.style.gridRowEnd            =       'span 1'                                                ;
                                                         }
 
-                                                        document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
-                                                        incrRowFlag = true;
-                                                } else {
-                                                        console.log(`Skipping ${columnName} column in grid!`);
+                                                        element                 = document.createElement('span')                        ;
+                                                        element.innerHTML       = record[columnName]                                    ;
+                                                        element.style.setProperty('background' , record['stimwordBackgroundColor'] )    ;
+                                                        break;
+
+                                                case stimwordPositionSetting            :
+
+                                                        colStartValue           =       '3'                                                     ;
+                                                        element                 =       document.createElement('span')                          ;
+                                                        element.innerHTML       =       record[columnName]                                      ;
+                                                        element.style.setProperty('background' , record['stimwordBackgroundColor'] )            ;
+                                                        break;
+
+                                                case 'clientContextError'               :
+                                                        if  ( stimwordPositionSettingCount == 1 )       {
+                                                                colStartValue                   = '3'                                           ;
+                                                        } else {
+                                                                colStartValue                   = '4'                                           ;
+                                                        }
+                                                        let elementId                   = columnName + '-' + rowCount                           ;
+                                                        let {stimwordPositionAutoIncr}  = record                                                ;
+                                                        lastDataItemAdded               = elementId                                             ;
+                                                        if  ( Number(record['languageNormsErrorCOUNT']) == 0 ) {
+                                                                                        /*      https://www.htmlelements.com/demos/input/textarea/ */
+                                                                element                         = document.createElement('smart-text-box')              ;
+                                                        } else {
+                                                                element                         = document.createElement('smart-combo-box')             ;
+                                                                element.incrementalSearchMode   = 'equals'                                              ;
+                                                        }
+                                                        element.style.setProperty('background'  , record['stimwordBackgroundColor']     )       ;
+                                                        element.setAttribute('value'            , record[columnName]                    )       ;
+                                                        element.setAttribute('id'               , elementId                             )       ;
+                                                        element.setAttribute('data-stimword-position-auto-incr', stimwordPositionAutoIncr)      ;
+                                                        element.setAttribute('class'            , 'phoeticTranscriptionInputField'      )       ;
+                                                        break;
+                                        } // end switch
+
+                                        if  ( element && colStartValue )        {
+                                                tag.appendChild(element);
+
+                                                tag.classList.add('box');
+
+                                                tag.style.gridColumnStart       =       colStartValue   ;
+                                                tag.style.gridRowStart          =       (parseInt(rowCount) + 1 ).toString()    ;
+                                                tag.style.gridColumnEnd         =       'span 1'        ;
+
+                                                switch ( columnName )   {
+
+                                                        case    contextPositionSoundPhoneme     :
+                                                                if  ( stimwordPositionSettingCount > 1 )        {
+                                                                        let cssVarName          =       '--'
+                                                                                                +       contextPositionSoundPhoneme
+                                                                                                +       '--'
+                                                                                                +       (rowCount + 1).toString()
+                                                                                                ;
+                                                                        tag.style.gridRowEnd    =       'span var('
+                                                                                                +       cssVarName
+                                                                                                +       ')'
+                                                                                                ;
+                                                                } else {
+                                                                        tag.style.gridRowEnd    =       'span 1'        ;
+                                                                }
+                                                                break;
+                                                        default                                 :
+                                                                tag.style.gridRowEnd            =       'span 1'        ;
                                                 }
 
+                                                document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
+                                                incrRowFlag = true;
                                         } else {
-                                                        // control break triggered
-                                                if      (       ( columnName                                    == contextPositionSoundPhoneme                  )
-                                                        &&      ( record['stimwordPositionSetting']             != controlBreak['stimwordPositionSetting']      )
-                                                        )
-                                                {
-                                                                cssVarHolderObj[(cssVarHolderObj.length -1)].endingRowNbr++
-                                                }
-
+                                                console.log(`Skipping ${columnName} column in grid!`);
                                         }
-                                        break;
 
-                                    case 'replicationValue'     :
-
-                                        if  ( record[columnName] )      {               // make SURE this is not a blank
-                                                let nbrOfComboBoxes     = document.getElementsByTagName('smart-combo-box').length               ;
-                                                let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
-                                                tmpComboBox.insert(99, record[columnName])                              ;
-                                                let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1 ;
-                                                let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location] ;
-                                                tmpListItem.classList.add('dropDownOptions', 'replicationValue' )                       ;
-                                                tmpListItem.title       = 'Prior Error'
+                                } else {
+                                                /* control break was triggered */
+                                        if      (       ( columnName                                    == contextPositionSoundPhoneme                  )
+                                                &&      ( record[stimwordPositionSetting]               != controlBreak[stimwordPositionSetting]        )
+                                                &&      ( stimwordPositionSettingCount                  > 1                                             )
+                                                )
+                                        {
+                                                        cssVarHolderObj[(cssVarHolderObj.length -1)].endingRowNbr++
                                         }
-                                        break;
 
-                                    case 'languageNormsError'           :
-                                        if  ( record[columnName] )      {               // make SURE this is not a blank
-                                                let nbrOfComboBoxes     = document.getElementsByTagName('smart-combo-box').length               ;
-                                                let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
-                                                tmpComboBox.insert(99, record[columnName])                              ;
-                                                let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1 ;
-                                                let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location] ;
-                                                tmpListItem.classList.add('dropDownOptions', 'languageNormsError'       )                       ;
-                                                tmpListItem.title       = 'Indian Pakistan'
-                                        }
-                                        break;
+                                }
+                                break;
 
-                                } // end switch statement
-                        } // end if "stimwordPositionSetting" has more than once occurence
+                            case 'replicationValue'     :
+
+                                if  ( record[columnName] )      {               // make SURE this is not a blank
+                                        let nbrOfComboBoxes     = document.getElementsByTagName('smart-combo-box').length               ;
+                                        let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
+                                        tmpComboBox.insert(99, record[columnName])                              ;
+                                        let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1 ;
+                                        let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location] ;
+                                        tmpListItem.classList.add('dropDownOptions', 'replicationValue' )                       ;
+                                        tmpListItem.title       = 'Prior Error'
+                                }
+                                break;
+
+                            case 'languageNormsError'           :
+                                if  ( record[columnName] )      {               // make SURE this is not a blank
+                                        let nbrOfComboBoxes     = document.getElementsByTagName('smart-combo-box').length               ;
+                                        let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
+                                        tmpComboBox.insert(99, record[columnName])                              ;
+                                        let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1 ;
+                                        let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location] ;
+                                        tmpListItem.classList.add('dropDownOptions', 'languageNormsError'       )                       ;
+                                        tmpListItem.title       = 'Indian Pakistan'
+                                }
+                                break;
+
+                        } // end switch statement
                 } // end for each column item
                 if  ( incrRowFlag )     {
                         rowCount++      ;
                 }
         } // end for each record
+
+
+                                /*      resize the stylesheet to make it fit!  */
+        // Getting the stylesheet
+        const stylesheet = document.styleSheets[1];
+        console.log(stylesheet);
+        let elementRules;
+
+
+        // looping through all the rules and getting the .box style to reduce the padding
+        for ( let i = 0; i < stylesheet.cssRules.length; i++) {
+                if ( stylesheet.cssRules[i].selectorText === '.box') {
+                        const currentPadding = parseInt(stylesheet.cssRules[i].style.getPropertyValue('padding-top').slice(0,-2));
+                        const rowMax            = 6     ;
+                        const fudgeFactor               = 3     ;       // three pixels per anything over row max
+                        const newPadding = ( currentPadding - ( rowCount - rowMax ) * fudgeFactor ) + 'px'      ;
+                        stylesheet.cssRules[i].style.setProperty('padding-top'          , newPadding);
+                        stylesheet.cssRules[i].style.setProperty('padding-bottom'       , newPadding);
+                }
+        }
+
+
 
         //      create the new rule string to "extend" the grid rows since there is not way to automate this (weird) !
         let ruleString = ':root ' + String.fromCharCode(123) + ' --stimwordWord: ' + rowCount.toString() + ';'  ;       //  using "String.fromCharCode(123)" instead of opening curly-brace for vim!
@@ -498,28 +535,16 @@ const DogData =
 ,{"contextPositionSoundPhoneme": "final -- g", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "k", "stimwordPositionAutoIncr": 24, "languageNormsErrorCOUNT": "1"}
 ];
 
-const protectedData =
-[{"contextPositionSoundPhoneme": "blend -- pr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "pR", "stimwordPositionAutoIncr": 949, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "blend -- pr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "p&r", "stimwordPositionAutoIncr": 949, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "blend -- pr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "p&R", "stimwordPositionAutoIncr": 949, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 950, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 950, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 950, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 951, "languageNormsErrorCOUNT": "2"}
-,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "t&", "stimwordPositionAutoIncr": 951, "languageNormsErrorCOUNT": "2"}
-,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "5"}
-,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "5"}
-,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "5"}
-,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "5"}
-,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "5"}
+const protectedData =  [
+{"contextPositionSoundPhoneme": "blend -- pr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "pR", "stimwordPositionAutoIncr": 949, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 950, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 951, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "middle -- k", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 953, "languageNormsErrorCOUNT": "0"}
-,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 954, "languageNormsErrorCOUNT": "2"}
-,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "t&", "stimwordPositionAutoIncr": 954, "languageNormsErrorCOUNT": "2"}
-,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 955, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 955, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 955, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 956, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 954, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 955, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "t", "stimwordPositionAutoIncr": 956, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 956, "languageNormsErrorCOUNT": "2"}
 ];
 
 const threadData =
@@ -547,26 +572,20 @@ const threadData =
 
 
 const sixty_sixData =
-[{"contextPositionSoundPhoneme": "initial -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1123, "languageNormsErrorCOUNT": "0"}
-,{"contextPositionSoundPhoneme": "vowel -- ɪ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 1124, "languageNormsErrorCOUNT": "2"}
-,{"contextPositionSoundPhoneme": "vowel -- ɪ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 1124, "languageNormsErrorCOUNT": "2"}
+[
+{"contextPositionSoundPhoneme": "initial -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1123, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "vowel -- ɪ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 1124, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "middle -- k", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1125, "languageNormsErrorCOUNT": "0"}
-,{"contextPositionSoundPhoneme": "middle -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "sø", "stimwordPositionAutoIncr": 1126, "languageNormsErrorCOUNT": "1"}
-,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 1127, "languageNormsErrorCOUNT": "2"}
-,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "t&", "stimwordPositionAutoIncr": 1127, "languageNormsErrorCOUNT": "2"}
-,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 1128, "languageNormsErrorCOUNT": "2"}
-,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝ", "stimwordPositionAutoIncr": 1128, "languageNormsErrorCOUNT": "2"}
-,{"contextPositionSoundPhoneme": "middle -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "sø", "stimwordPositionAutoIncr": 1129, "languageNormsErrorCOUNT": "1"}
-,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "5"}
-,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "5"}
-,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "5"}
-,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "5"}
-,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "5"}
-,{"contextPositionSoundPhoneme": "middle -- v", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "f", "stimwordPositionAutoIncr": 1131, "languageNormsErrorCOUNT": "1"}
-,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 1132, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 1132, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 1132, "languageNormsErrorCOUNT": "3"}
-,{"contextPositionSoundPhoneme": "final -- n", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 1133, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "middle -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1126, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 1127, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1128, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "middle -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1129, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 1130, "languageNormsErrorCOUNT": "1"}
+,{"contextPositionSoundPhoneme": "middle -- v", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "b", "stimwordPositionAutoIncr": 1131, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "middle -- v", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "f", "stimwordPositionAutoIncr": 1131, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1132, "languageNormsErrorCOUNT": "0"}
+,{"contextPositionSoundPhoneme": "final -- n", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 1133, "languageNormsErrorCOUNT": "2"}
+,{"contextPositionSoundPhoneme": "final -- n", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ŋ", "stimwordPositionAutoIncr": 1133, "languageNormsErrorCOUNT": "2"}
 ];
 
 const RockerfellerData =
