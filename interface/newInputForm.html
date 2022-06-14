@@ -1,4 +1,4 @@
-[root@edwardsmarkf newTranscriptionInterface]# clear
+
 [root@edwardsmarkf newTranscriptionInterface]# cat  phoneticTranscriptionGrid.html
 <html>
 
@@ -13,19 +13,15 @@ html, body {
         padding                 : 10px                                  ;
 }
 
-smart-text-box, smart-combo-box {
-        width                   : 80px                                  ;
-}
-
-.tooltipWrapperClass {
+div.tooltipWrapperClass {
         display                 : grid                                  ;
-        grid-template-columns   : repeat(4, 25px)                       ;
+        grid-template-columns   : repeat( 4, 25px)                      ;
         grid-gap                : 2px                                   ;
         background-color        : #fff                                  ;
         color                   : #444                                  ;
 }
 
-.tooltipElement {
+div.tooltipElement {
         background-color        : #444                                  ;
         color                   : #fff                                  ;
         border-radius           : 5px                                   ;
@@ -34,17 +30,16 @@ smart-text-box, smart-combo-box {
 }
 
 
-
-.wrapper {
+div.wrapper {
         color                   : #444                                  ;
         display                 : grid                                  ;
         max-width               : 1000px                                ;
         grid-gap                : 5px                                   ;
-        grid-template-columns   : 150px 200px 150px 150px               ;
+        grid-template-columns   : 150px 200px repeat(2, 150px )         ;
         background-color        : #fff                                  ;
 }
 
-.box {
+div.box {
         background-color        : #444                                  ;
         color                   : #ccc                                  ;
         border-radius           : 5px                                   ;
@@ -58,6 +53,15 @@ smart-text-box, smart-combo-box {
                                 /*     https://stackoverflow.com/questions/9249359/vertically-align-text-within-a-div
                                 https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-div/13515693#13515693*/
 }
+
+div#gridFirstColumn             {
+        text-align              : center                                ;
+}
+
+smart-text-box, smart-combo-box {
+        width                   : 80px                                  ;
+}
+
 
 smart-list-item.dropDownOptions {
         border                  : 1px dotted black                      ;
@@ -100,8 +104,6 @@ smart-list-item.languageNormsError      {
 <script>
 
 'use strict;'
-
-                                                                        //      const   stimwordWord                    = 'Horse'       ;
 
 const   maxCharsInPhoneticError         = 4     ;
 
@@ -158,9 +160,12 @@ function processItem(event) {
         var rowCount            =       0       ;
 
                 /* create the first column */
-        let stimwordWordTag     = document.createElement('div')                         ;
         let stimwordWordElement = document.createTextNode(stimwordWordParm)             ;
+        let stimwordWordTag     = document.createElement('div')                         ;
+
         stimwordWordTag.appendChild(stimwordWordElement)                                ;
+
+        stimwordWordTag.setAttribute('id', 'gridFirstColumn')                           ;
         stimwordWordTag.classList.add('box')                                            ;
         stimwordWordTag.style.gridColumnStart   =       '1'                             ;
         stimwordWordTag.style.gridRowStart      =       '1'                             ;
@@ -362,11 +367,11 @@ function processItem(event) {
 
         // looping through all the rules and getting the .box style to reduce the padding
         for ( let i = 0; i < stylesheet.cssRules.length; i++) {
-                if ( stylesheet.cssRules[i].selectorText === '.box') {
-                        const currentPadding = parseInt(stylesheet.cssRules[i].style.getPropertyValue('padding-top').slice(0,-2));
-                        const rowMax            = 6     ;
-                        const fudgeFactor               = 3     ;       // three pixels per anything over row max
-                        const newPadding = ( currentPadding - ( rowCount - rowMax ) * fudgeFactor ) + 'px'      ;
+                if ( stylesheet.cssRules[i].selectorText === 'div.box') {
+                                                //const currentPadding = parseInt(stylesheet.cssRules[i].style.getPropertyValue('padding-top').slice(0,-2));
+                        const rowMax            = 12    ;       // max number of rows is word 'sixty seven'
+                        const topBottomPadding  = 4     ;       // three pixels per anything over row max
+                        const newPadding = ( ( rowMax - rowCount ) * topBottomPadding ) + 'px'  ;
                         stylesheet.cssRules[i].style.setProperty('padding-top'          , newPadding);
                         stylesheet.cssRules[i].style.setProperty('padding-bottom'       , newPadding);
                 }
@@ -374,23 +379,18 @@ function processItem(event) {
 
 
 
-        //      create the new rule string to "extend" the grid rows since there is not way to automate this (weird) !
-        let ruleString = ':root ' + String.fromCharCode(123) + ' --stimwordWord: ' + rowCount.toString() + ';'  ;       //  using "String.fromCharCode(123)" instead of opening curly-brace for vim!
+
+        //      create the new rules to "extend" the grid rows since there is not way to automate this (weird) !
+        document.documentElement.style.setProperty( '--stimwordWord', rowCount.toString() );
         for ( let incr in cssVarHolderObj )
         {       let { startingRowNbr, endingRowNbr, cssVarName } = cssVarHolderObj[incr]        ;
                 if  ( startingRowNbr != endingRowNbr )
                 {
-                   ruleString   += ' '
-                                + cssVarName
-                                + ': '
-                                + (( endingRowNbr - startingRowNbr ) + 1 ).toString()
-                                + ';'
-                                ;
+                        let bottomRow = (( endingRowNbr - startingRowNbr ) + 1 ).toString() ;
+                        document.documentElement.style.setProperty( cssVarName, bottomRow );
+
                 }
         }
-        ruleString += String.fromCharCode(125);         // close curly-brace (125), again so as to not "confuse" vim!
-                                                // example:  ruleString = ':root { --stimwordWord--1: 6; --contextPositionSoundPhoneme--1: 2; --contextPositionSoundPhoneme--3: 2; --contextPositionSoundPhoneme--5: 2;}' ;
-        document.styleSheets[0].insertRule(ruleString);
 
 
 
@@ -463,21 +463,21 @@ function processItem(event) {
         });
 
 
-                                /*
-                                        for ( let tmp in document.getElementsByTagName('smart-combo-box') )     {
-                                                if (!(isNaN(parseInt(tmp))))    {
-                                                        let comboBox = document.getElementsByTagName('smart-combo-box')[tmp]    ;
-                                                        //if  ( comboBox.getElementsByClassName('smart-list-items-inner-container')[0].getElementsByClassName('smart-list-item').length )
-                                                        if  ( comboBox.items.length )
-                                                        {
-                                                                comboBox.getElementsByClassName('smart-drop-down-button')[0].style.setProperty('display' , 'block' );
-                                                        } else {
-                                                                comboBox.getElementsByClassName('smart-drop-down-button')[0].style.setProperty('display' , 'none' );    // HIDE the drop-down arrows if there are no items to select
-                                                        }
-                                                }
-                                        }
-                                */
 
+
+
+
+                        //let ruleString = ':root ' + String.fromCharCode(123) + ' --stimwordWord: ' + rowCount.toString() + ';'        ;       //  using "String.fromCharCode(123)" instead of opening curly-brace for vim!
+                        /*
+                                                   ruleString   += ' '
+                                                                + cssVarName
+                                                                + ': '
+                                                                + (( endingRowNbr - startingRowNbr ) + 1 ).toString()
+                                                                + ';'
+                                                                ;
+                        */
+                        //ruleString += String.fromCharCode(125);               // close curly-brace (125), again so as to not "confuse" vim!
+                                                                // example:  ruleString = ':root { --stimwordWord--1: 6; --contextPositionSoundPhoneme--1: 2; --contextPositionSoundPhoneme--3: 2; --contextPositionSoundPhoneme--5: 2;}' ;
 
 
 }
@@ -571,7 +571,7 @@ const threadData =
 ];
 
 
-const sixty_sixData =
+const sixty_sevenData =
 [
 {"contextPositionSoundPhoneme": "initial -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1123, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "vowel -- ɪ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 1124, "languageNormsErrorCOUNT": "1"}
@@ -663,7 +663,7 @@ const EventuallyData =
 <button onClick="javascript: processItem(this);">thread</button>
 &nbsp;
 <button onClick="javascript: processItem(this);">protected</button>
-<button onClick="javascript: processItem(this);">sixty_six</button>
+<button onClick="javascript: processItem(this);">sixty_seven</button>
 <button onClick="javascript: processItem(this);">Rockerfeller</button>
 <button onClick="javascript: processItem(this);">threatening</button>
 <button onClick="javascript: processItem(this);">Eventually</button>
