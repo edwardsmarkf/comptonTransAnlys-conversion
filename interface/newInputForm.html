@@ -1,4 +1,4 @@
-
+[root@edwardsmarkf newTranscriptionInterface]# clear
 [root@edwardsmarkf newTranscriptionInterface]# cat  phoneticTranscriptionGrid.html
 <html>
 
@@ -60,6 +60,7 @@ div#gridFirstColumn             {
 
 smart-text-box, smart-combo-box {
         width                   : 80px                                  ;
+        font-size: 30px;
 }
 
 
@@ -262,6 +263,16 @@ function processItem(event) {
                                                         let {stimwordPositionAutoIncr}  = record                                                ;
                                                         lastDataItemAdded               = elementId                                             ;
                                                         if  ( Number(record['languageNormsErrorCOUNT']) == 0 ) {
+
+
+                                // 2022-06-14
+
+
+                        //      document.documentElement.style.setProperty('--smart-font-size', '30px' k);
+
+
+
+
                                                                                         /*      https://www.htmlelements.com/demos/input/textarea/ */
                                                                 element                         = document.createElement('smart-text-box')              ;
                                                         } else {
