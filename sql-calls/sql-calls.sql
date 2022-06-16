@@ -115,7 +115,7 @@
 
 
  
- 
+     ####   M A I N    S C R E E N    G R I D    C R E A T O R   ! ! !
  
 
 
@@ -137,6 +137,24 @@
                         `stimwordPosition`.`stimwordPositionAutoIncr`
                 ;
 		
+		
+###    S O U N D     S E L E C T O R
+
+SELECT JSON_OBJECT
+( 'title1'			,	sound.soundTitle1
+, 'title2'			,	sound.soundTitle2
+, 'soundPhoneme'	,	sound.soundPhoneme
+, 'contextPosition'	,	context.contextPosition
+, 'contextAutoIncr'	,	context.contextAutoIncr
+) ''
+FROM comptonTransAnlys.sound
+, comptonTransAnlys.context
+WHERE 1
+AND sound.layoutName = 'PESL'
+AND sound.soundAutoIncr = context.contextAutoIncr
+ORDER BY sound.soundOrder
+, context.contextLabelOrder
+
 		
 		
           ##  ?? do we even need this one anymor???		
