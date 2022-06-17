@@ -5,35 +5,92 @@
 function soundScript() {
 
 
-	let controlBreak = {}
+	let keyArray		= []	;
+	let resultArray		= []	;
+	let controlBreak	= {}	;
 
 	soundScriptData.forEach( element => {
-				debugger;
+
+		if  ( !keyArray.length )	{
+			Object.keys(element).forEach( keyVal => {
+				keyArray.push(keyVal);
+			})
+		}
+		let colLevel = 0;
+
 		for ( const property in element )	{
 			if  ( property == 'contextAutoIncr' ) {
 				break;
 			}
 			if  ( element[property] != controlBreak[property] ) {
-				controlBreak[property] = element[property];
-				console.log('new control break for: ' + element[property]);
-				let skipFlag = false;
-				Object.keys(element).forEach( keyVal => {
-					if  ( keyVal == property )	{
-						skipFlag = true;
-					} else {
-						if ( skipFlag == true )	{
-							controlBreak[keyVal] = null;
-						} else {
-							// we have not yet reached our break value
-						}
-					}
-				})
-			} else {
-				//console.log('skipping since control-break is equal!')
+				controlBreak[property] = element[property];	//	new control break for element[property]
+				switch	( colLevel )	{
+					case	( 0 )	:
+							resultArray.push({ 'label' : element[property], 'items' : [] });
+							break;
+					case	( 1 )	:
+							resultArray
+								[resultArray.length - 1
+								]
+								['items']
+								.push({ 'label' : element[property], 'items' : [] });
+							break;
+					case	( 2 )	:
+							resultArray
+								[resultArray.length - 1
+								]
+								['items']
+								[	resultArray
+										[resultArray.length - 1
+										]
+										['items']
+										.length - 1
+								]
+								['items']
+								.push({ 'label' : element[property], 'items' : [] });
+							break;
+					case	( 3 )	:
+							resultArray
+								[resultArray.length - 1					// first level
+								]
+								['items']
+								[	resultArray					// second level
+										[resultArray.length - 1				// first level
+										]
+										['items']
+										.length - 1
+								]
+								['items']
+								[	resultArray					// third level
+										[resultArray.length - 1
+										]
+										['items']
+										[	resultArray				// second level
+												[resultArray.length - 1			// first level
+												]
+												['items']
+												.length - 1
+										]
+										['items']
+										.length - 1
+								]
+								['items']
+
+								.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
+							break;
+					default				:
+							break;
+				}
+
+				for ( let tmp=colLevel + 1 ; tmp < element.length; tmp++ )	{
+					controlBreak[keyArray[tmp]] = null;
+				};
 			}
+			colLevel++;
 		} // end for loop
 	})
 
+	return (resultArray);
 
 }
 
