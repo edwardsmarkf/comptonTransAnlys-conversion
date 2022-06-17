@@ -4,6 +4,7 @@
 
 function soundScript() {
 
+	'use strict;'
 
 	let keyArray		= []	;
 	let resultArray		= []	;
@@ -26,58 +27,101 @@ function soundScript() {
 				controlBreak[property] = element[property];	//	new control break for element[property]
 				switch	( colLevel )	{
 					case	( 0 )	:
-							resultArray.push({ 'label' : element[property], 'items' : [] });
+							let levelZero_0 = resultArray;
+							levelZero_0.push({ 'label' : element[property], 'items' : [] });
 							break;
+
+													//resultArray.push({ 'label' : element[property], 'items' : [] });
 					case	( 1 )	:
-							resultArray
-								[resultArray.length - 1
-								]
-								['items']
-								.push({ 'label' : element[property], 'items' : [] });
+							let levelOne_0	= resultArray;
+							let levelOne_1	= levelOne_0
+										[levelOne_0.length - 1 ] 
+										['items']
+										;
+
+							levelOne_1.push({ 'label' : element[property], 'items' : [] });
 							break;
+
+												/*
+												resultArray
+													[resultArray.length - 1
+													]
+													['items']
+													.push({ 'label' : element[property], 'items' : [] });
+												*/
 					case	( 2 )	:
-							resultArray
-								[resultArray.length - 1
-								]
-								['items']
-								[	resultArray
-										[resultArray.length - 1
-										]
+							let levelTwo_0	= resultArray;
+							let levelTwo_1	= levelTwo_0
+										[levelTwo_0.length - 1	] 
 										['items']
-										.length - 1
-								]
-								['items']
-								.push({ 'label' : element[property], 'items' : [] });
+										;
+							let levelTwo_2	= levelTwo_1
+										[levelTwo_1.length - 1	] 
+										['items']
+										;
+							levelTwo_2.push({ 'label' : element[property], 'items' : [] });
 							break;
+
+												/*
+												resultArray
+													[resultArray.length - 1
+													]
+													['items']
+													[	resultArray
+															[resultArray.length - 1
+															]
+															['items']
+															.length - 1
+													]
+													['items']
+													.push({ 'label' : element[property], 'items' : [] });
+												*/
 					case	( 3 )	:
-							resultArray
-								[resultArray.length - 1					// first level
-								]
-								['items']
-								[	resultArray					// second level
-										[resultArray.length - 1				// first level
+							let levelThree_0	= resultArray;
+							let levelThree_1	= levelThree_0
+											[levelThree_0.length - 1	] 
+											['items']
+											;
+							let levelThree_2	= levelThree_1
+											[levelThree_1.length - 1	] 
+											['items']
+											;
+							let levelThree_3	= levelThree_2
+											[levelThree_2.length - 1	] 
+											['items']
+											;
+							levelThree_3.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
+							break;
+
+									/*
+									resultArray
+										[resultArray.length - 1					// first level
 										]
 										['items']
-										.length - 1
-								]
-								['items']
-								[	resultArray					// third level
-										[resultArray.length - 1
-										]
-										['items']
-										[	resultArray				// second level
-												[resultArray.length - 1			// first level
+										[	resultArray					// second level
+												[resultArray.length - 1				// first level
 												]
 												['items']
 												.length - 1
 										]
 										['items']
-										.length - 1
-								]
-								['items']
+										[	resultArray					// third level
+												[resultArray.length - 1
+												]
+												['items']
+												[	resultArray				// second level
+														[resultArray.length - 1			// first level
+														]
+														['items']
+														.length - 1
+												]
+												['items']
+												.length - 1
+										]
+										['items']
 
-								.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
-							break;
+										.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
+									*/
 					default				:
 							break;
 				}
