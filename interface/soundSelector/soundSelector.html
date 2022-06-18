@@ -12,24 +12,30 @@ function soundScript() {
 
 	soundScriptData.forEach( element => {
 
-		if  ( !keyArray.length )	{
-			Object.keys(element).forEach( keyVal => {
-				keyArray.push(keyVal);
-			})
-		}
-		let colLevel = 0;
+											/*
+											if  ( !keyArray.length )	{
+												Object.keys(element).forEach( keyVal => {
+													keyArray.push(keyVal);
+												})
+											}
+											*/
+											//	let colLevel = 0;
 
-		for ( const property in element )	{
-			if  ( property == 'contextAutoIncr' ) {
-				break;
+											//for ( const property in element )	
+		Object.entries(element).forEach(( keyValPair, index )	=>
+		{
+			let [ key, val ]  = keyValPair;
+
+			if  ( key == 'contextAutoIncr' ) {
+				return;
 			}
 
+			if  ( typeof controlBreak[key] == 'undefined' || controlBreak[key] != val ) {
 
-			if  ( element[property] != controlBreak[property] ) {
-				controlBreak[property] = element[property];	//	new control break for element[property]
+					/* note we SLICE(get) only earlier items, remove the rest, and include the new(est) key/val pair */
+				controlBreak = Object.assign(Object.fromEntries(Object.entries(controlBreak).slice(0,index)), {[key]:val} ) ;
 
 				(function (arr, n, max) {
-					debugger;
 							//	https://eloquentcode.com/recursive-anonymous-functions-in-javascript
 					let tmpArr;
 					if  ( n === 0 )	{
@@ -42,16 +48,16 @@ function soundScript() {
 
 					if  ( n === max )	{
 						if  ( n === 3 )	{
-							tmpArr.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
+							tmpArr.push({ 'label' : val,  'value' : element['contextAutoIncr'] });
 						} else {
-							tmpArr.push({ 'label' : element[property], 'items' : [] });
+							tmpArr.push({ 'label' : val,  'items' : [] });
 						}
 						return 1;
 					} else {
 						arguments.callee(tmpArr, n + 1, max);
 					}
 
-				})(resultArray, 0 , keyArray.indexOf(property) );
+				})(resultArray, 0 , index /* keyArray.indexOf(property) */ );
 
 		/*
 		title1		- 0  0
@@ -163,12 +169,19 @@ function soundScript() {
 		//							break;
 		//				}
 
-				for ( let tmp=colLevel + 1 ; tmp < element.length; tmp++ )	{
-					controlBreak[keyArray[tmp]] = null;
-				};
+				/*
+				Object.entries(controlBreak).forEach((keyVal, controlBreakIndex) =>	{
+					if ( controlBreakIndex > index )	{
+						controlBreak[keyVal[0]] = undefined;
+					}
+				})
+       				*/
+										//for ( let tmp = /* colLevel */ index + 1 ; tmp < element.length; tmp++ )	{
+											//controlBreak[keyArray[tmp]] = null;
+										//};
 			}
-			colLevel++;
-		} // end for loop
+			//colLevel++;
+		}) // end for loop
 	})
 
 	return (resultArray);
