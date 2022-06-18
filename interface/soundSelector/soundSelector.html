@@ -23,108 +23,145 @@ function soundScript() {
 			if  ( property == 'contextAutoIncr' ) {
 				break;
 			}
+
+
 			if  ( element[property] != controlBreak[property] ) {
 				controlBreak[property] = element[property];	//	new control break for element[property]
-				switch	( colLevel )	{
-					case	( 0 )	:
-							let levelZero_0 = resultArray;
-							levelZero_0.push({ 'label' : element[property], 'items' : [] });
-							break;
 
-													//resultArray.push({ 'label' : element[property], 'items' : [] });
-					case	( 1 )	:
-							let levelOne_0	= resultArray;
-							let levelOne_1	= levelOne_0
-										[levelOne_0.length - 1 ] 
-										['items']
-										;
+				(function (arr, n, max) {
+					debugger;
+							//	https://eloquentcode.com/recursive-anonymous-functions-in-javascript
+					let tmpArr;
+					if  ( n === 0 )	{
+						tmpArr = arr;
+					} else {
+						tmpArr = arr	[arr.length - 1	] 
+								['items']
+								;
+					}
 
-							levelOne_1.push({ 'label' : element[property], 'items' : [] });
-							break;
+					if  ( n === max )	{
+						if  ( n === 3 )	{
+							tmpArr.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
+						} else {
+							tmpArr.push({ 'label' : element[property], 'items' : [] });
+						}
+						return 1;
+					} else {
+						arguments.callee(tmpArr, n + 1, max);
+					}
 
-												/*
-												resultArray
-													[resultArray.length - 1
-													]
-													['items']
-													.push({ 'label' : element[property], 'items' : [] });
-												*/
-					case	( 2 )	:
-							let levelTwo_0	= resultArray;
-							let levelTwo_1	= levelTwo_0
-										[levelTwo_0.length - 1	] 
-										['items']
-										;
-							let levelTwo_2	= levelTwo_1
-										[levelTwo_1.length - 1	] 
-										['items']
-										;
-							levelTwo_2.push({ 'label' : element[property], 'items' : [] });
-							break;
+				})(resultArray, 0 , keyArray.indexOf(property) );
 
-												/*
-												resultArray
-													[resultArray.length - 1
-													]
-													['items']
-													[	resultArray
-															[resultArray.length - 1
-															]
-															['items']
-															.length - 1
-													]
-													['items']
-													.push({ 'label' : element[property], 'items' : [] });
-												*/
-					case	( 3 )	:
-							let levelThree_0	= resultArray;
-							let levelThree_1	= levelThree_0
-											[levelThree_0.length - 1	] 
-											['items']
-											;
-							let levelThree_2	= levelThree_1
-											[levelThree_1.length - 1	] 
-											['items']
-											;
-							let levelThree_3	= levelThree_2
-											[levelThree_2.length - 1	] 
-											['items']
-											;
-							levelThree_3.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
-							break;
+		/*
+		title1		- 0  0
+		title2		- 1  0, 1
+		soundsPhoneme	- 2  0, 1, 2
+		contextPosition - 3  0, 1, 2, 3
+       		*/
 
-									/*
-									resultArray
-										[resultArray.length - 1					// first level
-										]
-										['items']
-										[	resultArray					// second level
-												[resultArray.length - 1				// first level
-												]
-												['items']
-												.length - 1
-										]
-										['items']
-										[	resultArray					// third level
-												[resultArray.length - 1
-												]
-												['items']
-												[	resultArray				// second level
-														[resultArray.length - 1			// first level
-														]
-														['items']
-														.length - 1
-												]
-												['items']
-												.length - 1
-										]
-										['items']
 
-										.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
-									*/
-					default				:
-							break;
-				}
+		//
+		//				switch	( colLevel )	{
+		//					case	( 0 )	:
+		//							let levelZero_0 = resultArray;
+		//							levelZero_0.push({ 'label' : element[property], 'items' : [] });
+		//							break;
+		//
+		//													//resultArray.push({ 'label' : element[property], 'items' : [] });
+		//					case	( 1 )	:
+		//							let levelOne_0	= resultArray;
+		//							let levelOne_1	= levelOne_0
+		//										[levelOne_0.length - 1 ] 
+		//										['items']
+		//										;
+		//
+		//							levelOne_1.push({ 'label' : element[property], 'items' : [] });
+		//							break;
+		//
+		//												/*
+		//												resultArray
+		//													[resultArray.length - 1
+		//													]
+		//													['items']
+		//													.push({ 'label' : element[property], 'items' : [] });
+		//												*/
+		//					case	( 2 )	:
+		//							let levelTwo_0	= resultArray;
+		//							let levelTwo_1	= levelTwo_0
+		//										[levelTwo_0.length - 1	] 
+		//										['items']
+		//										;
+		//							let levelTwo_2	= levelTwo_1
+		//										[levelTwo_1.length - 1	] 
+		//										['items']
+		//										;
+		//							levelTwo_2.push({ 'label' : element[property], 'items' : [] });
+		//							break;
+		//
+		//												/*
+		//												resultArray
+		//													[resultArray.length - 1
+		//													]
+		//													['items']
+		//													[	resultArray
+		//															[resultArray.length - 1
+		//															]
+		//															['items']
+		//															.length - 1
+		//													]
+		//													['items']
+		//													.push({ 'label' : element[property], 'items' : [] });
+		//												*/
+		//					case	( 3 )	:
+		//							let levelThree_0	= resultArray;
+		//							let levelThree_1	= levelThree_0
+		//											[levelThree_0.length - 1	] 
+		//											['items']
+		//											;
+		//							let levelThree_2	= levelThree_1
+		//											[levelThree_1.length - 1	] 
+		//											['items']
+		//											;
+		//							let levelThree_3	= levelThree_2
+		//											[levelThree_2.length - 1	] 
+		//											['items']
+		//											;
+		//							levelThree_3.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
+		//							break;
+		//
+		//									/*
+		//									resultArray
+		//										[resultArray.length - 1					// first level
+		//										]
+		//										['items']
+		//										[	resultArray					// second level
+		//												[resultArray.length - 1				// first level
+		//												]
+		//												['items']
+		//												.length - 1
+		//										]
+		//										['items']
+		//										[	resultArray					// third level
+		//												[resultArray.length - 1
+		//												]
+		//												['items']
+		//												[	resultArray				// second level
+		//														[resultArray.length - 1			// first level
+		//														]
+		//														['items']
+		//														.length - 1
+		//												]
+		//												['items']
+		//												.length - 1
+		//										]
+		//										['items']
+		//
+		//										.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
+		//									*/
+		//					default				:
+		//							break;
+		//				}
 
 				for ( let tmp=colLevel + 1 ; tmp < element.length; tmp++ )	{
 					controlBreak[keyArray[tmp]] = null;
