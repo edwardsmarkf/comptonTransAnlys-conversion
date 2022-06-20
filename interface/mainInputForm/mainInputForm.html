@@ -1,8 +1,4 @@
 [root@edwardsmarkf newTranscriptionInterface]# clear
-[root@edwardsmarkf newTranscriptionInterface]#
-[root@edwardsmarkf newTranscriptionInterface]#
-[root@edwardsmarkf newTranscriptionInterface]#
-[root@edwardsmarkf newTranscriptionInterface]#
 [root@edwardsmarkf newTranscriptionInterface]# cat  phoneticTranscriptionGrid.html
 <html>
 
@@ -156,6 +152,8 @@ function processItem(event) {
 
         document.getElementById('phoneticTranscriptionInputScreen').replaceChildren();  // temporary line for testing ONLY
 
+        const   selectedLanguage                =       'Indian Pakistan'               ;
+        const   replicatedTitle                 =       'Time1'                         ;
 
         const   contextPositionSoundPhoneme     =       'contextPositionSoundPhoneme'   ;               // these occur so frequently that they deserve their own const!
         const   stimwordPositionSetting         =       'stimwordPositionSetting'       ;
@@ -181,21 +179,23 @@ function processItem(event) {
 
         document.getElementById('phoneticTranscriptionInputScreen').appendChild(stimwordWordTag);
 
-        let data = eval( stimwordWordParm + 'Data' ) ;
+        const data = eval( stimwordWordParm + 'Data' ) ;
 
-                /* COUNT occurences of stimwordPositionSetting - if its just one occurence (like the reading passage) we do NOT need to dislay this column! */
+                /* COUNT occurences of stimwordPositionSetting - if its just one occurence (like the reading passage) we do NOT need to display this column! */
         let tmpArray = [] ;
         for ( let i in Object.keys(data) )  { tmpArray.push(data[i][stimwordPositionSetting]) ;  } ;
-        let stimwordPositionSettingCount = tmpArray.filter((v,i) => tmpArray.indexOf(v) == i ).length;
+        const stimwordPositionSettingCount = tmpArray.filter((v,i) => tmpArray.indexOf(v) == i ).length;
                 /* end COUNT of occurencs - is there a better way ???  */
 
-        for ( let recordNbr in Object.keys(data) )      {
-                let record = data[recordNbr] ;
+                                                //      for ( let recordNbr in Object.keys(data) )
+        for ( const [key, record] of Object.entries(data) )
+        {
+                                                                        //const record = data[recordNbr] ;
                 let incrRowFlag = false;
                                                                         //      columnLoop:
                                                                                         //for ( const property in element )
                                                                         //for ( let columnNbr in Object.keys(data[recordNbr]) )                 // loop over each column!
-                Object.entries(data[recordNbr]).forEach(( keyValPair, index )   =>
+                Object.entries(record).forEach(( keyValPair, index )    =>
                 {
                         const [ columnName, columnData ]  = keyValPair;
 
@@ -346,7 +346,7 @@ function processItem(event) {
                                         let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1         ;
                                         let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location]         ;
                                         tmpListItem.classList.add('dropDownOptions', 'replicationValue' )                               ;
-                                        tmpListItem.title       = 'Prior Error'
+                                        tmpListItem.title       = replicatedTitle                                                       ;
                                 }
                                 break;
 
@@ -358,7 +358,7 @@ function processItem(event) {
                                         let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1         ;
                                         let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location]         ;
                                         tmpListItem.classList.add('dropDownOptions', 'languageNormsError'       )                       ;
-                                        tmpListItem.title       = 'Indian Pakistan'
+                                        tmpListItem.title       = selectedLanguage                                                      ;
                                 }
                                 break;
 
@@ -435,7 +435,7 @@ function processItem(event) {
                                         console.log('!!! skipping because we came in from the RIGHT side and only half way up, and/or from the BOTTOM, ');
                                         console.log(' 2/3 of the way across on the right, instead of 1/3 of the way from the left');
                                 }
-                                                        //if  ( event.clientX < ( event.currentTarget.getElementsByClassName('smart-drop-down-button')[0].getBoundingClientRect().left -2 )     )
+                                                        //if  ( event.clientX < ( event.currentTarget.getElementsByClassName('smart-drop-down-button')[0].getBoundingClientRect().left -2 )    )
                         }
                 });
 
