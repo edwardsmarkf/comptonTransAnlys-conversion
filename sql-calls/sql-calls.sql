@@ -141,8 +141,8 @@
 ###    S O U N D     S E L E C T O R
 
 SELECT JSON_ARRAYAGG(JSON_OBJECT
-( 'title1'			,	sound.soundTitle1
-, 'title2'			,	sound.soundTitle2
+( 'soundTitle'		,	sound.soundTitle
+, 'soundSubtitle'	,	sound.soundSubTitle
 , 'soundPhoneme'	,	sound.soundPhoneme
 , 'contextPosition'	,	context.contextPosition
 , 'contextAutoIncr'	,	context.contextAutoIncr
