@@ -1,4 +1,8 @@
 [root@edwardsmarkf newTranscriptionInterface]# clear
+[root@edwardsmarkf newTranscriptionInterface]#
+[root@edwardsmarkf newTranscriptionInterface]#
+[root@edwardsmarkf newTranscriptionInterface]#
+[root@edwardsmarkf newTranscriptionInterface]#
 [root@edwardsmarkf newTranscriptionInterface]# cat  phoneticTranscriptionGrid.html
 <html>
 
@@ -13,9 +17,10 @@ html, body {
         padding                 : 10px                                  ;
 }
 
+
 div.tooltipWrapperClass {
         display                 : grid                                  ;
-        grid-template-columns   : repeat( 4, 25px)                      ;
+        grid-template-columns   : repeat( 3, 40px)                      ;
         grid-gap                : 2px                                   ;
         background-color        : #fff                                  ;
         color                   : #444                                  ;
@@ -26,7 +31,6 @@ div.tooltipElement {
         color                   : #fff                                  ;
         border-radius           : 5px                                   ;
         padding                 : 5px                                   ;
-        font-size               : 140%                                  ;
 }
 
 
@@ -60,9 +64,12 @@ div#gridFirstColumn             {
 
 smart-text-box, smart-combo-box {
         width                   : 80px                                  ;
-        font-size: 30px;
 }
 
+
+input.smart-input               {
+        --smart-font-size       : 20px                                  ;
+}
 
 smart-list-item.dropDownOptions {
         border                  : 1px dotted black                      ;
@@ -78,20 +85,18 @@ smart-list-item.languageNormsError      {
 
 
 .tooltipWrapperClass {
-  display: grid;
-  grid-template-columns:
-         repeat(4, 25px);
-  grid-gap: 2px;
-  background-color: #fff;
-  color: #444;
+        display                 : grid                                  ;
+        grid-template-columns   : repeat(4, 25px)                       ;
+        grid-gap                : 2px                                   ;
+        background-color        : #fff                                  ;
+        color                   : #444                                  ;
 }
 
 .tooltipElement {
-  background-color: #444;
-  color:  #fff;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 140%;
+        background-color        : #444                                  ;
+        color                   : #fff                                  ;
+        border-radius           : 5px                                   ;
+        padding                 : 5px                                   ;
 }
 
 </style>
@@ -149,7 +154,8 @@ window.onload = () => {
 
 function processItem(event) {
 
-        document.getElementById('phoneticTranscriptionInputScreen').replaceChildren();  // temporary line for testing
+        document.getElementById('phoneticTranscriptionInputScreen').replaceChildren();  // temporary line for testing ONLY
+
 
         const   contextPositionSoundPhoneme     =       'contextPositionSoundPhoneme'   ;               // these occur so frequently that they deserve their own const!
         const   stimwordPositionSetting         =       'stimwordPositionSetting'       ;
@@ -177,24 +183,21 @@ function processItem(event) {
 
         let data = eval( stimwordWordParm + 'Data' ) ;
 
-
-
                 /* COUNT occurences of stimwordPositionSetting - if its just one occurence (like the reading passage) we do NOT need to dislay this column! */
         let tmpArray = [] ;
         for ( let i in Object.keys(data) )  { tmpArray.push(data[i][stimwordPositionSetting]) ;  } ;
         let stimwordPositionSettingCount = tmpArray.filter((v,i) => tmpArray.indexOf(v) == i ).length;
                 /* end COUNT of occurencs - is there a better way ???  */
 
-
         for ( let recordNbr in Object.keys(data) )      {
                 let record = data[recordNbr] ;
                 let incrRowFlag = false;
-
-                columnLoop:
-
-                for ( let columnNbr in Object.keys(data[recordNbr]) ) {         // loop over each column!
-
-                        let columnName = Object.keys(data[recordNbr])[columnNbr];
+                                                                        //      columnLoop:
+                                                                                        //for ( const property in element )
+                                                                        //for ( let columnNbr in Object.keys(data[recordNbr]) )                 // loop over each column!
+                Object.entries(data[recordNbr]).forEach(( keyValPair, index )   =>
+                {
+                        const [ columnName, columnData ]  = keyValPair;
 
                                         /* skip single occurences of stimwordPositionSetting, and all columns that are not directly processed */
                         if      (       (columnName == stimwordPositionSetting && stimwordPositionSettingCount == 1     )
@@ -203,20 +206,27 @@ function processItem(event) {
                                 ||      (columnName == 'languageNormsErrorCOUNT'                                        )
                                 )
                         {
-                                continue columnLoop;
+                                return;         //              continue columnLoop;
                         }
 
                         switch ( columnName )   {
                             case contextPositionSoundPhoneme    :
                             case stimwordPositionSetting        :
                             case 'clientContextError'           :
-                                if  (   record[columnName] != controlBreak[columnName] )
+                                if  (   typeof controlBreak[columnName] === 'undefined' || controlBreak[columnName] != columnData )
                                 {
-                                        controlBreak[columnName] = record[columnName] ;
-                                        for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[recordNbr]).length; xx++ )
-                                                        // null out all subsequent control-break columns !!
-                                        {       controlBreak[ Object.keys(data[recordNbr])[xx]  ] = null;  ;
-                                        }
+                                        controlBreak = Object.assign
+                                                (       Object.fromEntries(Object.entries(controlBreak).slice(0,index))
+                                                ,       { [columnName] : columnData }
+                                                ) ;
+
+                                                                                /*
+                                                                                controlBreak[columnName] = record[columnName] ;
+                                                                                for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[recordNbr]).length; xx++ )
+                                                                                                // null out all subsequent control-break columns !!
+                                                                                {       controlBreak[ Object.keys(data[recordNbr])[xx]  ] = null;  ;
+                                                                                }
+                                                                                */
 
                                         let tag = document.createElement("div");
                                         let element             = null  ;
@@ -241,7 +251,7 @@ function processItem(event) {
                                                         }
 
                                                         element                 = document.createElement('span')                        ;
-                                                        element.innerHTML       = record[columnName]                                    ;
+                                                        element.innerHTML       = columnData                                            ;
                                                         element.style.setProperty('background' , record['stimwordBackgroundColor'] )    ;
                                                         break;
 
@@ -249,7 +259,7 @@ function processItem(event) {
 
                                                         colStartValue           =       '3'                                                     ;
                                                         element                 =       document.createElement('span')                          ;
-                                                        element.innerHTML       =       record[columnName]                                      ;
+                                                        element.innerHTML       =       columnData                                              ;
                                                         element.style.setProperty('background' , record['stimwordBackgroundColor'] )            ;
                                                         break;
 
@@ -264,15 +274,6 @@ function processItem(event) {
                                                         lastDataItemAdded               = elementId                                             ;
                                                         if  ( Number(record['languageNormsErrorCOUNT']) == 0 ) {
 
-
-                                // 2022-06-14
-
-
-                        //      document.documentElement.style.setProperty('--smart-font-size', '30px' k);
-
-
-
-
                                                                                         /*      https://www.htmlelements.com/demos/input/textarea/ */
                                                                 element                         = document.createElement('smart-text-box')              ;
                                                         } else {
@@ -280,7 +281,7 @@ function processItem(event) {
                                                                 element.incrementalSearchMode   = 'equals'                                              ;
                                                         }
                                                         element.style.setProperty('background'  , record['stimwordBackgroundColor']     )       ;
-                                                        element.setAttribute('value'            , record[columnName]                    )       ;
+                                                        element.setAttribute('value'            , columnData                            )       ;
                                                         element.setAttribute('id'               , elementId                             )       ;
                                                         element.setAttribute('data-stimword-position-auto-incr', stimwordPositionAutoIncr)      ;
                                                         element.setAttribute('class'            , 'phoeticTranscriptionInputField'      )       ;
@@ -338,31 +339,31 @@ function processItem(event) {
 
                             case 'replicationValue'     :
 
-                                if  ( record[columnName] )      {               // make SURE this is not a blank
+                                if  ( columnData )      {               // make SURE this is not a blank
                                         let nbrOfComboBoxes     = document.getElementsByTagName('smart-combo-box').length               ;
                                         let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
-                                        tmpComboBox.insert(99, record[columnName])                              ;
-                                        let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1 ;
-                                        let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location] ;
-                                        tmpListItem.classList.add('dropDownOptions', 'replicationValue' )                       ;
+                                        tmpComboBox.insert(99, columnData)                                                              ;
+                                        let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1         ;
+                                        let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location]         ;
+                                        tmpListItem.classList.add('dropDownOptions', 'replicationValue' )                               ;
                                         tmpListItem.title       = 'Prior Error'
                                 }
                                 break;
 
                             case 'languageNormsError'           :
-                                if  ( record[columnName] )      {               // make SURE this is not a blank
+                                if  ( columnData )      {               // make SURE this is not a blank
                                         let nbrOfComboBoxes     = document.getElementsByTagName('smart-combo-box').length               ;
                                         let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
-                                        tmpComboBox.insert(99, record[columnName])                              ;
-                                        let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1 ;
-                                        let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location] ;
+                                        tmpComboBox.insert(99, columnData)                                                              ;
+                                        let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1         ;
+                                        let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location]         ;
                                         tmpListItem.classList.add('dropDownOptions', 'languageNormsError'       )                       ;
                                         tmpListItem.title       = 'Indian Pakistan'
                                 }
                                 break;
 
                         } // end switch statement
-                } // end for each column item
+                }) // end for each column item
                 if  ( incrRowFlag )     {
                         rowCount++      ;
                 }
