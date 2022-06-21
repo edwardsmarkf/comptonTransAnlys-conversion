@@ -4,7 +4,7 @@
 #   2021-06-02  - initial writing
 #   2021-10-12  - misc fixes
 #   2021-10-15  - added flag "PASS" to bypass the silly tested? question
-#
+#   2022-06-21  - automated fixStimwordPosition (but not yet tested)
 
 if  [[ "$1" != "PASS" ]]; then 
            # https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
@@ -151,6 +151,9 @@ bash -vx  55_count_by_keys.bsh                                    >          55_
 grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   55_count_by_keys.bsh.log                               ;
 grep  --line-number   '^COUNT(\|^[0-9]'                                      55_count_by_keys.bsh.log                               ;
 
+## 2022-06-21
+echo $(date) ' - fixStimwordPosition!'
+bash -vx  ./fixStimwordPosition/fixStimwordPosition.bsh           >          fixStimwordPosition.bsh.log                 2>&1       ;
 
 echo $(date)                                                                                                                        ;
 
