@@ -1,6 +1,0 @@
-
-
-
-
-required sql calls for new feathers version are in  sql-calls.sql
-
