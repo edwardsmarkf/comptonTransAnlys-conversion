@@ -9,7 +9,7 @@
          	(	'stimwordPageNbr'	,	`stimword`.`stimwordPageNbr`
                 ,       'stimwordLineNbr'	,	`stimword`.`stimwordLineNbr`
                 ,       'stimwordWord'		,	`stimword`.`stimwordWord`
-	  	)
+	  	) AS ''
                 FROM    `stimword`
 		            ,       `stimwordPosition`
                 WHERE   1
