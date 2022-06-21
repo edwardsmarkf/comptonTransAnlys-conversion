@@ -11,15 +11,6 @@ function soundScript() {
 	let controlBreak	= {}	;
 
 	soundScriptData.forEach( element => {
-											/*
-											if  ( !keyArray.length )	{
-												Object.keys(element).forEach( keyVal => {
-													keyArray.push(keyVal);
-												})
-											}
-											*/
-											//	let colLevel = 0;
-											//for ( const property in element )	
 		Object.entries(element).forEach(( keyValPair, index )	=>
 		{
 			const [ key, val ]  = keyValPair;
@@ -57,130 +48,8 @@ function soundScript() {
 					}
 
 				})(resultArray, 0 , index );
-										/* (resultArray, 0 , index /* keyArray.indexOf(property) */ );
 
-		/*
-		soundTitle		- 0  0
-		soundSubTitle		- 1  0, 1
-		soundsPhoneme	- 2  0, 1, 2
-		contextPosition - 3  0, 1, 2, 3
-       		*/
-
-
-		//
-		//				switch	( colLevel )	{
-		//					case	( 0 )	:
-		//							let levelZero_0 = resultArray;
-		//							levelZero_0.push({ 'label' : element[property], 'items' : [] });
-		//							break;
-		//
-		//													//resultArray.push({ 'label' : element[property], 'items' : [] });
-		//					case	( 1 )	:
-		//							let levelOne_0	= resultArray;
-		//							let levelOne_1	= levelOne_0
-		//										[levelOne_0.length - 1 ] 
-		//										['items']
-		//										;
-		//
-		//							levelOne_1.push({ 'label' : element[property], 'items' : [] });
-		//							break;
-		//
-		//												/*
-		//												resultArray
-		//													[resultArray.length - 1
-		//													]
-		//													['items']
-		//													.push({ 'label' : element[property], 'items' : [] });
-		//												*/
-		//					case	( 2 )	:
-		//							let levelTwo_0	= resultArray;
-		//							let levelTwo_1	= levelTwo_0
-		//										[levelTwo_0.length - 1	] 
-		//										['items']
-		//										;
-		//							let levelTwo_2	= levelTwo_1
-		//										[levelTwo_1.length - 1	] 
-		//										['items']
-		//										;
-		//							levelTwo_2.push({ 'label' : element[property], 'items' : [] });
-		//							break;
-		//
-		//												/*
-		//												resultArray
-		//													[resultArray.length - 1
-		//													]
-		//													['items']
-		//													[	resultArray
-		//															[resultArray.length - 1
-		//															]
-		//															['items']
-		//															.length - 1
-		//													]
-		//													['items']
-		//													.push({ 'label' : element[property], 'items' : [] });
-		//												*/
-		//					case	( 3 )	:
-		//							let levelThree_0	= resultArray;
-		//							let levelThree_1	= levelThree_0
-		//											[levelThree_0.length - 1	] 
-		//											['items']
-		//											;
-		//							let levelThree_2	= levelThree_1
-		//											[levelThree_1.length - 1	] 
-		//											['items']
-		//											;
-		//							let levelThree_3	= levelThree_2
-		//											[levelThree_2.length - 1	] 
-		//											['items']
-		//											;
-		//							levelThree_3.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
-		//							break;
-		//
-		//									/*
-		//									resultArray
-		//										[resultArray.length - 1					// first level
-		//										]
-		//										['items']
-		//										[	resultArray					// second level
-		//												[resultArray.length - 1				// first level
-		//												]
-		//												['items']
-		//												.length - 1
-		//										]
-		//										['items']
-		//										[	resultArray					// third level
-		//												[resultArray.length - 1
-		//												]
-		//												['items']
-		//												[	resultArray				// second level
-		//														[resultArray.length - 1			// first level
-		//														]
-		//														['items']
-		//														.length - 1
-		//												]
-		//												['items']
-		//												.length - 1
-		//										]
-		//										['items']
-		//
-		//										.push({ 'label' : element[property], 'value' : element['contextAutoIncr'] });
-		//									*/
-		//					default				:
-		//							break;
-		//				}
-
-				/*
-				Object.entries(controlBreak).forEach((keyVal, controlBreakIndex) =>	{
-					if ( controlBreakIndex > index )	{
-						controlBreak[keyVal[0]] = undefined;
-					}
-				})
-       				*/
-										//for ( let tmp = /* colLevel */ index + 1 ; tmp < element.length; tmp++ )	{
-											//controlBreak[keyArray[tmp]] = null;
-										//};
 			}
-			//colLevel++;
 		}) // end for loop
 	})
 
