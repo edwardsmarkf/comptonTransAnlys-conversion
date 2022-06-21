@@ -6,6 +6,10 @@
 
 
    ###   mariadb      --skip-column-names comptonTransAnlys   < x.sql | sed -e 's/},{/}\n,{/g'  ;  ########      | tr '|' '\n'   ;
+   
+        SET  @LAYOUT_NAME           = 'PESL' ;
+        SET  @TEACHER_NAME          = 'info@englishwithoutaccent.com'   ;
+        SET  @LANGUAGE_NORMS_NAME   = 'Indian-pakistan' ;
 
         SELECT  ##JSON_ARRAYAGG(
                 JSON_OBJECT
@@ -41,11 +45,11 @@
                 `context` LEFT OUTER JOIN `languageNorms` `languageNorms` ON
                 (               1
                 AND             `context`.`contextAutoIncr`             = `languageNorms`.`contextAutoIncr`
-                AND             `context`.`layoutName`          = `languageNorms`.`layoutName`
+                AND             `context`.`layoutName`                  = `languageNorms`.`layoutName`
                 AND             `context`.`soundPhoneme`                = `languageNorms`.`soundPhoneme`
                 AND             `context`.`contextPosition`             = `languageNorms`.`contextPosition`
-                AND             `languageNorms`.`layoutName`            = 'PESL'
-                AND             `languageNorms`.`languageNormsName`     = 'Indian-pakistan'
+                AND             `languageNorms`.`layoutName`            = @LAYOUT_NAME
+                AND             `languageNorms`.`languageNormsName`     = @LANGUAGE_NORMS_NAME
                 )
                 ,
                 `stimwordPosition` LEFT OUTER JOIN `clientStimword` `clientStimwordCURRENT` ON
@@ -61,10 +65,10 @@
                 AND     `stimwordPosition`.`stimwordPositionSetting`            =       `clientStimwordCURRENT`.`stimwordPositionSetting`
                 AND     `stimwordPosition`.`soundPhoneme`                       =       `clientStimwordCURRENT`.`soundPhoneme`
 
-                AND     `clientStimwordCURRENT`.`teacherEmail`                  =       'info@englishwithoutaccent.com'
+                AND     `clientStimwordCURRENT`.`teacherEmail`                  =       
                 AND     `clientStimwordCURRENT`.`clientMasterEmail`             =       'mark_f_edwards@yahoo.com' ## '12yukos@gmail.com'
                 AND     `clientStimwordCURRENT`.`sessionName`                   =       'Time2'
-                AND     `clientStimwordCURRENT`.`layoutName`                    =       'PESL'
+                AND     `clientStimwordCURRENT`.`layoutName`                    =       @LAYOUT_NAME
                 )
                 LEFT OUTER JOIN `clientStimword` `clientStimwordREPLICATE` ON
                 (       1
@@ -79,16 +83,16 @@
                 AND     `stimwordPosition`.`stimwordPositionSetting`            =       `clientStimwordREPLICATE`.`stimwordPositionSetting`
                 AND     `stimwordPosition`.`soundPhoneme`                       =       `clientStimwordREPLICATE`.`soundPhoneme`
 
-                AND     `clientStimwordREPLICATE`.`teacherEmail`                =       'info@englishwithoutaccent.com'
+                AND     `clientStimwordREPLICATE`.`teacherEmail`                =       @TEACHER_NAME
                 AND     `clientStimwordREPLICATE`.`clientMasterEmail`           =       'mark_f_edwards@yahoo.com'  ##'12yukos@gmail.com'
                 AND     `clientStimwordREPLICATE`.`sessionName`                                 =       'Time1'
-                AND     `clientStimwordREPLICATE`.`layoutName`                  =       'PESL'
+                AND     `clientStimwordREPLICATE`.`layoutName`                  =       @LAYOUT_NAME
                 )
 
                 WHERE   1                       /* dummy first one */
                 AND `stimword`.`stimwordAutoIncr`                               =       `stimwordPosition`.`stimwordAutoIncr`
                 AND `context`.`contextAutoIncr`                                 =       `stimwordPosition`.`contextAutoIncr`
-                AND `stimword`.`layoutName`                                     =       "PESL"
+                AND `stimword`.`layoutName`                                     =       @LAYOUT_NAME
                 AND `stimword`.`stimwordPageNbr`                                =       "1"  ## see below
                 AND `stimword`.`stimwordLineNbr`                                =       "1"    
 
