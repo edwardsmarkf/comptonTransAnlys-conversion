@@ -2,7 +2,7 @@
 
 ####   M A I N    S C R E E N    G R I D    C R E A T O R   ! ! !
  
-        @LAYOUT_NAME    =  'PESL'   ;
+        SET @LAYOUT_NAME    =  'PESL'   ;
 
 
          SELECT  DISTINCT ''
