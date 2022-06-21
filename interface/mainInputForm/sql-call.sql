@@ -17,17 +17,16 @@
         SET  @STIMWORD_PAGE_NBR     =  "1"                              ;
         SET  @STIMWORD_LINE_NBR     =  "1"                              ;
         
-        /* horse         --  1/1 
-    snake         --  1/2
-    clown         --  1/3  
-    dog           --  1/4 
-    protected     --  21/5
-    thread        --  2/19
-    sixty-seven   --  25/9
-    Rockefeller   --  9/3, 16/3
-    threatening   --  20/7
-    Eventually    --  13/1
-  */
+##  horse         --  1/1 
+##  snake         --  1/2
+##  clown         --  1/3  
+##  dog           --  1/4 
+##  protected     --  21/5
+##  thread        --  2/19
+##  sixty-seven   --  25/9
+##  Rockefeller   --  9/3, 16/3
+##  threatening   --  20/7
+##  Eventually    --  13/1
 
 
         SELECT  ##JSON_ARRAYAGG(
