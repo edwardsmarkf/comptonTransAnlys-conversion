@@ -3,6 +3,7 @@
 ###	2022-05-10 - added 'COUNT' and 'GROUP BY'
 ###	2022-05-11 - removed "GROUP BY" and added subquery instead
 ###	2022-05-13 - added "stimwordPositionAutoIncr" and removed "stimwordWord"
+###   2022-06-20 - added variables
 
 
    ###   mariadb      --skip-column-names comptonTransAnlys   < x.sql | sed -e 's/},{/}\n,{/g'  ;  ########      | tr '|' '\n'   ;
