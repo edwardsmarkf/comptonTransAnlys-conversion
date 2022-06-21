@@ -8,9 +8,27 @@
 
    ###   mariadb      --skip-column-names comptonTransAnlys   < x.sql | sed -e 's/},{/}\n,{/g'  ;  ########      | tr '|' '\n'   ;
    
-        SET  @LAYOUT_NAME           = 'PESL' ;
-        SET  @TEACHER_NAME          = 'info@englishwithoutaccent.com'   ;
-        SET  @LANGUAGE_NORMS_NAME   = 'Indian-pakistan' ;
+        SET  @LAYOUT_NAME           = 'PESL'                            ;
+        SET  @REPLICATION_NAME      = 'Time1'                           ;
+        SET  @SESSION_NAME          = 'Time2'                           ;
+        SET  @TEACHER_EMAIL         = 'info@englishwithoutaccent.com'   ;
+        SET  @CLIENT_EMAIL          = 'mark_f_edwards@yahoo.com'        ;   ## '12yukos@gmail.com'
+        SET  @LANGUAGE_NORMS_NAME   = 'Indian-pakistan'                 ;
+        SET  @STIMWORD_PAGE_NBR     =  "1"                              ;
+        SET  @STIMWORD_LINE_NBR     =  "1"                              ;
+        
+        /* horse         --  1/1 
+    snake         --  1/2
+    clown         --  1/3  
+    dog           --  1/4 
+    protected     --  21/5
+    thread        --  2/19
+    sixty-seven   --  25/9
+    Rockefeller   --  9/3, 16/3
+    threatening   --  20/7
+    Eventually    --  13/1
+  */
+
 
         SELECT  ##JSON_ARRAYAGG(
                 JSON_OBJECT
@@ -66,9 +84,9 @@
                 AND     `stimwordPosition`.`stimwordPositionSetting`            =       `clientStimwordCURRENT`.`stimwordPositionSetting`
                 AND     `stimwordPosition`.`soundPhoneme`                       =       `clientStimwordCURRENT`.`soundPhoneme`
 
-                AND     `clientStimwordCURRENT`.`teacherEmail`                  =       
-                AND     `clientStimwordCURRENT`.`clientMasterEmail`             =       'mark_f_edwards@yahoo.com' ## '12yukos@gmail.com'
-                AND     `clientStimwordCURRENT`.`sessionName`                   =       'Time2'
+                AND     `clientStimwordCURRENT`.`teacherEmail`                  =       @TEACHER_EMAIL 
+                AND     `clientStimwordCURRENT`.`clientMasterEmail`             =       @CLIENT_EMAIL 
+                AND     `clientStimwordCURRENT`.`sessionName`                   =       @REPLICATION_NAME
                 AND     `clientStimwordCURRENT`.`layoutName`                    =       @LAYOUT_NAME
                 )
                 LEFT OUTER JOIN `clientStimword` `clientStimwordREPLICATE` ON
@@ -84,9 +102,9 @@
                 AND     `stimwordPosition`.`stimwordPositionSetting`            =       `clientStimwordREPLICATE`.`stimwordPositionSetting`
                 AND     `stimwordPosition`.`soundPhoneme`                       =       `clientStimwordREPLICATE`.`soundPhoneme`
 
-                AND     `clientStimwordREPLICATE`.`teacherEmail`                =       @TEACHER_NAME
-                AND     `clientStimwordREPLICATE`.`clientMasterEmail`           =       'mark_f_edwards@yahoo.com'  ##'12yukos@gmail.com'
-                AND     `clientStimwordREPLICATE`.`sessionName`                                 =       'Time1'
+                AND     `clientStimwordREPLICATE`.`teacherEmail`                =       @TEACHER_EMAIL
+                AND     `clientStimwordREPLICATE`.`clientMasterEmail`           =       @CLIENT_EMAIL
+                AND     `clientStimwordREPLICATE`.`sessionName`                 =       @REPLICATION_NAME
                 AND     `clientStimwordREPLICATE`.`layoutName`                  =       @LAYOUT_NAME
                 )
 
@@ -94,25 +112,14 @@
                 AND `stimword`.`stimwordAutoIncr`                               =       `stimwordPosition`.`stimwordAutoIncr`
                 AND `context`.`contextAutoIncr`                                 =       `stimwordPosition`.`contextAutoIncr`
                 AND `stimword`.`layoutName`                                     =       @LAYOUT_NAME
-                AND `stimword`.`stimwordPageNbr`                                =       "1"  ## see below
-                AND `stimword`.`stimwordLineNbr`                                =       "1"    
+                AND `stimword`.`stimwordPageNbr`                                =       @STIMWORD_PAGE_NBR
+                AND `stimword`.`stimwordLineNbr`                                =       @STIMWORD_LINE_NBR
 
                 ORDER BY        `stimwordPosition`.`stimwordPageNbr`
                 ,               `stimwordPosition`.`stimwordLineNbr`
                 ,               `stimwordPosition`.`soundPhonemeOrderNbr`
                 ;
- /* horse         --  1/1 
-    snake         --  1/2
-    clown         --  1/3  
-    dog           --  1/4 
-    protected     --  21/5
-    thread        --  2/19
-    sixty-seven   --  25/9
-    Rockefeller   --  9/3, 16/3
-    threatening   --  20/7
-    Eventually    --  13/1
-  */
-
+ 
 
 
 
