@@ -1,0 +1,50 @@
+**** clientContext/clientStimword addition  (clientStimword only) ****
+
+
+
+
+child (clientStimword) was ADDED/CHANGED:
+count PARENT (clientContext) & count CHILD (clientStimword)  (both using shortened keys)
+if zero for both:     insert PARENT (clientContext), insert CHILD (clientStimword)
+if one for both:    update PARENT (clientContext) only, child (clientStimword) will CASCADE (!!?? test this)
+if more children: (clientStimword)
+1) delete CHILD (clientStimword) using using only WORD, phoneme & phoneme position [shortened key]
+2)   count PARENT (clientContext) using only phoneme & phoneme position, NOT error sounds [shortened key]   (probably only one)
+    2.1)  if PARENT (clientContext) has more than one CHILD (clientStimword):
+        
+
+3) insert CHILD
+
+
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+child (clientStimword) was ADDED:
+count PARENT (clientContext):
+if zero:insert PARENT (clientContext), insert CHILD (clientStimword)
+if one: insert CHILD (clientStimword) only
+
+
+child (clientStimword) was CHANGED:
+count CHILD (clientStimword):
+if zero: insert PARENT (clientContext), insert CHILD (clientStimword)
+if one:update PARENT (clientContext) only, child  (clientStimword) will CASCADE
+if more:delete CHILD (clientStimword) update PARENT (clientContext) insert CHILD (clientStimword)
+
+
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
