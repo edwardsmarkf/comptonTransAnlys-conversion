@@ -1,7 +1,0 @@
-#! /bin/bash  -w
-
-
-
-mariadb --verbose  --execute="ALTER TABLE comptonTransAnlys.stimwordPosition ADD COLUMN IF NOT EXISTS soundPhonemeOrderNbr int(3) NOT NULL AFTER soundPhoneme ;"   ;
-
-exit 1;
