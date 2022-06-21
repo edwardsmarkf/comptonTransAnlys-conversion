@@ -3,8 +3,6 @@ Compton Phonetic transcription conversion
 
 copied from the drive.google.com
 
-2022-04-09 - new node program to add line number column to phonetic transcription:  
-        https://github.com/edwardsmarkf/comptonTransAnlys-conversion/tree/main/fix-stimwordPosition
 
 2021-04-26- since we are using unicodes, this conversion should be done on a linux workstation, or at least a command-line-interpretor that can handle unicodes.  using an ordinary minimial centos-8 could not handle unicodes.  probably an easy fix....  but i found it easier to use a linux workstation instead.
 
