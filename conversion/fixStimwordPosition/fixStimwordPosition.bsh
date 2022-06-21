@@ -1,0 +1,13 @@
+#!  /bin/bash -w
+
+mariadb --verbose <    ./fixStimwordPosition/fixStimwordPosition.sql ;
+
+npm install knex ; npm install mysql;
+
+node ./fixStimwordPosition/fixStimwordPosition.js > ./fixStimwordPosition/temp.sql ;
+
+mariadb --verbose comptonTransAnlys < ./fixStimwordPosition/temp.sql ;
+
+rm -verbose ./fixStimwordPosition/temp.sql ;
+
+#
