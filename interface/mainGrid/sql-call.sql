@@ -4,11 +4,12 @@
  
         SET @LAYOUT_NAME    =  'PESL'   ;
 
-
-         SELECT  DISTINCT ''
-                ,       `stimword`.`stimwordPageNbr`
-                ,       `stimword`.`stimwordLineNbr`
-                ,       `stimword`.`stimwordWord`
+  SELECT DISTINCT ##JSON_ARRAYAGG(
+                JSON_OBJECT
+         	(	'stimwordPageNbr'	,	`stimword`.`stimwordPageNbr`
+                ,       'stimwordLineNbr'	,	`stimword`.`stimwordLineNbr`
+                ,       'stimwordWord'		,	`stimword`.`stimwordWord`
+	  	)
                 FROM    `stimword`
 		            ,       `stimwordPosition`
                 WHERE   1
