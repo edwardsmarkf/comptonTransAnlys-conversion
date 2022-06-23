@@ -12,8 +12,8 @@ SELECT JSON_ARRAYAGG(JSON_OBJECT
 FROM comptonTransAnlys.sound
 , comptonTransAnlys.context
 WHERE 1
+AND sound.soundAutoIncr = context.soundAutoIncr
 AND sound.layoutName = @LAYOUT_NAME
-AND sound.soundAutoIncr = sound.contextAutoIncr
 ORDER BY sound.soundOrder
 , context.contextLabelOrder
 ;
