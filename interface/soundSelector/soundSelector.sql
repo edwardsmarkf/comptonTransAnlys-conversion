@@ -13,6 +13,6 @@ FROM comptonTransAnlys.sound
 , comptonTransAnlys.context
 WHERE 1
 AND sound.layoutName = @LAYOUT_NAME
-AND sound.soundAutoIncr = context.contextAutoIncr
+AND sound.soundAutoIncr = sound.contextAutoIncr
 ORDER BY sound.soundOrder
 , context.contextLabelOrder
