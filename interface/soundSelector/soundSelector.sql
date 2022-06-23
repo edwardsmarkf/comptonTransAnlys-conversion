@@ -1,6 +1,6 @@
 ###    S O U N D     S E L E C T O R
 
-SET @LAYOUT_NAME = 'PESL'
+SET @LAYOUT_NAME = 'PESL'  ;
 
 SELECT JSON_ARRAYAGG(JSON_OBJECT
 ( 'soundTitle'		,	sound.soundTitle
