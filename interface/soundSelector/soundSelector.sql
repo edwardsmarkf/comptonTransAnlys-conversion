@@ -5,6 +5,8 @@ SET @LAYOUT_NAME = 'PESL'  ;
 SELECT JSON_ARRAYAGG(JSON_OBJECT
 ( 'soundTitle'			,	`sound_a`.`soundTitle`
 , 'soundSubtitle'		,	`sound_a`.`soundSubTitle`
+, 'soundPhoneme'	,	`sound_a`.`soundPhoneme`
+, 'contextPosition'	,	`context_a`.`contextPosition`
 , 'soundSubTitleCOUNT'	,
 					(	SELECT  COUNT(`sound_b`.`soundSubTitle`)
 						FROM	`comptonTransAnlys`.`sound` `sound_b` 
@@ -15,8 +17,6 @@ SELECT JSON_ARRAYAGG(JSON_OBJECT
 						GROUP BY	`sound_b`.`soundTitle`
                         ,			`sound_b`.`soundSubTitle`
 					)
-, 'soundPhoneme'	,	`sound_a`.`soundPhoneme`
-, 'contextPosition'	,	`context_a`.`contextPosition`
 , 'contextPositionCOUNT', 
 							(	SELECT  COUNT(`context_b`.`contextPosition`)
 								FROM	`comptonTransAnlys`.`sound`		`sound_b`
