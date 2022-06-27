@@ -5,7 +5,7 @@ SET @LAYOUT_NAME = 'PESL'  ;
 SELECT JSON_ARRAYAGG(JSON_OBJECT
 ( 'soundTitle'			,	`sound_a`.`soundTitle`
 , 'soundSubtitle'		,	`sound_a`.`soundSubTitle`
-, 'soundSubTitleCount'	,
+, 'soundSubTitleCOUNT'	,
 					(	SELECT  COUNT(`sound_b`.`soundSubTitle`)
 						FROM	`comptonTransAnlys`.`sound` `sound_b` 
 						WHERE	1
