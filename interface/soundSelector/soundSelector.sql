@@ -4,7 +4,7 @@ SET @LAYOUT_NAME = 'PESL'  ;
 
 SELECT JSON_ARRAYAGG(JSON_OBJECT
 ( 'soundTitle'		,	`sound_a`.`soundTitle`
-, 'soundSubtitle'	,	`sound_a`.`soundSubTitle`
+, 'soundSubTitle'	,	`sound_a`.`soundSubTitle`
 , 'soundPhoneme'	,	`sound_a`.`soundPhoneme`
 , 'contextPosition'	,	`context_a`.`contextPosition`
 , 'contextAutoIncr'	,	`context_a`.`contextAutoIncr`
