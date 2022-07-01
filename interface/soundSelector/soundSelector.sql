@@ -15,7 +15,7 @@ SELECT JSON_ARRAYAGG(JSON_OBJECT
 						AND		`sound_a`.`soundTitle`		= `sound_b`.`soundTitle`
 						GROUP BY `sound_b`.`soundTitle`
 					)
-, 'soundSubtitleCOUNT'	,
+, 'soundSubTitleCOUNT'	,
 					(	SELECT  COUNT(`sound_b`.`soundSubTitle`)
 						FROM	`comptonTransAnlys`.`sound` `sound_b` 
 						WHERE	1
