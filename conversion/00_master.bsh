@@ -155,6 +155,11 @@ grep  --line-number   '^COUNT(\|^[0-9]'                                      55_
 echo $(date) ' - fixStimwordPosition!'
 bash -vx  ./fixStimwordPosition/fixStimwordPosition.bsh           >          fixStimwordPosition.bsh.log                 2>&1       ;
 
+## 2022-8-01
+echo $(date) ' - errorSoundsTooltip!'
+bash -vx  ./errorSoundsTooptip/errorSoundsTooltip.bsh             >          errorSoundsTooltip.bsh.log                 2>&1        ;
+
+
 echo $(date)                                                                                                                        ;
 
 grep ERROR   *.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR'  | grep -v  grep                        ;
