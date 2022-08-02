@@ -12,7 +12,7 @@ SELECT  ##JSON_ARRAYAGG(
 , 'frequency'                 ,    `clientContext`.`frequency`
 , 'clientContextErrorNotes'   ,    `clientContext`.`clientContextErrorNotes`
 , 'contextAutoIncr'           ,    `clientContext`.`contextAutoIncr`
-)
+) ''  ## blank out the header
 FROM `comptonTransAnlys`.`clientContext`
 WHERE 1
 AND `layoutName`         = @LAYOUT_NAME
