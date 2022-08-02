@@ -3,10 +3,7 @@
         SET  @LAYOUT_NAME           = 'PESL'                            ;
         SET  @SESSION_NAME          = 'Time1'                           ;
         SET  @TEACHER_EMAIL         = 'info@englishwithoutaccent.com'   ;
-        SET  @CLIENT_EMAIL          = '12yukos@gmail.com'        		;   ## 'mark_f_edwards@yahoo.com'
-        SET  @LANGUAGE_NORMS_NAME   = 'Indian-pakistan'                 ;
-        SET  @STIMWORD_PAGE_NBR     =  "1"                              ;
-        SET  @STIMWORD_LINE_NBR     =  "1"                              ;
+        SET  @CLIENT_EMAIL          =  'edwards.mark@yahoo.com'   ;   ##   '12yukos@gmail.com' ;   ## 'mark_f_edwards@yahoo.com
         
 SELECT  ##JSON_ARRAYAGG(
                 JSON_OBJECT
