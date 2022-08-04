@@ -8,7 +8,7 @@ SET  @CLIENT_EMAIL          = '12yukos@gmail.com'  ;  #'12yukos@gmail.com'      
 SELECT   ##JSON_ARRAYAGG(
                 JSON_OBJECT
 ( 'soundPhoneme'                    ,    `clientContext`.`soundPhoneme`
-, 'Occurences'                      ,    COUNT(`stimwordPosition`.`contextAutoIncr`)
+, 'Occurences'                      ,    `context`.`contextCount`
 , 'clientContextError'              ,    `clientContext`.`clientContextError`
 , 'clientContextSpeakingsError'     ,    `clientContext`.`clientContextSpeakingErrors`
 , 'frequency'                       ,    `clientContext`.`frequency`
@@ -20,24 +20,12 @@ SELECT   ##JSON_ARRAYAGG(
 ) ''
 FROM `comptonTransAnlys`.`clientContext`
 ,    `comptonTransAnlys`.`context`
-,    `comptonTransAnlys`.`stimwordPosition`
 WHERE 1
 AND `context`.`layoutName`                     = @LAYOUT_NAME
 AND `clientContext`.`layoutName`               = @LAYOUT_NAME
 AND `clientContext`.`teacherEmail`             = @TEACHER_EMAIL
 AND `clientContext`.`clientMasterEmail`        = @CLIENT_EMAIL
 AND `clientContext`.`sessionName`              = @SESSION_NAME
-AND `context`.`contextAutoIncr`                = `stimwordPosition`.`contextAutoIncr`
 AND `context`.`contextAutoIncr`                = `clientContext`.`contextAutoIncr`
-GROUP BY ( `stimwordPosition`.`contextAutoIncr` )
 ORDER BY `clientContext`.`contextAutoIncr`
 ;
-/*
-SELECT COUNT(*)
-FROM `comptonTransAnlys`.`context`
-,    `comptonTransAnlys`.`stimwordPosition`
-where `context`.`soundPhoneme` = 'b'
-and `context`.`contextPosition` = 'final'
-AND `context`.`layoutName` = 'PESL'
-AND `context`.`contextAutoIncr` = stimwordPosition.contextAutoIncr
-;*/
