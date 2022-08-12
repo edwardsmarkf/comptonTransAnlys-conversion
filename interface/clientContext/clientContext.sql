@@ -8,7 +8,7 @@ SET  @CLIENT_EMAIL          = '12yukos@gmail.com'  ;  #'12yukos@gmail.com'      
 SELECT   ##JSON_ARRAYAGG(
                 JSON_OBJECT
 ( 'soundPhoneme'                    ,    `clientContext`.`soundPhoneme`
-, 'Occurences'                      ,    `context`.`contextCount`
+############, 'Occurences'                      ,    `context`.`contextCount`
 , 'clientContextError'              ,    `clientContext`.`clientContextError`
 ############, 'frequency'                       ,    `clientContext`.`frequency`
 , 'clientContextSpeakingsError'     ,    `clientContext`.`clientContextSpeakingErrors`
