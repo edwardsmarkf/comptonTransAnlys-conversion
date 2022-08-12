@@ -1,7 +1,5 @@
 /*   clientContext.sql
 */
-
-
 SET  @LAYOUT_NAME           = 'PESL'                            ;
 SET  @SESSION_NAME          = 'Time1'                           ;
 SET  @TEACHER_EMAIL         = 'info@englishwithoutaccent.com'   ;
@@ -9,28 +7,44 @@ SET  @CLIENT_EMAIL          = '12yukos@gmail.com'  ;  #'12yukos@gmail.com'      
 
 SELECT   ##JSON_ARRAYAGG(
                 JSON_OBJECT
-(   'contextAutoIncr'              ,    `clientContext`.`contextAutoIncr`
-,	  'clientContextError'           ,   `clientContext`.`clientContextError`
-,   'clientContextSpeakingErrors'  ,   `clientContext`.`clientContextSpeakingErrors`
-,   'clientContextErrorNotes'      ,   `clientContext`.`clientContextErrorNotes`
+( 'soundPhoneme'                    ,    `clientContext`.`soundPhoneme`
+, 'Occurences'                      ,    `context`.`contextCount`
+, 'clientContextError'              ,    `clientContext`.`clientContextError`
+############, 'frequency'                       ,    `clientContext`.`frequency`
+, 'clientContextSpeakingsError'     ,    `clientContext`.`clientContextSpeakingErrors`
+, 'clientContextErrorNotes'         ,    `clientContext`.`clientContextErrorNotes`
+, 'contextAutoIncr'                 ,    `clientContext`.`contextAutoIncr`
+, 'clientContextAutoIncr'           ,    `clientContext`.`clientContextAutoIncr`
 #)
 ) ''
 FROM `comptonTransAnlys`.`context`
+,    `comptonTransAnlys`.`layout`
+,    `comptonTransAnlys`.`teacher`
+,    `comptonTransAnlys`.`clientMaster`
+,    `comptonTransAnlys`.`clientSession`
 ,    `comptonTransAnlys`.`clientContext`
-,   `comptonTransAnlys`.`clientSession`
-,   `comptonTransAnlys`.`clientMaster`
 WHERE 1
-AND   `context`.`contextAutoIncr`               = `clientContext`.`contextAutoIncr`
-AND   `clientContext`.`clientSessionAutoIncr`   =  `clientSession`.`clientSessionAutoIncr`
-AND   `clientContext`.`clientMasterEmail`       = `clientSession`.`clientMasterEmail`
-
-AND   `clientSession`.`clientMasterAutoIncr`    = `clientMaster`.`clientMasterAutoIncr`
-AND   `clientSession`.`clientMasterEmail`       = `clientMaster`.`clientMasterEmail`
-
-AND `clientContext`.`layoutName`               = @LAYOUT_NAME
-AND `clientContext`.`teacherEmail`             = @TEACHER_EMAIL
+AND `context`.`layoutName`                     = @LAYOUT_NAME
+AND `layout`.`layoutName`                      = @LAYOUT_NAME
+AND `teacher`.`teacherEmail`                   = @TEACHER_EMAIL
 AND `clientMaster`.`clientMasterEmail`         = @CLIENT_EMAIL
-AND `clientContext`.`sessionName`              = @SESSION_NAME
+AND `clientSession`.`sessionName`              = @SESSION_NAME
 
+AND  `layout`.`layoutName`                     = `teacher`.`layoutName`
+#####  ????  ######  AND  `layout`.`layoutAutoIncr`                 = `teacher`.`layoutAutoIncr`
 
+AND `teacher`.`teacherEmail`                   = `clientMaster`.`teacherEmail`
+AND `teacher`.`teacherAutoIncr`                = `clientMaster`.`teacherAutoIncr`
+
+AND `clientMaster`.`teacherEmail`              = `clientSession`.`teacherEmail`
+AND `clientMaster`.`ClientMasterEmail`         = `clientSession`.`clientMasterEmail`
+AND `clientMaster`.`clientMasterAutoIncr`      = `clientSession`.`clientMasterAutoIncr`
+
+AND `clientSession`.`teacherEmail`            = `clientContext`.`teacherEmail`
+AND `clientSession`.`clientMasterEmail`       = `clientContext`.`clientMasterEmail`
+AND `clientSession`.`sessionName`             = `clientContext`.`sessionName`
+AND `clientSession`.`clientSessionAutoIncr`   = `clientContext`.`clientSessionAutoIncr`
+
+AND `context`.`contextAutoIncr`                = `clientContext`.`contextAutoIncr`
+ORDER BY `clientContext`.`contextAutoIncr`
 ;
