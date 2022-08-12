@@ -11,7 +11,7 @@ SELECT   ##JSON_ARRAYAGG(
 ############, 'Occurences'                      ,    `context`.`contextCount`
 , 'clientContextError'              ,    `clientContext`.`clientContextError`
 ############, 'frequency'                       ,    `clientContext`.`frequency`
-, 'clientContextSpeakingsError'     ,    `clientContext`.`clientContextSpeakingErrors`
+, 'clientContextSpeakingErrors'     ,    `clientContext`.`clientContextSpeakingErrors`
 , 'clientContextErrorNotes'         ,    `clientContext`.`clientContextErrorNotes`
 , 'contextAutoIncr'                 ,    `clientContext`.`contextAutoIncr`
 , 'clientContextAutoIncr'           ,    `clientContext`.`clientContextAutoIncr`
