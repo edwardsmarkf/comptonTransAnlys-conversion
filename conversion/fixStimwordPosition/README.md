@@ -1,4 +1,8 @@
 
+now call ./fixStimwordPosition/fixStimwordPosition.bsh through the 00_master.bsh
+
+
+
 mariadb --verbose < ./fixStimwordPosition.sql ;
 
 npm install knex ; npm install mysql;
