@@ -103,63 +103,63 @@ bash -vx  ./conversion/10a_combine_stimword_phoneme.bsh                  >      
 grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/10a_combine_stimword_phoneme.bsh.log                 ;
 
 echo $(date) ' - 10b_combine_stimword_phoneme_test.bsh'                                                                                                    ;
-bash -vx  ./conversion/10b_combine_stimword_phoneme_test.bsh             >          ./conversion/logs/10b_combine_stimword_phoneme_test.bsh.log     2>&1   ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/10b_combine_stimword_phoneme_test.bsh.log              ;
-grep  --line-number   '^COUNT(\|^0'                                          ./conversion/10b_combine_stimword_phoneme_test.bsh.log              ;
+bash -vx  ./conversion/10b_combine_stimword_phoneme_test.bsh             >          ./conversion/logs/10b_combine_stimword_phoneme_test.bsh.log      2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/10b_combine_stimword_phoneme_test.bsh.log            ;
+grep  --line-number   '^COUNT(\|^0'                                                 ./conversion/logs/10b_combine_stimword_phoneme_test.bsh.log            ;
 
-echo $(date) ' - 11_alter_column_positions.bsh'                                                                                     ;
-bash -vx  ./conversion/11_alter_column_positions.bsh                           >          ./conversion/11_alter_column_positions.bsh.log           2>&1       ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/11_alter_column_positions.bsh.log                      ;
+echo $(date) ' - 11_alter_column_positions.bsh'                                                                                                            ;
+bash -vx  ./conversion/11_alter_column_positions.bsh                     >          ./conversion/logs/11_alter_column_positions.bsh.log              2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/11_alter_column_positions.bsh.log                    ;
 
-echo $(date) ' - 12_another_rename_column.bsh'                                                                                      ;
-bash -vx  ./conversion/12_another_rename_column.bsh                            >          ./conversion/12_another_rename_column.bsh.log            2>&1       ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/12_another_rename_column.bsh.log                       ;
+echo $(date) ' - 12_another_rename_column.bsh'                                                                                                             ;
+bash -vx  ./conversion/12_another_rename_column.bsh                      >          ./conversion/logs/12_another_rename_column.bsh.log                2>&1 ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/12_another_rename_column.bsh.log                     ;
 
-echo $(date) ' - 15_add_layout_table_and_keys.bsh'                                                                                  ;
-bash -vx  ./conversion/15_add_layout_table_and_keys.bsh                        >          ./conversion/15_add_layout_table_and_keys.bsh.log        2>&1       ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/15_add_layout_table_and_keys.bsh.log                   ;
+echo $(date) ' - 15_add_layout_table_and_keys.bsh'                                                                                                         ;
+bash -vx  ./conversion/15_add_layout_table_and_keys.bsh                  >          ./conversion/logs/15_add_layout_table_and_keys.bsh.log            2>&1 ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/15_add_layout_table_and_keys.bsh.log                 ;
 
-echo $(date) ' - 20_normalize_clientMaster.bsh'                                                                                     ;
-bash -vx  ./conversion/20_normalize_clientMaster.bsh                           >          ./conversion/20_normalize_clientMaster.bsh.log           2>&1       ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/20_normalize_clientMaster.bsh.log                      ;
+echo $(date) ' - 20_normalize_clientMaster.bsh'                                                                                                            ;
+bash -vx  ./conversion/20_normalize_clientMaster.bsh                     >          ./conversion/logs/20_normalize_clientMaster.bsh.log               2>&1 ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/20_normalize_clientMaster.bsh.log                    ;
 
-echo $(date) ' - 21_rearrange_keys.bsh'                                                                                             ;
-bash -vx   ./conversion/21_rearrange_keys.bsh                                  >          ./conversion/21_rearrange_keys.bsh.log                   2>&1       ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/21_rearrange_keys.bsh.log                              ;
+echo $(date) ' - 21_rearrange_keys.bsh'                                                                                                                    ;
+bash -vx   ./conversion/21_rearrange_keys.bsh                            >          ./conversion/logs/21_rearrange_keys.bsh.log                       2>&1 ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/21_rearrange_keys.bsh.log                            ;
 
-echo $(date) ' - 22a_remove_constraint_keys.bsh'                                                                                    ;
-bash -vx   ./conversion/22a_remove_constraint_keys.bsh                          >         ./conversion/22a_remove_constraint_keys.bsh.log          2>&1       ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/22a_remove_constraint_keys.bsh.log                     ;
+echo $(date) ' - 22a_remove_constraint_keys.bsh'                                                                                                           ;
+bash -vx   ./conversion/22a_remove_constraint_keys.bsh                    >         ./conversion/logs/22a_remove_constraint_keys.bsh.log              2>&1 ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/22a_remove_constraint_keys.bsh.log                   ;
 
-echo $(date) ' - 22b_remove_constraint_keys.bsh'                                                                                    ;
-bash -vx   ./conversion/22b_remove_constraint_keys.bsh                          >         ./conversion/22b_remove_constraint_keys.bsh.log          2>&1       ;
-grep ERROR   ./conversion/22b_remove_constraint_keys.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep  ;
+echo $(date) ' - 22b_remove_constraint_keys.bsh'                                                                                                           ;
+bash -vx   ./conversion/22b_remove_constraint_keys.bsh                    >         ./conversion/logs/22b_remove_constraint_keys.bsh.log              2>&1 ;
+grep ERROR   ./conversion/logs/22b_remove_constraint_keys.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep  ;
 
-echo $(date) ' - 22c_remove_constraint_keys.bsh'                                                                                    ;
-bash -vx   ./conversion/22c_remove_constraint_keys.bsh                          >         ./conversion/22c_remove_constraint_keys.bsh.log          2>&1       ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/22c_remove_constraint_keys.bsh.log                     ;
+echo $(date) ' - 22c_remove_constraint_keys.bsh'                                                                                                            ;
+bash -vx   ./conversion/22c_remove_constraint_keys.bsh                    >         ./conversion/logs/22c_remove_constraint_keys.bsh.log               2>&1 ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/22c_remove_constraint_keys.bsh.log                    ;
 
-echo $(date) ' - 22d_remove_constraint_keys.bsh'                                                                                    ;
-bash -vx   ./conversion/22d_remove_constraint_keys.bsh                          >         ./conversion/22d_remove_constraint_keys.bsh.log          2>&1       ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/22d_remove_constraint_keys.bsh.log                     ;
+echo $(date) ' - 22d_remove_constraint_keys.bsh'                                                                                                             ;
+bash -vx   ./conversion/22d_remove_constraint_keys.bsh                    >         ./conversion/logs/22d_remove_constraint_keys.bsh.log               2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/22d_remove_constraint_keys.bsh.log                     ;
 
-echo $(date) ' - 50_display_table_counts.bsh'                                                                                       ;
-bash -vx  ./conversion/50_display_table_counts.bsh                             >          ./conversion/50_display_table_counts.bsh.log             2>&1       ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/50_display_table_counts.bsh.log                        ;
-grep  --line-number   '^COUNT(\|^[0-9]'                                      ./conversion/50_display_table_counts.bsh.log                        ;
+echo $(date) ' - 50_display_table_counts.bsh'                                                                                                                ;
+bash -vx  ./conversion/50_display_table_counts.bsh                       >          ./conversion/logs/50_display_table_counts.bsh.log                   2>&1 ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/50_display_table_counts.bsh.log                        ;
+grep  --line-number   '^COUNT(\|^[0-9]'                                             ./conversion/logs/50_display_table_counts.bsh.log                        ;
 
-echo $(date) ' - 55_count_by_keys.bsh'                                                                                              ;
-bash -vx  ./conversion/55_count_by_keys.bsh                                    >          ./conversion/55_count_by_keys.bsh.log                    2>&1       ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                   ./conversion/55_count_by_keys.bsh.log                               ;
-grep  --line-number   '^COUNT(\|^[0-9]'                                      ./conversion/55_count_by_keys.bsh.log                               ;
+echo $(date) ' - 55_count_by_keys.bsh'                                                                                                                       ;
+bash -vx  ./conversion/55_count_by_keys.bsh                              >          ./conversion/logs/55_count_by_keys.bsh.log                         2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ./conversion/logs/55_count_by_keys.bsh.log                               ;
+grep  --line-number   '^COUNT(\|^[0-9]'                                             ./conversion/logs/55_count_by_keys.bsh.log                               ;
 
 ## 2022-11-03
-echo $(date) ' - fixStimwordPosition!'
-bash -vx  ./fixStimwordPosition/fixStimwordPosition.bsh           >          ./fixStimwordPosition/fixStimwordPosition.bsh.log                 2>&1       ;
+echo $(date) ' - fixStimwordPosition!'                                                                                                                       ;
+bash -vx  ./fixStimwordPosition/fixStimwordPosition.bsh                  >          ./conversion/logs/fixStimwordPosition.bsh.log                       2>&1 ;
 
 ## 2022-8-01
-echo $(date) ' - errorSoundsTooltip!'
-bash -vx  ./errorSoundsTooptip/errorSoundsTooltip.bsh             >          ./errorSoundsTooptip/errorSoundsTooltip.bsh.log                 2>&1        ;
+echo $(date) ' - errorSoundsTooltip!'                                                                                                                        ;
+bash -vx  ./errorSoundsTooptip/errorSoundsTooltip.bsh                    >          ./conversion/logs/errorSoundsTooltip.bsh.log                        2>&1 ;
 
 
 echo $(date)                                                                                                                        ;
