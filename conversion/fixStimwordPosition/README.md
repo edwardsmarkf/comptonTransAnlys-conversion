@@ -9,4 +9,4 @@ mariadb --verbose comptonTransAnlys < ./temp.sql ;
 
 rm -verbose ./temp.sql ;
 
-NOW OBSOLETE -- fixStimwordPosition.bsh
+################################################NOW OBSOLETE -- fixStimwordPosition.bsh
