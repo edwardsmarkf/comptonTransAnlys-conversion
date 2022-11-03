@@ -1,4 +1,3 @@
-no need for fixStimwordPosition.bsh anymore!
 
 mariadb --verbose < ./fixStimwordPosition.sql ;
 
@@ -9,3 +8,5 @@ node ./fixStimwordPosition.js > ./temp.sql ;
 mariadb --verbose comptonTransAnlys < ./temp.sql ;
 
 rm -verbose ./temp.sql ;
+
+NOW OBSOLETE -- fixStimwordPosition.bsh
