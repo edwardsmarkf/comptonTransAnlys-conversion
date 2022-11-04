@@ -35,133 +35,133 @@ grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                      
 
 echo $(date) ' - 02a_initial_preparation.bsh'                                                                                                              ;
 bash -vx  ${WORKING_DIR}/02a_initial_preparation.bsh                      >          ${LOGGING_DIR}/02a_initial_preparation.bsh.log                 2>&1   ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                         ${LOGGING_DIR}/02a_initial_preparation.bsh.log                        ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                           ${LOGGING_DIR}/02a_initial_preparation.bsh.log                        ;
 
 
 echo $(date) ' - 02b_test_initial_preparation_keys.bsh'                                                                                                    ;
 bash -vx  ${WORKING_DIR}/02b_test_initial_preparation_keys.bsh            >          ${LOGGING_DIR}/02b_test_initial_preparation_keys.bsh.log       2>&1   ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                         ${LOGGING_DIR}/02b_test_initial_preparation_keys.bsh.log              ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                           ${LOGGING_DIR}/02b_test_initial_preparation_keys.bsh.log              ;
 
 
 echo $(date) ' - 02c_initial_preparation.bsh'                                                                                                              ;
 bash -vx  ${WORKING_DIR}/02c_initial_preparation.bsh                      >          ${LOGGING_DIR}/02c_initial_preparation.bsh.log                  2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                         ${LOGGING_DIR}/02c_initial_preparation.bsh.log                        ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                           ${LOGGING_DIR}/02c_initial_preparation.bsh.log                        ;
 
 echo $(date) ' - 02d_initial_preparation.bsh'                                                                                                              ;
 bash -vx  ${WORKING_DIR}/02d_initial_preparation.bsh                      >          ${LOGGING_DIR}/02d_initial_preparation.bsh.log                  2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                         ${LOGGING_DIR}/02d_initial_preparation.bsh.log                        ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                           ${LOGGING_DIR}/02d_initial_preparation.bsh.log                        ;
 
 echo $(date) ' - 03_long_part.bsh'                                                                                                                         ;
 bash -vx  ${WORKING_DIR}/03_long_part.bsh                                 >          ${LOGGING_DIR}/03_long_part.bsh.log                             2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                         ${LOGGING_DIR}/03_long_part.bsh.log                                   ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                           ${LOGGING_DIR}/03_long_part.bsh.log                                   ;
 
 echo $(date) ' - 04_sed_changes.bsh'                                                                                                                       ;
 bash -vx  ${WORKING_DIR}/04_sed_changes.bsh                                >          ${LOGGING_DIR}/04_sed_changes.bsh.log                          2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/04_sed_changes.bsh.log                                ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/04_sed_changes.bsh.log                                ;
 
 echo $(date) ' - 05_convert_back_to_mariadb.bsh'                                                                                                           ;
 bash -vx  ${WORKING_DIR}/05_convert_back_to_mariadb.bsh                     >          ${LOGGING_DIR}/05_convert_back_to_mariadb.bsh.log             2>&1  ;
-ggrep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/05_convert_back_to_mariadb.bsh.log                   ;
+ggrep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/05_convert_back_to_mariadb.bsh.log                   ;
 
 echo $(date) ' - 06_concat_phonemes.bsh'                                                                                                                   ;
 bash -vx  ${WORKING_DIR}/06_concat_phonemes.bsh                              >          ${LOGGING_DIR}/06_concat_phonemes.bsh.log                    2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/06_concat_phonemes.bsh.log                          ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                              ${LOGGING_DIR}/06_concat_phonemes.bsh.log                          ;
 
 echo $(date) ' - 07a_alter_keys.bsh'                                                                                                                       ;
 bash -vx  ${WORKING_DIR}/07a_alter_keys.bsh                                 >          ${LOGGING_DIR}/07a_alter_keys.bsh.log                         2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                           ${LOGGING_DIR}/07a_alter_keys.bsh.log                               ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                             ${LOGGING_DIR}/07a_alter_keys.bsh.log                               ;
 
 echo $(date) ' - 07b_alter_keys.bsh'                                                                                                                       ;
 bash -vx  ${WORKING_DIR}/07b_alter_keys.bsh                               >            ${LOGGING_DIR}/07b_alter_keys.bsh.log                         2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                           ${LOGGING_DIR}/07b_alter_keys.bsh.log                               ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                             ${LOGGING_DIR}/07b_alter_keys.bsh.log                               ;
 
 echo $(date) ' - 07c_alter_keys_test.bsh'                                                                                                                  ;
-bash -vx  ${WORKING_DIR}/07c_alter_keys_test.bsh                          >          ${LOGGING_DIR}/07c_alter_keys_test.bsh.log                      2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                         ${LOGGING_DIR}/07c_alter_keys_test.bsh.log                            ;
+bash -vx  ${WORKING_DIR}/07c_alter_keys_test.bsh                          >           ${LOGGING_DIR}/07c_alter_keys_test.bsh.log                     2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/07c_alter_keys_test.bsh.log                           ;
 
 echo $(date) ' - 08a_final_sed_rename.bsh'                                                                                                                 ;
 bash -vx  ${WORKING_DIR}/08a_final_sed_rename.bsh                         >          ${LOGGING_DIR}/08a_final_sed_rename.bsh.log                     2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                         ${LOGGING_DIR}/08a_final_sed_rename.bsh.log                           ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                           ${LOGGING_DIR}/08a_final_sed_rename.bsh.log                           ;
 
 echo $(date) ' - 08b_final_sed_rename.bsh'                                                                                                                 ;
 bash -vx  ${WORKING_DIR}/08b_final_sed_rename.bsh                          >          ${LOGGING_DIR}/08b_final_sed_rename.bsh.log                     2>&1 ;
-grep   --line-number  'ERROR'                                                      ${LOGGING_DIR}/08b_final_sed_rename.bsh.log                           ;
+grep   --line-number  'ERROR'                                                         ${LOGGING_DIR}/08b_final_sed_rename.bsh.log                          ;
 
 echo $(date) ' - 08c_final_sed_rename.bsh'                                                                                                                 ;
 bash -vx  ${WORKING_DIR}/08c_final_sed_rename.bsh                          >          ${LOGGING_DIR}/08c_final_sed_rename.bsh.log                    2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/08c_final_sed_rename.bsh.log                          ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/08c_final_sed_rename.bsh.log                          ;
 
 echo $(date) ' - 08d_final_sed_rename.bsh'                                                                                                                 ;
 bash -vx  ${WORKING_DIR}/08d_final_sed_rename.bsh                          >          ${LOGGING_DIR}/08d_final_sed_rename.bsh.log                     2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/08d_final_sed_rename.bsh.log                          ;
-grep ERROR   ${LOGGING_DIR}/08d_final_sed_rename.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep        ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/08d_final_sed_rename.bsh.log                          ;
+grep ERROR   ${LOGGING_DIR}/08d_final_sed_rename.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep          ;
 
 echo $(date) ' - 08e_final_sed_rename.bsh'                                                                                                                 ;
 bash -vx  ${WORKING_DIR}/08e_final_sed_rename.bsh                          >          ${LOGGING_DIR}/08e_final_sed_rename.bsh.log                    2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/08e_final_sed_rename.bsh.log                          ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/08e_final_sed_rename.bsh.log                          ;
 
 echo $(date) ' - 09_move_columns.bsh'                                                                                                                      ;
-bash -vx  ${WORKING_DIR}/09_move_columns.bsh                               >         ${LOGGING_DIR}/09_move_columns.bsh.log                          2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/09_move_columns.bsh.log                               ;
+bash -vx  ${WORKING_DIR}/09_move_columns.bsh                               >         ${LOGGING_DIR}/09_move_columns.bsh.log                          2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/09_move_columns.bsh.log                               ;
 
 echo $(date) ' - 10a_combine_stimword_phoneme.bsh'                                                                                                         ;
-bash -vx  ${WORKING_DIR}/10a_combine_stimword_phoneme.bsh                  >          ${LOGGING_DIR}/10a_combine_stimword_phoneme.bsh.log           2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/10a_combine_stimword_phoneme.bsh.log                 ;
+bash -vx  ${WORKING_DIR}/10a_combine_stimword_phoneme.bsh                  >          ${LOGGING_DIR}/10a_combine_stimword_phoneme.bsh.log            2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/10a_combine_stimword_phoneme.bsh.log                  ;
 
 echo $(date) ' - 10b_combine_stimword_phoneme_test.bsh'                                                                                                    ;
 bash -vx  ${WORKING_DIR}/10b_combine_stimword_phoneme_test.bsh             >          ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log      2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log            ;
-grep  --line-number   '^COUNT(\|^0'                                                 ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log            ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log            ;
+grep  --line-number   '^COUNT(\|^0'                                                   ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log            ;
 
 echo $(date) ' - 11_alter_column_positions.bsh'                                                                                                            ;
-bash -vx  ${WORKING_DIR}/11_alter_column_positions.bsh                     >          ${LOGGING_DIR}/11_alter_column_positions.bsh.log              2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/11_alter_column_positions.bsh.log                    ;
+bash -vx  ${WORKING_DIR}/11_alter_column_positions.bsh                     >          ${LOGGING_DIR}/11_alter_column_positions.bsh.log               2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/11_alter_column_positions.bsh.log                     ;
 
 echo $(date) ' - 12_another_rename_column.bsh'                                                                                                             ;
 bash -vx  ${WORKING_DIR}/12_another_rename_column.bsh                      >          ${LOGGING_DIR}/12_another_rename_column.bsh.log                2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/12_another_rename_column.bsh.log                     ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/12_another_rename_column.bsh.log                     ;
 
 echo $(date) ' - 15_add_layout_table_and_keys.bsh'                                                                                                         ;
 bash -vx  ${WORKING_DIR}/15_add_layout_table_and_keys.bsh                  >          ${LOGGING_DIR}/15_add_layout_table_and_keys.bsh.log             2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/15_add_layout_table_and_keys.bsh.log                  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/15_add_layout_table_and_keys.bsh.log                  ;
 
 echo $(date) ' - 20_normalize_clientMaster.bsh'                                                                                                            ;
 bash -vx  ${WORKING_DIR}/20_normalize_clientMaster.bsh                     >          ${LOGGING_DIR}/20_normalize_clientMaster.bsh.log                2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/20_normalize_clientMaster.bsh.log                     ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/20_normalize_clientMaster.bsh.log                     ;
 
 echo $(date) ' - 21_rearrange_keys.bsh'                                                                                                                    ;
 bash -vx   ${WORKING_DIR}/21_rearrange_keys.bsh                            >          ${LOGGING_DIR}/21_rearrange_keys.bsh.log                        2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/21_rearrange_keys.bsh.log                             ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/21_rearrange_keys.bsh.log                             ;
 
 echo $(date) ' - 22a_remove_constraint_keys.bsh'                                                                                                           ;
 bash -vx   ${WORKING_DIR}/22a_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22a_remove_constraint_keys.bsh.log               2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/22a_remove_constraint_keys.bsh.log                    ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22a_remove_constraint_keys.bsh.log                    ;
 
 echo $(date) ' - 22b_remove_constraint_keys.bsh'                                                                                                           ;
 bash -vx   ${WORKING_DIR}/22b_remove_constraint_keys.bsh                    >         .${LOGGING_DIR}/22b_remove_constraint_keys.bsh.log               2>&1 ;
-grep ERROR   ./conversion/log/22b_remove_constraint_keys.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep  ;
+grep ERROR  ${LOGGING_DIR}/log/22b_remove_constraint_keys.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep  ;
 
 echo $(date) ' - 22c_remove_constraint_keys.bsh'                                                                                                            ;
 bash -vx   ${WORKING_DIR}/22c_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log                2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                           ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log                     ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log                     ;
 
 echo $(date) ' - 22d_remove_constraint_keys.bsh'                                                                                                             ;
 bash -vx   ${WORKING_DIR}/22d_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log                2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log                      ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log                      ;
 
 echo $(date) ' - 50_display_table_counts.bsh'                                                                                                                ;
 bash -vx  ${WORKING_DIR}/50_display_table_counts.bsh                       >          ${LOGGING_DIR}/50_display_table_counts.bsh.log                    2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/50_display_table_counts.bsh.log                         ;
-grep  --line-number   '^COUNT(\|^[0-9]'                                             ${LOGGING_DIR}/50_display_table_counts.bsh.log                         ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/50_display_table_counts.bsh.log                         ;
+grep  --line-number   '^COUNT(\|^[0-9]'                                               ${LOGGING_DIR}/50_display_table_counts.bsh.log                         ;
 
 echo $(date) ' - 55_count_by_keys.bsh'                                                                                                                       ;
 bash -vx  ${WORKING_DIR}/55_count_by_keys.bsh                              >          ${LOGGING_DIR}/55_count_by_keys.bsh.log                          2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                          ${LOGGING_DIR}/55_count_by_keys.bsh.log                                ;
-grep  --line-number   '^COUNT(\|^[0-9]'                                             ${LOGGING_DIR}/55_count_by_keys.bsh.log                                ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/55_count_by_keys.bsh.log                                ;
+grep  --line-number   '^COUNT(\|^[0-9]'                                               ${LOGGING_DIR}/55_count_by_keys.bsh.log                                ;
 
 ## 2022-11-03
 echo $(date) ' - fixStimwordPosition!'                                                                                                                       ;
-bash -vx  ${WORKING_DIR}/fixStimwordPosition/fixStimwordPosition.bsh      >          ${LOGGING_DIR}/fixStimwordPosition.bsh.log                        2>&1 ;
+bash -vx  ${WORKING_DIR}/fixStimwordPosition/fixStimwordPosition.bsh      >           ${LOGGING_DIR}/fixStimwordPosition.bsh.log                        2>&1 ;
 
 ## 2022-8-01
 echo $(date) ' - errorSoundsTooltip!'                                                                                                                        ;
