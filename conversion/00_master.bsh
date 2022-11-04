@@ -155,11 +155,11 @@ grep  --line-number   '^COUNT(\|^[0-9]'                                         
 
 ## 2022-11-03
 echo $(date) ' - fixStimwordPosition!'                                                                                                                       ;
-bash -vx  ./fixStimwordPosition/fixStimwordPosition.bsh                  >          ./conversion/log/fixStimwordPosition.bsh.log                        2>&1 ;
+bash -vx  ./conversion/fixStimwordPosition/fixStimwordPosition.bsh      >          ./conversion/log/fixStimwordPosition.bsh.log                        2>&1 ;
 
 ## 2022-8-01
 echo $(date) ' - errorSoundsTooltip!'                                                                                                                        ;
-bash -vx  ./errorSoundsTooptip/errorSoundsTooltip.bsh                    >          ./conversion/log/errorSoundsTooltip.bsh.log                         2>&1 ;
+bash -vx  ./conversion/errorSoundsTooptip/errorSoundsTooltip.bsh        >          ./conversion/log/errorSoundsTooltip.bsh.log                         2>&1 ;
 
 
 echo $(date)                                                                                                                        ;
