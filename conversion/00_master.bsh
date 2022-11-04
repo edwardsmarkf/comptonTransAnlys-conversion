@@ -5,6 +5,7 @@
 #   2021-10-12  - misc fixes
 #   2021-10-15  - added flag "PASS" to bypass the silly tested? question
 #   2022-06-21  - automated fixStimwordPosition (but not yet tested)
+#   2022-11-04  - changed around directories using variables instead
 
 if  [[ "$1" != "PASS" ]]; then 
            # https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
