@@ -159,7 +159,7 @@ bash -vx  ./conversion/fixStimwordPosition/fixStimwordPosition.bsh      >       
 
 ## 2022-8-01
 echo $(date) ' - errorSoundsTooltip!'                                                                                                                        ;
-bash -vx  ./conversion/errorSoundsTooptip/errorSoundsTooltip.bsh        >          ./conversion/log/errorSoundsTooltip.bsh.log                         2>&1 ;
+bash -vx  ./conversion/errorSoundsTooltip/errorSoundsTooltip.bsh        >          ./conversion/log/errorSoundsTooltip.bsh.log                         2>&1 ;
 
 
 echo $(date)                                                                                                                        ;
