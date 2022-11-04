@@ -21,11 +21,14 @@ else
 fi
 
 WORKING_DIR=./comptonTransAnlys-conversion/conversion/                       ;
+echo ${WORKING_DIR}                                                          ;
 LOGGING_DIR=${WORKING_DIR}/log/                                              ;
+echo ${LOGGING_DIR}                                                          ;
 
 cd ${WORKING_DIR}                                                            ;
+pwd                                                                          ;
 
-mkdir  --verbose  ${LOGGING_DIR}
+mkdir  --verbose  ${LOGGING_DIR}                                             ;
 
 echo $(date) ' - 01_create_db.bsh'                                                                                                                         ;
 bash -vx  ${WORKING_DIR}/01_create_db.bsh                                 >          ${LOGGING_DIR}/01_create_db.bsh.log                            2>&1   ;
