@@ -1,0 +1,12 @@
+#! /bin/bash
+#
+rm -Rf  ./comptonTransAnlys-conversion/                                                                         ;
+#
+git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion/                                        ;
+#
+cp  --verbose  ./comptonTransAnlys.sql.gz  ./comptonTransAnlys-conversion/comptonTransAnlys.sql.gz              ;
+#
+gzip --verbose  -d  ./comptonTransAnlys-conversion/comptonTransAnlys.sql.gz                                     ;
+#
+bash -vx  ./comptonTransAnlys-conversion/conversion/00_master.bsh  PASS    >  ./00_master.bsh.log   2>&1        &
+#
