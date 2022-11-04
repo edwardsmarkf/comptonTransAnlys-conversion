@@ -28,7 +28,7 @@ echo ${WORKING_DIR}                                                          ;
 LOGGING_DIR=${WORKING_DIR}/log/                                              ;
 echo ${LOGGING_DIR}                                                          ;
 
-####################################cd ${WORKING_DIR}                                                            ;
+cd ${WORKING_DIR}                                                            ;
 pwd                                                                          ;
 
 mkdir  --verbose  ${LOGGING_DIR}                                             ;
