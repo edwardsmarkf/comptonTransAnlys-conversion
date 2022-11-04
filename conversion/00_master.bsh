@@ -20,6 +20,8 @@ else
     echo 'skipping approval question!';
 fi
 
+echo 'Starting 00_master.bsh conversion process.'                            ;
+
 WORKING_DIR=./comptonTransAnlys-conversion/conversion/                       ;
 echo ${WORKING_DIR}                                                          ;
 LOGGING_DIR=${WORKING_DIR}/log/                                              ;
