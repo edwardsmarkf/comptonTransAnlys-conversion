@@ -1,14 +1,14 @@
-DROP TABLE IF EXISTS errorSoundsTooltip ;
+DROP TABLE IF EXISTS `comptonTransAnlys`.`errorSoundsTooltip` ;
 
-CREATE TABLE  errorSoundsTooltip	
-(	errorSound		CHAR(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''
-,	rowNbr			SMALLINT	NOT NULL
-,	toolTip			VARCHAR(50)	NULL
-,	errorSoundsAutoIncr	SMALLINT	NOT NULL AUTO_INCREMENT
-,	PRIMARY KEY (errorSoundsAutoIncr)
+CREATE TABLE  `comptonTransAnlys`.`errorSoundsTooltip`	
+(	`errorSound`		CHAR(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''
+,	`rowNbr`			SMALLINT	NOT NULL
+,	`toolTip`			VARCHAR(50)	NULL
+,	`errorSoundsAutoIncr`	SMALLINT	NOT NULL AUTO_INCREMENT
+,	PRIMARY KEY (`errorSoundsAutoIncr`)
 ); 
 
-INSERT INTO errorSoundsTooltip ( errorSound, rowNbr, toolTip )
+INSERT INTO  `comptonTransAnlys`.`errorSoundsTooltip` ( `errorSound`, `rowNbr`, `toolTip` )
 VALUES  ("&nbsp;" ,         1,     "Erase"                 )
 ,       ( "ø"     ,         1,     "Omission"              )
 ,	      ( "æ"     ,         1,     ""                      )
