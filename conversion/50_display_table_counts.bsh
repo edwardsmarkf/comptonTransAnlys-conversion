@@ -9,52 +9,53 @@
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
         SELECT 'clientContext'                          ;
-        SELECT COUNT(*) FROM    clientContext           ;
+        SELECT COUNT(*) FROM    `clientContext`         ;
         
         SELECT 'clientMaster'                           ;
-        SELECT COUNT(*) FROM    clientMaster            ;
+        SELECT COUNT(*) FROM    `clientMaster`          ;
         
         SELECT 'clientSession'                          ;
-        SELECT COUNT(*) FROM    clientSession           ;
+        SELECT COUNT(*) FROM    `clientSession`         ;
         
         SELECT 'clientStimword'                         ;
-        SELECT COUNT(*) FROM    clientStimword          ;
+        SELECT COUNT(*) FROM    `clientStimword`        ;
         
         SELECT 'context'                                ;
-        SELECT COUNT(*) FROM    context                 ;
+        SELECT COUNT(*) FROM    `context`               ;
         
         SELECT 'frequencyList'                          ;
-        SELECT COUNT(*) FROM    frequencyList           ;
+        SELECT COUNT(*) FROM    `frequencyList`         ;
         
         SELECT 'languageSpec'                           ;
-        SELECT COUNT(*) FROM    languageSpec            ;
+        SELECT COUNT(*) FROM    `languageSpec`          ;
         
         SELECT 'languageNorms'                          ;
-        SELECT COUNT(*) FROM    languageNorms           ;
+        SELECT COUNT(*) FROM    `languageNorms`         ;
         
         SELECT 'layout'                                 ;
-        SELECT COUNT(*) FROM    layout                  ;
+        SELECT COUNT(*) FROM    `layout`                ;
         
         SELECT 'phoneticGrid'                           ;
-        SELECT COUNT(*) FROM    phoneticGrid            ;
+        SELECT COUNT(*) FROM    `phoneticGrid`          ;
   
         SELECT 'sessionNames'                           ;
-        SELECT COUNT(*) FROM    sessionNames            ;
+        SELECT COUNT(*) FROM    `sessionNames`          ;
         
         SELECT 'sound'                                  ;
-        SELECT COUNT(*) FROM    sound                   ;
+        SELECT COUNT(*) FROM    `sound`                 ;
         
         SELECT 'stimword'                               ;
-        SELECT COUNT(*) FROM    stimword                ;
+        SELECT COUNT(*) FROM    `stimword`              ;
         
         SELECT 'stimwordPosition'                       ;
-        SELECT COUNT(*) FROM    stimwordPosition        ;
+        SELECT COUNT(*) FROM    `stimwordPosition`      ;
         
-        SELECT 'teacher`                                ;
-        SELECT COUNT(*) FROM    teacher                 ;
+        SELECT 'teacher'                                ;
+        SELECT COUNT(*) FROM    `teacher`               ;
 
         SELECT 'errorSoundsTooltip'                     ;
-        SELECT COUNT() FROM     errorSoundsTooltip	;
+        SELECT COUNT(*) FROM     `errorSoundsTooltip`	;
+        
 END
 
 ##
