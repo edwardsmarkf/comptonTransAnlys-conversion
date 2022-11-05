@@ -5,6 +5,10 @@
 ##
 ##    test all the large table key relationships.
 ##
+##       test for missing keys (?)
+##
+
+echo 'looking for missing key entries (?)'
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
