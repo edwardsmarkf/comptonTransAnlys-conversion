@@ -67,7 +67,7 @@ grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                      
 
 echo $(date) ' - 05_convert_back_to_mariadb.bsh'                                                                                                           ;
 bash -vx  ${WORKING_DIR}/05_convert_back_to_mariadb.bsh                     >          ${LOGGING_DIR}/05_convert_back_to_mariadb.bsh.log             2>&1  ;
-ggrep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/05_convert_back_to_mariadb.bsh.log                   ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                             ${LOGGING_DIR}/05_convert_back_to_mariadb.bsh.log                   ;
 
 echo $(date) ' - 06_concat_phonemes.bsh'                                                                                                                   ;
 bash -vx  ${WORKING_DIR}/06_concat_phonemes.bsh                              >          ${LOGGING_DIR}/06_concat_phonemes.bsh.log                    2>&1  ;
