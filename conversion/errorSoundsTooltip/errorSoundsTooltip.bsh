@@ -1,4 +1,4 @@
 
 #!  /bin/bash -w
 
-mariadb --verbose <    ./errorSoundsTooltip/errorSoundsTooltip.sql ;
+mariadb --verbose     comptonTransAnlys      < ./errorSoundsTooltip/errorSoundsTooltip.sql ;
