@@ -24,15 +24,29 @@ UPDATE `comptonTransAnlys`.`stimwordPosition`
 UPDATE `comptonTransAnlys`.`stimwordPosition`
     SET `stimwordPositionNbr` = '4' 
     WHERE 1
-    AND (`layoutName` = 'PESL' AND `stimwordPageNbr` = 24 AND `stimwordLineNbr` = 15 AND `stimwordWord` = 'sixty-one' AND `stimwordPositionAutoIncr` = '1089')
+    AND     (   `layoutName`                = 'PESL'
+            AND `stimwordPageNbr`           = 24 
+            AND `stimwordLineNbr`           = 15
+            AND `stimwordWord`              = 'sixty-one' 
+            AND `stimwordPositionAutoIncr`  = '1089'
+            )
     ;
 
-SELECT DISTINCT stimwordPageNbr, stimwordLineNbr, stimwordWord,  stimwordPositionNbr ,contextPosition,  soundPhoneme
-FROM comptonTransAnlys.stimwordPosition
+SELECT DISTINCT `stimwordPageNbr`, `stimwordLineNbr`, `stimwordWord`,  `stimwordPositionNbr` ,`contextPosition`,  `soundPhoneme`
+FROM `comptonTransAnlys`.`stimwordPosition`
 WHERE 1
-AND layoutName = 'PESL'
-GROUP BY stimwordPageNbr, stimwordLineNbr, stimwordWord,  stimwordPositionNbr, contextPosition ##  , soundPhoneme     ## include and remove soundPhoneme !!
-ORDER BY layoutName, stimwordPageNbr, stimwordLineNbr, stimwordPositionAutoIncr
+AND `layoutName` = 'PESL'
+GROUP BY    `stimwordPageNbr`
+    ,       `stimwordLineNbr`
+    ,       `stimwordWord`
+    ,       `stimwordPositionNbr`
+    ,       `contextPosition`        
+    ##  , soundPhoneme     ## include and remove soundPhoneme !!
+ORDER BY    `layoutName`
+        ,   `stimwordPageNbr`
+        ,   `stimwordLineNbr`
+        ,   `stimwordPositionAutoIncr`
+;
 
 
 
