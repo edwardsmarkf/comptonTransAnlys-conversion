@@ -9,7 +9,7 @@ node ./fixStimwordPosition/fixStimwordPosition.js > ./temp.sql    ;
 
 mariadb --verbose comptonTransAnlys < ./temp.sql                  ;
 
-rm -verbose ./temp.sql                                            ;
+rm --verbose ./temp.sql                                            ;
 
 exit                                                              ;
 
