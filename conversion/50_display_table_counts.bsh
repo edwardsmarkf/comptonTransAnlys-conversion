@@ -50,9 +50,11 @@
         SELECT 'stimwordPosition'                       ;
         SELECT COUNT(*) FROM    stimwordPosition        ;
         
-        SELECT 'teacher'                                ;
+        SELECT 'teacher`                                ;
         SELECT COUNT(*) FROM    teacher                 ;
 
+        SELECT 'errorSoundsTooltip'                     ;
+        SELECT COUNT() FROM     errorSoundsTooltip	;
 END
 
 ##
