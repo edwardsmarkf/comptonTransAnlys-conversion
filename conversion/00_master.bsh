@@ -6,6 +6,7 @@
 #   2021-10-15  - added flag "PASS" to bypass the silly tested? question
 #   2022-06-21  - automated fixStimwordPosition (but not yet tested)
 #   2022-11-04  - changed around directories using variables instead
+#   2022-11-05  - reordered tooltip and summary table counting
 
 if  [[ "$1" != "PASS" ]]; then 
            # https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
@@ -114,17 +115,17 @@ bash -vx  ${WORKING_DIR}/10a_combine_stimword_phoneme.bsh                  >    
 grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/10a_combine_stimword_phoneme.bsh.log                  ;
 
 echo $(date) ' - 10b_combine_stimword_phoneme_test.bsh'                                                                                                    ;
-bash -vx  ${WORKING_DIR}/10b_combine_stimword_phoneme_test.bsh             >          ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log      2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log            ;
-grep  --line-number   '^COUNT(\|^0'                                                   ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log            ;
+bash -vx  ${WORKING_DIR}/10b_combine_stimword_phoneme_test.bsh             >          ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log       2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log             ;
+grep  --line-number   '^COUNT(\|^0'                                                   ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log             ;
 
 echo $(date) ' - 11_alter_column_positions.bsh'                                                                                                            ;
 bash -vx  ${WORKING_DIR}/11_alter_column_positions.bsh                     >          ${LOGGING_DIR}/11_alter_column_positions.bsh.log               2>&1  ;
 grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/11_alter_column_positions.bsh.log                     ;
 
 echo $(date) ' - 12_another_rename_column.bsh'                                                                                                             ;
-bash -vx  ${WORKING_DIR}/12_another_rename_column.bsh                      >          ${LOGGING_DIR}/12_another_rename_column.bsh.log                2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/12_another_rename_column.bsh.log                     ;
+bash -vx  ${WORKING_DIR}/12_another_rename_column.bsh                      >          ${LOGGING_DIR}/12_another_rename_column.bsh.log                 2>&1 ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/12_another_rename_column.bsh.log                      ;
 
 echo $(date) ' - 15_add_layout_table_and_keys.bsh'                                                                                                         ;
 bash -vx  ${WORKING_DIR}/15_add_layout_table_and_keys.bsh                  >          ${LOGGING_DIR}/15_add_layout_table_and_keys.bsh.log             2>&1 ;
@@ -143,34 +144,35 @@ bash -vx   ${WORKING_DIR}/22a_remove_constraint_keys.bsh                    >   
 grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22a_remove_constraint_keys.bsh.log                    ;
 
 echo $(date) ' - 22b_remove_constraint_keys.bsh'                                                                                                           ;
-bash -vx   ${WORKING_DIR}/22b_remove_constraint_keys.bsh                    >         .${LOGGING_DIR}/22b_remove_constraint_keys.bsh.log               2>&1 ;
+bash -vx   ${WORKING_DIR}/22b_remove_constraint_keys.bsh                    >         .${LOGGING_DIR}/22b_remove_constraint_keys.bsh.log              2>&1 ;
 grep ERROR  ${LOGGING_DIR}/log/22b_remove_constraint_keys.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep  ;
 
-echo $(date) ' - 22c_remove_constraint_keys.bsh'                                                                                                            ;
-bash -vx   ${WORKING_DIR}/22c_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log                2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log                     ;
+echo $(date) ' - 22c_remove_constraint_keys.bsh'                                                                                                           ;
+bash -vx   ${WORKING_DIR}/22c_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log               2>&1 ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log                    ;
 
-echo $(date) ' - 22d_remove_constraint_keys.bsh'                                                                                                             ;
-bash -vx   ${WORKING_DIR}/22d_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log                2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log                      ;
-
-echo $(date) ' - 50_display_table_counts.bsh'                                                                                                                ;
-bash -vx  ${WORKING_DIR}/50_display_table_counts.bsh                       >          ${LOGGING_DIR}/50_display_table_counts.bsh.log                    2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/50_display_table_counts.bsh.log                         ;
-grep  --line-number   '^COUNT(\|^[0-9]'                                               ${LOGGING_DIR}/50_display_table_counts.bsh.log                         ;
-
-echo $(date) ' - 55_count_by_keys.bsh'                                                                                                                       ;
-bash -vx  ${WORKING_DIR}/55_count_by_keys.bsh                              >          ${LOGGING_DIR}/55_count_by_keys.bsh.log                          2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/55_count_by_keys.bsh.log                                ;
-grep  --line-number   '^COUNT(\|^[0-9]'                                               ${LOGGING_DIR}/55_count_by_keys.bsh.log                                ;
+echo $(date) ' - 22d_remove_constraint_keys.bsh'                                                                                                           ;
+bash -vx   ${WORKING_DIR}/22d_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log              2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log                    ;
 
 ## 2022-11-03
-echo $(date) ' - fixStimwordPosition!'                                                                                                                       ;
-bash -vx  ${WORKING_DIR}/fixStimwordPosition/fixStimwordPosition.bsh      >           ${LOGGING_DIR}/fixStimwordPosition.bsh.log                        2>&1 ;
+echo $(date) ' - fixStimwordPosition!'                                                                                                                     ;
+bash -vx  ${WORKING_DIR}/fixStimwordPosition/fixStimwordPosition.bsh      >           ${LOGGING_DIR}/fixStimwordPosition.bsh.log                      2>&1 ;
 
 ## 2022-8-01
-echo $(date) ' - errorSoundsTooltip!'                                                                                                                        ;
-bash -vx  ${WORKING_DIR}/errorSoundsTooltip/errorSoundsTooltip.bsh        >          ${LOGGING_DIR}/errorSoundsTooltip.bsh.log                         2>&1 ;
+echo $(date) ' - errorSoundsTooltip!'                                                                                                                      ;
+bash -vx  ${WORKING_DIR}/errorSoundsTooltip/errorSoundsTooltip.bsh        >          ${LOGGING_DIR}/errorSoundsTooltip.bsh.log                       2>&1  ;
+
+echo $(date) ' - 50_display_table_counts.bsh'                                                                                                              ;
+bash -vx  ${WORKING_DIR}/50_display_table_counts.bsh                       >          ${LOGGING_DIR}/50_display_table_counts.bsh.log                  2>&1 ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/50_display_table_counts.bsh.log                       ;
+grep  --line-number   '^COUNT(\|^[0-9]'                                               ${LOGGING_DIR}/50_display_table_counts.bsh.log                       ;
+
+echo $(date) ' - 55_count_by_keys.bsh'                                                                                                                     ;
+bash -vx  ${WORKING_DIR}/55_count_by_keys.bsh                              >          ${LOGGING_DIR}/55_count_by_keys.bsh.log                        2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/55_count_by_keys.bsh.log                              ;
+grep  --line-number   '^COUNT(\|^[0-9]'                                               ${LOGGING_DIR}/55_count_by_keys.bsh.log                              ;
+
 
 
 echo $(date)                                                                                                                        ;
