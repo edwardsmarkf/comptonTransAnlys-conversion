@@ -54,6 +54,12 @@ AND `context`.`contextAutoIncr`                = `clientContext`.`contextAutoInc
 ORDER BY `clientContext`.`contextAutoIncr`
 ;
 
+/*  for testing to get a zero value (a clientContext row without a corresponding clientStimword row) :
+INSERT INTO `comptonTransAnlys`.`clientContext` 
+    (`layoutName`, `teacherEmail`, `clientMasterEmail`, `sessionName`, `soundPhoneme`, `contextPosition`, `clientContextError`, `frequency`, `createdAt`, `updatedAt`, `contextAutoIncr`, `clientSessionAutoIncr`) 
+VALUES 
+    ('PESL', 'info@englishwithoutaccent.com', '12yukos@gmail.com', 'Time1', 'b', 'initial', 'XX', '', '2022-11-08', '2022-11-07', '6', '2349');
+*/
 ############, 'Occurences'                      ,    `context`.`contextCount`
 ############, 'frequency'                       ,    `clientContext`.`frequency`
 #####  ????  ######  AND  `layout`.`layoutAutoIncr`                 = `teacher`.`layoutAutoIncr`
