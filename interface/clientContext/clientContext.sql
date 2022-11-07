@@ -18,7 +18,7 @@ SELECT   ##JSON_ARRAYAGG(
 , 'clientContextErrorNotes'         ,    `clientContext`.`clientContextErrorNotes`
 , 'contextAutoIncr'                 ,    `clientContext`.`contextAutoIncr`
 , 'clientContextAutoIncr'           ,    `clientContext`.`clientContextAutoIncr`
-, 'clientStimwordCounting'                  ,    COUNT( `clientStimword`.`clientStimwordAutoIncr`)
+, 'clientStimwordCOUNT'             ,    COUNT( `clientStimword`.`clientStimwordAutoIncr`)
 #)
 ) ''
 FROM `comptonTransAnlys`.`context`
