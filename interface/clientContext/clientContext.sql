@@ -15,7 +15,7 @@ SELECT   ##JSON_ARRAYAGG(
 ( 'soundPhoneme'                    ,    `clientContext`.`soundPhoneme`
 , 'clientContextError'              ,    `clientContext`.`clientContextError`
 , 'clientContextSpeakingErrors'     ,    `clientContext`.`clientContextSpeakingErrors`
-, 'clientContextErrorNotes'         ,    `clientContext`.`clientContextErrorNotes`
+, 'clientContextErrorNotes'         ,    IFNULL(`clientContext`.`clientContextErrorNotes`, '')
 , 'contextAutoIncr'                 ,    `clientContext`.`contextAutoIncr`
 , 'clientContextAutoIncr'           ,    `clientContext`.`clientContextAutoIncr`
 , 'clientStimwordCOUNT'             ,    COUNT( `clientStimword`.`clientStimwordAutoIncr`)
