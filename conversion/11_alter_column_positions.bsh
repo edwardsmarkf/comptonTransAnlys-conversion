@@ -1,31 +1,23 @@
 #! /bin/bash
 
 ##      11_alter_column_positions.bsh
+##
+##
+##	2022-11-08 - no longer do anything with date until at the end
+##
+##
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
 
-			####ALTER TABLE \`clientMaster\`  
-			####	CHANGE  COLUMN \`clientNaster_timestamp\`   \`Client_master_timestamp\`  TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP()
-			####	AFTER \`Client_master_anlys_notes\`
-			####	;
-
-
-			###	ALTER TABLE \`clientMaster\`  
-			###		CHANGE  COLUMN \`clientMasterActiveFlag\`   \`clientMasterActiveFlag\`   TINYINT (4) DEFAULT NULL
-			###		AFTER \`clientMasterAnlysNotes\`
-			###		;
-
-
-	ALTER TABLE \`languageSpec\`  
-		CHANGE  COLUMN \`updatedAt\`   \`updatedAt\`  TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP() 
-		AFTER \`languageEpecError\`
-		;
-	ALTER TABLE \`languageSpec\`  
-		CHANGE  COLUMN \`createdAt\`   \`createdAt\`  TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP() 
-		AFTER \`languageEpecError\`
-		;
-
+####	ALTER TABLE \`languageSpec\`  
+####		CHANGE  COLUMN \`upda--tedAt\`   \`updat--edAt\`  TIMES_TAMP  NOT NULL DEFAULT CURR--ENT_TIMESTAMP() 
+####		AFTER \`languageEpecError\`
+####		;
+####	ALTER TABLE \`languageSpec\`  
+####		CHANGE  COLUMN \`creat--edAt\`   \`creat--edAt\`  TIMES_TAMP  NOT NULL DEFAULT CUR--RENT_TIMESTAMP() 
+####		AFTER \`languageEpecError\`
+####		;
 
 	ALTER TABLE \`stimwordPosition\`  
 		CHANGE  COLUMN \`stimwordAutoIncr\`   \`stimwordAutoIncr\`   MEDIUMINT(8) UNSIGNED NOT NULL
@@ -35,17 +27,6 @@
 		CHANGE  COLUMN \`contextAutoIncr\`   \`contextAutoIncr\`   MEDIUMINT(8) UNSIGNED NOT NULL
 		AFTER \`updatedAt\`
 		;
-		
-	
- 			###	ALTER TABLE \`clientContext\`
-			###		CHANGE  COLUMN \`clientContext_timestamp\`   \`Client_context_timestamp\`  TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP()
-			###		AFTER \`Client_context_error_notes\`  
-			###		;
-	
-			###	ALTER TABLE \`Client_stimword\` 
-			###		CHANGE  COLUMN \`Client_stimword_timestamp\`   \`Client_stimword_timestamp\`  TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP()
-			###		AFTER \`Client_stimword_notes\`  
-			###		;
 
 END
 
