@@ -13,7 +13,7 @@ grep  'INSERT INTO'  comptonTransAnlys.sql   |  wc  --lines ;   ## we need to be
 sed --in-place  --expression="s/dipthong/diphthong/g;  s/ON DELETE NO ACTION/ON DELETE CASCADE/g; /'mbirje'/d; "   ./comptonTransAnlys.sql  ;
 
     ###  2022-11-08   for whatever bizarre reason, dates are getting lost - so remove timestamp default suring conversion process
-sed  --in-place --expression="s/timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()//"     ./comptonTransAnlys.sql  ;
+sed  --in-place --expression="s/timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()/TIMESTAMP  /"     ./comptonTransAnlys.sql  ;
 
 /usr/bin/mariadb  -e  'DROP DATABASE IF EXISTS comptonTransAnlys ; CREATE DATABASE comptonTransAnlys'  ;
 
