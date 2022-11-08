@@ -102,10 +102,9 @@ bash -vx  ${WORKING_DIR}/08d_final_sed_rename.bsh                          >    
 grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/08d_final_sed_rename.bsh.log                          ;
 grep ERROR   ${LOGGING_DIR}/08d_final_sed_rename.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep          ;
 
-####   2022-11-08 - this should be done at the end
-####echo $(date) ' - 08e_final_sed_rename.bsh'                                                                                                                 ;
-####bash -vx  ${WORKING_DIR}/08e_final_sed_rename.bsh                          >          ${LOGGING_DIR}/08e_final_sed_rename.bsh.log                    2>&1  ;
-####grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/08e_final_sed_rename.bsh.log                          ;
+echo $(date) ' - 08e_final_sed_rename.bsh'                                                                                                                 ;
+bash -vx  ${WORKING_DIR}/08e_final_sed_rename.bsh                          >          ${LOGGING_DIR}/08e_final_sed_rename.bsh.log                    2>&1  ;
+grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/08e_final_sed_rename.bsh.log                          ;
 
 echo $(date) ' - 09_move_columns.bsh'                                                                                                                      ;
 bash -vx  ${WORKING_DIR}/09_move_columns.bsh                               >         ${LOGGING_DIR}/09_move_columns.bsh.log                          2>&1  ;
