@@ -3,6 +3,28 @@
 # 08e_final_sed_rename.bsh   -- 2021-06-03
 
 mariadb --verbose comptonTransAnlys  <<END ;
+ALTER TABLE \`clientContext\`     ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+ALTER TABLE \`clientMaster\`      ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+ALTER TABLE \`clientStimword\`    ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+ALTER TABLE \`context\`           ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+ALTER TABLE \`languageSpec\`      ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+ALTER TABLE \`languageNorms\`     ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+ALTER TABLE \`phoneticSpelling\`  ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+ALTER TABLE \`sessionNames\`      ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+ALTER TABLE \`sound\`             ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+ALTER TABLE \`stimwordPosition\`  ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+ALTER TABLE \`teacher\`           ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NULL AFTER \`createdAt\` ;
+END
+
+echo "end of sed part 08e_final_sed_rename.bsh." ;
+
+exit        ;
+
+##################################################################################
+
+
+
+mariadb --verbose comptonTransAnlys  <<END ;
 ALTER TABLE \`clientContext\`     ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() AFTER \`createdAt\` ;
 ALTER TABLE \`clientMaster\`      ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() AFTER \`createdAt\` ;
 ALTER TABLE \`clientStimword\`    ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() AFTER \`createdAt\` ;
@@ -15,8 +37,4 @@ ALTER TABLE \`sound\`             ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTA
 ALTER TABLE \`stimwordPosition\`  ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() AFTER \`createdAt\` ;
 ALTER TABLE \`teacher\`           ADD COLUMN IF NOT EXISTS \`updatedAt\` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() AFTER \`createdAt\` ;
 END
-
-echo "end of sed part 08e_final_sed_rename.bsh." ;
-
-exit        ;
 
