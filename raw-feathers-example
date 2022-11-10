@@ -1,0 +1,212 @@
+##   Feathers Knex Raw Sql Examples
+            2022-11-10
+
+
+0)    npm install @feathersjs/feathers --save ;
+
+
+1)    npm init --yes ; 
+      npm install knex   feathers-knex ;
+       
+
+2) create a username/password:
+
+    DROP USER IF EXISTS 'knexUser'@'localhost'                              ;
+    CREATE USER 'knexUser'@'localhost' IDENTIFIED BY 'knexPassword';
+
+    GRANT ALL ON `comptonTransAnlys`.* TO 'knexUser'@'localhost'                    \
+    IDENTIFIED BY 'knexPassword' WITH MAX_QUERIES_PER_HOUR 0                \
+    MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0                ;
+
+    GRANT ALL PRIVILEGES ON `comptonTransAnlys`.* TO 'knexUser'@'localhost' ;
+
+    # to test:
+    # mariadb  --host=localhost --user=knexUser  --password=knexPassword    comptonTransAnlys    ;
+
+
+3) feathers:
+     feathers generate app    ;
+     feathers generate  service ;  
+          ##    create custom service named "my-custom-service" type knex
+
+
+4) modify ./config/default.json to reflect the database access:
+
+        'connection': 'mysql://knexUser:knexPassword@localhost:3306/comptonTransAnlys'
+                  -- or  --
+      "mysql": {
+          "client": "mysql2",
+          "connection":
+              { "host"      : "localhost"
+              , "port"      : 3306
+              , "user"      : "knexUser"
+              , "password"  : "knexPassword"
+              , "database"  : "comptonTransAnlys"
+              }
+          }
+
+
+5) change:  ./src/services/my-custom-service/my-custom-service.class.js  :
+
+
+    /* eslint-disable no-unused-vars */
+    const { QueryTypes } = require('feathers-knex');
+
+    exports.MyCustomService = class MyCustomService {
+        constructor (options, app) {
+            this.options = options || {};
+            this.app = app;
+        }
+
+        async find (key) {
+             /*   Postman GET:  http://123.123.123.123:3030/my-custom-service/?one=twooo
+                         notice /?one=twoooo   - last slash between service name and question mark is OPTIONAL!
+             */
+            console.info(JSON.stringify(key.query) + ' in my find routine!!');
+            const knexClient = this.app.get('knexClient');
+            const rows = await knexClient.raw('SELECT VERSION();');
+            console.table (rows);
+            return `${JSON.stringify(key.query) + JSON.stringify(rows)} find routine!!`;
+        }
+
+        async get (key) {
+              /*   Postman GET:  http://123.123.123.123:3030/my-custom-service/123456789
+                         notice /123456789 - only ONE parameter as a suffix
+              */
+            console.info(JSON.stringify(key) + ' in get routine!!');
+            const knexClient = this.app.get('knexClient');
+            const mariaDbDate = await knexClient.raw('SELECT  CURDATE() ;'  );
+            console.table(mariaDbDate);
+            return `${JSON.stringify(key)  + JSON.stringify(mariaDbDate)} get routine!`;
+        }
+    };
+
+6) systemctl stop firewalld  ;  (this may be necessary if just testing)
+
+7) run    DEBUG=* npm start ;
+
+8) either postman or browser do:
+
+    http://123.123.123.123:3030/my-custom-service/1234    # get
+    http://123.123.123.123:3030/my-custom-service/?one=twoooooo  # find
+
+
+
+
+##   S E Q U E L I Z E:
+
+0) npm install sequelize
+
+1) create sequelize CUSTOM SERVICE named:  "my-custom-service"
+
+2) edit  ./src/sequelize.js change logging false to logging true
+
+3) change:  src/services/my-custom-service/my-custom-service.class.js  :
+
+/* eslint-disable no-unused-vars */
+const { QueryTypes } = require('sequelize');
+
+exports.MyCustomService = class MyCustomService {
+  constructor (options, app) {
+    this.options = options || {};
+    this.app = app;
+  }
+
+async find (key) {
+    const sequelize = this.app.get('sequelizeClient');
+    const stimwordPositionSelectFind    = 
+                        'SELECT * FROM stimwordPosition WHERE 1 AND stimwordPositionWord = $stimwordPositionWord;'            ;
+    const stimwordPositionSelectParms   =       
+                        {       'stimwordPositionWord'  :       JSON.parse(key.query).stimwordPositionWord      }       ;
+    const rows = await sequelize.query
+                        (       stimwordPositionSelectFind
+                        ,       {       'bind'  :       stimwordPositionSelectParms }
+                        );
+    return rows;
+  }
+};
+
+
+################################  browser-console:
+
+in browser console (common initial setup for all examples)
+
+first visit  http://123.123.123.123:3030/ to "initialize" chrome
+
+[ '//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'
+, '//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js'
+].forEach( (src) => {
+    let script = document.createElement('script'); script.src = src; script.async = false;
+    document.head.appendChild(script);
+});
+const app = feathers();    const socket = io();    app.configure(feathers.socketio(socket));
+
+// optional if trying to run on another http[s] webpage rather than at http://123.123.123.123:3030:
+
+const socket = io.connect
+		(	    '35.192.14.166:3030'   ,
+			{	'path'		:   '/socket.io/'   
+      , 'port'    :  '3030'
+      , 'hostname' :  '35.192.14.166'
+      , 'secure'  :  false
+			}
+		);
+                 
+//                    socket.io.engine.transport
+
+
+async function stimwordPositionFind(param) {    
+  console.log( 'param: ' + param); 
+  let getResult = await app.service('my-custom-service').find(param); 
+  console.log('stimwordPosition function: ' + JSON.stringify(getResult) ); 
+  return getResult; 
+};
+let stimwordPositionResult = null; 
+let key = { 'query' : JSON.stringify( { 'stimwordPositionWord' : 'horse', 'parm2' : 'answer2' } ) } ;   
+stimwordPositionFind(key).then( value => {      /* get(GET) */ 
+  stimwordPositionResult = value; 
+  console.log('stimwordPosition(' + key + ') : ' + JSON.stringify(stimwordPositionResult) ); 
+});
+
+
+async function stimwordPosition(id) {      /* get(GET) (just one by index) */
+  console.log( 'id: ' + id); 
+  let getResult = await app.service('my-custom-service').find(id); 
+  console.log('stimwordPosition function: ' + JSON.stringify(getResult) ); 
+  return getResult; 
+};
+
+############  GET GET GET GET GET GET
+
+  async get (id) {
+    const sequelize = this.app.get('sequelizeClient');
+    const stimwordPositionSelectGet = `SELECT * FROM stimwordPosition WHERE 1 AND stimwordPositionAutoIncr = ${id};`;
+    const rows = await sequelize.query(stimwordPositionSelectGet);
+    return rows;
+  }
+
+async function stimwordPosition(id) {      /* get(GET) (just one by index) */
+  console.log( 'id: ' + id); 
+  let getResult = await app.service('my-custom-service').get(id); 
+  console.log('stimwordPosition function: ' + JSON.stringify(getResult) ); 
+  return getResult; 
+};
+let stimwordPositionResult = null; let key = 1;   // assuming your row ID is one
+stimwordPosition(key).then( value => {      /* get(GET) */ 
+  stimwordPositionResult = value; 
+  console.log('stimwordPosition(' + key + ') : ' + JSON.stringify(stimwordPositionResult) ); 
+});
+#####################################################
+
+let stimwordPositionResult = null; let key = 1;   // assuming your row ID is one
+stimwordPosition(key).then( value => {      /* get(GET) */ 
+  stimwordPositionResult = value; 
+  console.log('stimwordPosition(' + key + ') : ' + JSON.stringify(stimwordPositionResult) ); 
+});
+
+              /notice object starting with "query" for the find:
+let stimwordPositionResult = null; let key = { 'query' : 'horse' } ;   // assuming your row ID is one
+stimwordPositionFind(key).then( value => {      /* get(GET) */ 
+  stimwordPositionResult = value; 
+  console.log('stimwordPosition(' + key + ') : ' + JSON.stringify(stimwordPositionResult) ); 
+});
