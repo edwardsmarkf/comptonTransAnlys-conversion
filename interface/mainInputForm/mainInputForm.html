@@ -1,5 +1,4 @@
-[root@edwardsmarkf newTranscriptionInterface]# clear
-[root@edwardsmarkf newTranscriptionInterface]# cat  phoneticTranscriptionGrid.html
+
 <html>
 
 <head>
@@ -8,498 +7,1362 @@
 
 <style>
 
-html, body {
-        margin                  : 40px                                  ;
-        padding                 : 10px                                  ;
-}
+	html, body { 
+		/* get rid of the scrolling crap */
+		margin			: 4px					;
+		padding			: 1px					;
+	}
+
+	smart-combo-box.phoneticTranscriptionComboBox		{
+		font-size		: 16px					;
+		width			: 100px					;
+	}
+
+	smart-text-box.phoneticTranscriptionTextBox		{
+		font-size		: 16px					;
+		width			: 80px					;
+	}
 
 
-div.tooltipWrapperClass {
-        display                 : grid                                  ;
-        grid-template-columns   : repeat( 3, 40px)                      ;
-        grid-gap                : 2px                                   ;
-        background-color        : #fff                                  ;
-        color                   : #444                                  ;
-}
 
-div.tooltipElement {
-        background-color        : #444                                  ;
-        color                   : #fff                                  ;
-        border-radius           : 5px                                   ;
-        padding                 : 5px                                   ;
-}
+		/* main grid	*/
 
+	div#primaryDisplayGrid		{
+		border			:	0px 			;
+		background-color	:	#fff			;
+		color			:	#444			;
+		display			:	grid			;
+		grid-template-columns	:	repeat(10, 100px)	;
+		grid-gap		:	4px			;
+		padding-left		:	20px			;
+		max-height		:	600px			;
+		max-width		:	1060px			;
+		overflow-x		:	hidden			;
+		overflow-y		:	auto			;
+		scroll-behavior		:	smooth			;
+	}
 
-div.wrapper {
-        color                   : #444                                  ;
-        display                 : grid                                  ;
-        max-width               : 1000px                                ;
-        grid-gap                : 5px                                   ;
-        grid-template-columns   : 150px 200px repeat(2, 150px )         ;
-        background-color        : #fff                                  ;
-}
+	div#primaryDisplayGrid  > div.cell {
+		background-color	:	#444			;
+		border-radius		:	5px			;
+		color			:	#fff			;
+		font-size		:	110%			;
+		padding			:	5px			;
+		transition		:	transform .3s		; /* Animation */
+	}
 
-div.box {
-        background-color        : #444                                  ;
-        color                   : #ccc                                  ;
-        border-radius           : 5px                                   ;
-        padding                 : 20px                                  ;
-        font-size               : 150%                                  ;
-        display                 : flex                                  ;
-        justify-content         : center                                ;
-        align-content           : center                                ;
-        flex-direction          : column                                ;
-                                        /*center alignment */
-                                /*     https://stackoverflow.com/questions/9249359/vertically-align-text-within-a-div
-                                https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-div/13515693#13515693*/
-}
-
-div#gridFirstColumn             {
-        text-align              : center                                ;
-}
-
-smart-text-box, smart-combo-box {
-        width                   : 80px                                  ;
-}
+	div#primaryDisplayGrid  div:hover  {
+		  background-color	:	#cccccc			;
+		  cursor		:	pointer			;
+		  transform		:	scale(1.3);		 
+		/* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+	}
 
 
-input.smart-input               {
-        --smart-font-size       : 20px                                  ;
-}
-
-smart-list-item.dropDownOptions {
-        border                  : 1px dotted black                      ;
-}
-
-smart-list-item.replicationValue        {
-        opacity                 : 50%                                   ;
-}
-
-smart-list-item.languageNormsError      {
-        background-color        : #333                                  ;
-}
 
 
-.tooltipWrapperClass {
-        display                 : grid                                  ;
-        grid-template-columns   : repeat(4, 25px)                       ;
-        grid-gap                : 2px                                   ;
-        background-color        : #fff                                  ;
-        color                   : #444                                  ;
-}
+		/* phonetic transcription input screen	*/
 
-.tooltipElement {
-        background-color        : #444                                  ;
-        color                   : #fff                                  ;
-        border-radius           : 5px                                   ;
-        padding                 : 5px                                   ;
-}
+	/*
+	div#phoneticTranscriptionInputScreen	div.smart.drop-down-container	{
+		margin-top		:	0px				;		
+	}
+	*/
+
+
+		/* client context screen */
+
+	smart-window#clientContextSpontWindow	{
+		overflow			: auto				;
+		--smart-window-default-width	: 620px				;
+		--smart-window-default-height	: 400px				;
+	}
+	div#clientContextSpontDiv		{
+		display				: grid				;
+		grid-template-columns		: 70px 90px 400px		;
+		grid-gap			: 10px				;
+		background-color		: #fff				;
+		color				: #444				;
+	}
+
+	smart-input.clientContextError		{
+		height				: 48px				;
+		width				: 70px				;
+		border				: none				;
+	}
+	smart-input.clientContextError input	{
+		background-color		: #eee				;
+	}
+	smart-number-input.clientContextSpeakingErrors	{
+		height				: 48px				;
+		margin-top			: 0px				;
+		width				: 90px				;
+	}
+	smart-number-input.clientContextSpeakingErrors input	{
+		background-color		: #eee				;
+	}
+	smart-multiline-text-box.clientContextErrorNotes	{
+		height				: 50px				;
+		width				: 400px				;
+	}
+	smart-multiline-text-box.clientContextErrorNotes textarea	{
+		background-color		: #eee				;
+	}
+
+	div.titleRow				{
+		background-color		: #444				;
+		color				: #fff				;
+		border-radius			: 5px				;
+		padding				: 5px				;
+		font-size			: 90%				;
+	}
+
+
+
+
+
+		/* transcription grid */
+
+	.smart-window .smart-content-container>.smart-content {
+		overflow-x		: visible				;
+		overflow-y		: visible				;
+	}
+
+	div.phoneticTranscrptionPopupWindowTitle		{
+		font-size		: 24px					;
+		margin-left		: 10px					;
+		margin-right		: 9px					;
+	}
+
+	div.smart-tooltip-content				{
+		transition-delay	: 5s					;
+	}
+
+	div.tooltipWrapperClass {
+		display			: grid					;
+		grid-template-columns	: repeat(3, 40px)			;
+		grid-gap		: 2px					;
+		background-color	: #fff					;
+		color			: #444					;
+											/*grid-template-columns	: repeat(4, 25px)			;*/
+	}
+
+	div.tooltipElement {
+		background-color	: #444					;
+		color			: #fff					;
+		border-radius		: 5px					;
+		padding			: 5px					;
+	}
+
+
+	div.wrapper {
+		color			: #444					;
+		display			: grid					;
+		max-width		: 1000px				;
+		grid-gap		: 5px					;
+		grid-template-columns	: 200px, repeat( var(--colNum), 150px ) ;
+		background-color	: #fff					;
+	}
+
+	div.box {
+		background-color	: #444					;
+		color			: #ccc					;
+		border-radius		: 5px					;
+		padding			: 20px					;
+		font-size		: 150%					;
+		display			: flex					;
+		justify-content		: center				;
+		align-content		: center				;
+		flex-direction		: column				;
+						/*center alignment */
+					/*     https://stackoverflow.com/questions/9249359/vertically-align-text-within-a-div
+					https://stackoverflow.com/questions/2939914/how-do-i-vertically-align-text-in-a-div/13515693#13515693*/
+	}
+
+	div#gridFirstColumn		{
+		text-align		: center				;
+	}
+
+	smart-text-box, smart-combo-box {
+		width			: 80px					;
+	}
+
+
+	smart-list-item.dropDownOptions	{
+		border			: 1px dotted black			;
+	}
+
+	smart-list-item.replicationValue	{
+		opacity			: 50%					;
+	}
+
+	smart-list-item.languageNormsError	{
+		background-color	: #333					;
+	}
+
+
+	smart-tooltip#phoneticPopupMenu		{
+		margin			: -6px					;
+		z-index			: 999999999				;
+	}
+
+	.tooltipWrapperClass {
+	}
+
+	.tooltipElement {
+		background-color	: #444					;
+		color			: #fff					;
+		border-radius		: 5px					;
+		padding			: 5px					;
+	}
+
+		/* https://stackoverflow.com/questions/13694062/css-left-center-right-align-text-on-same-line */
+	div#headerLabel	{
+		display			: flex					;
+		justify-content		: space-between				;
+	}
+
+	.prevNextLinks	{
+		text-decoration		: none					;
+		font-weight		: bolder				;
+		font-size		: 25px					;
+		color			: orange				;
+	}
+
+	.prevNextLinks:hover	{
+		background-color	: black					;
+		color			: white					;
+		font-weight		: bolder				;
+	}
+
+
+
+
+		/* sound selector menu css  */
+
+	smart-menu#soundSelectorMenu		{
+		max-height		: 50px					;
+		overflow		: display				;
+	}
+
+														/*
+														button#soundSelectorMenuContainer	{
+															border-radius		: 6px					;
+														}
+														*/
+
+	.smart-menu-item-label-element {
+		min-width		: 0px					;
+	}
+
+	div.smallLabelClass		{
+		min-width		: 100px					;
+		text-align		: center				;
+	}
+
+	div.smart-menu-item-label-container	{
+		background-color	: orange				;
+		font-size		: 20px					;		
+	}
+
+
+
 
 </style>
 
+    <!-- scripts -->  
+<script type='module' src='/js/smartHtmlElements/14.2.0/source/modules/smart.combobox.js'		></script>
+<script type='module' src='/js/smartHtmlElements/14.2.0/source/modules/smart.input.js'			></script>
+<script type='module' src='/js/smartHtmlElements/14.2.0/source/modules/smart.menu.js'			></script>
+<script type='module' src='/js/smartHtmlElements/14.2.0/source/modules/smart.multilinetextbox.js'	></script>
+<script type='module' src='/js/smartHtmlElements/14.2.0/source/modules/smart.numberinput.js'		></script>
+<script type='module' src='/js/smartHtmlElements/14.2.0/source/modules/smart.textbox.js'		></script>
+<script type='module' src='/js/smartHtmlElements/14.2.0/source/modules/smart.tooltip.js'		></script> 
+<script type='module' src='/js/smartHtmlElements/14.2.0/source/modules/smart.window.js'			></script> 
 
-    <!-- scripts -->
-<script type='module' src='/js/smartHtmlElements/9.1.0/source/modules/smart.combobox.js'></script>
-<script type='module' src='/js/smartHtmlElements/9.1.0/source/modules/smart.textbox.js'></script>
-<script type='module' src='/js/smartHtmlElements/9.1.0/source/modules/smart.tooltip.js'></script>
+<script type="module">	window.Smart.License = "8baa914e-5b38-4c19-8822-a9c661350252"; </script>
 
 <script>
 
 'use strict;'
 
-const   maxCharsInPhoneticError         = 4     ;
+const	selectedLanguage		=	'Indian Pakistan'		;
+const	replicatedTitle			=	'Time1'				;
 
-var     phoneticPopupMenu               = null  ;       // global to hold the phoentic tooltip
+const	contextPositionSoundPhoneme	=	'contextPositionSoundPhoneme'	;		// these occur so frequently that they deserve their own const!
+const	stimwordPositionSetting		=	'stimwordPositionSetting'	;
+
+const	maxCharsInPhoneticError		=	4				;
+
+const	widthFudgeFactor		=	60				;		// width extra space
+const	heightFudgeFactor		=	80				;		// height extra space
+
+
+var	phoneticPopupMenu		= null	;	// global to hold the phoentic tooltip
 
 
 window.onload = () => {
+ 
+ 	let controlBreak = null;
 
-        phoneticPopupMenu = document.getElementById('phoneticPopupMenu') ;
+	for ( const [key, elements] of Object.entries(parentData)) {
+    
+		if  ( controlBreak != elements['stimwordPageNbr'] )	{
+			if  ( controlBreak + 1 !== elements['stimwordPageNbr'] ) { 
+				let blankDiv		= document.createElement('div')			;
+				let hrTag		= document.createElement('hr')			;
+				blankDiv.appendChild(hrTag) ;
+				blankDiv.style.gridColumnStart = '1';
+				blankDiv.style.gridColumnEnd = '11';
+				document.getElementById('primaryDisplayGrid').appendChild(blankDiv);
+			}
+			controlBreak = elements['stimwordPageNbr'] ;
+		}
 
-        phoneticPopupMenu.addEventListener('mouseleave', (event) =>  {
-                phoneticPopupMenu.close();
-                let thisSmartComboBox = document.getElementById(phoneticPopupMenu.selector.id);
-                processValues   ( thisSmartComboBox.dataset.idNbr
-                                , thisSmartComboBox.dataset.oldValue
-                                , thisSmartComboBox.value
-                                );
-                thisSmartComboBox.dataset.oldValue = thisSmartComboBox.value // saved for future testing
-        })
+		let tag = document.createElement("div");
+		tag.classList.add('cell');
+		tag.onclick = (event) => {
+			processItem(elements['stimwordPageNbr'], elements['stimwordLineNbr'] );
+		};
 
-        const tooltipGridItems = document.getElementById('tooltipGrid').getElementsByTagName('DIV');
-        Object.keys(tooltipGridItems).forEach( element =>  {
-                let thisDiv = tooltipGridItems[element];
-                thisDiv.classList.add('tooltipElement');
-                thisDiv.style.cursor = "pointer";
-                thisDiv.addEventListener('click', event => {
-                        let clickedValue = event.target.innerHTML;
-                        let myComboBox = document.getElementById(phoneticPopupMenu.selector.id);
-                        if  ( clickedValue != '&nbsp;' )  {
-                                if ( myComboBox.value.length < maxCharsInPhoneticError ) {
-                                        myComboBox.value += clickedValue;
-                                } else {
-                                        console.log(`You filled up the phonetic errors input box, max size is ${maxCharsInPhoneticError} characters!`)
-                                }
-                        } else {  // delete selected, so remove character on the far right side
-                                myComboBox.value = myComboBox.value.slice(0, -1) ;              // ha ha why is this necessary ???
-                        }
-                });
-        }); // end Object.keys(descenands).foreach()
+		let text = document.createTextNode(elements['stimwordWord']);
+		tag.appendChild(text);
+		let element = document.getElementById("primaryDisplayGrid");
+		element.appendChild(tag);
+	}
+
+	phoneticPopupMenu = document.getElementById('phoneticPopupMenu') ;
+
+	phoneticPopupMenu.addEventListener('mouseleave', (event) =>  {
+												//if  ( ['SMART-COMBO-BOX', 'SMART-TEXT-BOX', 'INPUT', 'SMART-INPUT'].indexOf(document.elementFromPoint(event.clientX, event.clientY ).tagName )	== -1 ) {
+		phoneticPopupMenuClose(event.clientX, event.clientY, 'phoneticPopupMenu.addEventListener mouseleave was triggered.');
+												//}
+	});
+
+	phoneticPopupMenu.addEventListener('open', (event) =>  {
+		let id, currentValue, dataStimwordPositionAutoIncr										;
+		switch	( event.currentTarget.selector.tagName )	{
+			case	'SMART-TEXT-BOX'	:
+				id				= event.currentTarget.selector.closest('.smart-element').id			;
+				currentValue			= event.currentTarget.selector.value						;
+				dataStimwordPositionAutoIncr	= document.getElementById(id).getAttribute('data-stimword-position-auto-incr')	;
+				break														;
+
+			case	'SMART-COMBO-BOX'	:
+				id				= event.currentTarget.selector.id						;
+				currentValue			= event.currentTarget.selector.value						;
+				dataStimwordPositionAutoIncr	= document.getElementById(id).getAttribute('data-stimword-position-auto-incr')	;
+				break;
+
+			case	'SMART-INPUT'		:
+				id				= event.currentTarget.selector.id						;
+				currentValue			= event.currentTarget.selector.querySelector('input').value			;
+				dataStimwordPositionAutoIncr	= 'n/a'										;
+				break														;
+
+			default				:
+				console.error('We should never be here line 363: ' + event.currentTarget.selector.tagName )				;
+		}
+		document.getElementById(id).setAttribute('data-old-value', currentValue)							;
+	});
+
+	phoneticPopupMenu.addEventListener('close', (event) =>  {
+		let id, currentVal, dataStimwordPositionAutoIncr											;
+		switch	( event.currentTarget.selector.tagName )	{
+			case	'INPUT'			:
+			case	'DIV'			:
+				id				=	event.currentTarget.selector.closest('.smart-element').id			;
+				currentVal			=	document.getElementById(id).querySelector('input').value			;
+				dataStimwordPositionAutoIncr	=	document.getElementById(id).getAttribute('data-stimword-position-auto-incr')	;
+				break															;
+				currentVal			=	document.getElementById(id).querySelector('input').value			;
+				break;
+
+			case	'SMART-COMBO-BOX'	:
+				id				=	event.currentTarget.selector.id 						;
+				currentVal			=	event.currentTarget.selector.querySelector('input').value			;
+				break;
+
+			case	'SMART-TEXT-BOX'		:
+				id				=	event.currentTarget.selector.id							;
+				currentVal			=	event.currentTarget.selector.value						;
+				break															;
+
+			case	'SMART-INPUT'		:
+				id				=	event.currentTarget.selector.id						;
+				currentVal			=	event.currentTarget.selector.querySelector('input').value		;
+				dataStimwordPositionAutoIncr	=	null									;
+				break														;
+
+			default				:
+				console.error('We should never be here line 397: ' + event.currentTarget.selector.tagName )					;
+		}
+
+
+		if  ( document.getElementById(id).getAttribute('data-old-value') != currentVal ) {
+				/* feathers call will go here...............  */
+			const result =
+				(	''				//		event.type.toUpperCase()
+				+	' -- phoneticPopupMenu : '
+				+	id
+				+	' '
+				+	' line: '
+				+	' 377 '
+				+	'stimword position auto incr: '
+				+	document.getElementById(id).getAttribute('data-stimword-position-auto-incr')
+				+	' old value: '
+				+	(	(	(	typeof document.getElementById(id).getAttribute('data-old-value') == 'string'	)
+						&&	(	document.getElementById(id).getAttribute('data-old-value') 			)
+						)
+					?	document.getElementById(id).getAttribute('data-old-value')
+					:	'n/a'
+					)
+				+	' new value: '
+				+	(	currentVal
+					?	currentVal
+					:	'n/a'
+					)
+				);
+			document.getElementById('tempResults').innerHTML = result;
+		}
+	});
+
+
+
+
+		/* phonetic transcription clientContext form stuff */
+
+	for ( element of errorSoundSelectorData )	{
+		let thisDiv	= document.createElement('DIV')				;			//	tooltipGridItems[element];
+		let newText	= document.createTextNode(element['errorSound'])	;
+		thisDiv.appendChild(newText)						;
+		thisDiv.title	= element['toolTip']					;
+		thisDiv.classList.add('tooltipElement');
+		thisDiv.style.cursor = "pointer";
+
+		thisDiv.addEventListener('click', event => {
+			const clickedValue	= event.target.innerHTML					;
+			let thisElement		= phoneticPopupMenu.selector					;
+
+			switch (true)	{
+
+				case	(	( 'type' in thisElement						)
+					&&	( typeof thisElement.type		== 'string'		)
+					&&	( ['input', 'text'].indexOf(thisElement.type) > -1		)
+					&&	( thisElement.tagName			== 'SMART-TEXT-BOX'	)
+					)	:
+				case	(	( 'type' in thisElement						)
+					&&	( typeof thisElement.type		== 'string'		)
+					&&	( thisElement.type			== 'list'		)
+					&&	( thisElement.tagName			== 'SMART-COMBO-BOX'	)
+					)	:
+					if  ( clickedValue != ' ' )  {
+						if ( thisElement.value.length < maxCharsInPhoneticError ) {
+							thisElement.value += clickedValue;
+						} else {
+							console.info(`You filled up the phonetic errors input box, max size is ${maxCharsInPhoneticError} characters!`)
+						}
+					} else {  // delete selected, so remove character on the far right side
+						thisElement.value = thisElement.value.slice(0, -1) ;
+					}
+					break	;
+
+								/* client context spontaneous count */
+				case	(	( typeof thisElement.dataset.columnName		== 'string'			)
+					&&	( thisElement.dataset.columnName		== 'clientContextError'	)
+					&&	( thisElement.tagName				== 'SMART-INPUT'		)
+					) 	:
+					if  ( clickedValue != ' ' )  {
+						if ( thisElement.value.length < maxCharsInPhoneticError ) {
+							thisElement.value  += clickedValue;
+						} else {
+							console.info(`You filled up the phonetic errors input box, max size is ${maxCharsInPhoneticError} characters!`)
+						}
+					} else {  // delete selected, so remove character on the far right side
+						thisElement.value = thisElement.value.slice(0, -1) ;
+					}
+					break	;
+				default								:
+					console.error('we should NEVER be here! - line 485 - ', thisElement.tagName);
+			}
+				/* 2022-10-21	make the current element focused so users can type on the keyboard as well as select from the phonetic error tooltip menu  ;-) */
+			thisElement.focus();			
+		});
+		document.getElementById('tooltipGrid').appendChild(thisDiv)	;
+	}; // end errorSoundSelectorData
+
+
+		/* sound selector menu stuff */
+	let menuDataSource =  soundSelector() ;
+	document.getElementById('soundSelectorMenu').dataSource = menuDataSource;
+
+	document.getElementById('soundSelectorMenu').addEventListener('itemClick', (event) => {
+		clientContextWindow(event.detail.value); 
+	});
+													/*
+
+													//document.getElementById('soundSelectorMenuContainer').style.overflow = 'hidden';
+
+													document.getElementById('soundSelectorMenuContainer').addEventListener('mouseover', () => {
+														let rect = document.getElementById('soundSelectorMenuContainer').getBoundingClientRect();
+														console.info('Sound selector window opening!!');
+														document.getElementById('soundSelectorMenu').open(rect.x + 20, rect.y + 10);
+													});
+
+													document.getElementById('soundSelectorMenuContainer').addEventListener('mouseleave', () => {
+														const element = document.getElementById("soundSelectorMenu");
+														if ( !element.parentNode.matches(":hover")) {
+															console.info('Sound selector window closing not by hover!!');
+															document.getElementById('soundSelectorMenu').close();
+														}
+													});
+													*/
+
+	document.getElementById('soundSelectorMenu').addEventListener('mouseleave', (event) =>  {
+		document.getElementById('soundSelectorMenu').close();
+	})
+
+
+		/*Spontaneous speaking error menu */
+
+	document.querySelectorAll('smart-input.clientContextError').forEach(	element	=>	{
+		element.addEventListener(	'mouseover'	,	(event) => { clientContextPhoneticPopupMenuOnMouseOver(event)	;	});
+		element.addEventListener(	'mouseleave'	,	(event) => { clientContextPhoneticPopupMenuOnMouseLeave(event)	;	});
+	})
+
+	document.querySelectorAll('smart-number-input.clientContextSpeakingErrors').forEach(	element	=>	{
+		element.addEventListener(	'change'	,	(event) => { checkSpeakingCountValue(event)			;	});
+	})
 }
 
 
-function processItem(event) {
-
-        document.getElementById('phoneticTranscriptionInputScreen').replaceChildren();  // temporary line for testing ONLY
-
-        const   selectedLanguage                =       'Indian Pakistan'               ;
-        const   replicatedTitle                 =       'Time1'                         ;
-
-        const   contextPositionSoundPhoneme     =       'contextPositionSoundPhoneme'   ;               // these occur so frequently that they deserve their own const!
-        const   stimwordPositionSetting         =       'stimwordPositionSetting'       ;
-        const   stimwordWordParm                =       event.innerHTML                 ;
-
-        var lastDataItemAdded   =       null    ;               // save this for replication values
-        var controlBreak        =       {}      ;               // stores all the control breaks, really just an image of the current record
-        var cssVarHolderObj     =       []      ;               // stores all the 'span rules'
-        var rowCount            =       0       ;
-
-                /* create the first column */
-        let stimwordWordElement = document.createTextNode(stimwordWordParm)             ;
-        let stimwordWordTag     = document.createElement('div')                         ;
-
-        stimwordWordTag.appendChild(stimwordWordElement)                                ;
-
-        stimwordWordTag.setAttribute('id', 'gridFirstColumn')                           ;
-        stimwordWordTag.classList.add('box')                                            ;
-        stimwordWordTag.style.gridColumnStart   =       '1'                             ;
-        stimwordWordTag.style.gridRowStart      =       '1'                             ;
-        stimwordWordTag.style.gridColumnEnd     =       'span 1'                        ;
-        stimwordWordTag.style.gridRowEnd        =       'span var(--stimwordWord)'      ;
-
-        document.getElementById('phoneticTranscriptionInputScreen').appendChild(stimwordWordTag);
-
-        const data = eval( stimwordWordParm + 'Data' ) ;
-
-                /* COUNT occurences of stimwordPositionSetting - if its just one occurence (like the reading passage) we do NOT need to display this column! */
-        let tmpArray = [] ;
-        for ( let i in Object.keys(data) )  { tmpArray.push(data[i][stimwordPositionSetting]) ;  } ;
-        const stimwordPositionSettingCount = tmpArray.filter((v,i) => tmpArray.indexOf(v) == i ).length;
-                /* end COUNT of occurencs - is there a better way ???  */
-
-                                                //      for ( let recordNbr in Object.keys(data) )
-        for ( const [key, record] of Object.entries(data) )
-        {
-                                                                        //const record = data[recordNbr] ;
-                let incrRowFlag = false;
-                                                                        //      columnLoop:
-                                                                                        //for ( const property in element )
-                                                                        //for ( let columnNbr in Object.keys(data[recordNbr]) )                 // loop over each column!
-                Object.entries(record).forEach(( keyValPair, index )    =>
-                {
-                        const [ columnName, columnData ]  = keyValPair;
-
-                                        /* skip single occurences of stimwordPositionSetting, and all columns that are not directly processed */
-                        if      (       (columnName == stimwordPositionSetting && stimwordPositionSettingCount == 1     )
-                                ||      (columnName == 'stimwordPositionAutoIncr'                                       )
-                                ||      (columnName == 'stimwordBackgroundColor'                                        )
-                                ||      (columnName == 'languageNormsErrorCOUNT'                                        )
-                                )
-                        {
-                                return;         //              continue columnLoop;
-                        }
-
-                        switch ( columnName )   {
-                            case contextPositionSoundPhoneme    :
-                            case stimwordPositionSetting        :
-                            case 'clientContextError'           :
-                                if  (   typeof controlBreak[columnName] === 'undefined' || controlBreak[columnName] != columnData )
-                                {
-                                        controlBreak = Object.assign
-                                                (       Object.fromEntries(Object.entries(controlBreak).slice(0,index))
-                                                ,       { [columnName] : columnData }
-                                                ) ;
-
-                                                                                /*
-                                                                                controlBreak[columnName] = record[columnName] ;
-                                                                                for ( let xx = parseInt(columnNbr) + 1 ; xx < Object.keys(data[recordNbr]).length; xx++ )
-                                                                                                // null out all subsequent control-break columns !!
-                                                                                {       controlBreak[ Object.keys(data[recordNbr])[xx]  ] = null;  ;
-                                                                                }
-                                                                                */
-
-                                        let tag = document.createElement("div");
-                                        let element             = null  ;
-                                        let colStartValue       = null  ;
-                                        switch ( columnName )   {
-
-                                                case contextPositionSoundPhoneme        :
-
-                                                        colStartValue           = '2'                                                   ;
-
-                                                        if  ( stimwordPositionSettingCount  > 1 )       {
-                                                                let cssVarName          =       '--'
-                                                                                        +       contextPositionSoundPhoneme
-                                                                                        +       '--'
-                                                                                        +       (rowCount + 1).toString()
-                                                                                        ;
-                                                                cssVarHolderObj.push    (       {       'cssVarName'            :       cssVarName
-                                                                                                ,       'startingRowNbr'        :       rowCount
-                                                                                                ,       'endingRowNbr'          :       rowCount
-                                                                                                }
-                                                                                        );
-                                                        }
-
-                                                        element                 = document.createElement('span')                        ;
-                                                        element.innerHTML       = columnData                                            ;
-                                                        element.style.setProperty('background' , record['stimwordBackgroundColor'] )    ;
-                                                        break;
-
-                                                case stimwordPositionSetting            :
-
-                                                        colStartValue           =       '3'                                                     ;
-                                                        element                 =       document.createElement('span')                          ;
-                                                        element.innerHTML       =       columnData                                              ;
-                                                        element.style.setProperty('background' , record['stimwordBackgroundColor'] )            ;
-                                                        break;
-
-                                                case 'clientContextError'               :
-                                                        if  ( stimwordPositionSettingCount == 1 )       {
-                                                                colStartValue                   = '3'                                           ;
-                                                        } else {
-                                                                colStartValue                   = '4'                                           ;
-                                                        }
-                                                        let elementId                   = columnName + '-' + rowCount                           ;
-                                                        let {stimwordPositionAutoIncr}  = record                                                ;
-                                                        lastDataItemAdded               = elementId                                             ;
-                                                        if  ( Number(record['languageNormsErrorCOUNT']) == 0 ) {
-
-                                                                                        /*      https://www.htmlelements.com/demos/input/textarea/ */
-                                                                element                         = document.createElement('smart-text-box')              ;
-                                                        } else {
-                                                                element                         = document.createElement('smart-combo-box')             ;
-                                                                element.incrementalSearchMode   = 'equals'                                              ;
-                                                        }
-                                                        element.style.setProperty('background'  , record['stimwordBackgroundColor']     )       ;
-                                                        element.setAttribute('value'            , columnData                            )       ;
-                                                        element.setAttribute('id'               , elementId                             )       ;
-                                                        element.setAttribute('data-stimword-position-auto-incr', stimwordPositionAutoIncr)      ;
-                                                        element.setAttribute('class'            , 'phoeticTranscriptionInputField'      )       ;
-                                                        break;
-                                        } // end switch
-
-                                        if  ( element && colStartValue )        {
-                                                tag.appendChild(element);
-
-                                                tag.classList.add('box');
-
-                                                tag.style.gridColumnStart       =       colStartValue   ;
-                                                tag.style.gridRowStart          =       (parseInt(rowCount) + 1 ).toString()    ;
-                                                tag.style.gridColumnEnd         =       'span 1'        ;
-
-                                                switch ( columnName )   {
-
-                                                        case    contextPositionSoundPhoneme     :
-                                                                if  ( stimwordPositionSettingCount > 1 )        {
-                                                                        let cssVarName          =       '--'
-                                                                                                +       contextPositionSoundPhoneme
-                                                                                                +       '--'
-                                                                                                +       (rowCount + 1).toString()
-                                                                                                ;
-                                                                        tag.style.gridRowEnd    =       'span var('
-                                                                                                +       cssVarName
-                                                                                                +       ')'
-                                                                                                ;
-                                                                } else {
-                                                                        tag.style.gridRowEnd    =       'span 1'        ;
-                                                                }
-                                                                break;
-                                                        default                                 :
-                                                                tag.style.gridRowEnd            =       'span 1'        ;
-                                                }
-
-                                                document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
-                                                incrRowFlag = true;
-                                        } else {
-                                                console.log(`Skipping ${columnName} column in grid!`);
-                                        }
-
-                                } else {
-                                                /* control break was triggered */
-                                        if      (       ( columnName                                    == contextPositionSoundPhoneme                  )
-                                                &&      ( record[stimwordPositionSetting]               != controlBreak[stimwordPositionSetting]        )
-                                                &&      ( stimwordPositionSettingCount                  > 1                                             )
-                                                )
-                                        {
-                                                        cssVarHolderObj[(cssVarHolderObj.length -1)].endingRowNbr++
-                                        }
-
-                                }
-                                break;
-
-                            case 'replicationValue'     :
-
-                                if  ( columnData )      {               // make SURE this is not a blank
-                                        let nbrOfComboBoxes     = document.getElementsByTagName('smart-combo-box').length               ;
-                                        let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
-                                        tmpComboBox.insert(99, columnData)                                                              ;
-                                        let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1         ;
-                                        let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location]         ;
-                                        tmpListItem.classList.add('dropDownOptions', 'replicationValue' )                               ;
-                                        tmpListItem.title       = replicatedTitle                                                       ;
-                                }
-                                break;
-
-                            case 'languageNormsError'           :
-                                if  ( columnData )      {               // make SURE this is not a blank
-                                        let nbrOfComboBoxes     = document.getElementsByTagName('smart-combo-box').length               ;
-                                        let tmpComboBox         = document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1] ;  // get the most recent one
-                                        tmpComboBox.insert(99, columnData)                                                              ;
-                                        let location            = tmpComboBox.getElementsByTagName('smart-list-item').length -1         ;
-                                        let tmpListItem         = tmpComboBox.getElementsByTagName('smart-list-item')[location]         ;
-                                        tmpListItem.classList.add('dropDownOptions', 'languageNormsError'       )                       ;
-                                        tmpListItem.title       = selectedLanguage                                                      ;
-                                }
-                                break;
-
-                        } // end switch statement
-                }) // end for each column item
-                if  ( incrRowFlag )     {
-                        rowCount++      ;
-                }
-        } // end for each record
-
-
-                                /*      resize the stylesheet to make it fit!  */
-        // Getting the stylesheet
-        const stylesheet = document.styleSheets[1];
-        console.log(stylesheet);
-        let elementRules;
-
-
-        // looping through all the rules and getting the .box style to reduce the padding
-        for ( let i = 0; i < stylesheet.cssRules.length; i++) {
-                if ( stylesheet.cssRules[i].selectorText === 'div.box') {
-                                                //const currentPadding = parseInt(stylesheet.cssRules[i].style.getPropertyValue('padding-top').slice(0,-2));
-                        const rowMax            = 12    ;       // max number of rows is word 'sixty seven'
-                        const topBottomPadding  = 4     ;       // three pixels per anything over row max
-                        const newPadding = ( ( rowMax - rowCount ) * topBottomPadding ) + 'px'  ;
-                        stylesheet.cssRules[i].style.setProperty('padding-top'          , newPadding);
-                        stylesheet.cssRules[i].style.setProperty('padding-bottom'       , newPadding);
-                }
-        }
-
-
-
-
-        //      create the new rules to "extend" the grid rows since there is not way to automate this (weird) !
-        document.documentElement.style.setProperty( '--stimwordWord', rowCount.toString() );
-        for ( let incr in cssVarHolderObj )
-        {       let { startingRowNbr, endingRowNbr, cssVarName } = cssVarHolderObj[incr]        ;
-                if  ( startingRowNbr != endingRowNbr )
-                {
-                        let bottomRow = (( endingRowNbr - startingRowNbr ) + 1 ).toString() ;
-                        document.documentElement.style.setProperty( cssVarName, bottomRow );
-
-                }
-        }
-
-
-
-
-                /********************************
-                        tooltip stuff
-                *********************************/
-
-        Object.keys(document.getElementsByClassName('phoeticTranscriptionInputField')).forEach ( key => {
-
-                                                        //const comboBoxElement = document.getElementsByTagName('smart-combo-box')[key];
-
-                const comboBoxElement = document.getElementsByClassName('phoeticTranscriptionInputField')[key];
-
-                if  ( comboBoxElement.querySelector('input') )  {
-                        comboBoxElement.querySelector('input').setAttribute('maxlength', maxCharsInPhoneticError);
-                } else { // if ( comboBoxElement.querySelector('smart-text-box') ) {
-                        comboBoxElement.setAttribute('maxlength', maxCharsInPhoneticError);
-                };
-
-                comboBoxElement.addEventListener('mouseover', (event) => {
-                        if   (  event.target.tagName == 'INPUT' )  {    // ie, cursor is NOT over the arrow
-                                if      (       (!(comboBoxElement.opened))     // ie combobox is actually closed now, NOT OPEN, but closed is not an option, surprisingly
-                                        )
-                                {
-                                        phoneticPopupMenu.selector = comboBoxElement;
-                                        comboBoxElement.dataset.oldValue = comboBoxElement.value;   // save old for future testing!!
-                                        phoneticPopupMenu.open();
-                                } else {
-                                        console.log('!!! skipping because we came in from the RIGHT side and only half way up, and/or from the BOTTOM, ');
-                                        console.log(' 2/3 of the way across on the right, instead of 1/3 of the way from the left');
-                                }
-                                                        //if  ( event.clientX < ( event.currentTarget.getElementsByClassName('smart-drop-down-button')[0].getBoundingClientRect().left -2 )    )
-                        }
-                });
-
-                comboBoxElement.addEventListener('mouseout', event => {
-                                                                // did the cursor leave this combobox by going DOWN or left/right/up ???
-                        if  ( event.clientY <  comboBoxElement.getBoundingClientRect().bottom - 2 )     // two is the "fugde factor"  !!
-                        {
-                                phoneticPopupMenu.close();  // close this tooltip ONLY if the cursor went left/right/up otherwise leave open
-                        }
-                });
-
-
-                comboBoxElement.getElementsByClassName('smart-list-items-inner-container')[0].addEventListener('mouseleave', event => {
-                        if  ( event.clientY > ( comboBoxElement.getElementsByClassName('smart-list-items-inner-container')[0].getBoundingClientRect().top + 0))
-                        {
-                                                                //console.log(event.clientX);
-                                                                // console.log(JSON.stringify(comboBoxElement.getElementsByClassName('smart-list-items-inner-container')[0].getBoundingClientRect() ) );
-                                comboBoxElement.close();
-                        }
-                })
-
-                comboBoxElement.addEventListener('opening', () => {
-                        phoneticPopupMenu.close();
-                });
-
-                comboBoxElement.addEventListener('change', event => {
-                        if  (!( phoneticPopupMenu.visible )) {   // ie its CLOSED and therefore not visible
-                                processValues   ( event.currentTarget.dataset.idNbr
-                                                , event.currentTarget.dataset.oldValue
-                                                , event.currentTarget.value
-                                                );
-                                event.currentTarget.dataset.oldValue = event.currentTarget.value;
-                        } else {
-                                console.log('Skipping processing because tooltip is still visible, mouseout will trigger closing the tooltip!')
-                        }
-                });
-        });
-
-
-
-
-
-
-                        //let ruleString = ':root ' + String.fromCharCode(123) + ' --stimwordWord: ' + rowCount.toString() + ';'        ;       //  using "String.fromCharCode(123)" instead of opening curly-brace for vim!
-                        /*
-                                                   ruleString   += ' '
-                                                                + cssVarName
-                                                                + ': '
-                                                                + (( endingRowNbr - startingRowNbr ) + 1 ).toString()
-                                                                + ';'
-                                                                ;
-                        */
-                        //ruleString += String.fromCharCode(125);               // close curly-brace (125), again so as to not "confuse" vim!
-                                                                // example:  ruleString = ':root { --stimwordWord--1: 6; --contextPositionSoundPhoneme--1: 2; --contextPositionSoundPhoneme--3: 2; --contextPositionSoundPhoneme--5: 2;}' ;
 
 
+
+function processItem(stimwordPageNbr, stimwordLineNbr) {
+
+			// ONLY FOR TESTING
+	document.getElementById('phoneticTranscriptionInputScreen').replaceChildren();	// TEMPORARY line for testing ONLY
+			// ONLY FOR TESTING
+
+
+	document.getElementById('phoneticTranscriptionPopupWindow').close()	;	// just in case....
+
+
+	const	dataElement			=	parentData.find(x => x.stimwordPageNbr == stimwordPageNbr && x.stimwordLineNbr == stimwordLineNbr)		;
+	const	stimwordWordParm		=	dataElement['stimwordWord']			;
+	const	itemKey				=	dataElement['stimwordPageNbr']
+						+	'-'
+						+	dataElement['stimwordLineNbr']
+						;
+
+	var lastDataItemAdded	=	null	;		// save this for replication values
+	var controlBreak	=	{}	;		// stores all the control breaks, really just an image of the current record
+	var cssVarHolderObj	=	[]	;		// stores all the 'span rules'
+	var rowCount		=	0	;
+
+		/* COUNT occurences of stimwordPositionSetting - if its just one occurence (like the reading passage) we do NOT need to display this column! */
+	let tmpArray = [] ;
+	for ( let i in Object.keys(myData[itemKey]) )  { tmpArray.push(myData[itemKey][i][stimwordPositionSetting]) ;  } ;
+	const stimwordPositionSettingCount = tmpArray.filter((v,i) => tmpArray.indexOf(v) == i ).length;
+		/* end COUNT of occurencs - is there a better way ???  */
+
+	for ( const [key, record] of Object.entries(myData[itemKey]) )
+	{
+		let incrRowFlag = false;
+
+		Object.entries(record).forEach(( keyValPair, index )	=>
+		{
+			const [ columnName, columnData ]  = keyValPair;
+
+					/* skip single occurences of stimwordPositionSetting, and all columns that are not directly processed */
+			if	(	(columnName == stimwordPositionSetting && stimwordPositionSettingCount == 1	)
+				||	(columnName == 'stimwordPositionAutoIncr'					)
+				||	(columnName == 'stimwordBackgroundColor'					)
+				||	(columnName == 'languageNormsErrorCOUNT'					)
+				)
+			{
+				return;		//		continue columnLoop;
+			}
+
+			switch ( columnName )	{
+			    case contextPositionSoundPhoneme	:
+			    case stimwordPositionSetting	:
+			    case 'clientContextError'		:
+				if  (   typeof controlBreak[columnName] === 'undefined' || controlBreak[columnName] != columnData )
+				{ 
+					controlBreak = Object.assign
+						(	Object.fromEntries(Object.entries(controlBreak).slice(0,index))
+						,	{ [columnName] : columnData }
+						) ;
+
+					let tag = document.createElement('div');
+					let element		= null	;
+					let colStartValue	= null	;
+					switch ( columnName )	{
+
+						case contextPositionSoundPhoneme	:
+
+							colStartValue		= '2'							;
+
+							if  ( stimwordPositionSettingCount  > 1 )	{
+								let cssVarName		=	'--'
+											+	contextPositionSoundPhoneme
+											+	'--'
+											+	(rowCount + 1).toString() 
+											;
+								cssVarHolderObj.push	(	{	'cssVarName'		:	cssVarName
+												,	'startingRowNbr'	:	rowCount
+												,	'endingRowNbr'		:	rowCount
+												}
+											);
+							}
+
+							element			= document.createElement('span')			;
+							element.innerHTML	= columnData						;
+							element.style.setProperty('background' , record['stimwordBackgroundColor'] )	;
+							break;
+
+						case stimwordPositionSetting		:
+
+							colStartValue		=	'3'							;
+							element			=	document.createElement('span')				;
+							element.innerHTML	=	columnData						;
+							element.style.setProperty('background' , record['stimwordBackgroundColor'] )		;
+							break;
+
+						case 'clientContextError' 		:
+							if  ( stimwordPositionSettingCount == 1 )	{
+								colStartValue			= '3'						;
+							} else {
+								colStartValue			= '4'						;
+							}
+							let elementId			= columnName + '-' + rowCount				;
+							let {stimwordPositionAutoIncr}	= record						;
+							lastDataItemAdded		= elementId						;
+							if  ( Number(record['languageNormsErrorCOUNT']) == 0 ) {
+											/*	https://www.htmlelements.com/demos/input/textarea/ */
+								element				= document.createElement('smart-text-box')		;
+								element.setAttribute('class'			, 'phoneticTranscriptionTextBox'	)	;
+							} else {
+								element				= document.createElement('smart-combo-box')		;
+								element.incrementalSearchMode	= 'equals'						;
+								element.setAttribute('class'			, 'phoneticTranscriptionComboBox'	)	;
+
+										/* comboBox drop-down event!	*/
+								element.addEventListener('open', (event) =>	{
+										const id = event.currentTarget.id;
+										document.getElementById(id).setAttribute('data-old-value', event.currentTarget.value)
+										console.log
+											(	event.type.toUpperCase()
+											+	'  comboBox dropdown: '
+											+	id
+											+	' '
+											+	document.getElementById(id).getAttribute('data-stimword-position-auto-incr')
+											+	' old value: '
+											+	( document.getElementById(id).getAttribute('data-old-value')
+												?	document.getElementById(id).getAttribute('data-old-value')
+												: 'n/a'
+												)
+											);
+									})
+								element.addEventListener('close', (event) =>	{
+									const id = event.currentTarget.id;
+									const result =	
+											(	event.type.toUpperCase()
+											+	' -- comboBox dropdown: '
+											+	id
+											+	' line '
+											+	'652 '
+											+	' stimeword-position-auto-incr: '
+											+	document.getElementById(id).getAttribute('data-stimword-position-auto-incr')
+											+	' old value: '
+											+	( document.getElementById(id).getAttribute('data-old-value')
+												?	document.getElementById(id).getAttribute('data-old-value')
+												: 'n/a'
+												)
+											+	' new value: '
+											+	(document.getElementById(id).value ? document.getElementById(id).value : 'n/a' )
+											);
+									if  ( document.getElementById(id).getAttribute('data-old-value') != document.getElementById(id).value ) {
+										document.getElementById('tempResults').innerHTML = result;
+									}
+								})
+							}
+							element.style.setProperty('background'			, record['stimwordBackgroundColor']	)	;
+							element.setAttribute('value'				, columnData				)	;
+							element.setAttribute('id'				, elementId				)	;
+							element.setAttribute('data-stimword-position-auto-incr'	, stimwordPositionAutoIncr		)	;
+							break;
+					} // end switch
+
+					if  ( element && colStartValue )	{
+						tag.appendChild(element);
+
+						tag.classList.add('box');
+
+						tag.style.gridColumnStart 	=	colStartValue	;
+						tag.style.gridRowStart		=	(parseInt(rowCount) + 1 ).toString()	;
+						tag.style.gridColumnEnd		=	'span 1'	; 
+
+						switch ( columnName )	{
+													
+							case 	contextPositionSoundPhoneme	:
+		    						if  ( stimwordPositionSettingCount > 1 ) 	{
+									let cssVarName		=	'--'
+												+	contextPositionSoundPhoneme
+												+	'--'
+												+	(rowCount + 1).toString() 
+												;
+									tag.style.gridRowEnd	=	'span var('
+												+	cssVarName
+												+	')'
+												;
+								} else {
+									tag.style.gridRowEnd	=	'span 1'	;
+								}
+								break;
+							default					:
+								tag.style.gridRowEnd		=	'span 1'	;
+						}
+
+						document.getElementById('phoneticTranscriptionInputScreen').appendChild(tag);
+						incrRowFlag = true;
+					} else {
+						console.info(`Skipping ${columnName} column in css grid!`);
+					}
+
+				} else {
+						/* control break was triggered */
+					if  	(	( columnName					== contextPositionSoundPhoneme 			)
+						&&	( record[stimwordPositionSetting]		!= controlBreak[stimwordPositionSetting]	)
+						&&	( stimwordPositionSettingCount  		> 1						)
+						)
+					{
+							cssVarHolderObj[(cssVarHolderObj.length -1)].endingRowNbr++
+					}
+
+				}
+				break;
+
+			    case 'replicationValue'	:
+
+				if  ( columnData )	{		// make SURE this is not a blank
+					let nbrOfComboBoxes	= document.getElementsByTagName('smart-combo-box').length 		;
+					let tmpComboBox		= document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1]	;  // get the most recent one
+					tmpComboBox.insert(99, columnData)								;
+					let location		= tmpComboBox.getElementsByTagName('smart-list-item').length -1		;
+					let tmpListItem		= tmpComboBox.getElementsByTagName('smart-list-item')[location]		;
+					tmpListItem.classList.add('dropDownOptions', 'replicationValue'	)				;
+					tmpListItem.title	= replicatedTitle							;
+				}
+				break;
+
+			    case 'languageNormsError'		:
+				if  ( columnData )	{		// make SURE this is not a blank
+					let nbrOfComboBoxes	= document.getElementsByTagName('smart-combo-box').length 		;
+					let tmpComboBox		= document.getElementsByTagName('smart-combo-box')[nbrOfComboBoxes - 1]	;  // get the most recent one
+					tmpComboBox.insert(99, columnData)								;
+					let location		= tmpComboBox.getElementsByTagName('smart-list-item').length -1		;
+					let tmpListItem		= tmpComboBox.getElementsByTagName('smart-list-item')[location]		;
+					tmpListItem.classList.add('dropDownOptions', 'languageNormsError'	)			;
+					tmpListItem.title	= selectedLanguage							;
+				}
+				break;
+			   
+			} // end switch statement
+		}) // end for each column item
+		if  ( incrRowFlag )	{
+			rowCount++	;
+		}
+	} // end for each record
+
+
+
+				/*	resize the stylesheet to make it fit!  */
+	// Getting the stylesheet
+	const stylesheet = document.styleSheets[1];
+	let elementRules;
+
+	// looping through all the rules and getting the .box style to reduce the padding
+	for ( let i = 0; i < stylesheet.cssRules.length; i++) {
+		if ( stylesheet.cssRules[i].selectorText === 'div.box') {
+						//const currentPadding = parseInt(stylesheet.cssRules[i].style.getPropertyValue('padding-top').slice(0,-2));
+			const rowMax		= 12	;	// max number of rows is word 'sixty seven'
+			const topBottomPadding	= 4	;	// three pixels per anything over row max
+			const newPadding = ( ( rowMax - rowCount ) * topBottomPadding ) + 'px'	; 
+			stylesheet.cssRules[i].style.setProperty('padding-top'		, newPadding);
+			stylesheet.cssRules[i].style.setProperty('padding-bottom'	, newPadding);
+		}
+	}
+
+
+	
+
+	//	create the new rules to "extend" the grid rows since there is not way to automate this (weird) !
+	document.documentElement.style.setProperty( '--stimwordWord', rowCount.toString() );
+	for ( let incr in cssVarHolderObj ) 
+	{	let { startingRowNbr, endingRowNbr, cssVarName } = cssVarHolderObj[incr]	;
+		if  ( startingRowNbr != endingRowNbr ) 
+		{   
+			let bottomRow = (( endingRowNbr - startingRowNbr ) + 1 ).toString() ;
+			document.documentElement.style.setProperty( cssVarName, bottomRow );
+
+		}
+	}
+
+
+
+		/********************************
+			tooltip stuff
+		*********************************/
+
+	document.getElementById('phoneticTranscriptionInputScreen')
+		.querySelectorAll('smart-text-box.phoneticTranscriptionTextBox, smart-combo-box.phoneticTranscriptionComboBox')
+		.forEach( (element) =>
+	{
+
+		if  ( element.querySelector('input') )	{
+			element.querySelector('input').setAttribute('maxlength', maxCharsInPhoneticError);
+		} else {
+			element.setAttribute('maxlength', maxCharsInPhoneticError);
+		};
+
+		switch ( element.tagName)	{
+			case	'SMART-COMBO-BOX'	:
+				element.addEventListener('mouseover', (event) => {   
+					if	(	(	( event.target.className	== 'smart-action-button'	)	// ie, cursor is NOT over the arrow (weird name for a class....)
+							||	( event.target.className	== 'smart-input'		)
+							)
+						&&	(	event.target.className		!= 'smart-drop-down-button'	)
+						)
+					{									
+						if	(	(!(element.opened))	// ie combobox is actually closed now, NOT OPEN, but closed is not an option, surprisingly
+							)
+						{	
+							phoneticPopupMenu.selector = element;  
+							if  ( !(phoneticPopupMenu.visible) )	{
+								phoneticPopupMenu.open();
+							}
+						} else {
+							console.info('Combobox drop-down collection element is already opened, skipping opening the phoneticPopupMenu.');
+						}
+					} else {
+						console.info('Cursor is not over the INPUT element');
+					}
+				});
+				break;
+			case	'SMART-TEXT-BOX'	:
+				element.addEventListener('mouseover', (event) => {   
+					clientContextPhoneticPopupMenuOnMouseOver(event) ;
+				});
+			}; // end switch
+
+
+				/*
+					mouseleave is fired when the pointer has exited the element and all of its descendants
+
+					mouseout is fired when the pointer leaves the element or leaves one of the element's descendants (even if the pointer is still within the element).
+
+					https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event
+
+				*/
+
+																/*	2022-10-22
+																element.parentElement.addEventListener('mouseenter', (event) => {
+																		https://stackoverflow.com/questions/8813051/determine-which-element-the-mouse-pointer-is-on-top-of-in-javascript
+																			//	https://developer.mozilla.org/en-US/docs/Web/API/Document/elementFromPoint
+																	if	( document.elementFromPoint(event.clientX, event.clientY ).tagName != 'INPUT' )
+																	{
+																		phoneticPopupMenuClose('Closing because we are hovering in the div and not the input element');
+																	}
+																})
+																*/
+
+		element.addEventListener('mouseleave', event => {  
+																						/*	if the cursor leave this combobox by going DOWN we leave it OPEN
+																							but if they left by going left/right/up we CLOSE it
+																						*/
+														//	if  ( event.clientY <  element.getBoundingClientRect().bottom - 2 )	// ## is the "fudge factor"  !!
+			phoneticPopupMenuClose(event.clientX, event.clientY, 'element.addEventListener mouseleave event triggered.');
+		});
+	});
+
+	if  ( stimwordPositionSettingCount == 1 )	{
+		document.getElementById('phoneticTranscriptionPopupWindow').style.setProperty('--colNum', 1	);
+	} else {
+		document.getElementById('phoneticTranscriptionPopupWindow').style.setProperty('--colNum', 2	);
+	}
+
+	const	index		= parentData.findIndex(x => x.stimwordPageNbr == stimwordPageNbr && x.stimwordLineNbr == stimwordLineNbr)		;
+	let prevKey, nextKey;
+	if  ( index == 0 )	{
+		prevKey = parentData.length - 1	;
+	} else {
+		prevKey = index - 1		;
+	}
+	if  ( index == parentData.length - 1 )	{
+		nextKey = 0			;
+	} else {
+		nextKey = index + 1		;
+	}
+		
+	let leftArrow		= document.createElement('A')	;
+	leftArrow.innerText	= '←'				;
+	leftArrow.setAttribute('class'		, 'prevNextLinks'					);
+	leftArrow.setAttribute('target'		, 'none'						);
+	leftArrow.setAttribute('title'		, parentData[prevKey]['stimwordWord']				);
+	leftArrow.setAttribute('href'		, '#'							);
+	leftArrow.setAttribute	(	'onclick'
+				,	'javascript: processItem('
+						+	'"'
+						+	parentData[prevKey]['stimwordPageNbr']
+						+	'"'
+						+	','
+						+	'"'
+						+	parentData[prevKey]['stimwordLineNbr']
+						+	'"'
+						+	'); return false;'
+				) ;
+
+	let rightArrow		= document.createElement('A')	;
+	rightArrow.innerText	= '→'				;
+	rightArrow.setAttribute('class'		, 'prevNextLinks'					);
+	rightArrow.setAttribute('target'	, 'none'						);
+	rightArrow.setAttribute('title'		, parentData[nextKey]['stimwordWord']				);
+	rightArrow.setAttribute('href'		, '#'							);
+	rightArrow.setAttribute	(	'onclick'
+				,	'javascript: processItem('
+						+	'"'
+						+	parentData[nextKey]['stimwordPageNbr']
+						+	'"'
+						+	','
+						+	'"'
+						+	parentData[nextKey]['stimwordLineNbr']
+						+	'"'
+						+	'); return false;'
+				) ;
+
+
+	let titleDiv = document.createElement('DIV');
+	titleDiv.appendChild(document.createTextNode( stimwordWordParm + ' -- ' + parentData[index]['stimwordPhonetic']		));
+	titleDiv.classList.add('phoneticTranscrptionPopupWindowTitle')	;
+
+	let labelDiv = document.createElement('DIV');
+	labelDiv.setAttribute('id', 'headerLabel');
+	labelDiv.appendChild(leftArrow);
+	labelDiv.appendChild(titleDiv);
+	labelDiv.appendChild(rightArrow);
+	document.getElementById('phoneticTranscriptionPopupWindow').label = labelDiv.outerHTML;
+
+
+	let widthFudgeFactorTmp	=	widthFudgeFactor	+ ( labelDiv.innerText.length * 2 ) 	;
+
+	document.getElementById('phoneticTranscriptionPopupWindow').style.setProperty
+			(	'--smart-window-default-width'
+			,		(document.getElementById('phoneticTranscriptionInputScreen').offsetWidth + widthFudgeFactorTmp).toString()
+				+	'px'
+			);
+	document.getElementById('phoneticTranscriptionPopupWindow').style.setProperty
+			(	'--smart-window-default-height'
+			,		(document.getElementById('phoneticTranscriptionInputScreen').offsetHeight + heightFudgeFactor	).toString()
+				+	'px'
+			);
+
+	document.getElementById('phoneticTranscriptionPopupWindow').open()	;	// FINALLY!!
+																//	phoneticPopupMenu.c-lose();	// just in case.....
+
+
+	document.getElementById('phoneticTranscriptionInputScreen').querySelectorAll('span.smart-drop-down-button').forEach( eachDropDownButton => {
+
+		eachDropDownButton.addEventListener('mouseenter', event => {
+			phoneticPopupMenuClose(event.clientX, event.clientY, 'eachDropDownButton.addEventListener mouseenter event.');
+		});
+
+		eachDropDownButton.addEventListener('mouseleave', event => {
+						/*	when cursor moves OFF the drop down button, we close if they moved up, left or right
+							but of they go off the bottom, we leave it opened up
+						*/
+			if  ( element.opened )	{
+				if  ( event.clientY < ( event.currentTarget.getBoundingClientRect().bottom - 1.5 )	)	{	// yes half a pixel....
+					console.info('Closing since we moved somewhere other than the bottom of the arrow.');
+					element.close();
+				} else {
+					console.info('We moved the cursor from the BOTTOM of the arrow, so dont close if opened');
+				}
+			}
+		})
+	})
+
+	document.getElementById('phoneticTranscriptionInputScreen').querySelectorAll('div.smart-drop-down-container').forEach( (eachContainer) => {
+		eachContainer.style.marginTop = '0px';		//	?!?!?!?!?!?!?!?!?!	why does this work?  quit complaining about it.....
+	})
+	
+		/* the bottom row(s) might need this since they might accidentally open "below the fold" */
+	for ( let element of document.getElementsByTagName('smart-combo-box') )	{
+		element.dropDownAppendTo = 'body';
+	}
+
+	
 }
 
 
-function  processValues(id, oldValue, newValue)  {
-     console.log('RESULT!! ' + id, 'oldValue:',  (oldValue ? oldValue : 'not yet defined!') , 'newValue: ' , newValue);
+	/* sound selector menu jscript */
+
+function soundSelector() {
+
+	let resultObj		= []	;
+					//let resultObj		= [{'label' : 'Sound Selector'}]	;
+
+	soundSelectorData.forEach( element => {
+
+		let soundTitleObj	= processMenuItem(resultObj, element['soundTitle']);
+		let soundSubTitleObj	= {}	;
+		let soundPhonemeObj	= {}	;
+
+		switch (true)	{
+					// all the consonants
+			case	(	element['soundSubTitleCOUNT']	!= 1
+				&&	element['soundPhonemeCOUNT']	!= 1
+				&&	element['contextPositionCOUNT']	!= 1
+				) :
+				soundSubTitleObj	= processMenuItem(soundTitleObj, element['soundSubTitle'])	;
+				soundPhonemeObj		= processMenuItem(soundSubTitleObj, element['soundPhoneme'])	;
+				soundPhonemeObj.push(
+					{	'label'	: element['contextPosition']
+					,	'value': element['contextAutoIncr']
+					}
+				);
+				break;
+
+					// vowels and blends, except for the tw-blend
+			case	(	element['soundSubTitleCOUNT']	!= 1
+				&&	element['soundPhonemeCOUNT']	!= 1
+				&&	element['contextPositionCOUNT']	== 1
+				) :
+				soundSubTitleObj	=  processMenuItem(soundTitleObj, element['soundSubTitle'])	;
+
+				soundSubTitleObj.push(
+					{	'label'	: addClass(element['soundPhoneme'])
+					,	'value' : element['contextAutoIncr']
+					}
+				);
+				break;
+						/* Diphthongs and clusters */
+
+			case	(	element['soundSubTitleCOUNT']	== 1
+				&&	element['soundPhonemeCOUNT']	!= 1
+				&&	element['contextPositionCOUNT']	== 1
+				) :
+				soundTitleObj.push(
+					{	'label'	: addClass(element['soundPhoneme'])
+					,	'value' : element['contextAutoIncr']
+					}
+				);
+				break;
+
+						// this one is ONLY for the t-element blend!!
+			case	(	element['soundSubTitleCOUNT']	!= 1
+				&&	element['soundPhonemeCOUNT']	== 1
+				&&	element['contextPositionCOUNT']	== 1
+				) :
+				soundTitleObj.push(
+					{	'label'	: element['soundSubTitle']
+					,	'value'	: element['contextAutoIncr']
+					}
+				);
+				break;
+
+			default:
+				console.error('we should NEVER be here! - line 1077 - ');
+			break;
+		}
+	})
+
+
+			/*	take any level that has more than "MaxItems" and make "breakFactor" items out of it  */
+	const	maxItems	=	10	;
+	const	breakFactor	=	3	;
+	for ( let i in resultObj) {
+
+		let thisArr		=	resultObj[i]['items']				;
+		
+		if  ( thisArr.length > maxItems )	{
+
+			const breakPoint	=	Math.trunc(thisArr.length / breakFactor ) + 1	;
+
+			let newArr	=	[]	;
+			for ( let x = 0; x < breakFactor; x++ )	{
+
+				let tmpArr	=	[]	;
+				if  ( thisArr.length > breakPoint )	{
+					if  ( ( thisArr.length / 2 )  > breakPoint )	{
+						tmpArr	=	thisArr.splice(0, breakPoint  )			;
+					} else {
+						tmpArr	=	thisArr.splice(0, thisArr.length / 2  )		;
+					}
+				} else {
+					tmpArr	=	thisArr.splice(0, thisArr.length )			;
+				}
+
+				let itemLabel	=	'Part ' + ['One', 'Two', 'Three', 'Four', 'Five'][x] ;
+
+				newArr.push	(	{	'label' : itemLabel
+							,	'items' : tmpArr
+							}
+						)
+						;
+			}
+			thisArr.splice(0, newArr.length,  ...newArr);
+		}
+	}
+
+	let returnArray = new Array()	;
+	returnArray.push( { label:  'Sound Selector', items: resultObj });
+	return (returnArray);
+}
+						
+
+function processMenuItem(obj, val)	{
+	if	(	typeof	obj		[obj.length - 1]					== 'undefined'
+		||	typeof	obj		[obj.length - 1]		['label']		== 'undefined'
+		||		obj		[obj.length - 1]		['label']		!= val
+		)
+	{
+		obj.push(
+			{	'label'	: val
+			,	'items' : []
+			}
+		);
+	}
+	return( obj[obj.length - 1]['items'])	;
 }
 
-const HorseData =
+function addClass(val)	{
+	let returnVal	=	'<div class="smallLabelClass">'
+			+	val
+			+	'</div>'
+			;
+	return (returnVal);
+}
+			
+
+
+
+
+	/* client context stuff below	*/
+
+
+function clientContextWindow(contextAutoIncr) {
+
+	document.getElementById('phoneticTranscriptionPopupWindow').close()	;	// just in case......
+
+	phoneticPopupMenuClose(null, null, 'Creating the client context window, closing the phoneticPopupMenu just in case its still opened.');
+
+					// create the window label
+	document.getElementById('clientContextSpontWindow').label
+		=	'Phonetic Transcription Errors -- '
+		+	soundSelectorData[contextAutoIncr]['soundTitle']
+		+	( soundSelectorData[contextAutoIncr]['soundSubTitleCOUNT']	> 1 ? ' '	+ soundSelectorData[contextAutoIncr]['soundSubTitle']	: ''	)
+		+	( soundSelectorData[contextAutoIncr]['soundPhonemeCOUNT']	> 1 ? ' '	+ soundSelectorData[contextAutoIncr]['soundPhoneme']	: ''	)
+		+	( soundSelectorData[contextAutoIncr]['contextPositionCOUNT']	> 1 ? ' - '	+ soundSelectorData[contextAutoIncr]['contextPosition'] 	: ''	)
+		;
+
+	document.getElementById('clientContextSpontWindow').setAttribute('contextAutoIncr', contextAutoIncr);
+
+
+		/*	reset all input elements	*/
+
+	document.getElementById('clientContextSpontDiv').querySelectorAll('smart-input[data-column-name="clientContextError"]')
+		.forEach( smartInput => {
+			smartInput.value = '';
+		})
+	document.getElementById('clientContextSpontDiv').querySelectorAll('smart-number-input[data-column-name="clientContextSpeakingErrors"]')
+		.forEach( smartNumberInput => {
+			smartNumberInput.value = 0;
+		})
+	document.getElementById('clientContextSpontDiv').querySelectorAll('smart-multiline-text-box[data-column-name="clientContextErrorNotes"]')
+		.forEach( smartMultilineTextBox => {
+			smartMultilineTextBox.reset()  ; 
+		})
+
+
+		/*	reset all elements to make all the clientContextError's enabled`	*/
+	document.querySelectorAll('smart-input.clientContextError').forEach(	(element)	=>	{		// 2022-11-07
+		element.disabled = false;										// 2022-11-07
+	})														// 2022-11-07
+
+
+		/*	load clientContextData....	*/
+
+	clientContextData.filter (  x => x.contextAutoIncr == contextAutoIncr ).forEach((row, index) => {
+		const rowNbrSelector = '[data-row-nbr="' + ( index + 1 ) + '"]'	;	
+		document.getElementById('clientContextSpontDiv')
+			.querySelector('smart-input[data-column-name="clientContextError"]' 			+ rowNbrSelector	).value = row.clientContextError		;
+
+		if  ( Number(row.clientStimwordCOUNT) == 0 )																	// 2022-11-07
+		{																						// 2022-11-07
+			document.getElementById('clientContextSpontDiv')															// 2022-11-07
+				.querySelector('smart-input[data-column-name="clientContextError"]' 			+ rowNbrSelector	).disabled = false			;	// 2022-11-07
+		} else {																					// 2022-11-07
+			document.getElementById('clientContextSpontDiv')															// 2022-11-07
+				.querySelector('smart-input[data-column-name="clientContextError"]' 			+ rowNbrSelector	).disabled = true			;	// 2022-11-07
+		}																						// 2022-11-07
+			
+		document.getElementById('clientContextSpontDiv')
+			.querySelector('smart-number-input[data-column-name="clientContextSpeakingErrors"]' 	+ rowNbrSelector	).value = row.clientContextSpeakingErrors	;
+		document.getElementById('clientContextSpontDiv')
+			.querySelector('smart-multiline-text-box[data-column-name="clientContextErrorNotes"]' 	+ rowNbrSelector	).value =
+																			( row.clientContextErrorNotes
+																			? row.clientCOntextErrorNotes
+																			: ''
+																			)				;
+	});
+
+
+		/* assign event-handler to every item to finally process the input */
+
+				//	-- NOT USING:	'smart-input[data-column-name="clientContextError"]
+
+				//  created using:	https://bobbyhadz.com/blog/javascript-get-element-by-data-attribute
+
+	const selectorList	=	'smart-number-input[data-column-name="clientContextSpeakingErrors"]'
+				+	','
+				+	'smart-multiline-text-box[data-column-name="clientContextErrorNotes"]'
+				;
+		
+	document.getElementById('clientContextSpontDiv').querySelectorAll(selectorList).forEach ( (cell) =>	{
+		cell.addEventListener('focusin',(event)=>{
+			event.currentTarget.setAttribute('original-value', event.currentTarget.value);
+		});
+		cell.addEventListener('focusout',(event)=>{
+			if  ( event.currentTarget.getAttribute('original-value') != event.currentTarget.value )	{
+				document.getElementById('tempResults').innerHTML =
+						(	'Changes to the spontaneous count & notes are: '
+						+	document.getElementById('clientContextSpontWindow').getAttribute('contextAutoIncr')
+						+	' rowNbr: '
+						+	event.currentTarget.dataset.rowNbr
+						+	' columnName: ' 
+						+	event.currentTarget.dataset.columnName
+						+	' old value: '
+						+	event.currentTarget.getAttribute('original-value')
+						+	' new value: '
+						+	event.currentTarget.value
+						);
+			}
+		});
+	});
+
+	for (const smartInputCell of document.getElementById('clientContextSpontDiv').querySelectorAll('smart-input[data-column-name="clientContextError"] input')) {
+		smartInputCell.maxLength = '4';
+	}
+
+		// we UNHIDE the first time through since when the page loads, sometimes the div shows up, just for a split second
+	if  ( document.getElementById('clientContextSpontWindow').querySelector('div#clientContextSpontDiv').style.display != 'grid' 	)	{
+		document.getElementById('clientContextSpontWindow').querySelector('div#clientContextSpontDiv').style.display  = 'grid';
+	}
+
+	document.querySelector('smart-window#clientContextSpontWindow').open();
+}
+
+
+									//  https://www.htmlelements.com/demos/grid/editing-cascading/
+function clientContextPhoneticPopupMenuOnMouseOver(event) {
+	phoneticPopupMenu.selector = event.currentTarget;
+	if  ( !phoneticPopupMenu.visible )	{
+		console.info('phoneticPopupMenu.open(); Sound selector window opening because we hoved over a spontaneous sound clientContext error sound smart-input element.');
+		phoneticPopupMenu.open();
+	}
+}
+function clientContextPhoneticPopupMenuOnMouseLeave(event) {
+								//	https://stackoverflow.com/questions/8813051/determine-which-element-the-mouse-pointer-is-on-top-of-in-javascript
+								//	https://developer.mozilla.org/en-US/docs/Web/API/Document/elementFromPoint
+
+	phoneticPopupMenuClose(event.clientX, event.clientY, 'clientContextPopupMenuOnMouseLeave function.');
+}
+
+									//	if	( !document.elementFromPoint(event.clientX, event.clientY ).closest('smart-tooltip#phoneticPopupMenu') 	) {
+									//	}
+									// did the cursor leave this input element by going DOWN or left/right/up ???
+									//if  ( event.currentTarget ) {
+
+									/*
+									if	(	(	event.clientY < ( event.currentTarget.querySelector('input.smart-input').getBoundingClientRect().bottom - 2 )	)
+										||	(	event.clientY > ( event.currentTarget.querySelector('input.smart-input').getBoundingClientRect().bottom + 2 )	)
+										)
+									{
+										phoneticPopupMenuClose('Sound selector window closing because we hoved away from a spontaneous sound clientContext error sound smart-input element.');
+									}
+									*/
+																		//}
+
+function checkSpeakingCountValue(event)	{
+			// no negative numbers!
+	if ( parseInt(event.currentTarget.value) < 0 )	{
+		event.currentTarget.value = 0;
+	}
+}
+
+
+function phoneticPopupMenuClose(mouseX, mouseY, message)	{
+		/*	if we are *NOT* currently hovering over the phoneticPopupMenu, then close
+					//	https://stackoverflow.com/questions/8813051/determine-which-element-the-mouse-pointer-is-on-top-of-in-javascript
+					//	https://developer.mozilla.org/en-US/docs/Web/API/Document/elementFromPoint
+		*/
+
+											/*
+											console.count('trying to close!');
+											console.warn(mouseX)
+											console.warn(mouseY)
+											console.warn('tagname: '	+ document.elementFromPoint(mouseX,  mouseY ).tagName						);
+											console.warn('element: '	+ document.elementFromPoint(mouseX,  mouseY )							);
+											console.warn('closest: '	+ document.elementFromPoint(mouseX,  mouseY ).closest('smart-tooltip#phoneticPopupMenu')	);
+											console.warn('columnName : '	+ document.elementFromPoint(mouseX,  mouseY ).dataset.columnName 				);
+											console.warn ( 'phoneticPopupMenu.selector.id: ' + 	phoneticPopupMenu.selector.id	)	;
+											console.warn ( 'pointing at: ' + document.elementFromPoint(mouseX,  mouseY ).closest('smart-input').id	)
+											console.log ( document.elementFromPoint(mouseX,  mouseY )	)
+											*/
+
+	if	(	( document.elementFromPoint(mouseX,  mouseY ).closest('smart-tooltip#phoneticPopupMenu'	)	== null		) 	/* hovering over the tooltip itself!	*/
+		&&	(	mouseX						==	null
+			||	mouseY						==	null
+			||	phoneticPopupMenu.selector			==	null
+			||	document.elementFromPoint(mouseX,  mouseY ).id	==	null
+			||	document.elementFromPoint(mouseX,  mouseY ).id	!=	phoneticPopupMenu.selector.id
+			)
+		)
+	{
+		console.info('phoneticPopupMenu.close() ' + message);
+		phoneticPopupMenu.close();  
+	}		// hovering over tooltip itself, skip close!
+}
+
+
+
+const parentData =
+[{"stimwordPageNbr": 1, "stimwordLineNbr": 1, "stimwordWord": "horse", "stimwordPhonetic": "hoɚs"},{"stimwordPageNbr": 1, "stimwordLineNbr": 2, "stimwordWord": "snake", "stimwordPhonetic": "snek"},{"stimwordPageNbr": 1, "stimwordLineNbr": 3, "stimwordWord": "clown", "stimwordPhonetic": "klaun"},{"stimwordPageNbr": 1, "stimwordLineNbr": 4, "stimwordWord": "dog", "stimwordPhonetic": "dag"},{"stimwordPageNbr": 1, "stimwordLineNbr": 5, "stimwordWord": "spring", "stimwordPhonetic": "sprɪŋ"},{"stimwordPageNbr": 1, "stimwordLineNbr": 6, "stimwordWord": "shoes", "stimwordPhonetic": "ʃuz"},{"stimwordPageNbr": 1, "stimwordLineNbr": 7, "stimwordWord": "blocks", "stimwordPhonetic": "blaks"},{"stimwordPageNbr": 1, "stimwordLineNbr": 8, "stimwordWord": "zipper", "stimwordPhonetic": "zɪɚ"},{"stimwordPageNbr": 1, "stimwordLineNbr": 9, "stimwordWord": "witch", "stimwordPhonetic": "wɪtʃ"},{"stimwordPageNbr": 1, "stimwordLineNbr": 10, "stimwordWord": "breathe", "stimwordPhonetic": "brið"},{"stimwordPageNbr": 1, "stimwordLineNbr": 11, "stimwordWord": "skate", "stimwordPhonetic": "sket"},{"stimwordPageNbr": 1, "stimwordLineNbr": 12, "stimwordWord": "chair", "stimwordPhonetic": "tʃeɚ"},{"stimwordPageNbr": 1, "stimwordLineNbr": 13, "stimwordWord": "crib", "stimwordPhonetic": "krɪb"},{"stimwordPageNbr": 1, "stimwordLineNbr": 14, "stimwordWord": "ring", "stimwordPhonetic": "rɪŋ"},{"stimwordPageNbr": 1, "stimwordLineNbr": 15, "stimwordWord": "smoke", "stimwordPhonetic": "smok"},{"stimwordPageNbr": 1, "stimwordLineNbr": 16, "stimwordWord": "grass", "stimwordPhonetic": "græs"},{"stimwordPageNbr": 2, "stimwordLineNbr": 17, "stimwordWord": "fork", "stimwordPhonetic": "foɚk"},{"stimwordPageNbr": 2, "stimwordLineNbr": 18, "stimwordWord": "job", "stimwordPhonetic": "dʒab"},{"stimwordPageNbr": 2, "stimwordLineNbr": 19, "stimwordWord": "thread", "stimwordPhonetic": "θrɛd"},{"stimwordPageNbr": 2, "stimwordLineNbr": 20, "stimwordWord": "leaf", "stimwordPhonetic": "lif"},{"stimwordPageNbr": 2, "stimwordLineNbr": 21, "stimwordWord": "pig", "stimwordPhonetic": "pɪg"},{"stimwordPageNbr": 2, "stimwordLineNbr": 22, "stimwordWord": "spider", "stimwordPhonetic": "spaiɚ"},{"stimwordPageNbr": 2, "stimwordLineNbr": 23, "stimwordWord": "yes", "stimwordPhonetic": "jɛs"},{"stimwordPageNbr": 2, "stimwordLineNbr": 24, "stimwordWord": "gum", "stimwordPhonetic": "gʌm"},{"stimwordPageNbr": 2, "stimwordLineNbr": 25, "stimwordWord": "slide", "stimwordPhonetic": "slaid"},{"stimwordPageNbr": 2, "stimwordLineNbr": 26, "stimwordWord": "cage", "stimwordPhonetic": "kedʒ"},{"stimwordPageNbr": 2, "stimwordLineNbr": 27, "stimwordWord": "swing", "stimwordPhonetic": "swɪŋ"},{"stimwordPageNbr": 2, "stimwordLineNbr": 28, "stimwordWord": "glove", "stimwordPhonetic": "glʌv"},{"stimwordPageNbr": 2, "stimwordLineNbr": 29, "stimwordWord": "mop", "stimwordPhonetic": "map"},{"stimwordPageNbr": 2, "stimwordLineNbr": 30, "stimwordWord": "plate", "stimwordPhonetic": "plet"},{"stimwordPageNbr": 2, "stimwordLineNbr": 31, "stimwordWord": "string", "stimwordPhonetic": "strɪŋ"},{"stimwordPageNbr": 2, "stimwordLineNbr": 32, "stimwordWord": "rat", "stimwordPhonetic": "ræt"},{"stimwordPageNbr": 2, "stimwordLineNbr": 33, "stimwordWord": "scratch", "stimwordPhonetic": "skrætʃ"},{"stimwordPageNbr": 3, "stimwordLineNbr": 34, "stimwordWord": "nose", "stimwordPhonetic": "noz"},{"stimwordPageNbr": 3, "stimwordLineNbr": 35, "stimwordWord": "stove", "stimwordPhonetic": "stov"},{"stimwordPageNbr": 3, "stimwordLineNbr": 36, "stimwordWord": "flag", "stimwordPhonetic": "flæg"},{"stimwordPageNbr": 3, "stimwordLineNbr": 37, "stimwordWord": "third", "stimwordPhonetic": "θɝd"},{"stimwordPageNbr": 3, "stimwordLineNbr": 38, "stimwordWord": "sun", "stimwordPhonetic": "sʌn"},{"stimwordPageNbr": 3, "stimwordLineNbr": 39, "stimwordWord": "truck", "stimwordPhonetic": "trʌk"},{"stimwordPageNbr": 3, "stimwordLineNbr": 40, "stimwordWord": "those", "stimwordPhonetic": "ðoz"},{"stimwordPageNbr": 3, "stimwordLineNbr": 41, "stimwordWord": "drum", "stimwordPhonetic": "drʌm"},{"stimwordPageNbr": 3, "stimwordLineNbr": 42, "stimwordWord": "verb", "stimwordPhonetic": "vɝb"},{"stimwordPageNbr": 3, "stimwordLineNbr": 43, "stimwordWord": "splash", "stimwordPhonetic": "splæʃ"},{"stimwordPageNbr": 3, "stimwordLineNbr": 44, "stimwordWord": "look", "stimwordPhonetic": "lʊk"},{"stimwordPageNbr": 3, "stimwordLineNbr": 45, "stimwordWord": "frog", "stimwordPhonetic": "frag"},{"stimwordPageNbr": 3, "stimwordLineNbr": 46, "stimwordWord": "seal", "stimwordPhonetic": "sil"},{"stimwordPageNbr": 3, "stimwordLineNbr": 47, "stimwordWord": "twins", "stimwordPhonetic": "twɪnz"},{"stimwordPageNbr": 3, "stimwordLineNbr": 48, "stimwordWord": "ball", "stimwordPhonetic": "bal"},{"stimwordPageNbr": 3, "stimwordLineNbr": 49, "stimwordWord": "teeth", "stimwordPhonetic": "tiθ"},{"stimwordPageNbr": 3, "stimwordLineNbr": 50, "stimwordWord": "print", "stimwordPhonetic": "prɪnt"},{"stimwordPageNbr": 3, "stimwordLineNbr": 51, "stimwordWord": "wife", "stimwordPhonetic": "waif"},{"stimwordPageNbr": 4, "stimwordLineNbr": 52, "stimwordWord": "juice", "stimwordPhonetic": "dʒus"},{"stimwordPageNbr": 4, "stimwordLineNbr": 53, "stimwordWord": "shirt", "stimwordPhonetic": "ʃɝt"},{"stimwordPageNbr": 4, "stimwordLineNbr": 54, "stimwordWord": "put", "stimwordPhonetic": "pʊt"},{"stimwordPageNbr": 4, "stimwordLineNbr": 55, "stimwordWord": "you", "stimwordPhonetic": "ju"},{"stimwordPageNbr": 4, "stimwordLineNbr": 56, "stimwordWord": "noise", "stimwordPhonetic": "noiz"},{"stimwordPageNbr": 4, "stimwordLineNbr": 57, "stimwordWord": "yawn", "stimwordPhonetic": "jɔn"},{"stimwordPageNbr": 4, "stimwordLineNbr": 58, "stimwordWord": "mouse", "stimwordPhonetic": "maus"},{"stimwordPageNbr": 4, "stimwordLineNbr": 59, "stimwordWord": "chew", "stimwordPhonetic": "tʃu"},{"stimwordPageNbr": 4, "stimwordLineNbr": 60, "stimwordWord": "learn", "stimwordPhonetic": "lɝn"},{"stimwordPageNbr": 4, "stimwordLineNbr": 61, "stimwordWord": "book", "stimwordPhonetic": "bʊk"},{"stimwordPageNbr": 4, "stimwordLineNbr": 62, "stimwordWord": "about", "stimwordPhonetic": "ǝaut"},{"stimwordPageNbr": 4, "stimwordLineNbr": 63, "stimwordWord": "human", "stimwordPhonetic": "hjuǝn"},{"stimwordPageNbr": 4, "stimwordLineNbr": 64, "stimwordWord": "toy", "stimwordPhonetic": "toi"},{"stimwordPageNbr": 4, "stimwordLineNbr": 65, "stimwordWord": "zip code", "stimwordPhonetic": "zɪod"},{"stimwordPageNbr": 4, "stimwordLineNbr": 66, "stimwordWord": "caught", "stimwordPhonetic": "kɔt"},{"stimwordPageNbr": 9, "stimwordLineNbr": 1, "stimwordWord": "John", "stimwordPhonetic": "dʒan"},{"stimwordPageNbr": 9, "stimwordLineNbr": 2, "stimwordWord": "D", "stimwordPhonetic": "di"},{"stimwordPageNbr": 9, "stimwordLineNbr": 3, "stimwordWord": "Rockefeller", "stimwordPhonetic": "rakǝfɛlɚ"},{"stimwordPageNbr": 9, "stimwordLineNbr": 4, "stimwordWord": "did", "stimwordPhonetic": "dɪ"},{"stimwordPageNbr": 9, "stimwordLineNbr": 5, "stimwordWord": "three", "stimwordPhonetic": "θri"},{"stimwordPageNbr": 9, "stimwordLineNbr": 6, "stimwordWord": "amazing", "stimwordPhonetic": "ǝmezɪŋ"},{"stimwordPageNbr": 9, "stimwordLineNbr": 7, "stimwordWord": "things", "stimwordPhonetic": "θɪŋz"},{"stimwordPageNbr": 10, "stimwordLineNbr": 1, "stimwordWord": "First", "stimwordPhonetic": "fɝst"},{"stimwordPageNbr": 10, "stimwordLineNbr": 2, "stimwordWord": "he", "stimwordPhonetic": "hi"},{"stimwordPageNbr": 10, "stimwordLineNbr": 3, "stimwordWord": "acquired", "stimwordPhonetic": "ǝkwaiɚd"},{"stimwordPageNbr": 10, "stimwordLineNbr": 4, "stimwordWord": "probably", "stimwordPhonetic": "prabǝli"},{"stimwordPageNbr": 10, "stimwordLineNbr": 5, "stimwordWord": "the", "stimwordPhonetic": "ðǝ"},{"stimwordPageNbr": 10, "stimwordLineNbr": 6, "stimwordWord": "greatest", "stimwordPhonetic": "gretǝs"},{"stimwordPageNbr": 10, "stimwordLineNbr": 7, "stimwordWord": "fortune", "stimwordPhonetic": "foɚtʃǝn"},{"stimwordPageNbr": 10, "stimwordLineNbr": 8, "stimwordWord": "in", "stimwordPhonetic": "ɪn"},{"stimwordPageNbr": 10, "stimwordLineNbr": 9, "stimwordWord": "all", "stimwordPhonetic": "al"},{"stimwordPageNbr": 10, "stimwordLineNbr": 10, "stimwordWord": "history", "stimwordPhonetic": "hɪstoɚi"},{"stimwordPageNbr": 11, "stimwordLineNbr": 1, "stimwordWord": "He", "stimwordPhonetic": "hi"},{"stimwordPageNbr": 11, "stimwordLineNbr": 2, "stimwordWord": "started", "stimwordPhonetic": "saɚtǝd"},{"stimwordPageNbr": 11, "stimwordLineNbr": 3, "stimwordWord": "out", "stimwordPhonetic": "aut"},{"stimwordPageNbr": 11, "stimwordLineNbr": 4, "stimwordWord": "in", "stimwordPhonetic": "ɪn"},{"stimwordPageNbr": 11, "stimwordLineNbr": 5, "stimwordWord": "life", "stimwordPhonetic": "laif"},{"stimwordPageNbr": 11, "stimwordLineNbr": 6, "stimwordWord": "digging", "stimwordPhonetic": "dɪgŋ"},{"stimwordPageNbr": 11, "stimwordLineNbr": 7, "stimwordWord": "potatoes", "stimwordPhonetic": "pǝteoz"},{"stimwordPageNbr": 11, "stimwordLineNbr": 8, "stimwordWord": "under", "stimwordPhonetic": "ʌndɚ"},{"stimwordPageNbr": 11, "stimwordLineNbr": 9, "stimwordWord": "the", "stimwordPhonetic": "ðǝ"},{"stimwordPageNbr": 11, "stimwordLineNbr": 10, "stimwordWord": "hot", "stimwordPhonetic": "hat"},{"stimwordPageNbr": 11, "stimwordLineNbr": 11, "stimwordWord": "sun", "stimwordPhonetic": "sʌn"},{"stimwordPageNbr": 11, "stimwordLineNbr": 12, "stimwordWord": "for", "stimwordPhonetic": "fʊ"},{"stimwordPageNbr": 11, "stimwordLineNbr": 13, "stimwordWord": "four", "stimwordPhonetic": "foɚ"},{"stimwordPageNbr": 11, "stimwordLineNbr": 14, "stimwordWord": "cents", "stimwordPhonetic": "ɛnts"},{"stimwordPageNbr": 11, "stimwordLineNbr": 15, "stimwordWord": "an", "stimwordPhonetic": "æn"},{"stimwordPageNbr": 11, "stimwordLineNbr": 16, "stimwordWord": "hour", "stimwordPhonetic": "auwɚ"},{"stimwordPageNbr": 12, "stimwordLineNbr": 1, "stimwordWord": "In", "stimwordPhonetic": "ɪn"},{"stimwordPageNbr": 12, "stimwordLineNbr": 2, "stimwordWord": "those", "stimwordPhonetic": "ðoz"},{"stimwordPageNbr": 12, "stimwordLineNbr": 3, "stimwordWord": "days", "stimwordPhonetic": "dez"},{"stimwordPageNbr": 12, "stimwordLineNbr": 4, "stimwordWord": "there", "stimwordPhonetic": "ðɛɚ"},{"stimwordPageNbr": 12, "stimwordLineNbr": 5, "stimwordWord": "were", "stimwordPhonetic": "wɝ"},{"stimwordPageNbr": 12, "stimwordLineNbr": 6, "stimwordWord": "not", "stimwordPhonetic": "nat"},{"stimwordPageNbr": 12, "stimwordLineNbr": 7, "stimwordWord": "half a dozen", "stimwordPhonetic": "hæfdʌzǝn"},{"stimwordPageNbr": 12, "stimwordLineNbr": 8, "stimwordWord": "men", "stimwordPhonetic": "mɛn"},{"stimwordPageNbr": 12, "stimwordLineNbr": 9, "stimwordWord": "in", "stimwordPhonetic": "ɪn"},{"stimwordPageNbr": 12, "stimwordLineNbr": 10, "stimwordWord": "all", "stimwordPhonetic": "al"},{"stimwordPageNbr": 12, "stimwordLineNbr": 11, "stimwordWord": "the", "stimwordPhonetic": "ðǝ"},{"stimwordPageNbr": 12, "stimwordLineNbr": 12, "stimwordWord": "United", "stimwordPhonetic": "junaitǝd"},{"stimwordPageNbr": 12, "stimwordLineNbr": 13, "stimwordWord": "States", "stimwordPhonetic": "ste"},{"stimwordPageNbr": 12, "stimwordLineNbr": 14, "stimwordWord": "who", "stimwordPhonetic": "hu"},{"stimwordPageNbr": 12, "stimwordLineNbr": 15, "stimwordWord": "were", "stimwordPhonetic": "wɝ"},{"stimwordPageNbr": 12, "stimwordLineNbr": 16, "stimwordWord": "worth", "stimwordPhonetic": "wɝθ"},{"stimwordPageNbr": 12, "stimwordLineNbr": 17, "stimwordWord": "even", "stimwordPhonetic": "ivǝn"},{"stimwordPageNbr": 12, "stimwordLineNbr": 18, "stimwordWord": "one", "stimwordPhonetic": "wʌn"},{"stimwordPageNbr": 12, "stimwordLineNbr": 19, "stimwordWord": "million", "stimwordPhonetic": "mɪljǝn"},{"stimwordPageNbr": 12, "stimwordLineNbr": 20, "stimwordWord": "dollars", "stimwordPhonetic": "dalɚz"},{"stimwordPageNbr": 13, "stimwordLineNbr": 1, "stimwordWord": "Eventually", "stimwordPhonetic": "ivɛntʃʊl"},{"stimwordPageNbr": 13, "stimwordLineNbr": 2, "stimwordWord": "John", "stimwordPhonetic": "dʒan"},{"stimwordPageNbr": 13, "stimwordLineNbr": 3, "stimwordWord": "D", "stimwordPhonetic": "di"},{"stimwordPageNbr": 13, "stimwordLineNbr": 4, "stimwordWord": "managed", "stimwordPhonetic": "mænɪdʒ"},{"stimwordPageNbr": 13, "stimwordLineNbr": 5, "stimwordWord": "to", "stimwordPhonetic": "tǝ"},{"stimwordPageNbr": 13, "stimwordLineNbr": 6, "stimwordWord": "collect a", "stimwordPhonetic": "klɛtǝ"},{"stimwordPageNbr": 13, "stimwordLineNbr": 7, "stimwordWord": "fortune", "stimwordPhonetic": "foɚtʃǝn"},{"stimwordPageNbr": 13, "stimwordLineNbr": 8, "stimwordWord": "said", "stimwordPhonetic": "sɛd"},{"stimwordPageNbr": 13, "stimwordLineNbr": 9, "stimwordWord": "to", "stimwordPhonetic": "tǝ"},{"stimwordPageNbr": 13, "stimwordLineNbr": 10, "stimwordWord": "be", "stimwordPhonetic": "bi"},{"stimwordPageNbr": 13, "stimwordLineNbr": 11, "stimwordWord": "anywhere", "stimwordPhonetic": "niwɛɚ"},{"stimwordPageNbr": 13, "stimwordLineNbr": 12, "stimwordWord": "from", "stimwordPhonetic": "frʌm"},{"stimwordPageNbr": 13, "stimwordLineNbr": 13, "stimwordWord": "one to two", "stimwordPhonetic": "wʌntǝu"},{"stimwordPageNbr": 13, "stimwordLineNbr": 14, "stimwordWord": "billion", "stimwordPhonetic": "bɪljǝn"},{"stimwordPageNbr": 13, "stimwordLineNbr": 15, "stimwordWord": "dollars", "stimwordPhonetic": "dalɚz"},{"stimwordPageNbr": 14, "stimwordLineNbr": 1, "stimwordWord": "And", "stimwordPhonetic": "ænd"},{"stimwordPageNbr": 14, "stimwordLineNbr": 2, "stimwordWord": "yet", "stimwordPhonetic": "jɛt"},{"stimwordPageNbr": 14, "stimwordLineNbr": 3, "stimwordWord": "the", "stimwordPhonetic": "ðǝ"},{"stimwordPageNbr": 14, "stimwordLineNbr": 4, "stimwordWord": "first", "stimwordPhonetic": "fɝst"},{"stimwordPageNbr": 14, "stimwordLineNbr": 5, "stimwordWord": "girl", "stimwordPhonetic": "gɝʊl"},{"stimwordPageNbr": 14, "stimwordLineNbr": 6, "stimwordWord": "he", "stimwordPhonetic": "hi"},{"stimwordPageNbr": 14, "stimwordLineNbr": 7, "stimwordWord": "fell in", "stimwordPhonetic": "fɛlɪn"},{"stimwordPageNbr": 14, "stimwordLineNbr": 8, "stimwordWord": "love", "stimwordPhonetic": "lʌv"},{"stimwordPageNbr": 14, "stimwordLineNbr": 9, "stimwordWord": "with", "stimwordPhonetic": "wɪθ"},{"stimwordPageNbr": 14, "stimwordLineNbr": 10, "stimwordWord": "refused to", "stimwordPhonetic": "rǝfjuzt"},{"stimwordPageNbr": 14, "stimwordLineNbr": 11, "stimwordWord": "marry", "stimwordPhonetic": "mɛɚi"},{"stimwordPageNbr": 14, "stimwordLineNbr": 12, "stimwordWord": "him", "stimwordPhonetic": "hɪm"},{"stimwordPageNbr": 15, "stimwordLineNbr": 1, "stimwordWord": "The", "stimwordPhonetic": "ðǝ"},{"stimwordPageNbr": 15, "stimwordLineNbr": 2, "stimwordWord": "reason", "stimwordPhonetic": "rizǝn"},{"stimwordPageNbr": 15, "stimwordLineNbr": 3, "stimwordWord": "given", "stimwordPhonetic": "gɪvǝn"},{"stimwordPageNbr": 15, "stimwordLineNbr": 4, "stimwordWord": "was", "stimwordPhonetic": "wʌz"},{"stimwordPageNbr": 15, "stimwordLineNbr": 5, "stimwordWord": "because", "stimwordPhonetic": "bikɔz"},{"stimwordPageNbr": 15, "stimwordLineNbr": 6, "stimwordWord": "her", "stimwordPhonetic": "hɝ"},{"stimwordPageNbr": 15, "stimwordLineNbr": 7, "stimwordWord": "mother", "stimwordPhonetic": "mʌðɚ"},{"stimwordPageNbr": 15, "stimwordLineNbr": 8, "stimwordWord": "refused to", "stimwordPhonetic": "rǝfjuzt"},{"stimwordPageNbr": 15, "stimwordLineNbr": 9, "stimwordWord": "allow", "stimwordPhonetic": "ǝlau"},{"stimwordPageNbr": 15, "stimwordLineNbr": 10, "stimwordWord": "her", "stimwordPhonetic": "hɝ"},{"stimwordPageNbr": 15, "stimwordLineNbr": 11, "stimwordWord": "daughter", "stimwordPhonetic": "dɔtɚ"},{"stimwordPageNbr": 15, "stimwordLineNbr": 12, "stimwordWord": "to", "stimwordPhonetic": "tu"},{"stimwordPageNbr": 15, "stimwordLineNbr": 13, "stimwordWord": "throw", "stimwordPhonetic": "θro"},{"stimwordPageNbr": 15, "stimwordLineNbr": 14, "stimwordWord": "herself", "stimwordPhonetic": "hɝsɛlf"},{"stimwordPageNbr": 15, "stimwordLineNbr": 15, "stimwordWord": "away", "stimwordPhonetic": "ǝwe"},{"stimwordPageNbr": 15, "stimwordLineNbr": 16, "stimwordWord": "on a", "stimwordPhonetic": "ɔnǝ"},{"stimwordPageNbr": 15, "stimwordLineNbr": 17, "stimwordWord": "man", "stimwordPhonetic": "mæn"},{"stimwordPageNbr": 15, "stimwordLineNbr": 18, "stimwordWord": "who", "stimwordPhonetic": "hu"},{"stimwordPageNbr": 15, "stimwordLineNbr": 19, "stimwordWord": "had", "stimwordPhonetic": "hæd"},{"stimwordPageNbr": 15, "stimwordLineNbr": 20, "stimwordWord": "such", "stimwordPhonetic": "sʌtʃ"},{"stimwordPageNbr": 15, "stimwordLineNbr": 21, "stimwordWord": "poor", "stimwordPhonetic": "poɚ"},{"stimwordPageNbr": 15, "stimwordLineNbr": 22, "stimwordWord": "prospects", "stimwordPhonetic": "prasɛk"},{"stimwordPageNbr": 16, "stimwordLineNbr": 1, "stimwordWord": "The second", "stimwordPhonetic": "ðǝsɛknd"},{"stimwordPageNbr": 16, "stimwordLineNbr": 2, "stimwordWord": "amazing", "stimwordPhonetic": "ǝmezɪŋ"},{"stimwordPageNbr": 16, "stimwordLineNbr": 3, "stimwordWord": "thing", "stimwordPhonetic": "θɪŋ"},{"stimwordPageNbr": 16, "stimwordLineNbr": 4, "stimwordWord": "that", "stimwordPhonetic": "ðæt"},{"stimwordPageNbr": 16, "stimwordLineNbr": 5, "stimwordWord": "John", "stimwordPhonetic": "dʒan"},{"stimwordPageNbr": 16, "stimwordLineNbr": 6, "stimwordWord": "Rockefeller", "stimwordPhonetic": "rakǝfɛlɚ"},{"stimwordPageNbr": 16, "stimwordLineNbr": 7, "stimwordWord": "did", "stimwordPhonetic": "ɪd"},{"stimwordPageNbr": 16, "stimwordLineNbr": 8, "stimwordWord": "was to", "stimwordPhonetic": "wʌztǝ"},{"stimwordPageNbr": 16, "stimwordLineNbr": 9, "stimwordWord": "give away", "stimwordPhonetic": "gɪvǝwe"},{"stimwordPageNbr": 16, "stimwordLineNbr": 10, "stimwordWord": "more", "stimwordPhonetic": "moɚ"},{"stimwordPageNbr": 16, "stimwordLineNbr": 11, "stimwordWord": "money", "stimwordPhonetic": "mʌni"},{"stimwordPageNbr": 16, "stimwordLineNbr": 12, "stimwordWord": "than", "stimwordPhonetic": "θæn"},{"stimwordPageNbr": 16, "stimwordLineNbr": 13, "stimwordWord": "anyone", "stimwordPhonetic": "ɛniwʌ"},{"stimwordPageNbr": 16, "stimwordLineNbr": 14, "stimwordWord": "else", "stimwordPhonetic": "ɛls"},{"stimwordPageNbr": 16, "stimwordLineNbr": 15, "stimwordWord": "has", "stimwordPhonetic": "hæz"},{"stimwordPageNbr": 16, "stimwordLineNbr": 16, "stimwordWord": "done in", "stimwordPhonetic": "dʌnɪ"},{"stimwordPageNbr": 16, "stimwordLineNbr": 17, "stimwordWord": "history", "stimwordPhonetic": "hɪstoɚi"},{"stimwordPageNbr": 17, "stimwordLineNbr": 1, "stimwordWord": "And the", "stimwordPhonetic": "ænǝ"},{"stimwordPageNbr": 17, "stimwordLineNbr": 2, "stimwordWord": "third", "stimwordPhonetic": "θɝd"},{"stimwordPageNbr": 17, "stimwordLineNbr": 3, "stimwordWord": "thing", "stimwordPhonetic": "θɪŋ"},{"stimwordPageNbr": 17, "stimwordLineNbr": 4, "stimwordWord": "about", "stimwordPhonetic": "ǝbaut"},{"stimwordPageNbr": 17, "stimwordLineNbr": 5, "stimwordWord": "this", "stimwordPhonetic": "ðɪs"},{"stimwordPageNbr": 17, "stimwordLineNbr": 6, "stimwordWord": "man", "stimwordPhonetic": "mæn"},{"stimwordPageNbr": 17, "stimwordLineNbr": 7, "stimwordWord": "was", "stimwordPhonetic": "wʌz"},{"stimwordPageNbr": 17, "stimwordLineNbr": 8, "stimwordWord": "that", "stimwordPhonetic": "ðæt"},{"stimwordPageNbr": 18, "stimwordLineNbr": 9, "stimwordWord": "he", "stimwordPhonetic": "hi"},{"stimwordPageNbr": 18, "stimwordLineNbr": 10, "stimwordWord": "lived", "stimwordPhonetic": "lɪvd"},{"stimwordPageNbr": 18, "stimwordLineNbr": 11, "stimwordWord": "to", "stimwordPhonetic": "tǝ"},{"stimwordPageNbr": 18, "stimwordLineNbr": 12, "stimwordWord": "be", "stimwordPhonetic": "bi"},{"stimwordPageNbr": 18, "stimwordLineNbr": 13, "stimwordWord": "eighty-two", "stimwordPhonetic": "etiu"},{"stimwordPageNbr": 19, "stimwordLineNbr": 1, "stimwordWord": "He", "stimwordPhonetic": "hi"},{"stimwordPageNbr": 19, "stimwordLineNbr": 2, "stimwordWord": "was", "stimwordPhonetic": "wʌz"},{"stimwordPageNbr": 19, "stimwordLineNbr": 3, "stimwordWord": "one of the", "stimwordPhonetic": "wʌnǝvð"},{"stimwordPageNbr": 19, "stimwordLineNbr": 4, "stimwordWord": "most", "stimwordPhonetic": "most"},{"stimwordPageNbr": 19, "stimwordLineNbr": 5, "stimwordWord": "hated", "stimwordPhonetic": "hetǝd"},{"stimwordPageNbr": 19, "stimwordLineNbr": 6, "stimwordWord": "men", "stimwordPhonetic": "mɛn"},{"stimwordPageNbr": 19, "stimwordLineNbr": 7, "stimwordWord": "in", "stimwordPhonetic": "ɪn"},{"stimwordPageNbr": 19, "stimwordLineNbr": 8, "stimwordWord": "America", "stimwordPhonetic": "ǝmɛɚk"},{"stimwordPageNbr": 20, "stimwordLineNbr": 1, "stimwordWord": "He", "stimwordPhonetic": "hi"},{"stimwordPageNbr": 20, "stimwordLineNbr": 2, "stimwordWord": "got", "stimwordPhonetic": "gat"},{"stimwordPageNbr": 20, "stimwordLineNbr": 3, "stimwordWord": "lots of", "stimwordPhonetic": "latsǝv"},{"stimwordPageNbr": 20, "stimwordLineNbr": 4, "stimwordWord": "letters", "stimwordPhonetic": "lɛtɚz"},{"stimwordPageNbr": 20, "stimwordLineNbr": 5, "stimwordWord": "from", "stimwordPhonetic": "frʌm"},{"stimwordPageNbr": 20, "stimwordLineNbr": 6, "stimwordWord": "people", "stimwordPhonetic": "ipʊl"},{"stimwordPageNbr": 20, "stimwordLineNbr": 7, "stimwordWord": "threatening", "stimwordPhonetic": "θrɛtnɪŋ"},{"stimwordPageNbr": 20, "stimwordLineNbr": 8, "stimwordWord": "to", "stimwordPhonetic": "tǝ"},{"stimwordPageNbr": 20, "stimwordLineNbr": 9, "stimwordWord": "kill", "stimwordPhonetic": "kɪl"},{"stimwordPageNbr": 20, "stimwordLineNbr": 10, "stimwordWord": "him", "stimwordPhonetic": "hɪm"},{"stimwordPageNbr": 21, "stimwordLineNbr": 1, "stimwordWord": "He", "stimwordPhonetic": "hi"},{"stimwordPageNbr": 21, "stimwordLineNbr": 2, "stimwordWord": "had", "stimwordPhonetic": "hæd"},{"stimwordPageNbr": 21, "stimwordLineNbr": 3, "stimwordWord": "to", "stimwordPhonetic": "tǝ"},{"stimwordPageNbr": 21, "stimwordLineNbr": 4, "stimwordWord": "be", "stimwordPhonetic": "bi"},{"stimwordPageNbr": 21, "stimwordLineNbr": 5, "stimwordWord": "protected", "stimwordPhonetic": "prɛktǝd"},{"stimwordPageNbr": 21, "stimwordLineNbr": 6, "stimwordWord": "day", "stimwordPhonetic": "de"},{"stimwordPageNbr": 21, "stimwordLineNbr": 7, "stimwordWord": "and night", "stimwordPhonetic": "ænait"},{"stimwordPageNbr": 22, "stimwordLineNbr": 8, "stimwordWord": "by", "stimwordPhonetic": "bai"},{"stimwordPageNbr": 22, "stimwordLineNbr": 9, "stimwordWord": "armed", "stimwordPhonetic": "aɚmd"},{"stimwordPageNbr": 22, "stimwordLineNbr": 10, "stimwordWord": "bodyguards", "stimwordPhonetic": "badigɚz"},{"stimwordPageNbr": 23, "stimwordLineNbr": 1, "stimwordWord": "He", "stimwordPhonetic": "hi"},{"stimwordPageNbr": 23, "stimwordLineNbr": 2, "stimwordWord": "endured", "stimwordPhonetic": "ɛnduɚ"},{"stimwordPageNbr": 23, "stimwordLineNbr": 3, "stimwordWord": "the", "stimwordPhonetic": "ðǝ"},{"stimwordPageNbr": 23, "stimwordLineNbr": 4, "stimwordWord": "heavy", "stimwordPhonetic": "hɛvi"},{"stimwordPageNbr": 23, "stimwordLineNbr": 5, "stimwordWord": "nervous", "stimwordPhonetic": "nɝvǝs"},{"stimwordPageNbr": 23, "stimwordLineNbr": 6, "stimwordWord": "and", "stimwordPhonetic": "æn"},{"stimwordPageNbr": 23, "stimwordLineNbr": 7, "stimwordWord": "physical", "stimwordPhonetic": "fɪzkʊl"},{"stimwordPageNbr": 23, "stimwordLineNbr": 8, "stimwordWord": "strain", "stimwordPhonetic": "stren"},{"stimwordPageNbr": 23, "stimwordLineNbr": 9, "stimwordWord": "of", "stimwordPhonetic": "ǝv"},{"stimwordPageNbr": 23, "stimwordLineNbr": 10, "stimwordWord": "building", "stimwordPhonetic": "bɪldŋ"},{"stimwordPageNbr": 23, "stimwordLineNbr": 11, "stimwordWord": "up", "stimwordPhonetic": "ʌp"},{"stimwordPageNbr": 23, "stimwordLineNbr": 12, "stimwordWord": "and", "stimwordPhonetic": "æn"},{"stimwordPageNbr": 23, "stimwordLineNbr": 13, "stimwordWord": "bossing", "stimwordPhonetic": "bɔsɪŋ"},{"stimwordPageNbr": 23, "stimwordLineNbr": 14, "stimwordWord": "all", "stimwordPhonetic": "al"},{"stimwordPageNbr": 23, "stimwordLineNbr": 15, "stimwordWord": "his", "stimwordPhonetic": "hɪz"},{"stimwordPageNbr": 23, "stimwordLineNbr": 16, "stimwordWord": "big", "stimwordPhonetic": "bɪg"},{"stimwordPageNbr": 23, "stimwordLineNbr": 17, "stimwordWord": "empire", "stimwordPhonetic": "ɛmpaiɚ"},{"stimwordPageNbr": 24, "stimwordLineNbr": 1, "stimwordWord": "It is", "stimwordPhonetic": "ɪtz"},{"stimwordPageNbr": 24, "stimwordLineNbr": 2, "stimwordWord": "well", "stimwordPhonetic": "wɛl"},{"stimwordPageNbr": 24, "stimwordLineNbr": 3, "stimwordWord": "known", "stimwordPhonetic": "no"},{"stimwordPageNbr": 24, "stimwordLineNbr": 4, "stimwordWord": "that", "stimwordPhonetic": "ðæt"},{"stimwordPageNbr": 24, "stimwordLineNbr": 5, "stimwordWord": "the", "stimwordPhonetic": "ðǝ"},{"stimwordPageNbr": 24, "stimwordLineNbr": 6, "stimwordWord": "strain", "stimwordPhonetic": "stren"},{"stimwordPageNbr": 24, "stimwordLineNbr": 7, "stimwordWord": "of", "stimwordPhonetic": "ǝv"},{"stimwordPageNbr": 24, "stimwordLineNbr": 8, "stimwordWord": "business", "stimwordPhonetic": "bɪznǝs"},{"stimwordPageNbr": 24, "stimwordLineNbr": 9, "stimwordWord": "killed", "stimwordPhonetic": "kɪld"},{"stimwordPageNbr": 24, "stimwordLineNbr": 10, "stimwordWord": "Harriman", "stimwordPhonetic": "hɛɚǝmn"},{"stimwordPageNbr": 24, "stimwordLineNbr": 11, "stimwordWord": "the", "stimwordPhonetic": "ðǝ"},{"stimwordPageNbr": 24, "stimwordLineNbr": 12, "stimwordWord": "railroad", "stimwordPhonetic": "elrod"},{"stimwordPageNbr": 24, "stimwordLineNbr": 13, "stimwordWord": "man", "stimwordPhonetic": "mæn"},{"stimwordPageNbr": 24, "stimwordLineNbr": 14, "stimwordWord": "at", "stimwordPhonetic": "æt"},{"stimwordPageNbr": 24, "stimwordLineNbr": 15, "stimwordWord": "sixty-one", "stimwordPhonetic": "ɪkstiwǝn"},{"stimwordPageNbr": 25, "stimwordLineNbr": 1, "stimwordWord": "And that", "stimwordPhonetic": "ænðt"},{"stimwordPageNbr": 25, "stimwordLineNbr": 2, "stimwordWord": "Woolworth", "stimwordPhonetic": "ʊlwɝθ"},{"stimwordPageNbr": 25, "stimwordLineNbr": 3, "stimwordWord": "was", "stimwordPhonetic": "wʌz"},{"stimwordPageNbr": 25, "stimwordLineNbr": 4, "stimwordWord": "finished", "stimwordPhonetic": "fɪnʃt"},{"stimwordPageNbr": 25, "stimwordLineNbr": 5, "stimwordWord": "with", "stimwordPhonetic": "wɪθ"},{"stimwordPageNbr": 25, "stimwordLineNbr": 6, "stimwordWord": "his", "stimwordPhonetic": "hɪz"},{"stimwordPageNbr": 25, "stimwordLineNbr": 7, "stimwordWord": "life", "stimwordPhonetic": "laif"},{"stimwordPageNbr": 25, "stimwordLineNbr": 8, "stimwordWord": "at", "stimwordPhonetic": "æt"},{"stimwordPageNbr": 25, "stimwordLineNbr": 9, "stimwordWord": "sixty-seven", "stimwordPhonetic": "sɪktiɛvǝn"},{"stimwordPageNbr": 26, "stimwordLineNbr": 1, "stimwordWord": "But", "stimwordPhonetic": "bʌt"},{"stimwordPageNbr": 26, "stimwordLineNbr": 2, "stimwordWord": "John", "stimwordPhonetic": "dʒan"},{"stimwordPageNbr": 26, "stimwordLineNbr": 3, "stimwordWord": "Rockefeller", "stimwordPhonetic": "rakǝfɛlɚ"},{"stimwordPageNbr": 26, "stimwordLineNbr": 4, "stimwordWord": "made a", "stimwordPhonetic": "medǝ"},{"stimwordPageNbr": 26, "stimwordLineNbr": 5, "stimwordWord": "far", "stimwordPhonetic": "faɚ"},{"stimwordPageNbr": 26, "stimwordLineNbr": 6, "stimwordWord": "greater", "stimwordPhonetic": "gretɚ"},{"stimwordPageNbr": 26, "stimwordLineNbr": 7, "stimwordWord": "fortune", "stimwordPhonetic": "foɚtʃǝn"},{"stimwordPageNbr": 26, "stimwordLineNbr": 8, "stimwordWord": "and", "stimwordPhonetic": "æn"},{"stimwordPageNbr": 26, "stimwordLineNbr": 9, "stimwordWord": "still", "stimwordPhonetic": "stɪl"},{"stimwordPageNbr": 26, "stimwordLineNbr": 10, "stimwordWord": "lived", "stimwordPhonetic": "lɪvd"},{"stimwordPageNbr": 26, "stimwordLineNbr": 11, "stimwordWord": "many", "stimwordPhonetic": "mɛni"},{"stimwordPageNbr": 26, "stimwordLineNbr": 12, "stimwordWord": "years", "stimwordPhonetic": "jɪɚz"},{"stimwordPageNbr": 26, "stimwordLineNbr": 13, "stimwordWord": "longer", "stimwordPhonetic": "lɔŋgɚ"}]
+
+;
+
+				/*
+				[	{ 'stimwordPageNbr'	:	'1'	, 'stimwordLineNbr' : '1' 	,	'stimwordWord'	:	'Horse'		,	'stimwordPhonetic'	:	'hoɚs'		}
+				,	{ 'stimwordPageNbr'	:	'1'	, 'stimwordLineNbr' : '2'	,	'stimwordWord'	:	'Snake'		,	'stimwordPhonetic'	:	'snek'		}
+				,	{ 'stimwordPageNbr'	:	'1'	, 'stimwordLineNbr' : '3'	,	'stimwordWord'	:	'Clown'		,	'stimwordPhonetic'	:	'klaun'		}
+				,	{ 'stimwordPageNbr'	:	'1'	, 'stimwordLineNbr' : '4'	,	'stimwordWord'	:	'Dog'		,	'stimwordPhonetic'	:	'dag'		}
+				,	{ 'stimwordPageNbr'	:	'2'	, 'stimwordLineNbr' : '19'	,	'stimwordWord'	:	'thread'	,	'stimwordPhonetic'	:	'θrɛd'		}
+				,	{ 'stimwordPageNbr'	:	'21'	, 'stimwordLineNbr' : '5'	,	'stimwordWord'	:	'protected'	,	'stimwordPhonetic'	:	'prǝtɛktǝd'	}
+				,	{ 'stimwordPageNbr'	:	'25'	, 'stimwordLineNbr' : '9'	,	'stimwordWord'	:	'sixty_seven'	,	'stimwordPhonetic'	:	'sɪkstisɛvǝn'	}
+				,	{ 'stimwordPageNbr'	:	'9'	, 'stimwordLineNbr' : '3'	,	'stimwordWord'	:	'Rockerfeller'	,	'stimwordPhonetic'	:	'rakǝfɛlɚ'	}
+				,	{ 'stimwordPageNbr'	:	'20'	, 'stimwordLineNbr' : '7'	,	'stimwordWord'	:	'threatening'	,	'stimwordPhonetic'	:	'θrɛtnɪŋ'	}
+				,	{ 'stimwordPageNbr'	:	'13'	, 'stimwordLineNbr' : '1'	,	'stimwordWord'	:	'Eventually'	,	'stimwordPhonetic'	:	'θrɛtnɪŋ'	}
+				];
+				*/
+
+
+const myData = {
+
+'1-1' :
+
 [{"contextPositionSoundPhoneme": "initial -- h", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "ø", "languageNormsError": "ø", "stimwordPositionAutoIncr": 1, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "initial -- h", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 2, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "aɚ", "stimwordPositionAutoIncr": 3, "languageNormsErrorCOUNT": "5"}
@@ -514,18 +1377,20 @@ const HorseData =
 ,{"contextPositionSoundPhoneme": "diphthong -- oɚ", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝɚ", "stimwordPositionAutoIncr": 4, "languageNormsErrorCOUNT": "5"}
 ,{"contextPositionSoundPhoneme": "final -- s", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 5, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "final -- s", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 6, "languageNormsErrorCOUNT": "0"}
-];
+]
+,
+'1-2' :
 
-const SnakeData =
 [{"contextPositionSoundPhoneme": "blend -- sn", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 7, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "blend -- sn", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 8, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "vowel -- e", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 9, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "vowel -- e", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɛ", "stimwordPositionAutoIncr": 10, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "final -- k", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 11, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "final -- k", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 12, "languageNormsErrorCOUNT": "0"}
-];
+]
+,
+'1-3' :
 
-const ClownData =
 [{"contextPositionSoundPhoneme": "blend -- kl", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "k&l", "stimwordPositionAutoIncr": 13, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "blend -- kl", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "k&l", "stimwordPositionAutoIncr": 14, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "diphthong -- au", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "a", "stimwordPositionAutoIncr": 15, "languageNormsErrorCOUNT": "2"}
@@ -534,9 +1399,10 @@ const ClownData =
 ,{"contextPositionSoundPhoneme": "diphthong -- au", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "o", "stimwordPositionAutoIncr": 16, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "final -- n", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 17, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "final -- n", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 18, "languageNormsErrorCOUNT": "1"}
-];
+]
+,
+'1-4' :
 
-const DogData =
 [{"contextPositionSoundPhoneme": "initial -- d", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 19, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "initial -- d", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 20, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "vowel -- a", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "o", "stimwordPositionAutoIncr": 21, "languageNormsErrorCOUNT": "2"}
@@ -545,10 +1411,11 @@ const DogData =
 ,{"contextPositionSoundPhoneme": "vowel -- a", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#e0e0e0", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 22, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "final -- g", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "k", "stimwordPositionAutoIncr": 23, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "final -- g", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "k", "stimwordPositionAutoIncr": 24, "languageNormsErrorCOUNT": "1"}
-];
+]
+,
+'21-5' :
 
-const protectedData =  [
-{"contextPositionSoundPhoneme": "blend -- pr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "pR", "stimwordPositionAutoIncr": 949, "languageNormsErrorCOUNT": "1"}
+[{"contextPositionSoundPhoneme": "blend -- pr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "pR", "stimwordPositionAutoIncr": 949, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 950, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "middle -- t", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 951, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "vowel -- ɛ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "e", "stimwordPositionAutoIncr": 952, "languageNormsErrorCOUNT": "1"}
@@ -557,9 +1424,10 @@ const protectedData =  [
 ,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 955, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "t", "stimwordPositionAutoIncr": 956, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 956, "languageNormsErrorCOUNT": "2"}
-];
+]
+,
+'2-19' :
 
-const threadData =
 [{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "θR", "stimwordPositionAutoIncr": 107, "languageNormsErrorCOUNT": "3"}
 ,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "tr", "stimwordPositionAutoIncr": 107, "languageNormsErrorCOUNT": "3"}
 ,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "tR", "stimwordPositionAutoIncr": 107, "languageNormsErrorCOUNT": "3"}
@@ -580,12 +1448,11 @@ const threadData =
 ,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "word", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "t", "stimwordPositionAutoIncr": 111, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 112, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "final -- d", "stimwordPositionSetting": "sentence", "stimwordBackgroundColor": "#d3d3d3", "clientContextError": "", "replicationValue": "", "languageNormsError": "t", "stimwordPositionAutoIncr": 112, "languageNormsErrorCOUNT": "2"}
-];
+]
+,
+'25-9' :
 
-
-const sixty_sevenData =
-[
-{"contextPositionSoundPhoneme": "initial -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1123, "languageNormsErrorCOUNT": "0"}
+[{"contextPositionSoundPhoneme": "initial -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1123, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "vowel -- ɪ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "i", "stimwordPositionAutoIncr": 1124, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "middle -- k", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1125, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "middle -- s", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1126, "languageNormsErrorCOUNT": "0"}
@@ -598,9 +1465,10 @@ const sixty_sevenData =
 ,{"contextPositionSoundPhoneme": "vowel -- ǝ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "", "stimwordPositionAutoIncr": 1132, "languageNormsErrorCOUNT": "0"}
 ,{"contextPositionSoundPhoneme": "final -- n", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ø", "stimwordPositionAutoIncr": 1133, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "final -- n", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ŋ", "stimwordPositionAutoIncr": 1133, "languageNormsErrorCOUNT": "2"}
-];
+]
+,
+'9-3' :
 
-const RockerfellerData =
 [{"contextPositionSoundPhoneme": "initial -- r", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "R", "stimwordPositionAutoIncr": 396, "languageNormsErrorCOUNT": "1"}
 ,{"contextPositionSoundPhoneme": "vowel -- a", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "o", "stimwordPositionAutoIncr": 397, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "vowel -- a", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ʌ", "stimwordPositionAutoIncr": 397, "languageNormsErrorCOUNT": "2"}
@@ -619,9 +1487,10 @@ const RockerfellerData =
 ,{"contextPositionSoundPhoneme": "vowel -- ɚ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɚR", "stimwordPositionAutoIncr": 403, "languageNormsErrorCOUNT": "3"}
 ,{"contextPositionSoundPhoneme": "vowel -- ɚ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝR", "stimwordPositionAutoIncr": 403, "languageNormsErrorCOUNT": "3"}
 ,{"contextPositionSoundPhoneme": "vowel -- ɚ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝ", "stimwordPositionAutoIncr": 403, "languageNormsErrorCOUNT": "3"}
- ];
+]
+,
+'20-7' :
 
-const threateningData =
 [{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "tr", "stimwordPositionAutoIncr": 926, "languageNormsErrorCOUNT": "3"}
 ,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "tR", "stimwordPositionAutoIncr": 926, "languageNormsErrorCOUNT": "3"}
 ,{"contextPositionSoundPhoneme": "blend -- θr", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "θR", "stimwordPositionAutoIncr": 926, "languageNormsErrorCOUNT": "3"}
@@ -639,9 +1508,10 @@ const threateningData =
 ,{"contextPositionSoundPhoneme": "final -- ŋ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ŋk", "stimwordPositionAutoIncr": 931, "languageNormsErrorCOUNT": "3"}
 ,{"contextPositionSoundPhoneme": "final -- ŋ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ŋg", "stimwordPositionAutoIncr": 931, "languageNormsErrorCOUNT": "3"}
 ,{"contextPositionSoundPhoneme": "final -- ŋ", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "n", "stimwordPositionAutoIncr": 931, "languageNormsErrorCOUNT": "3"}
-];
+]
+,
+'13-1' :
 
-const EventuallyData =
 [{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 578, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝ", "stimwordPositionAutoIncr": 578, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "middle -- v", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "f", "stimwordPositionAutoIncr": 579, "languageNormsErrorCOUNT": "1"}
@@ -659,66 +1529,274 @@ const EventuallyData =
 ,{"contextPositionSoundPhoneme": "middle -- l", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "&l", "stimwordPositionAutoIncr": 584, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ɪ", "stimwordPositionAutoIncr": 585, "languageNormsErrorCOUNT": "2"}
 ,{"contextPositionSoundPhoneme": "vowel -- i", "stimwordPositionSetting": "reading", "stimwordBackgroundColor": "#fff", "clientContextError": "", "replicationValue": "", "languageNormsError": "ǝ", "stimwordPositionAutoIncr": 585, "languageNormsErrorCOUNT": "2"}
+]
+};
+
+
+
+soundSelectorData= 
+[{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "p", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 1},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "p", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 2},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "p", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 3},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "b", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 4},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "b", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 5},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "b", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 6},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "t", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 7},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "t", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 8},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "t", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 9},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "d", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 10},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "d", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 11},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "d", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 12},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "k", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 13},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "k", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 14},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "k", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 15},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "g", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 16},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "g", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 17},{"soundTitle": "Consonants", "soundSubTitle": "Stops", "soundPhoneme": "g", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "6", "contextPositionCOUNT": "3", "contextAutoIncr": 18},{"soundTitle": "Consonants", "soundSubTitle": "Nasals", "soundPhoneme": "m", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "3", "contextAutoIncr": 19},{"soundTitle": "Consonants", "soundSubTitle": "Nasals", "soundPhoneme": "m", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "3", "contextAutoIncr": 20},{"soundTitle": "Consonants", "soundSubTitle": "Nasals", "soundPhoneme": "m", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "3", "contextAutoIncr": 21},{"soundTitle": "Consonants", "soundSubTitle": "Nasals", "soundPhoneme": "n", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "3", "contextAutoIncr": 22},{"soundTitle": "Consonants", "soundSubTitle": "Nasals", "soundPhoneme": "n", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "3", "contextAutoIncr": 23},{"soundTitle": "Consonants", "soundSubTitle": "Nasals", "soundPhoneme": "n", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "3", "contextAutoIncr": 24},{"soundTitle": "Consonants", "soundSubTitle": "Nasals", "soundPhoneme": "ŋ", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "2", "contextAutoIncr": 25},{"soundTitle": "Consonants", "soundSubTitle": "Nasals", "soundPhoneme": "ŋ", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "2", "contextAutoIncr": 26},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "f", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 27},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "f", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 28},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "f", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 29},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "v", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 30},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "v", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 31},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "v", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 32},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "θ", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 33},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "θ", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 34},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "θ", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 35},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "ð", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 36},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "ð", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 37},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "ð", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 38},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "s", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 39},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "s", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 40},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "s", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 41},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "z", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 42},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "z", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 43},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "z", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 44},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "ʃ", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 45},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "ʃ", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 46},{"soundTitle": "Consonants", "soundSubTitle": "Frictions", "soundPhoneme": "ʃ", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "3", "contextAutoIncr": 47},{"soundTitle": "Consonants", "soundSubTitle": "Affricates", "soundPhoneme": "tʃ", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "3", "contextAutoIncr": 48},{"soundTitle": "Consonants", "soundSubTitle": "Affricates", "soundPhoneme": "tʃ", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "3", "contextAutoIncr": 49},{"soundTitle": "Consonants", "soundSubTitle": "Affricates", "soundPhoneme": "tʃ", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "3", "contextAutoIncr": 50},{"soundTitle": "Consonants", "soundSubTitle": "Affricates", "soundPhoneme": "dʒ", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "3", "contextAutoIncr": 51},{"soundTitle": "Consonants", "soundSubTitle": "Affricates", "soundPhoneme": "dʒ", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "3", "contextAutoIncr": 52},{"soundTitle": "Consonants", "soundSubTitle": "Affricates", "soundPhoneme": "dʒ", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "3", "contextAutoIncr": 53},{"soundTitle": "Consonants", "soundSubTitle": "Liquids", "soundPhoneme": "l", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "3", "contextAutoIncr": 54},{"soundTitle": "Consonants", "soundSubTitle": "Liquids", "soundPhoneme": "l", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "3", "contextAutoIncr": 55},{"soundTitle": "Consonants", "soundSubTitle": "Liquids", "soundPhoneme": "l", "contextPosition": "final", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "3", "contextAutoIncr": 56},{"soundTitle": "Consonants", "soundSubTitle": "Liquids", "soundPhoneme": "r", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "2", "contextAutoIncr": 57},{"soundTitle": "Consonants", "soundSubTitle": "Liquids", "soundPhoneme": "r", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "2", "contextPositionCOUNT": "2", "contextAutoIncr": 58},{"soundTitle": "Consonants", "soundSubTitle": "Glides", "soundPhoneme": "j", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "2", "contextAutoIncr": 59},{"soundTitle": "Consonants", "soundSubTitle": "Glides", "soundPhoneme": "j", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "2", "contextAutoIncr": 60},{"soundTitle": "Consonants", "soundSubTitle": "Glides", "soundPhoneme": "w", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "2", "contextAutoIncr": 61},{"soundTitle": "Consonants", "soundSubTitle": "Glides", "soundPhoneme": "w", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "2", "contextAutoIncr": 62},{"soundTitle": "Consonants", "soundSubTitle": "Glides", "soundPhoneme": "h", "contextPosition": "initial", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "2", "contextAutoIncr": 63},{"soundTitle": "Consonants", "soundSubTitle": "Glides", "soundPhoneme": "h", "contextPosition": "middle", "soundSubTitleCOUNT": "6", "soundPhonemeCOUNT": "3", "contextPositionCOUNT": "2", "contextAutoIncr": 64},{"soundTitle": "Vowels", "soundSubTitle": "Front", "soundPhoneme": "i", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 65},{"soundTitle": "Vowels", "soundSubTitle": "Front", "soundPhoneme": "ɪ", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 66},{"soundTitle": "Vowels", "soundSubTitle": "Front", "soundPhoneme": "e", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 67},{"soundTitle": "Vowels", "soundSubTitle": "Front", "soundPhoneme": "ɛ", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 68},{"soundTitle": "Vowels", "soundSubTitle": "Front", "soundPhoneme": "æ", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 69},{"soundTitle": "Vowels", "soundSubTitle": "Back", "soundPhoneme": "u", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 70},{"soundTitle": "Vowels", "soundSubTitle": "Back", "soundPhoneme": "ʊ", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 71},{"soundTitle": "Vowels", "soundSubTitle": "Back", "soundPhoneme": "o", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 72},{"soundTitle": "Vowels", "soundSubTitle": "Back", "soundPhoneme": "ɔ", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 73},{"soundTitle": "Vowels", "soundSubTitle": "Back", "soundPhoneme": "a", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 74},{"soundTitle": "Vowels", "soundSubTitle": "Central", "soundPhoneme": "ɝ", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "4", "contextPositionCOUNT": "1", "contextAutoIncr": 75},{"soundTitle": "Vowels", "soundSubTitle": "Central", "soundPhoneme": "ʌ", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "4", "contextPositionCOUNT": "1", "contextAutoIncr": 76},{"soundTitle": "Vowels", "soundSubTitle": "Central", "soundPhoneme": "ɚ", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "4", "contextPositionCOUNT": "1", "contextAutoIncr": 77},{"soundTitle": "Vowels", "soundSubTitle": "Central", "soundPhoneme": "ǝ", "contextPosition": "vowel", "soundSubTitleCOUNT": "3", "soundPhonemeCOUNT": "4", "contextPositionCOUNT": "1", "contextAutoIncr": 78},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "ai", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 79},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "au", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 80},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "oi", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 81},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "ju", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 82},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "iɚ", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 83},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "eɚ", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 84},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "oɚ", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 85},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "ɛɚ", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 86},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "aɚ", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 87},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "uɚ", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 88},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "aʊɚ", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 89},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "aiɚ", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 90},{"soundTitle": "Diphthongs", "soundSubTitle": "Diphthongs", "soundPhoneme": "ɪɚ", "contextPosition": "diphthong", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 91},{"soundTitle": "Blends", "soundSubTitle": "r-blends", "soundPhoneme": "pr", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "8", "contextPositionCOUNT": "1", "contextAutoIncr": 92},{"soundTitle": "Blends", "soundSubTitle": "r-blends", "soundPhoneme": "br", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "8", "contextPositionCOUNT": "1", "contextAutoIncr": 93},{"soundTitle": "Blends", "soundSubTitle": "r-blends", "soundPhoneme": "tr", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "8", "contextPositionCOUNT": "1", "contextAutoIncr": 94},{"soundTitle": "Blends", "soundSubTitle": "r-blends", "soundPhoneme": "dr", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "8", "contextPositionCOUNT": "1", "contextAutoIncr": 95},{"soundTitle": "Blends", "soundSubTitle": "r-blends", "soundPhoneme": "kr", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "8", "contextPositionCOUNT": "1", "contextAutoIncr": 96},{"soundTitle": "Blends", "soundSubTitle": "r-blends", "soundPhoneme": "gr", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "8", "contextPositionCOUNT": "1", "contextAutoIncr": 97},{"soundTitle": "Blends", "soundSubTitle": "r-blends", "soundPhoneme": "fr", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "8", "contextPositionCOUNT": "1", "contextAutoIncr": 98},{"soundTitle": "Blends", "soundSubTitle": "r-blends", "soundPhoneme": "θr", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "8", "contextPositionCOUNT": "1", "contextAutoIncr": 99},{"soundTitle": "Blends", "soundSubTitle": "l-blends", "soundPhoneme": "pl", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 100},{"soundTitle": "Blends", "soundSubTitle": "l-blends", "soundPhoneme": "bl", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 101},{"soundTitle": "Blends", "soundSubTitle": "l-blends", "soundPhoneme": "kl", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 102},{"soundTitle": "Blends", "soundSubTitle": "l-blends", "soundPhoneme": "gl", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 103},{"soundTitle": "Blends", "soundSubTitle": "l-blends", "soundPhoneme": "fl", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "5", "contextPositionCOUNT": "1", "contextAutoIncr": 104},{"soundTitle": "Blends", "soundSubTitle": "s-blends", "soundPhoneme": "sp", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "1", "contextAutoIncr": 105},{"soundTitle": "Blends", "soundSubTitle": "s-blends", "soundPhoneme": "st", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "1", "contextAutoIncr": 106},{"soundTitle": "Blends", "soundSubTitle": "s-blends", "soundPhoneme": "sk", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "1", "contextAutoIncr": 107},{"soundTitle": "Blends", "soundSubTitle": "s-blends", "soundPhoneme": "sm", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "1", "contextAutoIncr": 108},{"soundTitle": "Blends", "soundSubTitle": "s-blends", "soundPhoneme": "sn", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "1", "contextAutoIncr": 109},{"soundTitle": "Blends", "soundSubTitle": "s-blends", "soundPhoneme": "sl", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "1", "contextAutoIncr": 110},{"soundTitle": "Blends", "soundSubTitle": "s-blends", "soundPhoneme": "sw", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "7", "contextPositionCOUNT": "1", "contextAutoIncr": 111},{"soundTitle": "Blends", "soundSubTitle": "tw-blend", "soundPhoneme": "tw", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "1", "contextPositionCOUNT": "1", "contextAutoIncr": 112},{"soundTitle": "Blends", "soundSubTitle": "3-element ", "soundPhoneme": "spr", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "4", "contextPositionCOUNT": "1", "contextAutoIncr": 113},{"soundTitle": "Blends", "soundSubTitle": "3-element ", "soundPhoneme": "str", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "4", "contextPositionCOUNT": "1", "contextAutoIncr": 114},{"soundTitle": "Blends", "soundSubTitle": "3-element ", "soundPhoneme": "skr", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "4", "contextPositionCOUNT": "1", "contextAutoIncr": 115},{"soundTitle": "Blends", "soundSubTitle": "3-element ", "soundPhoneme": "spl", "contextPosition": "blend", "soundSubTitleCOUNT": "5", "soundPhonemeCOUNT": "4", "contextPositionCOUNT": "1", "contextAutoIncr": 116},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "ks", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 117},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "nt", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 118},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "nz", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 119},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "ts", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 120},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "kt", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 121},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "nd", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 122},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "zt", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 123},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "ls", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 124},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "vd", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 125},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "md", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 126},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "dz", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 127},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "ld", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 128},{"soundTitle": "Clusters", "soundSubTitle": "Final", "soundPhoneme": "lf", "contextPosition": "cluster", "soundSubTitleCOUNT": "1", "soundPhonemeCOUNT": "13", "contextPositionCOUNT": "1", "contextAutoIncr": 129}]
+;
+
+														/*
+														const clientContextData = 
+														[
+														{"contextAutoIncr": 74, "clientContextError": "o", "clientContextSpeakingErrors": 1, "clientContextErrorNotes": "caught"}
+														,{"contextAutoIncr": 99, "clientContextError": "θR", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 18, "clientContextError": "k", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 33, "clientContextError": "s", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 6, "clientContextError": "p", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 12, "clientContextError": "t", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 24, "clientContextError": "ø", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 76, "clientContextError": "o", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 65, "clientContextError": "ɪ", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 53, "clientContextError": "ʒ", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 71, "clientContextError": "u", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 26, "clientContextError": "ŋg", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 69, "clientContextError": "a", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 36, "clientContextError": "d", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 24, "clientContextError": "ŋ", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														,{"contextAutoIncr": 85, "clientContextError": "oǝ", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null}
+														];
+														*/
+
+const errorSoundSelectorData = 
+[{"errorSound" : " "	,	"rowNbr" :	1,	"toolTip" :	"Erase"			}
+,{"errorSound" : "ø"	,	"rowNbr" :	1,	"toolTip" :	"Omission"		}
+,{"errorSound" : "æ"	,	"rowNbr" :	1,	"toolTip" :	""			}
+,{"errorSound" : "ɜ"	,	"rowNbr" :	1,	"toolTip" :	""			}
+
+,{"errorSound" : "ɚ"	,	"rowNbr" :	2,	"toolTip" :	""			}
+,{"errorSound" : "ʌ"	,	"rowNbr" :	2,	"toolTip" :	""			}
+,{"errorSound" : "ɔ"	,	"rowNbr" :	2,	"toolTip" :	""			}
+,{"errorSound" : "ɝ"	,	"rowNbr" :	2,	"toolTip" :	""			}
+
+,{"errorSound" : "ʡ"	,	"rowNbr" :	3,	"toolTip" :	"Glottal Stop"		}
+,{"errorSound" : "═"	,	"rowNbr" :	3,	"toolTip" :	"Unaspirated"		}
+,{"errorSound" : "←"	,	"rowNbr" :	3,	"toolTip" :	"rtroFlx"		}
+,{"errorSound" : "ǝ"	,	"rowNbr" :	3,	"toolTip" :	""			}
+
+,{"errorSound" : "Ɒ"	,	"rowNbr" :	4,	"toolTip" :	"Distortion"		}
+,{"errorSound" : "ɛ"	,	"rowNbr" :	4,	"toolTip" :	""			}
+,{"errorSound" : "ʃ"	,	"rowNbr" :	4,	"toolTip" :	""			}
+,{"errorSound" : "ð"	,	"rowNbr" :	4,	"toolTip" :	""			}
+
+,{"errorSound" : "ŋ"	,	"rowNbr" :	5,	"toolTip" :	""			}
+,{"errorSound" : "θ"	,	"rowNbr" :	5,	"toolTip" :	""			}
+,{"errorSound" : "ʀ"	,	"rowNbr" :	5,	"toolTip" :	"Trilled"		}
+,{"errorSound" : "ṭ"	,	"rowNbr" :	5,	"toolTip" :	""			}
+
+,{"errorSound" : "ʊ"	,	"rowNbr" :	6,	"toolTip" :	""			}
+,{"errorSound" : "χ"	,	"rowNbr" :	6,	"toolTip" :	"pharyngeal friction"	}
+,{"errorSound" : "ʒ"	,	"rowNbr" :	6,	"toolTip" :	""			}
+,{"errorSound" : "ɪ"	,	"rowNbr" :	6,	"toolTip" :	""			}
+
 ];
 
 
+const clientContextData = 
+[{"soundPhoneme": "b", "clientContextError": "XX", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 6, "clientContextAutoIncr": 3276603, "clientStimwordCOUNT": "0"}
+,{"soundPhoneme": "b", "clientContextError": "p", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 6, "clientContextAutoIncr": 2946193, "clientStimwordCOUNT": "4"}
+,{"soundPhoneme": "d", "clientContextError": "t", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 12, "clientContextAutoIncr": 2946194, "clientStimwordCOUNT": "1"}
+,{"soundPhoneme": "g", "clientContextError": "k", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 18, "clientContextAutoIncr": 2946191, "clientStimwordCOUNT": "1"}
+,{"soundPhoneme": "n", "clientContextError": "ø", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 24, "clientContextAutoIncr": 2946195, "clientStimwordCOUNT": "1"}
+,{"soundPhoneme": "n", "clientContextError": "ŋ", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 24, "clientContextAutoIncr": 2946203, "clientStimwordCOUNT": "1"}
+,{"soundPhoneme": "ŋ", "clientContextError": "ŋg", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 26, "clientContextAutoIncr": 2946200, "clientStimwordCOUNT": "2"}
+,{"soundPhoneme": "θ", "clientContextError": "s", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 33, "clientContextAutoIncr": 2946192, "clientStimwordCOUNT": "2"}
+,{"soundPhoneme": "ð", "clientContextError": "d", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 36, "clientContextAutoIncr": 2946202, "clientStimwordCOUNT": "1"}
+,{"soundPhoneme": "dʒ", "clientContextError": "ʒ", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 53, "clientContextAutoIncr": 2946198, "clientStimwordCOUNT": "1"}
+,{"soundPhoneme": "i", "clientContextError": "ɪ", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 65, "clientContextAutoIncr": 2946197, "clientStimwordCOUNT": "2"}
+,{"soundPhoneme": "æ", "clientContextError": "a", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 69, "clientContextAutoIncr": 2946201, "clientStimwordCOUNT": "1"}
+,{"soundPhoneme": "ʊ", "clientContextError": "u", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 71, "clientContextAutoIncr": 2946199, "clientStimwordCOUNT": "2"}
+,{"soundPhoneme": "a", "clientContextError": "o", "clientContextSpeakingErrors": 1, "clientContextErrorNotes": "caught", "contextAutoIncr": 74, "clientContextAutoIncr": 2946189, "clientStimwordCOUNT": "2"}
+,{"soundPhoneme": "ʌ", "clientContextError": "o", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 76, "clientContextAutoIncr": 2946196, "clientStimwordCOUNT": "1"}
+,{"soundPhoneme": "oɚ", "clientContextError": "oǝ", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 85, "clientContextAutoIncr": 2946204, "clientStimwordCOUNT": "1"}
+,{"soundPhoneme": "θr", "clientContextError": "θR", "clientContextSpeakingErrors": 0, "clientContextErrorNotes": null, "contextAutoIncr": 99, "clientContextAutoIncr": 2946190, "clientStimwordCOUNT": "1"}
+];
+
 </script>
+
+
 
 </head>
 
 <body>
-
-<button onClick="javascript: processItem(this);">Horse</button>
-<button onClick="javascript: processItem(this);">Snake</button>
-<button onClick="javascript: processItem(this);">Clown</button>
-<button onClick="javascript: processItem(this);">Dog</button>
-<button onClick="javascript: processItem(this);">thread</button>
+Live Buttons:
 &nbsp;
-<button onClick="javascript: processItem(this);">protected</button>
-<button onClick="javascript: processItem(this);">sixty_seven</button>
-<button onClick="javascript: processItem(this);">Rockerfeller</button>
-<button onClick="javascript: processItem(this);">threatening</button>
-<button onClick="javascript: processItem(this);">Eventually</button>
+Horse 1-1
+&nbsp;
+&nbsp;
+Snake 1-2
+&nbsp;
+&nbsp;
+Clown 1-3
+&nbsp;
+&nbsp;
+Dog 1-4
+&nbsp;
+&nbsp;
+thread 2-19
+&nbsp;
+&nbsp;
+protected 21-5
+&nbsp;
+&nbsp;
+sixty_seven 25-9
+&nbsp;
+&nbsp;
+Rockefeller 9-3
+&nbsp;
+&nbsp;
+threatening 20-7
+&nbsp;
+&nbsp;
+Eventually 13-1
 <br />
-<div id='phoneticTranscriptionInputScreen' class="wrapper"></div>
+																	<!--
+																	<button id='soundSelectorMenuContainer'>
+																	Sound Selector
+																	-->
+											<!-- mode='dropDown' -->
+<smart-menu	
+		id			= 'soundSelectorMenu'
+		auto-close-delay	= '1000'
+		animation		= 'simple'
+		mode			= 'vertical'
+		selection-mode		= 'mouseenter'
+>
+</smart-menu>
+																	<!--
+																	</button>
+																	-->
 
-<smart-tooltip id="phoneticPopupMenu" style='border: 1px dotted red;' open-mode='manual' position='bottom' arrow>
-  <div class='tooltipWrapperClass' id='tooltipGrid'>
-        <!-- row one  -->
-        <div>&nbsp;</div>
-        <div title='null character'>ø</div>
-        <div>æ</div>
-        <div>ɜ</div>
-        <!-- row two -->
-        <div>ɚ</div>
-        <div>ʌ</div>
-        <div>ɔ</div>
-        <div>ɝ</div>
-        <!-- row three -->
-        <div>ʡ</div>
-        <div>═</div>
-        <div>←</div>
-        <div>ǝ</div>
-        <!--  row four -->
-        <div>Ɒ</div>
-        <div>ɛ</div>
-        <div>ʃ</div>
-        <div>ð</div>
-        <!--  row five -->
-        <div>ŋ</div>
-        <div>θ</div>
-        <div>ʀ</div>
-        <div>ṭ</div>
-        <!--  row six -->
-        <div>ʊ</div>
-        <div>χ</div>
-        <div>ʒ</div>
-        <div>ɪ</div>
+<div id='primaryDisplayGrid' class='wrapper'></div>
 
-    </div>
+		<!-- we may need to include   , "minimize"  here -->
+<smart-window id='phoneticTranscriptionPopupWindow' closed  header-buttons='[  "close", "collapse" ]' label=''	>
+	<div id='phoneticTranscriptionInputScreen' class="wrapper"></div>
+</smart-window>
 
+
+<smart-tooltip id='phoneticPopupMenu' open-mode='manual' position='bottom' arrow>
+	<div class='tooltipWrapperClass' id='tooltipGrid'>
+	</div>
 </smart-tooltip>
 
+		<!-- we may need to include   , "minimize"  here -->
+<smart-window id='clientContextSpontWindow' closed  header-buttons='[  "close", "collapse" ]' label=''>
+
+	<div id='clientContextSpontDiv' style='display: none'>	<!-- display none, hidden while page is loading -->
+
+		<div style='padding-top: 5px;' class="titleRow">Error<br /> Sounds</div>
+		<div class="titleRow">Spontaneous Count</div>
+		<div style='padding-top: 12px;' class="titleRow">Error Context Notes</div>
+	  
+				<!-- row one -->
+	
+		<smart-input
+			class			=	'clientContextError'
+			data-column-name	=	'clientContextError'
+			data-row-nbr		=	'1'						
+			maxlength		=	'4'
+		></smart-input>
+																<!--
+																	onMouseOver		=	'javascript: clientContextPhoneticPopupMenuOnMouseOver(this);'
+																	onMouseLeave		=	'javascript: clientContextPhoneticPopupMenuOnMouseLeave(event);'
+																	onChange		=	'javascript: checkSpeakingCountValue(this, event);'
+																-->
+													
+		<smart-number-input
+			class			=	'clientContextSpeakingErrors'
+			data-column-name	=	'clientContextSpeakingErrors'
+			data-row-nbr		=	'1'
+		></smart-number-input>
+													
+		<smart-multiline-text-box
+			class			=	'clientContextErrorNotes'
+			data-column-name	=	'clientContextErrorNotes'
+			data-row-nbr		=	'1'
+			placeholder		=	'Context Notes for Error #1'
+			resizable
+		></smart-multiline-text-box>
+													
+				<!-- row two -->
+
+		<smart-input
+			class			=	'clientContextError'
+			data-column-name	=	'clientContextError'
+			data-row-nbr		=	'2'
+			maxlength		=	'4'
+		></smart-input>
+													
+		<smart-number-input
+			class			=	'clientContextSpeakingErrors'
+			data-column-name	=	'clientContextSpeakingErrors'
+			data-row-nbr		=	'2'
+		></smart-number-input>
+													
+		<smart-multiline-text-box
+			class			=	'clientContextErrorNotes'
+			data-column-name	=	'clientContextErrorNotes'
+			data-row-nbr		=	'2'
+			placeholder		=	'Context Notes For Error #2'
+			resizable
+		></smart-multiline-text-box>
+
+			<!-- row three -->
+													
+		<smart-input
+			class			=	'clientContextError'
+			data-column-name	=	'clientContextError'
+			data-row-nbr		=	'3'
+			maxlength		=	'4'
+		></smart-input>
+													
+		<smart-number-input
+			class			=	'clientContextSpeakingErrors'
+			data-column-name	=	'clientContextSpeakingErrors'						
+			data-row-nbr		=	'3'
+		></smart-number-input>
+													
+		<smart-multiline-text-box
+			class			=	'clientContextErrorNotes'
+			data-column-name	=	'clientContextErrorNotes'
+			data-row-nbr		=	'3'
+			placeholder		=	'Context Notes For Error #3'
+			resizable		=	true
+		></smart-multiline-text-box>
+													
+			<!-- row four -->
+
+		<smart-input
+			class			=	'clientContextError'
+			data-column-name	=	'clientContextError'
+			data-row-nbr		=	'4'
+			maxlength		=	'4'
+		></smart-input>
+													
+		<smart-number-input
+			class			=	'clientContextSpeakingErrors'
+			data-column-name	=	'clientContextSpeakingErrors'
+			data-row-nbr		=	'4'
+		></smart-number-input>
+		<smart-multiline-text-box
+			class			=	'clientContextErrorNotes'
+			data-column-name	=	'clientContextErrorNotes'
+			data-row-nbr		=	'4'
+			placeholder		=	'Context Notes For Error #4'
+			resizable		=	true
+		></smart-multiline-text-box>
+													
+	</div>
+
+</smart-window>
+<div id='tempResults'>results</div>
+<p>
+https://gridbyexample.com/examples/<br />
+https://stackoverflow.com/questions/632100/apply-css-style-to-child-elements<br />
+https://stackoverflow.com/questions/56902735/css-grid-how-to-select-row-to-add-hover-effect<br />
+https://www.tutorialspoint.com/how-to-add-a-new-element-to-html-dom-in-javascript
+</p>
+	
 </body>
 </html>
-[root@edwardsmarkf newTranscriptionInterface]#
