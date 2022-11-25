@@ -1,5 +1,9 @@
 #! /bin/bash
 #
+#
+# its possible we might need to do this:
+ln --symbolic     /bin/mysql    /usr/bin/mariadb                                                ;
+#
 rm -Rf  ./comptonTransAnlys-conversion/                                                         ;
 #
 git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion                         ;
