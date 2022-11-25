@@ -11,6 +11,6 @@ cp  --verbose  ./comptonTransAnlys.sql.gz       ${WORKING_DIR}/comptonTransAnlys
 gzip --verbose  -d  ${WORKING_DIR}/comptonTransAnlys.sql.gz                                     ;
 #
 #
-bash -vx ${WORKING_DIR}/00_master.bsh PASS > ./00_master.bsh.log 2>&1                           &
+nohup nice bash -vx ${WORKING_DIR}/00_master.bsh PASS > ./00_master.bsh.log 2>&1                &
 #
 exit                                                                                            ;
