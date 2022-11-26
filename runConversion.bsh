@@ -2,7 +2,8 @@
 #
 #
 # its possible we might need to do this:
-ln --symbolic     /bin/mysql    /usr/bin/mariadb                                                ;
+ln --symbolic     /bin/mysql         /usr/bin/mariadb                                           ;
+ln --symbolic     /bin/mysqldump     /usr/bin/mariadb-dump                                      ;
 #
 rm -Rf  ./comptonTransAnlys-conversion/                                                         ;
 #
