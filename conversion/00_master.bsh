@@ -144,7 +144,7 @@ bash -vx   ${WORKING_DIR}/22a_remove_constraint_keys.bsh                    >   
 grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22a_remove_constraint_keys.bsh.log                    ;
 
 echo $(date) ' - 22b_remove_constraint_keys.bsh'                                                                                                           ;
-bash -vx   ${WORKING_DIR}/22b_remove_constraint_keys.bsh                    >         .${LOGGING_DIR}/22b_remove_constraint_keys.bsh.log              2>&1 ;
+bash -vx   ${WORKING_DIR}/22b_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22b_remove_constraint_keys.bsh.log              2>&1 ;
 grep ERROR  ${LOGGING_DIR}/log/22b_remove_constraint_keys.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep  ;
 
 echo $(date) ' - 22c_remove_constraint_keys.bsh'                                                                                                           ;
