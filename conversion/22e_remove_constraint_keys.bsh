@@ -1,8 +1,8 @@
 #! /bin/bash  -w
 
-# 22d_remove_constraint_keys.bsh
+# 22e_remove_constraint_keys.bsh
 
-mariadb comptonTransAnlys   <   ./comptonTransAnlys_22_remove_constraint_keys.sql ;
+#############################################3mariadb comptonTransAnlys   <   ./comptonTransAnlys_22_remove_constraint_keys.sql ;
 
 mariadb --verbose comptonTransAnlys  <<END    ;
     SHOW TABLES                               ;
