@@ -74,6 +74,14 @@ s/\`clientStimwordUniqueIndex\`/\`clientStimwordUniqueKey\`/;
 /context_2_stimwordPosition/d;
 #
 #
+#
+#
+#       fontTable  -- added 2022-11-28
+#
+s/  \`fontTableAutoIncrement\` smallint(5) unsigned NOT NULL AUTO_INCREMENT,/  \`fontTableAutoIncrement\` smallint(5) unsigned NOT NULL AUTO_INCREMENT/;
+#
+#
+#
 #       frequencyList
 # 
 #       we HAVE to remove the trailing comma from this line:
