@@ -6,6 +6,9 @@
 #   if there is no CONSTRAINT key, Mariadb will create one behind the scenes.
 #
 
+cp   --verbose    ./comptonTransAnlys_22_remove_constraint_keys.sql   ./comptonTransAnlys_22_remove_constraint_keys-COPY  .sql  ;
+#
+#
 ls -l     ./comptonTransAnlys_22_remove_constraint_keys.sql   ;
 
 sed   --in-place   --file=-    ./comptonTransAnlys_22_remove_constraint_keys.sql   <<EOF ;
