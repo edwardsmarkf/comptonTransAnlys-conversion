@@ -44,6 +44,9 @@ s/\`clientContextUniqueIndex\`/\`clientContextUniqueKey\`/;
 #
 #       clientSession
 #
+#   2022-11-28 - both of these FOREIGN_KEY statements should have been removed earlier....  ?!?!?
+/Teacher_2_Client_master_FOREIGN_KEY_1/d;
+/Teacher_2_Client_master_FOREIGN_KEY_2/d;
 ##2022-11-27## /  KEY \`clientMasterAutoIncr_2_clientSession\` (\`clientMasterAutoIncr\`),/d;
 ##2022-11-27## /  KEY \`clientMasterMiscKeys_2_clientSession\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`),/d;
 ##2022-11-27## /  KEY \`sessionNames_2_clientMaster\` (\`sessionName\`),/d;
