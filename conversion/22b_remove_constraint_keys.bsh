@@ -6,13 +6,13 @@
 #   if there is no CONSTRAINT key, Mariadb will create one behind the scenes.
 #   
 #   2022-11-27 -- added lines 27, 48 and 49:
-#         KEY `clientMasterAutoIncr_2_clientContext` (`clientMasterAutoIncr`),
-#       KEY `teacherEmail` (`teacherEmail`,`clientMasterEmail`,`sessionName`,`layoutName`),
-#       KEY `clientMasterMiscKeys_2_clientContext` (`layoutName`,`teacherEmail`,`clientMasterEmail`,`sessionName`),
+#       KEY clientMasterAutoIncr_2_clientContext
+#       KEY teacherEmail (teacherEmail
+#       KEY clientMasterMiscKeys_2_clientContext
+#   2022-11-27 -- try deleting all space-space-key-tilde lines
 #
-#   delete just    SPACE SPACE KEY \`  ??
-
-cp   --verbose    ./comptonTransAnlys_22_remove_constraint_keys.sql   ./comptonTransAnlys_22_remove_constraint_keys-COPY  .sql  ;
+#   
+cp   --verbose    ./comptonTransAnlys_22_remove_constraint_keys.sql   ./comptonTransAnlys_22_remove_constraint_keys-COPY-BEFORE-KEY-REMOVAL.sql  ;
 #
 #
 ls -l     ./comptonTransAnlys_22_remove_constraint_keys.sql   ;
@@ -22,51 +22,53 @@ sed   --in-place   --file=-    ./comptonTransAnlys_22_remove_constraint_keys.sql
 #
 #       clientContext
 #
-/  KEY \`clientContextAutoIncr_2_clientContext\` (\`clientSessionAutoIncr\`),/d;
-/  KEY \`contextMiscKeys_2_clientContext\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
-/  KEY \`contextAutoIncr_2_clientContext\` (\`contextAutoIncr\`),/d;
-/  KEY \`frequencyList_2_clientContext\` (\`frequency\`),/d;
-/  KEY \`clientSessionAutoIncr_2_clientContext\` (\`clientSessionAutoIncr\`),/d;
-/  KEY \`clientSessionMiscKeys_2_clientContext\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`),/d;
-/  KEY \`clientMasterAutoIncr_2_clientContext\` (\`clientMasterAutoIncr\`),/d;
+##2022-11-27## /  KEY \`clientContextAutoIncr_2_clientContext\` (\`clientSessionAutoIncr\`),/d;
+##2022-11-27## /  KEY \`contextMiscKeys_2_clientContext\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`contextAutoIncr_2_clientContext\` (\`contextAutoIncr\`),/d;
+##2022-11-27## /  KEY \`frequencyList_2_clientContext\` (\`frequency\`),/d;
+##2022-11-27## /  KEY \`clientSessionAutoIncr_2_clientContext\` (\`clientSessionAutoIncr\`),/d;
+##2022-11-27## /  KEY \`clientSessionMiscKeys_2_clientContext\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`),/d;
+###   added 2022-11-27:
+##2022-11-27## /  KEY \`clientMasterAutoIncr_2_clientContext\` (\`clientMasterAutoIncr\`),/d;
 s/\`clientContextSoundsUniqueIndex\`/\`clientContextUniqueKey\`/;
 s/\`clientContextUniqueIndex\`/\`clientContextUniqueKey\`/;
 #
 #
 #       clientMaster
 #
-/  KEY \`teacherAutoIncr_2_clientMaster\` (\`teacherAutoIncr\`),/d;
-/  KEY \`teacherMiscKeys_2_clientMaster\` (\`layoutName\`,\`teacherEmail\`),/d;
-/  KEY \`sessionNames_2_clientMaster\` (\`sessionName\`),/d;
-/  KEY \`sessionNames_2_clientSession\` (\`sessionName\`),/d;
+##2022-11-27## /  KEY \`teacherAutoIncr_2_clientMaster\` (\`teacherAutoIncr\`),/d;
+##2022-11-27## /  KEY \`teacherMiscKeys_2_clientMaster\` (\`layoutName\`,\`teacherEmail\`),/d;
+##2022-11-27## /  KEY \`sessionNames_2_clientMaster\` (\`sessionName\`),/d;
+##2022-11-27## /  KEY \`sessionNames_2_clientSession\` (\`sessionName\`),/d;
 #
 #
 #       clientSession
 #
-/  KEY \`clientMasterAutoIncr_2_clientSession\` (\`clientMasterAutoIncr\`),/d;
-/  KEY \`clientMasterMiscKeys_2_clientSession\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`),/d;
-/  KEY \`sessionNames_2_clientMaster\` (\`sessionName\`),/d;
-/  KEY \`teacherEmail\` (\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`,\`layoutName\`),/d
-/  KEY \`clientMasterMiscKeys_2_clientContext\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`),/d
+##2022-11-27## /  KEY \`clientMasterAutoIncr_2_clientSession\` (\`clientMasterAutoIncr\`),/d;
+##2022-11-27## /  KEY \`clientMasterMiscKeys_2_clientSession\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`),/d;
+##2022-11-27## /  KEY \`sessionNames_2_clientMaster\` (\`sessionName\`),/d;
+###              added  2022-08-27:
+##2022-11-27## /  KEY \`teacherEmail\` (\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`,\`layoutName\`),/d
+##2022-11-27## /  KEY \`clientMasterMiscKeys_2_clientContext\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`),/d
 #
 #
 #       clientStimword
 #
-/  KEY \`clientContextAutoIncr_2_clientStimword\` (\`clientContextAutoIncr\`),/d;
-/  KEY \`clientContextMiscKeys_2_clientStimword\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`,\`soundPhoneme\`,\`contextPosition\`,\`clientContextError\`),/d;
-/  KEY \`clientContextMisc_2_clientStimword\` (\`clientContextAutoIncr\`),/d;
-/  KEY \`stimwordPositionMiscKeys_2_clientStimword\` (\`layoutName\`,\`stimwordPageNbr\`,\`stimwordLineNbr\`,\`stimwordWord\`,\`contextPosition\`,\`stimwordPositionNbr\`,\`stimwordPositionSetting\`,\`soundPhoneme\`),/d;
-/  KEY \`stimwordPositionAutoIncr_2_clientStimword\` (\`stimwordPositionAutoIncr\`),/d;
+##2022-11-27## /  KEY \`clientContextAutoIncr_2_clientStimword\` (\`clientContextAutoIncr\`),/d;
+##2022-11-27## /  KEY \`clientContextMiscKeys_2_clientStimword\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`,\`soundPhoneme\`,\`contextPosition\`,\`clientContextError\`),/d;
+##2022-11-27## /  KEY \`clientContextMisc_2_clientStimword\` (\`clientContextAutoIncr\`),/d;
+##2022-11-27## /  KEY \`stimwordPositionMiscKeys_2_clientStimword\` (\`layoutName\`,\`stimwordPageNbr\`,\`stimwordLineNbr\`,\`stimwordWord\`,\`contextPosition\`,\`stimwordPositionNbr\`,\`stimwordPositionSetting\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`stimwordPositionAutoIncr_2_clientStimword\` (\`stimwordPositionAutoIncr\`),/d;
 s/\`clientStimwordUniqueIndex\`/\`clientStimwordUniqueKey\`/;
 
 #
 #
 #       context
 #
-/  KEY \`soundAutoIncr_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
-/  KEY \`soundMiscKeys_2_context\` (\`soundAutoIncr\`),/d;
-/  KEY \`soundAutoIncr_2_context\` (\`soundAutoIncr\`),/d;
-/  KEY \`soundMiscKeys_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`soundAutoIncr_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`soundMiscKeys_2_context\` (\`soundAutoIncr\`),/d;
+##2022-11-27## /  KEY \`soundAutoIncr_2_context\` (\`soundAutoIncr\`),/d;
+##2022-11-27## /  KEY \`soundMiscKeys_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
 /context_2_clientContext/d;
 /context_2_languageNorms/d;
 /context_2_stimwordPosition/d;
@@ -76,15 +78,15 @@ s/\`clientStimwordUniqueIndex\`/\`clientStimwordUniqueKey\`/;
 # 
 #       we HAVE to remove the trailing comma from this line:
 s/  KEY \`frequency\` (\`frequency\`),/  UNIQUE KEY \`frequencyListUniqueKey\` (\`frequency\`)/;
-/  KEY \`frequencyList_2_clientContext\`/d;
+##2022-11-27## /  KEY \`frequencyList_2_clientContext\`/d;
 #
 #
 #       languageNorms
 #
-/  KEY \`languageNormsKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
-/  KEY \`contextMiscKeys_2_languageNorms\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
-/  KEY \`contextAutoIncr_2_languageNorms\` (\`contextAutoIncr\`),/d;
-/  KEY \`languageNormsLayoutName\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
+##2022-11-27## /  KEY \`languageNormsKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
+##2022-11-27## /  KEY \`contextMiscKeys_2_languageNorms\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`contextAutoIncr_2_languageNorms\` (\`contextAutoIncr\`),/d;
+##2022-11-27## /  KEY \`languageNormsLayoutName\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
 #
 s/  KEY \`languageNormsNonUniqueKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`,\`soundPhoneme\`),\
 /  UNIQUE KEY \`languageNormsUniqueKey\` (\`layoutName\`,\`soundPhoneme\`,\`contextPosition\`,\`languageNormsName\`,\`languageNormsError\`),/
@@ -103,22 +105,22 @@ s/  KEY \`languageNormsNonUniqueKey\` (\`layoutName\`,\`languageNormsName\`,\`co
 #
 #       layout
 #
-/  KEY \`layout_2_sound\` (\`layoutName\`),/d;
-/  KEY \`layout_2_stimword\` (\`layoutName\`),/d;
-/  KEY \`languageNormsUniqueKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
+##2022-11-27## /  KEY \`layout_2_sound\` (\`layoutName\`),/d;
+##2022-11-27## /  KEY \`layout_2_stimword\` (\`layoutName\`),/d;
+##2022-11-27## /  KEY \`languageNormsUniqueKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
 s/  KEY \`layout_key\` (\`layoutName\`)/  UNIQUE KEY \`layoutUniqueKey\` (\`layoutName\`)/;
 #
 #
 #       sessionNames
 #
-/  KEY \`sessionName\` (\`sessionName\`)/d;
-/  KEY \`sessionName\` (\`sessionName\`)/d;
+##2022-11-27## /  KEY \`sessionName\` (\`sessionName\`)/d;
+##2022-11-27## /  KEY \`sessionName\` (\`sessionName\`)/d;
 s/  UNIQUE KEY \`sessionNameUniqueIndex\` (\`sessionName\`),/  UNIQUE KEY \`sessionNamesUniqueKey\` (\`sessionName\`)/;
 #
 #       sound
 #
-/  KEY \`sound_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
-/  KEY \`sound_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`sound_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`sound_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
 ####################s/  UNIQUE KEY \`soundUniqueKey\` (\`layoutName\`,\`soundPhoneme\`),/  UNIQUE KEY \`soundUniqueKey\` (\`layoutName\`,\`soundPhoneme\`)/;
 #
 #
@@ -129,21 +131,25 @@ s/  KEY \`stimword_2_stimwordPosition\`/  UNIQUE KEY \`stimwordUniqueKey\`/;
 #
 #       stimwordPosition
 #
-/  KEY \`contextMiscKeys_2_StimwordPosition\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
-/  KEY \`contextAutoIncr_2_StimwordPosition\` (\`contextAutoIncr\`),/d;
-/  KEY \`stimwordPosition_2_clientStimword\` (\`layoutName\`,\`stimwordPageNbr\`,\`stimwordLineNbr\`,\`stimwordWord\`,\`contextPosition\`,\`stimwordPositionNbr\`,\`stimwordPositionSetting\`,\`soundPhoneme\`),/d;
-/  KEY \`stimwordAutoIntr_2_stimwordPosition\` (\`stimwordAutoIncr\`),/d;
-/  KEY \`stimwordPositionAutoIncr\` (\`stimwordPositionAutoIncr\`),/d;
+##2022-11-27## /  KEY \`contextMiscKeys_2_StimwordPosition\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`contextAutoIncr_2_StimwordPosition\` (\`contextAutoIncr\`),/d;
+##2022-11-27## /  KEY \`stimwordPosition_2_clientStimword\` (\`layoutName\`,\`stimwordPageNbr\`,\`stimwordLineNbr\`,\`stimwordWord\`,\`contextPosition\`,\`stimwordPositionNbr\`,\`stimwordPositionSetting\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`stimwordAutoIntr_2_stimwordPosition\` (\`stimwordAutoIncr\`),/d;
+##2022-11-27## /  KEY \`stimwordPositionAutoIncr\` (\`stimwordPositionAutoIncr\`),/d;
 /\`stimwordPositionSecondaryKey\`/d;
 #
 #
 #       teacher
 #
-/  KEY \`layout_2_teacher\` (\`layoutName\`),/d;
-/  KEY \`teacherMiscKeys_2_clientMaster\`/d;
+##2022-11-27## /  KEY \`layout_2_teacher\` (\`layoutName\`),/d;
+##2022-11-27## /  KEY \`teacherMiscKeys_2_clientMaster\`/d;
 /  UNIQUE KEY \`teacherEmailUniqueIndex\` (\`teacherEmail\`),/d;
 s/  UNIQUE KEY \`teacherMiscKeys\` (\`layoutName\`,\`teacherEmail\`),/  UNIQUE KEY \`teacherUniqueKey\` (\`layoutName\`,\`teacherEmail\`),/;
 #  
+#
+####   2022-11-27 - delete ALL lines that start with space-space-KEY-tilde!
+#
+/^  KEY \`/d;
 EOF
 
 echo -n 'Current sed status result is: ' ;
