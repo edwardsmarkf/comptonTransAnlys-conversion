@@ -5,10 +5,12 @@
 #   Mariadb does NOT let us merely remove a CONSTRAINT key since during a CONSTRAINT creation, Mariadb will use whatever key we manually specify.
 #   if there is no CONSTRAINT key, Mariadb will create one behind the scenes.
 #   
-#   2022-11-27 -- added lines 42 and 43:
+#   2022-11-27 -- added lines 27, 48 and 49:
+#         KEY `clientMasterAutoIncr_2_clientContext` (`clientMasterAutoIncr`),
 #       KEY `teacherEmail` (`teacherEmail`,`clientMasterEmail`,`sessionName`,`layoutName`),
 #       KEY `clientMasterMiscKeys_2_clientContext` (`layoutName`,`teacherEmail`,`clientMasterEmail`,`sessionName`),
 #
+#   delete just    SPACE SPACE KEY \`  ??
 
 cp   --verbose    ./comptonTransAnlys_22_remove_constraint_keys.sql   ./comptonTransAnlys_22_remove_constraint_keys-COPY  .sql  ;
 #
@@ -26,6 +28,7 @@ sed   --in-place   --file=-    ./comptonTransAnlys_22_remove_constraint_keys.sql
 /  KEY \`frequencyList_2_clientContext\` (\`frequency\`),/d;
 /  KEY \`clientSessionAutoIncr_2_clientContext\` (\`clientSessionAutoIncr\`),/d;
 /  KEY \`clientSessionMiscKeys_2_clientContext\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`),/d;
+/  KEY \`clientMasterAutoIncr_2_clientContext\` (\`clientMasterAutoIncr\`),/d;
 s/\`clientContextSoundsUniqueIndex\`/\`clientContextUniqueKey\`/;
 s/\`clientContextUniqueIndex\`/\`clientContextUniqueKey\`/;
 #
@@ -43,8 +46,8 @@ s/\`clientContextUniqueIndex\`/\`clientContextUniqueKey\`/;
 /  KEY \`clientMasterAutoIncr_2_clientSession\` (\`clientMasterAutoIncr\`),/d;
 /  KEY \`clientMasterMiscKeys_2_clientSession\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`),/d;
 /  KEY \`sessionNames_2_clientMaster\` (\`sessionName\`),/d;
-/  KEY `teacherEmail` (`teacherEmail`,`clientMasterEmail`,`sessionName`,`layoutName`),/d
-/  KEY `clientMasterMiscKeys_2_clientContext` (`layoutName`,`teacherEmail`,`clientMasterEmail`,`sessionName`),/d
+/  KEY \`teacherEmail\` (\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`,\`layoutName\`),/d
+/  KEY \`clientMasterMiscKeys_2_clientContext\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`),/d
 #
 #
 #       clientStimword
