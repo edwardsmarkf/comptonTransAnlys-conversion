@@ -1,0 +1,12 @@
+#!  /bin/bash 
+#
+#
+# 22d_remove_constraint_keys.bsh
+#
+#
+#
+#
+mariadb comptonTransAnlys   <   ./comptonTransAnlys_22_remove_constraint_keys.sql ;
+#
+#
+exit;
