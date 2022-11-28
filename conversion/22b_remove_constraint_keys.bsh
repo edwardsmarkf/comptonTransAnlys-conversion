@@ -111,6 +111,13 @@ s/  KEY \`languageNormsNonUniqueKey\` (\`layoutName\`,\`languageNormsName\`,\`co
 ######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','ð','final','Indonesian','θ',0,1715,'2021-11-30 20:47:47','2021-11-30 21:25:32',131258);/   -- &/;
 #
 #
+#
+#       languageSpec  - 2022-11-28
+#
+s/  PRIMARY KEY (\`langSpecAutoIncr\`),/  PRIMARY KEY (\`langSpecAutoIncr\`)/;
+#
+#
+#
 #       layout
 #
 ##2022-11-27## /  KEY \`layout_2_sound\` (\`layoutName\`),/d;
