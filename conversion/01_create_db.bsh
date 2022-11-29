@@ -16,7 +16,8 @@ sed --in-place  --expression="s/dipthong/diphthong/g;  s/ON DELETE NO ACTION/ON 
 sed  --in-place --expression="s/timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()/TIMESTAMP NULL /;"      ./comptonTransAnlys.sql  ;
 
     ###   2022-11-28 - remove all of these, there is some weird conflict giving me PESL-kannedono@comcast.net-vtalasek@alteryx.com invalid key!
-sed   --in-place --expression="/'vojta talasek'/d;"                                                                                   ./comptonTransAnlys.sql  ;                                                            
+sed   --in-place --expression="/'vojta talasek'/d;"                                                                                   ./comptonTransAnlys.sql  ;   
+    #####   PESL-mary@underwoodaccentreduction.com-panassayagagnon@gmail.com
 
 /usr/bin/mariadb  -e  'DROP DATABASE IF EXISTS comptonTransAnlys ; CREATE DATABASE comptonTransAnlys'  ;
 
