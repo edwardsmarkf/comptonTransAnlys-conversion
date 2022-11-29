@@ -12,7 +12,7 @@
 #   2022-11-27 -- try deleting all space-space-key-tilde lines
 #
 #   
-cp   --verbose    ./comptonTransAnlys_22_remove_constraint_keys.sql   ./comptonTransAnlys_22_remove_constraint_keys-COPY-BEFORE-KEY-REMOVAL.sql  ;
+########cp   --verbose    ./comptonTransAnlys_22_remove_constraint_keys.sql   ./comptonTransAnlys_22_remove_constraint_keys-COPY-BEFORE-KEY-REMOVAL.sql  ;
 #
 #
 ls -l     ./comptonTransAnlys_22_remove_constraint_keys.sql   ;
