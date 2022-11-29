@@ -162,6 +162,7 @@ s/  KEY \`stimword_2_stimwordPosition\`/  UNIQUE KEY \`stimwordUniqueKey\`/;
 ##2022-11-27## /  KEY \`layout_2_teacher\` (\`layoutName\`),/d;
 ##2022-11-27## /  KEY \`teacherMiscKeys_2_clientMaster\`/d;
 /  UNIQUE KEY \`teacherEmailUniqueIndex\` (\`teacherEmail\`),/d;
+s/  \`teacherEmail\` varchar(100) NOT NULL,/  \`teacherEmail\` varchar(120) NOT NULL,/;
 s/  UNIQUE KEY \`teacherMiscKeys\` (\`layoutName\`,\`teacherEmail\`),/  UNIQUE KEY \`teacherUniqueKey\` (\`layoutName\`,\`teacherEmail\`),/;
 #  
 #
