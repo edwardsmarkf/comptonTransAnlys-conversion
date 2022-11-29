@@ -81,7 +81,7 @@ s/\`clientStimwordUniqueIndex\`/\`clientStimwordUniqueKey\`/;
 #
 #       fontTable  -- added 2022-11-28
 #
-s/  \`fontTableAutoIncrement\` smallint(5) unsigned NOT NULL AUTO_INCREMENT,/& PRIMARY  KEY `fontTableAutoIncrement` (`fontTableAutoIncrement`)/;
+s/  \`fontTableAutoIncrement\` smallint(5) unsigned NOT NULL AUTO_INCREMENT,/& PRIMARY  KEY \`fontTableAutoIncrement\` (\`fontTableAutoIncrement\`)/;
 #
 #
 #
