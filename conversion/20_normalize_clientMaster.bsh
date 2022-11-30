@@ -136,10 +136,10 @@ ALTER TABLE \`clientMaster\`	MODIFY \`clientMasterAutoIncr\` INT NOT NULL AUTO_I
 					-- 2022-11-29	more damn dup key stuff......
 DELETE FROM \`clientMaster\` 
 WHERE	1 
-AND	\`layoutName\` = 'PESL'  
-AND	\`teacherEmail\` = 'mary@underwoodaccentreduction.com' 
-AND	\`clientMasterEmail\` = 'panassayagagnon@gmail.com' 
-AND	\`createdAt\` = '2021-05-17 16:05:49'  
+AND	\`layoutName\`			= 'PESL'  
+AND	\`teacherEmail\`		= 'mary@underwoodaccentreduction.com' 
+AND	\`clientMasterEmail\`		= 'panassayagagnon@gmail.com' 
+AND	\`createdAt\`			= '2022-04-19 03:25:41'  
 ;
 ALTER TABLE \`clientMaster\`	ADD UNIQUE KEY \`clientMasterUniqueKey\` (\`layoutName\`, \`teacherEmail\`,\`clientMasterEmail\`) 		;
 ###   ERROR 1062 (23000) at line 125: Duplicate entry 'PESL-mary@underwoodaccentreduction.com-panassayagagnon@gmail.com' for key 'clientMasterUniqueKey'  ?????
