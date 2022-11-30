@@ -7,6 +7,7 @@
 #   2022-06-21  - automated fixStimwordPosition (but not yet tested)
 #   2022-11-04  - changed around directories using variables instead
 #   2022-11-05  - reordered tooltip and summary table counting
+#   2022-11-28 -  turned into function
 
 if  [[ "$1" != "PASS" ]]; then 
            # https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
@@ -127,7 +128,7 @@ process_section '08d_final_sed_rename' ;
 ####    echo $(date) ' - 08d_final_sed_rename.bsh'                                                                                                                 ;
 ####    bash -vx  ${WORKING_DIR}/08d_final_sed_rename.bsh                          >          ${LOGGING_DIR}/08d_final_sed_rename.bsh.log                     2>&1 ;
 ####    grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/08d_final_sed_rename.bsh.log                          ;
-####    grep ERROR   ${LOGGING_DIR}/08d_final_sed_rename.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep          ;
+grep ERROR   ${LOGGING_DIR}/08d_final_sed_rename.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep          ;
 
 process_section '08e_final_sed_rename' ;
 ####    echo $(date) ' - 08e_final_sed_rename.bsh'                                                                                                                 ;
@@ -165,40 +166,40 @@ process_section '15_add_layout_table_and_keys' ;
 ####    bash -vx  ${WORKING_DIR}/15_add_layout_table_and_keys.bsh                  >          ${LOGGING_DIR}/15_add_layout_table_and_keys.bsh.log             2>&1 ;
 ####    grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/15_add_layout_table_and_keys.bsh.log                  ;
 
-process_section '' ;
-echo $(date) ' - 20_normalize_clientMaster.bsh'                                                                                                            ;
-bash -vx  ${WORKING_DIR}/20_normalize_clientMaster.bsh                     >          ${LOGGING_DIR}/20_normalize_clientMaster.bsh.log                2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/20_normalize_clientMaster.bsh.log                     ;
+process_section '20_normalize_clientMaster' ;
+####    echo $(date) ' - 20_normalize_clientMaster.bsh'                                                                                                            ;
+####    bash -vx  ${WORKING_DIR}/20_normalize_clientMaster.bsh                     >          ${LOGGING_DIR}/20_normalize_clientMaster.bsh.log                2>&1 ;
+####    grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/20_normalize_clientMaster.bsh.log                     ;
 
-process_section '' ;
-echo $(date) ' - 21_rearrange_keys.bsh'                                                                                                                    ;
-bash -vx   ${WORKING_DIR}/21_rearrange_keys.bsh                            >          ${LOGGING_DIR}/21_rearrange_keys.bsh.log                        2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/21_rearrange_keys.bsh.log                             ;
+process_section '21_rearrange_keys' ;
+####    echo $(date) ' - 21_rearrange_keys.bsh'                                                                                                                    ;
+####    bash -vx   ${WORKING_DIR}/21_rearrange_keys.bsh                            >          ${LOGGING_DIR}/21_rearrange_keys.bsh.log                        2>&1 ;
+####    grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/21_rearrange_keys.bsh.log                             ;
 
-process_section '' ;
-echo $(date) ' - 22a_remove_constraint_keys.bsh'                                                                                                           ;
-bash -vx   ${WORKING_DIR}/22a_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22a_remove_constraint_keys.bsh.log               2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22a_remove_constraint_keys.bsh.log                    ;
+process_section '22a_remove_constraint_keys' ;
+####    echo $(date) ' - 22a_remove_constraint_keys.bsh'                                                                                                           ;
+####    bash -vx   ${WORKING_DIR}/22a_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22a_remove_constraint_keys.bsh.log               2>&1 ;
+####    grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22a_remove_constraint_keys.bsh.log                    ;
 
-process_section '' ;
-echo $(date) ' - 22b_remove_constraint_keys.bsh'                                                                                                           ;
-bash -vx   ${WORKING_DIR}/22b_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22b_remove_constraint_keys.bsh.log              2>&1  ;
-grep ERROR  ${LOGGING_DIR}/log/22b_remove_constraint_keys.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep  ;
+process_section '22b_remove_constraint_keys' ;
+####    echo $(date) ' - 22b_remove_constraint_keys.bsh'                                                                                                           ;
+####    bash -vx   ${WORKING_DIR}/22b_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22b_remove_constraint_keys.bsh.log              2>&1  ;
+####    grep ERROR  ${LOGGING_DIR}/log/22b_remove_constraint_keys.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep  ;
 
-process_section '' ;
-echo $(date) ' - 22c_remove_constraint_keys.bsh'                                                                                                           ;
-bash -vx   ${WORKING_DIR}/22c_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log               2>&1 ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log                    ;
+process_section '22c_remove_constraint_keys' ;
+####    echo $(date) ' - 22c_remove_constraint_keys.bsh'                                                                                                           ;
+####    bash -vx   ${WORKING_DIR}/22c_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log               2>&1 ;
+####    rep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22c_remove_constraint_keys.bsh.log                    ;
 
-process_section '' ;
-echo $(date) ' - 22d_remove_constraint_keys.bsh'                                                                                                           ;
-bash -vx   ${WORKING_DIR}/22d_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log              2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log                    ;
+process_section '22d_remove_constraint_keys' ;
+####    echo $(date) ' - 22d_remove_constraint_keys.bsh'                                                                                                           ;
+####    bash -vx   ${WORKING_DIR}/22d_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log              2>&1  ;
+####    grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22d_remove_constraint_keys.bsh.log                    ;
 
-process_section '' ;
-echo $(date) ' - 22e_remove_constraint_keys.bsh'                                                                                                           ;
-bash -vx   ${WORKING_DIR}/22e_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22e_remove_constraint_keys.bsh.log              2>&1  ;
-grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22e_remove_constraint_keys.bsh.log                    ;
+process_section '22e_remove_constraint_keys' ;
+####    echo $(date) ' - 22e_remove_constraint_keys.bsh'                                                                                                           ;
+####    bash -vx   ${WORKING_DIR}/22e_remove_constraint_keys.bsh                    >         ${LOGGING_DIR}/22e_remove_constraint_keys.bsh.log              2>&1  ;
+####    grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/22e_remove_constraint_keys.bsh.log                    ;
 
 
 ## 2022-11-03
