@@ -3,7 +3,7 @@
 #        20_normalize_clientMaster.bsh
         
 #       2021-11-14
-#
+#	2022-11-29 - added some dup-key stuff
 #
 #
 #
@@ -133,6 +133,7 @@ ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterAutoIncr\` INT(10) UNSIGNE
 ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterNotes\`	TEXT   	AFTER    \`clientMasterActiveFlag\`		  		;
 ALTER TABLE \`clientMaster\`	MODIFY \`clientMasterAutoIncr\` INT NOT NULL AUTO_INCREMENT PRIMARY KEY                           		;
 
+					-- 2022-11-29	more damn dup key stuff......
 DELETE FROM \`clientMaster\` 
 WHERE	1 
 AND	\`layoutName\` = 'PESL'  
