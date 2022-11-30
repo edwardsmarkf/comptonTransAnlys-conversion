@@ -98,7 +98,7 @@ SELECT ALL	"PLEASE BE BLANK! (clientMasterName test"
 	,	a.clientMasterEmail
 	,	a.layoutName
 	,	a.clientMasterName
-	,	b/clientMasterName
+	,	b.clientMasterName
 FROM		clientMaster  a
 	,	clientMaster  b
 WHERE	1 
