@@ -55,7 +55,7 @@ SELECT ALL	"PLEASE BE BLANK! (clientMasterSpecLanguage test)"
 FROM		clientMaster  a
 	,	clientMaster  b
 WHERE	1 
-AND	a.teacherEma			= b.teacherEmail 
+AND	a.teacherEmail			= b.teacherEmail 
 AND	a.clientMasterEmail		= b.clientMasterEmail 
 AND	a.layoutName			= b.layoutName
 AND	a.clientMasterSpecLanguage	!= b.clientMasterSpecLanguage
@@ -102,7 +102,7 @@ SELECT ALL	"PLEASE BE BLANK! (clientMasterName test"
 FROM		clientMaster  a
 	,	clientMaster  b
 WHERE	1 
-AND	a.teacherEma			= b.teacherEmail 
+AND	a.teacherEmail			= b.teacherEmail 
 AND	a.clientMasterEmail		= b.clientMasterEmail 
 AND	a.layoutName			= b.layoutName
 AND	a.clientMasterName		!= b.clientMasterName
