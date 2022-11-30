@@ -134,6 +134,7 @@ ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterNotes\`	TEXT   	AFTER    \
 ALTER TABLE \`clientMaster\`	MODIFY \`clientMasterAutoIncr\` INT NOT NULL AUTO_INCREMENT PRIMARY KEY                           		;
 
 					-- 2022-11-29	more damn dup key stuff......
+					--  PESL-rcthil@gmail.com-m.g.kuti@gearcentregroup.com   ? ? ? ? ? ? ? ? ? ? ? 
 DELETE FROM \`clientMaster\` 
 WHERE	1 
 AND	\`layoutName\`			= 'PESL'  
