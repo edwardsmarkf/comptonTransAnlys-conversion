@@ -27,9 +27,14 @@ echo 'Starting 00_master.bsh conversion process.'                            ;
 
 WORKING_DIR=/root/comptonTransAnlys-conversion/conversion/                   ;
 echo ${WORKING_DIR}                                                          ;
+
 LOGGING_DIR=${WORKING_DIR}/log/                                              ;
-BACKUP_DIR=${WORKING_DIR}/backup/                                            ;
 echo ${LOGGING_DIR}                                                          ;
+
+BACKUP_DIR=${WORKING_DIR}/backup/                                            ;
+echo ${BACKUP_DIR}                                                           ;
+
+
 
 cd ${WORKING_DIR}                                                            ;
 pwd                                                                          ;
