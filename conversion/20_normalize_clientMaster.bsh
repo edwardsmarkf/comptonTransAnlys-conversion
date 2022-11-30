@@ -132,6 +132,14 @@ CREATE TABLE \`clientMaster\` ENGINE=InnoDB DEFAULT CHARSET=latin1
 ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterAutoIncr\` INT(10) UNSIGNED NOT NULL                              	  	;
 ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterNotes\`	TEXT   	AFTER    \`clientMasterActiveFlag\`		  		;
 ALTER TABLE \`clientMaster\`	MODIFY \`clientMasterAutoIncr\` INT NOT NULL AUTO_INCREMENT PRIMARY KEY                           		;
+
+DELETE FROM \`clientMaster\` 
+WHERE	1 
+AND	\`layoutName\` = 'PESL'  
+AND	\`teacherEmail\` = 'mary@underwoodaccentreduction.com' 
+AND	\`clientMasterEmail\` = 'panassayagagnon@gmail.com' 
+AND	\`createdAt\` = '2021-05-17 16:05:49'  
+;
 ALTER TABLE \`clientMaster\`	ADD UNIQUE KEY \`clientMasterUniqueKey\` (\`layoutName\`, \`teacherEmail\`,\`clientMasterEmail\`) 		;
 ###   ERROR 1062 (23000) at line 125: Duplicate entry 'PESL-mary@underwoodaccentreduction.com-panassayagagnon@gmail.com' for key 'clientMasterUniqueKey'  ?????
 
