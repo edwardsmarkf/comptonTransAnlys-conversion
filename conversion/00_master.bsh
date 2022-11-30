@@ -28,7 +28,7 @@ function process_section {
     echo $(date) " - ${1}.bsh"                                                                                      ;
     bash -vx  ${WORKING_DIR}/${1}.bsh                                >      ${LOGGING_DIR}/${1}.bsh.log       2>&1  ;
     grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'              ${LOGGING_DIR}/${1}.bsh.log             ;
-    /usr/bin/mariadb-dump  --no-data  comptonTransAnlys              >      ${BACKUP_DIR}/${1}.bsh.sql              ;
+    /usr/bin/mariadb-dump             comptonTransAnlys              >      ${BACKUP_DIR}/${1}.bsh.sql              ;
     gzip                                                                    ${BACKUP_DIR}/${1}.bsh.sql              ;
 }
 
