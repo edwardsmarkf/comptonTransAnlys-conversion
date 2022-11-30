@@ -133,6 +133,7 @@ ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterAutoIncr\` INT(10) UNSIGNE
 ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterNotes\`	TEXT   	AFTER    \`clientMasterActiveFlag\`		  		;
 ALTER TABLE \`clientMaster\`	MODIFY \`clientMasterAutoIncr\` INT NOT NULL AUTO_INCREMENT PRIMARY KEY                           		;
 ALTER TABLE \`clientMaster\`	ADD UNIQUE KEY \`clientMasterUniqueKey\` (\`layoutName\`, \`teacherEmail\`,\`clientMasterEmail\`) 		;
+###   ERROR 1062 (23000) at line 125: Duplicate entry 'PESL-mary@underwoodaccentreduction.com-panassayagagnon@gmail.com' for key 'clientMasterUniqueKey'  ?????
 
 ALTER TABLE \`clientMaster\`	DROP KEY IF EXISTS		\`teacherAutoIncr_2_clientMaster\`						;
 ALTER TABLE \`clientMaster\`	ADD KEY        			\`teacherAutoIncr_2_clientMaster\`	(\`teacherAutoIncr\`)  			;
