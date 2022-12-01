@@ -15,103 +15,102 @@
 	-- delete columns where language and master-name are NOT equal.
 	
 	
-	--  2022-11-29 do this SEVERAL TIMES to eliminate all of the duplicates!
-UPDATE		\`clientMaster\`	\`a\`
-	, 	\`clientMaster\`	\`b\`
-        SET   \`a\`.\`clientMasterSpecLanguage\`	= ''
-        ,     \`b\`.\`clientMasterSpecLanguage\`	= ''
-        WHERE 1
-        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
-        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
-        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
-	AND  \`a\`.\`clientMasterSpecLanguage\`		!= \`b\`.\`clientMasterSpecLanguage\`
-        ;
-UPDATE		\`clientMaster\`	\`a\`
-	, 	\`clientMaster\`	\`b\`
-        SET   \`a\`.\`clientMasterSpecLanguage\`	= ''
-        ,     \`b\`.\`clientMasterSpecLanguage\`	= ''
-        WHERE 1
-        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
-        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
-        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
-	AND  \`a\`.\`clientMasterSpecLanguage\`		!= \`b\`.\`clientMasterSpecLanguage\`
-        ;
-UPDATE		\`clientMaster\`	\`a\`
-	, 	\`clientMaster\`	\`b\`
-        SET   \`a\`.\`clientMasterSpecLanguage\`	= ''
-        ,     \`b\`.\`clientMasterSpecLanguage\`	= ''
-        WHERE 1
-        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
-        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
-        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
-	AND  \`a\`.\`clientMasterSpecLanguage\`		!= \`b\`.\`clientMasterSpecLanguage\`
-        ;
-SELECT ALL	"PLEASE BE BLANK! (clientMasterSpecLanguage test)"
-	,	a.teacherEmail
-	,	a.clientMasterEmail
-	,	a.layoutName
-	,	a.clientMasterSpecLanguage
-	,	b.clientMasterSpecLanguage
-FROM		clientMaster  a
-	,	clientMaster  b
-WHERE	1 
-AND	a.teacherEmail			= b.teacherEmail 
-AND	a.clientMasterEmail		= b.clientMasterEmail 
-AND	a.layoutName			= b.layoutName
-AND	a.clientMasterSpecLanguage	!= b.clientMasterSpecLanguage
-;	
+--	--  2022-11-29 do this SEVERAL TIMES to eliminate all of the duplicates!
+--UPDATE		\`clientMaster\`	\`a\`
+--	, 	\`clientMaster\`	\`b\`
+--        SET   \`a\`.\`clientMasterSpecLanguage\`	= ''
+--        ,     \`b\`.\`clientMasterSpecLanguage\`	= ''
+--        WHERE 1
+--        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
+--        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
+--        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
+--	AND  \`a\`.\`clientMasterSpecLanguage\`		!= \`b\`.\`clientMasterSpecLanguage\`
+--        ;
+--UPDATE		\`clientMaster\`	\`a\`
+--	, 	\`clientMaster\`	\`b\`
+--        SET   \`a\`.\`clientMasterSpecLanguage\`	= ''
+--        ,     \`b\`.\`clientMasterSpecLanguage\`	= ''
+--        WHERE 1
+--        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
+--        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
+--        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
+--	AND  \`a\`.\`clientMasterSpecLanguage\`		!= \`b\`.\`clientMasterSpecLanguage\`
+--        ;
+--UPDATE		\`clientMaster\`	\`a\`
+--	, 	\`clientMaster\`	\`b\`
+--        SET   \`a\`.\`clientMasterSpecLanguage\`	= ''
+--        ,     \`b\`.\`clientMasterSpecLanguage\`	= ''
+--        WHERE 1
+--        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
+--        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
+--        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
+--	AND  \`a\`.\`clientMasterSpecLanguage\`		!= \`b\`.\`clientMasterSpecLanguage\`
+--        ;
+--SELECT ALL	"PLEASE BE BLANK! (clientMasterSpecLanguage test)"
+--	,	a.teacherEmail
+--	,	a.clientMasterEmail
+--	,	a.layoutName
+--	,	a.clientMasterSpecLanguage
+--	,	b.clientMasterSpecLanguage
+--FROM		clientMaster  a
+--	,	clientMaster  b
+--WHERE	1 
+--AND	a.teacherEmail			= b.teacherEmail 
+--AND	a.clientMasterEmail		= b.clientMasterEmail 
+--AND	a.layoutName			= b.layoutName
+--AND	a.clientMasterSpecLanguage	!= b.clientMasterSpecLanguage
+--;	
 	
 	
-	--  2022-11-29 do this SEVERAL TIMES to eliminate all of the duplicates!
-UPDATE		\`clientMaster\`	\`a\`
-	,	\`clientMaster\` 	\`b\`
-        SET   \`a\`.\`clientMasterName\`		= ''
-        ,     \`b\`.\`clientMasterName\`		= ''
-        WHERE 1
-        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
-        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
-        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
-	AND  \`a\`.\`clientMasterName\`			!= \`b\`.\`clientMasterName\`
-        ;
-UPDATE		\`clientMaster\`	\`a\`
-	,	\`clientMaster\` 	\`b\`
-        SET   \`a\`.\`clientMasterName\`		= ''
-        ,     \`b\`.\`clientMasterName\`		= ''
-        WHERE 1
-        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
-        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
-        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
-	AND  \`a\`.\`clientMasterName\`			!= \`b\`.\`clientMasterName\`
-        ;
-UPDATE		\`clientMaster\`	\`a\`
-	,	\`clientMaster\` 	\`b\`
-        SET   \`a\`.\`clientMasterName\`		= ''
-        ,     \`b\`.\`clientMasterName\`		= ''
-        WHERE 1
-        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
-        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
-        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
-	AND  \`a\`.\`clientMasterName\`			!= \`b\`.\`clientMasterName\`
-        ;	
-SELECT ALL	"PLEASE BE BLANK! (clientMasterName test"
-	,	a.teacherEmail
-	,	a.clientMasterEmail
-	,	a.layoutName
-	,	a.clientMasterName
-	,	b.clientMasterName
-FROM		clientMaster  a
-	,	clientMaster  b
-WHERE	1 
-AND	a.teacherEmail			= b.teacherEmail 
-AND	a.clientMasterEmail		= b.clientMasterEmail 
-AND	a.layoutName			= b.layoutName
-AND	a.clientMasterName		!= b.clientMasterName
-;	
+--	--  2022-11-29 do this SEVERAL TIMES to eliminate all of the duplicates!
+--UPDATE		\`clientMaster\`	\`a\`
+--	,	\`clientMaster\` 	\`b\`
+--        SET   \`a\`.\`clientMasterName\`		= ''
+--        ,     \`b\`.\`clientMasterName\`		= ''
+--        WHERE 1
+--        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
+--        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
+--        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
+--	AND  \`a\`.\`clientMasterName\`			!= \`b\`.\`clientMasterName\`
+--        ;
+--UPDATE		\`clientMaster\`	\`a\`
+--	,	\`clientMaster\` 	\`b\`
+--        SET   \`a\`.\`clientMasterName\`		= ''
+--        ,     \`b\`.\`clientMasterName\`		= ''
+--        WHERE 1
+--        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
+--        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
+--        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
+--	AND  \`a\`.\`clientMasterName\`			!= \`b\`.\`clientMasterName\`
+--        ;
+--UPDATE		\`clientMaster\`	\`a\`
+--	,	\`clientMaster\` 	\`b\`
+--        SET   \`a\`.\`clientMasterName\`		= ''
+--        ,     \`b\`.\`clientMasterName\`		= ''
+--        WHERE 1
+--        AND  \`a\`.\`layoutName\`			=  \`b\`.\`layoutName\`
+--        AND  \`a\`.\`teacherEmail\`			=  \`b\`.\`teacherEmail\`
+--        AND  \`a\`.\`clientMasterEmail\`		=  \`b\`.\`clientMasterEmail\`
+--	AND  \`a\`.\`clientMasterName\`			!= \`b\`.\`clientMasterName\`
+--        ;	
+--SELECT ALL	"PLEASE BE BLANK! (clientMasterName test"
+--	,	a.teacherEmail
+--	,	a.clientMasterEmail
+--	,	a.layoutName
+--	,	a.clientMasterName
+--	,	b.clientMasterName
+--FROM		clientMaster  a
+--	,	clientMaster  b
+--WHERE	1 
+--AND	a.teacherEmail			= b.teacherEmail 
+--AND	a.clientMasterEmail		= b.clientMasterEmail 
+--AND	a.layoutName			= b.layoutName
+--AND	a.clientMasterName		!= b.clientMasterName
+--;	
 
 
 
-RENAME TABLE \`clientMaster\` TO \`clientSession\`	;
-	
+RENAME TABLE \`clientMaster\` TO \`clientSession\`	;	
 
 	--  2022-11-30 - added GROUP BY and eliminated DISTINCT in favor of ALL
 CREATE TABLE \`clientMaster\` ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -143,21 +142,23 @@ CREATE TABLE \`clientMaster\` ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 
 
-ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterAutoIncr\` INT(10) UNSIGNED NOT NULL                              	  	;
-ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterNotes\`	TEXT   	AFTER    \`clientMasterActiveFlag\`		  		;
-ALTER TABLE \`clientMaster\`	MODIFY \`clientMasterAutoIncr\` INT NOT NULL AUTO_INCREMENT PRIMARY KEY                           		;
+ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterAutoIncr\` INT(10) UNSIGNED NOT NULL                              ;
+ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterNotes\`	TEXT   	AFTER    \`clientMasterActiveFlag\`		;
+ALTER TABLE \`clientMaster\`	MODIFY		\`clientMasterAutoIncr\` INT NOT NULL AUTO_INCREMENT PRIMARY KEY                ;
 
 					-- 2022-11-29	more damn dup key stuff......
 					--  PESL-rcthil@gmail.com-m.g.kuti@gearcentregroup.com   ? ? ? ? ? ? ? ? ? ? ? 
-DELETE FROM \`clientMaster\` 
-WHERE	1 
-AND	\`layoutName\`			= 'PESL'  
-AND	\`teacherEmail\`		= 'mary@underwoodaccentreduction.com' 
-AND	\`clientMasterEmail\`		= 'panassayagagnon@gmail.com' 
-AND	\`createdAt\`			= '2022-04-19 03:25:41'  
-;
+		--DELETE FROM \`clientMaster\` 
+		--WHERE	1 
+		--AND	\`layoutName\`			= 'PESL'  
+		--AND	\`teacherEmail\`		= 'mary@underwoodaccentreduction.com' 
+		--AND	\`clientMasterEmail\`		= 'panassayagagnon@gmail.com' 
+		--AND	\`createdAt\`			= '2022-04-19 03:25:41'  
+		--;
+
 ALTER TABLE \`clientMaster\`	ADD UNIQUE KEY \`clientMasterUniqueKey\` (\`layoutName\`, \`teacherEmail\`,\`clientMasterEmail\`) 		;
-###   ERROR 1062 (23000) at line 125: Duplicate entry 'PESL-mary@underwoodaccentreduction.com-panassayagagnon@gmail.com' for key 'clientMasterUniqueKey'  ?????
+		--	###   ERROR 1062 (23000) at line 125: Duplicate entry 'PESL-mary@underwoodaccentreduction.com-panassayagagnon@gmail.com' 
+		--	##	for key 'clientMasterUniqueKey'  ?????
 
 ALTER TABLE \`clientMaster\`	DROP KEY IF EXISTS		\`teacherAutoIncr_2_clientMaster\`						;
 ALTER TABLE \`clientMaster\`	ADD KEY        			\`teacherAutoIncr_2_clientMaster\`	(\`teacherAutoIncr\`)  			;
