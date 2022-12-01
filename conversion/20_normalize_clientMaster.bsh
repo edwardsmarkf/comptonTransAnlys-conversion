@@ -130,6 +130,9 @@ CREATE TABLE \`clientMaster\` ENGINE=InnoDB DEFAULT CHARSET=latin1
 		,	\`layoutName\` 
 	;
 	
+SELECT COUNT(*) FROM \`clientMaster\` ;
+
+
 	
 --	select	 	teacherEmail
 --		, 	clientMasterEmail
