@@ -113,10 +113,10 @@ AND	a.clientMasterName		!= b.clientMasterName
 RENAME TABLE \`clientMaster\` TO \`clientSession\`	;
 	
 
-	
+	--  2022-11-30 - added GROUP BY and eliminated DISTINCT in favor of ALL
 CREATE TABLE \`clientMaster\` ENGINE=InnoDB DEFAULT CHARSET=latin1
 	AS
-	SELECT DISTINCT			\`layoutName\`
+	SELECT ALL			\`layoutName\`
 				,	\`teacherEmail\`
 				,	\`clientMasterEmail\`
 				,	\`clientMasterSpecLanguage\`
@@ -125,8 +125,22 @@ CREATE TABLE \`clientMaster\` ENGINE=InnoDB DEFAULT CHARSET=latin1
 				,	\`createdAt\`
 				,	\`updatedAt\`
 				,	\`teacherAutoIncr\` 
-	FROM \`clientSession\`
+	FROM		\`clientSession\`
+	GROUP  BY	\`teacherEmail\`
+		,	\`clientMasterEmail\`
+		,	\`layoutName\` 
 	;
+	
+	
+--	select	 	teacherEmail
+--		, 	clientMasterEmail
+--		,	layoutName
+--		,	clientMasterSpecLanguage
+--		,	clientMasterName
+--		,	clientMasterActiveFlag
+--		,	createdAt, updatedAt,  min(clientMasterAutoIncr) 
+--	FROM	clientMaster group by teacherEmail, clientMasterEmail, layoutName   order by clientMasterAutoIncr ;
+
 
 
 ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterAutoIncr\` INT(10) UNSIGNED NOT NULL                              	  	;
