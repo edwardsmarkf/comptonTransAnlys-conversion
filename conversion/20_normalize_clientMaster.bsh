@@ -30,29 +30,17 @@ CREATE TABLE \`clientMaster\` ENGINE=InnoDB DEFAULT CHARSET=latin1
 	GROUP  BY	\`teacherEmail\`
 		,	\`clientMasterEmail\`
 		,	\`layoutName\` 
-	;
-	
+	;	
 SELECT COUNT(*) FROM \`clientMaster\` ;
-
 
 
 ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterAutoIncr\` INT(10) UNSIGNED NOT NULL                              ;
 ALTER TABLE \`clientMaster\`	ADD COLUMN	\`clientMasterNotes\`	TEXT   	AFTER    \`clientMasterActiveFlag\`		;
 ALTER TABLE \`clientMaster\`	MODIFY		\`clientMasterAutoIncr\` INT NOT NULL AUTO_INCREMENT PRIMARY KEY                ;
 
-					-- 2022-11-29	more damn dup key stuff......
-					--  PESL-rcthil@gmail.com-m.g.kuti@gearcentregroup.com   ? ? ? ? ? ? ? ? ? ? ? 
-		--DELETE FROM \`clientMaster\` 
-		--WHERE	1 
-		--AND	\`layoutName\`			= 'PESL'  
-		--AND	\`teacherEmail\`		= 'mary@underwoodaccentreduction.com' 
-		--AND	\`clientMasterEmail\`		= 'panassayagagnon@gmail.com' 
-		--AND	\`createdAt\`			= '2022-04-19 03:25:41'  
-		--;
 
 ALTER TABLE \`clientMaster\`	ADD UNIQUE KEY \`clientMasterUniqueKey\` (\`layoutName\`, \`teacherEmail\`,\`clientMasterEmail\`) 		;
-		--	###   ERROR 1062 (23000) at line 125: Duplicate entry 'PESL-mary@underwoodaccentreduction.com-panassayagagnon@gmail.com' 
-		--	##	for key 'clientMasterUniqueKey'  ?????
+
 
 ALTER TABLE \`clientMaster\`	DROP KEY IF EXISTS		\`teacherAutoIncr_2_clientMaster\`						;
 ALTER TABLE \`clientMaster\`	ADD KEY        			\`teacherAutoIncr_2_clientMaster\`	(\`teacherAutoIncr\`)  			;
@@ -79,8 +67,7 @@ ALTER TABLE \`clientMaster\`	ADD CONSTRAINT			\`teacherMiscKeys_2_clientMaster\`
 				FOREIGN KEY								( \`layoutName\`, \`teacherEmail\` )
 				REFERENCES \`teacher\`							( \`layoutName\`, \`teacherEmail\` )
 				ON DELETE CASCADE ON UPDATE CASCADE
-					;
-
+				;
 
 ALTER TABLE \`clientSession\` DROP COLUMN IF EXISTS	\`clientMasterActiveFlag\`								;
 ALTER TABLE \`clientSession\` DROP COLUMN IF EXISTS	\`clientMasterSpecLanguage\`								;
@@ -113,7 +100,6 @@ ALTER TABLE \`clientSession\`		ADD UNIQUE KEY	\`clientSessionUniqueKey\`
 							,	\`sessionName\`
 							)
 							;
-
 
 ALTER TABLE \`clientSession\`		ADD KEY			\`clientMasterMiscKeys_2_clientSession\`
 										(	\`layoutName\`
@@ -332,5 +318,17 @@ exit;
 --		,	clientMasterActiveFlag
 --		,	createdAt, updatedAt,  min(clientMasterAutoIncr) 
 --	FROM	clientMaster group by teacherEmail, clientMasterEmail, layoutName   order by clientMasterAutoIncr ;
+
+
+
+					-- 2022-11-29	more damn dup key stuff......
+					--  PESL-rcthil@gmail.com-m.g.kuti@gearcentregroup.com   ? ? ? ? ? ? ? ? ? ? ? 
+		--DELETE FROM \`clientMaster\` 
+		--WHERE	1 
+		--AND	\`layoutName\`			= 'PESL'  
+		--AND	\`teacherEmail\`		= 'mary@underwoodaccentreduction.com' 
+		--AND	\`clientMasterEmail\`		= 'panassayagagnon@gmail.com' 
+		--AND	\`createdAt\`			= '2022-04-19 03:25:41'  
+		--;
 
 
