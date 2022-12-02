@@ -95,6 +95,7 @@ process_section '21_rearrange_keys' ;
 
 process_section '22a_remove_constraint_keys' ;
 process_section '22b_remove_constraint_keys' ;
+grep ERROR   ${LOGGING_DIR}/22b_remove_constraint_keys.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep          ;
 process_section '22c_remove_constraint_keys' ;
 process_section '22d_remove_constraint_keys' ;
 process_section '22e_remove_constraint_keys' ;
