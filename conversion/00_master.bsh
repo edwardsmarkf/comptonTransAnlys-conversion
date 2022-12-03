@@ -109,34 +109,18 @@ bash -vx  ${WORKING_DIR}/fixStimwordPosition/fixStimwordPosition.bsh      >     
 echo $(date) ' - errorSoundsTooltip!'                                                                                                                      ;
 bash -vx  ${WORKING_DIR}/errorSoundsTooltip/errorSoundsTooltip.bsh        >          ${LOGGING_DIR}/errorSoundsTooltip.bsh.log                       2>&1  ;
 
-process_section '50_display_table_counts' ;
-                      --echo $(date) ' - 50_display_table_counts.bsh'                                                                                                              ;
-                      --bash -vx  ${WORKING_DIR}/50_display_table_counts.bsh                       >          ${LOGGING_DIR}/50_display_table_counts.bsh.log                  2>&1 ;
-                      --grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/50_display_table_counts.bsh.log                       ;
-grep  --line-number   '^COUNT(\|^[0-9]'                                               ${LOGGING_DIR}/50_display_table_counts.bsh.log                       ;
-
+process_section '50_display_table_counts' ;                          
+                                                       #####                  ${LOGGING_DIR}/50_display_table_counts.bsh.log                       ;
 process_section '55_count_by_keys' ;
-                      --echo $(date) ' - 55_count_by_keys.bsh'                                                                                                                     ;
-                      --bash -vx  ${WORKING_DIR}/55_count_by_keys.bsh                              >          ${LOGGING_DIR}/55_count_by_keys.bsh.log                        2>&1  ;
-                      --grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'                            ${LOGGING_DIR}/55_count_by_keys.bsh.log                              ;
-grep  --line-number   '^COUNT(\|^[0-9]'                                               ${LOGGING_DIR}/55_count_by_keys.bsh.log                              ;
-
 
 
 echo $(date)                                                                                                                        ;
 
 grep ERROR   ${LOGGING_DIR}/*.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR'  | grep -v  grep                        ;
 
-
 echo "finished 00_master.bsh!"       ;
 
 exit  ;
-
-
-
-exit                                                                                                                                ;
-
-#
 
 #
 
