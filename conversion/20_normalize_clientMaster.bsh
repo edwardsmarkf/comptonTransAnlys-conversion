@@ -52,7 +52,7 @@ ALTER TABLE \`clientMaster\`	ADD CONSTRAINT \`teacherAutoIncr_2_clientMaster\`
 				;
 
 ALTER TABLE \`clientMaster\`	DROP CONSTRAINT IF EXISTS	\`teacherAutoIncr_2_clientMaster\`						;
-ALTER TABLE \`clientMaster\`	DROP CONSTRAINT IF EXISTS	\`sessionNames_2_clientMaster\` 						;
+ALTER TABLE \`clientMaster\`	DROP CONSTRAINT IF EXISTS	\`clientSessionNames_2_clientMaster\` 						;
 ALTER TABLE \`clientMaster\`	DROP CONSTRAINT IF EXISTS	\`session_2_clientMaster\` 							;
 
 ALTER TABLE \`clientMaster\`	DROP KEY IF EXISTS		\`teacherMiscKeys_2_clientMaster\`  						;
@@ -100,7 +100,7 @@ ALTER TABLE \`clientSession\`		ADD UNIQUE KEY	\`clientSessionUniqueKey\`
 							(	\`layoutName\`
 							,	\`teacherEmail\`
 							,	\`clientMasterEmail\`
-							,	\`sessionName\`
+							,	\`clientSessionName\`
 							)
 							;
 
@@ -124,10 +124,10 @@ ALTER TABLE \`clientSession\`		ADD CONSTRAINT		\`clientMasterMiscKeys_2_clientSe
 					ON DELETE CASCADE ON UPDATE CASCADE
 					;
 
-ALTER TABLE \`clientSession\`		ADD CONSTRAINT 		\`sessionNames_2_clientSession\`
-					FOREIGN KEY 				(\`sessionName\`)
-					REFERENCES 		\`sessionNames\`
-										(\`sessionName\`)
+ALTER TABLE \`clientSession\`		ADD CONSTRAINT 		\`essionNames_2_clientSession\`
+					FOREIGN KEY 				(\`clientSessionName\`)
+					REFERENCES 		\`clientSessionNames\`
+										(\`clientSessionName\`)
 					ON DELETE CASCADE ON UPDATE CASCADE
 					;
 
@@ -159,7 +159,7 @@ ALTER TABLE \`clientContext\`	ADD KEY	\`clientSessionMiscKeys_2_clientContext\`
 							(	\`layoutName\`
 							,	\`teacherEmail\`
 							,	\`clientMasterEmail\`
-							,	\`sessionName\`
+							,	\`clientSessionName\`
 							)
 							;
 ALTER TABLE \`clientContext\`
@@ -167,12 +167,12 @@ ALTER TABLE \`clientContext\`
 		FOREIGN KEY			(	\`layoutName\`
 						,	\`teacherEmail\`
 						,	\`clientMasterEmail\`
-						,	\`sessionName\`
+						,	\`clientSessionName\`
 						)
 		REFERENCES \`clientSession\`	(	\`layoutName\`
 						,	\`teacherEmail\`
 						,	\`clientMasterEmail\`
-						,	\`sessionName\`
+						,	\`clientSessionName\`
 						)
 		ON DELETE CASCADE ON UPDATE CASCADE
 		;
@@ -188,7 +188,6 @@ ALTER TABLE \`clientContext\`	DROP KEY	IF EXISTS	\`clientContextMiscKeys_2_clien
 
 ALTER TABLE \`clientSession\`	DROP KEY IF EXISTS	\`clientMasterUniqueKey\`					;
 ALTER TABLE \`clientSession\`	DROP KEY IF EXISTS	\`clientMasterMiscKeys_2_clientContext\`			;
-#######  needed for some bizarre reason ???	ALTER TABLE \`clientSession\`	DROP KEY IF EXISTS	\`sessionNames_2_clientMaster\`					;
 ALTER TABLE \`clientSession\`	DROP KEY IF EXISTS	\`teacherEmail\`						;
 
 ###################### 2021-11-21  SET FOREIGN_KEY_CHECKS=1 ;
