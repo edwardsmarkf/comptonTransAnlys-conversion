@@ -8,31 +8,31 @@
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
-        SELECT "clientContext"          ,       COUNT(*)        FROM    \`clientContext\`       ;
+        SELECT "COUNT: clientContext"          ,       COUNT(*)        FROM    \`clientContext\`       ;
         
-        SELECT "clientMaster"           ,       COUNT(*)        FROM    \`clientMaster\`        ;
+        SELECT "COUNT: clientMaster"           ,       COUNT(*)        FROM    \`clientMaster\`        ;
         
-        SELECT  "clientSession"         ,       COUNT(*)        FROM    \`clientSession\`       ;
+        SELECT  "COUNT: clientSession"         ,       COUNT(*)        FROM    \`clientSession\`       ;
        
-        SELECT "clientStimword"         ,       COUNT(*)        FROM    \`clientStimword\`      ;
+        SELECT "COUNT: clientStimword"         ,       COUNT(*)        FROM    \`clientStimword\`      ;
        
-        SELECT  "context"               ,       COUNT(*)        FROM    \`context\`             ;
+        SELECT  "COUNT: context"               ,       COUNT(*)        FROM    \`context\`             ;
         
-        SELECT "layout"                 ,       COUNT(*)        FROM    \`layout\`              ;
+        SELECT "COUNT: layout"                 ,       COUNT(*)        FROM    \`layout\`              ;
         
-        SELECT  "phoneticGrid"          ,       COUNT(*)        FROM    \`phoneticGrid\`        ;
+        SELECT  "COUNT: phoneticGrid"          ,       COUNT(*)        FROM    \`phoneticGrid\`        ;
   
-        SELECT "sessionNames"           ,       COUNT(*)        FROM    \`sessionNames\`        ;
+        SELECT "COUNT: sessionNames"           ,       COUNT(*)        FROM    \`sessionNames\`        ;
         
-        SELECT "sound"                  ,       COUNT(*)        FROM    \`sound\`               ;
+        SELECT "COUNT: sound"                  ,       COUNT(*)        FROM    \`sound\`               ;
        
-        SELECT "stimword"               ,       COUNT(*)        FROM    \`stimword\`            ;
+        SELECT "COUNT: stimword"               ,       COUNT(*)        FROM    \`stimword\`            ;
         
-        SELECT "stimwordPosition"       ,       COUNT(*)        FROM    \`stimwordPosition\`    ;
+        SELECT "COUNT: stimwordPosition"       ,       COUNT(*)        FROM    \`stimwordPosition\`    ;
        
-        SELECT "teacher"                ,       COUNT(*)        FROM    \`teacher\`             ;
+        SELECT "COUNT: teacher"                ,       COUNT(*)        FROM    \`teacher\`             ;
         
-        SELECT "errorSoundsTooltip"     ,       COUNT(*)        FROM    \`errorSoundsTooltip\`	;
+        SELECT "COUNT: errorSoundsTooltip"     ,       COUNT(*)        FROM    \`errorSoundsTooltip\`	;
         
 END
 
