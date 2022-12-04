@@ -8,53 +8,37 @@
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
-        SELECT 'clientContext'                          ;
-        SELECT COUNT(*) FROM    \`clientContext\`       ;
+        SELECT COUNT(*)         "clientContext"         FROM    \`clientContext\`       ;
         
-        SELECT 'clientMaster'                           ;
-        SELECT COUNT(*) FROM    \`clientMaster\`        ;
+        SELECT COUNT(*)         "clientMaster"          FROM    \`clientMaster\`        ;
         
-        SELECT 'clientSession'                          ;
-        SELECT COUNT(*) FROM    \`clientSession\`       ;
+        SELECT COUNT(*)         "clientSession"         FROM    \`clientSession\`       ;
+       
+        SELECT COUNT(*)         "clientStimword"        FROM    \`clientStimword\`      ;
+       
+        SELECT COUNT(*)         "context"               FROM    \`context\`             ;
         
-        SELECT 'clientStimword'                         ;
-        SELECT COUNT(*) FROM    \`clientStimword\`      ;
+        SELECT COUNT(*)         "frequencyList"         FROM    \`frequencyList\`       ;
+       
+        SELECT COUNT(*)         "languageSpec"          FROM    \`languageSpec\`        ;
         
-        SELECT 'context'                                ;
-        SELECT COUNT(*) FROM    \`context\`             ;
+        SELECT COUNT(*)         "languageNorms"         FROM    \`languageNorms\`       ;
         
-        SELECT 'frequencyList'                          ;
-        SELECT COUNT(*) FROM    \`frequencyList\`       ;
+        SELECT COUNT(*)         "layout"                FROM    \`layout\`              ;
         
-        SELECT 'languageSpec'                           ;
-        SELECT COUNT(*) FROM    \`languageSpec\`        ;
-        
-        SELECT 'languageNorms'                          ;
-        SELECT COUNT(*) FROM    \`languageNorms\`       ;
-        
-        SELECT 'layout'                                 ;
-        SELECT COUNT(*) FROM    \`layout\`              ;
-        
-        SELECT 'phoneticGrid'                           ;
-        SELECT COUNT(*) FROM    \`phoneticGrid\`        ;
+        SELECT COUNT(*)         "phoneticGrid"          FROM    \`phoneticGrid\`        ;
   
-        SELECT 'sessionNames'                           ;
-        SELECT COUNT(*) FROM    \`sessionNames\`        ;
+        SELECT COUNT(*)         "sessionNames"          FROM    \`sessionNames\`        ;
         
-        SELECT 'sound'                                  ;
-        SELECT COUNT(*) FROM    \`sound\`               ;
+        SELECT COUNT(*)         "sound"                 FROM    \`sound\`               ;
+       
+        SELECT COUNT(*)         "stimword"              FROM    \`stimword\`            ;
         
-        SELECT 'stimword'                               ;
-        SELECT COUNT(*) FROM    \`stimword\`            ;
+        SELECT COUNT(*)         "stimwordPosition"      FROM    \`stimwordPosition\`    ;
+       
+        SELECT COUNT(*)         "teacher"               FROM    \`teacher\`             ;
         
-        SELECT 'stimwordPosition'                       ;
-        SELECT COUNT(*) FROM    \`stimwordPosition\`    ;
-        
-        SELECT 'teacher'                                ;
-        SELECT COUNT(*) FROM    \`teacher\`             ;
-
-        SELECT 'errorSoundsTooltip'                     ;
-        SELECT COUNT(*) FROM    \`errorSoundsTooltip\`	;
+        SELECT COUNT(*)         "errorSoundsTooltip"    FROM    \`errorSoundsTooltip\`	;
         
 END
 
