@@ -9,9 +9,7 @@
 #
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
-
-SELECT 'COUNT: stimword to stimwordPosition MISC KEYS'   ;
-SELECT COUNT(*)
+SELECT COUNT(*) "stimword to stimwordPosition MISC KEYS"
 FROM    \`stimword\`
 ,       \`stimwordPosition\`
 WHERE   1
@@ -20,15 +18,15 @@ AND     \`stimword\`.\`stimwordPageNbr\`          =   \`stimwordPosition\`.\`sti
 AND     \`stimword\`.\`stimwordLineNbr\`          =   \`stimwordPosition\`.\`stimwordLineNbr\`
 AND     \`stimword\`.\`stimwordWord\`             =   \`stimwordPosition\`.\`stimwordWord\`
 ;
-SELECT 'COUNT: stimword to stimwordPosition AutoIncr';
-SELECT COUNT(*)
+
+SELECT COUNT(*)   "COUNT: stimword to stimwordPosition AutoIncr"
 FROM    \`stimword\`
 ,       \`stimwordPosition\`
 WHERE   1
 AND     \`stimword\`.\`stimwordAutoIncr\`         =   \`stimwordPosition\`.\`stimwordAutoIncr\`
 ;
-SELECT 'COUNT: stimword to stimwordPosition BOTH KEYS';
-SELECT COUNT(*)
+
+SELECT COUNT(*)   "stimword to stimwordPosition BOTH KEYS"
 FROM    \`stimword\`
 ,       \`stimwordPosition\`
 WHERE   1
@@ -39,24 +37,22 @@ AND     \`stimword\`.\`stimwordLineNbr\`          =   \`stimwordPosition\`.\`sti
 AND     \`stimword\`.\`stimwordWord\`             =   \`stimwordPosition\`.\`stimwordWord\`
 ;
 
-
-SELECT 'COUNT: sound to context MISC KEYS'   ;
-SELECT COUNT(*)
+SELECT COUNT(*)     "sound to context MISC KEYS"
 FROM    \`sound\`
 ,       \`context\`
 WHERE   1
 AND   \`sound\`.\`layoutName\`                =   \`context\`.\`layoutName\`
 AND   \`sound\`.\`soundPhoneme\`              =   \`context\`.\`soundPhoneme\`
 ;
-SELECT 'COUNT: sound to context AutoIncr'   ;
-SELECT COUNT(*)
+
+SELECT COUNT(*)   "sound to context AutoIncr"
 FROM    \`sound\`
 ,       \`context\`
 WHERE   1
 AND   \`sound\`.\`soundAutoIncr\`                =   \`context\`.\`soundAutoIncr\`
 ;
-SELECT 'COUNT: sound to context BOTH'   ;
-SELECT COUNT(*)
+
+SELECT COUNT(*)     "sound to context BOTH"
 FROM    \`sound\`
 ,       \`context\`
 WHERE   1
@@ -65,9 +61,7 @@ AND   \`sound\`.\`layoutName\`                =   \`context\`.\`layoutName\`
 AND   \`sound\`.\`soundPhoneme\`              =   \`context\`.\`soundPhoneme\`
 ;
 
-
-SELECT 'COUNT: teacher to clientMaster MISC KEYS'  ;
-SELECT COUNT(*)
+SELECT COUNT(*)   "teacher to clientMaster MISC KEYS"
 FROM  \`teacher\`
 ,     \`clientMaster\`
 WHERE 1
