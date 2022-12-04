@@ -16,8 +16,8 @@ echo 'looking for missing key entries (?)'
 
          ##### context  languageNorms   TEST
 
-SELECT 'COUNT: languageNorms 2 context'    ;
-SELECT COUNT(*)
+
+SELECT COUNT(*)            "COUNT: languageNorms 2 context"
                                        ##   languageNormsLayoutName
                                        ## , languageNormsName
                                        ## , languageNormsPosition
@@ -50,8 +50,7 @@ AND  contextPhoneme    =  languageNormsPhoneme
 
           ####   context  stimwordPosition    TEST
 
-SELECT 'COUNT: context to stimwordPosition MiscKeys'         ;
-SELECT COUNT(*)
+SELECT COUNT(*)            "context to stimwordPosition MiscKeys"
 FROM stimwordPosition
 WHERE 1
 AND stimwordPositionAutoIncr NOT IN
@@ -67,8 +66,7 @@ AND  stimwordPosition.stimwordPositionPhoneme            = context.contextPhonem
 ;
 
       ### stimwordPosition  to clientStimword TEST
-SELECT 'stimwordPosition to clientStimword MiscKeys'  ;
-SELECT COUNT(*)
+SELECT COUNT(*)   "stimwordPosition to clientStimword MiscKeys"
 FROM clientStimword
 WHERE 1
 AND (    clientStimword.clientMasterLayoutName
