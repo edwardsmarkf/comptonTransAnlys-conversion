@@ -15,7 +15,7 @@ ALTER TABLE  clientContext     RENAME COLUMN    clientContextErrorFrequency     
 ALTER TABLE  clientContext     RENAME COLUMN    clientContextPhoneme              TO   contextPhoneme                ;
 ALTER TABLE  clientContext     RENAME COLUMN    clientContextPositionName         TO   contextPosition               ;
 ALTER TABLE  clientContext     RENAME COLUMN    contextPhoneme                    TO   soundPhoneme                  ;
-ALTER TABLE  clientContext     RENAME COLUMN    clientMasterSessionName           TO   sessionName                   ;
+ALTER TABLE  clientContext     RENAME COLUMN    clientMasterSessionName           TO   clientSessionName             ;
 
 
 
@@ -23,14 +23,14 @@ ALTER TABLE  clientStimword    RENAME COLUMN    clientContextPositionName       
 ALTER TABLE  clientStimword    RENAME COLUMN    clientStimwordPositionNbr         TO   stimwordPositionNbr           ;
 ALTER TABLE  clientStimword    RENAME COLUMN    clientStimwordSetting             TO   stimwordPositionSetting       ;
 ALTER TABLE  clientStimword    RENAME COLUMN    clientContextPhoneme              TO   soundPhoneme                  ;
-ALTER TABLE  clientStimword    RENAME COLUMN    clientMasterSessionName           TO   sessionName                   ;
+ALTER TABLE  clientStimword    RENAME COLUMN    clientMasterSessionName           TO   clientSessionName             ;
 
 ALTER TABLE  clientStimword    RENAME COLUMN    stimwordPositionPageNbr           TO   stimwordPageNbr               ;
 ALTER TABLE  clientStimword    RENAME COLUMN    stimwordPositionLineNbr           TO   stimwordLineNbr               ;
 ALTER TABLE  clientStimword    RENAME COLUMN    stimwordPositionWord              TO   stimwordWord                  ;
 ALTER TABLE  clientStimword    RENAME COLUMN    stimwordPositionName              TO   contextPosition               ;
 
-ALTER TABLE  clientMaster      RENAME COLUMN    clientMasterSessionName	          TO	 sessionName		               ;
+ALTER TABLE  clientMaster      RENAME COLUMN    clientMasterSessionName	          TO	 clientSessionName		         ;
 
 ALTER TABLE  context           RENAME COLUMN    contextPhoneme                    TO   soundPhoneme                  ;
 
