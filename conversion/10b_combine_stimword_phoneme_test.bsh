@@ -42,7 +42,7 @@ AND  contextPhoneme        =  languageNormsPhoneme
 
           ####   context  stimwordPosition    TEST
 
-SELECT "context to stimwordPosition MiscKeys MISSING" ,        COUNT(*) 
+SELECT "COUNT: context to stimwordPosition MiscKeys MISSING" ,        COUNT(*) 
 FROM stimwordPosition
 WHERE 1
 AND stimwordPositionAutoIncr NOT IN
@@ -58,7 +58,7 @@ AND  stimwordPosition.stimwordPositionPhoneme            = context.contextPhonem
 ;
 
       ### stimwordPosition  to clientStimword TEST
-SELECT    "stimwordPosition to clientStimword MiscKeys MISSING"  ,       COUNT(*)
+SELECT    "COUNT: stimwordPosition to clientStimword MiscKeys MISSING"  ,       COUNT(*)
 FROM clientStimword
 WHERE 1
 AND (    clientStimword.clientMasterLayoutName
@@ -90,7 +90,7 @@ NOT IN
 
 
 ##   context  to clientContext  TEST
-SELECT     "context to clientContext MiscKeys MISSING" ,        COUNT(*)
+SELECT     "COUNT: context to clientContext MiscKeys MISSING" ,        COUNT(*)
 FROM clientContext
 WHERE
 ( clientMasterLayoutName
@@ -114,7 +114,7 @@ AND  contextPosition        = clientContextPositionName
 
 
 ##  clientContext   to clientStimword  TEST
-SELECT    "clientContext to clientStimword MiscKeys MISSING"    ,        COUNT(*) 
+SELECT    "COUNT: clientContext to clientStimword MiscKeys MISSING"    ,        COUNT(*) 
 FROM  clientStimword
 WHERE 1
 AND clientStimwordAutoIncr
