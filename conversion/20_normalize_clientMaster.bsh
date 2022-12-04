@@ -159,7 +159,7 @@ ALTER TABLE \`clientContext\`	ADD KEY	\`clientSessionMiscKeys_2_clientContext\`
 							(	\`layoutName\`
 							,	\`teacherEmail\`
 							,	\`clientMasterEmail\`
-							,	\`clientSessionName\`
+							,	\`sessionName\`
 							)
 							;
 ALTER TABLE \`clientContext\`
@@ -167,12 +167,12 @@ ALTER TABLE \`clientContext\`
 		FOREIGN KEY			(	\`layoutName\`
 						,	\`teacherEmail\`
 						,	\`clientMasterEmail\`
-						,	\`clientSessionName\`
+						,	\`sessionName\`
 						)
 		REFERENCES \`clientSession\`	(	\`layoutName\`
 						,	\`teacherEmail\`
 						,	\`clientMasterEmail\`
-						,	\`clientSessionName\`
+						,	\`sessionName\`
 						)
 		ON DELETE CASCADE ON UPDATE CASCADE
 		;
