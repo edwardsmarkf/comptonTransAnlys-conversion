@@ -83,7 +83,7 @@ process_section '09_move_columns' ;
 process_section '10a_combine_stimword_phoneme' ;
 
 process_section '10b_combine_stimword_phoneme_test' ;
-grep  --line-number   '^COUNT(\|^0'                                                   ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log             ;
+grep  --line-number   '^COUNT:'                                                   ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log             ;
 
 process_section '12_another_rename_column' ;
 
@@ -110,10 +110,10 @@ echo $(date) ' - errorSoundsTooltip!'                                           
 bash -vx  ${WORKING_DIR}/errorSoundsTooltip/errorSoundsTooltip.bsh        >          ${LOGGING_DIR}/errorSoundsTooltip.bsh.log                       2>&1  ;
 
 process_section '50_display_table_counts'                                                                                                                  ;
-grep  --line-number   '^COUNT(\|^0'                                                   ${LOGGING_DIR}/50_display_table_counts.bsh.log                       ;
+grep  --line-number   '^COUNT:'                                                       ${LOGGING_DIR}/50_display_table_counts.bsh.log                       ;
  
 process_section '55_count_by_keys'                                                                                                                          ;
-grep  --line-number   '^COUNT(\|^0'                                                   ${LOGGING_DIR}/55_count_by_keys.bsh.log                             ;
+grep  --line-number   '^COUNT:'                                                         ${LOGGING_DIR}/55_count_by_keys.bsh.log                             ;
 
 
 
