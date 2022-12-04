@@ -87,8 +87,7 @@ AND   \`teacher\`.\`teacherEmail\`                                    = \`client
 
 
 
-SELECT 'COUNT: clientMaster to clientSession Misc KEYS';
-SELECT COUNT(*)
+SELECT COUNT(*)   "clientMaster to clientSession Misc KEYS"
 FROM  \`clientMaster\`
 ,     \`clientSession\`
 WHERE 1
@@ -96,15 +95,13 @@ AND   \`clientMaster\`.\`layoutName\`                                 = \`client
 AND   \`clientMaster\`.\`teacherEmail\`                               = \`clientSession\`.\`teacherEmail\`
 AND   \`clientMaster\`.\`clientMasterEmail\`                          = \`clientSession\`.\`clientMasterEmail\`
 ;
-SELECT 'COUNT: clientMaster to clientSession AutoIncr';
-SELECT COUNT(*)
+SELECT COUNT(*)   "clientMaster to clientSession AutoIncr"
 FROM  \`clientMaster\`
 ,     \`clientSession\`
 WHERE 1
 AND   \`clientMaster\`.\`clientMasterAutoIncr\`                       = \`clientSession\`.\`clientMasterAutoIncr\`
 ;
-SELECT 'COUNT: clientMaster to clientSession BOTH';
-SELECT COUNT(*)
+SELECT COUNT(*)   "clientMaster to clientSession BOTH"
 FROM  \`clientMaster\`
 ,     \`clientSession\`
 WHERE 1
@@ -116,8 +113,7 @@ AND   \`clientMaster\`.\`clientMasterEmail\`                          = \`client
 
 
 
-SELECT 'COUNT: clientSession to clientContext MiscKeys'  ;
-SELECT COUNT(*)
+SELECT COUNT(*)   "clientSession to clientContext MiscKeys"
   FROM  \`clientSession\` 
   ,     \`clientContext\`
   WHERE 1
@@ -126,15 +122,13 @@ SELECT COUNT(*)
   AND   \`clientSession\`.\`clientMasterEmail\`                        = \`clientContext\`.\`clientMasterEmail\`
   AND   \`clientSession\`.\`sessionName\`                              = \`clientContext\`.\`sessionName\`  
   ;
-SELECT 'COUNT: clientSession to clientContext AutoIncr'  ;
-SELECT COUNT(*)
+SELECT COUNT(*)   "clientSession to clientContext AutoIncr"
   FROM  \`clientSession\` 
   ,     \`clientContext\`
   WHERE 1
   AND   \`clientSession\`.\`clientSessionAutoIncr\`                    = \`clientContext\`.\`clientSessionAutoIncr\`
   ;
-SELECT 'COUNT: clientSession to clientContext BOTH'  ;
-SELECT COUNT(*)
+SELECT COUNT(*)       "clientSession to clientContext BOTH"
   FROM  \`clientSession\` 
   ,     \`clientContext\`
   WHERE 1
@@ -145,8 +139,8 @@ SELECT COUNT(*)
   AND   \`clientSession\`.\`sessionName\`                              = \`clientContext\`.\`sessionName\`  
   ;
 
-SELECT 'COUNT: context to clientContext MiscKeys'  ;
-SELECT COUNT(*)
+
+SELECT COUNT(*)     "context to clientContext MiscKeys"
 FROM    \`context\`
 ,       \`clientContext\`
 WHERE   1
@@ -154,15 +148,13 @@ AND     \`context\`.\`layoutName\`                                  = \`clientCo
 AND     \`context\`.\`soundPhoneme\`                                = \`clientContext\`.\`soundPhoneme\`
 AND     \`context\`.\`contextPosition\`                             = \`clientContext\`.\`contextPosition\`
 ;
-SELECT 'COUNT: context to clientContext AutoIncr'  ;
-SELECT COUNT(*)
+SELECT COUNT(*)     "context to clientContext AutoIncr"
 FROM    \`context\`
 ,       \`clientContext\`
 WHERE   1
 AND     \`context\`.\`contextAutoIncr\`                             = \`clientContext\`.\`contextAutoIncr\`
 ;
-SELECT 'COUNT: context to clientContext BOTH'  ;
-SELECT COUNT(*)
+SELECT COUNT(*)     "context to clientContext BOTH"
 FROM    \`context\`
 ,       \`clientContext\`
 WHERE   1
@@ -173,10 +165,7 @@ AND     \`context\`.\`contextPosition\`                             = \`clientCo
 ;
 
 
-
-  
-SELECT 'COUNT: stimwordPosition to clientStimword MiscKeys' ;
-SELECT COUNT(*)
+SELECT COUNT(*)   "stimwordPosition to clientStimword MiscKeys"
 FROM    \`stimwordPosition\`
 ,       \`clientStimword\`
 WHERE   1
@@ -189,15 +178,13 @@ AND     \`stimwordPosition\`.\`stimwordPositionNbr\`                    =   \`cl
 AND     \`stimwordPosition\`.\`stimwordPositionSetting\`                =   \`clientStimword\`.\`stimwordPositionSetting\`
 AND     \`stimwordPosition\`.\`soundPhoneme\`                           =   \`clientStimword\`.\`soundPhoneme\`
 ;
-SELECT 'COUNT: stimwordPosition to clientStimword AutoIncr' ;
-SELECT COUNT(*)
+SELECT COUNT(*)     "stimwordPosition to clientStimword AutoIncr"
 FROM    \`stimwordPosition\`
 ,       \`clientStimword\`
 WHERE   1
 AND     \`stimwordPosition\`.\`stimwordPositionAutoIncr\`               =   \`clientStimword\`.\`stimwordPositionAutoIncr\`
 ;
-SELECT 'COUNT: stimwordPosition to clientStimword BOTH' ;
-SELECT COUNT(*)
+SELECT COUNT(*)     "stimwordPosition to clientStimword BOTH"
 FROM    \`stimwordPosition\`
 ,       \`clientStimword\`
 WHERE   1
@@ -215,8 +202,7 @@ AND     \`stimwordPosition\`.\`soundPhoneme\`                           =   \`cl
 
 
 
-SELECT 'COUNT: clientContext to clientStimword MiscKeys' ;
-SELECT COUNT(*)
+SELECT COUNT(*)         "clientContext to clientStimword MiscKeys"
     FROM      \`clientContext\`
     ,         \`clientStimword\`
     WHERE 1
@@ -228,15 +214,13 @@ SELECT COUNT(*)
     AND   \`clientContext\`.\`soundPhoneme\`                            =       \`clientStimword\`.\`soundPhoneme\`
     AND   \`clientContext\`.\`clientContextError\`                      =       \`clientStimword\`.\`clientContextError\`
     ;
-SELECT 'COUNT: clientContext to clientStimword AutoIncr' ;
-SELECT COUNT(*)
+SELECT COUNT(*)         "clientContext to clientStimword AutoIncr"
         FROM      \`clientContext\`
         ,         \`clientStimword\`
         WHERE 1
     AND   \`clientContext\`.\`clientContextAutoIncr\`                   =       \`clientStimword\`.\`clientContextAutoIncr\`    
     ;
-SELECT 'COUNT: clientContext to clientStimword BOTH' ;
-SELECT COUNT(*)
+SELECT COUNT(*)         "clientContext to clientStimword BOTH"
     FROM      \`clientContext\`
     ,         \`clientStimword\`
     WHERE 1
