@@ -124,10 +124,10 @@ ALTER TABLE \`clientSession\`		ADD CONSTRAINT		\`clientMasterMiscKeys_2_clientSe
 					ON DELETE CASCADE ON UPDATE CASCADE
 					;
 
-ALTER TABLE \`clientSession\`		ADD CONSTRAINT 		\`essionNames_2_clientSession\`
-					FOREIGN KEY 				(\`clientSessionName\`)
-					REFERENCES 		\`clientSessionNames\`
-										(\`clientSessionName\`)
+ALTER TABLE \`clientSession\`		ADD CONSTRAINT 		\`sessionNames_2_clientSession\`
+					FOREIGN KEY 				(\`sessionName\`)
+					REFERENCES 		\`sessionNames\`
+										(\`sessionName\`)
 					ON DELETE CASCADE ON UPDATE CASCADE
 					;
 
