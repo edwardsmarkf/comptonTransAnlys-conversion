@@ -18,23 +18,16 @@ echo 'looking for missing key entries (?)'
 
 
 SELECT COUNT(*)            "COUNT: languageNorms 2 context"
-                                       ##   languageNormsLayoutName
-                                       ## , languageNormsName
-                                       ## , languageNormsPosition
-                                       ## , languageNormsPhoneme
-                                       ## , languageNormsAutoIncr
 FROM languageNorms
 WHERE 1
                                         ####    AND  languageNormsPosition = 'cluster'
 AND
 ( languageNormsLayoutName
-                                                ####, languageNormsName
 , languageNormsPosition
 , languageNormsPhoneme
 ) NOT IN (
 SELECT
  languageNormsLayoutName
-                                                #####, languageNormsName
 , languageNormsPosition
 , languageNormsPhoneme
 FROM context
@@ -42,8 +35,7 @@ FROM context
 WHERE 1
 AND  contextLayoutName        =  languageNormsLayoutName
 AND  contextPosition           =  languageNormsPosition
-AND  contextPhoneme    =  languageNormsPhoneme
-                                                                          ####  AND  contextPosition = 'cluster'
+AND  contextPhoneme        =  languageNormsPhoneme
 );
 
 
@@ -98,8 +90,7 @@ NOT IN
 
 
 ##   context  to clientContext  TEST
-SELECT 'COUNT: context to clientContext MiscKeys'   ;
-SELECT COUNT(*)
+SELECT COUNT(*)            "context to clientContext MiscKeys"
 FROM clientContext
 WHERE
 ( clientMasterLayoutName
@@ -123,8 +114,7 @@ AND  contextPosition        = clientContextPositionName
 
 
 ##  clientContext   to clientStimword  TEST
-SELECT 'clientContext to clientStimword MiscKeys'     ;
-SELECT COUNT(*)
+SELECT COUNT(*)            "clientContext to clientStimword MiscKeys"
 FROM  clientStimword
 WHERE 1
 AND clientStimwordAutoIncr
@@ -145,12 +135,9 @@ NOT IN
 
 
 ##   sound to context   TEST
-SELECT 'COUNT: sound to context'  ;
 SELECT ALL   contextLayoutName                        'layout'
 ,      contextPosition                                'position'
 ,      contextPhoneme                                 'phoneme'
-                                                                                                            #,      soundAutoIncr
-                                                                                                   #,      contextAutoIncr
 FROM sound
 , context
 WHERE 1
