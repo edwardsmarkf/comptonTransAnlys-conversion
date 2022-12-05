@@ -4,7 +4,7 @@
         
 #       2021-11-14
 #	2022-11-29 - added some dup-key stuff
-#
+#	2022-12-05 - added removal of teacherAutoIncr from clientSession
 #
 #
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
@@ -68,6 +68,9 @@ ALTER TABLE \`clientMaster\`	ADD CONSTRAINT			\`teacherMiscKeys_2_clientMaster\`
 				REFERENCES \`teacher\`							( \`layoutName\`, \`teacherEmail\` )
 				ON DELETE CASCADE ON UPDATE CASCADE
 				;
+				
+				
+	-- clientSession
 
 ALTER TABLE \`clientSession\` DROP COLUMN IF EXISTS	\`clientMasterActiveFlag\`								;
 ALTER TABLE \`clientSession\` DROP COLUMN IF EXISTS	\`clientMasterSpecLanguage\`								;
@@ -151,7 +154,7 @@ ALTER TABLE \`clientContext\`
 		REFERENCES \`clientSession\`	(\`clientSessionAutoIncr\`)
 		ON DELETE CASCADE ON UPDATE CASCADE
 		;
-
+				-- added 2022-12-05
 ALTER TABLE \`clientSession\`	DROP COLUMN	IF EXISTS	\`teacherAutoIncr\`						;
 ALTER TABLE \`clientContext\`	DROP CONSTRAINT IF EXISTS	\`clientMasterAutoIncr_2_clientContext\`			;
 
