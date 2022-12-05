@@ -10,7 +10,7 @@
 
 echo 'looking for missing key entries (?)'
 
-/usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
+/usr/bin/mariadb    --verbose  --skip-column-names    comptonTransAnlys  <<END ;
 
 
 
