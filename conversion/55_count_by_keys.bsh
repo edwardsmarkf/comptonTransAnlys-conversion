@@ -37,7 +37,7 @@ AND     \`stimword\`.\`stimwordLineNbr\`          =   \`stimwordPosition\`.\`sti
 AND     \`stimword\`.\`stimwordWord\`             =   \`stimwordPosition\`.\`stimwordWord\`
 ;
 
-SELECT "COUNT: sound to context MISC KEYS        " , COUNT(*)     
+SELECT "COUNT: sound to context MISC KEYS         " , COUNT(*)     
 FROM    \`sound\`
 ,       \`context\`
 WHERE   1
@@ -45,14 +45,14 @@ AND   \`sound\`.\`layoutName\`                =   \`context\`.\`layoutName\`
 AND   \`sound\`.\`soundPhoneme\`              =   \`context\`.\`soundPhoneme\`
 ;
 
-SELECT "COUNT: sound to context AutoIncr       " , COUNT(*)   
+SELECT "COUNT: sound to context AutoIncr        " , COUNT(*)   
 FROM    \`sound\`
 ,       \`context\`
 WHERE   1
 AND   \`sound\`.\`soundAutoIncr\`                =   \`context\`.\`soundAutoIncr\`
 ;
 
-SELECT "COUNT: sound to context BOTH          " , COUNT(*)     
+SELECT "COUNT: sound to context BOTH            " , COUNT(*)     
 FROM    \`sound\`
 ,       \`context\`
 WHERE   1
