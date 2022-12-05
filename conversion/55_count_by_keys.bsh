@@ -68,8 +68,8 @@ WHERE 1
 AND   \`teacher\`.\`layoutName\`                                      = \`clientMaster\`.\`layoutName\`
 AND   \`teacher\`.\`teacherEmail\`                                    = \`clientMaster\`.\`teacherEmail\`
 ;
-SELECT 'COUNT: teacher to clientMaster AutoIncr'  ;
-SELECT COUNT(*)
+SELECT ''  ;
+SELECT "COUNT: teacher to clientMaster AutoIncr"    ,   COUNT(*)
 FROM  \`teacher\`
 ,     \`clientMaster\`
 WHERE 1
