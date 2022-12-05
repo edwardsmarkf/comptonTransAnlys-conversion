@@ -72,7 +72,7 @@ ALTER TABLE \`clientMaster\`	ADD CONSTRAINT			\`teacherMiscKeys_2_clientMaster\`
 ALTER TABLE \`clientSession\` DROP COLUMN IF EXISTS	\`clientMasterActiveFlag\`								;
 ALTER TABLE \`clientSession\` DROP COLUMN IF EXISTS	\`clientMasterSpecLanguage\`								;
 ALTER TABLE \`clientSession\` DROP COLUMN IF EXISTS	\`clientMasterName\`									;
-ALTER TABLE \`clientSession\` DROP COLUMN IF EXISTS	\`teacherAutoIncr\`									;
+			--		?????	ALTER TABLE \`clientSession\` DROP COLUMN IF EXISTS	\`teacherAutoIncr\`									;
 
 
 ALTER TABLE \`clientSession\` RENAME COLUMN \`clientMasterAutoIncr\` TO \`clientSessionAutoIncr\`						;
