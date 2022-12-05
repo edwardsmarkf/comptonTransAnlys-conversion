@@ -6,7 +6,7 @@
 ##      set fileformat=unix
 
 
-/usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
+/usr/bin/mariadb    --verbose  --skip-column-names      comptonTransAnlys  <<END ;
 
         SELECT "COUNT: clientContext"          ,       COUNT(*)        FROM    \`clientContext\`       ;
         
