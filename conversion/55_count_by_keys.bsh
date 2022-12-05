@@ -56,12 +56,12 @@ SELECT "COUNT: sound to context BOTH"            , COUNT(*)
 FROM    \`sound\`
 ,       \`context\`
 WHERE   1
-AND   \`sound\`.\`soundAutoIncr\`                =   \`context\`.\`soundAutoIncr\`
-AND   \`sound\`.\`layoutName\`                =   \`context\`.\`layoutName\`
-AND   \`sound\`.\`soundPhoneme\`              =   \`context\`.\`soundPhoneme\`
+AND   \`sound\`.\`soundAutoIncr\`                 =   \`context\`.\`soundAutoIncr\`
+AND   \`sound\`.\`layoutName\`                    =   \`context\`.\`layoutName\`
+AND   \`sound\`.\`soundPhoneme\`                  =   \`context\`.\`soundPhoneme\`
 ;
 
-SELECT "COUNT: teacher to clientMaster MISC KEYS"  `   , COUNT(*)   
+SELECT "COUNT: teacher to clientMaster MISC KEYS"     , COUNT(*)   
 FROM  \`teacher\`
 ,     \`clientMaster\`
 WHERE 1
