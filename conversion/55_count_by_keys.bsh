@@ -218,7 +218,7 @@ SELECT "COUNT: clientContext to clientStimword AutoIncr     " , COUNT(*)
         WHERE 1
     AND   \`clientContext\`.\`clientContextAutoIncr\`                   =       \`clientStimword\`.\`clientContextAutoIncr\`    
     ;
-SELECT "COUNT: clientContext to clientStimword BOTH        " , COUNT(*)         
+SELECT "COUNT: clientContext to clientStimword BOTH         " , COUNT(*)         
     FROM      \`clientContext\`
     ,         \`clientStimword\`
     WHERE 1
