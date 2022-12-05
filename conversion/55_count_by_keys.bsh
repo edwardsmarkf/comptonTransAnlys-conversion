@@ -7,7 +7,7 @@
 
 #
 #
-/usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
+/usr/bin/mariadb    --verbose  --skip-column-names  comptonTransAnlys  <<END ;
 
 SELECT "COUNT: stimword to stimwordPosition MISC KEYS"       , COUNT(*) 
 FROM    \`stimword\`
