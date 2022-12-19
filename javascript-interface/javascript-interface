@@ -7,3 +7,13 @@
   catch (e) { console.log(e); }  } 
 )  () ;
 
+// or:
+
+(async () => { 
+        let logoutResult = await app.service('stimword').find(); 
+        console.log(logoutResult); 
+    })().catch(e => { console.log(e) }
+);
+
+
+
