@@ -1,0 +1,9 @@
+
+// one line of code (shown three for readability to immediately execute promise
+
+(async () => { 
+  try { let result = await app.service(‘stimword’).find() ; 
+    console.log(‘the result is: ‘ + JSON.stringify(result)) }
+  catch (e) { console.log(e); }  } 
+)  () ;
+
