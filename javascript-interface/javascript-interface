@@ -1,11 +1,32 @@
 
+
+/* load in libraries */
+[ 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'
+, 'https://unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js'
+].forEach( (src) => {
+    let script = document.createElement('script'); 
+            // script.setAttribute('crossOrigin',  'anonymous' );  /* optional  */
+    script.src =  src;
+            // script.type = 'javascript';   /*optional  */
+    script.src = src; 
+    script.async = false;
+    document.head.appendChild(script);
+});
+
+
+/* initialize constants */
+const app = feathers();
+app.configure(feathers.socketio(io('ws://###.###.###.###:3030'))); 
+
+
+
 // one line of code (shown three for readability to immediately execute promise
 
 (async () => { 
-  try { let result = await app.service(‘stimword’).find() ; 
+  try { let result = await app.service(‘stimword’).get(#) ; 
     console.log(‘the result is: ‘ + JSON.stringify(result)) }
   catch (e) { console.log(e); }  } 
-)  () ;
+)() ;
 
 // or:
 
@@ -15,5 +36,6 @@
     })().catch(e => { console.log(e) }
 );
 
+(async () => { try { let result = await app.service(‘stimword’).find({‘query’:{‘stimwordWord’:‘horse’}}) ; console.log(‘the result is: ‘ + JSON.stringify(result)) } catch (e) { console.log(e); }  } )  () ;
 
 
