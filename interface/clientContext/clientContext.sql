@@ -20,7 +20,7 @@ SELECT   ##JSON_ARRAYAGG(
 , 'clientContextAutoIncr'           ,    `clientContext`.`clientContextAutoIncr`
 , 'clientStimwordCOUNT'             ,    COUNT( `clientStimword`.`clientStimwordAutoIncr`)
 #)
-) ''
+) 'JSON_ARRAYAGG'
 FROM `comptonTransAnlys`.`context`
 ,    `comptonTransAnlys`.`layout`
 ,    `comptonTransAnlys`.`teacher`
