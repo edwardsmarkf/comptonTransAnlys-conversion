@@ -38,7 +38,8 @@ SELECT JSON_ARRAYAGG(JSON_OBJECT
                                		,		sound_b.soundPhoneme  
 				)
 , 'contextAutoIncr'	,	`context_a`.`contextAutoIncr`
-)) ''
+)
+) 'JSON_ARRAYAGG'
 FROM	`comptonTransAnlys`.`sound`	`sound_a`
 ,	`comptonTransAnlys`.`context`   `context_a`
 WHERE 1
