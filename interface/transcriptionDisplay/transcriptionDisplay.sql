@@ -17,7 +17,7 @@ SELECT   ##JSON_ARRAYAGG(
 , 'contextAutoIncr'                 ,    `clientContext`.`contextAutoIncr`
 , 'clientContextAutoIncr'           ,    `clientContext`.`clientContextAutoIncr`
 #)
-) ''
+) 'JSON_ARRAYAGG'
 FROM `comptonTransAnlys`.`clientContext`
 ,    `comptonTransAnlys`.`context`
 WHERE 1
