@@ -9,7 +9,8 @@ CREATE TABLE  `comptonTransAnlys`.`errorSoundsTooltip`
 ,	PRIMARY KEY (`errorSoundsAutoIncr`)
 ); 
 
-INSERT INTO  `comptonTransAnlys`.`errorSoundsTooltip` ( `errorSound`, `rowNbr`, `toolTip` )
+INSERT INTO  `comptonTransAnlys`.`errorSoundsTooltip` 
+               (`layoutName`, `errorSound`, `rowNbr`, `toolTip` )
 VALUES  ("PESL"    ,  " "      ,         1,     "Erase"                 )
 ,       ("PESL"    ,   "ø"     ,         1,     "Omission"              )
 ,	      ("PESL"    ,   "æ"     ,         1,     ""                      )
