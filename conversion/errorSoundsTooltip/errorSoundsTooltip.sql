@@ -6,7 +6,7 @@ CREATE TABLE  `comptonTransAnlys`.`errorSoundsTooltip`
 ,	`rowNbr`			                SMALLINT	                    NOT NULL
 ,	`toolTip`			                VARCHAR(50)	                  NULL
 ,	`errorSoundsTooltipAutoIncr`	SMALLINT	                    NOT NULL AUTO_INCREMENT
-,	PRIMARY KEY (`errorSoundsAutoIncr`)
+,	PRIMARY KEY (`errorSoundsTooltipAutoIncr`)
 ); 
 
 INSERT INTO  `comptonTransAnlys`.`errorSoundsTooltip` 
