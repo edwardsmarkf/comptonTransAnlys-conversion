@@ -19,8 +19,8 @@ sed  --in-place --expression="s/timestamp NOT NULL DEFAULT current_timestamp() O
 sed   --in-place --expression="/'vojta talasek'/d;"                                                                                   ./comptonTransAnlys.sql  ;   
     #####   PESL-mary@underwoodaccentreduction.com-panassayagagnon@gmail.com
 
-    ### 2021-01-30 - not sure where the 'sweedish' bit came from.....
-sed --in-place  --expression="s/latin1_swedish_ci/latin1_general_ci/;"                                                                ./comptonTransAnlys.sql  ;
+                                     ### 2021-01-30 - not sure where the 'sweedish' bit came from.....
+                #### latin1_sweedish is the default (?????)   sed --in-place  --expression="s/latin1_swedish_ci/latin1_general_ci/;" ./comptonTransAnlys.sql  ;
 
 /usr/bin/mariadb  -e  'DROP DATABASE IF EXISTS comptonTransAnlys ; CREATE DATABASE comptonTransAnlys'  ;
 
