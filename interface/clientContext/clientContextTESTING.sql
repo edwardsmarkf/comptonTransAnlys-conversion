@@ -1,4 +1,11 @@
-
+        INSERT INTO  clientSession
+                        SET     layoutName                      =       'PESL'
+                        ,       teacherEmail                    =       'info@englishwithoutaccent.com'
+                        ,       clientMasterEmail               =       'mark_f_edwards@yahoo.com'
+                        ,       sessionName                     =       'Time2'
+                        ,		clientMasterAutoIncr			=		1617
+       ;
+			
                 INSERT INTO clientContext
                         SET     layoutName                      =       'PESL'
                         ,       teacherEmail                    =       'info@englishwithoutaccent.com'
