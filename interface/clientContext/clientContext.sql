@@ -3,8 +3,9 @@
                       if greater than zero, then there is a corresponding clientStimword record, and we are not allowed
                       to change the key value
                       
-      2021-01-31 -  for whatever bizarre reason, trying to use JSON_ARRAYAGG combined with GROUP BY does not seem to work, 
+      2023-01-31 -  for whatever bizarre reason, trying to use JSON_ARRAYAGG combined with GROUP BY does not seem to work, 
                      replacing it with an embedded SELECT
+      2023-02-04 -  forgot to include the soundPhoneme 
 */
 /*   clientContext.sql
 */
@@ -12,6 +13,7 @@ SET  @LAYOUT_NAME           = 'PESL'                            ;
 SET  @SESSION_NAME          = 'Time1'                           ;
 SET  @TEACHER_EMAIL         = 'info@englishwithoutaccent.com'   ;
 SET  @CLIENT_EMAIL          = '12yukos@gmail.com'  ;  #'12yukos@gmail.com'                      ;   ## 'mark_f_edwards@yahoo.com'
+SET  @SOUND_PHONEME         = 'b'                               ;
 
 SELECT #JSON_ARRAYAGG(
                 JSON_OBJECT
@@ -42,6 +44,7 @@ AND `layout`.`layoutName`                      = @LAYOUT_NAME
 AND `teacher`.`teacherEmail`                   = @TEACHER_EMAIL
 AND `clientMaster`.`clientMasterEmail`         = @CLIENT_EMAIL
 AND `clientSession`.`sessionName`              = @SESSION_NAME
+AND `clientContext`.`soundPhoneme`             = @SOUND_PHONEME
 
 AND  `layout`.`layoutName`                     = `teacher`.`layoutName`
 
