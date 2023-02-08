@@ -1,0 +1,3 @@
+
+
+ALTER TABLE sessionNames  ADD  sessionNamesAutoIncr   INT PRIMARY KEY AUTO_INCREMENT;
