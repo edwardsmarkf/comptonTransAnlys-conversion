@@ -1,4 +1,8 @@
-#! /40_misc_cleanup.bsh
+#! /bin/bash
+
+
+#   40_misc_cleanup.bsh
+#             2023-02-08
 
 
 mariadb  --verbose   comptonTransAnlys   <<END;
@@ -6,5 +10,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   ALTER TABLE sessionNames  ADD  sessionNamesAutoIncr   INT PRIMARY KEY AUTO_INCREMENT;
 
 END
+
+echo  'finished with 40_misc_cleanup.bsh!';
 
 exit 1
