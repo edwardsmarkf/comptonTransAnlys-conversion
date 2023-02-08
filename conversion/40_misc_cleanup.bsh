@@ -1,3 +1,10 @@
+#! /40_misc_cleanup.bsh
 
 
-ALTER TABLE sessionNames  ADD  sessionNamesAutoIncr   INT PRIMARY KEY AUTO_INCREMENT;
+mariadb  --verbose   comptonTransAnlys   <<END;
+
+  ALTER TABLE sessionNames  ADD  sessionNamesAutoIncr   INT PRIMARY KEY AUTO_INCREMENT;
+
+END
+
+exit 1
