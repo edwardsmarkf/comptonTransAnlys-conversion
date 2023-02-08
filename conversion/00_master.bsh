@@ -8,6 +8,7 @@
 #   2022-11-04  - changed around directories using variables instead
 #   2022-11-05  - reordered tooltip and summary table counting
 #   2022-11-28 -  turned into function
+#   2023-02-08 -  added 40_misc_cleanup
 
 if  [[ "$1" != "PASS" ]]; then 
            # https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
