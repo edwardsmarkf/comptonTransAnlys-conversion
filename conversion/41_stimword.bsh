@@ -1,0 +1,6 @@
+
+
+ALTER TABLE `stimword` ADD COLUMN `stimwordPosition` ENUM ('66-words', 'reading-passage') NULL AFTER `stimwordPhonetic` ;
+
+UPDATE `stimword` SET `stimwordPosition` = '66-words'        WHERE 1 AND `stimwordPageNbr`  <  9 ; 
+UPDATE `stimword` SET `stimwordPosition` = 'reading-passage' WHERE 1 AND `stimwordPageNbr`  >= 9 ; 
