@@ -1,5 +1,4 @@
 
-
 ALTER TABLE `stimword` DROP COLUMN IF EXISTS `stimwordPosition`  ;
 ALTER TABLE `stimword` ADD  COLUMN           `stimwordPosition` ENUM ('66-words', 'reading-passage') NULL AFTER `stimwordPhonetic` ;
 
@@ -12,17 +11,18 @@ ALTER TABLE `stimword` ADD  COLUMN           `stimwordPositionNbr` SMALLINT NULL
 SELECT @i := 0;
 UPDATE `stimword` SET `stimwordPositionNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'ACAD' AND  `stimwordPosition` = '66-words' ORDER BY `stimwordAutoIncr` ;
 
-SELECT @i:=0;
+SELECT @i := 0;
 UPDATE `stimword` SET `stimwordPositionNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'ACAD' AND  `stimwordPosition` = 'reading-passage' ORDER BY `stimwordAutoIncr` ;
 
-SELECT @pesl_66_words:=0;
+SELECT @i := 0;
 UPDATE `stimword` SET `stimwordPositionNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'PESL' AND  `stimwordPosition` = '66-words' ORDER BY `stimwordAutoIncr` ;
 
-SELECT @pesl_reading_passage:=0;
+SELECT @i := 0;
 UPDATE `stimword` SET `stimwordPositionNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'PESL' AND  `stimwordPosition` = 'reading-passage' ORDER BY `stimwordAutoIncr` ;
 
-SELECT @pesl_66_words:=0;
+SELECT @i := 0;
 UPDATE `stimword` SET `stimwordPositionNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'SAMP' AND  `stimwordPosition` = '66-words' ORDER BY `stimwordAutoIncr` ;
 
-SELECT @pesl_reading_passage:=0;
+SELECT @i := 0;
 UPDATE `stimword` SET `stimwordPositionNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'SAMP' AND  `stimwordPosition` = 'reading-passage' ORDER BY `stimwordAutoIncr` ;
+
