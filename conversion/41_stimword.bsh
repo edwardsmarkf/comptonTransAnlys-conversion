@@ -1,12 +1,6 @@
 
-ALTER TABLE `stimword` DROP COLUMN IF EXISTS `stimwordPosition`  ;
-ALTER TABLE `stimword` ADD  COLUMN           `stimwordPosition` ENUM ('66-words', 'reading-passage') NULL AFTER `stimwordPhonetic` ;
-
-UPDATE `stimword` SET `stimwordPosition` = '66-words'        WHERE 1 AND `stimwordPageNbr` < 9 ; 
-UPDATE `stimword` SET `stimwordPosition` = 'reading-passage' WHERE 1 AND `stimwordPageNbr` >= 9 ; 
-
-ALTER TABLE `stimword` DROP COLUMN IF EXISTS `stimwordPositionNbr`;
-ALTER TABLE `stimword` ADD  COLUMN           `stimwordPositionNbr` SMALLINT NULL AFTER `stimwordPosition` ;
+###  stimwordPageNbr will become  stimwordPlacement  in the sed-changes page  (and here once done)
+###  stimwordLineNbr will become  stimwordOrderNbr
 
 SELECT @i := 0;
 UPDATE `stimword` SET `stimwordPositionNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'ACAD' AND  `stimwordPosition` = '66-words' ORDER BY `stimwordAutoIncr` ;
@@ -25,4 +19,15 @@ UPDATE `stimword` SET `stimwordPositionNbr` = @i := @i + 1 WHERE 1 AND `layoutNa
 
 SELECT @i := 0;
 UPDATE `stimword` SET `stimwordPositionNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'SAMP' AND  `stimwordPosition` = 'reading-passage' ORDER BY `stimwordAutoIncr` ;
+
+
+UPDATE `stimword` SET `stimwordPosition` = '66-words'        WHERE 1 AND `stimwordPageNbr` < 9 ; 
+UPDATE `stimword` SET `stimwordPosition` = 'reading-passage' WHERE 1 AND `stimwordPageNbr` >= 9 ; 
+
+
+    ####ALTER TABLE `stimword` DROP COLUMN IF EXISTS `stimwordPosition`  ;
+    ####ALTER TABLE `stimword` ADD  COLUMN           `stimwordPosition` ENUM ('66-words', 'reading-passage') NULL AFTER `stimwordPhonetic` ;
+
+    ####ALTER TABLE `stimword` DROP COLUMN IF EXISTS `stimwordPositionNbr`;
+    ####ALTER TABLE `stimword` ADD  COLUMN           `stimwordPositionNbr` SMALLINT NULL AFTER `stimwordPosition` ;
 
