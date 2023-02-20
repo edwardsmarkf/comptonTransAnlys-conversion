@@ -85,7 +85,7 @@
 
                 AND     `clientStimwordCURRENT`.`teacherEmail`                  =       @TEACHER_EMAIL 
                 AND     `clientStimwordCURRENT`.`clientMasterEmail`             =       @CLIENT_EMAIL 
-                AND     `clientStimwordCURRENT`.`sessionName`                   =       @REPLICATION_NAME
+                AND     `clientStimwordCURRENT`.`sessionName`                   =       @SESSION_NAME
                 AND     `clientStimwordCURRENT`.`layoutName`                    =       @LAYOUT_NAME
                 )
                 LEFT OUTER JOIN `clientStimword` `clientStimwordREPLICATE` ON
