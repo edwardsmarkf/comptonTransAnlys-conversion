@@ -5,7 +5,9 @@
 ##      set fileencoding=ASCII
 ##      set fileformat=unix
 
-#
+#     2023-02-20:
+#        change stimwordPageNbr   to stimwordPlacement
+#        change stimwordLineNbr   to stimwordOrderNbr
 #
 /usr/bin/mariadb    --verbose  --skip-column-names  comptonTransAnlys  <<END ;
 
