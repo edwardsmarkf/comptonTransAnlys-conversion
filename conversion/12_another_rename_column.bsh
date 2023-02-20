@@ -3,6 +3,9 @@
 #  12_another_rename_column.bsh
 #
 #
+#    2022-02-20:
+#      change stimwordPageNbr   to stimwordPlacement
+#      change stimwordLineNbr   to stimwordOrderNbr
 #
 #
 
@@ -19,14 +22,14 @@ ALTER TABLE  clientContext     RENAME COLUMN    clientMasterSessionName         
 
 
 
-ALTER TABLE  clientStimword    RENAME COLUMN    clientContextPositionName         TO   stimwordPositionName          ;
+ALTER TABLE  clientStimword    RENAME COLUMN    clientContextPositionName         TO   stimwordPlacement             ;
 ALTER TABLE  clientStimword    RENAME COLUMN    clientStimwordPositionNbr         TO   stimwordPositionNbr           ;
 ALTER TABLE  clientStimword    RENAME COLUMN    clientStimwordSetting             TO   stimwordPositionSetting       ;
 ALTER TABLE  clientStimword    RENAME COLUMN    clientContextPhoneme              TO   soundPhoneme                  ;
-ALTER TABLE  clientStimword    RENAME COLUMN    clientMasterSessionName           TO   sessionName                  ;
+ALTER TABLE  clientStimword    RENAME COLUMN    clientMasterSessionName           TO   sessionName                   ;
 
-ALTER TABLE  clientStimword    RENAME COLUMN    stimwordPositionPageNbr           TO   stimwordPageNbr               ;
-ALTER TABLE  clientStimword    RENAME COLUMN    stimwordPositionLineNbr           TO   stimwordLineNbr               ;
+ALTER TABLE  clientStimword    RENAME COLUMN    stimwordPositionPageNbr           TO   stimwordPosition              ;
+ALTER TABLE  clientStimword    RENAME COLUMN    stimwordPositionLineNbr           TO   stimwordOrderNbr              ;
 ALTER TABLE  clientStimword    RENAME COLUMN    stimwordPositionWord              TO   stimwordWord                  ;
 ALTER TABLE  clientStimword    RENAME COLUMN    stimwordPositionName              TO   contextPosition               ;
 
@@ -41,8 +44,8 @@ ALTER TABLE  languageNorms	   RENAME COLUMN    contextPhoneme                   
 
 ALTER TABLE  stimwordPosition  RENAME COLUMN    stimwordPositionName              TO   contextPosition               ;
 ALTER TABLE  stimwordPosition  RENAME COLUMN    stimwordPositionPhoneme           TO   soundPhoneme                  ;
-ALTER TABLE  stimwordPosition  RENAME COLUMN    stimwordPositionPageNbr           TO   stimwordPageNbr               ;
-ALTER TABLE  stimwordPosition  RENAME COLUMN    stimwordPositionLineNbr           TO   stimwordLineNbr               ;
+ALTER TABLE  stimwordPosition  RENAME COLUMN    stimwordPositionPageNbr           TO   stimwordPlacement             ;
+ALTER TABLE  stimwordPosition  RENAME COLUMN    stimwordPositionLineNbr           TO   stimwordOrderNbr              ;
 ALTER TABLE  stimwordPosition  RENAME COLUMN    stimwordPositionWord              TO   stimwordWord                  ;
 
 END
