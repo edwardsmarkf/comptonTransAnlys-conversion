@@ -18,8 +18,8 @@ DROP TABLE IF EXISTS tempPhonetic
 
 CREATE TABLE tempPhonetic 
 SELECT DISTINCT stimword.stimwordLayoutName
-         ,      stimword.stimwordPageNbr
-         ,      stimword.stimwordlineNbr
+         ,      stimword.stimwordPlacement
+         ,      stimword.stimwordOrderNbr
          ,      stimword.stimwordWord
          ,      CONVERT(GROUP_CONCAT(  
                   DISTINCT  phoneticSpelling.phoneticSpellingTargetSound ORDER BY phoneticSpelling.phoneticSpellingOrderNbr SEPARATOR '' 
@@ -29,16 +29,16 @@ FROM comptonTransAnlys.stimword
 ,  comptonTransAnlys.phoneticSpelling
 WHERE 1
 AND  stimword.stimwordLayoutName      = phoneticSpelling.phoneticSpellingLayoutName
-AND  stimword.stimwordPageNbr         = phoneticSpelling.phoneticSpellingPageNbr
-AND  stimword.stimwordLineNbr         = phoneticSpelling.phoneticSpellingLineNbr
+AND  stimword.stimwordPlacement       = phoneticSpelling.phoneticSpellingPageNbr
+AND  stimword.stimwordOrderNbr        = phoneticSpelling.phoneticSpellingLineNbr
 AND  stimword.stimwordWord            = phoneticSpelling.phoneticSpellingStimword
 GROUP BY  phoneticSpelling.phoneticSpellingLayoutName
 		, phoneticSpelling.phoneticSpellingPageNbr
 		, phoneticSpelling.phoneticSpellingLineNbr
         , phoneticSpelling.phoneticSpellingStimword
 ORDER BY stimword.stimwordLayoutName
-,       stimword.stimwordPageNbr
-,       stimword.stimwordLineNbr
+,       stimword.stimwordPlacement
+,       stimword.stimwordOrderNbr
 ,       stimword.stimwordWord
 ;
 
@@ -46,8 +46,8 @@ UPDATE stimword, tempPhonetic
   SET stimword.stimwordPhonetic  = tempPhonetic.stimwordPhonetic
 WHERE 1
 AND  stimword.stimwordLayoutName    = tempPhonetic.stimwordLayoutName
-AND  stimword.stimwordPageNbr       = tempPhonetic.stimwordPageNbr
-AND  stimword.stimwordLineNbr       = tempPhonetic.stimwordLineNbr
+AND  stimword.stimwordPlacement       = tempPhonetic.stimwordPlacement
+AND  stimword.stimwordOrderNbr       = tempPhonetic.stimwordOrderNbr
 AND  stimword.stimwordWord          = tempPhonetic.stimwordWord
 ;
 
