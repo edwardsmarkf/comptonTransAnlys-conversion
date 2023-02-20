@@ -14,8 +14,8 @@ FROM    \`stimword\`
 ,       \`stimwordPosition\`
 WHERE   1
 AND     \`stimword\`.\`layoutName\`               =   \`stimwordPosition\`.\`layoutName\`
-AND     \`stimword\`.\`stimwordPageNbr\`          =   \`stimwordPosition\`.\`stimwordPageNbr\`
-AND     \`stimword\`.\`stimwordLineNbr\`          =   \`stimwordPosition\`.\`stimwordLineNbr\`
+AND     \`stimword\`.\`stimwordPlacement\         =   \`stimwordPosition\`.\`stimwordPlacement\`
+AND     \`stimword\`.\`stimwordOrderNbr\`         =   \`stimwordPosition\`.\`stimwordOrderNbr\`
 AND     \`stimword\`.\`stimwordWord\`             =   \`stimwordPosition\`.\`stimwordWord\`
 ;
 
@@ -32,8 +32,8 @@ FROM    \`stimword\`
 WHERE   1
 AND     \`stimword\`.\`stimwordAutoIncr\`         =   \`stimwordPosition\`.\`stimwordAutoIncr\`
 AND     \`stimword\`.\`layoutName\`               =   \`stimwordPosition\`.\`layoutName\`
-AND     \`stimword\`.\`stimwordPageNbr\`          =   \`stimwordPosition\`.\`stimwordPageNbr\`
-AND     \`stimword\`.\`stimwordLineNbr\`          =   \`stimwordPosition\`.\`stimwordLineNbr\`
+AND     \`stimword\`.\`stimwordPlacement\`        =   \`stimwordPosition\`.\`stimwordPlacement\`
+AND     \`stimword\`.\`stimwordOrderNbr\`         =   \`stimwordPosition\`.\`stimwordOrderNbr\`
 AND     \`stimword\`.\`stimwordWord\`             =   \`stimwordPosition\`.\`stimwordWord\`
 ;
 
@@ -168,8 +168,8 @@ FROM    \`stimwordPosition\`
 ,       \`clientStimword\`
 WHERE   1
 AND     \`stimwordPosition\`.\`layoutName\`                             =   \`clientStimword\`.\`layoutName\`
-AND     \`stimwordPosition\`.\`stimwordPageNbr\`                        =   \`clientStimword\`.\`stimwordPageNbr\`
-AND     \`stimwordPosition\`.\`stimwordLineNbr\`                        =   \`clientStimword\`.\`stimwordLineNbr\`
+AND     \`stimwordPosition\`.\`stimwordPlacement\`                      =   \`clientStimword\`.\`stimwordPlacement\`
+AND     \`stimwordPosition\`.\`stimwordOrderNbr\`                       =   \`clientStimword\`.\`stimwordOrderNbr\`
 AND     \`stimwordPosition\`.\`stimwordWord\`                           =   \`clientStimword\`.\`stimwordWord\`
 AND     \`stimwordPosition\`.\`contextPosition\`                        =   \`clientStimword\`.\`contextPosition\`
 AND     \`stimwordPosition\`.\`stimwordPositionNbr\`                    =   \`clientStimword\`.\`stimwordPositionNbr\`
@@ -188,8 +188,8 @@ FROM    \`stimwordPosition\`
 WHERE   1
 AND     \`stimwordPosition\`.\`stimwordPositionAutoIncr\`               =   \`clientStimword\`.\`stimwordPositionAutoIncr\`
 AND     \`stimwordPosition\`.\`layoutName\`                             =   \`clientStimword\`.\`layoutName\`
-AND     \`stimwordPosition\`.\`stimwordPageNbr\`                        =   \`clientStimword\`.\`stimwordPageNbr\`
-AND     \`stimwordPosition\`.\`stimwordLineNbr\`                        =   \`clientStimword\`.\`stimwordLineNbr\`
+AND     \`stimwordPosition\`.\`stimwordPlacement\`                      =   \`clientStimword\`.\`stimwordPlacement\`
+AND     \`stimwordPosition\`.\`stimwordOrderNbr\`                       =   \`clientStimword\`.\`stimwordOrderNbr\`
 AND     \`stimwordPosition\`.\`stimwordWord\`                           =   \`clientStimword\`.\`stimwordWord\`
 AND     \`stimwordPosition\`.\`contextPosition\`                        =   \`clientStimword\`.\`contextPosition\`
 AND     \`stimwordPosition\`.\`stimwordPositionNbr\`                    =   \`clientStimword\`.\`stimwordPositionNbr\`
