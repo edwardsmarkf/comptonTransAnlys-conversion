@@ -86,6 +86,8 @@ process_section '10a_combine_stimword_phoneme' ;
 process_section '10b_combine_stimword_phoneme_test' ;
 grep  --line-number   '^COUNT:'                                                   ${LOGGING_DIR}/10b_combine_stimword_phoneme_test.bsh.log             ;
 
+process_section '11_alter_column_positions' ;
+
 process_section '12_another_rename_column' ;
 
 process_section '15_add_layout_table_and_keys' ;
