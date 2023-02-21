@@ -16,7 +16,7 @@ FROM    \`stimword\`
 ,       \`stimwordPosition\`
 WHERE   1
 AND     \`stimword\`.\`layoutName\`               =   \`stimwordPosition\`.\`layoutName\`
-AND     \`stimword\`.\`stimwordPlacement\         =   \`stimwordPosition\`.\`stimwordPlacement\`
+AND     \`stimword\`.\`stimwordPlacement\`        =   \`stimwordPosition\`.\`stimwordPlacement\`
 AND     \`stimword\`.\`stimwordOrderNbr\`         =   \`stimwordPosition\`.\`stimwordOrderNbr\`
 AND     \`stimword\`.\`stimwordWord\`             =   \`stimwordPosition\`.\`stimwordWord\`
 ;
