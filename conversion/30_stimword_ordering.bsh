@@ -6,7 +6,6 @@
 
 mariadb  --verbose   comptonTransAnlys  <<END ;
 
-
 DROP TABLE IF EXISTS `TEMP`
 ;
 
@@ -38,55 +37,40 @@ SELECT @i := 0; UPDATE `TEMP`   SET `stimwordOrderNbrNew` = @i := @i + 1 WHERE 1
 SELECT @i := 0; UPDATE `TEMP`   SET `stimwordOrderNbrNew` = @i := @i + 1 WHERE 1  AND `layoutName` = 'SAMP' AND `stimwordPlacementNew` = 0              ;
 SELECT @i := 0; UPDATE `TEMP`   SET `stimwordOrderNbrNew` = @i := @i + 1 WHERE 1  AND `layoutName` = 'SAMP' AND `stimwordPlacementNew` = 1              ;
 
-SELECT  *  from  `TEMP` WHERE layoutName ='SAMP'  ORDER BY layoutName, stimwordPlacement, stimwordOrderNbr ; 
-
-
-
 SET FOREIGN_KEY_CHECKS=0  ;
 
-UPDATE \`stimword\`               SET \`stimwordPlacement\` = 0        WHERE 1 AND \`stimwordPlacement\` < 9 ;
-UPDATE \`stimwordPosition\`       SET \`stimwordPlacement\` = 0        WHERE 1 AND \`stimwordPlacement\` < 9 ;
-UPDATE \`clientStimword\`         SET \`stimwordPlacement\` = 0        WHERE 1 AND \`stimwordPlacement\` < 9 ;
+UPDATE `stimword` , `TEMP`
+SET    `stimword`.`stimwordPlacement`      = `TEMP`.`stimwordPlacementNew`
+,      `stimword`.`stimwordOrderNbr`       = `TEMP`.`stimwordOrderNbrNew`
+WHERE 1
+AND    `stimword`.`stimwordPlacement`      = `TEMP`.`stimwordPlacement`
+AND    `stimword`.`stimwordOrderNbr`       = `TEMP`.`stimwordOrderNbr`
+AND    `stimword`.`layoutName`   		   = `TEMP`.`layoutName`
+;
+/*
+UPDATE `stimwordPosition` , `TEMP`
+SET    `stimwordPosition`.`stimwordPlacement`   = `TEMP`.`stimwordPlacementNew`
+,      `stimwordPosition`.`stimwordOrderNbr`    = `TEMP`.`stimwordOrderNbrNew`
+WHERE 1
+AND    `stimwordPosition`.`stimwordPlacement`   = `TEMP`.`stimwordPlacement`
+AND    `stimwordPosition`.`stimwordOrderNbr`    = `TEMP`.`stimwordOrderNbr`
+AND    `stimwordPosition`.`layoutName`   		= `TEMP`.`layoutName`
+;
+
+UPDATE `clientContext` , `TEMP`
+SET    `clientContext`.`stimwordPlacement`   = `TEMP`.`stimwordPlacementNew`
+,      `clientContext`.`stimwordOrderNbr`    = `TEMP`.`stimwordOrderNbrNew`
+WHERE 1
+AND    `clientContext`.`stimwordPlacement`   = `TEMP`.`stimwordPlacement`
+AND    `clientContext`.`stimwordOrderNbr`    = `TEMP`.`stimwordOrderNbr`
+AND    `clientContext`.`layoutName`   		 = `TEMP`.`layoutName`
+;
+*/
+SET FOREIGN_KEY_CHECKS=1  ;
+
+##SELECT  *  from  `TEMP` WHERE layoutName ='SAMP'  ORDER BY layoutName, stimwordPlacement, stimwordOrderNbr ; 
 
 
-UPDATE \`stimword\`               SET \`stimwordPlacement\` = 1        WHERE 1 AND \`stimwordPlacement\` >= 9 ;
-UPDATE \`stimwordPosition\`       SET \`stimwordPlacement\` = 1        WHERE 1 AND \`stimwordPlacement\` >= 9 ;
-UPDATE \`clientStimword\`         SET \`stimwordPlacement\` = 1        WHERE 1 AND \`stimwordPlacement\` >= 9 ;
-
-
-
-SELECT @i := 0;
-UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
-
-SELECT @i := 0;
-UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
-
-SELECT @i := 0;
-UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
-
-SELECT @i := 0;
-UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
-
-
-UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
-
-SELECT @i := 0;
-UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
-UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
-
-
-SET FOREIGN_KEY_CHECKS=1;
 
 END
 
