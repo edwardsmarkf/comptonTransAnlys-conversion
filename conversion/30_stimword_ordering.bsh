@@ -7,6 +7,41 @@
 mariadb  --verbose   comptonTransAnlys  <<END ;
 
 
+DROP TABLE IF EXISTS `TEMP`
+;
+
+CREATE TABLE `TEMP` AS
+SELECT `stimwordPlacement`
+     , `stimwordOrderNbr`
+     , `layoutName`
+     , 0 'stimwordPlacementNew'
+     , 0 'stimwordOrderNbrNew'
+FROM `comptonTransAnlys`.`stimword`
+WHERE 1
+############AND   `layoutName` = 'PESL'
+;
+
+UPDATE `TEMP` SET `stimwordPlacementNew` = 0 WHERE 1 AND `layoutName` = 'ACAD' AND `stimwordPlacement` < 9;
+UPDATE `TEMP` SET `stimwordPlacementNew` = 0 WHERE 1 AND `layoutName` = 'PESL' AND `stimwordPlacement` < 9;
+UPDATE `TEMP` SET `stimwordPlacementNew` = 0 WHERE 1 AND `layoutName` = 'SAMP' AND `stimwordPlacement` < 9;
+
+UPDATE `TEMP` SET `stimwordPlacementNew` = 1 WHERE 1 AND `layoutName` = 'ACAD' AND `stimwordPlacement` >= 9;
+UPDATE `TEMP` SET `stimwordPlacementNew` = 1 WHERE 1 AND `layoutName` = 'PESL' AND `stimwordPlacement` >= 9;
+UPDATE `TEMP` SET `stimwordPlacementNew` = 1 WHERE 1 AND `layoutName` = 'SAMP' AND `stimwordPlacement` >= 9;
+
+SELECT @i := 0; UPDATE `TEMP`   SET `stimwordOrderNbrNew` = @i := @i + 1 WHERE 1  AND `layoutName` = 'ACAD' AND `stimwordPlacementNew` = 0              ;
+SELECT @i := 0; UPDATE `TEMP`   SET `stimwordOrderNbrNew` = @i := @i + 1 WHERE 1  AND `layoutName` = 'ACAD' AND `stimwordPlacementNew` = 1              ;
+
+SELECT @i := 0; UPDATE `TEMP`   SET `stimwordOrderNbrNew` = @i := @i + 1 WHERE 1  AND `layoutName` = 'PESL' AND `stimwordPlacementNew` = 0              ;
+SELECT @i := 0; UPDATE `TEMP`   SET `stimwordOrderNbrNew` = @i := @i + 1 WHERE 1  AND `layoutName` = 'PESL' AND `stimwordPlacementNew` = 1              ;
+
+SELECT @i := 0; UPDATE `TEMP`   SET `stimwordOrderNbrNew` = @i := @i + 1 WHERE 1  AND `layoutName` = 'SAMP' AND `stimwordPlacementNew` = 0              ;
+SELECT @i := 0; UPDATE `TEMP`   SET `stimwordOrderNbrNew` = @i := @i + 1 WHERE 1  AND `layoutName` = 'SAMP' AND `stimwordPlacementNew` = 1              ;
+
+SELECT  *  from  `TEMP` WHERE layoutName ='SAMP'  ORDER BY layoutName, stimwordPlacement, stimwordOrderNbr ; 
+
+
+
 SET FOREIGN_KEY_CHECKS=0  ;
 
 UPDATE \`stimword\`               SET \`stimwordPlacement\` = 0        WHERE 1 AND \`stimwordPlacement\` < 9 ;
