@@ -1,55 +1,65 @@
+#! /bin/bash  -w
+
+# 30_stimword_ordering.bsh
+#
+#       2023-02-22
+
+mariadb  --verbose  <<END ;
+
 
 SET FOREIGN_KEY_CHECKS=0  ;
 
-UPDATE `stimword`               SET `stimwordPlacement` = 0        WHERE 1 AND `stimwordPlacement` < 9 ; 
-UPDATE `stimwordPosition`       SET `stimwordPlacement` = 0        WHERE 1 AND `stimwordPlacement` < 9 ; 
-UPDATE `clientStimword`         SET `stimwordPlacement` = 0        WHERE 1 AND `stimwordPlacement` < 9 ; 
+UPDATE \`stimword\`               SET \`stimwordPlacement\` = 0        WHERE 1 AND \`stimwordPlacement\` < 9 ;
+UPDATE \`stimwordPosition\`       SET \`stimwordPlacement\` = 0        WHERE 1 AND \`stimwordPlacement\` < 9 ;
+UPDATE \`clientStimword\`         SET \`stimwordPlacement\` = 0        WHERE 1 AND \`stimwordPlacement\` < 9 ;
 
 
-UPDATE `stimword`               SET `stimwordPlacement` = 1        WHERE 1 AND `stimwordPlacement` >= 9 ; 
-UPDATE `stimwordPosition`       SET `stimwordPlacement` = 1        WHERE 1 AND `stimwordPlacement` >= 9 ; 
-UPDATE `clientStimword`         SET `stimwordPlacement` = 1        WHERE 1 AND `stimwordPlacement` >= 9 ; 
+UPDATE \`stimword\`               SET \`stimwordPlacement\` = 1        WHERE 1 AND \`stimwordPlacement\` >= 9 ;
+UPDATE \`stimwordPosition\`       SET \`stimwordPlacement\` = 1        WHERE 1 AND \`stimwordPlacement\` >= 9 ;
+UPDATE \`clientStimword\`         SET \`stimwordPlacement\` = 1        WHERE 1 AND \`stimwordPlacement\` >= 9 ;
 
 
-
-SELECT @i := 0;
-UPDATE `stimword`           SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'ACAD' AND  `stimwordPlacement` = 0   ORDER BY `stimwordAutoIncr` ;
-UPDATE `stimwordPosition`   SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'ACAD' AND  `stimwordPlacement` = 0   ORDER BY `stimwordAutoIncr` ;
-UPDATE `clientStimword`     SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'ACAD' AND  `stimwordPlacement` = 0   ORDER BY `stimwordAutoIncr` ;
 
 SELECT @i := 0;
-UPDATE `stimword`           SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'ACAD' AND  `stimwordPlacement` = 1   ORDER BY `stimwordAutoIncr` ;
-UPDATE `stimwordPosition`   SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'ACAD' AND  `stimwordPlacement` = 1   ORDER BY `stimwordAutoIncr` ;
-UPDATE `clientStimword`     SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'ACAD' AND  `stimwordPlacement` = 1   ORDER BY `stimwordAutoIncr` ;
+UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
 
 SELECT @i := 0;
-UPDATE `stimword`           SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'PESL' AND  `stimwordPlacement` = 0   ORDER BY `stimwordAutoIncr` ;
-UPDATE `stimwordPosition`   SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'PESL' AND  `stimwordPlacement` = 0   ORDER BY `stimwordAutoIncr` ;
-UPDATE `clientStimword`     SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'PESL' AND  `stimwordPlacement` = 0   ORDER BY `stimwordAutoIncr` ;
+UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'ACAD' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
 
 SELECT @i := 0;
-UPDATE `stimword`           SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'PESL' AND  `stimwordPlacement` = 1   ORDER BY `stimwordAutoIncr` ;
-UPDATE `stimwordPosition`   SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'PESL' AND  `stimwordPlacement` = 1   ORDER BY `stimwordAutoIncr` ;
-UPDATE `clientStimword`     SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'PESL' AND  `stimwordPlacement` = 1   ORDER BY `stimwordAutoIncr` ;
-
-
-UPDATE `stimword`           SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'SAMP' AND  `stimwordPlacement` = 0   ORDER BY `stimwordAutoIncr` ;
-UPDATE `stimwordPosition`   SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'SAMP' AND  `stimwordPlacement` = 0   ORDER BY `stimwordAutoIncr` ;
-UPDATE `clientStimword`     SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'SAMP' AND  `stimwordPlacement` = 0   ORDER BY `stimwordAutoIncr` ;
+UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
 
 SELECT @i := 0;
-UPDATE `stimword`           SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'SAMP' AND  `stimwordPlacement` = 1   ORDER BY `stimwordAutoIncr` ;
-UPDATE `stimwordPosition`   SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'SAMP' AND  `stimwordPlacement` = 1   ORDER BY `stimwordAutoIncr` ;
-UPDATE `clientStimword`     SET `stimwordOrderNbr` = @i := @i + 1 WHERE 1 AND `layoutName` = 'SAMP' AND  `stimwordPlacement` = 1   ORDER BY `stimwordAutoIncr` ;
+UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'PESL' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
+
+
+UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 0   ORDER BY \`stimwordAutoIncr\` ;
+
+SELECT @i := 0;
+UPDATE \`stimword\`           SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`stimwordPosition\`   SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
+UPDATE \`clientStimword\`     SET \`stimwordOrderNbr\` = @i := @i + 1 WHERE 1 AND \`layoutName\` = 'SAMP' AND  \`stimwordPlacement\` = 1   ORDER BY \`stimwordAutoIncr\` ;
 
 
 SET FOREIGN_KEY_CHECKS=1;
 
+END
+
+exit;
 
 
-    ####ALTER TABLE `stimword` DROP COLUMN IF EXISTS `stimwordPosition`  ;
-    ####ALTER TABLE `stimword` ADD  COLUMN           `stimwordPosition` ENUM ('66-words', 'reading-passage') NULL AFTER `stimwordPhonetic` ;
+    ####ALTER TABLE \`stimword\` DROP COLUMN IF EXISTS \`stimwordPosition\`  ;
+    ####ALTER TABLE \`stimword\` ADD  COLUMN           \`stimwordPosition\` ENUM ('66-words', 'reading-passage') NULL AFTER \`stimwordPhonetic\` ;
 
-    ####ALTER TABLE `stimword` DROP COLUMN IF EXISTS `stimwordPositionNbr`;
-    ####ALTER TABLE `stimword` ADD  COLUMN           `stimwordPositionNbr` SMALLINT NULL AFTER `stimwordPosition` ;
-
+    ####ALTER TABLE \`stimword\` DROP COLUMN IF EXISTS \`stimwordPositionNbr\`;
+    ####ALTER TABLE \`stimword\` ADD  COLUMN           \`stimwordPositionNbr\` SMALLINT NULL AFTER \`stimwordPosition\` ;
