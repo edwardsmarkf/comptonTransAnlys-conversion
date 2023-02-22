@@ -103,6 +103,7 @@ process_section '22c_remove_constraint_keys' ;
 process_section '22d_remove_constraint_keys' ;
 process_section '22e_remove_constraint_keys' ;
 
+process_section '30_stimword_ordering'      ;
 process_section '40_misc_cleanup'           ;
 
 ## 2022-11-03
