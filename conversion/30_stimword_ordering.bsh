@@ -6,6 +6,7 @@
 
 mariadb  --verbose   comptonTransAnlys  <<END ;
 
+
 DROP TABLE IF EXISTS `TEMP`
 ;
 
@@ -17,7 +18,6 @@ SELECT `stimwordPlacement`
      , 0 'stimwordOrderNbrNew'
 FROM `comptonTransAnlys`.`stimword`
 WHERE 1
-############AND   `layoutName` = 'PESL'
 ;
 
 UPDATE `TEMP` SET `stimwordPlacementNew` = 0 WHERE 1 AND `layoutName` = 'ACAD' AND `stimwordPlacement` < 9;
@@ -47,29 +47,32 @@ AND    `stimword`.`stimwordPlacement`      = `TEMP`.`stimwordPlacement`
 AND    `stimword`.`stimwordOrderNbr`       = `TEMP`.`stimwordOrderNbr`
 AND    `stimword`.`layoutName`   		   = `TEMP`.`layoutName`
 ;
-/*
+
 UPDATE `stimwordPosition` , `TEMP`
 SET    `stimwordPosition`.`stimwordPlacement`   = `TEMP`.`stimwordPlacementNew`
 ,      `stimwordPosition`.`stimwordOrderNbr`    = `TEMP`.`stimwordOrderNbrNew`
 WHERE 1
 AND    `stimwordPosition`.`stimwordPlacement`   = `TEMP`.`stimwordPlacement`
 AND    `stimwordPosition`.`stimwordOrderNbr`    = `TEMP`.`stimwordOrderNbr`
-AND    `stimwordPosition`.`layoutName`   		= `TEMP`.`layoutName`
+AND    `stimwordPosition`.`layoutName`          = `TEMP`.`layoutName`
 ;
 
-UPDATE `clientContext` , `TEMP`
-SET    `clientContext`.`stimwordPlacement`   = `TEMP`.`stimwordPlacementNew`
-,      `clientContext`.`stimwordOrderNbr`    = `TEMP`.`stimwordOrderNbrNew`
+UPDATE `clientStimword` , `TEMP`
+SET    `clientStimword`.`stimwordPlacement`     = `TEMP`.`stimwordPlacementNew`
+,      `clientStimword`.`stimwordOrderNbr`      = `TEMP`.`stimwordOrderNbrNew`
 WHERE 1
-AND    `clientContext`.`stimwordPlacement`   = `TEMP`.`stimwordPlacement`
-AND    `clientContext`.`stimwordOrderNbr`    = `TEMP`.`stimwordOrderNbr`
-AND    `clientContext`.`layoutName`   		 = `TEMP`.`layoutName`
+AND    `clientStimword`.`stimwordPlacement`     = `TEMP`.`stimwordPlacement`
+AND    `clientStimword`.`stimwordOrderNbr`      = `TEMP`.`stimwordOrderNbr`
+AND    `clientStimword`.`layoutName`   		   = `TEMP`.`layoutName`
 ;
-*/
+
 SET FOREIGN_KEY_CHECKS=1  ;
 
-##SELECT  *  from  `TEMP` WHERE layoutName ='SAMP'  ORDER BY layoutName, stimwordPlacement, stimwordOrderNbr ; 
+DROP TABLE IF EXISTS `TEMP`
+;
 
+
+##SELECT  *  from  `TEMP` WHERE layoutName ='SAMP'  ORDER BY layoutName, stimwordPlacement, stimwordOrderNbr ; 
 
 
 END
