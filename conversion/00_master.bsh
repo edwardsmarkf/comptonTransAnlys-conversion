@@ -32,6 +32,7 @@ function process_section {
     grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'              ${LOGGING_DIR}/${1}.bsh.log             ;
     /usr/bin/mariadb-dump             comptonTransAnlys              >      ${BACKUP_DIR}/${1}.bsh.sql              ;
     gzip                                                                    ${BACKUP_DIR}/${1}.bsh.sql              ;
+    echo "It takes $((ENDTIME - STARTTIME)) seconds to complete this task..."                                       ;
 }
 
 
