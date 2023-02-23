@@ -104,8 +104,6 @@ process_section '22c_remove_constraint_keys' ;
 process_section '22d_remove_constraint_keys' ;
 process_section '22e_remove_constraint_keys' ;
 
-process_section '30_stimword_ordering'      ;
-process_section '40_misc_cleanup'           ;
 
 ## 2022-11-03
 echo $(date) ' - fixStimwordPosition!'                                                                                                                     ;
@@ -114,6 +112,10 @@ bash -vx  ${WORKING_DIR}/fixStimwordPosition/fixStimwordPosition.bsh      >     
 ## 2022-8-01
 echo $(date) ' - errorSoundsTooltip!'                                                                                                                      ;
 bash -vx  ${WORKING_DIR}/errorSoundsTooltip/errorSoundsTooltip.bsh        >          ${LOGGING_DIR}/errorSoundsTooltip.bsh.log                       2>&1  ;
+
+
+process_section '30_stimword_ordering'      ;
+process_section '40_misc_cleanup'           ;
 
 process_section '50_display_table_counts'                                                                                                                  ;
 grep  --line-number   '^COUNT:'                                                       ${LOGGING_DIR}/50_display_table_counts.bsh.log                       ;
