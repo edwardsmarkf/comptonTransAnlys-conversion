@@ -111,10 +111,12 @@ process_section '22e_remove_constraint_keys' ;
 ## 2022-11-03
 echo $(date) ' - fixStimwordPosition!'                                                                                                                     ;
 bash -vx  ${WORKING_DIR}/fixStimwordPosition/fixStimwordPosition.bsh      >           ${LOGGING_DIR}/fixStimwordPosition.bsh.log                      2>&1 ;
+grep ERROR ${LOGGING_DIR}/fixStimwordPosition.bsh.log                                                                                                      ;
 
-## 2022-8-01
+## 2022-08-01
 echo $(date) ' - errorSoundsTooltip!'                                                                                                                      ;
 bash -vx  ${WORKING_DIR}/errorSoundsTooltip/errorSoundsTooltip.bsh        >          ${LOGGING_DIR}/errorSoundsTooltip.bsh.log                       2>&1  ;
+grep ERROR ${LOGGING_DIR}/errorSoundsTooltip.bsh.log                                                                                                       ;
 
 
 process_section '30_stimword_ordering'      ;
