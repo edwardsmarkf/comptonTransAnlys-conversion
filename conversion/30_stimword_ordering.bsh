@@ -6,10 +6,10 @@
 
 mariadb  --verbose   comptonTransAnlys  <<END ;
 
-ALTER TABLE \`stimword\` ADD COLUMN \`stimword_line_nbr_legacy\' TINYINT(4) NULL AFTER \`stimwordPhonetic\`   ;
-ALTER TABLE \`stimword\` ADD COLUMN \`stimword_page_nbr_legacy\' TINYINT(4) NULL AFTER \`stimwordPhonetic\`   ;
-UPDATE \`stimword\` SET \`stimword_page_nbr_legacy\' = \`stimwordPlacement\'                                  ;
-UPDATE \`stimword\` SET \`stimword_line_nbr_legacy\' = \`stimwordOrderNbr\'                                   ;
+ALTER TABLE \`stimword\` ADD COLUMN \`stimword_line_nbr_legacy\` TINYINT(4) NULL AFTER \`stimwordPhonetic\`   ;
+ALTER TABLE \`stimword\` ADD COLUMN \`stimword_page_nbr_legacy\` TINYINT(4) NULL AFTER \`stimwordPhonetic\`   ;
+UPDATE \`stimword\` SET \`stimword_page_nbr_legacy\` = \`stimwordPlacement\`                                  ;
+UPDATE \`stimword\` SET \`stimword_line_nbr_legacy\` = \`stimwordOrderNbr\`                                   ;
 
 
 DROP TABLE IF EXISTS \`TEMP\`
