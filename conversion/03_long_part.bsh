@@ -25,7 +25,6 @@
 
   ALTER TABLE Client_master         DROP COLUMN IF EXISTS   Client_master_script_name          ;  ## 2021-05-09
   ALTER TABLE Client_master         DROP COLUMN IF EXISTS   Client_master_script_line          ;  ## 2021-05-09
-  ALTER TABLE Client_master         MODIFY Client_master_client_name VARCHAR(120) NULL         ;  ## 2023-03-08
 END
 
 mariadb    --verbose  comptonTransAnlys  <<END ;
