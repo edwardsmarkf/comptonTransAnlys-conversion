@@ -8,6 +8,7 @@
 mariadb  --verbose   comptonTransAnlys   <<END;
 
   ALTER TABLE sessionNames  ADD  sessionNamesAutoIncr   INT PRIMARY KEY AUTO_INCREMENT;
+  ALTER TABLE clientMaster MODIFY `clientMasterName` varchar(120) NULL;       ## 2023-03-08
 
 END
 
