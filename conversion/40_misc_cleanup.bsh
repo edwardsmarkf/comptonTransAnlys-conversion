@@ -13,11 +13,23 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   
   ALTER TABLE \`clientSession\` ADD   COLUMN  \`sessionNamesAutoIncr\` INT AFTER \`clientSessionAutoIncr\`  ;   ## 2023-03-10
   
-  ALTER TABLE \`clientSession\`	ADD CONSTRAINT \`sessionNamesAutoIncr_2_clientSession\`
-				FOREIGN KEY                          (\`sessionNamesAutoIncr\`)
-				REFERENCES 	 \`sessionNames\`    (\`sessionNamesAutoIncr\`)
-				ON DELETE CASCADE ON UPDATE CASCADE
-				;                                                                 ## 2023-03-10
+  ## 2023-03-10
+  ## 2023-03-10
+  ALTER TABLE \`clientSession\`
+          ADD CONSTRAINT \`sessionNamesAutoIncr_2_clientSession\`
+          FOREIGN KEY                          (\`sessionNamesAutoIncr\`)
+          REFERENCES 	 \`sessionNames\`    (\`sessionNamesAutoIncr\`)
+          ON DELETE CASCADE ON UPDATE CASCADE
+          ;
+  ## 2023-03-10
+  ## 2023-03-10				
+  UPDATE  \`clientSession\`  
+       ,  \`sessionNames\`
+       SET  \`clientSession\`.\`sessionNamesAutoIncr\` = \`sessionNames\`.\`sessionNamesAutoIncr\`
+       WHERE 1
+       AND  \`clientSession\`.\`sessionName\`           = \`sessionNames\`.\`sessionName\`
+       ;
+  ## 2023-03-10
 
 END
 
