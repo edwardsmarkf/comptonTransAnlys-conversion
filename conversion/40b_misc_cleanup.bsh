@@ -1,0 +1,17 @@
+#! /bin/bash
+
+
+#   40a_sessionNamesKey
+#             2023-02-08
+#	2023-03-10 - added autoIncr foreign key for clientSession
+
+
+mariadb  --verbose   comptonTransAnlys   <<END;
+
+  ALTER TABLE \`clientMaster\`  MODIFY  \`clientMasterName\`       VARCHAR(120) NOT NULL DEFAULT 0;       ## 2023-03-08
+
+END
+
+echo  'finished with 40b_misc_cleanup.bsh!';
+
+exit 1
