@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-#   40_misc_cleanup.bsh
+#   40a_sessionNamesKey
 #             2023-02-08
 #	2023-03-10 - added autoIncr foreign key for clientSession
 
