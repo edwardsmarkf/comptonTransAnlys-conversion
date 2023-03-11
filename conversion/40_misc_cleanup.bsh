@@ -10,7 +10,12 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   ALTER TABLE \`sessionNames\`  ADD     \`sessionNamesAutoIncr\`   INT PRIMARY KEY AUTO_INCREMENT;
   ALTER TABLE \`clientMaster\`  MODIFY  \`clientMasterName\`       VARCHAR(120) NULL;       ## 2023-03-08
   
-###  ALTER TABLE \'clientSession\' ADD     \`sessionNamesAutoIncr\`   
+  ALTER TABLE \'clientSession\' ADD     \`sessionNamesAutoIncr\` INT ;
+  ALTER TABLE \`clientSession\`	ADD CONSTRAINT \`SessionNamesAutoIncr_2_clientSession\`
+				FOREIGN KEY								              (\`sessionNamesAutoIncr\`)
+				REFERENCES 			\`sessionNames\`				(\`sessionNamesAutoIncr\`)
+				ON DELETE CASCADE ON UPDATE CASCADE
+				;
 
 END
 
