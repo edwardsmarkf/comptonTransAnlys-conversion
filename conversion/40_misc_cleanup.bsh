@@ -11,8 +11,10 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   ALTER TABLE \`sessionNames\`  ADD     \`sessionNamesAutoIncr\`   INT PRIMARY KEY AUTO_INCREMENT;
   ALTER TABLE \`clientMaster\`  MODIFY  \`clientMasterName\`       VARCHAR(120) NOT NULL DEFAULT 0;       ## 2023-03-08
   
-  ALTER TABLE \`clientSession\` ADD   COLUMN  \`sessionNamesAutoIncr\` INT AFTER \`clientSessionAutoIncr\`  ;   ## 2023-03-10
-  
+  ## 2023-03-10
+  ## 2023-03-10
+  ALTER TABLE \`clientSession\` ADD   COLUMN  \`sessionNamesAutoIncr\` INT AFTER \`updatedAt\`  ;   
+  ## 2023-03-10
   ## 2023-03-10
   UPDATE  \`clientSession\`  
        ,  \`sessionNames\`
