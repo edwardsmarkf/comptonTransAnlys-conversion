@@ -8,22 +8,44 @@
 
 mariadb  --verbose   comptonTransAnlys   <<END;
 
-  ALTER TABLE \`sessionNames\`  ADD     \`sessionNamesAutoIncr\`   INT PRIMARY KEY AUTO_INCREMENT;
   ALTER TABLE \`clientMaster\`  MODIFY  \`clientMasterName\`       VARCHAR(120) NOT NULL DEFAULT 0;       ## 2023-03-08
+
+
+    
+  ## 2023-03-10
+  ## 2023-03-10
   
-  ## 2023-03-10
-  ## 2023-03-10
-  ALTER TABLE \`clientSession\` ADD   COLUMN  \`sessionNamesAutoIncr\` INT AFTER \`updatedAt\`  ;   
+  ALTER TABLE \`sessionNames\`  ADD  COLUMN   \`sessionNamesAutoIncr\`   INT PRIMARY KEY AUTO_INCREMENT;   
+  
+  ALTER TABLE \`sessionNames\` ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST ;
+  
+  ALTER TABLE \`sessionNames\` ADD   COLUMN  \`layoutAutoIncr\`         INT AFTER \`updatedAt\`  ;
+  
+  
   ## 2023-03-10
   ## 2023-03-10
   UPDATE  \`clientSession\`  
        ,  \`sessionNames\`
        SET  \`clientSession\`.\`sessionNamesAutoIncr\` = \`sessionNames\`.\`sessionNamesAutoIncr\`
        WHERE 1
+       AND  \`clientSession\`.\`layoutName\`           = \`layout\`.\`layoutName\`
        AND  \`clientSession\`.\`sessionName\`           = \`sessionNames\`.\`sessionName\`
        ;
  
   ## 2023-03-10
+      ALTER TABLE \`sessionNames\`
+          ADD CONSTRAINT \`layoutAutoIncr_2_sessionNamesAutoIncr\`
+          FOREIGN KEY                      (\`layoutAutoIncr\`)
+          REFERENCES 	 \`layout\`          (\`layoutAutoIncr\`)
+          ON DELETE CASCADE ON UPDATE CASCADE
+          ;
+    ALTER TABLE \`sessionNames\`
+          ADD CONSTRAINT \`layout_2_sessionNames\`
+          FOREIGN KEY                      (\`layoutName\`)
+          REFERENCES 	 \`sessionNames\`    (\`layoutName\`)
+          ON DELETE CASCADE ON UPDATE CASCADE
+          ;
+  
   ## 2023-03-10
   ALTER TABLE \`clientSession\`
           ADD CONSTRAINT \`sessionNamesAutoIncr_2_clientSession\`
