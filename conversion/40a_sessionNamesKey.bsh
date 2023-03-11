@@ -33,6 +33,15 @@ mariadb  --verbose   comptonTransAnlys   <<END;
                                ( 'ACAD', 1, 'TIME2'   , 'TIME1' ,  1, 33
                                )
                                ;
+#+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
+#| sessionOrderNbr | sessionName | sessionReplicate | sessionBeginLineNbr | sessionEndLineNbr | sessionErrorsCssNormalClass          | sessionErrorsCssReplicateClass     | createdAt           | updatedAt |
+#+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
+#|               1 | Time1       |                  |                   0 |                99 | evalErrorSoundsTime1DivNormalClass   | evalErrorSoundsTime1DivReplClass   | 2008-03-06 22:17:48 | NULL      |
+#|               2 | Modeled     | Time1            |                   9 |                15 | evalErrorSoundsModeledDivNormalClass | evalErrorSoundsModeledDivReplClass | 2008-03-06 22:17:48 | NULL      |
+#|               3 | Time2       | Time1            |                   0 |                99 | evalErrorSoundsTime2DivNormalClass   | evalErrorSoundsTime2DivReplClass   | 2008-03-06 22:17:48 | NULL      |
+#+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
+
+  
   
   INSERT INTO person (first_name, last_name) VALUES ('John', 'Doe');
   
