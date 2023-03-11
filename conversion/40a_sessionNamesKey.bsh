@@ -1,45 +1,56 @@
 #! /bin/bash
 
 
-#   40a_sessionNamesKey
-#             2023-02-08
+#   40a_sessionNamesKey.bsh
+#             2023-03-10
 #	2023-03-10 - added autoIncr foreign key for clientSession
 
 
 mariadb  --verbose   comptonTransAnlys   <<END;
 
-######  ALTER TABLE \`clientMaster\`  MODIFY  \`clientMasterName\`       VARCHAR(120) NOT NULL DEFAULT 0;       ## 2023-03-08
-
-
-    
-  ## 2023-03-10
-  ## 2023-03-10
   
-  ALTER TABLE \`sessionNames\`  ADD  COLUMN   \`sessionNamesAutoIncr\`   INT PRIMARY KEY AUTO_INCREMENT;   
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN   \`sessionNamesAutoIncr\`   INT PRIMARY KEY AUTO_INCREMENT                         ;   
   
-  ALTER TABLE \`sessionNames\` ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST ;
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST                ;
   
-  ALTER TABLE \`sessionNames\` ADD   COLUMN  \`layoutAutoIncr\`         INT AFTER \`updatedAt\`  ;
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         INT                                AFTER \`updatedAt\`  ;
   
+  INSERT INTO \`sessionNames\` (  \'layoutName\'
+                               ,  \`sessionOrderNbr\`
+                               ,  \`sessionName\`
+                               ,  \`sessionReplicate\`
+                               ,  \`sessionBeginLineNbr\`
+                               ,  \`sessionEndLineNbr\`
+                               ,  \`sessionErrorsCssNormal\`
+                               ,  \`sessionErrorsCssReplicate\`
+                               )
+                     VALUES    ( 'ACAD', 1, 'TIME1'   , ''      ,      1, 33
+                               )
+                               ,
+                               ( 'ACAD', 1, 'MODELED' , ''      ,       1, 33
+                               )
+                               ,
+                               ( 'ACAD', 1, 'TIME2'   , 'TIME1' ,  1, 33
+                               )
+                               ;
   
-  ## 2023-03-10
-  ## 2023-03-10
+  INSERT INTO person (first_name, last_name) VALUES ('John', 'Doe');
+  
   UPDATE  \`clientSession\`  
        ,  \`sessionNames\`
        SET  \`clientSession\`.\`sessionNamesAutoIncr\` = \`sessionNames\`.\`sessionNamesAutoIncr\`
        WHERE 1
        AND  \`clientSession\`.\`layoutName\`           = \`layout\`.\`layoutName\`
-       AND  \`clientSession\`.\`sessionName\`           = \`sessionNames\`.\`sessionName\`
+       AND  \`clientSession\`.\`sessionName\`          = \`sessionNames\`.\`sessionName\`
        ;
  
-  ## 2023-03-10
-      ALTER TABLE \`sessionNames\`
+  ALTER TABLE \`sessionNames\`
           ADD CONSTRAINT \`layoutAutoIncr_2_sessionNamesAutoIncr\`
           FOREIGN KEY                      (\`layoutAutoIncr\`)
           REFERENCES 	 \`layout\`          (\`layoutAutoIncr\`)
           ON DELETE CASCADE ON UPDATE CASCADE
           ;
-    ALTER TABLE \`sessionNames\`
+  ALTER TABLE \`sessionNames\`
           ADD CONSTRAINT \`layout_2_sessionNames\`
           FOREIGN KEY                      (\`layoutName\`)
           REFERENCES 	 \`sessionNames\`    (\`layoutName\`)
@@ -53,12 +64,9 @@ mariadb  --verbose   comptonTransAnlys   <<END;
           REFERENCES 	 \`sessionNames\`    (\`sessionNamesAutoIncr\`)
           ON DELETE CASCADE ON UPDATE CASCADE
           ;
-  ## 2023-03-10
-  ## 2023-03-10				
-  
 
 END
 
-echo  'finished with 40_misc_cleanup.bsh!';
+echo  'finished with 40a_sessionNamesKey.bsh!';
 
 exit 1
