@@ -8,7 +8,7 @@
 
 mariadb  --verbose   comptonTransAnlys   <<END;
 
-  ALTER TABLE \`clientMaster\`  MODIFY  \`clientMasterName\`       VARCHAR(120) NOT NULL DEFAULT 0;       ## 2023-03-08
+######  ALTER TABLE \`clientMaster\`  MODIFY  \`clientMasterName\`       VARCHAR(120) NOT NULL DEFAULT 0;       ## 2023-03-08
 
 
     
