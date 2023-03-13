@@ -56,6 +56,10 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 #|               3 | Time2       | Time1            |                   0 |                99 | evalErrorSoundsTime2DivNormalClass   | evalErrorSoundsTime2DivReplClass   | 2008-03-06 22:17:48 | NULL      |
 #+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
   
+  
+  ###  necessary  ? ? ? ? ? ?
+  ALTER TABLE \`sessionNames\`  ADD KEY \`layout_2_sessionNames\`	(\`layoutAutoIncr\`)  ;
+
   UPDATE      \`sessionNames\`
        ,      \`layout\`
        SET    \`sessionNames\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
