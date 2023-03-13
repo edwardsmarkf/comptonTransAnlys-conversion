@@ -9,8 +9,10 @@
 mariadb  --verbose   comptonTransAnlys   <<END;
 
   
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN   \`sessionNamesAutoIncr\`   INT PRIMARY KEY AUTO_INCREMENT                         ;   
-  
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN   \`sessionNamesAutoIncr\`   INT                                  ;   
+  UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                             ; 
+  ALTER TABLE \`sessionNames\`  MODIFY   COLUMN   \`sessionNamesAutoIncr\`    INT PRIMARY KEY AUTO_INCREMENT   ;   
+ 
   ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST                ;
   
   ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         INT                                AFTER \`updatedAt\`  ;
@@ -24,14 +26,23 @@ mariadb  --verbose   comptonTransAnlys   <<END;
                                ,  \`sessionErrorsCssNormal\`
                                ,  \`sessionErrorsCssReplicate\`
                                )
-                     VALUES    ( 'ACAD', 1, 'TIME1'   , ''      ,      1, 33
+                     VALUES    ( 'ACAD', 1, 'TIME1'   , ''      ,      0  , 99 ,  'evalErrorSoundsTime1DivNormalClass'  , 'evalErrorSoundsTime1DivReplClass'
                                )
                                ,
-                               ( 'ACAD', 1, 'MODELED' , ''      ,       1, 33
+                               ( 'ACAD', 1, 'MODELED' , ''      ,      9  , 15 ,  'evalErrorSoundsModeledDivNormalClass , 'evalErrorSoundsModeledDivReplClass'
                                )
                                ,
-                               ( 'ACAD', 1, 'TIME2'   , 'TIME1' ,  1, 33
+                               ( 'ACAD', 1, 'TIME2'   , 'TIME1' ,  0      , 99 ,  'evalErrorSoundsTime2DivNormalClass'  , 'evalErrorSoundsTime2DivReplClass'
                                )
+                               ,
+                               ( 'SAMP', 1, 'TIME1'   , ''      ,      0  , 99 ,  'evalErrorSoundsTime1DivNormalClass'  , 'evalErrorSoundsTime1DivReplClass'
+                               )
+                               ,
+                               ( 'SAMP', 1, 'MODELED' , ''      ,      9  , 15 ,  'evalErrorSoundsModeledDivNormalClass , 'evalErrorSoundsModeledDivReplClass'
+                               )
+                               ,
+                               ( 'SAMP', 1, 'TIME2'   , 'TIME1' ,  0      , 99 ,  'evalErrorSoundsTime2DivNormalClass'  , 'evalErrorSoundsTime2DivReplClass'
+                               )                               
                                ;
 #+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
 #| sessionOrderNbr | sessionName | sessionReplicate | sessionBeginLineNbr | sessionEndLineNbr | sessionErrorsCssNormalClass          | sessionErrorsCssReplicateClass     | createdAt           | updatedAt |
