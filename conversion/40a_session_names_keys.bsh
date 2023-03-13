@@ -18,7 +18,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
  
   ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST                ;
   
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         INT                                AFTER \`updatedAt\`  ;
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         SMALLINT(8) UNSIGNED  NOT NULL     AFTER \`updatedAt\`  ;
   
   INSERT INTO \`sessionNames\` (  \`layoutName\`
                                ,  \`sessionOrderNbr\`
