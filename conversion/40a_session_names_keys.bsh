@@ -55,14 +55,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 #|               3 | Time2       | Time1            |                   0 |                99 | evalErrorSoundsTime2DivNormalClass   | evalErrorSoundsTime2DivReplClass   | 2008-03-06 22:17:48 | NULL      |
 #+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
   
-  UPDATE  \`clientSession\`  
-       ,  \`sessionNames\`
-       SET  \`clientSession\`.\`sessionNamesAutoIncr\` = \`sessionNames\`.\`sessionNamesAutoIncr\`
-       WHERE 1
-       AND  \`clientSession\`.\`layoutName\`           = \`layout\`.\`layoutName\`
-       AND  \`clientSession\`.\`sessionName\`          = \`sessionNames\`.\`sessionName\`
-       ;
- 
+  
   ALTER TABLE \`sessionNames\`
           ADD CONSTRAINT \`layoutAutoIncr_2_sessionNamesAutoIncr\`
           FOREIGN KEY                      (\`layoutAutoIncr\`)
@@ -75,6 +68,18 @@ mariadb  --verbose   comptonTransAnlys   <<END;
           REFERENCES 	 \`sessionNames\`    (\`layoutName\`)
           ON DELETE CASCADE ON UPDATE CASCADE
           ;
+          
+  ALTER TABLE \`clientSession\` ADD COLUMN \`sessionNamesAutoIncr\` INT AFTER \`updatedAt\` ;
+  
+  UPDATE  \`clientSession\`  
+       ,  \`sessionNames\`
+       SET  \`clientSession\`.\`sessionNamesAutoIncr\` = \`sessionNames\`.\`sessionNamesAutoIncr\`
+       WHERE 1
+       AND  \`clientSession\`.\`layoutName\`           = \`layout\`.\`layoutName\`
+       AND  \`clientSession\`.\`sessionName\`          = \`sessionNames\`.\`sessionName\`
+       ;
+ 
+
   
   ## 2023-03-10
   ALTER TABLE \`clientSession\`
