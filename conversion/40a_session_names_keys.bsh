@@ -16,9 +16,8 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    SMALLINT PRIMARY KEY AUTO_INCREMENT      ;   
   SET FOREIGN_KEY_CHECKS=1;
  
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST                ;
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST             ;
   
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         SMALLINT(8) UNSIGNED  NOT NULL     AFTER \`updatedAt\`  ;
   
   INSERT INTO \`sessionNames\` (  \`layoutName\`
                                ,  \`sessionOrderNbr\`
@@ -56,6 +55,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 #|               3 | Time2       | Time1            |                   0 |                99 | evalErrorSoundsTime2DivNormalClass   | evalErrorSoundsTime2DivReplClass   | 2008-03-06 22:17:48 | NULL      |
 #+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
   
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         SMALLINT(8) UNSIGNED  NOT NULL     AFTER \`updatedAt\`  ;
   
   ###  necessary  ? ? ? ? ? ?
   ALTER TABLE \`sessionNames\`  ADD KEY \`layout_2_sessionNames\`	(\`layoutAutoIncr\`)  ;
