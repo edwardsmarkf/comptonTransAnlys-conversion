@@ -8,7 +8,6 @@
 
 mariadb  --verbose   comptonTransAnlys   <<END;
 
-  
   ALTER TABLE \`sessionNames\`  ADD   COLUMN   \`sessionNamesAutoIncr\`   INT                                  ;   
   UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                             ; 
   ALTER TABLE \`sessionNames\`  MODIFY   COLUMN   \`sessionNamesAutoIncr\`    INT PRIMARY KEY AUTO_INCREMENT   ;   
@@ -17,7 +16,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   
   ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         INT                                AFTER \`updatedAt\`  ;
   
-  INSERT INTO \`sessionNames\` (  \'layoutName\'
+  INSERT INTO \`sessionNames\` (  \`layoutName\`
                                ,  \`sessionOrderNbr\`
                                ,  \`sessionName\`
                                ,  \`sessionReplicate\`
