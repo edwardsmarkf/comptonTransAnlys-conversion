@@ -8,6 +8,10 @@
 
 mariadb  --verbose   comptonTransAnlys   <<END;
 
+  SET FOREIGN_KEY_CHECKS=0;
+  ALTER TABLE \`sessionNames\` DROP INDEX  \`sessionNamesUniqueKey\` ;
+  SET FOREIGN_KEY_CHECKS=1;
+  
   ALTER TABLE \`sessionNames\`  ADD   COLUMN   \`sessionNamesAutoIncr\`   INT                                  ;   
   UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                             ; 
   ALTER TABLE \`sessionNames\`  MODIFY   COLUMN   \`sessionNamesAutoIncr\`    INT PRIMARY KEY AUTO_INCREMENT   ;   
