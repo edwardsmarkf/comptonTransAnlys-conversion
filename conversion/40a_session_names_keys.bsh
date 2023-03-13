@@ -82,7 +82,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
           ON DELETE CASCADE ON UPDATE CASCADE
           ;
           
-  ALTER TABLE \`clientSession\` ADD COLUMN \`sessionNamesAutoIncr\` INT AFTER \`updatedAt\` ;
+  ALTER TABLE \`clientSession\` ADD COLUMN \`sessionNamesAutoIncr\` SMALLINT AFTER \`updatedAt\` ;
   
   UPDATE  \`clientSession\`  
        ,  \`sessionNames\`
