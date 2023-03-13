@@ -8,6 +8,7 @@
 
 mariadb  --verbose   comptonTransAnlys   <<END;
 
+    /* make sessionNames   non-unique  */
   SET FOREIGN_KEY_CHECKS=0;
   ALTER TABLE \`sessionNames\` DROP INDEX  \`sessionNamesUniqueKey\` ;
   SET FOREIGN_KEY_CHECKS=1;
@@ -55,7 +56,14 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 #|               3 | Time2       | Time1            |                   0 |                99 | evalErrorSoundsTime2DivNormalClass   | evalErrorSoundsTime2DivReplClass   | 2008-03-06 22:17:48 | NULL      |
 #+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
   
-  
+  UPDATE      \`sessionNames\`
+       ,      \`layout\`
+       SET    \`sessionNames\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
+       WHERE 1
+       AND    \`sessionNames\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
+       ;
+       
+       
   ALTER TABLE \`sessionNames\`
           ADD CONSTRAINT \`layoutAutoIncr_2_sessionNamesAutoIncr\`
           FOREIGN KEY                      (\`layoutAutoIncr\`)
