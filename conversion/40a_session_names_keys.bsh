@@ -11,7 +11,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   
   SET FOREIGN_KEY_CHECKS=0;
          /* make sessionNames   non-unique  */
-  ALTER TABLE \`sessionNames\`  DROP   INDEX  IF EXIST  \`sessionNamesUniqueKey\`                                            ;
+  ALTER TABLE \`sessionNames\`  DROP   INDEX  IF EXISTS  \`sessionNamesUniqueKey\`                                            ;
   ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`   SMALLINT                                  ;   
   UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                                           ; 
   ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    SMALLINT PRIMARY KEY AUTO_INCREMENT      ;   
