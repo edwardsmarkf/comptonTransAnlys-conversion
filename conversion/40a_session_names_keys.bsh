@@ -88,7 +88,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
        ,  \`sessionNames\`
        SET  \`clientSession\`.\`sessionNamesAutoIncr\` = \`sessionNames\`.\`sessionNamesAutoIncr\`
        WHERE 1
-       AND  \`clientSession\`.\`layoutName\`           = \`layout\`.\`layoutName\`
+       AND  \`clientSession\`.\`layoutName\`           = \`sessionNames\`.\`layoutName\`
        AND  \`clientSession\`.\`sessionName\`          = \`sessionNames\`.\`sessionName\`
        ;
  
