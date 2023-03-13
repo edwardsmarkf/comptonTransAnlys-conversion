@@ -78,7 +78,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   ALTER TABLE \`sessionNames\`
           ADD CONSTRAINT \`layout_2_sessionNames\`
           FOREIGN KEY                      (\`layoutName\`)
-          REFERENCES 	 \`sessionNames\`    (\`layoutName\`)
+          REFERENCES 	 \`layout\`          (\`layoutName\`)
           ON DELETE CASCADE ON UPDATE CASCADE
           ;
           
