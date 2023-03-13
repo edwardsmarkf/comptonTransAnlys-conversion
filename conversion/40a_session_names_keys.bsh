@@ -29,23 +29,24 @@ mariadb  --verbose   comptonTransAnlys   <<END;
                                ,  \`sessionEndLineNbr\`
                                ,  \`sessionErrorsCssNormalClass\`
                                ,  \`sessionErrorsCssReplicateClass\`
+                               ,  \`createdAt\`
                                )
-                     VALUES    ( 'ACAD', 1, 'TIME1'   , ''      ,      0  , 99 ,  'evalErrorSoundsTime1DivNormalClass'   , 'evalErrorSoundsTime1DivReplClass'
-                               )
-                               ,
-                               ( 'ACAD', 1, 'MODELED' , ''      ,      9  , 15 ,  'evalErrorSoundsModeledDivNormalClass' , 'evalErrorSoundsModeledDivReplClass'
+                     VALUES    ( 'ACAD', 1, 'TIME1'   , ''      ,      0  , 99 ,  'evalErrorSoundsTime1DivNormalClass'   , 'evalErrorSoundsTime1DivReplClass'    , NOW()
                                )
                                ,
-                               ( 'ACAD', 1, 'TIME2'   , 'TIME1' ,  0      , 99 ,  'evalErrorSoundsTime2DivNormalClass'   , 'evalErrorSoundsTime2DivReplClass'
+                               ( 'ACAD', 1, 'MODELED' , ''      ,      9  , 15 ,  'evalErrorSoundsModeledDivNormalClass' , 'evalErrorSoundsModeledDivReplClass'   , NOW()
                                )
                                ,
-                               ( 'SAMP', 1, 'TIME1'   , ''      ,      0  , 99 ,  'evalErrorSoundsTime1DivNormalClass'   , 'evalErrorSoundsTime1DivReplClass'
+                               ( 'ACAD', 1, 'TIME2'   , 'TIME1' ,  0      , 99 ,  'evalErrorSoundsTime2DivNormalClass'   , 'evalErrorSoundsTime2DivReplClass'   , NOW()
                                )
                                ,
-                               ( 'SAMP', 1, 'MODELED' , ''      ,      9  , 15 ,  'evalErrorSoundsModeledDivNormalClass' , 'evalErrorSoundsModeledDivReplClass'
+                               ( 'SAMP', 1, 'TIME1'   , ''      ,      0  , 99 ,  'evalErrorSoundsTime1DivNormalClass'   , 'evalErrorSoundsTime1DivReplClass'   , NOW()
                                )
                                ,
-                               ( 'SAMP', 1, 'TIME2'   , 'TIME1' ,  0      , 99 ,  'evalErrorSoundsTime2DivNormalClass'   , 'evalErrorSoundsTime2DivReplClass'
+                               ( 'SAMP', 1, 'MODELED' , ''      ,      9  , 15 ,  'evalErrorSoundsModeledDivNormalClass' , 'evalErrorSoundsModeledDivReplClass'   , NOW()
+                               )
+                               ,
+                               ( 'SAMP', 1, 'TIME2'   , 'TIME1' ,  0      , 99 ,  'evalErrorSoundsTime2DivNormalClass'   , 'evalErrorSoundsTime2DivReplClass'   , NOW()
                                )                               
                                ;
 #+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
