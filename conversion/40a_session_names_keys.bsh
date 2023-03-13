@@ -22,8 +22,8 @@ mariadb  --verbose   comptonTransAnlys   <<END;
                                ,  \`sessionReplicate\`
                                ,  \`sessionBeginLineNbr\`
                                ,  \`sessionEndLineNbr\`
-                               ,  \`sessionErrorsCssNormal\`
-                               ,  \`sessionErrorsCssReplicate\`
+                               ,  \`sessionErrorsCssNormalClass\`
+                               ,  \`sessionErrorsCssReplicateClass\`
                                )
                      VALUES    ( 'ACAD', 1, 'TIME1'   , ''      ,      0  , 99 ,  'evalErrorSoundsTime1DivNormalClass'   , 'evalErrorSoundsTime1DivReplClass'
                                )
