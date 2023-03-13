@@ -10,12 +10,11 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 
     /* make sessionNames   non-unique  */
   SET FOREIGN_KEY_CHECKS=0;
-  ALTER TABLE \`sessionNames\` DROP INDEX  \`sessionNamesUniqueKey\` ;
+  ALTER TABLE \`sessionNames\`  DROP   INDEX    \`sessionNamesUniqueKey\`                                           ;
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN   \`sessionNamesAutoIncr\`   SMALLINT                                  ;   
+  UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                                  ; 
+  ALTER TABLE \`sessionNames\`  MODIFY   COLUMN   \`sessionNamesAutoIncr\`    SMALLINT PRIMARY KEY AUTO_INCREMENT   ;   
   SET FOREIGN_KEY_CHECKS=1;
-  
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN   \`sessionNamesAutoIncr\`   INT                                  ;   
-  UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                             ; 
-  ALTER TABLE \`sessionNames\`  MODIFY   COLUMN   \`sessionNamesAutoIncr\`    INT PRIMARY KEY AUTO_INCREMENT   ;   
  
   ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST                ;
   
