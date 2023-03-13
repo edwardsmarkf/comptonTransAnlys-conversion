@@ -58,7 +58,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   
   ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         SMALLINT(8) UNSIGNED  NOT NULL     AFTER \`updatedAt\`  ;
   
-  ###  necessary  ? ? ? ? ? ?
+  ALTER TABLE \`sessionNames\`  ADD KEY \`layoutName\`     	(\`layoutName\`)      ;
   ALTER TABLE \`sessionNames\`  ADD KEY \`layoutAutoIncr\`	(\`layoutAutoIncr\`)  ;
 
   UPDATE      \`sessionNames\`
