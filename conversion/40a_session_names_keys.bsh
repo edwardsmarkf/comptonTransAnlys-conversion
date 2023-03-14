@@ -13,16 +13,16 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   
   SET FOREIGN_KEY_CHECKS=0;
          /* make sessionNames   non-unique  */
-  ALTER TABLE \`sessionNames\`  DROP   INDEX  IF EXISTS  \`sessionNamesUniqueKey\`                                            ;
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`    SMALLINT UNSIGNED NOT NULL              ;   
-  UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                                           ; 
+  ALTER TABLE \`sessionNames\`  DROP   INDEX  IF EXISTS  \`sessionNamesUniqueKey\`                                                             ;
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`    SMALLINT UNSIGNED NOT NULL                                 ;   
+  UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                                                             ; 
   ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    SMALLINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT      ;   
   
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         SMALLINT UNSIGNED NOT NULL     AFTER \`updatedAt\`  ;  
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST             ;
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         SMALLINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`        ;  
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`             CHAR(04)          NOT NULL DEFAULT 'PESL'  FIRST                      ;
     
-  ALTER TABLE \`sessionNames\`  ADD KEY \`layoutName_2_sessionNames\`     	(\`layoutName\`)      ;
-  ALTER TABLE \`sessionNames\`  ADD KEY \`layoutAutoIncr_2_sessionNames\` 	(\`layoutAutoIncr\`)  ;
+  ALTER TABLE \`sessionNames\`  ADD KEY \`layoutName_2_sessionNames\`     	(\`layoutName\`)                                                   ;
+  ALTER TABLE \`sessionNames\`  ADD KEY \`layoutAutoIncr_2_sessionNames\` 	(\`layoutAutoIncr\`)                                               ;
 
   ################################################SET FOREIGN_KEY_CHECKS=1;
  
