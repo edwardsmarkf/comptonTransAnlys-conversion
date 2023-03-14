@@ -69,7 +69,8 @@ mariadb  --verbose   comptonTransAnlys   <<END;
        AND    \`sessionNames\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
        ;
        
-       
+  ALTER TABLE \`sessionNames\` ENGINE = InnoDB;     
+  
   ALTER TABLE \`sessionNames\`
           ADD CONSTRAINT \`layoutAutoIncr_2_sessionNamesAutoIncr\`
           FOREIGN KEY                      (\`layoutAutoIncr\`)
