@@ -11,6 +11,19 @@
 #
 /usr/bin/mariadb    --verbose  --skip-column-names  comptonTransAnlys  <<END ;
 
+SELECT "COUNT: layout to sessionNames AutoIncr   " , COUNT(*) 
+FROM    \`layout\`
+,       \`sessionNames\`
+WHERE   1
+AND     \`layout\`.\`layoutAutoIncr\`           =   \`sessionNames\`.\`layoutAutoIncr\`
+;
+SELECT "COUNT: layout to sessionNames MISC KEYS   " , COUNT(*) 
+FROM    \`layout\`
+,       \`sessionNames\`
+WHERE   1
+AND     \`layout\`.\`layoutName\`              =   \`sessionNames\`.\`layoutName\`
+;
+
 SELECT "COUNT: stimword to stimwordPosition MISC KEYS   " , COUNT(*) 
 FROM    \`stimword\`
 ,       \`stimwordPosition\`
