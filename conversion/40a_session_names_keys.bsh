@@ -19,7 +19,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    SMALLINT(8) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT           ;   
   
   ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`                    SMALLINT(8) UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;  
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`                        CHAR(04)          NOT NULL DEFAULT 'PESL'  FIRST                    ;
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`                        CHAR(04)             NOT NULL DEFAULT 'PESL'  FIRST                 ;
     
   ALTER TABLE \`sessionNames\`  ADD KEY \`layoutName_2_sessionNames\`     	(\`layoutName\`)                                                            ;
   ALTER TABLE \`sessionNames\`  ADD KEY \`layoutAutoIncr_2_sessionNames\` 	(\`layoutAutoIncr\`)                                                        ;
