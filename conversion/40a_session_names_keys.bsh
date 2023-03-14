@@ -95,7 +95,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
        ;
  
 
-  ALTER TABLE \`clientSession\`  ADD KEY \`sessionNamesAutoIncr\`	(\`sessionNamesAutoIncr\`)  ;
+  ALTER TABLE \`clientSession\`  ADD KEY \`sessionNamesAutoIncr_2_clientSession\`	(\`sessionNamesAutoIncr\`)  ;
   
   ## 2023-03-10
   ALTER TABLE \`clientSession\`
