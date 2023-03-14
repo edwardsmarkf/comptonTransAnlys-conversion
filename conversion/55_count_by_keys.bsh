@@ -24,6 +24,24 @@ WHERE   1
 AND     \`layout\`.\`layoutName\`              =   \`sessionNames\`.\`layoutName\`
 ;
 
+
+
+SELECT "COUNT: sessionNames to clientSession AutoIncr   " , COUNT(*) 
+FROM    \`sessionNames\`
+,       \`clientSession\`
+WHERE   1
+AND     \`sessionNames\`.\`SessionNamesAutoIncr\`               =   \`clientSession\`.\`clientSessionAutoIncr\`
+;
+
+SELECT "COUNT: sessionNames to clientSession MISC KEYS   " , COUNT(*) 
+FROM    \`sessionNames\`
+,       \`clientSession\`
+WHERE   1
+AND     \`sessionNames\`.\`sessionName\`               =   \`clientSession\`.\`sessionName\`
+;
+
+
+
 SELECT "COUNT: stimword to stimwordPosition MISC KEYS   " , COUNT(*) 
 FROM    \`stimword\`
 ,       \`stimwordPosition\`
