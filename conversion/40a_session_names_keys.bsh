@@ -18,11 +18,16 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                                           ; 
   ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    SMALLINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT      ;   
   
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         SMALLINT UNSIGNED NOT NULL     AFTER \`updatedAt\`  ;  
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST             ;
+    
+  ALTER TABLE \`sessionNames\`  ADD KEY \`layoutName_2_sessionNames\`     	(\`layoutName\`)      ;
+  ALTER TABLE \`sessionNames\`  ADD KEY \`layoutAutoIncr_2_sessionNames\` 	(\`layoutAutoIncr\`)  ;
+
   ################################################SET FOREIGN_KEY_CHECKS=1;
  
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`             CHAR(04)  NOT NULL DEFAULT 'PESL'  FIRST             ;
-  
-  
+ 
+
   INSERT INTO \`sessionNames\` (  \`layoutName\`
                                ,  \`sessionOrderNbr\`
                                ,  \`sessionName\`
@@ -51,18 +56,6 @@ mariadb  --verbose   comptonTransAnlys   <<END;
                                ( 'SAMP', 1, 'TIME2'   , 'TIME1' ,  0      , 99 ,  'evalErrorSoundsTime2DivNormalClass'   , 'evalErrorSoundsTime2DivReplClass'   , NOW()
                                )                               
                                ;
-#+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
-#| sessionOrderNbr | sessionName | sessionReplicate | sessionBeginLineNbr | sessionEndLineNbr | sessionErrorsCssNormalClass          | sessionErrorsCssReplicateClass     | createdAt           | updatedAt |
-#+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
-#|               1 | Time1       |                  |                   0 |                99 | evalErrorSoundsTime1DivNormalClass   | evalErrorSoundsTime1DivReplClass   | 2008-03-06 22:17:48 | NULL      |
-#|               2 | Modeled     | Time1            |                   9 |                15 | evalErrorSoundsModeledDivNormalClass | evalErrorSoundsModeledDivReplClass | 2008-03-06 22:17:48 | NULL      |
-#|               3 | Time2       | Time1            |                   0 |                99 | evalErrorSoundsTime2DivNormalClass   | evalErrorSoundsTime2DivReplClass   | 2008-03-06 22:17:48 | NULL      |
-#+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
-  
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         SMALLINT UNSIGNED NOT NULL     AFTER \`updatedAt\`  ;
-  
-  ALTER TABLE \`sessionNames\`  ADD KEY \`layoutName_2_sessionNames\`     	(\`layoutName\`)      ;
-  ALTER TABLE \`sessionNames\`  ADD KEY \`layoutAutoIncr_2_sessionNames\` 	(\`layoutAutoIncr\`)  ;
 
   UPDATE      \`sessionNames\`
        ,      \`layout\`
