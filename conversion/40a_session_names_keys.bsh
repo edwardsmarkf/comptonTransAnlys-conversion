@@ -8,7 +8,6 @@
 
 mariadb  --verbose   comptonTransAnlys   <<END;
 
-  
   ALTER TABLE \`sessionNames\` ENGINE = InnoDB;     
   
   SET FOREIGN_KEY_CHECKS=0;
