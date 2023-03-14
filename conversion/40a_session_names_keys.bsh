@@ -12,7 +12,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   SET FOREIGN_KEY_CHECKS=0;
          /* make sessionNames   non-unique  */
   ALTER TABLE \`sessionNames\`  DROP   INDEX  IF EXISTS  \`sessionNamesUniqueKey\`                                            ;
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`    MEDIUMINT UNSIGNED                                 ;   
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`    MEDIUMINT UNSIGNED NOT NULL              ;   
   UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                                           ; 
   ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    MEDIUMINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT      ;   
   
