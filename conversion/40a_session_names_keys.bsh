@@ -9,12 +9,14 @@
 mariadb  --verbose   comptonTransAnlys   <<END;
 
   
+  ALTER TABLE \`sessionNames\` ENGINE = InnoDB;     
+  
   SET FOREIGN_KEY_CHECKS=0;
          /* make sessionNames   non-unique  */
   ALTER TABLE \`sessionNames\`  DROP   INDEX  IF EXISTS  \`sessionNamesUniqueKey\`                                            ;
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`    MEDIUMINT UNSIGNED NOT NULL              ;   
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`    SMALLINT UNSIGNED NOT NULL              ;   
   UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                                           ; 
-  ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    MEDIUMINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT      ;   
+  ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    SMALLINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT      ;   
   
   ################################################SET FOREIGN_KEY_CHECKS=1;
  
@@ -57,7 +59,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 #|               3 | Time2       | Time1            |                   0 |                99 | evalErrorSoundsTime2DivNormalClass   | evalErrorSoundsTime2DivReplClass   | 2008-03-06 22:17:48 | NULL      |
 #+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
   
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         MEDIUMINT UNSIGNED NOT NULL     AFTER \`updatedAt\`  ;
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         SMALLINT UNSIGNED NOT NULL     AFTER \`updatedAt\`  ;
   
   ALTER TABLE \`sessionNames\`  ADD KEY \`layoutName_2_sessionNames\`     	(\`layoutName\`)      ;
   ALTER TABLE \`sessionNames\`  ADD KEY \`layoutAutoIncr_2_sessionNames\` 	(\`layoutAutoIncr\`)  ;
@@ -69,7 +71,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
        AND    \`sessionNames\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
        ;
        
-  ALTER TABLE \`sessionNames\` ENGINE = InnoDB;     
+  
   
   ALTER TABLE \`sessionNames\`
           ADD CONSTRAINT \`layoutAutoIncr_2_sessionNamesAutoIncr\`
@@ -84,7 +86,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
           ON DELETE CASCADE ON UPDATE CASCADE
           ;
           
-  ALTER TABLE \`clientSession\` ADD COLUMN \`sessionNamesAutoIncr\` MEDIUMINT UNSIGNED NOT NULL AFTER \`updatedAt\` ;
+  ALTER TABLE \`clientSession\` ADD COLUMN \`sessionNamesAutoIncr\` SMALLINT UNSIGNED NOT NULL AFTER \`updatedAt\` ;
   
   UPDATE  \`clientSession\`  
        ,  \`sessionNames\`
