@@ -62,7 +62,6 @@ mariadb  --verbose   comptonTransAnlys   <<END;
        ;
        
   
-  
   ALTER TABLE \`sessionNames\`
           ADD CONSTRAINT \`layoutAutoIncr_2_sessionNamesAutoIncr\`
           FOREIGN KEY                      (\`layoutAutoIncr\`)
