@@ -31,7 +31,7 @@ FROM    \`sessionNames\`
 ,       \`clientSession\`
 WHERE   1
 AND     \`sessionNames\`.\`layoutName\`                 =   \`clientSession\`.\`layoutName\`
-AND     \`sessionNames\`.\`SessionNamesAutoIncr\`       =   \`clientSession\`.\`clientSessionAutoIncr\`
+AND     \`sessionNames\`.\`SessionNamesAutoIncr\`       =   \`clientSession\`.\`SessionNamesAutoIncr\`
 ;
 
 SELECT "COUNT: sessionNames to clientSession MISC KEYS   " , COUNT(*) 
