@@ -12,9 +12,9 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   SET FOREIGN_KEY_CHECKS=0;
          /* make sessionNames   non-unique  */
   ALTER TABLE \`sessionNames\`  DROP   INDEX  IF EXISTS  \`sessionNamesUniqueKey\`                                            ;
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`   SMALLINT                                  ;   
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`    MEDIUMINT UNSIGNED                                 ;   
   UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                                           ; 
-  ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    SMALLINT PRIMARY KEY AUTO_INCREMENT      ;   
+  ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    MEDIUMINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT      ;   
   
   ################################################SET FOREIGN_KEY_CHECKS=1;
  
@@ -57,7 +57,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 #|               3 | Time2       | Time1            |                   0 |                99 | evalErrorSoundsTime2DivNormalClass   | evalErrorSoundsTime2DivReplClass   | 2008-03-06 22:17:48 | NULL      |
 #+-----------------+-------------+------------------+---------------------+-------------------+--------------------------------------+------------------------------------+---------------------+-----------+
   
-  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         SMALLINT(8) UNSIGNED  NOT NULL     AFTER \`updatedAt\`  ;
+  ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`         MEDIUMINT UNSIGNED NOT NULL     AFTER \`updatedAt\`  ;
   
   ALTER TABLE \`sessionNames\`  ADD KEY \`layoutName_2_sessionNames\`     	(\`layoutName\`)      ;
   ALTER TABLE \`sessionNames\`  ADD KEY \`layoutAutoIncr_2_sessionNames\` 	(\`layoutAutoIncr\`)  ;
@@ -84,7 +84,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
           ON DELETE CASCADE ON UPDATE CASCADE
           ;
           
-  ALTER TABLE \`clientSession\` ADD COLUMN \`sessionNamesAutoIncr\` SMALLINT AFTER \`updatedAt\` ;
+  ALTER TABLE \`clientSession\` ADD COLUMN \`sessionNamesAutoIncr\` MEDIUMINT UNSIGNED NOT NULL AFTER \`updatedAt\` ;
   
   UPDATE  \`clientSession\`  
        ,  \`sessionNames\`
