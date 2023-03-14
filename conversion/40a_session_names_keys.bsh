@@ -24,8 +24,6 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   ALTER TABLE \`sessionNames\`  ADD KEY \`layoutAutoIncr_2_sessionNames\` 	(\`layoutAutoIncr\`)                                                       ;
 
   ################################################SET FOREIGN_KEY_CHECKS=1;
- 
- 
 
   INSERT INTO \`sessionNames\` (  \`layoutName\`
                                ,  \`sessionOrderNbr\`
