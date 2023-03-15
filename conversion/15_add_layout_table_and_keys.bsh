@@ -41,7 +41,7 @@ ALTER TABLE \`teacher\`             RENAME COLUMN \`teacherLayoutName\`         
 
 CREATE TABLE \`layout\` (
                 \`layoutName\`            VARCHAR(30) NOT NULL                            ,
-                \`layoutAutoIncr\`        SMALLINT(8) UNSIGNED NOT NULL AUTO_INCREMENT    ,
+                \`layoutAutoIncr\`        TINYINT     UNSIGNED NOT NULL AUTO_INCREMENT    ,
                 PRIMARY KEY (\`layoutAutoIncr\`)                                          ,
                 KEY \`layout_key\` (\`layoutName\`)
         )
