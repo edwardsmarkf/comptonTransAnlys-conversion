@@ -10,7 +10,8 @@
 
 mariadb  --verbose   comptonTransAnlys   <<END;
 
-    ALTER TABLE \`stimword\`  ADD   COLUMN  \`createdAt\`       TIMESTAMP        NULL DEFAULT NULL     AFTER \`stimword_line_nbr_legacy\`  ;
+    #### somehow 'Anlys_master_timestamp' was getting lost - now changing it to 'createdAt' in the sed routine
+    ############ALTER TABLE \`stimword\`  ADD   COLUMN  \`createdAt\`       TIMESTAMP        NULL DEFAULT NULL     AFTER \`stimword_line_nbr_legacy\`  ;
     ALTER TABLE \`stimword\`  ADD   COLUMN  \`updatedAt\`       TIMESTAMP        NULL DEFAULT NULL     AFTER \`createdAt\`                 ;
     ALTER TABLE \`stimword\`  ADD   COLUMN  \`layoutAutoIncr\`  TINYINT UNSIGNED NOT NULL DEFAULT 0    AFTER \`updatedAt\`                 ;
  
