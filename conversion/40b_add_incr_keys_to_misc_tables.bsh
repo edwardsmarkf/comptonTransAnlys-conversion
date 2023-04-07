@@ -31,7 +31,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 
    ## sound 
 
-    ALTER TABLE \`sound\`  ADD   COLUMN  \`layoutAutoIncr\'  TINYINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;
+    ALTER TABLE \`sound\`  ADD   COLUMN  \`layoutAutoIncr\`  TINYINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;
 
  
     UPDATE      \`sound\`
