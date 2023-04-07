@@ -1,9 +1,10 @@
 #! /bin/bash
 
 
-#   40a_sessionNamesKey
+#   40zz_misc_cleanup
 #             2023-02-08
 #	2023-03-10 - added autoIncr foreign key for clientSession
+# 2023-04-07 - renamed
 
 
 mariadb  --verbose   comptonTransAnlys   <<END;
