@@ -1,0 +1,68 @@
+#! /bin/bash
+#
+#        40b_add_incr_keys_to_misc_tables.bsh
+#
+#        2023-04-07
+#
+#        add the layout table key to stimword, sound, and teacher tables
+
+    ## stimword 
+
+
+ALTER TABLE \`stimword\`  ADD   COLUMN  \`createdAt\`       TIMESTAMP        NULL DEFAULT NULL     AFTER \`stimword_line_nbr_legacy\`  ;
+ALTER TABLE \`stimword\`  ADD   COLUMN  \`updatedAt\`       TIMESTAMP        NULL DEFAULT NULL     AFTER \`createdAt\`                 ;
+ALTER TABLE \`stimword\`  ADD   COLUMN  \`layoutAutoIncr\`  TINYINT UNSIGNED NOT NULL DEFAULT 0    AFTER \`updatedAt\`                 ;
+ 
+UPDATE      \`stimword\`
+       ,      \`layout\`
+       SET    \`stimword\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
+       WHERE 1
+       AND    \`stimword\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
+       ;
+
+ALTER TABLE \`stimword\`
+          ADD CONSTRAINT \`layoutAutoIncr_2_stimwordAutoIncr\`
+          FOREIGN KEY                      (\`layoutAutoIncr\`)
+          REFERENCES     \`layout\`        (\`layoutAutoIncr\`)
+          ON DELETE CASCADE ON UPDATE CASCADE
+          ;
+
+
+   ## sound 
+
+ALTER TABLE \`sound\`  ADD   COLUMN  \`layoutAutoIncr\'  TINYINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;
+
+ 
+UPDATE      \`sound\`
+       ,      \`layout\`
+       SET    \`sound\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
+       WHERE 1
+       AND    \`sound\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
+       ;
+
+ALTER TABLE \`sound\`
+          ADD CONSTRAINT \`layoutAutoIncr_2_soundAutoIncr\`
+          FOREIGN KEY                      (\`layoutAutoIncr\`)
+          REFERENCES     \`layout\`        (\`layoutAutoIncr\`)
+          ON DELETE CASCADE ON UPDATE CASCADE
+          ;
+
+
+
+    ## teacher
+
+ALTER TABLE \`teacher\`  ADD   COLUMN  \`layoutAutoIncr\'  TINYINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;
+ 
+UPDATE      \`teacher\`
+       ,      \`layout\`
+       SET    \`teacher\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
+       WHERE 1
+       AND    \`teacher\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
+       ;
+
+ALTER TABLE \`teacher\`
+          ADD CONSTRAINT \`layoutAutoIncr_2_teacherAutoIncr\`
+          FOREIGN KEY                      (\`layoutAutoIncr\`)
+          REFERENCES     \`layout\`        (\`layoutAutoIncr\`)
+          ON DELETE CASCADE ON UPDATE CASCADE
+          ;
