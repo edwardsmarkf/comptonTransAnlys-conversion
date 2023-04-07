@@ -10,8 +10,9 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 
   ALTER TABLE \`sessionNames\` ENGINE = InnoDB;     
   
-  SET FOREIGN_KEY_CHECKS=0;
+  ##########################################SET FOREIGN_KEY_CHECKS=0;
          /* make sessionNames   non-unique  */
+  ALTER TABLE \`clientSession\`  DROP CONSTRAINT IF EXISTS \`sessionNames_2_clientSession\`  ;
   ALTER TABLE \`sessionNames\`  DROP   INDEX  IF EXISTS  \`sessionNamesUniqueKey\`                                                                     ;
   ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`    TINYINT UNSIGNED NOT NULL                                      ;   
   UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                                                                     ; 
@@ -94,7 +95,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
           ON DELETE CASCADE ON UPDATE CASCADE
           ;
           
-     SET FOREIGN_KEY_CHECKS=1;
+  #########################################################   SET FOREIGN_KEY_CHECKS=1;
 
 END
 
