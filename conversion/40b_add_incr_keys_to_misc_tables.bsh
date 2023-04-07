@@ -8,19 +8,20 @@
 
     ## stimword 
 
+mariadb  --verbose   comptonTransAnlys   <<END;
 
-ALTER TABLE \`stimword\`  ADD   COLUMN  \`createdAt\`       TIMESTAMP        NULL DEFAULT NULL     AFTER \`stimword_line_nbr_legacy\`  ;
-ALTER TABLE \`stimword\`  ADD   COLUMN  \`updatedAt\`       TIMESTAMP        NULL DEFAULT NULL     AFTER \`createdAt\`                 ;
-ALTER TABLE \`stimword\`  ADD   COLUMN  \`layoutAutoIncr\`  TINYINT UNSIGNED NOT NULL DEFAULT 0    AFTER \`updatedAt\`                 ;
+    ALTER TABLE \`stimword\`  ADD   COLUMN  \`createdAt\`       TIMESTAMP        NULL DEFAULT NULL     AFTER \`stimword_line_nbr_legacy\`  ;
+    ALTER TABLE \`stimword\`  ADD   COLUMN  \`updatedAt\`       TIMESTAMP        NULL DEFAULT NULL     AFTER \`createdAt\`                 ;
+    ALTER TABLE \`stimword\`  ADD   COLUMN  \`layoutAutoIncr\`  TINYINT UNSIGNED NOT NULL DEFAULT 0    AFTER \`updatedAt\`                 ;
  
-UPDATE      \`stimword\`
-       ,      \`layout\`
-       SET    \`stimword\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
-       WHERE 1
-       AND    \`stimword\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
-       ;
+    UPDATE      \`stimword\`
+           ,      \`layout\`
+           SET    \`stimword\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
+           WHERE 1
+           AND    \`stimword\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
+           ;
 
-ALTER TABLE \`stimword\`
+    ALTER TABLE \`stimword\`
           ADD CONSTRAINT \`layoutAutoIncr_2_stimwordAutoIncr\`
           FOREIGN KEY                      (\`layoutAutoIncr\`)
           REFERENCES     \`layout\`        (\`layoutAutoIncr\`)
@@ -30,17 +31,17 @@ ALTER TABLE \`stimword\`
 
    ## sound 
 
-ALTER TABLE \`sound\`  ADD   COLUMN  \`layoutAutoIncr\'  TINYINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;
+    ALTER TABLE \`sound\`  ADD   COLUMN  \`layoutAutoIncr\'  TINYINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;
 
  
-UPDATE      \`sound\`
-       ,      \`layout\`
-       SET    \`sound\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
-       WHERE 1
-       AND    \`sound\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
-       ;
+    UPDATE      \`sound\`
+           ,      \`layout\`
+           SET    \`sound\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
+           WHERE 1
+           AND    \`sound\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
+           ;
 
-ALTER TABLE \`sound\`
+    ALTER TABLE \`sound\`
           ADD CONSTRAINT \`layoutAutoIncr_2_soundAutoIncr\`
           FOREIGN KEY                      (\`layoutAutoIncr\`)
           REFERENCES     \`layout\`        (\`layoutAutoIncr\`)
@@ -51,18 +52,21 @@ ALTER TABLE \`sound\`
 
     ## teacher
 
-ALTER TABLE \`teacher\`  ADD   COLUMN  \`layoutAutoIncr\'  TINYINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;
+    ALTER TABLE \`teacher\`  ADD   COLUMN  \`layoutAutoIncr\'  TINYINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;
  
-UPDATE      \`teacher\`
-       ,      \`layout\`
-       SET    \`teacher\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
-       WHERE 1
-       AND    \`teacher\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
-       ;
+    UPDATE      \`teacher\`
+           ,      \`layout\`
+           SET    \`teacher\`.\`layoutAutoIncr\`    =   \`layout\`.\`layoutAutoIncr\`
+          WHERE 1
+           AND    \`teacher\`.\`layoutName\`        =   \`layout\`.\`layoutName\`
+           ;
 
-ALTER TABLE \`teacher\`
+    ALTER TABLE \`teacher\`
           ADD CONSTRAINT \`layoutAutoIncr_2_teacherAutoIncr\`
           FOREIGN KEY                      (\`layoutAutoIncr\`)
           REFERENCES     \`layout\`        (\`layoutAutoIncr\`)
           ON DELETE CASCADE ON UPDATE CASCADE
           ;
+END
+
+exit;
