@@ -299,6 +299,12 @@ s/\`Stimword_2_Stimword_position_FOREIGN_KEY_2\`/\`stimwordAutoIncr_2_stimwordPo
 s/\`clientContextAutoIncr_2_clientContext\`/\`clientSessionAutoIncr_2_clientContext\`/g;
 s/\`Frequency\`/\`frequency\`/g;
 
+
+## 2023-04-07
+s/\`Anlys_master_timestamp\`/\'createdAt\`/g;
+
+
+
 #languageNorms:
 s/\'aR\'/\'aʀ\'/g;
 s/\'tampersand\'/\'t&\'/g;
