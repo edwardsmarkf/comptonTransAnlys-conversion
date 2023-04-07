@@ -10,20 +10,23 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 
   ALTER TABLE \`sessionNames\` ENGINE = InnoDB;     
   
-  ##########################################SET FOREIGN_KEY_CHECKS=0;
-         /* make sessionNames   non-unique  */
+  # 2023-04-07 #########################################SET FOREIGN_KEY_CHECKS=0;
+        ### make sessionNames   non-unique  
   ALTER TABLE \`clientSession\`  DROP CONSTRAINT IF EXISTS \`sessionNames_2_clientSession\`  ;
   ALTER TABLE \`sessionNames\`  DROP   INDEX  IF EXISTS  \`sessionNamesUniqueKey\`                                                                     ;
   ALTER TABLE \`sessionNames\`  ADD   COLUMN            \`sessionNamesAutoIncr\`    TINYINT UNSIGNED NOT NULL                                          ;   
   UPDATE      \`sessionNames\`  SET \`sessionNamesAutoIncr\` = \`sessionOrderNbr\`                                                                     ; 
   ALTER TABLE \`sessionNames\`  MODIFY COLUMN           \`sessionNamesAutoIncr\`    TINYINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT               ;   
   
+                    ## removed "DEFAULT 0" which was causing serious foreign key issues!
   ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutAutoIncr\`                    TINYINT UNSIGNED NOT NULL                    AFTER \`updatedAt\`   ;  
   ALTER TABLE \`sessionNames\`  ADD   COLUMN  \`layoutName\`                        CHAR(04)             NOT NULL DEFAULT 'PESL'  FIRST                ;
     
   ALTER TABLE \`sessionNames\`  ADD KEY \`layoutName_2_sessionNames\`     	(\`layoutName\`)                                                           ;
   ALTER TABLE \`sessionNames\`  ADD KEY \`layoutAutoIncr_2_sessionNames\` 	(\`layoutAutoIncr\`)                                                       ;
 
+    ## temporarily need to include layoutAutoIncr values here unfortunately
+    
   INSERT INTO \`sessionNames\` (  \`layoutName\`
                                ,  \`layoutAutoIncr\`
                                ,  \`sessionOrderNbr\`
