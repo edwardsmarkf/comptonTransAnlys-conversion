@@ -53,6 +53,8 @@ mariadb  --verbose   comptonTransAnlys   <<END;
                                ( 'SAMP',99, 1, 'TIME2'   , 'TIME1' ,  0      , 99 ,  'evalErrorSoundsTime2DivNormalClass'   , 'evalErrorSoundsTime2DivReplClass'   , NOW()
                                )                               
                                ;
+                #####     may be required for testing ONLY....
+                #####   INSERT INTO `layout` VALUES ('ACAD',2),('PESL',1),('SAMP',3);
 
   UPDATE      \`sessionNames\`
        ,      \`layout\`
