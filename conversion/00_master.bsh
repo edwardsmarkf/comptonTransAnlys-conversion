@@ -124,7 +124,7 @@ process_section '30_stimword_ordering'             ;
 
 process_section '40a_session_names_keys'           ;
 
-process_section '40b_misc_cleanup'                 ;
+process_section '40zz_misc_cleanup'                 ;
 
 
 process_section '50_display_table_counts'                                                                                                                  ;
