@@ -52,7 +52,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 
     ## teacher
 
-    ALTER TABLE \`teacher\`  ADD   COLUMN  \`layoutAutoIncr\'  TINYINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;
+    ALTER TABLE \`teacher\`  ADD   COLUMN  \`layoutAutoIncr\`  TINYINT UNSIGNED NOT NULL DEFAULT 0       AFTER \`updatedAt\`  ;
  
     UPDATE      \`teacher\`
            ,      \`layout\`
