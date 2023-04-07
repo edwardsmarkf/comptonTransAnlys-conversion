@@ -69,4 +69,6 @@ mariadb  --verbose   comptonTransAnlys   <<END;
           ;
 END
 
-exit;
+echo  'finished with 40b_add_incr_keys_to_misc_tables.bsh!';
+
+exit 1
