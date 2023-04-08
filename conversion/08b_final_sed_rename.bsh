@@ -9,6 +9,8 @@
 #             stimwordPageNbr being changed to stimwordPlacement
 #             stimwordLineNbr being changed to stimwordOrderNbr
 #
+#     2023-04-08 - turned Eval_master_timestamp to  createdAt
+#
 #   2021-10-17:
 #                ???  clientStimwordPageNbr  => stimwordPositionPageNbr
 #                ???   clientStimwordLineNbr    => stimwordPositionLineNbr
@@ -300,8 +302,8 @@ s/\`clientContextAutoIncr_2_clientContext\`/\`clientSessionAutoIncr_2_clientCont
 s/\`Frequency\`/\`frequency\`/g;
 
 
-## 2023-04-07
-s/\`Anlys_master_timestamp\`/\'createdAt\`/g;
+## 2023-04-08
+s/\`Eval_master_timestamp\`/\'createdAt\`/g;
 
 
 
