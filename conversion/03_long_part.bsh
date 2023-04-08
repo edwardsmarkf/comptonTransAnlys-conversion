@@ -6,6 +6,7 @@
 ##  2021-05-09  - removed Karen Bragg's fake email client fix, probably no longer needed.
 #   2021-06-01  - made all email(name) references varchar(120) instead of varchar(100)
 ##  2021-09-05  - removed all the ALTER TABLE for email and changed VARCHAR(50) to VARCHAR(120)
+##  2023-04-08  - added Eval_master_timestamp
 
 ##	set fileencoding=ASCII
 ##	set fileformat=unix
@@ -114,24 +115,28 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
   DELETE FROM Eval_spec where Eval_spec_target_sound_1 = '';
   
   ## add our new table - the name will be changed later   2010-06-10
-  DROP TABLE IF EXISTS TEMP_Eval_master;
-  CREATE TABLE TEMP_Eval_master (
-    Eval_master_layout_name   varchar(30) NOT NULL
-  , Eval_master_page_nbr  tinyint(4) NOT NULL
-  , Eval_master_line_nbr    tinyint(4) NOT NULL
-  , Eval_master_stimulus_word  CHAR(25) NOT NULL
+  DROP TABLE IF EXISTS \`TEMP_Eval_master\`;
+  CREATE TABLE \`TEMP_Eval_master\` (
+    \`Eval_master_layout_name\`     VARCHAR(30) NOT NULL
+  , \`Eval_master_page_nbr\`        TINYINT(4)  NOT NULL
+  , \`Eval_master_line_nbr\`        TINYINT(4)  NOT NULL
+  , \`Eval_master_stimulus_word\`   CHAR(25)    NOT NULL
+  , \`Eval_master_timestamp\`       TIMESTAMP      NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=latin1
   ;
 END
 
+##  2023-04-08 - added  Eval_master_timestamp
 mariadb    --verbose  comptonTransAnlys  <<END ;
 
-  INSERT INTO TEMP_Eval_master 
-  SELECT DISTINCT  Eval_master_layout_name
-  , Eval_master_page_nbr
-  , Eval_master_line_nbr
-  , Eval_master_stimulus_word
+  INSERT INTO \`TEMP_Eval_master\` 
+  SELECT DISTINCT   \`Eval_master_layout_name\`
+                  , \`Eval_master_page_nbr\`
+                  , \`Eval_master_line_nbr\`
+                  , \`Eval_master_stimulus_word\`
+                  , MAX(\`Eval_master_timestamp\`)
   FROM  Eval_master
+  GROUP BY \`Eval_master_layout_name\`, \`Eval_master_page_nbr\`, \`Eval_master_line_nbr\` 
   ;
 END
 
