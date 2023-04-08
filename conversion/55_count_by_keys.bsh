@@ -25,6 +25,48 @@ AND     \`layout\`.\`layoutName\`              =   \`sessionNames\`.\`layoutName
 ;
 
 
+SELECT "COUNT: layout to stimword AutoIncr   " , COUNT(*)
+FROM    \`layout\`
+,       \`stimword\`
+WHERE   1
+AND     \`layout\`.\`layoutAutoIncr\`           =   \`stimword\`.\`layoutAutoIncr\`
+;
+SELECT "COUNT: layout to stimword MISC KEYS   " , COUNT(*)
+FROM    \`layout\`
+,       \`stimword\`
+WHERE   1
+AND     \`layout\`.\`layoutName\`              =   \`stimword\`.\`layoutName\`
+;
+
+
+SELECT "COUNT: layout to sound AutoIncr   " , COUNT(*)
+FROM    \`layout\`
+,       \`sound\`
+WHERE   1
+AND     \`layout\`.\`layoutAutoIncr\`           =   \`sound\`.\`layoutAutoIncr\`
+;
+SELECT "COUNT: layout to sound MISC KEYS   " , COUNT(*)
+FROM    \`layout\`
+,       \`sound\`
+WHERE   1
+AND     \`layout\`.\`layoutName\`              =   \`sound\`.\`layoutName\`
+;
+
+
+SELECT "COUNT: layout to teacher AutoIncr   " , COUNT(*)
+FROM    \`layout\`
+,       \`teacher\`
+WHERE   1
+AND     \`layout\`.\`layoutAutoIncr\`           =   \`teacher\`.\`layoutAutoIncr\`
+;
+SELECT "COUNT: layout to teacher MISC KEYS   " , COUNT(*)
+FROM    \`layout\`
+,       \`teacher\`
+WHERE   1
+AND     \`layout\`.\`layoutName\`              =   \`teacher\`.\`layoutName\`
+;
+
+
 
 SELECT "COUNT: sessionNames to clientSession AutoIncr   " , COUNT(*) 
 FROM    \`sessionNames\`
