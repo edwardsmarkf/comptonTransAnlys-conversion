@@ -23,6 +23,13 @@ FROM    \`layout\`
 WHERE   1
 AND     \`layout\`.\`layoutName\`              =   \`sessionNames\`.\`layoutName\`
 ;
+SELECT "COUNT: layout to sessionNames BOTH KEYS   " , COUNT(*) 
+FROM    \`layout\`
+,       \`sessionNames\`
+WHERE   1
+AND     \`layout\`.\`layoutAutoIncr\`          =   \`sessionNames\`.\`layoutAutoIncr\`
+AND     \`layout\`.\`layoutName\`              =   \`sessionNames\`.\`layoutName\`
+;
 
 
 SELECT "COUNT: layout to stimword AutoIncr   " , COUNT(*)
@@ -35,6 +42,13 @@ SELECT "COUNT: layout to stimword MISC KEYS   " , COUNT(*)
 FROM    \`layout\`
 ,       \`stimword\`
 WHERE   1
+AND     \`layout\`.\`layoutName\`              =   \`stimword\`.\`layoutName\`
+;
+SELECT "COUNT: layout to stimword BOTH KEYS   " , COUNT(*)
+FROM    \`layout\`
+,       \`stimword\`
+WHERE   1
+AND     \`layout\`.\`layoutAutoIncr\`          =   \`stimword\`.\`layoutAutoIncr\`
 AND     \`layout\`.\`layoutName\`              =   \`stimword\`.\`layoutName\`
 ;
 
@@ -51,6 +65,13 @@ FROM    \`layout\`
 WHERE   1
 AND     \`layout\`.\`layoutName\`              =   \`sound\`.\`layoutName\`
 ;
+SELECT "COUNT: layout to sound BOTH KEYS   " , COUNT(*)
+FROM    \`layout\`
+,       \`sound\`
+WHERE   1
+AND     \`layout\`.\`layoutAutoIncr\`          =   \`sound\`.\`layoutAutoIncr\`
+AND     \`layout\`.\`layoutName\`              =   \`sound\`.\`layoutName\`
+;
 
 
 SELECT "COUNT: layout to teacher AutoIncr   " , COUNT(*)
@@ -63,6 +84,13 @@ SELECT "COUNT: layout to teacher MISC KEYS   " , COUNT(*)
 FROM    \`layout\`
 ,       \`teacher\`
 WHERE   1
+AND     \`layout\`.\`layoutName\`              =   \`teacher\`.\`layoutName\`
+;
+SELECT "COUNT: layout to teacher BOTH KEYS   " , COUNT(*)
+FROM    \`layout\`
+,       \`teacher\`
+WHERE   1
+AND     \`layout\`.\`layoutAutoIncr\`          =   \`teacher\`.\`layoutAutoIncr\`
 AND     \`layout\`.\`layoutName\`              =   \`teacher\`.\`layoutName\`
 ;
 
@@ -83,9 +111,23 @@ WHERE   1
 AND     \`sessionNames\`.\`layoutName\`                =   \`clientSession\`.\`layoutName\`
 AND     \`sessionNames\`.\`sessionName\`               =   \`clientSession\`.\`sessionName\`
 ;
+SELECT "COUNT: sessionNames to clientSession BOTH KEYS   " , COUNT(*) 
+FROM    \`sessionNames\`
+,       \`clientSession\`
+WHERE   1
+AND     \`sessionNames\`.\`layoutName\`                =   \`clientSession\`.\`layoutName\`
+AND     \`sessionNames\`.\`sessionName\`               =   \`clientSession\`.\`sessionName\`
+AND     \`sessionNames\`.\`SessionNamesAutoIncr\`       =   \`clientSession\`.\`SessionNamesAutoIncr\`
+;
 
 
 
+SELECT "COUNT: stimword to stimwordPosition AutoIncr  " , COUNT(*)   
+FROM    \`stimword\`
+,       \`stimwordPosition\`
+WHERE   1
+AND     \`stimword\`.\`stimwordAutoIncr\`         =   \`stimwordPosition\`.\`stimwordAutoIncr\`
+;
 SELECT "COUNT: stimword to stimwordPosition MISC KEYS   " , COUNT(*) 
 FROM    \`stimword\`
 ,       \`stimwordPosition\`
@@ -94,13 +136,6 @@ AND     \`stimword\`.\`layoutName\`               =   \`stimwordPosition\`.\`lay
 AND     \`stimword\`.\`stimwordPlacement\`        =   \`stimwordPosition\`.\`stimwordPlacement\`
 AND     \`stimword\`.\`stimwordOrderNbr\`         =   \`stimwordPosition\`.\`stimwordOrderNbr\`
 AND     \`stimword\`.\`stimwordWord\`             =   \`stimwordPosition\`.\`stimwordWord\`
-;
-
-SELECT "COUNT: stimword to stimwordPosition AutoIncr  " , COUNT(*)   
-FROM    \`stimword\`
-,       \`stimwordPosition\`
-WHERE   1
-AND     \`stimword\`.\`stimwordAutoIncr\`         =   \`stimwordPosition\`.\`stimwordAutoIncr\`
 ;
 
 SELECT "COUNT: stimword to stimwordPosition BOTH KEYS " , COUNT(*)   
@@ -113,6 +148,7 @@ AND     \`stimword\`.\`stimwordPlacement\`        =   \`stimwordPosition\`.\`sti
 AND     \`stimword\`.\`stimwordOrderNbr\`         =   \`stimwordPosition\`.\`stimwordOrderNbr\`
 AND     \`stimword\`.\`stimwordWord\`             =   \`stimwordPosition\`.\`stimwordWord\`
 ;
+
 
 SELECT "COUNT: sound to context MISC KEYS         " , COUNT(*)     
 FROM    \`sound\`
