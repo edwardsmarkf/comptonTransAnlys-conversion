@@ -3,6 +3,7 @@
 #     15_add_layout_table_and_keys.bsh    2021-11-01
 #
 #     2023-03-14 - changed layoutAutoIncr key to TINYINT
+#     2023-05-08  - added createdAt and updatedAt to frequencyList
 
 
 /usr/bin/mariadb  --verbose  comptonTransAnlys   <<END  ;
@@ -42,14 +43,16 @@ ALTER TABLE \`teacher\`             RENAME COLUMN \`teacherLayoutName\`         
 
 
 CREATE TABLE \`layout\` (
-                \`layoutName\`            VARCHAR(30) NOT NULL                            ,
-                \`layoutAutoIncr\`        TINYINT     UNSIGNED NOT NULL AUTO_INCREMENT    ,
-                PRIMARY KEY (\`layoutAutoIncr\`)                                          ,
+                \`layoutName\`            VARCHAR(30) NOT NULL                                                          ,
+                \`createdAt\`             TIMESTAMP   NOT NULL DEFAULT current_timestamp()                              ,
+                \`updatedAt\`             TIMESTAMP   NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+                \`layoutAutoIncr\`        TINYINT     UNSIGNED NOT NULL AUTO_INCREMENT                                  ,
+                PRIMARY KEY (\`layoutAutoIncr\`)                                                                        ,
                 KEY \`layout_key\` (\`layoutName\`)
         )
         ;
 
-INSERT INTO \`layout\` (\`layoutName\`) VALUES  ( 'P-ESL'   )   ;
+INSERT INTO \`layout\` (\`layoutName\`) VALUES  ( 'PESL'    )   ;
 INSERT INTO \`layout\` (\`layoutName\`) VALUES  ( 'ACADEMY' )   ;
 INSERT INTO \`layout\` (\`layoutName\`) VALUES  ( 'SAMPLE'  )   ;
 
