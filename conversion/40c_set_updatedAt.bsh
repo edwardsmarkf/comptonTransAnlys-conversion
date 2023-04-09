@@ -6,19 +6,19 @@
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
-UPDATE \`clientContext\`                SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`clientContext\`           MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`clientMaster\`         SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`clientMaster\`            MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`clientSession\`                SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`clientSession\`           MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`clientStimword\`               SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`context\`              SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`context\`         MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`languageNorms\`                SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`languageNorms\`           MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`languageSpec\`         SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`languageSpec\`            MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`layout\`                       SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`layout\`          MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`sessionNames\`         SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`sessionNames\`            MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`sound\`                        SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`sound\`                   MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`stimword\`             SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`stimword\`                MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`stimwordPosition\`     SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`stimwordPosition\`        MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
-UPDATE \`teacher\`              SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`teacher\`         MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`clientContext\`     SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`clientContext\`    MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`clientMaster\`      SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`clientMaster\`     MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`clientSession\`     SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`clientSession\`    MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`clientStimword\`    SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`clientStimword\`   MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`context\`           SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`context\`          MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`languageNorms\`     SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`languageNorms\`    MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`languageSpec\`      SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`languageSpec\`     MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`layout\`            SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`layout\`           MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`sessionNames\`      SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`sessionNames\`     MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`sound\`             SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`sound\`            MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`stimword\`          SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`stimword\`         MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`stimwordPosition\`  SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`stimwordPosition\` MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
+UPDATE \`teacher\`           SET  \`updatedAt\` = \`createdAt\` ;    ALTER TABLE \`teacher\`          MODIFY COLUMN \`updatedAt\`  timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() ;
 
 
 END
