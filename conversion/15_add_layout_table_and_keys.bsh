@@ -52,7 +52,7 @@ CREATE TABLE \`layout\` (
         )
         ;
 
-INSERT INTO \`layout\` (\`layoutName\`) VALUES  ( 'PESL'    )   ;
+INSERT INTO \`layout\` (\`layoutName\`) VALUES  ( 'P-ESL'   )   ;
 INSERT INTO \`layout\` (\`layoutName\`) VALUES  ( 'ACADEMY' )   ;
 INSERT INTO \`layout\` (\`layoutName\`) VALUES  ( 'SAMPLE'  )   ;
 
