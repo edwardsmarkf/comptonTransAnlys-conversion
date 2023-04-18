@@ -1,5 +1,6 @@
 #! /bin/bash -w
 
+##  may need:   npm  install knex  mysql ;
 
   ## new ball word "abc" 285
 node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "notes ball word --- abc 285"}'          ;
