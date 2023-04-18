@@ -4,10 +4,13 @@
         2023-04-18      - updated columns stimwordPageNbr stimwordLineNbr to stimwordPlacement and stimwordOrderNbr
         
         to run:
+                npm  install knex  mysql
                 node  clientStimword.js  '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 284, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def", "clientStimwordNotes" : "my client stimword notes"}'
+
         for development/debugging:
                 contextAutoIncr = 74 when stimwordPosition is 283/284
                 contextAutoIncr = 56 when stimwordPosition is 285   !!
+ 
         adapted from            https://stackoverflow.com/questions/70883305/best-way-to-make-a-knex-request-from-inside-a-promise      (mine)
                                 https://stackoverflow.com/questions/71210850/best-way-to-have-a-knex-column-search-be-optional          (mine)
                                 https://javascript.info/promise-basics
