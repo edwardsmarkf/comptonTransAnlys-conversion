@@ -1,4 +1,8 @@
 /*      clientStimword.js
+
+
+        2023-04-18      - updated columns stimwordPageNbr stimwordLineNbr to stimwordPlacement and stimwordOrderNbr
+        
         to run:
                 node  clientStimword.js  '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 284, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def", "clientStimwordNotes" : "my client stimword notes"}'
         for development/debugging:
@@ -530,8 +534,8 @@ let returnVar =
         ,       \`soundPhoneme\`
         ,       \`contextPosition\`
         ,       \`clientContextError\`
-        ,       \`stimwordPageNbr\`
-        ,       \`stimwordLineNbr\`
+        ,       \`stimwordPlacement\`
+        ,       \`stimwordOrderNbr\`
         ,       \`stimwordWord\`
         ,       \`stimwordPositionNbr\`
         ,       \`stimwordPositionSetting\`
@@ -546,8 +550,8 @@ let returnVar =
                 ,       \`stimwordPosition\`.\`soundPhoneme\`
                 ,       \`stimwordPosition\`.\`contextPosition\`
                 ,       \`clientContext\`.\`clientContextError\`
-                ,       \`stimwordPosition\`.\`stimwordPageNbr\`
-                ,       \`stimwordPosition\`.\`stimwordLineNbr\`
+                ,       \`stimwordPosition\`.\`stimwordPlacement\`
+                ,       \`stimwordPosition\`.\`stimwordOrderNbr\`
                 ,       \`stimwordPosition\`.\`stimwordWord\`
                 ,       \`stimwordPosition\`.\`stimwordPositionNbr\`
                 ,       \`stimwordPosition\`.\`stimwordPositionSetting\`
