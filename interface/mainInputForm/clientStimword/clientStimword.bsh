@@ -1,5 +1,3 @@
-[root@localhost knex]# clear
-[root@localhost knex]# cat  clientStimword.bsh
 #! /bin/bash -w
 
 
@@ -127,4 +125,3 @@ echo 'hopefully it is EMPTY!!' ;
 
 
 exit 1;
-[root@localhost knex]#
