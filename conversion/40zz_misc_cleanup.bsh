@@ -6,11 +6,13 @@
 #	2023-03-10 - added autoIncr foreign key for clientSession
 # 2023-04-07 - renamed
 # 2023-04-21 - made all createdAt dates default to current timestamp
+# 2023-04-21 - changed zero to blank
+  
 
 
 mariadb  --verbose   comptonTransAnlys   <<END;
 
-  ALTER TABLE \`clientMaster\`     MODIFY  \`clientMasterName\`       VARCHAR(120) NOT NULL DEFAULT 0;       ## 2023-03-08
+  ALTER TABLE \`clientMaster\`     MODIFY  \`clientMasterName\`       VARCHAR(120) NOT NULL DEFAULT '';       ## 2023-03-08 ## 2023-04-21 - changed zero to blank
   
          ## 2023-04-21
    
