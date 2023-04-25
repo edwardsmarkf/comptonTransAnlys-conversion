@@ -78,7 +78,7 @@ ALTER TABLE \`clientSession\` DROP COLUMN IF EXISTS	\`clientMasterName\`								
 
 
 ALTER TABLE \`clientSession\` RENAME COLUMN \`clientMasterAutoIncr\` TO \`clientSessionAutoIncr\`						;
-ALTER TABLE \`clientSession\` RENAME COLUMN \`clientMasterAnlysNotes\` TO \`clientSessionAnlysNotes\`						;
+ALTER TABLE \`clientSession\` RENAME COLUMN \`clientMasterAnlysNotes\` TO \`clientSessionNotes\`						;
 
 ALTER TABLE \`clientSession\` ADD COLUMN    \`clientMasterAutoIncr\` INT(11)  NOT NULL AFTER \`updatedAt\` ;
 
