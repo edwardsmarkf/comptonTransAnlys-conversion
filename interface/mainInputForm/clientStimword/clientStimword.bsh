@@ -2,6 +2,9 @@
 
 ##  may need:   npm  install knex  mysql ;
 
+## add in ZERO  c stimwordPositionAutoIncr to signal a change just to clientContext?????
+
+
   ## new ball word "abc" 285
 node clientStimword.js '  {   "clientSessionAutoIncr"     : 2349                          \
                           ,   "stimwordPositionAutoIncr"  : 285                           \
@@ -14,7 +17,12 @@ mariadb --execute  "\. ./clientStimword.sql" ;
 
 
   ## duplicate error!
-node clientStimword.js '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 285, "clientContextError_OLD" :"", "clientContextError_NEW" : "abc"    , "clientStimwordNotes" : "hopefully a duplicate error"}'          ;
+node clientStimword.js  ' {   "clientSessionAutoIncr"     : 2349                          \
+                          ,   "stimwordPositionAutoIncr"  : 285
+                          ,   "clientContextError_OLD"    : ""
+                          ,   "clientContextError_NEW"    : "abc"
+                          ,   "clientStimwordNotes"       : "hopefully a duplicate error"}'
+                          ;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
