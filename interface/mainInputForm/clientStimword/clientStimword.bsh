@@ -21,7 +21,8 @@ node clientStimword.js  ' {   "clientSessionAutoIncr"     : 2349
                           ,   "stimwordPositionAutoIncr"  : 285
                           ,   "clientContextError_OLD"    : ""
                           ,   "clientContextError_NEW"    : "abc"
-                          ,   "clientStimwordNotes"       : "hopefully a duplicate error"}
+                          ,   "clientStimwordNotes"       : "hopefully a duplicate error"
+                          }
                        ';
 mariadb --execute  "\. ./clientStimword.sql" ;
 
@@ -31,7 +32,8 @@ node clientStimword.js '  {   "clientSessionAutoIncr"     : 2349
                           ,   "stimwordPositionAutoIncr"  : 285
                           ,   "clientContextError_OLD"    : ""
                           ,   "clientContextError_NEW"    : "XXX"
-                          ,   "clientStimwordNotes"       : "hopefully a duplicate error"}
+                          ,   "clientStimwordNotes"       : "hopefully a duplicate error"
+                          }
                        ';
 mariadb --execute  "\. ./clientStimword.sql" ;
 
