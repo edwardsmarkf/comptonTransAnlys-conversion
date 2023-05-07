@@ -96,8 +96,9 @@ node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                           , "stimwordPositionAutoIncr"      : 285
                           , "clientContextError_OLD"        :"def"
                           , "clientContextError_NEW"        : ""
-                          , "clientStimwordNotes"           : "deleting ball word def 285"}'
-                        ';
+                          , "clientStimwordNotes"           : "deleting ball word def 285"
+                         }
+                      ';
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
