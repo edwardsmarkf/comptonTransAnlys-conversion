@@ -7,7 +7,7 @@
 # 2023-04-07 - renamed
 # 2023-04-21 - made all createdAt dates default to current timestamp
 # 2023-04-21 - changed zero to blank
-# 2023-05-08 - moved column so all the foreign key columns are separated from the actual data columns
+# 2023-05-08 - moved column so all the foreign key columns are separated from the actual data columns, also frequency was zero default changed to ''
   
 
 
@@ -31,8 +31,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
   ALTER TABLE \`teacher\`          MODIFY  \`createdAt\`              TIMESTAMP NOT NULL DEFAULT current_timestamp();
   
   ##  2023-05-08
-  ALTER TABLE \`clientContext\`    MODIFY COLUMN \`clientContextErrorCount\` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0  AFTER \`frequency\` ;
-  
+ALTER TABLE \`clientContext\` MODIFY COLUMN \`frequency\` VARCHAR(15) NOT NULL DEFAULT ''  AFTER \`contextPosition\` ;
 
 END
 
