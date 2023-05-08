@@ -64,7 +64,7 @@ s/\`Client_context_error\`/\`clientContextError\`/g;
 ###   s/\`Client_context_error_2\`/\`clientContextError2_UNUSED\`/g;
 ###   s/\`Client_context_error_3\`/\`clientContextError3_UNUSED\`/g;
 ###   s/\`Client_context_error_4\`/\`clientContextError4_UNUSED\`/g;
-s/\`Client_context_error_speaking_count\`/\`clientContextSpeakingErrors\`/g;
+s/\`Client_context_error_speaking_count\`/\`clientContextErrorCount\`/g;
 s/\`Client_context_error_frequency\`/\`clientContextErrorFrequency\`/g;
 s/\`Client_context_error_notes\`/\`clientContextErrorNotes\`/g;
 s/\`Context_auto_increment\`/\`contextAutoIncr\`/g;
