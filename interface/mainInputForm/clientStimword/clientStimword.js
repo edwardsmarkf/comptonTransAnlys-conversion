@@ -271,34 +271,7 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
         })
         ;
 
-/*
-GET contextAutoIncr using stimwordPosition(clientContextAutoIncr)
-        switch(true)
-        case   ( OLD == <blank> && NEW NOT <blank> )      {
-                if  ( selectClientContextStimword(NEW) == 0 )   {
-                        if  ( clientContext(NEW) NOT exists )   {
-                            INSERT clientContext(NEW)
-                        }
-                        INSERT clientStimword(NEW)
-                } else {        // duplicate!!
-                        throw dup error
-                }
-        case   ( OLD NOT <blank> && NEW NOT <blank> )      {
-                if  ( selectClientContextStimword(OLD) == 1 )   {
-                        if  ( clientContext(NEW) NOT exists )   {
-                            INSERT clientContext(NEW)
-                        }
-                        MODIFY clientStimword(OLD) to clientStimword(NEW)
-                        deleteChildlessClientContext    (OLD)
-                } else {
-                        throw missing error
-                }
-        case   ( OLD NOT <blank> && NEW == <blank> )      {
-                                                                //      make sure OLD exists ????
-                DELETE clientStimword(OLD)
-                deleteChildlessClientContext    (OLD)
-        }
-*/
+
 
 function selectClientContextStimword(clientSessionAutoIncr, stimwordPositionAutoIncr, clientContextError)       {
 
@@ -575,3 +548,37 @@ let returnVar =
 };
 
 //
+
+
+
+
+
+
+/*
+GET contextAutoIncr using stimwordPosition(clientContextAutoIncr)
+        switch(true)
+        case   ( OLD == <blank> && NEW NOT <blank> )      {
+                if  ( selectClientContextStimword(NEW) == 0 )   {
+                        if  ( clientContext(NEW) NOT exists )   {
+                            INSERT clientContext(NEW)
+                        }
+                        INSERT clientStimword(NEW)
+                } else {        // duplicate!!
+                        throw dup error
+                }
+        case   ( OLD NOT <blank> && NEW NOT <blank> )      {
+                if  ( selectClientContextStimword(OLD) == 1 )   {
+                        if  ( clientContext(NEW) NOT exists )   {
+                            INSERT clientContext(NEW)
+                        }
+                        MODIFY clientStimword(OLD) to clientStimword(NEW)
+                        deleteChildlessClientContext    (OLD)
+                } else {
+                        throw missing error
+                }
+        case   ( OLD NOT <blank> && NEW == <blank> )      {
+                                                                //      make sure OLD exists ????
+                DELETE clientStimword(OLD)
+                deleteChildlessClientContext    (OLD)
+        }
+*/
