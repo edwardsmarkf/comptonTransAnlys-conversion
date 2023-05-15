@@ -7,7 +7,7 @@ outputFile='/home/comptonpeslonline.com/comptonTransAnlys.sql' ;
 
 /usr/bin/mariadb-dump --extended-insert=TRUE --user=root --password='!zzyzx15zzyzx!' comptonTransAnlys > $outputFile; 
  
-/usr/bin/gzip  --force /home/comptonpeslonline.com/comptonTransAnlys.sql   ;
+/usr/bin/gzip  --force  $outputFile   ;
      
    FTP FILE OVER
    
