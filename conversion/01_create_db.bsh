@@ -3,7 +3,8 @@
 #	01_create_db.bsh
 #
 #   2022-11-08 - remove the default timestamp
-#       
+#   2022-05-16 - the EXTENDED-INSERT may not be necessary anymore
+#
 #	set fileformat=unix
 #
 #
