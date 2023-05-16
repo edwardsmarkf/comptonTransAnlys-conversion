@@ -8,7 +8,9 @@
 #
 #
 
-grep  'INSERT INTO'  comptonTransAnlys.sql   |  wc  --lines ;   ## we need to be SURE that  "mariadb-dump  --extended-insert=FALSE"   was used!
+
+####  2023-05-16 - this MAY not be necessary anymore
+###grep  'INSERT INTO'  comptonTransAnlys.sql   |  wc  --lines ;   ## we need to be SURE that  "mariadb-dump  --extended-insert=FALSE"   was used!
 
 sed --in-place  --expression="s/dipthong/diphthong/g;  s/ON DELETE NO ACTION/ON DELETE CASCADE/g; /'mbirje'/d; "                    ./comptonTransAnlys.sql  ;
 
