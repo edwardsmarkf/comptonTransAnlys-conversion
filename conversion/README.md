@@ -5,7 +5,8 @@ current server:
 
 outputFile='/home/comptonpeslonline.com/comptonTransAnlys.sql' ;
 
-/usr/bin/mariadb-dump --extended-insert=FALSE --user=root --password='!zzyzx15zzyzx!' comptonTransAnlys > $outputFile; 
+###    2013-05-16 - changed FALSE to TRUE
+/usr/bin/mariadb-dump --extended-insert=TRUE --user=root --password='!zzyzx15zzyzx!' comptonTransAnlys > $outputFile; 
  
 /usr/bin/gzip  --force  $outputFile   ;
      
