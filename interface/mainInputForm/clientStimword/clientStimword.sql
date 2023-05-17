@@ -1,4 +1,13 @@
-        ## test display written 2022-02-18
+       
+       
+       update clientStimword set clientStimwordNotes = 'Manually added by mark!' 
+       where clientMasterEmail = '12yukos@gmail.com' 
+       and stimwordWord = 'crib'  
+       and clientStimwordAutoIncr = 8109607
+       ;
+       
+       
+       ## test display written 2022-02-18
 
         SELECT  `clientContext`.`clientContextError`
         ,       `clientContext`.`contextPosition`
