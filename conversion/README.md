@@ -2,10 +2,10 @@
 current server:
 
 ##   DID NOT WORK 2023-05-15 - changed --extended-insert=FALSE  to   --extended-insert=TRUE  since the bug appears to be fixed now.
+###    2023-05-16 - changed --extended-insert=FALSE to --extended-insert=TRUE 
+
 
 outputFile='/home/comptonpeslonline.com/comptonTransAnlys.sql' ;
-
-###    2013-05-16 - changed FALSE to TRUE
 /usr/bin/mariadb-dump --extended-insert=TRUE --user=root --password='!zzyzx15zzyzx!' comptonTransAnlys > $outputFile; 
  
 /usr/bin/gzip  --force  $outputFile   ;
