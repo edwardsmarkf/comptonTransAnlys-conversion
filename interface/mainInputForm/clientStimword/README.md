@@ -1,3 +1,3 @@
 main interface for main input form
 
-this entire section should probably ignore   "clientStimwordNotes"....!
+2023-06-23 - this entire section should probably ignore   "clientStimwordNotes"....!
