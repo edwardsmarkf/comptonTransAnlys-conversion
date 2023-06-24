@@ -6,15 +6,20 @@
 
 
   ## new ball word "abc" 285
-node clientStimword.js '  {   "clientSessionAutoIncr"     : 2349
+clientContextAutoIncr=$(
+  node clientStimword.js '  {   "clientSessionAutoIncr"     : 2349
                           ,   "stimwordPositionAutoIncr"  : 285
                           ,   "clientContextError_OLD"    : ""
                           ,   "clientContextError_NEW"    : "abc"
-                          ,   "clientStimwordNotes"       : "notes ball word --- abc 285"
+                          ,   "clientStimwordAutoIncr"    :  null
                           }
                        ';
+);
+##                            ,   "clientStimwordNotes"       : "notes ball word --- abc 285"
 mariadb --execute  "\. ./clientStimword.sql" ;
+echo ${clientContextAutoIncr};
 
+exit;
 
   ## duplicate error!
 node clientStimword.js  ' {   "clientSessionAutoIncr"     : 2349
