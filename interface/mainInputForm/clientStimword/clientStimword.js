@@ -5,7 +5,7 @@
         
         to run:
                 npm  install knex  mysql
-                node  clientStimword.js  '{"clientSessionAutoIncr" : 2349, "stimwordPositionAutoIncr" : 284, "clientContextError_OLD" :"abc", "clientContextError_NEW" : "def", "clientStimwordNotes" : "my client stimword notes"}'
+                node  clientStimword.js  '{"clientSessionAutoIncr": 2349, "stimwordPositionAutoIncr": 284, "clientContextError_OLD":"abc", "clientContextError_NEW": "def" }'
 
         for development/debugging:
                 contextAutoIncr = 74 when stimwordPosition is 283/284
@@ -26,8 +26,8 @@ const   parmClientSessionAutoIncr       = myArgs.clientSessionAutoIncr          
 const   parmStimwordPositionAutoIncr    = myArgs.stimwordPositionAutoIncr       ;
 const   parmClientContextError_OLD      = myArgs.clientContextError_OLD         ;
 const   parmClientContextError_NEW      = myArgs.clientContextError_NEW         ;
-const   parmClientStimwordAUtoIncr      = myArgs.clientContextAutoIncr          ;
-                                        //const   parmClientStimwordNotes         = myArgs.clientStimwordNotes            ;
+const   parmClientStimwordAutoIncr      = myArgs.clientContextAutoIncr          ;
+
 
 
                                                                 //      mariadb  --host=localhost --user=kenxUser  --password=knexPassword    comptonTransAnlys
@@ -82,7 +82,7 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                                         } else {
                                                                                 exitScript(0, 'Bad clientContextAutoIncr on insert!', val);
                                                                         }
-                                                                        insertClientStimword(clientContextAutoIncr, parmStimwordPositionAutoIncr, parmClientStimwordNotes)
+                                                                        insertClientStimword(clientContextAutoIncr, parmStimwordPositionAutoIncr )
                                                                                 .then(  val =>  {
                                                                                         exitScript(1, 'Successful insert.', val[0]);    //       val[0][0]['clientStimwordAutoIncr']);
                                                                                 });
@@ -166,7 +166,7 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                                                                         ,       'stimwordPositionAutoIncr'      :       parmStimwordPositionAutoIncr
                                                                                                         ,       'clientContextError_OLD'        :       parmClientContextError_OLD
                                                                                                         ,       'clientContextError_NEW'        :       parmClientContextError_NEW
-                                                                                                        ,       'clientStimwordNotes'           :       parmClientStimwordNotes
+                                                                                                     
                                                                                                         }
                                                                                                         ;
 
@@ -351,12 +351,11 @@ function insertClientContext(val, clientContextError, contextAutoIncr, clientSes
         return knex.raw(insertClientContextStatement, insertClientContextParms);
 }
 
-function insertClientStimword(clientContextAutoIncr, stimwordPositionAutoIncr, clientStimwordNotes)     {
+function insertClientStimword(clientContextAutoIncr, stimwordPositionAutoIncr)     {
 
         let insertClientStimwordParms =
                 {       'clientContextAutoIncr'                 :       clientContextAutoIncr
                 ,       'stimwordPositionAutoIncr'              :       stimwordPositionAutoIncr
-                ,       'clientStimwordNotes'                   :       clientStimwordNotes
                 }
                 ;
         return knex.raw(insertClientStimwordStatement, insertClientStimwordParms);
@@ -382,7 +381,6 @@ function updateClientStimword   (parmObject)    {
                                    , clientContextError_OLD
                                    , clientContextAutoIncr_NEW
                                    , clientContextError_NEW
-                                   , clientStimwordNotes
                                    }
                                 ) 
        {
@@ -396,7 +394,6 @@ function updateClientStimword   (parmObject)    {
         let updateClientStimwordUpdateParms =
                 {       'clientContextAutoIncr'         :       parmObject.clientContextAutoIncr_NEW
                 ,       'clientContextError'            :       parmObject.clientContextError_NEW
-                ,       'clientStimwordNotes'           :       parmObject.clientStimwordNotes
                 };
 
         return knex
@@ -517,7 +514,6 @@ let returnVar =
         ,       \`stimwordWord\`
         ,       \`stimwordPositionNbr\`
         ,       \`stimwordPositionSetting\`
-        ,       \`clientStimwordNotes\`
         ,       \`clientContextAutoIncr\`
         ,       \`stimwordPositionAutoIncr\`
         )
@@ -533,7 +529,6 @@ let returnVar =
                 ,       \`stimwordPosition\`.\`stimwordWord\`
                 ,       \`stimwordPosition\`.\`stimwordPositionNbr\`
                 ,       \`stimwordPosition\`.\`stimwordPositionSetting\`
-                ,       :clientStimwordNotes
                 ,       \`clientContext\`.\`clientContextAutoIncr\`
                 ,       \`stimwordPosition\`.\`stimwordPositionAutoIncr\`
                 FROM    \`clientContext\`
