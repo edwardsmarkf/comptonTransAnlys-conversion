@@ -2,7 +2,7 @@
 
 ##  may need:   npm  install knex  mysql ;
 
-## add in ZERO  c stimwordPositionAutoIncr to signal a change just to clientContext?????  ???????????????????????/////
+##  2023-06-24  -- removed any reference to clientStimwordNotes
 
 
   ## new ball word "abc" 285
@@ -18,13 +18,9 @@ returnJSON=$(
 ##                            ,   "clientStimwordNotes"       : "notes ball word --- abc 285"
 mariadb --execute  "\. ./clientStimword.sql" ;
 
-clientContextAutoIncr=$(  echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;';  ) ;
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
 
-echo ${clientContextAutoIncr};
-echo ${clientContextAutoIncr};
-echo ${clientContextAutoIncr};
-echo ${clientContextAutoIncr};
-echo ${clientContextAutoIncr};
 
 exit;
 
