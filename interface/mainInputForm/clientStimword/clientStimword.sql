@@ -5,7 +5,7 @@
 
         SELECT  `clientContext`.`clientContextError`
         ,       `clientContext`.`contextPosition`
-        ,       `clientContext`.`clientContextSpeakingErrors`
+        ,       `clientContext`.`clientContextErrorCount`
         ,       `clientContext`.`clientContextErrorNotes`
         ,       `clientContext`.`clientContextAutoIncr`
         FROM    `comptonTransAnlys`.`clientContext`
