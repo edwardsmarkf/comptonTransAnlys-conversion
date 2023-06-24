@@ -27,7 +27,7 @@ const   parmClientSessionAutoIncr       = myArgs.clientSessionAutoIncr          
 const   parmStimwordPositionAutoIncr    = myArgs.stimwordPositionAutoIncr       ;
 const   parmClientContextError_OLD      = myArgs.clientContextError_OLD         ;
 const   parmClientContextError_NEW      = myArgs.clientContextError_NEW         ;
-const   parmClientStimwordAutoIncr      = myArgs.clientContextAutoIncr          ;
+                //                const   parmClientStimwordAutoIncr      = myArgs.clientContextAutoIncr          ;
 
 
 
