@@ -26,12 +26,14 @@ const   parmClientSessionAutoIncr       = myArgs.clientSessionAutoIncr          
 const   parmStimwordPositionAutoIncr    = myArgs.stimwordPositionAutoIncr       ;
 const   parmClientContextError_OLD      = myArgs.clientContextError_OLD         ;
 const   parmClientContextError_NEW      = myArgs.clientContextError_NEW         ;
-const   parmClientStimwordNotes         = myArgs.clientStimwordNotes            ;
+const   parmClientStimwordAUtoIncr      = myArgs.clientContextAutoIncr          ;
+                                        //const   parmClientStimwordNotes         = myArgs.clientStimwordNotes            ;
 
 
                                                                 //      mariadb  --host=localhost --user=kenxUser  --password=knexPassword    comptonTransAnlys
 const knexConnectOptions =
-        {       'client'        :       'mysql'
+        {       'host'          :       '127.0.0.1'
+        ,       'client'        :       'mysql'
         ,       'debug'         :       false
         ,       'connection'    :       'mysql://knexUser:knexPassword@localhost:3306/comptonTransAnlys'
         };
