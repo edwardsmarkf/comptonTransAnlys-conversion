@@ -6,7 +6,7 @@
 
 
   ## new ball word "abc" 285
-clientContextAutoIncr=$(
+returnJSON=$(
   node clientStimword.js '  {   "clientSessionAutoIncr"     : 2349
                           ,   "stimwordPositionAutoIncr"  : 285
                           ,   "clientContextError_OLD"    : ""
@@ -17,6 +17,13 @@ clientContextAutoIncr=$(
 );
 ##                            ,   "clientStimwordNotes"       : "notes ball word --- abc 285"
 mariadb --execute  "\. ./clientStimword.sql" ;
+
+clientContextAutoIncr=$(  echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;';  ) ;
+
+echo ${clientContextAutoIncr};
+echo ${clientContextAutoIncr};
+echo ${clientContextAutoIncr};
+echo ${clientContextAutoIncr};
 echo ${clientContextAutoIncr};
 
 exit;
