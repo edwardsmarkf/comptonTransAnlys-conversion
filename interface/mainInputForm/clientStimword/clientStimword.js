@@ -2,6 +2,7 @@
 
 
         2023-04-18      - updated columns stimwordPageNbr stimwordLineNbr to stimwordPlacement and stimwordOrderNbr
+        2023-06-24      - changed  clientContextSpeakingErrors clientContextErrorCount 
         
         to run:
                 npm  install knex  mysql
@@ -342,7 +343,7 @@ function insertClientContext(val, clientContextError, contextAutoIncr, clientSes
                 {       'clientContextError'                    :       clientContextError
                 ,       'contextAutoIncr'                       :       contextAutoIncr
                 ,       'clientSessionAutoIncr'                 :       clientSessionAutoIncr
-                ,       'clientContextSpeakingErrors'           :       0
+                ,       'clientContextErrorCount'           :       0
                 ,       'frequency'                             :       ''
                 ,       'clientContextErrorNotes'               :       null
                 }
@@ -424,7 +425,7 @@ function deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, cl
                 ,       'clientContextError'                    :       clientContextError
                 ,       'clientContextErrorNotes'               :       null
                 ,       'frequency'                             :       ''
-                ,       'clientContextSpeakingErrors'           :       0
+                ,       'clientContextErrorCount'           :       0
                 };
         return knex
                 .from('clientContext')
@@ -466,7 +467,7 @@ let returnVar =
         ,               \`contextPosition\`
         ,               \`contextAutoIncr\`
         ,               \`clientContextError\`
-        ,               \`clientContextSpeakingErrors\`
+        ,               \`clientContextErrorCount\`
         ,               \`frequency\`
         ,               \`clientContextErrorNotes\`
         )
@@ -479,7 +480,7 @@ let returnVar =
                 ,               \`context\`.\`contextPosition\`
                 ,               \`context\`.\`contextAutoIncr\`
                 ,               :clientContextError
-                ,               :clientContextSpeakingErrors
+                ,               :clientContextErrorCount
                 ,               :frequency
                 ,               :clientContextErrorNotes
                 FROM    \`clientSession\`
