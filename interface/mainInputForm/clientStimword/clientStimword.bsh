@@ -22,8 +22,6 @@ echo ${returnJSON};
 echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
 
 
-exit;
-
   ## duplicate error!
 returnJSON=$(
   node clientStimword.js '{   "clientSessionAutoIncr"     : 2349
@@ -35,6 +33,8 @@ returnJSON=$(
                        ';
 );
 mariadb --execute  "\. ./clientStimword.sql" ;
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
 
 
   ## another duplicate error!
@@ -48,6 +48,8 @@ returnJSON=$(
                        ';
 );
 mariadb --execute  "\. ./clientStimword.sql" ;
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
 
 
   ## new ball sentence "abc" 286
@@ -61,6 +63,8 @@ returnJSON=$(
                       ';
 );
 mariadb --execute  "\. ./clientStimword.sql" ;
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
 
 
   ## new seal word "abc" 273
@@ -73,6 +77,8 @@ returnJSON=$(
                           }
                       ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -86,6 +92,9 @@ returnJSON=$(
                           }
                         ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -99,6 +108,9 @@ returnJSON=$(
                             }
                          ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -111,7 +123,9 @@ returnJSON=$(
                                   //    , "clientStimwordNotes"           : "cannot find item to change"
                             }
                         ';
-);
+)echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -125,6 +139,9 @@ returnJSON=$(
                            }
                         ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
@@ -139,6 +156,8 @@ returnJSON=$(
                             }
                          ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
 
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
@@ -154,6 +173,9 @@ returnJSON=$(
                             }
                          ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
@@ -173,6 +195,9 @@ returnJSON=$(
                               }
                          ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -186,6 +211,9 @@ returnJSON=$(
                             }
                         ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
@@ -200,6 +228,9 @@ returnJSON=$(
                             }
                         ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
@@ -213,7 +244,10 @@ returnJSON=$(
                                   //    , "clientStimwordNotes"             : "notes 'seal' sentence ---- abc 274"
                             }
                          ';
-)/
+);
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -227,6 +261,9 @@ returnJSON=$(
                             }
                          ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
@@ -247,6 +284,9 @@ returnJSON=$(
                             }
                          ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -261,6 +301,9 @@ returnJSON=$(
                          ';
 );
 sleep 1;
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -275,6 +318,9 @@ returnJSON=$(
                         ';
 );
 sleep 1;
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -288,6 +334,9 @@ returnJSON=$(
                             }
                           ';
 );
+echo ${returnJSON};
+echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+
 sleep 1;
 echo 'this should be EMPTY!!' ;
 mariadb --execute  "\. ./clientStimword.sql" ;
