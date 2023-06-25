@@ -7,6 +7,7 @@
 #   2021-06-01  - made all email(name) references varchar(120) instead of varchar(100)
 ##  2021-09-05  - removed all the ALTER TABLE for email and changed VARCHAR(50) to VARCHAR(120)
 ##  2023-04-08  - added Eval_master_timestamp
+##  2023-06-25  - strange problem with the Client_master_email tripping over the Teacher foreign key...?
 
 ##	set fileencoding=ASCII
 ##	set fileformat=unix
@@ -89,7 +90,11 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
 
   SELECT '005';
   ## move the client_master emails over to the Client_master_client_name
-  UPDATE Client_master SET Client_master_client_name = lower(Client_master_email)   ;
+  UPDATE Client_master SET Client_master_client_name = lower(Client_master_email)
+  WHERE 1
+  AND \`Client_master\`.\`Client_master_client_name\` != lower(\`Client_master\`.\'Client_master_email\')
+  ;
+  ## 2023-06-25 - weird problem somehow affecting the Teacher foreign key....?  added AND not-equal as a stop-gap measure
 END
 
 
