@@ -3,7 +3,7 @@
               
        ## test display written 2022-02-18
 
-        SELECT  `clientContext`.`clientContextError`
+        SELECT  `clientContext`.`clientContextErrorSound`
         ,       `clientContext`.`contextPosition`
         ,       `clientContext`.`clientContextErrorCount`
         ,       `clientContext`.`clientContextErrorNotes`
@@ -14,7 +14,7 @@
         AND     `clientContext`.`clientSessionAutoIncr`         =       2349
         ;
 
-        SELECT  `clientContext`.`clientContextError`
+        SELECT  `clientContext`.`clientContextErrorSound`
         ,       `clientStimword`.`stimwordWord`
         ,       `clientStimword`.`contextPosition`
         ,       `clientStimword`.`stimwordPositionSetting`
