@@ -49,7 +49,7 @@ ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`clientMasterEmail\` VARCHAR(120)
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`sessionName\` VARCHAR(30) NOT NULL                                                              AFTER \`clientMasterEmail\`     ;
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`soundPhoneme\` CHAR(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''            AFTER \`sessionName\`           ;
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`contextPosition\` VARCHAR(20) NOT NULL                                                          AFTER \`soundPhoneme\`          ;
-ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`clientContextError\` CHAR(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''      AFTER \`contextPosition\`       ;
+ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`clientContextErrorSound\` CHAR(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '' AFTER \`contextPosition\`       ;
 
 
 END
