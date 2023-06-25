@@ -85,6 +85,7 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                                         }
                                                                         insertClientStimword(clientContextAutoIncr, parmStimwordPositionAutoIncr )
                                                                                 .then(  val =>  {
+                                                                                        console.info('do something with clientContextAutoIncr: ' + clientContextAutoIncr );
                                                                                         exitScript(1, 'Successful insert.', val[0]);    //       val[0][0]['clientStimwordAutoIncr']);
                                                                                 });
                                                                 })
