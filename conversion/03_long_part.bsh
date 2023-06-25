@@ -90,9 +90,9 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
 
   SELECT '005';
   ## move the client_master emails over to the Client_master_client_name
-  UPDATE Client_master SET Client_master_client_name = lower(Client_master_email)
+  UPDATE \`Client_master\` SET \`Client_master\`.\`Client_master_client_name\` = LOWER(\`Client_master\`.\`Client_master_email\`)
   WHERE 1
-  AND \`Client_master\`.\`Client_master_client_name\` != lower(\`Client_master\`.\'Client_master_email\')
+  AND \`Client_master\`.\`Client_master_client_name\` != LOWER(\`Client_master\`.\'Client_master_email\')
   ;
   ## 2023-06-25 - weird problem somehow affecting the Teacher foreign key....?  added AND not-equal as a stop-gap measure
 END
