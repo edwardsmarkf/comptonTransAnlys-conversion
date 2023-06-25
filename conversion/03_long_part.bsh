@@ -12,11 +12,10 @@
 ##	set fileformat=unix
 
 
+echo '001'  ;
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
-  ###### 2021-05-09 UPDATE Client_master         SET Client_master_script_name       = '' ;  ## 2020-10-30
-  ###### 2021-05-09 UPDATE Client_anlys_detail   SET Client_anlys_detail_script_name = ''  ; ## 2020-10-30
-  ###### 2021-05-09 UPDATE Client_eval_detail    SET Client_eval_detail_script_name  = ''  ; ## 2020-10-30
+  SELECT '001'  ;
 
   ALTER TABLE Client_anlys_detail   DROP COLUMN IF EXISTS   Client_anlys_detail_script_name    ;  ## 2021-05-09
   ALTER TABLE Client_anlys_detail   DROP COLUMN IF EXISTS   Client_anlys_detail_script_line    ;  ## 2021-05-09
@@ -28,11 +27,11 @@
   ALTER TABLE Client_master         DROP COLUMN IF EXISTS   Client_master_script_line          ;  ## 2021-05-09
 END
 
+
+echo '002';
 mariadb    --verbose  comptonTransAnlys  <<END ;
 
-  ####  2021-09-07  ## 2021-09-05 - for some reason, Client_master_email is coming through as blank.
-  ####  2021-09-07  SELECT * FROM Client_master                                               WHERE 1 AND Client_master_email IS   NULL   ;
-  ####  2021-09-07  UPDATE Client_master SET Client_master_email = Client_master_client_name  WHERE 1 AND Client_master_email IS   NULL   ;
+  SELECT '002';
   
   ##
   ##
@@ -56,8 +55,10 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
 END
 
 
+echo '003' ;
 mariadb    --verbose  comptonTransAnlys  <<END ;
 
+  SELECT '003';
   ## create 'fake' email addresses in the client_master table for the blank ones  
    --  change-client-master-emails-for-blanks.qbquery
 
@@ -69,8 +70,10 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
 
 END
 
+echo '004';
 mariadb    --verbose  comptonTransAnlys  <<END ;
 
+  SELECT '004' ;
   ## create *NEW* client name column:
    ### 2021-09-05  change VARCHAR(50) to VARCHAR(120)
   ALTER TABLE Client_master   ADD COLUMN Client_master_name  VARCHAR(120) NOT NULL 
@@ -80,14 +83,20 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
   UPDATE Client_master SET Client_master_name = Client_master_client_name;
 END
 
+
+echo '005';
 mariadb    --verbose  comptonTransAnlys  <<END ;
 
+  SELECT '005';
   ## move the client_master emails over to the Client_master_client_name
   UPDATE Client_master SET Client_master_client_name = lower(Client_master_email)   ;
 END
 
+
+echo '006';
 mariadb    --verbose  comptonTransAnlys  <<END ;
 
+  SELECT '006';
   ## create a legacy column for the teacher username ((??))
   ### 2021-09-05  change VARCHAR(50) to VARCHAR(120)
   ALTER TABLE Teacher ADD COLUMN Teacher_legacy_name  VARCHAR(120)  NOT NULL AFTER Teacher_security_level ;
@@ -100,8 +109,10 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
 END
 
 
+echo '007';
 mariadb    --verbose  comptonTransAnlys  <<END ;
 
+  SELECT '007';
  ## delete the old email columns:
  --  drop-all-email-columns.sql
   ALTER TABLE Teacher         DROP COLUMN Teacher_email;
@@ -141,7 +152,10 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
 END
 
 
+echo '008';
+
 mariadb    --verbose  comptonTransAnlys  <<END ;
+  SELECT '008';
   ALTER TABLE TEMP_Eval_master ADD COLUMN TEMP_Eval_master_auto_increment MEDIUMINT  NOT NULL AUTO_INCREMENT PRIMARY KEY
   , CHANGE COLUMN Eval_master_layout_name     TEMP_Eval_master_layout_name VARCHAR(30) NOT NULL
   , CHANGE COLUMN  Eval_master_page_nbr       TEMP_Eval_master_page_nbr    TINYINT(4) NOT NULL
