@@ -6,7 +6,7 @@
         
         to run:
                 npm  install knex  mysql
-                node  clientStimword.js  '{"clientSessionAutoIncr": 2349, "stimwordPositionAutoIncr": 284, "clientContextError_OLD":"abc", "clientContextError_NEW": "def" }'
+                node  clientStimword.js  '{"clientSessionAutoIncr": 2349, "stimwordPositionAutoIncr": 284, "clientContextErrorSound_OLD":"abc", "clientContextErrorSound_NEW": "def" }'
 
         for development/debugging:
                 contextAutoIncr = 74 when stimwordPosition is 283/284
@@ -22,11 +22,11 @@
 
 'use strict';
 
-var     myArgs                          = JSON.parse(process.argv.slice(2)[0])  ;
-const   parmClientSessionAutoIncr       = myArgs.clientSessionAutoIncr          ;
-const   parmStimwordPositionAutoIncr    = myArgs.stimwordPositionAutoIncr       ;
-const   parmClientContextError_OLD      = myArgs.clientContextError_OLD         ;
-const   parmClientContextError_NEW      = myArgs.clientContextError_NEW         ;
+var     myArgs                               = JSON.parse(process.argv.slice(2)[0])  ;
+const   parmClientSessionAutoIncr            = myArgs.clientSessionAutoIncr          ;
+const   parmStimwordPositionAutoIncr         = myArgs.stimwordPositionAutoIncr       ;
+const   parmclientContextErrorSound_OLD      = myArgs.clientContextErrorSound_OLD         ;
+const   parmclientContextErrorSound_NEW      = myArgs.clientContextErrorSound_NEW         ;
                 //                const   parmClientStimwordAutoIncr      = myArgs.clientContextAutoIncr          ;
 
 
@@ -60,20 +60,20 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                 OLD is blank,   NEW is filled in
                                         */
 
-                        case ( parmClientContextError_OLD  == ''  &&    parmClientContextError_NEW > '' )       :
+                        case ( parmclientContextErrorSound_OLD  == ''  &&    parmclientContextErrorSound_NEW > '' )       :
                         {
                                 selectClientContextStimword(parmClientSessionAutoIncr, parmStimwordPositionAutoIncr, true)
                                         .then( val =>   {
 
                                                 let clientStimwordCount = val.length ;
                                                 if  ( clientStimwordCount == 0 )        {
-                                                        selectClientContext(parmClientContextError_NEW, parmClientSessionAutoIncr, contextAutoIncr)
+                                                        selectClientContext(parmclientContextErrorSound_NEW, parmClientSessionAutoIncr, contextAutoIncr)
                                                                 .then( val =>  {
                                                                                 if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
                                                                                         let returnArray = [ val ];      // funky way to "match" what the insert returns!
                                                                                         return  returnArray;
                                                                                 } else {
-                                                                                        return insertClientContext(val, parmClientContextError_NEW, contextAutoIncr, parmClientSessionAutoIncr);
+                                                                                        return insertClientContext(val, parmclientContextErrorSound_NEW, contextAutoIncr, parmClientSessionAutoIncr);
                                                                                 }
                                                                         })
                                                                 .then( val =>  {
@@ -93,7 +93,7 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                                 })
                                                                 .catch( err =>  {
                                                                         exitScript      (       0
-                                                                                        ,       (`Cannot find selectClientContext!  parmClientContextError_NEW: ${parmClientContextError_NEW},  \
+                                                                                        ,       (`Cannot find selectClientContext!  parmclientContextErrorSound_NEW: ${parmclientContextErrorSound_NEW},  \
                                                                                                 parmClientSessionAutoIncr: ${parmClientSessionAutoIncr},  \
                                                                                                 contextAutoIncr: ${contextAutoIncr}.\
                                                                                                 `).replace(/t/g, '')
@@ -105,7 +105,7 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                 } else {
                                                         exitScript      (       0
                                                                         ,       (`Duplicate insert!  \
-                                                                                parmClientContextError_NEW: ${parmClientContextError_NEW},  \
+                                                                                parmclientContextErrorSound_NEW: ${parmclientContextErrorSound_NEW},  \
                                                                                 parmClientAutoIncr: ${parmClientSessionAutoIncr},  \
                                                                                 parmStimwordPositionAutoIncr ${parmStimwordPositionAutoIncr},  \
                                                                                 stimword count: ${clientStimwordCount}.\
@@ -128,9 +128,9 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                 OLD is filled in,   NEW is filled in
                                         */
 
-                        case ( parmClientContextError_OLD  > ''  &&     parmClientContextError_NEW > '' )       :
+                        case ( parmclientContextErrorSound_OLD  > ''  &&     parmclientContextErrorSound_NEW > '' )       :
                         {
-                                selectClientContextStimword(parmClientSessionAutoIncr, parmStimwordPositionAutoIncr, parmClientContextError_OLD)
+                                selectClientContextStimword(parmClientSessionAutoIncr, parmStimwordPositionAutoIncr, parmclientContextErrorSound_OLD)
                                         .then( val =>   {
                                                 let clientStimwordCount = val.length;
                                                 if  ( clientStimwordCount == 1 )        {
@@ -138,13 +138,13 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
 
                                                         let clientContextAutoIncr_OLD = val[0]['clientContextAutoIncr'];
 
-                                                        selectClientContext(parmClientContextError_NEW, parmClientSessionAutoIncr, contextAutoIncr)
+                                                        selectClientContext(parmclientContextErrorSound_NEW, parmClientSessionAutoIncr, contextAutoIncr)
                                                                 .then( val =>  {
                                                                                 if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
                                                                                         let returnArray = [ val ];      // funky way to "match" what the insert returns!
                                                                                         return  returnArray;
                                                                                 } else {
-                                                                                        return insertClientContext(val, parmClientContextError_NEW, contextAutoIncr, parmClientSessionAutoIncr);
+                                                                                        return insertClientContext(val, parmclientContextErrorSound_NEW, contextAutoIncr, parmClientSessionAutoIncr);
                                                                                 }
                                                                         })
 
@@ -155,7 +155,7 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                                         } else {
                                                                                 exitScript      (       0
                                                                                                 ,       (`Error on insertClientContext! \
-                                                                                                        parmClientContextError_NEW: ${parmClientContextError_NEW},  \
+                                                                                                        parmclientContextErrorSound_NEW: ${parmclientContextErrorSound_NEW},  \
                                                                                                         contextAutoIncr: ${contextAutoIncr},  \
                                                                                                         parmClientSessionAutoIncr: ${parmClientSessionAutoIncr}.\
                                                                                                         `).replace(/\t/g, '')
@@ -168,14 +168,14 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                                                                         {       'clientContextAutoIncr_OLD'     :       clientContextAutoIncr_OLD
                                                                                                         ,       'clientContextAutoIncr_NEW'     :       clientContextAutoIncr_NEW
                                                                                                         ,       'stimwordPositionAutoIncr'      :       parmStimwordPositionAutoIncr
-                                                                                                        ,       'clientContextError_OLD'        :       parmClientContextError_OLD
-                                                                                                        ,       'clientContextError_NEW'        :       parmClientContextError_NEW
+                                                                                                        ,       'clientContextErrorSound_OLD'   :       parmclientContextErrorSound_OLD
+                                                                                                        ,       'clientContextErrorSound_NEW'   :       parmclientContextErrorSound_NEW
                                                                                                      
                                                                                                         }
                                                                                                         ;
 
                                                                         updateClientStimword    (updateClientStimwordParms)
-                                                                                .then( () =>    { return deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr_OLD, parmClientContextError_OLD) })
+                                                                                .then( () =>    { return deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr_OLD, parmclientContextErrorSound_OLD) })
                                                                                 .then( val =>   {
                                                                                         exitScript(1, 'Successful update of clientStimword.', val);
                                                                                 })
@@ -184,7 +184,7 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                                 .catch( err =>  {
                                                                         exitScript      (       0
                                                                                         ,       (`Bad selectClientContext on update attempt!  \
-                                                                                                parmClientContextError_NEW: ${parmClientContextError_NEW},  \
+                                                                                                parmclientContextErrorSound_NEW: ${parmclientContextErrorSound_NEW},  \
                                                                                                 parmClientSessionAutoIncr: ${parmClientSessionAutoIncr},  \
                                                                                                 contextAutoIncr: ${contextAutoIncr}.\
                                                                                                 `).replace(/\t/g, '')
@@ -196,7 +196,7 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                 } else {
                                                         exitScript      (       0
                                                                         ,       (`Rejecting! cannot find  \
-                                                                                parmClientContextError_OLD: ${parmClientContextError_OLD},  \
+                                                                                parmclientContextErrorSound_OLD: ${parmclientContextErrorSound_OLD},  \
                                                                                 parmClientSessionAutoIncr: ${parmClientSessionAutoIncr},  \
                                                                                 parmStimwordPositionAutoIncr: ${parmStimwordPositionAutoIncr}.\
                                                                                 `).replace(/\t/g, '')
@@ -214,13 +214,13 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                 OLD is filled in,   NEW is BLANK!
                                         */
 
-                        case ( parmClientContextError_OLD  > ''  &&     parmClientContextError_NEW == ''        )       :
+                        case ( parmclientContextErrorSound_OLD  > ''  &&     parmclientContextErrorSound_NEW == ''        )       :
                         {
-                                selectClientContextStimword(parmClientSessionAutoIncr, parmStimwordPositionAutoIncr, parmClientContextError_OLD)
+                                selectClientContextStimword(parmClientSessionAutoIncr, parmStimwordPositionAutoIncr, parmclientContextErrorSound_OLD)
                                         .catch( err =>  {
                                                         exitScript      (       0
                                                                         ,       (`selectClientContextStimnword select failed!  \
-                                                                                selectCparmClientContextError_OLD: ${parmClientContextError_OLD},  \
+                                                                                selectCparmclientContextErrorSound_OLD: ${parmclientContextErrorSound_OLD},  \
                                                                                 parmClientSessionAutoIncr: ${parmClientSessionAutoIncr},  \
                                                                                 parmStimwordPositionAutoIncr: ${parmStimwordPositionAutoIncr}.\
                                                                                 `).replace(/\t/g, '')
@@ -236,8 +236,8 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
 
                                                         let clientContextAutoIncr = val[0]['clientContextAutoIncr'];
 
-                                                        deleteClientStimword(parmStimwordPositionAutoIncr, clientContextAutoIncr, parmClientContextError_OLD)
-                                                                .then( () =>    { return deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, parmClientContextError_OLD) })
+                                                        deleteClientStimword(parmStimwordPositionAutoIncr, clientContextAutoIncr, parmclientContextErrorSound_OLD)
+                                                                .then( () =>    { return deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, parmclientContextErrorSound_OLD) })
                                                                 .then( val =>   {
                                                                         exitScript(1, 'Successful delete of clientStimword.', val);
                                                                 })
@@ -246,7 +246,7 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                                                 } else {
                                                         exitScript      (       0
                                                                         ,       (`Cannot find   \
-                                                                                parmClientContextError_OLD: ${parmClientContextError_OLD},  \
+                                                                                parmclientContextErrorSound_OLD: ${parmclientContextErrorSound_OLD},  \
                                                                                  to delete!  \
                                                                                 parmClientSessionAutoIncr: ${parmClientSessionAutoIncr},  \
                                                                                 parmStimwordPositionAutoIncr: ${parmStimwordPositionAutoIncr}.\
@@ -267,8 +267,8 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
                         default :       {
                                 exitScript      (       -1
                                                 ,       (`Bad processing!  Attempted  \
-                                                        parmClientContextError_OLD: ${parmClientContextError_OLD},  \
-                                                        parmClientContextError_NEW: ${parmClientContextError_NEW}.\
+                                                        parmclientContextErrorSound_OLD: ${parmclientContextErrorSound_OLD},  \
+                                                        parmclientContextErrorSound_NEW: ${parmclientContextErrorSound_NEW}.\
                                                         `).replace(/\t/g, '')
                                                 )
                                                 ;
@@ -279,19 +279,19 @@ returnContextAutoIncr(parmStimwordPositionAutoIncr)
 
 
 
-function selectClientContextStimword(clientSessionAutoIncr, stimwordPositionAutoIncr, clientContextError)       {
+function selectClientContextStimword(clientSessionAutoIncr, stimwordPositionAutoIncr, clientContextErrorSound)       {
 
                                                         //      https://stackify.dev/136700-knex-js-how-to-select-columns-from-multiple-tables
                                                         //      https://stackoverflow.com/questions/65413824/multiple-count-and-left-joins-in-mysql-node-using-knex
                                                         //      https://editor.datatables.net/manual/nodejs/conditions
-        let clientContextErrorFlag;
+        let clientContextErrorSoundFlag;
 
-        if  ( typeof clientContextError == 'boolean' )  {
-                clientContextErrorFlag  = clientContextError    ;
-        } else if ( typeof clientContextError == 'number' )   {
-                clientContextErrorFlag  = false ;
+        if  ( typeof clientContextErrorSound == 'boolean' )  {
+                clientContextErrorSoundFlag  = clientContextErrorSound    ;
+        } else if ( typeof clientContextErrorSound == 'number' )   {
+                clientContextErrorSoundFlag  = false ;
         } else {
-                clientContextErrorFlag  = false ;
+                clientContextErrorSoundFlag  = false ;
         }
 
         return knex
@@ -304,8 +304,8 @@ function selectClientContextStimword(clientSessionAutoIncr, stimwordPositionAuto
                                         }
                                 )
                 .andWhere       ( val =>        {
-                                        val.where       (       {       'clientContext.clientContextError'              :       clientContextError              }       )
-                                        val.orWhereRaw  (               '(true = ?)'                                    ,       clientContextErrorFlag                  )
+                                        val.where       (       {       'clientContext.clientContextErrorSound'        :       clientContextErrorSound              }       )
+                                        val.orWhereRaw  (               '(true = ?)'                                    ,       clientContextErrorSoundFlag                  )
                                 })
                 ;
                                 /*
@@ -315,13 +315,13 @@ function selectClientContextStimword(clientSessionAutoIncr, stimwordPositionAuto
                                         ON clientContext.clientContextAutoIncr = clientStimword.clientContextAutoIncr
                                         WHERE 1
                                         AND clientContext.clientSessionAutoIncr = 2349
-                                        AND clientContext.clientContextError   = 'def'
+                                        AND clientContext.clientContextErrorSound   = 'def'
                                         AND ( clientStimword.stimwordPositionAutoIncr = 285 OR true = true )
                                 */
 }
 
 
-function selectClientContext(clientContextError, clientSessionAutoIncr, contextAutoIncr)        {
+function selectClientContext(clientContextErrorSound, clientSessionAutoIncr, contextAutoIncr)        {
                                                 //      https://stackoverflow.com/questions/21979388/get-count-result-with-knex-js-bookshelf-js
                                                 //      https://stackoverflow.com/questions/53751587/knex-js-or-inside-where
                                                 //      https://stackoverflow.com/questions/54407751/how-to-add-two-bind-params-in-knex/54422388
@@ -331,7 +331,7 @@ function selectClientContext(clientContextError, clientSessionAutoIncr, contextA
                 .from           ('clientContext')
                 .select         ('clientContext.clientContextAutoIncr')
                 .where          (true)
-                .andWhere       (       {       'clientContext.clientContextError'      : clientContextError
+                .andWhere       (       {       'clientContext.clientContextErrorSound' : clientContextErrorSound
                                         ,       'clientContext.clientSessionAutoIncr'   : clientSessionAutoIncr
                                         ,       'clientContext.contextAutoIncr'         : contextAutoIncr
                                         }
@@ -340,13 +340,13 @@ function selectClientContext(clientContextError, clientSessionAutoIncr, contextA
 }
 
 
-function insertClientContext(val, clientContextError, contextAutoIncr, clientSessionAutoIncr)   {
+function insertClientContext(val, clientContextErrorSound, contextAutoIncr, clientSessionAutoIncr)   {
 
         let insertClientContextParms =
-                {       'clientContextError'                    :       clientContextError
+                {       'clientContextErrorSound'               :       clientContextErrorSound
                 ,       'contextAutoIncr'                       :       contextAutoIncr
                 ,       'clientSessionAutoIncr'                 :       clientSessionAutoIncr
-                ,       'clientContextErrorCount'           :       0
+                ,       'clientContextErrorSoundCount'          :       0
                 ,       'frequency'                             :       ''
                 ,       'clientContextErrorNotes'               :       null
                 }
@@ -382,9 +382,9 @@ function updateClientStimword   (parmObject)    {
 // try this:  (2022-04-01 )     https://www.sitepoint.com/community/t/promises-feedback/384246/3
 // function updateClientStimword( {  stimwordPositionAutoIncr
                                    , clientContextAutoIncr_OLD
-                                   , clientContextError_OLD
+                                   , clientContextErrorSound_OLD
                                    , clientContextAutoIncr_NEW
-                                   , clientContextError_NEW
+                                   , clientContextErrorSound_NEW
                                    }
                                 ) 
        {
@@ -392,12 +392,12 @@ function updateClientStimword   (parmObject)    {
         let updateClientStimwordWhereParms =
                 {       'stimwordPositionAutoIncr'      :       parmObject.stimwordPositionAutoIncr
                 ,       'clientContextAutoIncr'         :       parmObject.clientContextAutoIncr_OLD
-                ,       'clientContextError'            :       parmObject.clientContextError_OLD
+                ,       'clientContextErrorSound'       :       parmObject.clientContextErrorSound_OLD
                 };
 
         let updateClientStimwordUpdateParms =
                 {       'clientContextAutoIncr'         :       parmObject.clientContextAutoIncr_NEW
-                ,       'clientContextError'            :       parmObject.clientContextError_NEW
+                ,       'clientContextErrorSound'       :       parmObject.clientContextErrorSound_NEW
                 };
 
         return knex
@@ -407,11 +407,11 @@ function updateClientStimword   (parmObject)    {
                 ;
 }
 
-function deleteClientStimword(stimwordPositionAutoIncr, clientContextAutoIncr, clientContextError)      {
+function deleteClientStimword(stimwordPositionAutoIncr, clientContextAutoIncr, clientContextErrorSound)      {
         let deleteClientStimwordParms =
                 {       'stimwordPositionAutoIncr'      :       stimwordPositionAutoIncr
                 ,       'clientContextAutoIncr'         :       clientContextAutoIncr
-                ,       'clientContextError'            :       clientContextError
+                ,       'clientContextErrorSound'       :       clientContextErrorSound
                 };
         return knex
                 .from('clientStimword')
@@ -421,14 +421,14 @@ function deleteClientStimword(stimwordPositionAutoIncr, clientContextAutoIncr, c
 }
 
 
-function deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, clientContextError)       {
+function deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, clientContextErrorSound)       {
         let deleteClientContextParms =
                 {       'contextAutoIncr'                       :       contextAutoIncr
                 ,       'clientContextAutoIncr'                 :       clientContextAutoIncr
-                ,       'clientContextError'                    :       clientContextError
+                ,       'clientContextErrorSound'               :       clientContextErrorSound
                 ,       'clientContextErrorNotes'               :       null
                 ,       'frequency'                             :       ''
-                ,       'clientContextErrorCount'           :       0
+                ,       'clientContextErrorSoundCount'           :       0
                 };
         return knex
                 .from('clientContext')
@@ -469,7 +469,7 @@ let returnVar =
         ,               \`soundPhoneme\`
         ,               \`contextPosition\`
         ,               \`contextAutoIncr\`
-        ,               \`clientContextError\`
+        ,               \`clientContextErrorSound\`
         ,               \`clientContextErrorCount\`
         ,               \`frequency\`
         ,               \`clientContextErrorNotes\`
@@ -482,7 +482,7 @@ let returnVar =
                 ,               \`context\`.\`soundPhoneme\`
                 ,               \`context\`.\`contextPosition\`
                 ,               \`context\`.\`contextAutoIncr\`
-                ,               :clientContextError
+                ,               :clientContextErrorSound
                 ,               :clientContextErrorCount
                 ,               :frequency
                 ,               :clientContextErrorNotes
