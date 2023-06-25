@@ -323,7 +323,7 @@ SELECT "COUNT: clientContext to clientStimword MiscKeys     " , COUNT(*)
     AND   \`clientContext\`.\`sessionName\`                             =       \`clientStimword\`.\`sessionName\`
     AND   \`clientContext\`.\`contextPosition\`                         =       \`clientStimword\`.\`contextPosition\`
     AND   \`clientContext\`.\`soundPhoneme\`                            =       \`clientStimword\`.\`soundPhoneme\`
-    AND   \`clientContext\`.\`clientContextError\`                      =       \`clientStimword\`.\`clientContextError\`
+    AND   \`clientContext\`.\`clientContextErrorSound\`                 =       \`clientStimword\`.\`clientContextErrorSound\`
     ;
 SELECT "COUNT: clientContext to clientStimword AutoIncr     " , COUNT(*)         
         FROM      \`clientContext\`
@@ -342,7 +342,7 @@ SELECT "COUNT: clientContext to clientStimword BOTH         " , COUNT(*)
     AND   \`clientContext\`.\`sessionName\`                             =       \`clientStimword\`.\`sessionName\`
     AND   \`clientContext\`.\`contextPosition\`                         =       \`clientStimword\`.\`contextPosition\`
     AND   \`clientContext\`.\`soundPhoneme\`                            =       \`clientStimword\`.\`soundPhoneme\`
-    AND   \`clientContext\`.\`clientContextError\`                      =       \`clientStimword\`.\`clientContextError\`
+    AND   \`clientContext\`.\`clientContextErrorSound\`                 =       \`clientStimword\`.\`clientContextErrorSound\`
     ;
     
 END
