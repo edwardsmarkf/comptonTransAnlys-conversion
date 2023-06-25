@@ -31,7 +31,6 @@ returnJSON=$(
                           ,   "clientContextError_NEW"    : "abc"
                           }
                        ';
-                  ##   ,   "clientStimwordNotes"       : "hopefully a duplicate test"
 );
 mariadb --execute  "\. ./clientStimword.sql" ;
 echo ${returnJSON}  ;
@@ -46,7 +45,6 @@ returnJSON=$(
                           ,   "clientContextError_NEW"    : "XXX"
                           }
                        ';
-                           ##    ,   "clientStimwordNotes"       : "hopefully a duplicate error"
 );
 echo ${returnJSON}   ;    ## 2023-06-24
 mariadb --execute  "\. ./clientStimword.sql" ;
