@@ -85,6 +85,9 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
 END
 
 
+# Client_master_teacher_name	Client_master_client_name	  Client_master_session_name	Client_master_email	    Client_master_timestamp	     Client_master_auto_increment
+# sfarrer	                    haixia.wang@ll.mit.edu	    Time2	                      haixia.wang@ll.mit.edu	2023-06-11 16:29:24	         7873
+
 echo '005';
 mariadb    --verbose  comptonTransAnlys  <<END ;
 
