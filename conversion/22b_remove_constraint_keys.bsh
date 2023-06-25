@@ -47,31 +47,16 @@ s/\`clientContextUniqueIndex\`/\`clientContextUniqueKey\`/;
 #   2022-11-28 - both of these FOREIGN_KEY statements should have been removed earlier....  ?!?!?
 /Teacher_2_Client_master_FOREIGN_KEY_1/d;
 /Teacher_2_Client_master_FOREIGN_KEY_2/d;
-##2022-11-27## /  KEY \`clientMasterAutoIncr_2_clientSession\` (\`clientMasterAutoIncr\`),/d;
-##2022-11-27## /  KEY \`clientMasterMiscKeys_2_clientSession\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`),/d;
-##2022-11-27## /  KEY \`sessionNames_2_clientMaster\` (\`sessionName\`),/d;
-###              added  2022-08-27:
-##2022-11-27## /  KEY \`teacherEmail\` (\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`,\`layoutName\`),/d
-##2022-11-27## /  KEY \`clientMasterMiscKeys_2_clientContext\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`),/d
 #
 #
 #       clientStimword
 #
-##2022-11-27## /  KEY \`clientContextAutoIncr_2_clientStimword\` (\`clientContextAutoIncr\`),/d;
-##2022-11-27## /  KEY \`clientContextMiscKeys_2_clientStimword\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`,\`soundPhoneme\`,\`contextPosition\`,\`clientContextError\`),/d;
-##2022-11-27## /  KEY \`clientContextMisc_2_clientStimword\` (\`clientContextAutoIncr\`),/d;
-##2022-11-27## /  KEY \`stimwordPositionMiscKeys_2_clientStimword\` (\`layoutName\`,\`stimwordPageNbr\`,\`stimwordLineNbr\`,\`stimwordWord\`,\`contextPosition\`,\`stimwordPositionNbr\`,\`stimwordPositionSetting\`,\`soundPhoneme\`),/d;
-##2022-11-27## /  KEY \`stimwordPositionAutoIncr_2_clientStimword\` (\`stimwordPositionAutoIncr\`),/d;
 s/\`clientStimwordUniqueIndex\`/\`clientStimwordUniqueKey\`/;
 
 #
 #
 #       context
 #
-##2022-11-27## /  KEY \`soundAutoIncr_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
-##2022-11-27## /  KEY \`soundMiscKeys_2_context\` (\`soundAutoIncr\`),/d;
-##2022-11-27## /  KEY \`soundAutoIncr_2_context\` (\`soundAutoIncr\`),/d;
-##2022-11-27## /  KEY \`soundMiscKeys_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
 /context_2_clientContext/d;
 /context_2_languageNorms/d;
 /context_2_stimwordPosition/d;
