@@ -115,21 +115,21 @@ AND  contextPosition        = clientContextPositionName
 
 ##  clientContext   to clientStimword  TEST
 SELECT    "COUNT: clientContext to clientStimword MiscKeys MISSING"    ,        COUNT(*) 
-FROM  `clientStimword`
+FROM  \`clientStimword\`
 WHERE 1
-AND `clientStimwordAutoIncr`
+AND \`clientStimwordAutoIncr\`
 NOT IN
-( SELECT `clientStimwordAutoIncr`
-        FROM      `clientContext`
-        ,         `clientStimword`
+( SELECT \`clientStimwordAutoIncr\`
+        FROM      \`clientContext\`
+        ,         \`clientStimword\`
         WHERE 1
-    AND   `clientContext`.`clientMasterLayoutName`       =       `clientStimword`.`clientMasterLayoutName`
-    AND   `clientContext`.`teacherEmail`                 =       `clientStimword`.`teacherEmail`
-    AND   `clientContext`.`clientMasterEmail`            =       `clientStimword`.`clientMasterEmail`
-    AND   `clientContext`.`clientMasterSessionName`      =       `clientStimword`.`clientMasterSessionName`
-    AND   `clientContext`.`clientContextPositionName`    =       `clientStimword`.`clientContextPositionName`
-    AND   `clientContext`.`clientContextPhoneme`         =       `clientStimword`.`clientContextPhoneme`
-    AND   `clientContext`.`clientContextErrorSound`      =       `clientStimword`.`clientContextErrorSound`
+    AND   \`clientContext\`.\`clientMasterLayoutName\`       =       \`clientStimword\`.\`clientMasterLayoutName\`
+    AND   \`clientContext\`.\`teacherEmail\`                 =       \`clientStimword\`.\`teacherEmail\`
+    AND   \`clientContext\`.\`clientMasterEmail\`            =       \`clientStimword\`.\`clientMasterEmail\`
+    AND   \`clientContext\`.\`clientMasterSessionName\`      =       \`clientStimword\`.\`clientMasterSessionName\`
+    AND   \`clientContext\`.\`clientContextPositionName\`    =       \`clientStimword\`.\`clientContextPositionName\`
+    AND   \`clientContext\`.\`clientContextPhoneme\`         =       \`clientStimword\`.\`clientContextPhoneme\`
+    AND   \`clientContext\`.\`clientContextErrorSound\`      =       \`clientStimword\`.\`clientContextErrorSound\`
 ) ;
 
 
