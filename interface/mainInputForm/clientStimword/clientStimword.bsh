@@ -5,7 +5,7 @@
 ##  2023-06-24  -- removed any reference to clientStimwordNotes
 
 
-  ## new ball word "abc" 285
+echo 'new ball word "abc" 285';
 returnJSON=$(
   node clientStimword.js '{   "clientSessionAutoIncr"     : 2349
                           ,   "stimwordPositionAutoIncr"  : 285
@@ -15,29 +15,28 @@ returnJSON=$(
                           }
                          ';
 );
-##                            ,   "clientStimwordNotes"       : "notes ball word --- abc 285"
-mariadb --execute  "\. ./clientStimword.sql" ;
-
 echo ${returnJSON};
 echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## duplicate error!
+
+
+echo ' duplicate error!';
 returnJSON=$(
   node clientStimword.js '{   "clientSessionAutoIncr"     : 2349
                           ,   "stimwordPositionAutoIncr"  : 285
                           ,   "clientContextError_OLD"    : ""
                           ,   "clientContextError_NEW"    : "abc"
-                          ,   "clientStimwordNotes"       : "hopefully a duplicate error"
+                                    // ,   "clientStimwordNotes"       : "hopefully a duplicate error"
                           }
                        ';
 );
 mariadb --execute  "\. ./clientStimword.sql" ;
-echo ${returnJSON};
-echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+echo ${returnJSON}  ;
 
 
-  ## another duplicate error!
+echo ' another duplicate error!';
 returnJSON=$(
   node clientStimword.js '{   "clientSessionAutoIncr"     : 2349
                           ,   "stimwordPositionAutoIncr"  : 285
@@ -47,12 +46,11 @@ returnJSON=$(
                           }
                        ';
 );
+echo ${returnJSON}   ;    ## 2023-06-24
 mariadb --execute  "\. ./clientStimword.sql" ;
-echo ${returnJSON};
-echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
 
 
-  ## new ball sentence "abc" 286
+echo ' new ball sentence "abc" 286';
 returnJSON=$(
   node clientStimword.js  ' { "clientSessionAutoIncr"       : 2349
                           , "stimwordPositionAutoIncr"    : 286
@@ -62,12 +60,12 @@ returnJSON=$(
                           }
                       ';
 );
-mariadb --execute  "\. ./clientStimword.sql" ;
 echo ${returnJSON};
 echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
+mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## new seal word "abc" 273
+echo 'new seal word "abc" 273';
 returnJSON=$(
   node clientStimword.js '{ "clientSessionAutoIncr"         : 2349
                           , "stimwordPositionAutoIncr"      : 273
@@ -82,7 +80,7 @@ echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## new seal sentence "abc" 274
+echo 'new seal sentence "abc" 274';
 returnJSON=$(
   node clientStimword.js '{ "clientSessionAutoIncr"         : 2349
                           , "stimwordPositionAutoIncr"      : 274
@@ -94,11 +92,10 @@ returnJSON=$(
 );
 echo ${returnJSON};
 echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
-
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## change ball word from "abc" to "def" 285
+echo ' change ball word from "abc" to "def" 285';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 285
@@ -110,11 +107,10 @@ returnJSON=$(
 );
 echo ${returnJSON};
 echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
-
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## should fail on trying to change item
+echo ' should fail on trying to change item';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 285
@@ -123,13 +119,12 @@ returnJSON=$(
                                   //    , "clientStimwordNotes"           : "cannot find item to change"
                             }
                         ';
-)echo ${returnJSON};
-echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
-
+);
+echo ${returnJSON};
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## delete ball word "def" 285
+echo ' delete ball word "def" 285 ';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 285
@@ -141,12 +136,11 @@ returnJSON=$(
 );
 echo ${returnJSON};
 echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
-
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## delete ball sentence "abc" 286
+echo ' delete ball sentence "abc" 286';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 286
@@ -158,12 +152,11 @@ returnJSON=$(
 );
 echo ${returnJSON};
 echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
-
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## cannot find item to delete
+echo ' cannot find item to delete';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 286
@@ -174,8 +167,6 @@ returnJSON=$(
                          ';
 );
 echo ${returnJSON};
-echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
-
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
@@ -185,7 +176,7 @@ mariadb    --verbose  --execute="UPDATE comptonTransAnlys.clientContext SET clie
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## ball word "xyz" into existing clientContext 285
+echo ' ball word "xyz" into existing clientContext 285';
 returnJSON=$(
     node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                               , "stimwordPositionAutoIncr"      : 285
@@ -201,7 +192,7 @@ echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## change ball word from "xyz" to "xyzw" 285
+echo ' change ball word from "xyz" to "xyzw" 285';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 285
@@ -218,7 +209,7 @@ sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## deleting seal word - abc 273
+echo ' deleting seal word - abc 273';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"           : 2349
                             , "stimwordPositionAutoIncr"        : 273
@@ -235,7 +226,7 @@ sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## adding 'seal' sentence abc 274 - should fail!
+echo ' adding 'seal' sentence abc 274 - should fail!';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"           : 2349
                             , "stimwordPositionAutoIncr"        : 274
@@ -246,12 +237,11 @@ returnJSON=$(
                          ';
 );
 echo ${returnJSON};
-echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
 
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## trying to add ball word def 285, should fail
+echo 'trying to add ball word def 285, should fail';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"           : 2349
                             , "stimwordPositionAutoIncr"        : 285
@@ -262,7 +252,6 @@ returnJSON=$(
                          ';
 );
 echo ${returnJSON};
-echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:.*/-->\1<--/;'  ;    ## 2023-06-24
 
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
@@ -274,7 +263,7 @@ sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## creating seal word abc 273
+echo 'creating seal word abc 273';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"           : 2349
                             , "stimwordPositionAutoIncr"        : 273
@@ -290,7 +279,7 @@ echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## deleting seal word abc 273
+echo ' deleting seal word abc 273';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 273
@@ -307,7 +296,7 @@ echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## deleting 'seal' sentence abc - 274
+echo ' deleting 'seal' sentence abc - 274';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 274
@@ -324,7 +313,7 @@ echo ${returnJSON}  | sed    -e 's/^.*clientStimwordAutoIncr:\([0-9]*\)},status:
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
-  ## deleting ball word xyzw 285
+echo 'deleting ball word xyzw 285';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"           : 2349
                             , "stimwordPositionAutoIncr"        : 285
