@@ -100,6 +100,7 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
   ## 2023-06-25 - weird problem somehow affecting the Teacher foreign key....?  added AND not-equal as a stop-gap measure
 END
 
+exit;
 
 echo '006';
 mariadb    --verbose  comptonTransAnlys  <<END ;
