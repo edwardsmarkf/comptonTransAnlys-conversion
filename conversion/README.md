@@ -18,3 +18,6 @@ new server:
 
     bash -vx  runConversion.bsh ;
     
+possibly use:
+
+     cat comptonTransAnlys-mariadbBackup-2023-06-26-01-00-Monday.sql  | sed -e '/INSERT INTO `Client_eval_detail` VALUES/d; /INSERT INTO `Client_anlys_detail` VALUES/d'  > ./comptonTransAnlys.sql
