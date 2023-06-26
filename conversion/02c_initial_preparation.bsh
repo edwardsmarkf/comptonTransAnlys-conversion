@@ -8,36 +8,36 @@
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
 
-  DELETE FROM \`Teacher\`
-  WHERE  \`Teacher\`.\`Teacher_create_date\`   IN  ( '2023-06-19 17:21:10', '2023-06-20 18:52:37' )
-  ;
-
-        ## 2023-06-25 -- 
+#  DELETE FROM \`Teacher\`
+#  WHERE  \`Teacher\`.\`Teacher_create_date\`   IN  ( '2023-06-19 17:21:10', '2023-06-20 18:52:37' )
+#  ;
+#
+#        ## 2023-06-25 -- 
     ##  # Client_master_teacher_name	Client_master_client_name	Client_master_session_name	Client_master_email	Client_master_timestamp	Client_master_auto_increment
     ##   sfarrer	haixia.wang@ll.mit.edu	Time2	haixia.wang@ll.mit.edu	2023-06-11 16:29:24	7873
-   DELETE FROM \`Client_master\`
-   WHERE  \`Client_master\`.\`Client_master_auto_increment\`   IN  
-  ( 8127
-  , 8128
-  , 8129
-  , 8130
-  , 8131
-  , 8132
-  , 8133
-  , 8134
-  , 8135
-  , 8136
-  , 8137
-  , 8138
-  , 8139
-  , 8140
-  , 8141
-  , 8142
-  , 8143
-  , 8144
-  , 8145
-  )
-   ;
+#   DELETE FROM \`Client_master\`
+#   WHERE  \`Client_master\`.\`Client_master_auto_increment\`   IN  
+#  ( 8127
+#  , 8128
+#  , 8129
+#  , 8130
+#  , 8131
+#  , 8132
+#  , 8133
+#  , 8134
+#  , 8135
+#  , 8136
+#  , 8137
+#  , 8138
+#  , 8139
+#  , 8140
+#  , 8141
+#  , 8142
+#  , 8143
+#  , 8144
+#  , 8145
+#  )
+#   ;
 
         ## 2021-09-09
   DELETE FROM \`Client_master\`
