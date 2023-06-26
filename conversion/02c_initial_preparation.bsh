@@ -7,41 +7,51 @@
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
+        ## 2023-06-25 -- 
+    ##  # Client_master_teacher_name	Client_master_client_name	Client_master_session_name	Client_master_email	Client_master_timestamp	Client_master_auto_increment
+    ##   sfarrer	haixia.wang@ll.mit.edu	Time2	haixia.wang@ll.mit.edu	2023-06-11 16:29:24	7873
+  DELETE FROM \`Client_master\`
+  WHERE  \`Client_master\`.\`Client_master_auto_increment\`   =  7873
+  ;
         ## 2021-09-09
-  DELETE FROM Client_master
-  WHERE  Client_master_teacher_name IS NULL
+  DELETE FROM \`Client_master\`
+  WHERE  \`Client_master\`.\`Client_master_teacher_name\` IS NULL
   ;
 
-  DELETE FROM Client_master
-  WHERE ( Client_master_teacher_name
-        , Client_master_client_name
-        , Client_master_session_name
-        , Client_master_client_name
+  DELETE FROM \`Client_master\`
+  WHERE ( \`Client_master\`.\`Client_master_teacher_name\`
+        , \`Client_master\`.\`Client_master_client_name\`
+        , \`Client_master\`.\`Client_master_session_name\`
+        , \`Client_master\`.\`Client_master_client_name\`
         )
   NOT IN 
-    ( SELECT Client_anlys_detail_teacher_name
-    , Client_anlys_detail_client_name
-    , Client_anlys_detail_session_name
-    , Client_anlys_detail_client_name
-    FROM Client_anlys_detail
+    ( SELECT \`Client_anlys_detail\`.\`Client_anlys_detail_teacher_name\`
+    ,        \`Client_anlys_detail\`.\`Client_anlys_detail_client_name\`
+    ,        \`Client_anlys_detail\`.\`Client_anlys_detail_session_name\`
+    ,        \`Client_anlys_detail\`.\`Client_anlys_detail_client_name\`
+    FROM     \`Client_anlys_detail\`
     WHERE 1
     )
     ;
   
-  SELECT Client_master_teacher_name
-  ,     Client_master_client_name
-  ,     Client_master_session_name
-  ,     Client_master_client_name
-  ,     Client_master_timestamp
-  ,     Client_master_auto_increment
-  FROM Client_master
-  WHERE ( Client_master_teacher_name, Client_master_client_name, Client_master_session_name, Client_master_client_name)
+  SELECT \`Client_master\`.\`Client_master_teacher_name\`
+  ,      \`Client_master\`.\`Client_master_client_name\`
+  ,      \`Client_master\`.\`Client_master_session_name\`
+  ,      \`Client_master\`.\`Client_master_client_name\`
+  ,      \`Client_master\`.\`Client_master_timestamp\`
+  ,      \`Client_master\`.\`Client_master_auto_increment\`
+  FROM   \`Client_master\`
+  WHERE (  \`Client_master\`.\`Client_master_teacher_name\`
+         , \`Client_master\`.\`Client_master_client_name\`
+         , \`Client_master\`.\`Client_master_session_name\`
+         , \`Client_master\`.\`Client_master_client_name\`
+        )
   NOT IN 
-    ( SELECT Client_anlys_detail_teacher_name
-    , Client_anlys_detail_client_name
-    , Client_anlys_detail_session_name
-    , Client_anlys_detail_client_name
-    FROM Client_anlys_detail
+    ( SELECT \`Client_anlys_detail\`.\`Client_anlys_detail_teacher_name\`
+    ,        \`Client_anlys_detail\`.\`Client_anlys_detail_client_name\`
+    ,        \`Client_anlys_detail\`.\`Client_anlys_detail_session_name\`
+    ,        \`Client_anlys_detail\`.\`Client_anlys_detail_client_name\`
+    FROM     \`Client_anlys_detail\`
     WHERE 1
     )
     ;
