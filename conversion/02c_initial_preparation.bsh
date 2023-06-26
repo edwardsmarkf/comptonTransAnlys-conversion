@@ -12,8 +12,7 @@
     ##   sfarrer	haixia.wang@ll.mit.edu	Time2	haixia.wang@ll.mit.edu	2023-06-11 16:29:24	7873
   DELETE FROM \`Client_master\`
   WHERE  \`Client_master\`.\`Client_master_auto_increment\`   IN  
-(7873 
-,8127
+(8127
 ,8128
 ,8129
 ,8130
