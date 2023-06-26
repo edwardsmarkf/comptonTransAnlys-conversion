@@ -66,8 +66,6 @@ process_section '02d_initial_preparation' ;
 
 process_section '03_long_part' ;
 
-exit;
-
 process_section '04_sed_changes' ;
 
 process_section '05_convert_back_to_mariadb' ;
