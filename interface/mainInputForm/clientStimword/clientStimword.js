@@ -360,7 +360,7 @@ function insertClientContext(val, clientContextErrorSound, contextAutoIncr, clie
                 {       'clientContextErrorSound'               :       clientContextErrorSound
                 ,       'contextAutoIncr'                       :       contextAutoIncr
                 ,       'clientSessionAutoIncr'                 :       clientSessionAutoIncr
-                ,       'clientContextErrorSoundCount'          :       0
+                ,       'clientContextErrorCount'          :       0
                 ,       'frequency'                             :       ''
                 ,       'clientContextErrorNotes'               :       null
                 }
@@ -442,7 +442,7 @@ function deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, cl
                 ,       'clientContextErrorSound'               :       clientContextErrorSound
                 ,       'clientContextErrorNotes'               :       null
                 ,       'frequency'                             :       ''
-                ,       'clientContextErrorSoundCount'           :       0
+                ,       'clientContextErrorCount'           :       0
                 };
         return knex
                 .from('clientContext')
