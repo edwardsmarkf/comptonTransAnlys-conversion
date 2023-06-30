@@ -47,6 +47,20 @@ const   insertClientContextStatement    =       returnInsertClientContextStateme
 
 const   insertClientStimwordStatement   =       returnInsertClientStimwordStatement()   ;
 
+
+
+//  https://flexiple.com/javascript/javascript-exit-functions/
+//javascript exit function using break
+const getName = () => {
+    getName: {
+        console.log("I get logged");   // maybe embed *EVERYTHING* here ???
+        break getName;
+        //exits the function
+        console.log("I don't get logged");
+    }
+};
+
+
 returnContextAutoIncr(parmStimwordPositionAutoIncr)
         .catch( err =>  {
                         exitScript(0, `Bad returnContextAutoIncr:   parmStimwordPositionAutoIncr: ${parmStimwordPositionAutoIncr}`, err);
