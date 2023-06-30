@@ -10,8 +10,8 @@ echo 'new ball word "abc" 285';
 returnJSON=$(
   node clientStimword.js '{   "clientSessionAutoIncr"     : 2349
                           ,   "stimwordPositionAutoIncr"  : 285
-                          ,   "clientContextErrorStimword_OLD"    : ""
-                          ,   "clientContextErrorStimword_NEW"    : "abc"
+                          ,   "clientContextErrorSound_OLD"    : ""
+                          ,   "clientContextErrorSound_NEW"    : "abc"
                           ,   "clientStimwordAutoIncr"    :  null
                           }
                          ';
@@ -27,8 +27,8 @@ echo ' duplicate test!';
 returnJSON=$(
   node clientStimword.js '{   "clientSessionAutoIncr"     : 2349
                           ,   "stimwordPositionAutoIncr"  : 285
-                          ,   "clientContextErrorStimword_OLD"    : ""
-                          ,   "clientContextErrorStimword_NEW"    : "abc"
+                          ,   "clientContextErrorSound_OLD"    : ""
+                          ,   "clientContextErrorSound_NEW"    : "abc"
                           }
                        ';
 );
@@ -41,8 +41,8 @@ echo ' another duplicate test!';
 returnJSON=$(
   node clientStimword.js '{   "clientSessionAutoIncr"     : 2349
                           ,   "stimwordPositionAutoIncr"  : 285
-                          ,   "clientContextErrorStimword_OLD"    : ""
-                          ,   "clientContextErrorStimword_NEW"    : "XXX"
+                          ,   "clientContextErrorSound_OLD"    : ""
+                          ,   "clientContextErrorSound_NEW"    : "XXX"
                           }
                        ';
 );
@@ -55,8 +55,8 @@ echo ' new ball sentence "abc" 286';
 returnJSON=$(
   node clientStimword.js  ' { "clientSessionAutoIncr"       : 2349
                           , "stimwordPositionAutoIncr"    : 286
-                          , "clientContextErrorStimword_OLD"      : ""
-                          , "clientContextErrorStimword_NEW"      : "abc"
+                          , "clientContextErrorSound_OLD"      : ""
+                          , "clientContextErrorSound_NEW"      : "abc"
                           }
                       ';
 );
@@ -70,8 +70,8 @@ echo 'new seal word "abc" 273';
 returnJSON=$(
   node clientStimword.js '{ "clientSessionAutoIncr"         : 2349
                           , "stimwordPositionAutoIncr"      : 273
-                          , "clientContextErrorStimword_OLD"        : ""
-                          , "clientContextErrorStimword_NEW"        : "abc"    
+                          , "clientContextErrorSound_OLD"        : ""
+                          , "clientContextErrorSound_NEW"        : "abc"    
                           }
                       ';
 );
@@ -85,8 +85,8 @@ echo 'new seal sentence "abc" 274';
 returnJSON=$(
   node clientStimword.js '{ "clientSessionAutoIncr"         : 2349
                           , "stimwordPositionAutoIncr"      : 274
-                          , "clientContextErrorStimword_OLD"        : ""
-                          , "clientContextErrorStimword_NEW"        : "abc"    
+                          , "clientContextErrorSound_OLD"        : ""
+                          , "clientContextErrorSound_NEW"        : "abc"    
                           }
                         ';
 );
@@ -100,8 +100,8 @@ echo ' change ball word from "abc" to "def" 285';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 285
-                            , "clientContextErrorStimword_OLD"        : "abc"
-                            , "clientContextErrorStimword_NEW"        : "def" 
+                            , "clientContextErrorSound_OLD"        : "abc"
+                            , "clientContextErrorSound_NEW"        : "def" 
                             }
                          ';
 );
@@ -115,8 +115,8 @@ echo ' should fail on trying to change item';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 285
-                            , "clientContextErrorStimword_OLD"        : "abc"
-                            , "clientContextErrorStimword_NEW"        : "def"
+                            , "clientContextErrorSound_OLD"        : "abc"
+                            , "clientContextErrorSound_NEW"        : "def"
                             }
                         ';
 );
@@ -129,8 +129,8 @@ echo ' delete ball word "def" 285 ';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 285
-                            , "clientContextErrorStimword_OLD"        :"def"
-                            , "clientContextErrorStimword_NEW"        : ""
+                            , "clientContextErrorSound_OLD"        :"def"
+                            , "clientContextErrorSound_NEW"        : ""
                            }
                         ';
 );
@@ -145,8 +145,8 @@ echo ' delete ball sentence "abc" 286';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 286
-                            , "clientContextErrorStimword_OLD"        : "abc"
-                            , "clientContextErrorStimword_NEW"        : ""   
+                            , "clientContextErrorSound_OLD"        : "abc"
+                            , "clientContextErrorSound_NEW"        : ""   
                             }
                          ';
 );
@@ -161,8 +161,8 @@ echo ' cannot find item to delete';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 286
-                            , "clientContextErrorStimword_OLD"        :"abc"
-                            , "clientContextErrorStimword_NEW"        : ""   
+                            , "clientContextErrorSound_OLD"        :"abc"
+                            , "clientContextErrorSound_NEW"        : ""   
                             }
                          ';
 );
@@ -181,8 +181,8 @@ echo ' ball word "xyz" into existing clientContext 285';
 returnJSON=$(
     node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                               , "stimwordPositionAutoIncr"      : 285
-                              , "clientContextErrorStimword_OLD"        : ""
-                              , "clientContextErrorStimword_NEW"        : "xyz"    
+                              , "clientContextErrorSound_OLD"        : ""
+                              , "clientContextErrorSound_NEW"        : "xyz"    
                               }
                          ';
 );
@@ -197,8 +197,8 @@ echo ' change ball word from "xyz" to "xyzw" 285';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 285
-                            , "clientContextErrorStimword_OLD"        : "xyz"
-                            , "clientContextErrorStimword_NEW"        : "xyzw" 
+                            , "clientContextErrorSound_OLD"        : "xyz"
+                            , "clientContextErrorSound_NEW"        : "xyzw" 
                             }
                         ';
 );
@@ -214,8 +214,8 @@ echo ' deleting seal word - abc 273';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"           : 2349
                             , "stimwordPositionAutoIncr"        : 273
-                            , "clientContextErrorStimword_OLD"          : "abc"
-                            , "clientContextErrorStimword_NEW"          : ""    
+                            , "clientContextErrorSound_OLD"          : "abc"
+                            , "clientContextErrorSound_NEW"          : ""    
                             }
                         ';
 );
@@ -231,8 +231,8 @@ echo ' adding 'seal' sentence abc 274 - should fail!';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"           : 2349
                             , "stimwordPositionAutoIncr"        : 274
-                            , "clientContextErrorStimword_OLD"          : ""
-                            , "clientContextErrorStimword_NEW"          : "abc"    
+                            , "clientContextErrorSound_OLD"          : ""
+                            , "clientContextErrorSound_NEW"          : "abc"    
                             }
                          ';
 );
@@ -246,8 +246,8 @@ echo 'trying to add ball word def 285, should fail';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"           : 2349
                             , "stimwordPositionAutoIncr"        : 285
-                            , "clientContextErrorStimword_OLD"          : ""
-                            , "clientContextErrorStimword_NEW"          : "def"    
+                            , "clientContextErrorSound_OLD"          : ""
+                            , "clientContextErrorSound_NEW"          : "def"    
                             }
                          ';
 );
@@ -268,8 +268,8 @@ echo 'creating seal word abc 273';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"           : 2349
                             , "stimwordPositionAutoIncr"        : 273
-                            , "clientContextErrorStimword_OLD"          : ""
-                            , "clientContextErrorStimword_NEW"          : "abc"    
+                            , "clientContextErrorSound_OLD"          : ""
+                            , "clientContextErrorSound_NEW"          : "abc"    
                             }
                          ';
 );
@@ -284,8 +284,8 @@ echo ' deleting seal word abc 273';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 273
-                            , "clientContextErrorStimword_OLD"        : "abc"
-                            , "clientContextErrorStimword_NEW"        : ""    
+                            , "clientContextErrorSound_OLD"        : "abc"
+                            , "clientContextErrorSound_NEW"        : ""    
                             }
                          ';
 );
@@ -301,8 +301,8 @@ echo ' deleting 'seal' sentence abc - 274';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"         : 2349
                             , "stimwordPositionAutoIncr"      : 274
-                            , "clientContextErrorStimword_OLD"        : "abc"
-                            , "clientContextErrorStimword_NEW"        : ""    
+                            , "clientContextErrorSound_OLD"        : "abc"
+                            , "clientContextErrorSound_NEW"        : ""    
                             }
                         ';
 );
@@ -318,8 +318,8 @@ echo 'deleting ball word xyzw 285';
 returnJSON=$(
   node clientStimword.js '  { "clientSessionAutoIncr"           : 2349
                             , "stimwordPositionAutoIncr"        : 285
-                            , "clientContextErrorStimword_OLD"          :"xyzw"
-                            , "clientContextErrorStimword_NEW"          : ""    
+                            , "clientContextErrorSound_OLD"          :"xyzw"
+                            , "clientContextErrorSound_NEW"          : ""    
                             }
                           ';
 );
