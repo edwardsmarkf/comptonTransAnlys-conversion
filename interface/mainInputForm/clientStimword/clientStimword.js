@@ -526,7 +526,7 @@ let returnVar =
         ,       \`sessionName\`
         ,       \`soundPhoneme\`
         ,       \`contextPosition\`
-        ,       \`clientContextError\`
+        ,       \`clientContextErrorSound\`
         ,       \`stimwordPlacement\`
         ,       \`stimwordOrderNbr\`
         ,       \`stimwordWord\`
@@ -541,7 +541,7 @@ let returnVar =
                 ,       \`clientContext\`.\`sessionName\`
                 ,       \`stimwordPosition\`.\`soundPhoneme\`
                 ,       \`stimwordPosition\`.\`contextPosition\`
-                ,       \`clientContext\`.\`clientContextError\`
+                ,       \`clientContext\`.\`clientContextErrorSound\`
                 ,       \`stimwordPosition\`.\`stimwordPlacement\`
                 ,       \`stimwordPosition\`.\`stimwordOrderNbr\`
                 ,       \`stimwordPosition\`.\`stimwordWord\`
