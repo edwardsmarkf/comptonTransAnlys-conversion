@@ -172,7 +172,7 @@ mariadb --execute  "\. ./clientStimword.sql" ;
 
 
   ## make a clientContext record "live"
-mariadb    --verbose  --execute="UPDATE comptonTransAnlys.clientContext SET clientContextErrorStimwordSpeakingCount=99, clientContextErrorStimwordNotes = 'Notes added!'  WHERE contextAutoIncr=56 AND clientSessionAutoIncr=2349"              ;
+mariadb    --verbose  --execute="UPDATE comptonTransAnlys.clientContext SET clientContextErrorCount=99, clientContextErrorNotes = 'Notes added!'  WHERE contextAutoIncr=56 AND clientSessionAutoIncr=2349"              ;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
 
@@ -258,7 +258,7 @@ mariadb --execute  "\. ./clientStimword.sql" ;
 
 
   ## make a clientContext record eligible to be deleted
-mariadb    --verbose  --execute="UPDATE comptonTransAnlys.clientContext SET clientContextErrorStimwordSpeakingCount= 0, clientContextErrorStimwordNotes = NULL  WHERE 1 AND contextAutoIncr=56 AND clientSessionAutoIncr=2349"                  ;
+mariadb    --verbose  --execute="UPDATE comptonTransAnlys.clientContext SET clientContextErrorCount= 0, clientContextErrorNotes = NULL  WHERE 1 AND contextAutoIncr=56 AND clientSessionAutoIncr=2349"                  ;
 sleep 1;
 mariadb --execute  "\. ./clientStimword.sql" ;
 
