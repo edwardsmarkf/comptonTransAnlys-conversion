@@ -61,6 +61,13 @@ const   insertClientStimwordStatement   =       returnInsertClientStimwordStatem
     //    };
 
 // this section should be put into its own function and called , and ELMINIATE the exitScript() function!
+// or just use exitScript for format a JSON
+
+//  const entireFunction = (myArgs) =>  {
+//        set constants for myargs
+//        returnContextAutoIncr(parmStimwordPositionAutoIncr)
+//  }
+// const entireFunction(myArgs)
 
 returnContextAutoIncr(parmStimwordPositionAutoIncr)
         .catch( err =>  {
