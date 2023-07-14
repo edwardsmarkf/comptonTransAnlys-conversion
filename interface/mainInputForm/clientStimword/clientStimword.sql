@@ -4,6 +4,7 @@
        ## test display written 2022-02-18
 
         SELECT  "Testing clientContext table!"
+        ,       COUNT(*)                                "count of clientContext"
         ,       `clientContext`.`clientContextErrorSound`
         ,       `clientContext`.`contextPosition`
         ,       `clientContext`.`clientContextErrorCount`
@@ -16,6 +17,7 @@
         ;
 
         SELECT  "Testing clientStimword table!"
+        ,       COUNT(*)                                "count of clientStimword"
         ,       `clientContext`.`clientContextErrorSound`
         ,       `clientStimword`.`stimwordWord`
         ,       `clientStimword`.`contextPosition`
