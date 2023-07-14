@@ -6,19 +6,18 @@
         SELECT  " "
         ;
 
-        SELECT  "Testing clientContext table!"
-        ,       count(*)                                "count of clientContext"
+        SELECT  count(*)                "count of clientContext table:"
         FROM    `comptonTransAnlys`.`clientContext`
         WHERE   1
         AND     `clientContext`.`contextAutoIncr`               =       56
         AND     `clientContext`.`clientSessionAutoIncr`         =       2349
         ;
 
-        SELECT  "Testing clientContext table!"
-        ,       `clientContext`.`clientContextErrorSound`
-        ,       `clientContext`.`contextPosition`
+        SELECT  `clientContext`.`clientContextErrorSound`       "Sound"
+        ,       `clientContext`.`contextPosition`               "Position"
         ,       `clientContext`.`clientContextErrorCount`
         ,       `clientContext`.`clientContextErrorNotes`
+        ,       `clientContext`.`contextAutoIncr`
         ,       `clientContext`.`clientContextAutoIncr`
         FROM    `comptonTransAnlys`.`clientContext`
         WHERE   1
@@ -29,8 +28,7 @@
         SELECT  " "
         ;
 
-        SELECT  "Testing clientStimword table!"
-        ,       count(*)                                "count of clientStimword"
+        SELECT  count(*)                "count of clientContextStimword table:"
         FROM    `comptonTransAnlys`.`clientContext`
         LEFT JOIN `comptonTransAnlys`.`clientStimword`
         ON      (`clientContext`.`clientContextAutoIncr`        =       `clientStimword`.`clientContextAutoIncr`)
@@ -38,12 +36,10 @@
         AND     `clientContext`.`clientSessionAutoIncr`         =       2349
         ;
 
-        SELECT  "Testing clientStimword table!"
-        ,       `clientContext`.`clientContextErrorSound`
-        ,       `clientStimword`.`stimwordWord`
-        ,       `clientStimword`.`contextPosition`
-        ,       `clientStimword`.`stimwordPositionSetting`
-        ,       `clientStimword`.`clientStimwordNotes`
+        SELECT  `clientContext`.`clientContextErrorSound`       "Sound"
+        ,       CONCAT(`clientStimword`.`contextPosition`       , '-', `clientStimword`.`stimwordWord`                  )
+                                                                "Position-Word"
+        ,       `clientStimword`.`stimwordPositionSetting`      "Setting"
         ,       `clientStimword`.`clientStimwordAutoIncr`
         ,       `clientStimword`.`stimwordPositionAutoIncr`
         ,       `clientStimword`.`clientStimwordAutoIncr`
@@ -52,4 +48,7 @@
         ON      (`clientContext`.`clientContextAutoIncr`        =       `clientStimword`.`clientContextAutoIncr`)
         WHERE   `clientContext`.`contextAutoIncr`               =       56
         AND     `clientContext`.`clientSessionAutoIncr`         =       2349
+        ;
+
+        SELECT  " "
         ;
