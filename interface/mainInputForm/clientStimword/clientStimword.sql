@@ -1,10 +1,20 @@
-       
+
        ## ** FOR TESTING ONLY **
-              
+
        ## test display written 2022-02-18
 
+        SELECT  " "
+        ;
+
         SELECT  "Testing clientContext table!"
-        ,       COUNT(*)                                "count of clientContext"
+        ,       count(*)                                "count of clientContext"
+        FROM    `comptonTransAnlys`.`clientContext`
+        WHERE   1
+        AND     `clientContext`.`contextAutoIncr`               =       56
+        AND     `clientContext`.`clientSessionAutoIncr`         =       2349
+        ;
+
+        SELECT  "Testing clientContext table!"
         ,       `clientContext`.`clientContextErrorSound`
         ,       `clientContext`.`contextPosition`
         ,       `clientContext`.`clientContextErrorCount`
@@ -16,8 +26,19 @@
         AND     `clientContext`.`clientSessionAutoIncr`         =       2349
         ;
 
+        SELECT  " "
+        ;
+
         SELECT  "Testing clientStimword table!"
-        ,       COUNT(*)                                "count of clientStimword"
+        ,       count(*)                                "count of clientStimword"
+        FROM    `comptonTransAnlys`.`clientContext`
+        LEFT JOIN `comptonTransAnlys`.`clientStimword`
+        ON      (`clientContext`.`clientContextAutoIncr`        =       `clientStimword`.`clientContextAutoIncr`)
+        WHERE   `clientContext`.`contextAutoIncr`               =       56
+        AND     `clientContext`.`clientSessionAutoIncr`         =       2349
+        ;
+
+        SELECT  "Testing clientStimword table!"
         ,       `clientContext`.`clientContextErrorSound`
         ,       `clientStimword`.`stimwordWord`
         ,       `clientStimword`.`contextPosition`
