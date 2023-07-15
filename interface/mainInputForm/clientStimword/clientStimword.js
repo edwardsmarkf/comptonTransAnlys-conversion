@@ -12,11 +12,25 @@
                 contextAutoIncr = 74 when stimwordPosition is 283/284
                 contextAutoIncr = 56 when stimwordPosition is 285   !!
 
-        adapted from            https://stackoverflow.com/questions/70883305/best-way-to-make-a-knex-request-from-inside-a-promise      (mine)
-                                https://stackoverflow.com/questions/71210850/best-way-to-have-a-knex-column-search-be-optional          (mine)
-                                https://javascript.info/promise-basics
-                                https://stackoverflow.com/questions/35318442/how-to-pass-parameter-to-a-promise-function
+        adapted from
+                                https://stackoverflow.com/questions/21979388/get-count-result-with-knex-js-bookshelf-js
+                                https://stackoverflow.com/questions/30945104/db-raw-with-more-than-one-paremter-with-knex
                                 https://stackoverflow.com/questions/33257412/how-to-handle-the-if-else-in-promise-then?rq=1
+                                https://stackoverflow.com/questions/35318442/how-to-pass-parameter-to-a-promise-function
+                                https://stackoverflow.com/questions/47464078/mysql-insert-with-multiple-selects-with-differing-number-of-returned-columns
+                                https://stackoverflow.com/questions/48558183/knex-select-result-return-to-a-variable
+                                https://stackoverflow.com/questions/53751587/knex-js-or-inside-where
+                                https://stackoverflow.com/questions/54407751/how-to-add-two-bind-params-in-knex/54422388
+                                https://stackoverflow.com/questions/65413824/multiple-count-and-left-joins-in-mysql-node-using-knex
+                                https://stackoverflow.com/questions/70883305/best-way-to-make-a-knex-request-from-inside-a-promise      (mine)
+                                https://stackoverflow.com/questions/71210850/best-way-to-have-a-knex-column-search-be-optional          (mine)
+
+                                https://javascript.info/promise-basics
+
+                                https://stackify.dev/136700-knex-js-how-to-select-columns-from-multiple-tables
+                                https://editor.datatables.net/manual/nodejs/conditions
+
+                                try this:  (2022-04-01 )     https://www.sitepoint.com/community/t/promises-feedback/384246/3
 */
 
 
@@ -34,7 +48,7 @@ const knexConnectOptions =
         ,       'connection'    :       'mysql://knexUser:knexPassword@localhost:3306/comptonTransAnlys'
         };
 
-const knex = require('knex')(knexConnectOptions);
+const knexClient = require('knex')(knexConnectOptions);
 
 const     myArgs                               = JSON.parse(process.argv.slice(2)[0])  ;
 
@@ -79,30 +93,13 @@ const processClientStimword = async (argObj) => {
                                         })
 
                                         .then( () =>    {
-console.info('calling function selectClientContext');
-console.log('parmclientContextErrorSound_NEW:')
-console.log(parmclientContextErrorSound_NEW)
-console.log('parmClientSessionAutoIncr:')
-console.log(parmClientSessionAutoIncr)
-console.log('contextAutoIncr:')
-console.log(contextAutoIncr)
-console.log('calling..................')
                                                 return selectClientContext(parmclientContextErrorSound_NEW, parmClientSessionAutoIncr, contextAutoIncr)
                                         })
                                           .then( val =>  {
-console.info('!!!!!!!!!!!!!!!! val is:  ');
-console.table(val);
-console.table(val[0]);
-console.info('END should not be inserting on last test');
                                                 if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
-console.info('yes ');
                                                         let returnArray = [ val ];      // funky way to "match" what the insert returns!
-console.info(returnArray)
-console.table(returnArray)
-console.info('leaving........');
                                                         return  returnArray;
                                                 } else {
-console.info('no creatting new one');
                                                         return insertClientContext(val, parmclientContextErrorSound_NEW, contextAutoIncr, parmClientSessionAutoIncr);
                                                 }
                                         })
@@ -313,7 +310,6 @@ console.info('no creatting new one');
 };
 
 
-
 processClientStimword(myArgs)
         .then(  (val)   =>      {
                 console.info('Exit status stuff:');
@@ -326,9 +322,6 @@ processClientStimword(myArgs)
 
 async function selectClientContextStimword(clientSessionAutoIncr, stimwordPositionAutoIncr, clientContextErrorSound)       {
 
-                                                        //      https://stackify.dev/136700-knex-js-how-to-select-columns-from-multiple-tables
-                                                        //      https://stackoverflow.com/questions/65413824/multiple-count-and-left-joins-in-mysql-node-using-knex
-                                                        //      https://editor.datatables.net/manual/nodejs/conditions
         let clientContextErrorSoundFlag;
 
         if  ( typeof clientContextErrorSound == 'boolean' )  {
@@ -339,7 +332,7 @@ async function selectClientContextStimword(clientSessionAutoIncr, stimwordPositi
                 clientContextErrorSoundFlag  = false ;
         }
 
-        return knex
+        return knexClient
                 .select         ('clientContext.clientContextAutoIncr')
                 .from           ('clientStimword')
                 .innerJoin      ('clientContext', 'clientContext.clientContextAutoIncr', 'clientStimword.clientContextAutoIncr')
@@ -367,21 +360,7 @@ async function selectClientContextStimword(clientSessionAutoIncr, stimwordPositi
 
 
 async function selectClientContext(clientContextErrorSound, clientSessionAutoIncr, contextAutoIncr)        {
-                                                //      https://stackoverflow.com/questions/21979388/get-count-result-with-knex-js-bookshelf-js
-                                                //      https://stackoverflow.com/questions/53751587/knex-js-or-inside-where
-                                                //      https://stackoverflow.com/questions/54407751/how-to-add-two-bind-params-in-knex/54422388
-                                                //      https://stackoverflow.com/questions/47464078/mysql-insert-with-multiple-selects-with-differing-number-of-returned-columns
-                                                //      https://stackoverflow.com/questions/30945104/db-raw-with-more-than-one-paremter-with-knex
-console.info('inside of asyunc function selectClientContext');
-console.info('clientContextErrorSound:')
-console.info(clientContextErrorSound)
-console.info('clientSessionAutoIncr:')
-console.info(clientSessionAutoIncr)
-console.info('contextAutoIncr:');
-console.info(contextAutoIncr);
-console.info('about to execute  asyunc function selectClientContext');
-
-        return knex
+        return knexClient
                 .select         ('clientContext.clientContextAutoIncr')
                 .from           ('clientContext')
                 .where          (true)
@@ -390,7 +369,7 @@ console.info('about to execute  asyunc function selectClientContext');
                                         ,       'clientContext.contextAutoIncr'         : contextAutoIncr
                                         }
                                 )
-                //.then( val => { console.warn('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'); return val[0]; } )
+                                                                        //.then( val => { console.warn('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'); return val[0]; } )
                                                                         /*
                                                                         .then( val =>   {
                                                                                         console.log(val);
@@ -414,7 +393,7 @@ function insertClientContext(val, clientContextErrorSound, contextAutoIncr, clie
                 }
                 ;
 
-        return knex.raw(returnInsertClientContextStatement(), insertClientContextParms);
+        return knexClient.raw(returnInsertClientContextStatement(), insertClientContextParms);
 }
 
 function insertClientStimword(clientContextAutoIncr, stimwordPositionAutoIncr)     {
@@ -424,22 +403,21 @@ function insertClientStimword(clientContextAutoIncr, stimwordPositionAutoIncr)  
                 ,       'stimwordPositionAutoIncr'              :       stimwordPositionAutoIncr
                 }
                 ;
-        return knex.raw(returnInsertClientStimwordStatement(), insertClientStimwordParms);
+        return knexClient.raw(returnInsertClientStimwordStatement(), insertClientStimwordParms);
 }
 
 
 function returnContextAutoIncr(stimwordPositionAutoIncr)        {
-                                                        //      https://stackoverflow.com/questions/48558183/knex-select-result-return-to-a-variable
-        return knex.from('stimwordPosition')
+        return knexClient
+                .from('stimwordPosition')
                 .select('contextAutoIncr')
                 .where ({ 'stimwordPositionAutoIncr': stimwordPositionAutoIncr })
-                .then( val => { return val[0]; } )
+                .then( val => { return val[0]; } )                              // WHY IS THIS REQUIRED  ? ? ? ? ? ?? ? ? ? ? ? ? ? ? ? ? ?? ? ? ?
                 ;
 }
 
 
 function updateClientStimword(parmObject)    {
-                                                /* try this:  (2022-04-01 )     https://www.sitepoint.com/community/t/promises-feedback/384246/3 */
 
         let updateClientStimwordWhereParms =
                 {       'stimwordPositionAutoIncr'      :       parmObject.stimwordPositionAutoIncr
@@ -452,11 +430,11 @@ function updateClientStimword(parmObject)    {
                 ,       'clientContextErrorSound'       :       parmObject.clientContextErrorSound_NEW
                 };
 
-        return knex
+        return knexClient
                 .from('clientStimword')
                 .where(updateClientStimwordWhereParms)
                 .update(updateClientStimwordUpdateParms)
-                .returning('clientStimwordAutoIncr')
+                .returning('clientStimwordAutoIncr')                    // returning on update statement only.....  ( ? ? ? )
                 ;
 }
 
@@ -466,7 +444,7 @@ function deleteClientStimword(stimwordPositionAutoIncr, clientContextAutoIncr, c
                 ,       'clientContextAutoIncr'         :       clientContextAutoIncr
                 ,       'clientContextErrorSound'       :       clientContextErrorSound
                 };
-        return knex
+        return knexClient
                 .from('clientStimword')
                 .where(deleteClientStimwordParms)
                 .delete()
@@ -483,14 +461,14 @@ function deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, cl
                 ,       'frequency'                             :       ''
                 ,       'clientContextErrorCount'               :       0
                 };
-        return knex
+        return knexClient
                 .from('clientContext')
                 .delete()
                 .where(deleteClientContextParms)
                 .andWhere('clientContextAutoIncr', 'NOT IN',
-                        knex    .select('clientContextAutoIncr')
-                                .from('clientStimword')
-                                .where({ 'clientContextAutoIncr'        :       clientContextAutoIncr   })
+                        knexClient      .select('clientContextAutoIncr')
+                                        .from('clientStimword')
+                                        .where({ 'clientContextAutoIncr'        :       clientContextAutoIncr   })
                 )
                 ;
 }
@@ -636,3 +614,4 @@ function exitScript(statusVal, statusTxt, passedJSON)   {
         process.exit(statusVal);
 }
 */
+
