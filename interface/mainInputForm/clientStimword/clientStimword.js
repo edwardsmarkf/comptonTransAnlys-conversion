@@ -434,7 +434,6 @@ function updateClientStimword(parmObject)    {
                 .from('clientStimword')
                 .where(updateClientStimwordWhereParms)
                 .update(updateClientStimwordUpdateParms)
-                .returning('clientStimwordAutoIncr')                    // returning on update statement only.....  ( ? ? ? )
                 ;
 }
 
