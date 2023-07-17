@@ -40,7 +40,7 @@
 
 
 
-                                                                //      mariadb  --host=localhost --user=kenxUser  --password=knexPassword    comptonTransAnlys
+                                                                //      mariadb  --host=localhost --user=knexUser  --password=knexPassword    comptonTransAnlys
 const knexConnectOptions =
         {       'host'          :       '127.0.0.1'
         ,       'client'        :       'mysql'
@@ -48,11 +48,11 @@ const knexConnectOptions =
         ,       'connection'    :       'mysql://knexUser:knexPassword@localhost:3306/comptonTransAnlys'
         };
 
-const knexClient = require('knex')(knexConnectOptions);
+const knexMasterClient = require('knex')(knexConnectOptions);
 
 const     myArgs                               = JSON.parse(process.argv.slice(2)[0])  ;
 
-const processClientStimword = async (argObj) => {
+const processClientStimword = async (knexClient, argObj) => {
 
         const   parmClientSessionAutoIncr            = argObj.clientSessionAutoIncr          ;
                                                                                                         //const   parmContextAutoIncr                        = argObj.contextAutoIncr       ;
@@ -61,7 +61,7 @@ const processClientStimword = async (argObj) => {
         const   parmclientContextErrorSound_NEW      = argObj.clientContextErrorSound_NEW         ;
 
 
-    return returnContextAutoIncr(parmStimwordPositionAutoIncr)
+    return returnContextAutoIncr(knexClient, parmStimwordPositionAutoIncr)
         .catch( err =>  {
                 return (0, `Bad returnContextAutoIncr:   parmStimwordPositionAutoIncr: ${parmStimwordPositionAutoIncr}`, err);
         })
@@ -78,7 +78,12 @@ const processClientStimword = async (argObj) => {
 
                         case ( parmclientContextErrorSound_OLD  == ''  &&    parmclientContextErrorSound_NEW > '' )       :
                         {
-                                return selectClientContextStimword(parmClientSessionAutoIncr, parmStimwordPositionAutoIncr, true)
+                                return selectClientContextStimword
+                                                (       knexClient
+                                                ,       parmClientSessionAutoIncr
+                                                ,       parmStimwordPositionAutoIncr
+                                                ,       true
+                                                )
                                         .then( val =>   {
                                                 if  ( val.length > 0 )  {
                                                         throw new Error(
@@ -93,14 +98,26 @@ const processClientStimword = async (argObj) => {
                                         })
 
                                         .then( () =>    {
-                                                return selectClientContext(parmclientContextErrorSound_NEW, parmClientSessionAutoIncr, contextAutoIncr)
+                                                return selectClientContext
+                                                        (       knexClient
+                                                        ,       parmclientContextErrorSound_NEW
+                                                        ,       parmClientSessionAutoIncr
+                                                        ,       contextAutoIncr
+                                                        )
                                         })
                                           .then( val =>  {
                                                 if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
                                                         let returnArray = [ val ];      // funky way to "match" what the insert returns!
                                                         return  returnArray;
                                                 } else {
-                                                        return insertClientContext(val, parmclientContextErrorSound_NEW, contextAutoIncr, parmClientSessionAutoIncr);
+                                                        return insertClientContext
+                                                                (       knexClient
+                                                                ,       val
+                                                                ,       parmclientContextErrorSound_NEW
+                                                                ,       contextAutoIncr
+                                                                ,       parmClientSessionAutoIncr
+                                                                )
+                                                                ;
                                                 }
                                         })
                                         .then( val =>  {
@@ -112,7 +129,12 @@ const processClientStimword = async (argObj) => {
                                                 }
                                         })
                                         .then( ( clientContextAutoIncr) =>      {
-                                                return insertClientStimword(clientContextAutoIncr, parmStimwordPositionAutoIncr);
+                                                return insertClientStimword
+                                                        (       knexClient
+                                                        ,       clientContextAutoIncr
+                                                        ,       parmStimwordPositionAutoIncr
+                                                        )
+                                                        ;
                                         })
                                         .then(  (val) =>  {
                                                 let retObj =
@@ -154,7 +176,12 @@ const processClientStimword = async (argObj) => {
                                 var clientContextAutoIncr_OLD   ;
                                 var clientContextAutoIncr_NEW   ;
 
-                                return selectClientContextStimword(parmClientSessionAutoIncr, parmStimwordPositionAutoIncr, parmclientContextErrorSound_OLD)
+                                return selectClientContextStimword
+                                                (       knexClient
+                                                ,       parmClientSessionAutoIncr
+                                                ,       parmStimwordPositionAutoIncr
+                                                ,       parmclientContextErrorSound_OLD
+                                                )
                                         .catch( err =>  {
                                                         return  (       (`selectClientContextStimnword select failed!  \
                                                                                 selectCparmclientContextErrorSound_OLD: ${parmclientContextErrorSound_OLD},  \
@@ -180,13 +207,25 @@ const processClientStimword = async (argObj) => {
                                                 }
 
                                                 clientContextAutoIncr_OLD = val[0]['clientContextAutoIncr'];
-                                                return selectClientContext(parmclientContextErrorSound_NEW, parmClientSessionAutoIncr, contextAutoIncr)
+                                                return selectClientContext
+                                                                (       knexClient
+                                                                ,       parmclientContextErrorSound_NEW
+                                                                ,       parmClientSessionAutoIncr
+                                                                ,       contextAutoIncr
+                                                                )
                                         .then( val =>  {
                                                         if  ( val.length && val[0].hasOwnProperty('clientContextAutoIncr'))             {
                                                                 let returnArray = [ val ];      // funky way to "match" what the insert returns!
                                                                 return  returnArray;
                                                         } else {
-                                                                return insertClientContext(val, parmclientContextErrorSound_NEW, contextAutoIncr, parmClientSessionAutoIncr);
+                                                                return insertClientContext
+                                                                        (       knexClient
+                                                                        ,       val
+                                                                        ,       parmclientContextErrorSound_NEW
+                                                                        ,       contextAutoIncr
+                                                                        ,       parmClientSessionAutoIncr
+                                                                        )
+                                                                        ;
                                                         }
                                                 })
 
@@ -214,12 +253,18 @@ const processClientStimword = async (argObj) => {
                                                         }
                                                         ;
 
-                                                return  updateClientStimword(updateClientStimwordParms)
+                                                return  updateClientStimword(knexClient, updateClientStimwordParms)
                                         })
-                                        .then( val =>    {
-                                                return deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr_OLD, parmclientContextErrorSound_OLD) })
+                                        .then( () =>    {
+                                                return deleteChildlessClientContext
+                                                                (       knexClient
+                                                                ,       contextAutoIncr
+                                                                ,       clientContextAutoIncr_OLD
+                                                                ,       parmclientContextErrorSound_OLD
+                                                                )
                                         })
-                                        .then( val =>   {
+                                        })
+                                        .then( () =>   {
                                                 let retObj =
                                                         {       'status'                        :       1
                                                         ,       'clientContextAutoIncr - OLD'   :       clientContextAutoIncr_OLD
@@ -247,7 +292,12 @@ const processClientStimword = async (argObj) => {
                         {
                                 var clientContextAutoIncr ;
 
-                                return selectClientContextStimword(parmClientSessionAutoIncr, parmStimwordPositionAutoIncr, parmclientContextErrorSound_OLD)
+                                return selectClientContextStimword
+                                                (       knexClient
+                                                ,       parmClientSessionAutoIncr
+                                                ,       parmStimwordPositionAutoIncr
+                                                ,       parmclientContextErrorSound_OLD
+                                                )
                                         .catch( err =>  {
                                                         return  (       (`selectClientContextStimnword select failed!  \
                                                                                 selectCparmclientContextErrorSound_OLD: ${parmclientContextErrorSound_OLD},  \
@@ -273,10 +323,20 @@ const processClientStimword = async (argObj) => {
                                                 }
 
                                                 clientContextAutoIncr = val[0]['clientContextAutoIncr'];
-                                                return deleteClientStimword(parmStimwordPositionAutoIncr, clientContextAutoIncr, parmclientContextErrorSound_OLD)
+                                                return deleteClientStimword
+                                                        (       knexClient
+                                                        ,       parmStimwordPositionAutoIncr
+                                                        ,       clientContextAutoIncr
+                                                        ,       parmclientContextErrorSound_OLD
+                                                        )
                                         })
                                         .then( (val) =>    {
-                                                return deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, parmclientContextErrorSound_OLD)
+                                                return deleteChildlessClientContext
+                                                        (       knexClient
+                                                        ,       contextAutoIncr
+                                                        ,       clientContextAutoIncr
+                                                        ,       parmclientContextErrorSound_OLD
+                                                        )
                                         })
                                         .then( val =>   {
                                                 let retObj =
@@ -310,7 +370,7 @@ const processClientStimword = async (argObj) => {
 };
 
 
-processClientStimword(myArgs)
+processClientStimword(knexMasterClient, myArgs)
         .then(  (val)   =>      {
                 console.info('Exit status stuff:');
                 console.info(val);
@@ -320,7 +380,7 @@ processClientStimword(myArgs)
         });
 
 
-async function selectClientContextStimword(clientSessionAutoIncr, stimwordPositionAutoIncr, clientContextErrorSound)       {
+async function selectClientContextStimword(knexClient, clientSessionAutoIncr, stimwordPositionAutoIncr, clientContextErrorSound)       {
 
         let clientContextErrorSoundFlag;
 
@@ -359,7 +419,7 @@ async function selectClientContextStimword(clientSessionAutoIncr, stimwordPositi
 }
 
 
-async function selectClientContext(clientContextErrorSound, clientSessionAutoIncr, contextAutoIncr)        {
+async function selectClientContext(knexClient, clientContextErrorSound, clientSessionAutoIncr, contextAutoIncr)        {
         return knexClient
                 .select         ('clientContext.clientContextAutoIncr')
                 .from           ('clientContext')
@@ -381,7 +441,7 @@ async function selectClientContext(clientContextErrorSound, clientSessionAutoInc
 }
 
 
-function insertClientContext(val, clientContextErrorSound, contextAutoIncr, clientSessionAutoIncr)   {
+function insertClientContext(knexClient, val, clientContextErrorSound, contextAutoIncr, clientSessionAutoIncr)   {
 
         let insertClientContextParms =
                 {       'clientContextErrorSound'               :       clientContextErrorSound
@@ -396,7 +456,7 @@ function insertClientContext(val, clientContextErrorSound, contextAutoIncr, clie
         return knexClient.raw(returnInsertClientContextStatement(), insertClientContextParms);
 }
 
-function insertClientStimword(clientContextAutoIncr, stimwordPositionAutoIncr)     {
+function insertClientStimword(knexClient, clientContextAutoIncr, stimwordPositionAutoIncr)     {
 
         let insertClientStimwordParms =
                 {       'clientContextAutoIncr'                 :       clientContextAutoIncr
@@ -407,7 +467,7 @@ function insertClientStimword(clientContextAutoIncr, stimwordPositionAutoIncr)  
 }
 
 
-function returnContextAutoIncr(stimwordPositionAutoIncr)        {
+function returnContextAutoIncr(knexClient, stimwordPositionAutoIncr)        {
         return knexClient
                 .from('stimwordPosition')
                 .select('contextAutoIncr')
@@ -417,7 +477,7 @@ function returnContextAutoIncr(stimwordPositionAutoIncr)        {
 }
 
 
-function updateClientStimword(parmObject)    {
+function updateClientStimword(knexClient, parmObject)    {
 
         let updateClientStimwordWhereParms =
                 {       'stimwordPositionAutoIncr'      :       parmObject.stimwordPositionAutoIncr
@@ -437,7 +497,7 @@ function updateClientStimword(parmObject)    {
                 ;
 }
 
-function deleteClientStimword(stimwordPositionAutoIncr, clientContextAutoIncr, clientContextErrorSound)      {
+function deleteClientStimword(knexClient, stimwordPositionAutoIncr, clientContextAutoIncr, clientContextErrorSound)      {
         let deleteClientStimwordParms =
                 {       'stimwordPositionAutoIncr'      :       stimwordPositionAutoIncr
                 ,       'clientContextAutoIncr'         :       clientContextAutoIncr
@@ -451,7 +511,7 @@ function deleteClientStimword(stimwordPositionAutoIncr, clientContextAutoIncr, c
 }
 
 
-function deleteChildlessClientContext(contextAutoIncr, clientContextAutoIncr, clientContextErrorSound)       {
+function deleteChildlessClientContext(knexClient, contextAutoIncr, clientContextAutoIncr, clientContextErrorSound)       {
         let deleteClientContextParms =
                 {       'contextAutoIncr'                       :       contextAutoIncr
                 ,       'clientContextAutoIncr'                 :       clientContextAutoIncr
@@ -613,4 +673,5 @@ function exitScript(statusVal, statusTxt, passedJSON)   {
         process.exit(statusVal);
 }
 */
+
 
