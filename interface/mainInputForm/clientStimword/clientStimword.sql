@@ -40,7 +40,6 @@
         ,       CONCAT(`clientStimword`.`contextPosition`       , '-', `clientStimword`.`stimwordWord`                  )
                                                                 "Position-Word"
         ,       `clientStimword`.`stimwordPositionSetting`      "Setting"
-        ,       `clientStimword`.`clientStimwordAutoIncr`
         ,       `clientStimword`.`stimwordPositionAutoIncr`
         ,       `clientStimword`.`clientStimwordAutoIncr`
         FROM    `comptonTransAnlys`.`clientContext`
@@ -52,3 +51,4 @@
 
         SELECT  " "
         ;
+
