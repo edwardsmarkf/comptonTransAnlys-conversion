@@ -74,6 +74,10 @@ s/  \`fontTableAutoIncrement\` smallint(5) unsigned NOT NULL AUTO_INCREMENT,/& P
 # 
 #       we HAVE to remove the trailing comma from this line:
 s/  KEY \`frequency\` (\`frequency\`),/  UNIQUE KEY \`frequencyListUniqueKey\` (\`frequency\`)/;
+/  \`frequency\` varchar(15) NOT NULL,/a
+ \`frequencyListAutoIncr\` SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+/PRIMARY KEY (`frequencyOrder`)/d
 ##2022-11-27## /  KEY \`frequencyList_2_clientContext\`/d;
 #
 #
