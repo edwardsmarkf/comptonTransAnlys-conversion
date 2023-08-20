@@ -10,39 +10,39 @@
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
  
- ALTER TABLE `clientContext` DROP CONSTRAINT IF EXISTS `frequencyList_2_clientContext`;
+ ALTER TABLE \`clientContext\` DROP CONSTRAINT IF EXISTS \`frequencyList_2_clientContext\`;
 
-          ######## ALTER TABLE `frequencyList` DROP PRIMARY KEY;  # `frequencyOrder` ;
+          ######## ALTER TABLE \`frequencyList\` DROP PRIMARY KEY;  # \`frequencyOrder\` ;
 
-DELETE FROM  `frequencyList` ;  ## necessary to reorder
+DELETE FROM  \`frequencyList\` ;  ## necessary to reorder
 
-ALTER TABLE `frequencyList` DROP COLUMN IF EXISTS `frequencyListAutoIncr` ;
+ALTER TABLE \`frequencyList\` DROP COLUMN IF EXISTS \`frequencyListAutoIncr\` ;
     
-ALTER TABLE `frequencyList` ADD COLUMN `frequencyListAutoIncr` SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
-ALTER TABLE `frequencyList` AUTO_INCREMENT = 1 ;
+ALTER TABLE \`frequencyList\` ADD COLUMN \`frequencyListAutoIncr\` SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
+ALTER TABLE \`frequencyList\` AUTO_INCREMENT = 1 ;
 
 
-INSERT INTO `frequencyList` (`frequencyList`.`frequencyOrder`, `frequencyList`.`frequency`)
+INSERT INTO \`frequencyList\` (\`frequencyList\`.\`frequencyOrder\`, \`frequencyList\`.\`frequency\`)
     VALUES (0, ''), (1, 'Occasionally'), (2, '50%'), (3,'Usually'), (4, 'Always') ;
     
-ALTER TABLE `frequencyList` ADD KEY `frequencyList_2_clientContext` (`frequency`) ;
+ALTER TABLE \`frequencyList\` ADD KEY \`frequencyList_2_clientContext\` (\`frequency\`) ;
  
-ALTER TABLE `clientContext` ADD COLUMN IF NOT EXISTS `frequencyListAutoIncr` SMALLINT(2) NOT NULL AFTER `updatedAt` ;
+ALTER TABLE \`clientContext\` ADD COLUMN IF NOT EXISTS \`frequencyListAutoIncr\` SMALLINT(2) NOT NULL AFTER \`updatedAt\` ;
  
-ALTER TABLE `clientContext` ADD KEY IF NOT EXISTS `frequencyListAutoIncr_2_clientContext` (`frequencyListAutoIncr`) ;
-ALTER TABLE `clientContext` ADD KEY IF NOT EXISTS `frequencyList_2_clientContext` (`frequency`) ;
+ALTER TABLE \`clientContext\` ADD KEY IF NOT EXISTS \`frequencyListAutoIncr_2_clientContext\` (\`frequencyListAutoIncr\`) ;
+ALTER TABLE \`clientContext\` ADD KEY IF NOT EXISTS \`frequencyList_2_clientContext\` (\`frequency\`) ;
 
-UPDATE `clientContext` SET `frequencyListAutoIncr` = 1 WHERE `frequency` = '';
-UPDATE `clientContext` SET `frequencyListAutoIncr` = 2 WHERE `frequency` = 'Occasionally';
-UPDATE `clientContext` SET `frequencyListAutoIncr` = 3 WHERE `frequency` = '50%';
-UPDATE `clientContext` SET `frequencyListAutoIncr` = 4 WHERE `frequency` = 'Usually';
-UPDATE `clientContext` SET `frequencyListAutoIncr` = 5 WHERE `frequency` = 'Always';
+UPDATE \`clientContext\` SET \`frequencyListAutoIncr\` = 1 WHERE \`frequency\` = '';
+UPDATE \`clientContext\` SET \`frequencyListAutoIncr\` = 2 WHERE \`frequency\` = 'Occasionally';
+UPDATE \`clientContext\` SET \`frequencyListAutoIncr\` = 3 WHERE \`frequency\` = '50%';
+UPDATE \`clientContext\` SET \`frequencyListAutoIncr\` = 4 WHERE \`frequency\` = 'Usually';
+UPDATE \`clientContext\` SET \`frequencyListAutoIncr\` = 5 WHERE \`frequency\` = 'Always';
  
-ALTER TABLE `clientContext` ADD CONSTRAINT `frequencyListAutoIncr_2_clientContextAutoIncr` 
-    FOREIGN KEY (`frequencyListAutoIncr`) REFERENCES `frequencyList` (`frequencyListAutoIncr`) ON DELETE CASCADE ON UPDATE CASCADE ;
+ALTER TABLE \`clientContext\` ADD CONSTRAINT \`frequencyListAutoIncr_2_clientContextAutoIncr\` 
+    FOREIGN KEY (\`frequencyListAutoIncr\`) REFERENCES \`frequencyList\` (\`frequencyListAutoIncr\`) ON DELETE CASCADE ON UPDATE CASCADE ;
  
- ALTER TABLE `clientContext` ADD CONSTRAINT `frequencyList_2_clientContext`
-   FOREIGN KEY (`frequency`)              REFERENCES `frequencyList` (`frequency`) ON DELETE CASCADE ON UPDATE CASCADE ;
+ ALTER TABLE \`clientContext\` ADD CONSTRAINT \`frequencyList_2_clientContext\`
+   FOREIGN KEY (\`frequency\`)              REFERENCES \`frequencyList\` (\`frequency\`) ON DELETE CASCADE ON UPDATE CASCADE ;
 
 END
 
