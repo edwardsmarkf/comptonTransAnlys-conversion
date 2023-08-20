@@ -44,4 +44,8 @@ ALTER TABLE `clientContext` ADD CONSTRAINT `frequencyListAutoIncr_2_clientContex
  ALTER TABLE `clientContext` ADD CONSTRAINT `frequencyList_2_clientContext`
    FOREIGN KEY (`frequency`)              REFERENCES `frequencyList` (`frequency`) ON DELETE CASCADE ON UPDATE CASCADE ;
 
+END
+
+echo 'Done with 40d_create_frequency_list_keys.bsh!';
+
  
