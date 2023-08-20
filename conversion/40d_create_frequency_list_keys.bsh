@@ -10,9 +10,9 @@
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
  
- ALTER TABLE \`clientContext\` DROP CONSTRAINT IF EXISTS \`frequencyList_2_clientContext\`;
+ALTER TABLE \`clientContext\` DROP CONSTRAINT IF EXISTS \`frequencyList_2_clientContext\`;
 
-          ######## ALTER TABLE \`frequencyList\` DROP PRIMARY KEY;  # \`frequencyOrder\` ;
+ALTER TABLE \`frequencyList\` DROP PRIMARY KEY;  # \`frequencyOrder\` ;
 
 DELETE FROM  \`frequencyList\` ;  ## necessary to reorder
 
