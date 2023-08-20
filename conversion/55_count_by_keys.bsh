@@ -247,11 +247,31 @@ SELECT "COUNT: clientSession to clientContext BOTH      " , COUNT(*)
   AND   \`clientSession\`.\`layoutName\`                               = \`clientContext\`.\`layoutName\`
   AND   \`clientSession\`.\`teacherEmail\`                             = \`clientContext\`.\`teacherEmail\`
   AND   \`clientSession\`.\`clientMasterEmail\`                        = \`clientContext\`.\`clientMasterEmail\`
-  AND   \`clientSession\`.\`sessionName\`                              = \`clientContext\`.\`sessionName\`  
+  AND   \`clientSession\`.\`sessionName\`                       = \`clientContext\`.\`sessionName\`  
   ;
 
 
-SELECT "COUNT: context to clientContext MiscKeys        " , COUNT(*)     
+SELECT "COUNT: frequencyList to clientContext MiscKeys        " , COUNT(*)     
+FROM    \`frequencyList\`
+,       \`clientContext\`
+WHERE   1
+AND     \`frequencyList\`.\`frequency\`                         = \`clientContext\`.\`frequency\`
+;
+SELECT "COUNT: frequencyList to clientContext AutoIncr       " , COUNT(*)     
+FROM    \`frequencyList\`
+,       \`clientContext\`
+WHERE   1
+AND     \`frequencyList\`.\`frequencyListAutoIncr\`             = \`clientContext\`.\`frequencyListAutoIncr\`
+;
+SELECT "COUNT: frequencyList to clientContext BOTH            " , COUNT(*)     
+FROM    \`frequencyList\`
+,       \`clientContext\`
+WHERE   1
+AND     \`frequencyList\`.\`frequencyListAutoIncr\`           = \`clientContext\`.\`frequencyListAutoIncr\`
+;
+
+
+SELECT "COUNT: context to clientContext MiscKeys            " , COUNT(*)     
 FROM    \`context\`
 ,       \`clientContext\`
 WHERE   1
