@@ -27,19 +27,11 @@ INSERT INTO positionSettings ( positionSetting, positionSettingAutoIncr) VALUES 
 ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingAutoIncr` TINYINT(2) NOT NULL AFTER `updatedAt` ;
 ALTER TABLE `stimwordPosition`  RENAME COLUMN `stimwordPositionSetting` TO  `positionSetting`  ;
 
-ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrColor`   ;
-ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrStyle`   ;
-ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrThickness` ;
-
-####ALTER TABLE \`positionSetting\` ADD COLUMN \`positionSettingAutoIncr\` SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
-####ALTER TABLE \`positionSetting\` AUTO_INCREMENT = 1 ;
 
 ALTER TABLE \`positionSetting\` ADD KEY \`positionSetting_2_stimwordPosition\` (\`positionSetting\`) ;
- 
- 
+  
 ALTER TABLE `stimwordPosition` ADD KEY IF NOT EXISTS \`positionSettingAutoIncr_2_stimwordPosition\` (\`positionSettingAutoIncr\`) ;
 ALTER TABLE `stimwordPosition` ADD KEY IF NOT EXISTS \`positionSetting_2_stimwordPosition\` (\`frequency\`) ;
-
 
 UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 1 WHERE 1 AND `positionSetting` = 'word' ;
 UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 2 WHERE 1 AND `positionSetting` = 'sentence' ;
@@ -58,3 +50,10 @@ echo 'Done with 40d_create_frequency_list_keys.bsh!';
 exit;
 
 #
+#ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrColor`   ;
+#ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrStyle`   ;
+#ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrThickness` ;
+
+####ALTER TABLE \`positionSetting\` ADD COLUMN \`positionSettingAutoIncr\` SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
+####ALTER TABLE \`positionSetting\` AUTO_INCREMENT = 1 ;
+
