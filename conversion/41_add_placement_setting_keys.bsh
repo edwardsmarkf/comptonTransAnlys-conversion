@@ -10,10 +10,12 @@
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
-ALTER TABLE \`stimwordPosition\`  DROP COLUMN  IF EXISTS  \`positionSetting\`                     ;
-ALTER TABLE \`stimwordPosition\`  DROP COLUMN  IF EXISTS  \`positionSettingsAutoIncr\`            ;
-ALTER TABLE \`stimwordPosition\`  DROP KEY     IF EXISTS  \`positionSettingKey\`                  ;
-ALTER TABLE \`stimwordPosition\`  DROP KEY     IF EXISTS  \`positionSetting_2_stimwordPosition\`  ;
+ALTER TABLE \`stimwordPosition\`  DROP CONSTRAINT  IF EXISTS  \`positionSettingsAutoIncr_2_stimwordPosition\` ;
+ALTER TABLE \`stimwordPosition\`  DROP CONSTRAINT  IF EXISTS  \`positionSettings_2_stimwordPosition\`         ;
+ALTER TABLE \`stimwordPosition\`  DROP KEY         IF EXISTS  \`positionSettingKey\`                          ;
+ALTER TABLE \`stimwordPosition\`  DROP KEY         IF EXISTS  \`positionSetting_2_stimwordPosition\`          ;
+ALTER TABLE \`stimwordPosition\`  DROP COLUMN      IF EXISTS  \`positionSetting\`                             ;
+ALTER TABLE \`stimwordPosition\`  DROP COLUMN      IF EXISTS  \`positionSettingsAutoIncr\`                    ;
 
 DROP TABLE IF EXISTS  \`positionSettings\`  ;
 
@@ -46,7 +48,7 @@ ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSettingsAutoIncr_2_sti
     ON DELETE CASCADE ON UPDATE CASCADE
     ;
 
-ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSettings_2_stimwordPosition\`
+ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT  \`positionSettings_2_stimwordPosition\`
     FOREIGN KEY (\`positionSetting\`)                REFERENCES \`positionSettings\` (\`positionSetting\`)
     ON DELETE CASCADE ON UPDATE CASCADE
     ;
