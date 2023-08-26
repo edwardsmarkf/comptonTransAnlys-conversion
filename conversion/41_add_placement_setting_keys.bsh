@@ -15,10 +15,10 @@ ALTER TABLE `stimwordPosition` DROP COLUMN  IF EXISTS  `positionSettingAutoIncr`
 
 
 CREATE TABLE   `positionSettings` 
-   (   `positionSetting`             VARCHAR(20) NOT NULL
-   ,   `createdAt`                   TIMESTAMP   NOT NULL    DEFAULT CURRENT_TIMESTAMP()
-   ,   `updatedAt`                   TIMESTAMP   NOT NULL    DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()
-   ,   `positionSettingAutoIncr`     TINYINT(2)  NOT NULL    UNSIGNED AUTO_INCREMENT  PRIMARY KEY
+   (   `positionSetting`             VARCHAR(20)           NOT NULL
+   ,   `createdAt`                   TIMESTAMP             NOT NULL    DEFAULT CURRENT_TIMESTAMP()
+   ,   `updatedAt`                   TIMESTAMP             NOT NULL    DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()
+   ,   `positionSettingAutoIncr`     TINYINT(2)  UNSIGNED  NOT NULL    AUTO_INCREMENT  PRIMARY KEY
    ,   UNIQUE KEY `positionSettingUniqueKey` (`positionSetting`)
    )   ENGINE=InnoDB DEFAULT CHARSET=latin1
     ;
