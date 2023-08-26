@@ -10,42 +10,44 @@
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
-ALTER TABLE `stimwordPosition` DROP COLUMN  IF EXISTS  `positionSetting`                     ;
-ALTER TABLE `stimwordPosition` DROP COLUMN  IF EXISTS  `positionSettingsAutoIncr`            ;
-ALTER TABLE `stimwordPosition` DROP KEY     IF EXISTS  `positionSettingKey`                  ;
-ALTER TABLE `stimwordPosition` DROP KEY     IF EXISTS  `positionSetting_2_stimwordPosition`  ;
+ALTER TABLE \`stimwordPosition\`  DROP COLUMN  IF EXISTS  \`positionSetting\`                     ;
+ALTER TABLE \`stimwordPosition\`  DROP COLUMN  IF EXISTS  \`positionSettingsAutoIncr\`            ;
+ALTER TABLE \`stimwordPosition\`  DROP KEY     IF EXISTS  \`positionSettingKey\`                  ;
+ALTER TABLE \`stimwordPosition\`  DROP KEY     IF EXISTS  \`positionSetting_2_stimwordPosition\`  ;
 
-DROP TABLE IF EXISTS  `positionSettings`  ;
+DROP TABLE IF EXISTS  \`positionSettings\`  ;
 
-CREATE TABLE   `positionSettings` 
-   (   `positionSetting`             VARCHAR(20)           NOT NULL
-   ,   `createdAt`                   TIMESTAMP             NOT NULL    DEFAULT CURRENT_TIMESTAMP()
-   ,   `updatedAt`                   TIMESTAMP             NOT NULL    DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()
-   ,   `positionSettingsAutoIncr`    TINYINT(2)  UNSIGNED  NOT NULL    AUTO_INCREMENT  PRIMARY KEY
-   ,   UNIQUE KEY `positionSettingUniqueKey` (`positionSetting`)
+CREATE TABLE   \`positionSettings\` 
+   (   \`positionSetting\`             VARCHAR(20)           NOT NULL
+   ,   \`createdAt\`                   TIMESTAMP             NOT NULL    DEFAULT CURRENT_TIMESTAMP()
+   ,   \`updatedAt\`                   TIMESTAMP             NOT NULL    DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()
+   ,   \`positionSettingsAutoIncr\`    TINYINT(2)  UNSIGNED  NOT NULL    AUTO_INCREMENT  PRIMARY KEY
+   ,   UNIQUE KEY \`positionSettingUniqueKey\` (\`positionSetting\`)
    )   ENGINE=InnoDB DEFAULT CHARSET=latin1
    ;
 
-INSERT INTO positionSettings ( positionSetting, positionSettingsAutoIncr) VALUES ( 'sentence', 1), ('word', 2), ('reading', 3) ;
+INSERT INTO \`positionSettings\` ( \`positionSetting\`, \`positionSettingsAutoIncr\`)
+    VALUES ( 'sentence', 1), ('word', 2), ('reading', 3)
+    ;
 
-ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingsAutoIncr` TINYINT(2)   UNSIGNED NOT NULL AFTER `updatedAt`                 ;
-ALTER TABLE `stimwordPosition` ADD COLUMN `positionSetting`          VARCHAR(20)           NOT NULL AFTER `stimwordPositionSetting`   ;
+ALTER TABLE \`stimwordPosition\` ADD COLUMN \`positionSettingsAutoIncr\` TINYINT(2)   UNSIGNED NOT NULL AFTER \`updatedAt\`                 ;
+ALTER TABLE \`stimwordPosition\` ADD COLUMN \`positionSetting\`          VARCHAR(20)           NOT NULL AFTER \`stimwordPositionSetting\`   ;
 
-UPDATE   `stimwordPosition`  SET `positionSetting`          = `stimwordPositionSetting`                     ;
-UPDATE   `stimwordPosition`  SET `positionSettingsAutoIncr` = 1 WHERE 1 AND `positionSetting` = 'word'      ;
-UPDATE   `stimwordPosition`  SET `positionSettingsAutoIncr` = 2 WHERE 1 AND `positionSetting` = 'sentence'  ;
-UPDATE   `stimwordPosition`  SET `positionSettingsAutoIncr` = 3 WHERE 1 AND `positionSetting` = 'reading'   ;
+UPDATE   \`stimwordPosition\`  SET \`positionSetting\`          = \`stimwordPositionSetting\`                     ;
+UPDATE   \`stimwordPosition\`  SET \`positionSettingsAutoIncr\` = 1 WHERE 1 AND \`positionSetting\` = 'word'      ;
+UPDATE   \`stimwordPosition\`  SET \`positionSettingsAutoIncr\` = 2 WHERE 1 AND \`positionSetting\` = 'sentence'  ;
+UPDATE   \`stimwordPosition\`  SET \`positionSettingsAutoIncr\` = 3 WHERE 1 AND \`positionSetting\` = 'reading'   ;
 
-ALTER TABLE `stimwordPosition` ADD KEY `positionSettingKey` (`positionSetting`)                           ;
-ALTER TABLE `stimwordPosition` ADD KEY `positionSetting_2_stimwordPosition` (`positionSettingsAutoIncr`) ;
+ALTER TABLE \`stimwordPosition\` ADD KEY \`positionSettingKey\` (\`positionSetting\`)                           ;
+ALTER TABLE \`stimwordPosition\` ADD KEY \`positionSetting_2_stimwordPosition\` (\`positionSettingsAutoIncr\`) ;
 
-ALTER TABLE `stimwordPosition` ADD CONSTRAINT `positionSettingsAutoIncr_2_stimwordPosition`
-    FOREIGN KEY (`positionSettingsAutoIncr`)       REFERENCES `positionSettings` (`positionSettingsAutoIncr`)
+ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSettingsAutoIncr_2_stimwordPosition\`
+    FOREIGN KEY (\`positionSettingsAutoIncr\`)       REFERENCES \`positionSettings\` (\`positionSettingsAutoIncr\`)
     ON DELETE CASCADE ON UPDATE CASCADE
     ;
 
-ALTER TABLE `stimwordPosition` ADD CONSTRAINT `positionSettings_2_stimwordPosition`
-    FOREIGN KEY (`positionSetting`)                REFERENCES `positionSettings` (`positionSetting`)
+ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSettings_2_stimwordPosition\`
+    FOREIGN KEY (\`positionSetting\`)                REFERENCES \`positionSettings\` (\`positionSetting\`)
     ON DELETE CASCADE ON UPDATE CASCADE
     ;
 
@@ -56,18 +58,3 @@ echo 'Done with 40d_create_frequency_list_keys.bsh!';
 exit;
 
 #
-#ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrColor`   ;
-#ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrStyle`   ;
-#ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrThickness` ;
-
-####ALTER TABLE \`positionSetting\` ADD COLUMN \`positionSettingsAutoIncr\` SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
-#ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSettingsAutoIncr_2_stimwordPositionAutoIncr\` 
-#    FOREIGN KEY (\`positionSettingsAutoIncr\`) REFERENCES \`positionSetting\` (\`positionSettingsAutoIncr\`) ON DELETE CASCADE ON UPDATE CASCADE ;
-# 
-# ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSetting_2_stimwordPosition\`
-#   FOREIGN KEY (\`frequency\`)              REFERENCES \`positionSetting\` (\`frequency\`) ON DELETE CASCADE ON UPDATE CASCADE ;
-####ALTER TABLE \`positionSetting\` AUTO_INCREMENT = 1 ;
-#ALTER TABLE `stimwordPosition`  RENAME COLUMN `stimwordPositionSetting` TO  `positionSetting`  ;
-#  ALTER TABLE \`positionSetting\` ADD KEY \`positionSetting_2_stimwordPosition\` (\`positionSetting\`) ;
-#ALTER TABLE `stimwordPosition` ADD KEY IF NOT EXISTS \`positionSettingsAutoIncr_2_stimwordPosition\` (\`positionSettingsAutoIncr\`) ;
-#ALTER TABLE `stimwordPosition` ADD KEY IF NOT EXISTS \`positionSetting_2_stimwordPosition\` (\`frequency\`) ;
