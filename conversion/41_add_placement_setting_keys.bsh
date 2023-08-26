@@ -36,11 +36,18 @@ UPDATE   `stimwordPosition`  SET `positionSettingsAutoIncr` = 1 WHERE 1 AND `pos
 UPDATE   `stimwordPosition`  SET `positionSettingsAutoIncr` = 2 WHERE 1 AND `positionSetting` = 'sentence' ;
 UPDATE   `stimwordPosition`  SET `positionSettingsAutoIncr` = 3 WHERE 1 AND `positionSetting` = 'reading' ;
 
-ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSettingsAutoIncr_2_stimwordPositionAutoIncr\` 
-    FOREIGN KEY (\`positionSettingsAutoIncr\`) REFERENCES \`positionSetting\` (\`positionSettingsAutoIncr\`) ON DELETE CASCADE ON UPDATE CASCADE ;
- 
- ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSetting_2_stimwordPosition\`
-   FOREIGN KEY (\`frequency\`)              REFERENCES \`positionSetting\` (\`frequency\`) ON DELETE CASCADE ON UPDATE CASCADE ;
+ALTER TABLE `stimwordPosition` ADD KEY `positionSettingKey` (`positionSetting`)                           ;
+ALTER TABLE `stimwordPosition` ADD KEY ``positionSetting_2_stimwordPosition` (`positionSettingsAutoIncr`) ;
+
+ALTER TABLE `stimwordPosition` ADD CONSTRAINT `positionSettingsAutoIncr_2_stimwordPosition`
+    FOREIGN KEY (`positionSettingsAutoIncr`) REFERENCES `stimword` (`positionSettingsAutoIncr`)
+    ON DELETE CASCADE ON UPDATE CASCADE
+    ;
+
+ALTER TABLE `stimwordPosition` ADD CONSTRAINT `positionSettings_2_stimwordPosition`
+    FOREIGN KEY (`positionSetting`) REFERENCES `positionSetting` (`positionSettings`)
+    ON DELETE CASCADE ON UPDATE CASCADE
+    ;
 
 END
 
@@ -54,5 +61,10 @@ exit;
 #ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrThickness` ;
 
 ####ALTER TABLE \`positionSetting\` ADD COLUMN \`positionSettingsAutoIncr\` SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
+#ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSettingsAutoIncr_2_stimwordPositionAutoIncr\` 
+#    FOREIGN KEY (\`positionSettingsAutoIncr\`) REFERENCES \`positionSetting\` (\`positionSettingsAutoIncr\`) ON DELETE CASCADE ON UPDATE CASCADE ;
+# 
+# ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSetting_2_stimwordPosition\`
+#   FOREIGN KEY (\`frequency\`)              REFERENCES \`positionSetting\` (\`frequency\`) ON DELETE CASCADE ON UPDATE CASCADE ;
 ####ALTER TABLE \`positionSetting\` AUTO_INCREMENT = 1 ;
 
