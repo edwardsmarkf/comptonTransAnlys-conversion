@@ -18,13 +18,15 @@ CREATE TABLE   `positionSettings`
    (   `positionSetting`             VARCHAR(20) NOT NULL
    ,   `createdAt`                   TIMESTAMP   NOT NULL    DEFAULT CURRENT_TIMESTAMP()
    ,   `updatedAt`                   TIMESTAMP   NOT NULL    DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()
-   ,   `positionSettingAutoIncr`     SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY
-   );
+   ,   `positionSettingAutoIncr`     TINYINT(2)  NOT NULL    UNSIGNED AUTO_INCREMENT  PRIMARY KEY
+   ,   UNIQUE KEY `positionSettingUniqueKey` (`positionSetting`)
+   )   ENGINE=InnoDB DEFAULT CHARSET=latin1
+    ;
+
 
 INSERT INTO positionSettings ( positionSetting, positionSettingAutoIncr) VALUES ( 'sentence', 1), ('word', 2), ('reading', 3) ;
 
-ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingAutoIncr` SMALLINT(2) NOT NULL AFTER `updatedAt` ;
-
+ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingAutoIncr` TINYINT(2) NOT NULL AFTER `updatedAt` ;
 ALTER TABLE `stimwordPosition`  RENAME COLUMN `stimwordPositionSetting` TO  `positionSetting`  ;
 
 ALTER TABLE `stimwordPosition`  DROP COLUMN IF EXISTS `stimwordPositionBdrColor`   ;
