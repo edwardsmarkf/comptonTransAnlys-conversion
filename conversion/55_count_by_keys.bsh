@@ -150,6 +150,27 @@ AND     \`stimword\`.\`stimwordWord\`             =   \`stimwordPosition\`.\`sti
 ;
 
 
+SELECT "COUNT: positionSettings to stimwordPosition AutoIncr  " , COUNT(*)   
+FROM    \`positionSettings\`
+,       \`stimwordPosition\`
+WHERE   1
+AND     \`positionSettings\`.\`positionSettingsAutoIncr\`         =   \`stimwordPosition\`.\`positionSettingsAutoIncr\`
+;
+
+SELECT "COUNT: positionSettings to stimwordPosition MISC KEYS   " , COUNT(*) 
+FROM    \`positionSettings\`
+,       \`stimwordPosition\`
+WHERE   1
+AND     \`positionSettings\`.\`positionSetting\`        =   \`stimwordPosition\`.\`positionSetting\`
+;
+SELECT "COUNT: positionSettings to stimwordPosition BOTH KEYS " , COUNT(*)   
+FROM    \`positionSettings\`
+,       \`stimwordPosition\`
+WHERE   1
+AND     \`positionSettings\`.\`positionSettingsAutoIncr\`       =   \`stimwordPosition\`.\`positionSettingsAutoIncr\`
+AND     \`positionSettings\`.\`positionSetting\`              =   \`stimwordPosition\`.\`positionSetting\`
+;
+
 SELECT "COUNT: sound to context MISC KEYS         " , COUNT(*)     
 FROM    \`sound\`
 ,       \`context\`
