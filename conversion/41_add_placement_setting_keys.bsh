@@ -40,7 +40,7 @@ ALTER TABLE `stimwordPosition` ADD KEY `positionSettingKey` (`positionSetting`) 
 ALTER TABLE `stimwordPosition` ADD KEY `positionSetting_2_stimwordPosition` (`positionSettingsAutoIncr`) ;
 
 ALTER TABLE `stimwordPosition` ADD CONSTRAINT `positionSettingsAutoIncr_2_stimwordPosition`
-    FOREIGN KEY (`positionSettingsAutoIncr`) REFERENCES `stimword` (`positionSettingsAutoIncr`)
+    FOREIGN KEY (`positionSettingsAutoIncr`) REFERENCES `positionSettings` (`positionSettingsAutoIncr`)
     ON DELETE CASCADE ON UPDATE CASCADE
     ;
 
