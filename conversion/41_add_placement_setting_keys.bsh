@@ -10,6 +10,7 @@
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
+##  really these are more for debugging...
 ALTER TABLE \`stimwordPosition\`  DROP CONSTRAINT  IF EXISTS  \`positionSettingsAutoIncr_2_stimwordPosition\` ;
 ALTER TABLE \`stimwordPosition\`  DROP CONSTRAINT  IF EXISTS  \`positionSettings_2_stimwordPosition\`         ;
 ALTER TABLE \`stimwordPosition\`  DROP KEY         IF EXISTS  \`positionSettingKey\`                          ;
