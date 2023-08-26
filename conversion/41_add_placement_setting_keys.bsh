@@ -13,7 +13,7 @@
 
 CREATE TABLE   `positionSettings` 
    (   `positionSetting`           VARCHAR(20) NOT NULL
-   ,   `positionSettingAutoIncr`   SMALLINT(2) NOT NULL
+   ,   `positionSettingAutoIncr`   SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
    );
 
 INSERT INTO positionSettings ( positionSetting, positionSettingAutoIncr) VALUES ( 'sentence', 0), ('word', 1), ('reading', 2) ;
@@ -22,15 +22,25 @@ ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingAutoIncr` SMALLINT(2) 
 
 ALTER TABLE `stimwordPosition`  RENAME COLUMN `stimwordPositionSetting` TO  `positionSetting`  ;
 
-UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 0 WHERE 1 AND `positionSetting` = 'word' ;
-UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 1 WHERE 1 AND `positionSetting` = 'sentence' ;
-UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 2 WHERE 1 AND `positionSetting` = 'reading' ;
+ALTER TABLE \`positionSetting\` ADD COLUMN \`positionSettingAutoIncr\` SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
+ALTER TABLE \`positionSetting\` AUTO_INCREMENT = 1 ;
 
-ALTER TABLE \`clientContext\` ADD CONSTRAINT \`frequencyListAutoIncr_2_clientContextAutoIncr\` 
-    FOREIGN KEY (\`frequencyListAutoIncr\`) REFERENCES \`frequencyList\` (\`frequencyListAutoIncr\`) ON DELETE CASCADE ON UPDATE CASCADE ;
+ALTER TABLE \`positionSetting\` ADD KEY \`positionSetting_2_stimwordPosition\` (\`positionSetting\`) ;
  
- ALTER TABLE \`clientContext\` ADD CONSTRAINT \`frequencyList_2_clientContext\`
-   FOREIGN KEY (\`frequency\`)              REFERENCES \`frequencyList\` (\`frequency\`) ON DELETE CASCADE ON UPDATE CASCADE ;
+ 
+ALTER TABLE `stimwordPosition` ADD KEY IF NOT EXISTS \`positionSettingAutoIncr_2_stimwordPosition\` (\`positionSettingAutoIncr\`) ;
+ALTER TABLE `stimwordPosition` ADD KEY IF NOT EXISTS \`positionSetting_2_stimwordPosition\` (\`frequency\`) ;
+
+
+UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 1 WHERE 1 AND `positionSetting` = 'word' ;
+UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 2 WHERE 1 AND `positionSetting` = 'sentence' ;
+UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 3 WHERE 1 AND `positionSetting` = 'reading' ;
+
+ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSettingAutoIncr_2_stimwordPositionAutoIncr\` 
+    FOREIGN KEY (\`positionSettingAutoIncr\`) REFERENCES \`positionSetting\` (\`positionSettingAutoIncr\`) ON DELETE CASCADE ON UPDATE CASCADE ;
+ 
+ ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT \`positionSetting_2_stimwordPosition\`
+   FOREIGN KEY (\`frequency\`)              REFERENCES \`positionSetting\` (\`frequency\`) ON DELETE CASCADE ON UPDATE CASCADE ;
 
 END
 
