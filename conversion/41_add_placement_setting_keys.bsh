@@ -11,7 +11,7 @@
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
 DROP TABLE IF EXISTS  `positionSettings`  ;
-ALTER TABLE `stimwordPosition` DROP COLUMN  IF EXISTS  `positionSettingAutoIncr` 
+ALTER TABLE `stimwordPosition` DROP COLUMN  IF EXISTS  `positionSettingAutoIncr` ;
 
 
 CREATE TABLE   `positionSettings` 
