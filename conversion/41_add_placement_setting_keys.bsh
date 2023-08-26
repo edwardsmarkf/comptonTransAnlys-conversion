@@ -22,8 +22,8 @@ ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingAutoIncr` SMALLINT(2) 
 
 ALTER TABLE `stimwordPosition`  RENAME COLUMN `stimwordPositionSetting` TO  `positionSetting`  ;
 
-ALTER TABLE \`positionSetting\` ADD COLUMN \`positionSettingAutoIncr\` SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
-ALTER TABLE \`positionSetting\` AUTO_INCREMENT = 1 ;
+####ALTER TABLE \`positionSetting\` ADD COLUMN \`positionSettingAutoIncr\` SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
+####ALTER TABLE \`positionSetting\` AUTO_INCREMENT = 1 ;
 
 ALTER TABLE \`positionSetting\` ADD KEY \`positionSetting_2_stimwordPosition\` (\`positionSetting\`) ;
  
