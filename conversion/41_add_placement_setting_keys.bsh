@@ -22,10 +22,6 @@ ALTER TABLE \`stimwordPosition\`  DROP COLUMN      IF EXISTS  \`positionSettings
 DROP TABLE IF EXISTS  \`positionSettings\`                                                                    ;  
 ## again, really more for debugging.....
 
-   ## we HOPE its ok to remove these....  i dont think they are used anywhere.
-ALTER TABLE \`stimwordPosition\`  DROP COLUMN      IF EXISTS   \`stimwordPositionBdrColor\`                   ;
-ALTER TABLE \`stimwordPosition\`  DROP COLUMN      IF EXISTS   \`stimwordPositionBdrStyle\`                   ;
-ALTER TABLE \`stimwordPosition\`  DROP COLUMN      IF EXISTS   \`stimwordPositionBdrThickness\`               ;
 
 CREATE TABLE   \`positionSettings\` 
    (   \`positionSetting\`             VARCHAR(20)           NOT NULL
@@ -68,3 +64,8 @@ echo 'Done with 40d_create_frequency_list_keys.bsh!';
 exit;
 
 #
+   ## are we using these??
+# ALTER TABLE \`stimwordPosition\`  DROP COLUMN      IF EXISTS   \`stimwordPositionBdrColor\`                   ;
+# ALTER TABLE \`stimwordPosition\`  DROP COLUMN      IF EXISTS   \`stimwordPositionBdrStyle\`                   ;
+# ALTER TABLE \`stimwordPosition\`  DROP COLUMN      IF EXISTS   \`stimwordPositionBdrThickness\`               ;
+
