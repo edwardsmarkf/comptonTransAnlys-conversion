@@ -17,10 +17,14 @@
         SELECT "COUNT: clientStimword"         ,       COUNT(*)        FROM    \`clientStimword\`      ;
        
         SELECT  "COUNT: context"               ,       COUNT(*)        FROM    \`context\`             ;
+
+        SELECT "COUNT: errorSoundsTooltip"     ,       COUNT(*)        FROM    \`errorSoundsTooltip\`	;
         
         SELECT "COUNT: layout"                 ,       COUNT(*)        FROM    \`layout\`              ;
         
         SELECT  "COUNT: phoneticGrid"          ,       COUNT(*)        FROM    \`phoneticGrid\`        ;
+
+        SELECT "COUNT: positionSettings"       ,       COUNT(*)        FROM    \`positionSettings\`	;
   
         SELECT "COUNT: sessionNames"           ,       COUNT(*)        FROM    \`sessionNames\`        ;
         
@@ -31,9 +35,7 @@
         SELECT "COUNT: stimwordPosition"       ,       COUNT(*)        FROM    \`stimwordPosition\`    ;
        
         SELECT "COUNT: teacher"                ,       COUNT(*)        FROM    \`teacher\`             ;
-        
-        SELECT "COUNT: errorSoundsTooltip"     ,       COUNT(*)        FROM    \`errorSoundsTooltip\`	;
-        
+         
 END
 
 ##
