@@ -17,7 +17,7 @@ CREATE TABLE   `positionSettings`
    (   `positionSetting`             VARCHAR(20)           NOT NULL
    ,   `createdAt`                   TIMESTAMP             NOT NULL    DEFAULT CURRENT_TIMESTAMP()
    ,   `updatedAt`                   TIMESTAMP             NOT NULL    DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()
-   ,   `positionSettingAutoIncr`     TINYINT(2)  UNSIGNED  NOT NULL    AUTO_INCREMENT  PRIMARY KEY
+   ,   `positionSettingsAutoIncr`    TINYINT(2)  UNSIGNED  NOT NULL    AUTO_INCREMENT  PRIMARY KEY
    ,   UNIQUE KEY `positionSettingUniqueKey` (`positionSetting`)
    )   ENGINE=InnoDB DEFAULT CHARSET=latin1
    ;
@@ -26,7 +26,6 @@ INSERT INTO positionSettings ( positionSetting, positionSettingAutoIncr) VALUES 
 
 ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingAutoIncr` TINYINT(2) NOT NULL AFTER `updatedAt` ;
 ALTER TABLE `stimwordPosition`  RENAME COLUMN `stimwordPositionSetting` TO  `positionSetting`  ;
-
 
 ALTER TABLE \`positionSetting\` ADD KEY \`positionSetting_2_stimwordPosition\` (\`positionSetting\`) ;
   
