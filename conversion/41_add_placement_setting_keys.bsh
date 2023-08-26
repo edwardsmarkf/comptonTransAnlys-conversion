@@ -21,14 +21,14 @@ CREATE TABLE   `positionSettings`
    (   `positionSetting`             VARCHAR(20)           NOT NULL
    ,   `createdAt`                   TIMESTAMP             NOT NULL    DEFAULT CURRENT_TIMESTAMP()
    ,   `updatedAt`                   TIMESTAMP             NOT NULL    DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()
-   ,   `positionSettingsAutoIncr`    TINYINT(2)  UNSIGNED  NOT NULL    AUTO_INCREMENT  PRIMARY KEY
+   ,   `positionSettingsAutoIncr`    TINYINT(3)  UNSIGNED  NOT NULL    AUTO_INCREMENT  PRIMARY KEY
    ,   UNIQUE KEY `positionSettingUniqueKey` (`positionSetting`)
    )   ENGINE=InnoDB DEFAULT CHARSET=latin1
    ;
 
 INSERT INTO positionSettings ( positionSetting, positionSettingsAutoIncr) VALUES ( 'sentence', 1), ('word', 2), ('reading', 3) ;
 
-ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingsAutoIncr` TINYINT(2)   NOT NULL AFTER `updatedAt`                 ;
+ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingsAutoIncr` TINYINT(3)   NOT NULL AFTER `updatedAt`                 ;
 ALTER TABLE `stimwordPosition` ADD COLUMN `positionSetting`          VARCHAR(20)  NOT NULL AFTER `stimwordPositionSetting`   ;
 
 UPDATE   `stimwordPosition`  SET `positionSetting`          = `stimwordPositionSetting`                     ;
