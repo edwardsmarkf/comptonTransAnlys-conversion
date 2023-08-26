@@ -12,6 +12,9 @@
 
 DROP TABLE IF EXISTS  `positionSettings`  ;
 ALTER TABLE `stimwordPosition` DROP COLUMN  IF EXISTS  `positionSettingsAutoIncr` ;
+ALTER TABLE `stimwordPosition` DROP KEY  IF EXISTS  `positionSettingKey` ;
+ALTER TABLE `stimwordPosition` DROP KEY  IF EXISTS  `positionSetting_2_stimwordPosition` ;
+
 
 CREATE TABLE   `positionSettings` 
    (   `positionSetting`             VARCHAR(20)           NOT NULL
@@ -37,7 +40,7 @@ UPDATE   `stimwordPosition`  SET `positionSettingsAutoIncr` = 2 WHERE 1 AND `pos
 UPDATE   `stimwordPosition`  SET `positionSettingsAutoIncr` = 3 WHERE 1 AND `positionSetting` = 'reading' ;
 
 ALTER TABLE `stimwordPosition` ADD KEY `positionSettingKey` (`positionSetting`)                           ;
-ALTER TABLE `stimwordPosition` ADD KEY ``positionSetting_2_stimwordPosition` (`positionSettingsAutoIncr`) ;
+ALTER TABLE `stimwordPosition` ADD KEY `positionSetting_2_stimwordPosition` (`positionSettingsAutoIncr`) ;
 
 ALTER TABLE `stimwordPosition` ADD CONSTRAINT `positionSettingsAutoIncr_2_stimwordPosition`
     FOREIGN KEY (`positionSettingsAutoIncr`) REFERENCES `stimword` (`positionSettingsAutoIncr`)
