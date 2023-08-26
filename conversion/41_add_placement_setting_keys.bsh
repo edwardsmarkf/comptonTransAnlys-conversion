@@ -16,7 +16,7 @@ CREATE TABLE   `positionSettings`
    ,   `positionSettingAutoIncr`   SMALLINT(2) NOT NULL    AUTO_INCREMENT  PRIMARY KEY;
    );
 
-INSERT INTO positionSettings ( positionSetting, positionSettingAutoIncr) VALUES ( 'sentence', 0), ('word', 1), ('reading', 2) ;
+INSERT INTO positionSettings ( positionSetting, positionSettingAutoIncr) VALUES ( 'sentence', 1), ('word', 2), ('reading', 3) ;
 
 ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingAutoIncr` SMALLINT(2) NOT NULL AFTER `updatedAt` ;
 
