@@ -1,0 +1,41 @@
+
+#! /bin/bash
+
+##      41_add_placement_setting_keys.bsh
+##
+##
+##	2023-08-25 - initial writing 
+##
+##
+
+/usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
+
+
+CREATE TABLE   `positionSettings` 
+   (   `positionSetting`           VARCHAR(20) NOT NULL
+   ,   `positionSettingAutoIncr`   SMALLINT(2) NOT NULL
+   );
+
+INSERT INTO positionSettings ( positionSetting, positionSettingAutoIncr) VALUES ( 'sentence', 0), ('word', 1), ('reading', 2) ;
+
+ALTER TABLE `stimwordPosition` ADD COLUMN `positionSettingAutoIncr` SMALLINT(2) NOT NULL AFTER `updatedAt` ;
+
+ALTER TABLE `stimwordPosition`  RENAME COLUMN `stimwordPositionSetting` TO  `positionSetting`  ;
+
+UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 0 WHERE 1 AND `positionSetting` = 'word' ;
+UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 1 WHERE 1 AND `positionSetting` = 'sentence' ;
+UPDATE   `stimwordPosition`  SET `positionSettingAutoIncr` = 2 WHERE 1 AND `positionSetting` = 'reading' ;
+
+ALTER TABLE \`clientContext\` ADD CONSTRAINT \`frequencyListAutoIncr_2_clientContextAutoIncr\` 
+    FOREIGN KEY (\`frequencyListAutoIncr\`) REFERENCES \`frequencyList\` (\`frequencyListAutoIncr\`) ON DELETE CASCADE ON UPDATE CASCADE ;
+ 
+ ALTER TABLE \`clientContext\` ADD CONSTRAINT \`frequencyList_2_clientContext\`
+   FOREIGN KEY (\`frequency\`)              REFERENCES \`frequencyList\` (\`frequency\`) ON DELETE CASCADE ON UPDATE CASCADE ;
+
+END
+
+echo 'Done with 40d_create_frequency_list_keys.bsh!';
+
+exit;
+
+#
