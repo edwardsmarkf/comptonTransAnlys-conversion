@@ -38,7 +38,7 @@ UPDATE \`clientContext\` SET \`frequencyListAutoIncr\` = 3 WHERE \`frequency\` =
 UPDATE \`clientContext\` SET \`frequencyListAutoIncr\` = 4 WHERE \`frequency\` = 'Usually';
 UPDATE \`clientContext\` SET \`frequencyListAutoIncr\` = 5 WHERE \`frequency\` = 'Always';
  
-ALTER TABLE \`clientContext\` ADD CONSTRAINT \`frequencyListAutoIncr_2_clientContextAutoIncr\` 
+ALTER TABLE \`clientContext\` ADD CONSTRAINT \`frequencyListAutoIncr_2_clientContext\` 
     FOREIGN KEY (\`frequencyListAutoIncr\`) REFERENCES \`frequencyList\` (\`frequencyListAutoIncr\`) ON DELETE CASCADE ON UPDATE CASCADE ;
  
  ALTER TABLE \`clientContext\` ADD CONSTRAINT \`frequencyList_2_clientContext\`
