@@ -1,5 +1,13 @@
-\
+#! /bin/bash
 
+##      42_more_columns_added.bsh
+##
+##
+##	2023-08-25 - initial writing 
+##
+##
+
+/usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
 
 
@@ -15,3 +23,14 @@ ALTER TABLE `stimword` ADD COLUMN stimwordClass VARCHAR(20) NOT NULL after `stim
 UPDATE `stimword` SET `stimwordClass` = 'SIXTYSIX_WORDS'     WHERE 1 and `stimwordPlacement` = 0 ;
 UPDATE `stimword` SET `stimwordClass` = 'READING_PASSAGE'  WHERE 1 and `stimwordPlacement` = 1 ;
 SELECT * FROM comptonTransAnlys.stimword where layoutName = 'PESL';
+
+
+
+END
+
+echo 'Done with 42_more_columns_added.bsh!';
+
+exit;
+
+
+
