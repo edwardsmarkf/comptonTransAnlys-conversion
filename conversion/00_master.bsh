@@ -127,7 +127,8 @@ process_section '40b_add_incr_keys_to_misc_tables' ;
 process_section '40c_set_updatedAt'                ;
 process_section '40d_create_frequency_list_keys'   ;
 process_section '40zz_misc_cleanup'                ;
-process_section `41_add_placement_setting_keys'    ;
+process_section '41_add_placement_setting_keys'    ;
+process_section '42_more_columns_added.bsh'        ;
 
 
 process_section '50_display_table_counts'                                                                                                                  ;
