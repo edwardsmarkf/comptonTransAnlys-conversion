@@ -59,7 +59,7 @@ ALTER TABLE \`stimwordPosition\` ADD CONSTRAINT  \`positionSettings_2_stimwordPo
 
 END
 
-echo 'Done with 40d_create_frequency_list_keys.bsh!';
+echo 'Done with 41_add_placement_setting.bsh!';
 
 exit;
 
