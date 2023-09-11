@@ -3,28 +3,21 @@
 ##      42_more_columns_added.bsh
 ##
 ##
-##	2023-08-25 - initial writing 
+##	2023-09-11 - initial writing  -- added new columns to tables
 ##
 ##
-
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
+UPDATE       \`sessionNames\`  SET \`sessionReplicate\` = '' WHERE \`sessionName\` IN ('MODELED', 'Modeled' )         ;
+ALTER TABLE \`sessionNames\`   DROP COLUMN IF EXISTS \`sessionNamesShow66Words\`                                       ;
+ALTER TABLE  \`sessionNames\`  ADD COLUMN \`sessionNamesShow66Words\` BOOL NOT NULL after \`sessionReplicate\`          ;
+UPDATE       \`sessionNames\`  SET \`sessionNamesShow66Words\` = FALSE  WHERE 1  AND \`sessionName\` IN ('MODELED', 'Modeled' ) ;
+UPDATE       \`sessionNames\`  SET \`sessionNamesShow66Words\` = TRUE   WHERE 1 AND \`sessionName\` NOT IN ('MODELED', 'Modeled' ) ;
 
-
-UPDATE       `sessionNames` SET `sessionReplicate` = '' WHERE `sessionName` IN ('MODELED', 'Modeled' ) ;
-ALTER TABLE `sessionNames` DROP COLUMN IF EXISTS `sessionNamesShow66Words`;
-ALTER TABLE  `sessionNames` ADD COLUMN `sessionNamesShow66Words` BOOL NOT NULL after `sessionReplicate` ;
-UPDATE       `sessionNames` SET `sessionNamesShow66Words` = FALSE  WHERE 1  AND `sessionName` IN ('MODELED', 'Modeled' ) ;
-UPDATE       `sessionNames` SET `sessionNamesShow66Words` = TRUE   WHERE 1 AND `sessionName` NOT IN ('MODELED', 'Modeled' ) ;
-SELECT * FROM comptonTransAnlys.sessionNames;
-
-
-ALTER TABLE `stimword` ADD COLUMN stimwordClass VARCHAR(20) NOT NULL after `stimwordPhonetic` ;
-UPDATE `stimword` SET `stimwordClass` = 'SIXTYSIX_WORDS'     WHERE 1 and `stimwordPlacement` = 0 ;
-UPDATE `stimword` SET `stimwordClass` = 'READING_PASSAGE'  WHERE 1 and `stimwordPlacement` = 1 ;
-SELECT * FROM comptonTransAnlys.stimword where layoutName = 'PESL';
-
-
+ALTER TABLE \`stimword\`      DROP COLUMN IF EXISTS \`stimwordClass\`                                                      ;
+ALTER TABLE \`stimword\`      ADD COLUMN stimwordClass VARCHAR(20) NOT NULL after \`stimwordPhonetic\`                     ;
+UPDATE \`stimword\`           SET \`stimwordClass\` = 'SIXTYSIX_WORDS'     WHERE 1 and \`stimwordPlacement\` = 0           ;
+UPDATE \`stimword\`           SET \`stimwordClass\` = 'READING_PASSAGE'    WHERE 1 and \`stimwordPlacement\` = 1           ;
 
 END
 
