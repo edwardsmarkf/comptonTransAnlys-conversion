@@ -12,6 +12,7 @@
 #   2023-02-23 -  added 30_stimword_ordering
 #   2023-11-07 -  disabled '09_move_columns.bsh since it appears the ONLY way to move keys 
 #                      is simply to move the other non-keys like createdAt and updatedAt
+#                      at the end of the run!
 
 if  [[ "$1" != "PASS" ]]; then 
            # https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
