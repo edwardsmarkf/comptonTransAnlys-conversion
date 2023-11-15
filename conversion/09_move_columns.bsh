@@ -23,7 +23,7 @@ ALTER TABLE \`clientContext\`     MODIFY COLUMN \`contextAutoIncr\`          MED
 
 ALTER TABLE \`clientStimword\`    MODIFY COLUMN \`clientStimwordAutoIncr\`   INT(10)       UNSIGNED NOT NULL AUTO_INCREMENT  AFTER \`updatedAt\`  ;
 ALTER TABLE \`clientStimword\`    MODIFY COLUMN \`clientContextAutoIncr\`    INT(10)       UNSIGNED NOT NULL                 AFTER \`updatedAt\`  ;
-ALTER TABLE \`clientStimword\`    MODIFY COLUMN \`stimwordPositionAutoIncr\` MEDIUMINT(10) UNSIGNED NOT NULL                 AFTER \`updatedAt\`  ;
+ALTER TABLE \`clientStimword\`    MODIFY COLUMN \`stimwordPositionAutoIncr\` MEDIUMINT(10) SIGNED   NOT NULL                 AFTER \`updatedAt\`  ;
 
 ALTER TABLE \`context\`           MODIFY COLUMN \`contextAutoIncr\`          MEDIUMINT(08) UNSIGNED NOT NULL AUTO_INCREMENT  AFTER \`updatedAt\`  ;
 ALTER TABLE \`context\`           MODIFY COLUMN \`soundAutoIncr\`            MEDIUMINT(08) UNSIGNED NOT NULL                 AFTER \`updatedAt\`  ;
