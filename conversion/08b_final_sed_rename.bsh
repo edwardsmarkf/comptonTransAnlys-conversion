@@ -242,7 +242,7 @@ s/\`Stimword_position_bdr_color\`/\`stimwordPositionBdrColor\`/g;
 s/\`Stimword_position_bdr_style\`/\`stimwordPositionBdrStyle\`/g;
 s/\`Stimword_position_bdr_thickness\`/\`stimwordPositionBdrThickness\`/g;
 s/\`Stimword_position_timestamp\`/\`createdAt\`/g;
-s/\`Stimword_position_auto_increment\`/\`stimwordPositionAutoIncr\`/g;
+        #######    s/\`Stimword_position_auto_increment\`/\`stimwordPositionAutoIncr\`/g;
 ## keys:
 s/\`Stimword_position_unique_key\`/\`stimwordPositionUniqueKey\`/g;
 s/\`Stimword_position_secondary_key\`/\`stimwordPositionSecondaryKey\`/g;
