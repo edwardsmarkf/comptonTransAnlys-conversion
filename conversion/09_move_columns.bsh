@@ -7,7 +7,7 @@
 #
 #        2023-11-16        - release of mariadb 10.5.23 is enforcing rules that were previously unenforced.  the foreign keys have to match EXACTLY!
 #                            notice "SIGNED" in two spots as a workaround
-#    TEMPORARY line 26 changed to unsigned
+#        2023-11-17        - fixed in 08b_sed_rename.bsh rather than here.
 #
 #
 /usr/bin/mariadb  --verbose  comptonTransAnlys   <<END  ;
@@ -35,7 +35,7 @@ ALTER TABLE \`languageNorms\`     MODIFY COLUMN \`languageNormsAutoIncr\`    MED
 
 ALTER TABLE \`sound\`             MODIFY COLUMN \`soundAutoIncr\`            MEDIUMINT(08) UNSIGNED NOT NULL AUTO_INCREMENT  AFTER \`updatedAt\`  ;
 
-ALTER TABLE \`stimwordPosition\`  MODIFY COLUMN \`stimwordPositionAutoIncr\` MEDIUMINT(10) SIGNED   NOT NULL AUTO_INCREMENT  AFTER \`updatedAt\`  ;
+ALTER TABLE \`stimwordPosition\`  MODIFY COLUMN \`stimwordPositionAutoIncr\` MEDIUMINT(10) UNSIGNED NOT NULL AUTO_INCREMENT  AFTER \`updatedAt\`  ;
 
 SET FOREIGN_KEY_CHECKS=1  ;
 
