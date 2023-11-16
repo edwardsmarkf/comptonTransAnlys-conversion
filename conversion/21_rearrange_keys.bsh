@@ -5,7 +5,8 @@
 #       
 #       2021-11-16
 #
-#        2023-11-16        - release of mariadb 10.5.23 is enforcing rules that were previously unenforced.  the foreign keys have to match EXACTLY!
+#       2023-11-16        - release of mariadb 10.5.23 is enforcing rules that were previously unenforced.  the foreign keys have to match EXACTLY!
+#       2023-11-17        - removed fix of 2023-11-16   
 
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
@@ -20,25 +21,25 @@ ALTER TABLE \`languageNorms\`   MODIFY COLUMN \`languageNormsName\`  VARCHAR(30)
 
 -- teacher
 
-ALTER TABLE \`teacher\`         MODIFY COLUMN \`layoutName\` VARCHAR(10) NOT NULL                                                               FIRST                           ;
+ALTER TABLE \`teacher\`         MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                   FIRST                           ;
 
 
 -- clientMaster
 
-ALTER TABLE \`clientMaster\`   MODIFY COLUMN \`layoutName\` VARCHAR(30) NOT NULL                                                                FIRST                           ;
+ALTER TABLE \`clientMaster\`   MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                   FIRST                           ;
 ALTER TABLE \`clientMaster\`   MODIFY COLUMN \`teacherEmail\` VARCHAR(120) NOT NULL                                                             AFTER \`layoutName\`            ;
 
 
 -- clientSession
 
-ALTER TABLE \`clientSession\`  MODIFY COLUMN \`layoutName\` VARCHAR(30) NOT NULL                                                                FIRST                           ;
+ALTER TABLE \`clientSession\`  MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                    FIRST                           ;
 ALTER TABLE \`clientSession\`  MODIFY COLUMN \`teacherEmail\` VARCHAR(120) NOT NULL                                                             AFTER \`layoutName\`            ;
 ALTER TABLE \`clientSession\`  MODIFY COLUMN \`clientMasterEmail\` VARCHAR(120) NOT NULL                                                        AFTER \`teacherEmail\`          ;
 
 
 --  clientContext
 
-ALTER TABLE \`clientContext\`  MODIFY COLUMN \`layoutName\` VARCHAR(30) NOT NULL                                                                FIRST                           ;
+ALTER TABLE \`clientContext\`  MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                    FIRST                           ;
 ALTER TABLE \`clientContext\`  MODIFY COLUMN \`teacherEmail\` VARCHAR(120) NOT NULL                                                             AFTER \`layoutName\`            ;
 ALTER TABLE \`clientContext\`  MODIFY COLUMN \`clientMasterEmail\` VARCHAR(120) NOT NULL                                                        AFTER \`teacherEmail\`          ;
 ALTER TABLE \`clientContext\`  MODIFY COLUMN \`sessionName\` VARCHAR(30) NOT NULL                                                               AFTER \`clientMasterEmail\`     ;
@@ -46,7 +47,7 @@ ALTER TABLE \`clientContext\`  MODIFY COLUMN \`sessionName\` VARCHAR(30) NOT NUL
 
 -- clientStimword
 
-ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`layoutName\` VARCHAR(30) NOT NULL                                                               FIRST                           ;
+ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                   FIRST                           ;
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`teacherEmail\` VARCHAR(120) NOT NULL                                                            AFTER \`layoutName\`            ;
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`clientMasterEmail\` VARCHAR(120) NOT NULL                                                       AFTER \`teacherEmail\`          ;
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`sessionName\` VARCHAR(30) NOT NULL                                                              AFTER \`clientMasterEmail\`     ;
