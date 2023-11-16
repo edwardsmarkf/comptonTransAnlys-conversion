@@ -4,7 +4,9 @@
 #
 #  written from:
 #    https://stackoverflow.com/questions/10718905/how-to-change-the-column-position-of-mysql-table-without-losing-column-data/10718926
-
+#
+#        2023-11-16        - release of mariadb 10.5.23 is enforcing rules that were previously unenforced.  the foreign keys have to match EXACTLY!
+#                            notice "SIGNED" in two spots as a workaround
 #
 #
 /usr/bin/mariadb  --verbose  comptonTransAnlys   <<END  ;
