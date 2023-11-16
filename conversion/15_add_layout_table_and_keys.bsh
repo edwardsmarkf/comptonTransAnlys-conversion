@@ -4,6 +4,7 @@
 #
 #     2023-03-14 - changed layoutAutoIncr key to TINYINT
 #     2023-05-08  - added createdAt and updatedAt to frequencyList
+#     2023-11-16  - changed CHANGE COLUMN to MODIFY COLUMN since we are not renaming.
 
 
 /usr/bin/mariadb  --verbose  comptonTransAnlys   <<END  ;
@@ -128,27 +129,27 @@ UPDATE teacher          SET layoutName = 'SAMP' WHERE 1 AND layoutName = 'SAMPLE
 UPDATE teacher          SET layoutName = 'PESL' WHERE 1 AND layoutName = 'P-ESL'                ;
 UPDATE teacher          SET layoutName = 'ACAD' WHERE 1 AND layoutName = 'ACADEMY'              ;
 
-ALTER TABLE  clientContext      CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  clientContext      MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
-ALTER TABLE  clientMaster       CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  clientMaster       MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
-ALTER TABLE  clientStimword     CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  clientStimword     MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
-ALTER TABLE  context            CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  context            MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
-ALTER TABLE  languageNorms      CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  languageNorms      MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
-ALTER TABLE  languageSpec       CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  languageSpec       MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
-ALTER TABLE  layout             CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  layout             MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
-ALTER TABLE  sound              CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  sound              MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
-ALTER TABLE  stimword           CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  stimword           MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
-ALTER TABLE  stimwordPosition   CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  stimwordPosition   MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
-ALTER TABLE  teacher            CHANGE COLUMN IF EXISTS layoutName layoutName CHAR(04) NOT NULL;
+ALTER TABLE  teacher            MODIFY COLUMN    layoutName CHAR(04) NOT NULL;
 
 
 SET FOREIGN_KEY_CHECKS=1 ;
