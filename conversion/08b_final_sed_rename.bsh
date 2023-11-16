@@ -31,7 +31,7 @@ s/\`Client_context_auto_increment\` int(10) unsigned NOT NULL,/\`Client_context_
 s/\`Client_stimword_auto_increment\` int(10) unsigned NOT NULL AUTO_INCREMENT,/\`Client_stimword_auto_increment\` int unsigned NOT NULL AUTO_INCREMENT,/g;
 s/\`Sound_auto_increment\` mediumint(8) unsigned NOT NULL,/\`Sound_auto_increment\` mediumint(8) unsigned NOT NULL,/g;
 s/\`Context_auto_increment\` mediumint(8) unsigned NOT NULL,/\`Context_auto_increment\` mediumint(8) unsigned NOT NULL,/g;
-s/\`Stimword_position_auto_increment\` mediumint(9) NOT NULL,/\`Stimword_position_auto_increment\` mediumint(10) NOT NULL,/g;
+s/\`Stimword_position_auto_increment\` mediumint(9) NOT NULL,/\`Stimword_position_auto_increment\` MEDIUMINT(10) UNSIGNED NOT NULL,/g;
 ##    clientMaster:
 s/\`Client_master_teacher_email\`/\`teacherEmail\`/g;
 s/\`Client_master_client_email\`/\`clientMasterEmail\`/g;
