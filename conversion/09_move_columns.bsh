@@ -19,7 +19,7 @@ ALTER TABLE \`clientMaster\`     MODIFY COLUMN \`clientMasterAutoIncr\`      INT
 ALTER TABLE \`clientMaster\`     MODIFY COLUMN \`teacherAutoIncr\`           INT(10) unsigned NOT NULL                       AFTER \`updatedAt\`  ;
 
 
-ALTER TABLE \`clientContext\`     MODIFY COLUMN \`clientContextAutoIncr\`    INT(10)       UNSIGNED NOT NULL AUTO_INCREMENT  AFTER \`updatedAt\`  ;
+ALTER TABLE \`clientContext\`     MODIFY COLUMN \`clientContextAutoIncr\`    INT(10)       UNSIGNED NOT NULL                 AFTER \`updatedAt\`  ;
 ALTER TABLE \`clientContext\`     MODIFY COLUMN \`clientMasterAutoIncr\`     INT(10)       UNSIGNED NOT NULL                 AFTER \`updatedAt\`  ;
 ALTER TABLE \`clientContext\`     MODIFY COLUMN \`contextAutoIncr\`          MEDIUMINT(10) UNSIGNED NOT NULL                 AFTER \`updatedAt\`  ;
 
