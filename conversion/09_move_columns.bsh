@@ -16,8 +16,8 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 
-ALTER TABLE \`clientMaster\`     MODIFY COLUMN \`clientMasterAutoIncr\`      INT(10) unsigned NOT NULL AUTO_INCREMENT        AFTER \`updatedAt\`  ;
-ALTER TABLE \`clientMaster\`     MODIFY COLUMN \`teacherAutoIncr\`           INT(10) unsigned NOT NULL                       AFTER \`updatedAt\`  ;
+ALTER TABLE \`clientMaster\`      MODIFY COLUMN \`clientMasterAutoIncr\`     INT(10)       UNSIGNED NOT NULL AUTO_INCREMENT  AFTER \`updatedAt\`  ;
+ALTER TABLE \`clientMaster\`      MODIFY COLUMN \`teacherAutoIncr\`          INT(10)       UNSIGNED NOT NULL                 AFTER \`updatedAt\`  ;
 
 
 ALTER TABLE \`clientContext\`     MODIFY COLUMN \`clientContextAutoIncr\`    INT(10)       UNSIGNED NOT NULL AUTO_INCREMENT  AFTER \`updatedAt\`  ;
