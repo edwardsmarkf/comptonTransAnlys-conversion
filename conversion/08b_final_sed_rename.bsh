@@ -16,7 +16,6 @@
 #                ???   clientStimwordLineNbr    => stimwordPositionLineNbr
 # clientStimwordWord        => stimwordPositionWord  
 #
-        2023-11-16 - added AUTO_INCREMENT
 #
 # s/\`Client_stimword_stimword\`/\`stimwordPositionWord\`/g;
 # s/\`Client_stimword_page_nbr\`/\`stimwordPositionPageNbr\`/g;
@@ -71,10 +70,6 @@ s/\`Client_context_error_frequency\`/\`clientContextErrorFrequency\`/g;
 s/\`Client_context_error_notes\`/\`clientContextErrorNotes\`/g;
 s/\`Context_auto_increment\`/\`contextAutoIncr\`/g;
 s/\`Client_context_auto_increment\`/\`clientContextAutoIncr\`/g;
-
-## 2023-11-16
-/\`clientMasterAutoIncr\` int(10) unsigned NOT NULL,/{n; s/int(10) unsigned NOT NULL,/MEDIUMINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,/}
-
 s/\`Client_context_timestamp\`/\`createdAt\`/g;
 # keys:
 s/\`Client_context_sounds_unique_index\`/\`clientContextSoundsUniqueIndex\`/g;
