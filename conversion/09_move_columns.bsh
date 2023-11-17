@@ -7,7 +7,8 @@
 #
 #        2023-11-16        - release of mariadb 10.5.23 is enforcing rules that were previously unenforced.  the foreign keys have to match EXACTLY!
 #                            notice "SIGNED" in two spots as a workaround
-#        2023-11-17        - fixed in 08b_sed_rename.bsh rather than here.
+#        2023-11-17        - undid  2023-11-16 changes
+#        2023-11-17        - removed AUTO_INCREMENT in clientContext as a workaround
 #
 #
 /usr/bin/mariadb  --verbose  comptonTransAnlys   <<END  ;
