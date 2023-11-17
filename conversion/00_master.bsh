@@ -87,6 +87,7 @@ process_section '07c_alter_keys_test' ;
 
 process_section '08a_final_sed_rename' ;
 process_section '08b_final_sed_rename' ;
+process_section '08bb_final_sed_rename' ;
 process_section '08c_final_sed_rename' ;
 process_section '08d_final_sed_rename' ;
 grep ERROR   ${LOGGING_DIR}/08d_final_sed_rename.bsh.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR' | grep -v  grep          ;
