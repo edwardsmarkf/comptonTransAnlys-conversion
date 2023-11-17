@@ -2,7 +2,7 @@
 
 # 08bb_final_sed_rename.bsh
 #
-#    2021-11-19 - initial writing
+#    2021-11-19 - initial writing  -- needed to do this separate since i am not sure what names will be, easier to do this in a separate script
 #
 
 sed   --in-place   --file=-    ./comptonTransAnlys_08_FinalRename.sql   <<EOF ;
