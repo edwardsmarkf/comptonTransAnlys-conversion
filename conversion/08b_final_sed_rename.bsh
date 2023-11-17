@@ -69,7 +69,10 @@ s/\`Client_context_error_speaking_count\`/\`clientContextErrorCount\`/g;
 s/\`Client_context_error_frequency\`/\`clientContextErrorFrequency\`/g;
 s/\`Client_context_error_notes\`/\`clientContextErrorNotes\`/g;
 s/\`Context_auto_increment\`/\`contextAutoIncr\`/g;
-s/\`Client_context_auto_increment\`/\`clientContextAutoIncr\`/g;
+        ####   s/\`Client_context_auto_increment\`/\`clientContextAutoIncr\`/g;
+## 2023-11-16
+s/\`Client_context_auto_increment\` int unsigned NOT NULL,/\`clientContextAutoIncr\` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,/g;
+
 s/\`Client_context_timestamp\`/\`createdAt\`/g;
 # keys:
 s/\`Client_context_sounds_unique_index\`/\`clientContextSoundsUniqueIndex\`/g;
