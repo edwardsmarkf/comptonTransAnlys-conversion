@@ -19,7 +19,7 @@ sed   --in-place   --file=-    ./comptonTransAnlys_08_FinalRename.sql   <<EOF ;
 
 
 /\`contextAutoIncr\` mediumint(8) unsigned NOT NULL,$/\
-        {n;s/\`stimwordPositionAutoIncr\` MEDIUMINT(10) UNSIGNED NOT NULL,/\`stimwordPosition\` MEDIUMINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,/;};
+        {n;s/\`stimwordPositionAutoIncr\` MEDIUMINT(10) UNSIGNED NOT NULL,/\`stimwordPositionAutoIncr\` MEDIUMINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,/;};
 
 
 EOF
