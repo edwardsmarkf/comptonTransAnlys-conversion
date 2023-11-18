@@ -24,11 +24,14 @@ sed   --in-place   --file=-    ./comptonTransAnlys_08_FinalRename.sql   <<EOF ;
 
 EOF
 #
+#
+#
 mariadb-dump   --no-data   comptonTransAnlys   >  ./comptonTransAnlys_08_FinalRename_no_data_AFTER.sql   ;
 #
-
+#
 diff  ./comptonTransAnlys_08_FinalRename_no_data_BEFORE.sql    ./comptonTransAnlys_08_FinalRename_no_data_AFTER.sql   ;
-
+#
+#
 echo -n 'Current sed status result is: ' ;
 echo  $?                                  ;
 
