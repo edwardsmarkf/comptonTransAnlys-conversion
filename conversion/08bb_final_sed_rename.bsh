@@ -4,7 +4,10 @@
 #
 #    2021-11-19 - initial writing  -- needed to do this separate since i am not sure what names will be, easier to do this in a separate script
 #
-
+#
+#
+mariadb-dump   --no-data   comptonTransAnlys   >  ./comptonTransAnlys_08_FinalRename_no_data_BEFORE.sql   ;
+#
 sed   --in-place   --file=-    ./comptonTransAnlys_08_FinalRename.sql   <<EOF ;
 ##
 
@@ -20,6 +23,11 @@ sed   --in-place   --file=-    ./comptonTransAnlys_08_FinalRename.sql   <<EOF ;
 
 
 EOF
+#
+mariadb-dump   --no-data   comptonTransAnlys   >  ./comptonTransAnlys_08_FinalRename_no_data_AFTER.sql   ;
+#
+
+diff  ./comptonTransAnlys_08_FinalRename_no_data_BEFORE.sql    ./comptonTransAnlys_08_FinalRename_no_data_AFTER.sql   ;
 
 echo -n 'Current sed status result is: ' ;
 echo  $?                                  ;
