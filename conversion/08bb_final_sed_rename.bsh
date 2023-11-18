@@ -6,30 +6,21 @@
 #
 #
 #
-mariadb-dump   --no-data   comptonTransAnlys   >  ./comptonTransAnlys_08_FinalRename_no_data_BEFORE.sql   ;
+cp --force      ./comptonTransAnlys_08_FinalRename.sql          ./comptonTransAnlys_08_FinalRename-BEFORE-08bb_final_sed_rename.sql   ;
 #
 sed   --in-place   --file=-    ./comptonTransAnlys_08_FinalRename.sql   <<EOF ;
 ##
 
-/\`clientMasterAutoIncr\` int unsigned NOT NULL,$/\
-        {n;s/\`clientContextAutoIncr\` int unsigned NOT NULL,/\`clientContextAutoIncr\` INT UNSIGNED NOT NULL AUTO_INCREMENT,/;};
-/\`clientMasterAutoIncr\` int unsigned NOT NULL,$/\
-        {n;s/\`clientContextAutoIncr\` int(10) unsigned NOT NULL,/\`clientContextAutoIncr\` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,/;};
+/\`contextAutoIncr\` .* NOT NULL,$/{n;s/\`stimwordPositionAutoIncr\` .* NOT NULL,/\`stimwordPositionAutoIncr\` MEDIUMINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,/;};
 
-/\`contextAutoIncr\` mediumint(8) unsigned NOT NULL,$/\
-        {n;s/\`stimwordPositionAutoIncr\` mediumint(10) UNSIGNED NOT NULL,/\`stimwordPositionAutoIncr\` MEDIUMINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,/;};
-/\`contextAutoIncr\` mediumint(8) unsigned NOT NULL,$/\
-        {n;s/\`stimwordPositionAutoIncr\` MEDIUMINT(10) UNSIGNED NOT NULL,/\`stimwordPositionAutoIncr\` MEDIUMINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,/;};
-
+/\`clientMasterAutoIncr\` .* NOT NULL,$/{n;s/\`clientContextAutoIncr\` .* NOT NULL,/\`clientContextAutoIncr\` INT UNSIGNED NOT NULL AUTO_INCREMENT,/;};
 
 EOF
 #
 #
 #
-mariadb-dump   --no-data   comptonTransAnlys   >  ./comptonTransAnlys_08_FinalRename_no_data_AFTER.sql   ;
 #
-#
-diff  ./comptonTransAnlys_08_FinalRename_no_data_BEFORE.sql    ./comptonTransAnlys_08_FinalRename_no_data_AFTER.sql   ;
+diff    ./comptonTransAnlys_08_FinalRename.sql          ./comptonTransAnlys_08_FinalRename-BEFORE-08bb_final_sed_rename.sql   ;
 #
 #
 echo -n 'Current sed status result is: ' ;
@@ -37,4 +28,3 @@ echo  $?                                  ;
 
 
 echo "end of sed part 08bb_final_sed_rename.bsh." ;
-
