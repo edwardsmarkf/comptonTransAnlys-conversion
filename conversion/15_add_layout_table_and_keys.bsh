@@ -24,7 +24,7 @@ SHOW COLUMNS FROM     \`teacher\`              ;
 
 ALTER TABLE \`context\`             RENAME COLUMN \`contextLayoutName\`             TO   \`layoutName\`   ;
 
-ALTER TABLE \`clientContext\`       RENAME COLUMN \`clientContextLayoutName\`       TO   \`layoutName\`   ;
+ALTER TABLE \`clientContext\`       RENAME COLUMN \`clientMasterLayoutName\`        TO   \`layoutName\`   ;
 
 ALTER TABLE \`clientMaster\`        RENAME COLUMN \`clientMasterLayoutName\`        TO   \`layoutName\`   ;
 
