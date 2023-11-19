@@ -1,6 +1,6 @@
 #!  /bin/bash
 
-#     15_add_layout_table_and_keys.bsh    2021-11-01
+#     15a_add_layout_table_and_keys.bsh    2021-11-01
 #
 #     2023-03-14 - changed layoutAutoIncr key to TINYINT
 #     2023-05-08  - added createdAt and updatedAt to frequencyList
@@ -146,6 +146,6 @@ SET FOREIGN_KEY_CHECKS=1 ;
 
 END
 
-echo '15_add_layout_table_and_keys.bsh!';
+echo '15a_add_layout_table_and_keys.bsh!';
 
 exit;
