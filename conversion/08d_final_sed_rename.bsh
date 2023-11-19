@@ -4,7 +4,7 @@
 
 mariadb --verbose comptonTransAnlys   <   ./comptonTransAnlys_08_FinalRename.sql ;
 
-gzip  -d  ./comptonTransAnlys_08_FinalRename.sql ;
+gzip ./comptonTransAnlys_08_FinalRename.sql ;
 
 mariadb --verbose comptonTransAnlys  <<END ;
 
@@ -12,7 +12,6 @@ mariadb --verbose comptonTransAnlys  <<END ;
 
 END
 
-gzip   ./comptonTransAnlys_08_FinalRename.sql ;
 
 echo "end of sed part 08d_final_sed_rename.bsh." ;
 
