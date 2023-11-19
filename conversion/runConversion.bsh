@@ -4,23 +4,23 @@
 #
 #
 #
-# its possible we might need to do this:
-ln --symbolic     /bin/mysql         /usr/bin/mariadb                                                                                                                                                                                                                ;
-ln --symbolic     /bin/mysqldump     /usr/bin/mariadb-dump                                                                                                                                                                                                           ;
+# It is possible we might need to do this:
+ln --symbolic     /bin/mysql         /usr/bin/mariadb                                           ;
+ln --symbolic     /bin/mysqldump     /usr/bin/mariadb-dump                                      ;
 #
-rm -Rf  ./comptonTransAnlys-conversion/                                                                                                                                                                                                                              ;
+rm -Rf  ./comptonTransAnlys-conversion/                                                         ;
 #
-git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion                                                                                                                                                                                              ;
+git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion                         ;
 #
-WORKING_DIR=/root//comptonTransAnlys-conversion/conversion/                                                                                                                                                                                                          ;
+WORKING_DIR=/root//comptonTransAnlys-conversion/conversion/                                     ;
 #
-cp  --verbose  ./comptonTransAnlys.sql.gz       ${WORKING_DIR}/comptonTransAnlys                                                                                                                                                                     .sql.gz         ;
+cp  --verbose  ./comptonTransAnlys.sql.gz       ${WORKING_DIR}/comptonTransAnlys.sql.gz         ;
 #
-gzip --verbose  -d  ${WORKING_DIR}/comptonTransAnlys.sql.gz                                                                                                                                                                                                          ;
+gzip --verbose  -d  ${WORKING_DIR}/comptonTransAnlys.sql.gz                                     ;
 #
 #
 
 ##
-nohup nice bash -vx ${WORKING_DIR}/00_master.bsh PASS > ./00_master.bsh.log 2>&1                                                                                                                                                                                     &
+nohup nice bash -vx ${WORKING_DIR}/00_master.bsh PASS > ./00_master.bsh.log 2>&1                &
 #
 exit
