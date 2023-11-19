@@ -4,6 +4,8 @@
 
 mariadb --verbose comptonTransAnlys   <   ./comptonTransAnlys_08_FinalRename.sql ;
 
+gzip  -d  ./comptonTransAnlys_08_FinalRename.sql ;
+
 mariadb --verbose comptonTransAnlys  <<END ;
 
     SHOW TABLES ;
