@@ -9,6 +9,8 @@
 
 /usr/bin/mariadb                 comptonTransAnlys   < comptonTransAnlysSedChanges.sql ;
 
+gzip   comptonTransAnlysSedChanges.sql ;
+
 echo 'Done with 05_convert_back_to_mysql.bsh';
 
 
