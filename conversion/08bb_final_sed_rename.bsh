@@ -6,7 +6,7 @@
 #
 #
 #
-cp --force      ./comptonTransAnlys_08_FinalRename.sql          ./comptonTransAnlys_08_FinalRename-BEFORE-08bb_final_sed_rename.sql   ;
+cp --force      ./comptonTransAnlys_08_FinalRename.sql          ./comptonTransAnlys_08bb_FinalRename-BEFORE-08bb_final_sed_rename.sql   ;
 #
 sed   --in-place   --file=-    ./comptonTransAnlys_08_FinalRename.sql   <<EOF ;
 ##
@@ -20,7 +20,9 @@ EOF
 #
 #
 #
-diff    ./comptonTransAnlys_08_FinalRename.sql          ./comptonTransAnlys_08_FinalRename-BEFORE-08bb_final_sed_rename.sql   ;
+diff    ./comptonTransAnlys_08_FinalRename.sql          ./comptonTransAnlys_08bb_FinalRename-BEFORE-08bb_final_sed_rename.sql   ;
+#
+gzip    ./comptonTransAnlys_08bb_FinalRename-BEFORE-08bb_final_sed_rename.sql   ;
 #
 #
 echo -n 'Current sed status result is: ' ;
