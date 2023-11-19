@@ -3,24 +3,9 @@
 #     15b_add_layout_table_and_keys.bsh      2023-11-19
 
 
-/usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > ./15b_add_layout_table_and_keys.bsh.sql ;
+/usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > ./15_add_layout_table_and_keys.bsh.sql ;
 
-ls -l  ./15b_add_layout_table_and_keys.bsh.sql ;
-
-
-
-#ALTER TABLE  \`clientContext\`      MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`clientMaster\`       MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`clientStimword\`     MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`context\`            MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`languageNorms\`      MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`languageSpec\`       MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`layout\`             MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`sound\`              MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`stimword\`           MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`stimwordPosition\`   MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`teacher\`            MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-
+ls -l  ./15_add_layout_table_and_keys.bsh.sql ;
 
 
 echo '15b_add_layout_table_and_keys.bsh!';
