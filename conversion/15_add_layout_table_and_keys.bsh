@@ -105,9 +105,9 @@ UPDATE \`languageNorms\`    SET \`layoutName\`  = 'SAMP' WHERE 1 AND \`layoutNam
 UPDATE \`languageNorms\`    SET \`layoutName\`  = 'PESL' WHERE 1 AND \`layoutName\`  = 'P-ESL'                ;
 UPDATE \`languageNorms\`    SET \`layoutName\`  = 'ACAD' WHERE 1 AND \`layoutName\`  = 'ACADEMY'              ;
 
-UPDATE \'languageSpec\`     SET \`layoutName\`  = 'SAMP' WHERE 1 AND \`layoutName\`  = 'SAMPLE'               ;
-UPDATE \'languageSpec\`     SET \`layoutName\`  = 'PESL' WHERE 1 AND \`layoutName\`  = 'P-ESL'                ;
-UPDATE \'languageSpec\`     SET \`layoutName\`  = 'ACAD' WHERE 1 AND \`layoutName\`  = 'ACADEMY'              ;
+UPDATE \`languageSpec\`     SET \`layoutName\`  = 'SAMP' WHERE 1 AND \`layoutName\`  = 'SAMPLE'               ;
+UPDATE \`languageSpec\`     SET \`layoutName\`  = 'PESL' WHERE 1 AND \`layoutName\`  = 'P-ESL'                ;
+UPDATE \`languageSpec\`     SET \`layoutName\`  = 'ACAD' WHERE 1 AND \`layoutName\`  = 'ACADEMY'              ;
 
 UPDATE \`layout\`           SET \`layoutName\`  = 'SAMP' WHERE 1 AND \`layoutName\`  = 'SAMPLE'               ;
 UPDATE \`layout\`           SET \`layoutName\`  = 'PESL' WHERE 1 AND \`layoutName\`  = 'P-ESL'                ;
