@@ -2,7 +2,7 @@
 
 #   15d_add_layout_table_and_keys.bsh  -- 2023-11-19
 
-cp   -v   ./15_add_layout_name_and_keys.sql    ./15_add_layout_name_and_keys-SAVED.sql ;
+cp   -v   ./15_add_layout_table_and_keys.sql    ./15_add_layout_table_and_keys-SAVED.sql ;
 
 #
 #
@@ -13,9 +13,9 @@ sed   --in-place   --file=-    ./15_add_layout_table_and_keys.sql   <<EOF ;
 EOF
 
 
-diff  ./15_add_layout_name_and_keys.sql    ./15_add_layout_name_and_keys-SAVED.sql ;
+diff  ./15_add_layout_table_and_keys.sql    ./15_add_layout_table_and_keys-SAVED.sql ;
 
-gzip    ./15_add_layout_name_and_keys-SAVED.sql ;
+gzip    ./15_add_layout_table_and_keys-SAVED.sql ;
 
 echo 'finished 15d_add_layout_table_and_keys.bsh!';
 
