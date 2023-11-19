@@ -97,7 +97,13 @@ process_section '11_alter_column_positions' ;
 
 process_section '12_another_rename_column' ;
 
-process_section '15_add_layout_table_and_keys' ;
+
+process_section '15a_add_layout_table_and_keys' ;
+process_section '15b_add_layout_table_and_keys' ;
+process_section '15c_add_layout_table_and_keys' ;
+process_section '15d_add_layout_table_and_keys' ;
+process_section '15e_add_layout_table_and_keys' ;
+
 
 process_section '20_normalize_clientMaster' ;
 
