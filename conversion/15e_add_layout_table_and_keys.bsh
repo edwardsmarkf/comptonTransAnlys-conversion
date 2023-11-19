@@ -2,9 +2,9 @@
 
 # 15e_add_layout_table_and_keys.bsh    -- 2023-11-19
 
-mariadb --verbose comptonTransAnlys   <   ./15e_add_layout_table_and_keys.sql ;
+mariadb --verbose comptonTransAnlys   <   ./15_add_layout_table_and_keys.sql ;
 
-gzip  -d  ./15e_add_layout_table_and_keys.sql ;
+gzip  -d  ./15_add_layout_table_and_keys.sql ;
 
 echo "end of 15e_add_layout_table_and_keys.bsh!" ;
 
