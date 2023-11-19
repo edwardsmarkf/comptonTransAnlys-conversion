@@ -1,0 +1,13 @@
+#! /bin/bash  -w
+
+# 15c_add_layout_name_and_keys.bsh
+
+mariadb  --verbose  <<END ;
+    DROP    DATABASE  comptonTransAnlys;
+    CREATE  DATABASE  comptonTransAnlys;
+
+END
+
+echo '15c_add_layout_name_and_keys.bsh'
+
+exit
