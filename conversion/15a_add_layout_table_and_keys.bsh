@@ -121,25 +121,13 @@ UPDATE \`stimword\`         SET \`layoutName\`  = 'SAMP' WHERE 1 AND \`layoutNam
 UPDATE \`stimword\`         SET \`layoutName\`  = 'PESL' WHERE 1 AND \`layoutName\`  = 'P-ESL'                ;
 UPDATE \`stimword\`         SET \`layoutName\`  = 'ACAD' WHERE 1 AND \`layoutName\`  = 'ACADEMY'              ;
 
-UPDATE \`stimwordPosition\`         SET \`layoutName\`  = 'SAMP' WHERE 1 AND \`layoutName\`  = 'SAMPLE'               ;
-UPDATE \`stimwordPosition\`         SET \`layoutName\`  = 'PESL' WHERE 1 AND \`layoutName\`  = 'P-ESL'                ;
-UPDATE \`stimwordPosition\`         SET \`layoutName\`  = 'ACAD' WHERE 1 AND \`layoutName\`  = 'ACADEMY'              ;
+UPDATE \`stimwordPosition\`         SET \`layoutName\`  = 'SAMP' WHERE 1 AND \`layoutName\`  = 'SAMPLE'       ;
+UPDATE \`stimwordPosition\`         SET \`layoutName\`  = 'PESL' WHERE 1 AND \`layoutName\`  = 'P-ESL'        ;
+UPDATE \`stimwordPosition\`         SET \`layoutName\`  = 'ACAD' WHERE 1 AND \`layoutName\`  = 'ACADEMY'      ;
 
 UPDATE \`teacher\`          SET \`layoutName\`  = 'SAMP' WHERE 1 AND \`layoutName\`  = 'SAMPLE'               ;
 UPDATE \`teacher\`          SET \`layoutName\`  = 'PESL' WHERE 1 AND \`layoutName\`  = 'P-ESL'                ;
 UPDATE \`teacher\`          SET \`layoutName\`  = 'ACAD' WHERE 1 AND \`layoutName\`  = 'ACADEMY'              ;
-
-#ALTER TABLE  \`clientContext\`      MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`clientMaster\`       MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`clientStimword\`     MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`context\`            MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`languageNorms\`      MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`languageSpec\`       MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`layout\`             MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`sound\`              MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`stimword\`           MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`stimwordPosition\`   MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
-#ALTER TABLE  \`teacher\`            MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
 
 
 SET FOREIGN_KEY_CHECKS=1 ;
