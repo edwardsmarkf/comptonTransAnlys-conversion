@@ -9,6 +9,20 @@ gzip    ./15_add_layout_name_and_keys-SAVED.sql ;
 sed   --in-place   --file=-    ./15_add_layout_name_and_keys.sql   <<EOF ;
 ##
 
+EOF
+
+
+#ALTER TABLE  \`clientContext\`      MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
+#ALTER TABLE  \`clientMaster\`       MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
+#ALTER TABLE  \`clientStimword\`     MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
+#ALTER TABLE  \`context\`            MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
+#ALTER TABLE  \`languageNorms\`      MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
+#ALTER TABLE  \`languageSpec\`       MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
+#ALTER TABLE  \`layout\`             MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
+#ALTER TABLE  \`sound\`              MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
+#ALTER TABLE  \`stimword\`           MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
+#ALTER TABLE  \`stimwordPosition\`   MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
+#ALTER TABLE  \`teacher\`            MODIFY COLUMN    \`layoutName\`  CHAR(04) NOT NULL;
 
 
 echo '15d_add_layout_name_and_keys.bsh';
