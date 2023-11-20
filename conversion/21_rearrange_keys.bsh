@@ -11,7 +11,7 @@
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
-                                                        ##SET FOREIGN_KEY_CHECKS=0 ;
+SET FOREIGN_KEY_CHECKS=0 ;
 
 -- languageNorms
 
@@ -54,6 +54,8 @@ ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`sessionName\` VARCHAR(30) NOT NU
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`soundPhoneme\` CHAR(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''            AFTER \`sessionName\`           ;
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`contextPosition\` VARCHAR(20) NOT NULL                                                          AFTER \`soundPhoneme\`          ;
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`clientContextErrorSound\` CHAR(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '' AFTER \`contextPosition\`       ;
+
+SET FOREIGN_KEY_CHECKS=1 ;
 
 
 END
