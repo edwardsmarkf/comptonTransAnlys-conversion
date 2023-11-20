@@ -1,6 +1,6 @@
 #! /bin/bash  -w
 
-# 15c_add_layout_table_and_keys.bsh.bsh
+# 15d_add_layout_table_and_keys.bsh.bsh
 
 mariadb  --verbose  <<END ;
     DROP    DATABASE  comptonTransAnlys;
@@ -8,6 +8,6 @@ mariadb  --verbose  <<END ;
 
 END
 
-echo 'finished 15c_add_layout_table_and_keys.bsh.bsh!'  ;
+echo 'finished 15d_add_layout_table_and_keys.bsh.bsh!'  ;
 
 exit
