@@ -8,7 +8,7 @@ cp   --verbose   ./15_add_layout_table_and_keys.sql    ./15_add_layout_table_and
 #
 sed   --in-place   --file=-    ./15_add_layout_table_and_keys.sql   <<EOF ;
 ##
-s/\`layoutName\` varchar(30) NOT NULL,/\`layoutName\` CHAR(04) NOT NULL,/g;
+s/\`layoutName\` varchar([0-9]\+) NOT NULL,/\`layoutName\` CHAR(04) NOT NULL,/g;
 ##
 EOF
 
