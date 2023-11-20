@@ -1,6 +1,6 @@
 #! /bin/bash
 
-#   15d_add_layout_table_and_keys.bsh  -- 2023-11-19 - priginal writing
+#   15c_add_layout_table_and_keys.bsh  -- 2023-11-19 - priginal writing
 
 cp   --verbose   ./15_add_layout_table_and_keys.sql    ./15_add_layout_table_and_keys-SAVED.sql ;
 
@@ -17,7 +17,7 @@ diff  ./15_add_layout_table_and_keys.sql    ./15_add_layout_table_and_keys-SAVED
 
 gzip    ./15_add_layout_table_and_keys-SAVED.sql ;
 
-echo 'finished 15d_add_layout_table_and_keys.bsh!';
+echo 'finished 15c_add_layout_table_and_keys.bsh!';
 
 exit
 
