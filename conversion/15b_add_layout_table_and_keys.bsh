@@ -5,7 +5,7 @@
 
 /usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > ./15_add_layout_table_and_keys.sql ;
 
-ls -l  ./15_add_layout_table_and_keys.bsh.sql ;
+ls -l  ./15_add_layout_table_and_keys.sql ;
 
 
 echo '15b_add_layout_table_and_keys.bsh!';
