@@ -4,7 +4,7 @@
 #
 ls -l     ./comptonTransAnlys_23b_resize_primary_keys.sql   ;
 
-sed   --in-place   --file=-    ./comptonTransAnlys_22_remove_constraint_keys.sql   <<EOF ;
+sed   --in-place   --file=-    ./comptonTransAnlys_23a_resize_primary_keys.sql   <<EOF ;
 #
 #
 EOF
@@ -12,8 +12,9 @@ EOF
 echo -n 'Current sed status result is: ' ;
 echo  $?                                  ;
 
-echo 'compare this result to one from above and make SURE its smaller!' ;
-ls -l     ../comptonTransAnlys_22_remove_constraint_keys.sql   ;
+diff  ./comptonTransAnlys_23a_resize_primary_keys.sql   ./comptonTransAnlys_23a_resize_primary_keys.sql-COPY-BEFORE-KEY-RESIZE.sql  ;
+
+gzip   ./comptonTransAnlys_23a_resize_primary_keys.sql-COPY-BEFORE-KEY-RESIZE.sql  ; 
 
 echo "end of sed part 23b_resize_primary_keys.bsh!" ;
 
