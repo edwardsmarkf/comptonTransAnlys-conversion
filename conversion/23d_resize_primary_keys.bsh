@@ -12,3 +12,4 @@ gzip  ./comptonTransAnlys_23_resize_primary_keys.sql  ;
 echo "end of sed part 23d_resize_primary_keys.bsh!" ;
 #
 exit;
+#
