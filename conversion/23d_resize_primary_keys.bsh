@@ -1,0 +1,9 @@
+#! /bin/bash  -w
+
+# 23d_resize_primary_keys.bsh  --2023-11-21
+
+#
+mariadb comptonTransAnlys   <   ./comptonTransAnlys_23_resize_primary_keys.sql ;
+#
+#
+exit;
