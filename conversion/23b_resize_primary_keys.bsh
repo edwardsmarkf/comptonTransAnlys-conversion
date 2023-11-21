@@ -5,10 +5,9 @@
 #
 #
 #
-/usr/bin/mariadb-dump  --no-data  comptonTransAnlys  > ./comptonTransAnlys_23b_resize_primary_key-NO-DATA-BEFORE.sql ;
+ 
 #
-ls -l     ./comptonTransAnlys_23b_resize_primary_key-NO-DATA-BEFORE.sql  ;
-#
+cp --verbose  ./comptonTransAnlys_23_resize_primary_keys.sql    ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED ;
 #
 #
 #
@@ -79,14 +78,15 @@ echo  $?                                  ;
 #
 #
 #
-/usr/bin/mariadb-dump  --no-data  comptonTransAnlys  > ./comptonTransAnlys_23b_resize_primary_key-NO-DATA-AFTER.sql ;
 #
-diff  ./comptonTransAnlys_23b_resize_primary_key-NO-DATA-BEFORE.sql  ./comptonTransAnlys_23b_resize_primary_key-NO-DATA-AFTER.sql  ;
+diff    ./comptonTransAnlys_23_resize_primary_keys.sql    ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED ;
 #
-gzip  ./comptonTransAnlys_2b3_resize_primary_key-NO-DATA-BEFORE.sql                ;
-gzip  ./comptonTransAnlys_23b_resize_primary_key-NO-DATA-AFTER.sql                 ;
+rm  --force  ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED ;
 #
 echo "end of sed part 23b_resize_primary_keys.bsh!" ;
-
+#
 exit        ;
 #
+
+
+      #################/usr/bin/mariadb-dump  --no-data  comptonTransAnlys  > ./comptonTransAnlys_23b_resize_primary_key-NO-DATA-BEFORE.sql ;
