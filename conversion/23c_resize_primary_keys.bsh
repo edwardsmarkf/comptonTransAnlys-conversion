@@ -1,0 +1,14 @@
+#! /bin/bash  -w
+
+# 23c_resize_primary_keys.bsh
+
+mariadb  --verbose  <<END ;
+    DROP    DATABASE  comptonTransAnlys     ;
+    CREATE  DATABASE  comptonTransAnlys     ;
+    USE               comptonTransAnlys     ;
+    SHOW TABLES                             ;
+END
+
+
+echo "end of sed part 23c_resize_primary_keys.bsh!" ;
+
