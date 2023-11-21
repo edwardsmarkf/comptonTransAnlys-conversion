@@ -16,59 +16,59 @@ ls -l    ./comptonTransAnlys_23_resize_primary_keys.sql ;
 #
 sed   --in-place   --file=-    ./comptonTransAnlys_23_resize_primary_keys.sql   <<EOF ;
 #
-#387
+#  387
 s/\`contextAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`contextAutoIncr\` TINYINT(3) UNSIGNED NOT NULL,/;
 s/\`contextAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`contextAutoIncr\` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#341949 
+#  341949 
 s/\`clientContextAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL,/;
 s/\`clientContextAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#5460
+#  5460
 s/\`clientContextAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL,/;
 s/\`clientContextAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#7902
+#  7902
 s/\`clientSessionAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`clientSessionAutoIncr\` SMALLINT(6) UNSIGNED NOT NULL,/;
 s/\`clientSessionAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`clientSessionAutoIncr\` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#900604
+#  900604
 s/\`clientStimwordAutoIncr\` *int([0-9]+) unsigned NOT NULL,/\`clientStimwordAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL,/;
 s/\`clientStimwordAutoIncr\` *int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`clientStimwordAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#24
+#  24
 s/\`errorSoundsTooltipAutoIncr\` .*int([0-9]*) NOT NULL,/\`errorSoundsTooltipAutoIncr\` TINYINT(2) UNSIGNED NOT NULL,/;
 s/\`errorSoundsTooltipAutoIncr\` .*int([0-9]*) NOT NULL AUTO_INCREMENT,/\`errorSoundsTooltipAutoIncr\` TINYINT(2) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#7566
+#  7566
 s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageNormsAutoIncr\` SMALLINT(4) UNSIGNED NOT NULL,/;
 s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageNormsAutoIncr\` SMALLINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-48211
+#  48211
 s/\`langSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageSpecAutoIncr\` MEDIUMINT(6) UNSIGNED NOT NULL,/;
 s/\`langSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageSpecAutoIncr\` MEDIUMINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#3!
+#  3!
 s/\`layoutAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`layoutAutoIncr\` tinyint(1) UNSIGNED NOT NULL,/;
 s/\`layoutAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`layoutAutoIncr\` tinyint(1) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#9!
+#  9!
 s/\`sessionNamesAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`sessionNamesAutoIncr\` TINYINT(1) UNSIGNED NOT NULL,/;
 s/\`sessionNamesAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`sessionNamesAutoIncr\` TINYINT(1) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#264
+#  264
 s/\`soundAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`soundAutoIncr\` TINYINT(3) UNSIGNED NOT NULL,/;
 s/\`soundAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`soundAutoIncr\` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#393
+#  393
 s/\`stimwordAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`stimwordAutoIncr\` TINYINT(3) UNSIGNED NOT NULL,/;
 s/\`stimwordAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`stimwordAutoIncr\` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#1704
+#  1704
 s/\`stimwordPositionAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`stimwordPositionAutoIncr\` TINYINT(4) UNSIGNED NOT NULL,/;
 s/\`stimwordPositionAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`stimwordPositionAutoIncr\` TINYINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#1704
+#  1704
 s/\`teacherAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`teacherAutoIncr\` TINYINT(5) UNSIGNED NOT NULL,/;
 s/\`teacherAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`teacherAutoIncr\` TINYINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
