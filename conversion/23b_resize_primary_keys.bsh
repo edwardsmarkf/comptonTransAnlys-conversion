@@ -20,55 +20,55 @@ sed   --in-place   --file=-    ./comptonTransAnlys_23_resize_primary_keys.sql   
 #  MEDIUMINT - 0 to 16777215
 #
 #
-#  387
+#                                                                                                      387    SMALLINT  - 0 to 65535
 s/\`contextAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`contextAutoIncr\`                                    SMALLINT  UNSIGNED NOT NULL                    ,/;
 s/\`contextAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`contextAutoIncr\`                     SMALLINT  UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
 #
-#  341949 
+#                                                                                                  341949     MEDIUMINT - 0 to 16777215
 s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`clientContextAutoIncr\`                        MEDIUMINT UNSIGNED NOT NULL                    ,/;
 s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientContextAutoIncr\`         MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
 #
-#  5460
+#                                                                                                      5460   SMALLINT  - 0 to 65535
 s/\`clientMasterAutoIncr\` .*int([0-9]*) NOT NULL,/\`clientMasterAutoIncr\`                                   SMALLINT  UNSIGNED NOT NULL                    ,/;
 s/\`clientMasterAutoIncr\` .*int([0-9]*) NOT NULL AUTO_INCREMENT,/\`clientMasterAutoIncr\`                    SMALLINT  UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
 #
-#  7902
+#                                                                                                     7902    SMALLINT  - 0 to 65535
 s/\`clientSessionAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`clientSessionAutoIncr\`                        SMALLINT  UNSIGNED NOT NULL                    ,/;
 s/\`clientSessionAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientSessionAutoIncr\`         SMALLINT UNSIGNED  NOT NULL AUTO_INCREMENT     ,/;
 #
-#  900604
+#                                                                                                  900604     MEDIUMINT - 0 to 16777215
 s/\`clientStimwordAutoIncr\` *int([0-9]*) unsigned NOT NULL,/\`clientStimwordAutoIncr\`                       MEDIUMINT UNSIGNED NOT NULL                    ,/;
 s/\`clientStimwordAutoIncr\` *int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientStimwordAutoIncr\`        MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
 #
-#  7566
-s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageNormsAutoIncr\`                        SMALLINT  UNSIGNED NOT NULL                     ,/;
-s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageNormsAutoIncr\`         SMALLINT  UNSIGNED NOT NULL AUTO_INCREMENT      ,/;
+#                                                                                                  ?? 7566 ?? MEDIUMINT  - 0 to 65535
+s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageNormsAutoIncr\`                        MEDIUMINT  UNSIGNED NOT NULL                   ,/;
+s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageNormsAutoIncr\`         MEDIUMINT  UNSIGNED NOT NULL AUTO_INCREMENT    ,/;
 #
-#  48211
+#                                                                                                   48211     SMALLINT  - 0 to 65535
 s/\`langSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageSpecAutoIncr\`                              SMALLINT UNSIGNED NOT NULL                      ,/;
 s/\`langSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageSpecAutoIncr\`               SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT       ,/;
 #
-#  3!
+#                                                                                                        3!   TINYINT   - 0 to 255
 s/\`layoutAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`layoutAutoIncr\`                                      TINYINT  UNSIGNED NOT NULL                      ,/;
 s/\`layoutAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`layoutAutoIncr\`                       TINYINT  UNSIGNED NOT NULL AUTO_INCREMENT       ,/;
 #
-#  9!
+#                                                                                                        9!   TINYINT   - 0 to 255
 s/\`sessionNamesAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`sessionNamesAutoIncr\`                          TINYINT  UNSIGNED NOT NULL                      ,/;
 s/\`sessionNamesAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`sessionNamesAutoIncr\`           TINYINT  UNSIGNED NOT NULL AUTO_INCREMENT       ,/;
 #
-#  264
+#                                                                                                   264       SMALLINT  - 0 to 65535
 s/\`soundAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`soundAutoIncr\`                                        SMALLINT  UNSIGNED NOT NULL                     ,/;
 s/\`soundAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`soundAutoIncr\`                         SMALLINT  UNSIGNED NOT NULL AUTO_INCREMENT      ,/;
 #
-#  393
+#                                                                                                   393       SMALLINT  - 0 to 65535
 s/\`stimwordAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`stimwordAutoIncr\`                                  SMALLINT  UNSIGNED NOT NULL                     ,/;
 s/\`stimwordAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`stimwordAutoIncr\`                   SMALLINT  UNSIGNED NOT NULL AUTO_INCREMENT      ,/;
 #
-#  1704
+#                                                                                                   1704      SMALLINT  - 0 to 65535
 s/\`stimwordPositionAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`stimwordPositionAutoIncr\`                  SMALLINT  UNSIGNED NOT NULL                     ,/;
 s/\`stimwordPositionAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`stimwordPositionAutoIncr\`   SMALLINT  UNSIGNED NOT NULL AUTO_INCREMENT      ,/;
 #
-#  1704
+#                                                                                                     1704    SMALLINT  - 0 to 65535
 s/\`teacherAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`teacherAutoIncr\`                                    SMALLINT  UNSIGNED NOT NULL                     ,/;
 s/\`teacherAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`teacherAutoIncr\`                     SMALLINT  UNSIGNED NOT NULL AUTO_INCREMENT      ,/;
 #
