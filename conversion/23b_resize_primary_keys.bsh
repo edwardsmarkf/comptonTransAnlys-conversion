@@ -35,10 +35,6 @@ s/\`clientSessionAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`cl
 s/\`clientStimwordAutoIncr\` *int([0-9]*) unsigned NOT NULL,/\`clientStimwordAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL,/;
 s/\`clientStimwordAutoIncr\` *int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientStimwordAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
-#  24
-s/\`errorSoundsTooltipAutoIncr\` .*int([0-9]*) NOT NULL,/\`errorSoundsTooltipAutoIncr\` TINYINT(2) UNSIGNED NOT NULL,/;
-s/\`errorSoundsTooltipAutoIncr\` .*int([0-9]*) NOT NULL AUTO_INCREMENT,/\`errorSoundsTooltipAutoIncr\` TINYINT(2) UNSIGNED NOT NULL AUTO_INCREMENT,/;
-#
 #  7566
 s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageNormsAutoIncr\` SMALLINT(4) UNSIGNED NOT NULL,/;
 s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageNormsAutoIncr\` SMALLINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,/;
