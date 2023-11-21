@@ -5,8 +5,13 @@
 /usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > ./comptonTransAnlys_23a_resize_primary_keys.sql ;
 
 ls -l   ./comptonTransAnlys_23a_resize_primary_keys.sql   ;
+#
+#
+#
+#
+/usr/bin/mariadb-dump  --no-data  comptonTransAnlys  > ./comptonTransAnlys_23a_resize_primary_keys.sql-NO-DATA-BEFORE.sql ;
+#
 
-cp   --verbose    ./comptonTransAnlys_23a_resize_primary_keys.sql   ./comptonTransAnlys_23a_resize_primary_keys.sql-COPY-BEFORE-KEY-RESIZE.sql  ;
 
 echo "end of 23a_resize_primary_keys.bsh!" ;
 
