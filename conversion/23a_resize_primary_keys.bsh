@@ -4,7 +4,7 @@
 
 /usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > ./comptonTransAnlys_23a_resize_primary_keys.sql ;
 
-ls -l  ./comptonTransAnlys_22_remove_constraint_keys.sql ;
+ls -l   ./comptonTransAnlys_23a_resize_primary_keys.sql   ;
 
 cp   --verbose    ./comptonTransAnlys_23a_resize_primary_keys.sql   ./comptonTransAnlys_23a_resize_primary_keys.sql-COPY-BEFORE-KEY-RESIZE.sql  ;
 
