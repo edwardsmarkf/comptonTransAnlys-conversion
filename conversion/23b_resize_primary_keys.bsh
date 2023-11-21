@@ -7,10 +7,13 @@
 #
 /usr/bin/mariadb-dump  --no-data  comptonTransAnlys  > ./comptonTransAnlys_23b_resize_primary_key-NO-DATA-BEFORE.sql ;
 #
-#
-#
 ls -l     ./comptonTransAnlys_23b_resize_primary_key-NO-DATA-BEFORE.sql  ;
-
+#
+#
+#
+#
+ls -l    ./comptonTransAnlys_23_resize_primary_keys.sql ;
+#
 sed   --in-place   --file=-    ./comptonTransAnlys_23_resize_primary_keys.sql   <<EOF ;
 #
 #387
