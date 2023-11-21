@@ -24,7 +24,7 @@ sed   --in-place   --file=-    ./comptonTransAnlys_23_resize_primary_keys.sql   
 s/\`contextAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`contextAutoIncr\`                                    SMALLINT  UNSIGNED NOT NULL                    ,/;
 s/\`contextAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`contextAutoIncr\`                     SMALLINT  UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
 #
-#                                                                                      341,949 - 3,490,945    MEDIUMINT - 0 to 16,777,215
+#                                                                         341,949 - min=687  max=3,490,945    MEDIUMINT - 0 to 16,777,215
 s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`clientContextAutoIncr\`                        MEDIUMINT UNSIGNED NOT NULL                    ,/;
 s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientContextAutoIncr\`         MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
 #
@@ -32,17 +32,17 @@ s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`cl
 s/\`clientMasterAutoIncr\` .*int([0-9]*) NOT NULL,/\`clientMasterAutoIncr\`                                   SMALLINT  UNSIGNED NOT NULL                    ,/;
 s/\`clientMasterAutoIncr\` .*int([0-9]*) NOT NULL AUTO_INCREMENT,/\`clientMasterAutoIncr\`                    SMALLINT  UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
 #
-#                                                                                             7,902  8,232   SMALLINT  - 0 to 65,535
+#                                                                                              7,902  8,232   SMALLINT  - 0 to 65,535
 s/\`clientSessionAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`clientSessionAutoIncr\`                        SMALLINT  UNSIGNED NOT NULL                    ,/;
 s/\`clientSessionAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientSessionAutoIncr\`         SMALLINT UNSIGNED  NOT NULL AUTO_INCREMENT     ,/;
 #
-#                                                                                     900,604    8,288,164    MEDIUMINT - 0 to 16,777,215
+#                                                                        900,604  min=1,560  max=8,288,164    MEDIUMINT - 0 to 16,777,215
 s/\`clientStimwordAutoIncr\` *int([0-9]*) unsigned NOT NULL,/\`clientStimwordAutoIncr\`                       MEDIUMINT UNSIGNED NOT NULL                    ,/;
 s/\`clientStimwordAutoIncr\` *int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientStimwordAutoIncr\`        MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
 #
-#                                                                                       ?? 7566 ??   131,877  MEDIUMINT  - 0 to 16,777,215
-s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageNormsAutoIncr\`                        MEDIUMINT  UNSIGNED NOT NULL                   ,/;
-s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageNormsAutoIncr\`         MEDIUMINT  UNSIGNED NOT NULL AUTO_INCREMENT    ,/;
+#                                                                               7566 min=79,754  max=131,877  SMALLINT  - 0 to 65,535
+s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageNormsAutoIncr\`                        SMALLINT   UNSIGNED NOT NULL                   ,/;
+s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageNormsAutoIncr\`         SMALLINT   UNSIGNED NOT NULL AUTO_INCREMENT    ,/;
 #
 #                                                                                                   48211     SMALLINT  - 0 to 65535
 s/\`langSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageSpecAutoIncr\`                              SMALLINT UNSIGNED NOT NULL                      ,/;
