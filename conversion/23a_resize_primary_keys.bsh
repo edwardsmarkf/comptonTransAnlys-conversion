@@ -8,10 +8,6 @@ ls -l   ./comptonTransAnlys_23a_resize_primary_keys.sql   ;
 #
 #
 #
-#
-/usr/bin/mariadb-dump  --no-data  comptonTransAnlys  > ./comptonTransAnlys_23a_resize_primary_keys.sql-NO-DATA-BEFORE.sql ;
-#
-
 
 echo "end of 23a_resize_primary_keys.bsh!" ;
 
