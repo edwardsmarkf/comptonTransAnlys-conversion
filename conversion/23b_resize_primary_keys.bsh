@@ -79,7 +79,7 @@ echo  $?                                  ;
 #
 #
 #
-diff    ./comptonTransAnlys_23_resize_primary_keys.sql    ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED ;
+diff    ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED    ./comptonTransAnlys_23_resize_primary_keys.sql ;
 #
 rm  --force  ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED ;
 #
