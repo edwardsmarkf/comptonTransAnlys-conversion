@@ -116,6 +116,12 @@ process_section '22c_remove_constraint_keys' ;
 process_section '22d_remove_constraint_keys' ;
 process_section '22e_remove_constraint_keys' ;
 
+   ## 2023-11-21
+process_section '23a_resize_keys'            ;
+process_section '23b_resize_keys'            ;
+process_section '23c_resize_keys'            ;
+process_section '23c_resize_keys'            ;
+
 
 ## 2022-11-03
 echo $(date) ' - fixStimwordPosition!'                                                                                                                     ;
