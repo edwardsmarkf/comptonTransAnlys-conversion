@@ -1,11 +1,11 @@
 DROP TABLE IF EXISTS `comptonTransAnlys`.`errorSoundsTooltip` ;
 
 CREATE TABLE  `comptonTransAnlys`.`errorSoundsTooltip`	
-(	`layoutName`      CHAR(4)                       NOT NULL
-, `errorSound`      CHAR(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''
-,	`rowNbr`         SMALLINT	                    NOT NULL
-,	`toolTip`         VARCHAR(50)	                  NULL
-,	`errorSoundsTooltipAutoIncr`	SMALLINT	                    NOT NULL AUTO_INCREMENT
+(	`layoutName`                  CHAR(04)                                            NOT NULL
+, `errorSound`                  CHAR(01) CHARACTER SET utf8mb4  COLLATE utf8mb4_bin NOT NULL DEFAULT ''
+,	`rowNbr`                      TINYINT(02)	                                        NOT NULL
+,	`toolTip`                     VARCHAR(50)	                                        NULL
+,	`errorSoundsTooltipAutoIncr`	TINYINT(02)                                         NOT NULL AUTO_INCREMENT
 ,	PRIMARY KEY (`errorSoundsTooltipAutoIncr`)
 ); 
 
