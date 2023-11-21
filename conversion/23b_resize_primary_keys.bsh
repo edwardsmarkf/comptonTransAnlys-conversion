@@ -38,7 +38,7 @@ s/\`errorSoundsTooltipAutoIncr\` .*int([0-9]*) NOT NULL AUTO_INCREMENT,/\`errorS
 s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageNormsAutoIncr\` SMALLINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
 48211
-s/\`langSpecAutoIncr\` .*nt([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageSpecAutoIncr\` MEDIUMINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,/;
+s/\`langSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageSpecAutoIncr\` MEDIUMINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
 #3!
 s/\`layoutAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`layoutAutoIncr\` tinyint(1) UNSIGNED NOT NULL AUTO_INCREMENT,/;
