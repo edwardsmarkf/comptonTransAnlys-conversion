@@ -29,8 +29,8 @@ s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`clientContextAuto
 s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientContextAutoIncr\`         MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
 #
 #  5460
-s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`clientContextAutoIncr\`                        MEDIUMINT UNSIGNED NOT NULL                    ,/;
-s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientContextAutoIncr\`         MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
+s/\`clientMasterAutoIncr\` .*int([0-9]*) NOT NULL,/\`clientMasterAutoIncr\`                                   SMALLINT  UNSIGNED NOT NULL                    ,/;
+s/\`clientMasterAutoIncr\` .*int([0-9]*) NOT NULL AUTO_INCREMENT,/\`clientMasterAutoIncr\`                    SMALLINT  UNSIGNED NOT NULL AUTO_INCREMENT     ,/;
 #
 #  7902
 s/\`clientSessionAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`clientSessionAutoIncr\`                        SMALLINT  UNSIGNED NOT NULL                    ,/;
