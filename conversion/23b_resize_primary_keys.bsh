@@ -16,24 +16,24 @@ ls -l    ./comptonTransAnlys_23_resize_primary_keys.sql ;
 sed   --in-place   --file=-    ./comptonTransAnlys_23_resize_primary_keys.sql   <<EOF ;
 #
 #  387
-s/\`contextAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`contextAutoIncr\` TINYINT(3) UNSIGNED NOT NULL,/;
-s/\`contextAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`contextAutoIncr\` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,/;
+s/\`contextAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`contextAutoIncr\` TINYINT(3) UNSIGNED NOT NULL,/;
+s/\`contextAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`contextAutoIncr\` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
 #  341949 
-s/\`clientContextAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL,/;
-s/\`clientContextAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,/;
+s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL,/;
+s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
 #  5460
-s/\`clientContextAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL,/;
-s/\`clientContextAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,/;
+s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL,/;
+s/\`clientContextAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientContextAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
 #  7902
-s/\`clientSessionAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`clientSessionAutoIncr\` SMALLINT(6) UNSIGNED NOT NULL,/;
-s/\`clientSessionAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`clientSessionAutoIncr\` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,/;
+s/\`clientSessionAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`clientSessionAutoIncr\` SMALLINT(6) UNSIGNED NOT NULL,/;
+s/\`clientSessionAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientSessionAutoIncr\` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
 #  900604
-s/\`clientStimwordAutoIncr\` *int([0-9]+) unsigned NOT NULL,/\`clientStimwordAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL,/;
-s/\`clientStimwordAutoIncr\` *int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`clientStimwordAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,/;
+s/\`clientStimwordAutoIncr\` *int([0-9]*) unsigned NOT NULL,/\`clientStimwordAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL,/;
+s/\`clientStimwordAutoIncr\` *int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`clientStimwordAutoIncr\` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
 #  24
 s/\`errorSoundsTooltipAutoIncr\` .*int([0-9]*) NOT NULL,/\`errorSoundsTooltipAutoIncr\` TINYINT(2) UNSIGNED NOT NULL,/;
@@ -64,12 +64,12 @@ s/\`stimwordAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`stimwordAutoIncr\` TIN
 s/\`stimwordAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`stimwordAutoIncr\` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
 #  1704
-s/\`stimwordPositionAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`stimwordPositionAutoIncr\` TINYINT(4) UNSIGNED NOT NULL,/;
-s/\`stimwordPositionAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`stimwordPositionAutoIncr\` TINYINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,/;
+s/\`stimwordPositionAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`stimwordPositionAutoIncr\` TINYINT(4) UNSIGNED NOT NULL,/;
+s/\`stimwordPositionAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`stimwordPositionAutoIncr\` TINYINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
 #  1704
-s/\`teacherAutoIncr\` .*int([0-9]+) unsigned NOT NULL,/\`teacherAutoIncr\` TINYINT(5) UNSIGNED NOT NULL,/;
-s/\`teacherAutoIncr\` .*int([0-9]+) unsigned NOT NULL AUTO_INCREMENT,/\`teacherAutoIncr\` TINYINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,/;
+s/\`teacherAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`teacherAutoIncr\` TINYINT(5) UNSIGNED NOT NULL,/;
+s/\`teacherAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`teacherAutoIncr\` TINYINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,/;
 #
 EOF
 
