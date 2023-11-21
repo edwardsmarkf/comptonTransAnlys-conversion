@@ -3,7 +3,9 @@
 # 23d_resize_primary_keys.bsh  --2023-11-21
 
 #
-mariadb comptonTransAnlys   <   ./comptonTransAnlys_23_resize_primary_keys.sql ;
+mariadb comptonTransAnlys   <   ./comptonTransAnlys_23a_resize_primary_keys.sql ;
 #
+#
+gzip  ./comptonTransAnlys_23a_resize_primary_keys.sql  ;
 #
 exit;
