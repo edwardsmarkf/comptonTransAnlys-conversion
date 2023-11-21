@@ -1,0 +1,21 @@
+#! /bin/bash  -w
+
+# 23a_resize_primary_keys.bsh   -- 2021-11-27 !!
+
+
+mariadb  --verbose  comptonTransAnlys  <<END ;
+    DELETE FROM \`languageNorms\` WHERE 1 AND \`languageNormsAutoIncr\` IN (92029, 93972, 94146, 129141, 131084, 131258  ) ;
+END
+
+
+/usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > ./comptonTransAnlys_22_remove_constraint_keys.sql ;
+
+ls -l  ./comptonTransAnlys_22_remove_constraint_keys.sql ;
+
+cp   --verbose    ./comptonTransAnlys_22_remove_constraint_keys.sql   ./comptonTransAnlys_22_remove_constraint_keys-COPY-BEFORE-KEY-REMOVAL.sql  ;
+
+/usr/bin/mariadb-dump  --no-data  comptonTransAnlys  > ./comptonTransAnlys_22_remove_constraint_keys-NO-DATA-BEFORE.sql ;
+
+echo "end of 23a_resize_primary_keys.bsh!" ;
+
+exit        ;
