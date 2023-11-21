@@ -53,9 +53,10 @@ EOF
 echo -n 'Current sed status result is: ' ;
 echo  $?                                  ;
 
-diff  ./comptonTransAnlys_23a_resize_primary_keys.sql   ./comptonTransAnlys_23a_resize_primary_keys.sql-COPY-BEFORE-KEY-RESIZE.sql  ;
 
-gzip   ./comptonTransAnlys_23a_resize_primary_keys.sql-COPY-BEFORE-KEY-RESIZE.sql  ; 
+diff   ./comptonTransAnlys_23a_resize_primary_keys.sql-NO-DATA-AFTER.sql  ./comptonTransAnlys_23a_resize_primary_keys.sql--COPY-NO-DATA-BEFORE.sql  ;
+
+gzip    ./comptonTransAnlys_23a_resize_primary_keys.sql-NO-DATA-AFTER.sql  ./comptonTransAnlys_23a_resize_primary_keys.sql--COPY-NO-DATA-BEFORE.sql  ;
 
 echo "end of sed part 23b_resize_primary_keys.bsh!" ;
 
