@@ -61,7 +61,6 @@ ALTER TABLE  \`Client_stimword\`  DROP COLUMN IF EXISTS  \`Client_stimword_error
 
 END
 
+echo "Done with $0!";
 
-echo 'end of 07b_alter_keys.bsh!';
-
-exit;
+exit 1;
