@@ -16,6 +16,8 @@ cp   --verbose    ./comptonTransAnlys_22_remove_constraint_keys.sql   ./comptonT
 
 /usr/bin/mariadb-dump  --no-data  comptonTransAnlys  > ./comptonTransAnlys_22_remove_constraint_keys-NO-DATA-BEFORE.sql ;
 
-echo "end of 22a_remove_constraint_keys.bsh!" ;
 
-exit        ;
+
+echo "Done with $0!";
+
+exit 1;
