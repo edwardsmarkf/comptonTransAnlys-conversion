@@ -175,11 +175,8 @@ END
 
 
 ##
-echo  'finished with 03_long_part.bsh!';
-
-exit;
 
 
-
-
-
+echo "end of $0 !" ;
+#
+exit  1      ;
