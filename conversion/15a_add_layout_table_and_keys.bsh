@@ -134,6 +134,6 @@ SET FOREIGN_KEY_CHECKS=1 ;
 
 END
 
-echo '15a_add_layout_table_and_keys.bsh!';
+echo "Done with $0!";
 
-exit;
+exit 1;
