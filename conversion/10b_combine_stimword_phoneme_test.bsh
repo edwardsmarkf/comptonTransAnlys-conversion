@@ -155,6 +155,6 @@ ORDER BY layout,  position, phoneme
 END
 
 
-echo 'end of 10b_combine_stimword_phoneme_test.bsh!';
+echo "Done with $0!";
 
-exit;
+exit 1;
