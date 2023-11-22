@@ -170,7 +170,10 @@ echo  $?                                  ;
 echo 'compare this result to one from above and make SURE its smaller!' ;
 ls -l     ./comptonTransAnlys_22_remove_constraint_keys.sql   ;
 
-echo "end of sed part 22b_remove_constraint_keys.bsh!" ;
 
-exit        ;
+
+echo "Done with $0!";
+
+exit 1;
+
 #
