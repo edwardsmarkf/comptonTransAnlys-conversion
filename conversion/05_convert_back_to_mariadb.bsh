@@ -11,6 +11,7 @@
 
 gzip   comptonTransAnlysSedChanges.sql ;
 
-echo 'Done with 05_convert_back_to_mysql.bsh';
 
-
+echo "end of $0 !" ;
+#
+exit  1      ;
