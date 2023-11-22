@@ -389,7 +389,7 @@ SELECT "COUNT: clientContext to clientStimword BOTH         " , COUNT(*)
 END
 
 ##
-echo  'finished with 55_count_by_keys.bsh!';
 
-exit;
+echo "Done with $0!";
 
+exit 1;
