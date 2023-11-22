@@ -32,4 +32,6 @@ sed   --in-place --expression="/'vojta talasek'/d;"                             
 
 /usr/bin/mariadb  --verbose  comptonTransAnlys <     ./comptonTransAnlys.sql  ;
 
-echo 'Done with 01_create_db.bsh';
+echo "Done with $0!";
+
+exit 1;
