@@ -185,9 +185,26 @@ ORDER BY layout,  position, t1, t2
 
 END
 
-echo 'end of 02b_test_initial_preparation.bsh! ';
+echo "end of $0 !" ;
+#
+exit 1;
 
-exit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 2021-10-02:
 
