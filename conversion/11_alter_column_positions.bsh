@@ -31,7 +31,6 @@
 END
 
 ##
-echo  'finished with 11_display_table_counts.bsh!';
+echo "Done with $0!";
 
-exit;
-
+exit 1;
