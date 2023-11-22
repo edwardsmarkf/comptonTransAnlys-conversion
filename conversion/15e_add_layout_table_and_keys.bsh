@@ -6,6 +6,6 @@ mariadb --verbose comptonTransAnlys   <   ./15_add_layout_table_and_keys.sql ;
 
 gzip    ./15_add_layout_table_and_keys.sql ;
 
-echo "end of 15e_add_layout_table_and_keys.bsh!" ;
+echo "Done with $0!";
 
-exit        ;
+exit 1;
