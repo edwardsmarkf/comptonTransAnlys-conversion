@@ -1,6 +1,6 @@
 #! /bin/bash  -w
 
-# 23a_resize_primary_keys.bsh   -- 2023-11-22 !!
+# 23a_resize_primary_keys.bsh   -- 2023-11-22 !!!!
 
 #  written from   https://www.delftstack.com/howto/mysql/mysql-loop-through-rows/
 
@@ -59,4 +59,4 @@ END
 
 echo "end of $0 !" ;
 
-exit        ;
+exit  1      ;
