@@ -121,7 +121,6 @@ process_section '23a_resize_keys'            ;
 process_section '23b_resize_keys'            ;
 process_section '23c_resize_keys'            ;
 process_section '23d_resize_keys'            ;
-process_section '23e_resize_keys'            ;
 
 
 ## 2022-11-03
@@ -159,9 +158,9 @@ echo $(date)                                                                    
 
 grep ERROR   ${LOGGING_DIR}/*.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR'  | grep -v  grep                        ;
 
-echo "finished 00_master.bsh!"       ;
+echo "finished $0 !"       ;
 
-exit  ;
+exit  1 ;
 
 #
 
