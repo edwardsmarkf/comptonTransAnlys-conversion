@@ -105,6 +105,7 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 
 END
 
-echo  'finished with 40a_session_names_keys.bsh!';
 
-exit 1
+echo "Done with $0!";
+
+exit 1;
