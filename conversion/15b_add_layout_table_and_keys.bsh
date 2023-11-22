@@ -8,6 +8,7 @@
 ls -l  ./15_add_layout_table_and_keys.sql ;
 
 
-echo '15b_add_layout_table_and_keys.bsh!';
 
-exit;
+echo "Done with $0!";
+
+exit 1;
