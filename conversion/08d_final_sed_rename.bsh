@@ -12,8 +12,6 @@ mariadb --verbose comptonTransAnlys  <<END ;
 
 END
 
+echo "Done with $0!";
 
-echo "end of sed part 08d_final_sed_rename.bsh." ;
-
-exit        ;
-
+exit 1;
