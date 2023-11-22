@@ -81,6 +81,12 @@ echo  $?                                  ;
 #
 #
 diff    ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED    ./comptonTransAnlys_23_resize_primary_keys.sql ;
+
+diff    ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED    ./comptonTransAnlys_23_resize_primary_keys.sql                      \
+ | sed  --expression='; s/ mediumint.*$//i; s/ smallint.*$//i; s/ tinyint.*$//i; s/ int.*$//i; /^[0-9]/d; /---/d; s/^[<>]   //; '   \
+ |  sed -e 's/ //g' | sort | uniq  
+ ;
+
 #
 rm  --force  ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED ;
 #
