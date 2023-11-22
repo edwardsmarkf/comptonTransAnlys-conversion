@@ -46,6 +46,8 @@ ALTER TABLE \`clientContext\` ADD CONSTRAINT \`frequencyListAutoIncr_2_clientCon
 
 END
 
-echo 'Done with 40d_create_frequency_list_keys.bsh!';
+echo "Done with $0!";
+
+exit 1;
 
  
