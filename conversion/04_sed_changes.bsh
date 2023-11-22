@@ -245,6 +245,7 @@ EOF
 echo -n 'The sed status result is: '   ;
 echo $?                         ;
 
-echo "end of sed part 04_sed_changes.bsh." ;
 
-exit  ;
+echo "end of $0 !" ;
+#
+exit  1      ;
