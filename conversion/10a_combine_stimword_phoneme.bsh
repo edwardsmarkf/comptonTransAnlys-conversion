@@ -59,5 +59,6 @@ RENAME TABLE phoneticSpelling TO phoneticSpellingUnused
 
 END
 
-echo 'Done with 10a_combine_stimword_phoneme.bsh!';
+echo "Done with $0!";
 
+exit 1;
