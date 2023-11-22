@@ -17,6 +17,6 @@ mariadb-dump  --no-data  comptonTransAnlys  | grep  KEY   | grep  '_2_' | grep -
 diff  ./comptonTransAnlys_22_remove_constraint_keys-NO-DATA-BEFORE.sql    ./comptonTransAnlys_22_remove_constraint_keys-NO-DATA-AFTER.sql  ;
 
 
-echo "end of sed part 22d_remove_constraint_keys.bsh!" ;
+echo "Done with $0!";
 
-exit        ;
+exit 1;
