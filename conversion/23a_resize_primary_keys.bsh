@@ -9,6 +9,6 @@ ls -l   ./comptonTransAnlys_23_resize_primary_keys.sql   ;
 #
 #
 
-echo "end of 23a_resize_primary_keys.bsh!" ;
+echo "end of $0 !" ;
 
 exit        ;
