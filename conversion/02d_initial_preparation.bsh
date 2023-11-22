@@ -128,4 +128,7 @@ GROUP BY
 HAVING EMAIL>1;
 
 END
-echo 'done with 02d_initial_preparation.bsh';
+
+echo "end of $0 !" ;
+#
+exit  1      ;
