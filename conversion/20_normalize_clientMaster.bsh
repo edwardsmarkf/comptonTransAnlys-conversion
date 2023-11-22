@@ -197,9 +197,13 @@ ALTER TABLE \`clientSession\`	DROP KEY IF EXISTS	\`teacherEmail\`						;
 
 END
 
-echo 'end of 20_normalize_clientMaster.bsh' ;
 
-exit;
+
+echo "Done with $0!";
+
+exit 1;
+
+
 
 #
 
