@@ -719,4 +719,6 @@ mariadb  --verbose   comptonTransAnlys   <<END;
 	
 END
 
-echo 'finished with the conversion 07a_alter_keys.bsh !!';
+echo "Done with $0!";
+
+exit 1;
