@@ -1,4 +1,12 @@
 
 #!  /bin/bash -w
 
+#  errorSoundsTooltip.bsh  
+
 mariadb --verbose         < ./errorSoundsTooltip/errorSoundsTooltip.sql ;
+
+#
+
+echo "Done with $0!";
+
+exit 1;
