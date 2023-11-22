@@ -2,7 +2,55 @@
 
 # 23a_resize_primary_keys.bsh   -- 2023-11-22 !!
 
-/usr/bin/mariadb   <<>END ;
+#  written from   https://www.delftstack.com/howto/mysql/mysql-loop-through-rows/
+
+/usr/bin/mariadb  --verbose  <<END ;
+
+USE comptonTransAnlys ;
+
+SELECT MIN(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
+SELECT MAX(\`languageNorms\`.l\`anguageNormsAutoIncr\`) FROM \`languageNorms\`   ;
+
+DROP PROCEDURE IF EXISTS restore_language_norms_key;
+DELIMITER ;;
+
+CREATE PROCEDURE restore_language_norms_key()
+BEGIN
+DECLARE cursor_languageNormsAutoIncr INT(12) DEFAULT 0;
+DECLARE newKeyValue INT(12) DEFAULT 1;
+DECLARE done INT DEFAULT FALSE;
+DECLARE cursor_languageNorms CURSOR FOR
+                SELECT \`languageNorms\`.\`languageNormsAutoIncr\`
+                FROM \`languageNorms\`
+                ORDER BY \`languageNormsAutoIncr\`
+                ;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+OPEN cursor_languageNorms;
+read_loop: LOOP
+  FETCH cursor_languageNorms INTO cursor_languageNormsAutoIncr  ;
+  IF done THEN
+    LEAVE read_loop;
+  END IF;
+                                                ##########SELECT newKeyValue, cursor_languageNormsAutoIncr;
+  UPDATE \`languageNorms\`
+        SET     \`languageNorms\`.\`languageNormsAutoIncr\` = newKeyValue
+        WHERE   1
+        AND     \`languageNorms\`.\`languageNormsAutoIncr\` = cursor_languageNormsAutoIncr
+        ;
+  SET newKeyValue = newKeyValue + 1;
+                                                  ##INSERT INTO emp_performance (FIRSTNAME,LASTNAME)
+                                                  ##VALUES (cursor_FIRSTNAME, cursor_LASTNAME);
+END LOOP;
+CLOSE cursor_languageNorms;
+END;
+;;
+
+DELIMITER ;
+
+CALL restore_language_norms_key();
+
+SELECT MIN(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
+SELECT MAX(\`languageNorms\`.l\`anguageNormsAutoIncr\`) FROM \`languageNorms\`   ;
 
 END
 #
