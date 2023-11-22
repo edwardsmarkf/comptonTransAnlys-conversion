@@ -1,6 +1,6 @@
 #! /bin/bash  -w
 
-# 23b_resize_primary_keys.bsh   -- 2021-11-27 !!
+# 23b_resize_primary_keys.bsh   -- 2023-11-22 !!
 
 /usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > ./comptonTransAnlys_23_resize_primary_keys.sql ;
 
