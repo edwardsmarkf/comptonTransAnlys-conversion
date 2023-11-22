@@ -60,10 +60,7 @@ SET FOREIGN_KEY_CHECKS=1 ;
 
 END
 
-echo 'end of 21_rearrange_keys.bsh' ;
+echo "Done with $0!";
 
-exit;
-
-
-
+exit 1;
 
