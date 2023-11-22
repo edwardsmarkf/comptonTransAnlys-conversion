@@ -121,6 +121,7 @@ process_section '23a_resize_keys'            ;
 process_section '23b_resize_keys'            ;
 process_section '23c_resize_keys'            ;
 process_section '23d_resize_keys'            ;
+process_section '23e_resize_keys'            ;
 
 
 ## 2022-11-03
