@@ -8,8 +8,7 @@
 
 USE comptonTransAnlys ;
 
-SELECT MIN(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
-SELECT MAX(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
+SELECT COUNT(*), MIN(\`languageNorms\`.\`languageNormsAutoIncr\`), MAX(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
 
 DROP PROCEDURE IF EXISTS restore_language_norms_key;
 DELIMITER ;;
@@ -49,8 +48,7 @@ DELIMITER ;
 
 CALL restore_language_norms_key();
 
-SELECT MIN(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
-SELECT MAX(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
+SELECT COUNT(*), MIN(\`languageNorms\`.\`languageNormsAutoIncr\`), MAX(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
 
 END
 #
