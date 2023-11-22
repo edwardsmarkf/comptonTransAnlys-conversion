@@ -12,7 +12,6 @@ END
 
 ls -l  ././comptonTransAnlys_08_FinalRename.sql ;
 
-echo "end of sed part 08a_final_sed_rename.bsh." ;
+echo "Done with $0!";
 
-exit        ;
-
+exit 1;
