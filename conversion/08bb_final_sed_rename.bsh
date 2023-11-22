@@ -28,5 +28,6 @@ gzip    ./comptonTransAnlys_08bb_FinalRename-BEFORE-08bb_final_sed_rename.sql   
 echo -n 'Current sed status result is: ' ;
 echo  $?                                  ;
 
+echo "Done with $0!";
 
-echo "end of sed part 08bb_final_sed_rename.bsh." ;
+exit 1;
