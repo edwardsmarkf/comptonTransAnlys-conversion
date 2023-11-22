@@ -20,7 +20,7 @@ mariadb    <<END  ;
    SELECT  COUNT(*),  MIN(\`clientSessionAutoIncr\`)    ,  MAX(\`clientSessionAutoIncr\`)     FROM  \`clientSession\`     ;
    SELECT  COUNT(*),  MIN(\`clientStimwordAutoIncr\`)   ,  MAX(\`clientStimwordAutoIncr\`)    FROM  \`clientStimword\`    ;
    SELECT  COUNT(*),  MIN(\`languageNormsAutoIncr\`)    ,  MAX(\`languageNormsAutoIncr\`)     FROM  \`languageNorms\`     ;
-   SELECT  COUNT(*),  MIN(\`languageSpecAutoIncr\`)     ,  MAX(\`languageSpecAutoIncr\`)      FROM  \`languageSpec\`      ;
+   SELECT  COUNT(*),  MIN(\`langSpecAutoIncr\`)         ,  MAX(\`langSpecAutoIncr\`)          FROM  \`languageSpec\`      ;  ## the key name will be changed!
    SELECT  COUNT(*),  MIN(\`layoutAutoIncr\`)           ,  MAX(\`layoutAutoIncr\`)            FROM  \`layout\`            ;
    SELECT  COUNT(*),  MIN(\`sessionNamesAutoIncr\`)     ,  MAX(\`sessionNamesAutoIncr\`)      FROM  \`sessionNames\`      ;
    SELECT  COUNT(*),  MIN(\`soundAutoIncr\`)            ,  MAX(\`soundAutoIncr\`)             FROM  \`sound\`             ;
