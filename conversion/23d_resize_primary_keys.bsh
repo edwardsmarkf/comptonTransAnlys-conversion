@@ -10,5 +10,7 @@ mariadb  --verbose  <<END ;
 END
 
 
-echo "end of sed part 23d_resize_primary_keys.bsh!" ;
+echo "end of $0 !" ;
+#
+exit 1;
 
