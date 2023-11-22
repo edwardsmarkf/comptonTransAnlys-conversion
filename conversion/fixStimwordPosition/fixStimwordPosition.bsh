@@ -11,7 +11,10 @@ mariadb --verbose comptonTransAnlys < ./temp.sql                  ;
 
 rm --verbose ./temp.sql                                            ;
 
-exit                                                              ;
 
-#
+echo "Done with $0!";
+
+exit 1;
+
+
 #
