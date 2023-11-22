@@ -80,4 +80,6 @@ UPDATE \`Client_stimword\`
 	
 END
 
-echo 'Done with  06_combine_phonemes.bsh !';
+echo "Done with $0!";
+
+exit 1;
