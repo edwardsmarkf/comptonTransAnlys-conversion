@@ -158,7 +158,6 @@ ORDER BY layout,  position, phoneme
 
 END
 
+echo "Done with $0!";
 
-echo 'end of 07c_alter_keys_test.bsh!';
-
-exit;
+exit 1;
