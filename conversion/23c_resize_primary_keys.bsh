@@ -10,6 +10,25 @@
 cp --verbose  ./comptonTransAnlys_23_resize_primary_keys.sql    ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED ;
 #
 #
+mariadb    <<END  ;
+
+   USE  \`comptonTransAnlys\` ;
+
+   SELECT  COUNT(*),  MIN(\`contextAutoIncr\`)          ,  MAX(\`contextAutoIncr\`)           FROM  \`context\`           ;
+   SELECT  COUNT(*),  MIN(\`clientContextAutoIncr\`)    ,  MAX(\`clientContextAutoIncr\`)     FROM  \`clientContext\`     ;
+   SELECT  COUNT(*),  MIN(\`clientMasterAutoIncr\`)     ,  MAX(\`clientMasterAutoIncr\`)      FROM  \`clientMaster\`      ;
+   SELECT  COUNT(*),  MIN(\`clientSessionAutoIncr\`)    ,  MAX(\`clientSessionAutoIncr\`)     FROM  \`clientSession\`     ;
+   SELECT  COUNT(*),  MIN(\`clientStimwordAutoIncr\`)   ,  MAX(\`clientStimwordAutoIncr\`)    FROM  \`clientStimword\`    ;
+   SELECT  COUNT(*),  MIN(\`languageNormsAutoIncr\`)    ,  MAX(\`languageNormsAutoIncr\`)     FROM  \`languageNorms\`     ;
+   SELECT  COUNT(*),  MIN(\`languageSpecAutoIncr\`)     ,  MAX(\`languageSpecAutoIncr\`)      FROM  \`languageSpec\`      ;
+   SELECT  COUNT(*),  MIN(\`layoutAutoIncr\`)           ,  MAX(\`layoutAutoIncr\`)            FROM  \`layout\`            ;
+   SELECT  COUNT(*),  MIN(\`sessionNamesAutoIncr\`)     ,  MAX(\`sessionNamesAutoIncr\`)      FROM  \`sessionNames\`      ;
+   SELECT  COUNT(*),  MIN(\`soundAutoIncr\`)            ,  MAX(\`soundAutoIncr\`)             FROM  \`sound\`             ;
+   SELECT  COUNT(*),  MIN(\`stimwordAutoIncr\`)         ,  MAX(\`stimwordAutoIncr\`)          FROM  \`stimword\`          ;
+   SELECT  COUNT(*),  MIN(\`stimwordPositionAutoIncr\`) ,  MAX(\`stimwordPositionAutoIncr\`)  FROM  \`stimwordPosition\`  ;
+   SELECT  COUNT(*),  MIN(\`teacherAutoIncr\`)          ,  MAX(\`teacherAutoIncr\`)           FROM  \`teacher\`           ;
+
+END
 #
 ls -l    ./comptonTransAnlys_23_resize_primary_keys.sql ;
 #
@@ -44,9 +63,10 @@ s/\`clientStimwordAutoIncr\` *int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`cl
 s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageNormsAutoIncr\`                        SMALLINT   UNSIGNED NOT NULL                   ,/;
 s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageNormsAutoIncr\`         SMALLINT   UNSIGNED NOT NULL AUTO_INCREMENT    ,/;
 #
+s/\`langSpecAutoIncr\`/\`languageSpecAutoIncr\`/                 ;
 #                                                                                                   48211     SMALLINT  - 0 to 65535
-s/\`langSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageSpecAutoIncr\`                              SMALLINT UNSIGNED NOT NULL                      ,/;
-s/\`langSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageSpecAutoIncr\`               SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT       ,/;
+s/\`languageSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageSpecAutoIncr\`                          SMALLINT UNSIGNED NOT NULL                      ,/;
+s/\`languageSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageSpecAutoIncr\`           SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT       ,/;
 #
 #                                                                                                        3!   TINYINT   - 0 to 255
 s/\`layoutAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`layoutAutoIncr\`                                      TINYINT  UNSIGNED NOT NULL                      ,/;
