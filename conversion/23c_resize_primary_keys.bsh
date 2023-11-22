@@ -20,7 +20,7 @@ mariadb    <<END  ;
    SELECT  COUNT(*),  MIN(\`clientSessionAutoIncr\`)    ,  MAX(\`clientSessionAutoIncr\`)     FROM  \`clientSession\`     ;
    SELECT  COUNT(*),  MIN(\`clientStimwordAutoIncr\`)   ,  MAX(\`clientStimwordAutoIncr\`)    FROM  \`clientStimword\`    ;
    SELECT  COUNT(*),  MIN(\`languageNormsAutoIncr\`)    ,  MAX(\`languageNormsAutoIncr\`)     FROM  \`languageNorms\`     ;
-   SELECT  COUNT(*),  MIN(\`langSpecAutoIncr\`)         ,  MAX(\`langSpecAutoIncr\`)          FROM  \`languageSpec\`      ;  ## the key name will be changed!
+###########################################   SELECT  COUNT(*),  MIN(\`langSpecAutoIncr\`)         ,  MAX(\`langSpecAutoIncr\`)          FROM  \`languageSpec\`      ;  ## the key name will be changed!
    SELECT  COUNT(*),  MIN(\`layoutAutoIncr\`)           ,  MAX(\`layoutAutoIncr\`)            FROM  \`layout\`            ;
    SELECT  COUNT(*),  MIN(\`soundAutoIncr\`)            ,  MAX(\`soundAutoIncr\`)             FROM  \`sound\`             ;
    SELECT  COUNT(*),  MIN(\`stimwordAutoIncr\`)         ,  MAX(\`stimwordAutoIncr\`)          FROM  \`stimword\`          ;
@@ -66,10 +66,9 @@ s/\`clientStimwordAutoIncr\` *int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`cl
 s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageNormsAutoIncr\`                        SMALLINT   UNSIGNED NOT NULL                   ,/;
 s/\`languageNormsAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageNormsAutoIncr\`         SMALLINT   UNSIGNED NOT NULL AUTO_INCREMENT    ,/;
 #
-s/\`langSpecAutoIncr\`/\`languageSpecAutoIncr\`/g                 ;
-#                                                                                                   48211     SMALLINT  - 0 to 65535
-s/\`languageSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageSpecAutoIncr\`                          SMALLINT UNSIGNED NOT NULL                      ,/;
-s/\`languageSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageSpecAutoIncr\`           SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT       ,/;
+###################s/\`langSpecAutoIncr\`/\`languageSpecAutoIncr\`/g                 ;\                                                                                                   48211     SMALLINT  - 0 to 65535
+######################s/\`languageSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`languageSpecAutoIncr\`                          SMALLINT UNSIGNED NOT NULL                      ,/;
+######################s/\`languageSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`languageSpecAutoIncr\`           SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT       ,/;
 #
 #                                                                                                        3!   TINYINT   - 0 to 255
 s/\`layoutAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`layoutAutoIncr\`                                      TINYINT  UNSIGNED NOT NULL                      ,/;
