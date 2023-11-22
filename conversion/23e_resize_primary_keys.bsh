@@ -1,6 +1,6 @@
 #! /bin/bash  -w
 
-# 23d_resize_primary_keys.bsh  --2023-11-21
+# 23e_resize_primary_keys.bsh  --2023-11-21
 
 #
 mariadb comptonTransAnlys   <   ./comptonTransAnlys_23_resize_primary_keys.sql ;
@@ -9,7 +9,7 @@ mariadb comptonTransAnlys   <   ./comptonTransAnlys_23_resize_primary_keys.sql ;
 gzip  ./comptonTransAnlys_23_resize_primary_keys.sql  ;
 #
 #
-echo "end of sed part 23d_resize_primary_keys.bsh!" ;
+echo "end of sed part 23e_resize_primary_keys.bsh!" ;
 #
 exit;
 #
