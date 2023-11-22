@@ -10,6 +10,14 @@ mariadb  --verbose  <<END ;
 END
 
 
+mariadb comptonTransAnlys   <   ./comptonTransAnlys_23_resize_primary_keys.sql ;
+#
+#
+gzip  ./comptonTransAnlys_23_resize_primary_keys.sql  ;
+#
+#
+
+
 echo "end of $0 !" ;
 #
 exit 1;
