@@ -1,6 +1,6 @@
 #! /bin/bash  -w
 
-# 23d_resize_primary_keys.bsh
+# 23d_resize_primary_keys.bsh  -- 2023-11-22
 
 mariadb  --verbose  <<END ;
     DROP    DATABASE  comptonTransAnlys     ;
