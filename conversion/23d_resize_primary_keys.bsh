@@ -13,7 +13,7 @@ END
 mariadb comptonTransAnlys   <   ./comptonTransAnlys_23_resize_primary_keys.sql ;
 #
 #
-gzip  ./comptonTransAnlys_23_resize_primary_keys.sql  ;
+gzip  --force ./comptonTransAnlys_23_resize_primary_keys.sql  ;
 #
 #
 
