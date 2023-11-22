@@ -83,7 +83,10 @@ DROP TABLE IF EXISTS \`TEMP\`
 
 END
 
-exit;
+
+echo "Done with $0!";
+
+exit 1;
 
 
 
