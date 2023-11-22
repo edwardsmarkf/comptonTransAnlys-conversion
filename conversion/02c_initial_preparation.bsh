@@ -84,9 +84,8 @@
 
 END
 
-echo 'completed 02c_initial_preparation.bsh !';
-
-exit;
-
+echo "end of $0 !" ;
+#
+exit        ;
 
   
