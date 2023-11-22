@@ -22,7 +22,6 @@ mariadb    <<END  ;
    SELECT  COUNT(*),  MIN(\`languageNormsAutoIncr\`)    ,  MAX(\`languageNormsAutoIncr\`)     FROM  \`languageNorms\`     ;
    SELECT  COUNT(*),  MIN(\`langSpecAutoIncr\`)         ,  MAX(\`langSpecAutoIncr\`)          FROM  \`languageSpec\`      ;  ## the key name will be changed!
    SELECT  COUNT(*),  MIN(\`layoutAutoIncr\`)           ,  MAX(\`layoutAutoIncr\`)            FROM  \`layout\`            ;
-   SELECT  COUNT(*),  MIN(\`sessionNamesAutoIncr\`)     ,  MAX(\`sessionNamesAutoIncr\`)      FROM  \`sessionNames\`      ;
    SELECT  COUNT(*),  MIN(\`soundAutoIncr\`)            ,  MAX(\`soundAutoIncr\`)             FROM  \`sound\`             ;
    SELECT  COUNT(*),  MIN(\`stimwordAutoIncr\`)         ,  MAX(\`stimwordAutoIncr\`)          FROM  \`stimword\`          ;
    SELECT  COUNT(*),  MIN(\`stimwordPositionAutoIncr\`) ,  MAX(\`stimwordPositionAutoIncr\`)  FROM  \`stimwordPosition\`  ;
@@ -75,10 +74,6 @@ s/\`languageSpecAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`lan
 #                                                                                                        3!   TINYINT   - 0 to 255
 s/\`layoutAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`layoutAutoIncr\`                                      TINYINT  UNSIGNED NOT NULL                      ,/;
 s/\`layoutAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`layoutAutoIncr\`                       TINYINT  UNSIGNED NOT NULL AUTO_INCREMENT       ,/;
-#
-#                                                                                                        9!   TINYINT   - 0 to 255
-s/\`sessionNamesAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`sessionNamesAutoIncr\`                          TINYINT  UNSIGNED NOT NULL                      ,/;
-s/\`sessionNamesAutoIncr\` .*int([0-9]*) unsigned NOT NULL AUTO_INCREMENT,/\`sessionNamesAutoIncr\`           TINYINT  UNSIGNED NOT NULL AUTO_INCREMENT       ,/;
 #
 #                                                                                                   264       SMALLINT  - 0 to 65535
 s/\`soundAutoIncr\` .*int([0-9]*) unsigned NOT NULL,/\`soundAutoIncr\`                                        SMALLINT  UNSIGNED NOT NULL                     ,/;
