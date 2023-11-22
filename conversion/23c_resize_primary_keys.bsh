@@ -84,7 +84,7 @@ diff    ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED    ./comptonTransAn
 #
 rm  --force  ./comptonTransAnlys_23_resize_primary_keys.sql-SAVED ;
 #
-echo "end of sed part 23c_resize_primary_keys.bsh!" ;
+echo "end of $0 !" ;
 #
 exit        ;
 #
