@@ -35,6 +35,6 @@ ALTER TABLE \`clientContext\` MODIFY COLUMN \`frequency\` VARCHAR(15) NOT NULL D
 
 END
 
-echo  'finished with 40b_misc_cleanup.bsh!';
+echo "Done with $0!";
 
-exit 1
+exit 1;
