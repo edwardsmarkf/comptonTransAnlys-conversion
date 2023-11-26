@@ -59,11 +59,11 @@ END;
 
 DELIMITER ;
 
-CALL restore_language_norms_key();
+CALL reset_languageNorms_key();
 
 SELECT COUNT(*), MIN(\`languageNorms\`.\`languageNormsAutoIncr\`), MAX(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
 
-
+DROP PROCEDURE IF EXISTS reset_languageNorms_key;
 
 
 
@@ -79,10 +79,10 @@ SELECT COUNT(*), MIN(\`languageNorms\`.\`languageNormsAutoIncr\`), MAX(\`languag
 
 SELECT COUNT(*), MIN(\`clientContext\`.\`clientContextAutoIncr\`), MAX(\`clientContext\`.\`clientContextAutoIncr\`) FROM \`clientContext\`   ;
 
-DROP PROCEDURE IF EXISTS restore_language_norms_key;
+DROP PROCEDURE IF EXISTS reset_clientContext_key;
 DELIMITER ;;
 
-CREATE PROCEDURE restore_language_norms_key()
+CREATE PROCEDURE reset_clientContext_key()
 BEGIN
 DECLARE cursor_clientContextAutoIncr INT(12) DEFAULT 0;
 DECLARE newKeyValue INT(12) DEFAULT 1;
@@ -114,11 +114,11 @@ END;
 
 DELIMITER ;
 
-CALL restore_language_norms_key();
+CALL reset_clientContext_key();
 
 SELECT COUNT(*), MIN(\`clientContext\`.\`clientContextAutoIncr\`), MAX(\`clientContext\`.\`clientContextAutoIncr\`) FROM \`clientContext\`   ;
 
-
+DROP PROCEDURE IF EXISTS reset_clientContext_key;
 
 
 
@@ -134,10 +134,10 @@ SELECT COUNT(*), MIN(\`clientContext\`.\`clientContextAutoIncr\`), MAX(\`clientC
 
 SELECT COUNT(*), MIN(\`clientStimword\`.\`clientStimwordAutoIncr\`), MAX(\`clientStimword\`.\`clientStimwordAutoIncr\`) FROM \`clientStimword\`   ;
 
-DROP PROCEDURE IF EXISTS restore_language_norms_key;
+DROP PROCEDURE IF EXISTS reset_clientStimword_key;
 DELIMITER ;;
 
-CREATE PROCEDURE restore_language_norms_key()
+CREATE PROCEDURE reset_clientContext_key()
 BEGIN
 DECLARE cursor_clientStimwordAutoIncr INT(12) DEFAULT 0;
 DECLARE newKeyValue INT(12) DEFAULT 1;
@@ -169,10 +169,11 @@ END;
 
 DELIMITER ;
 
-CALL restore_language_norms_key();
+CALL reset_clientStimword_key();
 
 SELECT COUNT(*), MIN(\`clientStimword\`.\`clientStimwordAutoIncr\`), MAX(\`clientStimword\`.\`clientStimwordAutoIncr\`) FROM \`clientStimword\`   ;
 
+DROP PROCEDURE IF EXISTS reset_clientStimword_key;
 
 
 
