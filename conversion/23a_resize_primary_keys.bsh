@@ -137,7 +137,7 @@ SELECT COUNT(*), MIN(\`clientStimword\`.\`clientStimwordAutoIncr\`), MAX(\`clien
 DROP PROCEDURE IF EXISTS reset_clientStimword_key;
 DELIMITER ;;
 
-CREATE PROCEDURE reset_clientContext_key()
+CREATE PROCEDURE reset_clientStimword_key()
 BEGIN
 DECLARE cursor_clientStimwordAutoIncr INT(12) DEFAULT 0;
 DECLARE newKeyValue INT(12) DEFAULT 1;
