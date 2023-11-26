@@ -1,12 +1,26 @@
 #! /bin/bash  -w
-
+#
 # 23a_resize_primary_keys.bsh   -- 2023-11-22 !!!!
+#                               -- 2023-11-26 - added  clientContext and clientStimword
+#
+#
+#
 
 #  written from   https://www.delftstack.com/howto/mysql/mysql-loop-through-rows/
+#
+#
 
 /usr/bin/mariadb  --verbose  <<END ;
 
 USE comptonTransAnlys ;
+
+
+
+        #################################
+        #                               #
+        #   languageNorms               #
+        #                               #
+        #################################
 
 SELECT COUNT(*), MIN(\`languageNorms\`.\`languageNormsAutoIncr\`), MAX(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
 
@@ -30,7 +44,6 @@ read_loop: LOOP
   IF done THEN
     LEAVE read_loop;
   END IF;
-                                                ##########SELECT newKeyValue, cursor_languageNormsAutoIncr;
   UPDATE \`languageNorms\`
         SET     \`languageNorms\`.\`languageNormsAutoIncr\` = newKeyValue
         WHERE   1
@@ -49,6 +62,120 @@ DELIMITER ;
 CALL restore_language_norms_key();
 
 SELECT COUNT(*), MIN(\`languageNorms\`.\`languageNormsAutoIncr\`), MAX(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
+
+
+
+
+
+
+
+
+        #################################
+        #                               #
+        #   clientContext               #
+        #                               #
+        #################################
+
+
+SELECT COUNT(*), MIN(\`clientContext\`.\`clientContextAutoIncr\`), MAX(\`clientContext\`.\`clientContextAutoIncr\`) FROM \`clientContext\`   ;
+
+DROP PROCEDURE IF EXISTS restore_language_norms_key;
+DELIMITER ;;
+
+CREATE PROCEDURE restore_language_norms_key()
+BEGIN
+DECLARE cursor_clientContextAutoIncr INT(12) DEFAULT 0;
+DECLARE newKeyValue INT(12) DEFAULT 1;
+DECLARE done INT DEFAULT FALSE;
+DECLARE cursor_clientContext CURSOR FOR
+                SELECT \`clientContext\`.\`clientContextAutoIncr\`
+                FROM \`clientContext\`
+                ORDER BY \`clientContextAutoIncr\`
+                ;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+OPEN cursor_clientContext;
+read_loop: LOOP
+  FETCH cursor_clientContext INTO cursor_clientContextAutoIncr  ;
+  IF done THEN
+    LEAVE read_loop;
+  END IF;
+  UPDATE \`clientContext\`
+        SET     \`clientContext\`.\`clientContextAutoIncr\` = newKeyValue
+        WHERE   1
+        AND     \`clientContext\`.\`clientContextAutoIncr\` = cursor_clientContextAutoIncr
+        ;
+  SET newKeyValue = newKeyValue + 1;
+                                                  ##INSERT INTO emp_performance (FIRSTNAME,LASTNAME)
+                                                  ##VALUES (cursor_FIRSTNAME, cursor_LASTNAME);
+END LOOP;
+CLOSE cursor_clientContext;
+END;
+;;
+
+DELIMITER ;
+
+CALL restore_language_norms_key();
+
+SELECT COUNT(*), MIN(\`clientContext\`.\`clientContextAutoIncr\`), MAX(\`clientContext\`.\`clientContextAutoIncr\`) FROM \`clientContext\`   ;
+
+
+
+
+
+
+
+
+        ###############################
+        #                             #
+        #   clientStimword            #
+        #                             #
+        ###############################
+
+
+SELECT COUNT(*), MIN(\`clientStimword\`.\`clientStimwordAutoIncr\`), MAX(\`clientStimword\`.\`clientStimwordAutoIncr\`) FROM \`clientStimword\`   ;
+
+DROP PROCEDURE IF EXISTS restore_language_norms_key;
+DELIMITER ;;
+
+CREATE PROCEDURE restore_language_norms_key()
+BEGIN
+DECLARE cursor_clientStimwordAutoIncr INT(12) DEFAULT 0;
+DECLARE newKeyValue INT(12) DEFAULT 1;
+DECLARE done INT DEFAULT FALSE;
+DECLARE cursor_clientStimword CURSOR FOR
+                SELECT \`clientStimword\`.\`clientStimwordAutoIncr\`
+                FROM \`clientStimword\`
+                ORDER BY \`clientStimwordAutoIncr\`
+                ;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+OPEN cursor_clientStimword;
+read_loop: LOOP
+  FETCH cursor_clientStimword INTO cursor_clientStimwordAutoIncr  ;
+  IF done THEN
+    LEAVE read_loop;
+  END IF;
+  UPDATE \`clientStimword\`
+        SET     \`clientStimword\`.\`clientStimwordAutoIncr\` = newKeyValue
+        WHERE   1
+        AND     \`clientStimword\`.\`clientStimwordAutoIncr\` = cursor_clientStimwordAutoIncr
+        ;
+  SET newKeyValue = newKeyValue + 1;
+                                                  ##INSERT INTO emp_performance (FIRSTNAME,LASTNAME)
+                                                  ##VALUES (cursor_FIRSTNAME, cursor_LASTNAME);
+END LOOP;
+CLOSE cursor_clientStimword;
+END;
+;;
+
+DELIMITER ;
+
+CALL restore_language_norms_key();
+
+SELECT COUNT(*), MIN(\`clientStimword\`.\`clientStimwordAutoIncr\`), MAX(\`clientStimword\`.\`clientStimwordAutoIncr\`) FROM \`clientStimword\`   ;
+
+
+
+
 
 END
 #
