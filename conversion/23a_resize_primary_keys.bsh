@@ -24,10 +24,10 @@ USE comptonTransAnlys ;
 
 SELECT COUNT(*), MIN(\`languageNorms\`.\`languageNormsAutoIncr\`), MAX(\`languageNorms\`.\`languageNormsAutoIncr\`) FROM \`languageNorms\`   ;
 
-DROP PROCEDURE IF EXISTS restore_language_norms_key;
+DROP PROCEDURE IF EXISTS reset_languageNorms_key;
 DELIMITER ;;
 
-CREATE PROCEDURE restore_language_norms_key()
+CREATE PROCEDURE reset_languageNorms_key()
 BEGIN
 DECLARE cursor_languageNormsAutoIncr INT(12) DEFAULT 0;
 DECLARE newKeyValue INT(12) DEFAULT 1;
