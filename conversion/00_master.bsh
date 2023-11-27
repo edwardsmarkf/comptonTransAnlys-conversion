@@ -51,10 +51,7 @@ echo ${LOGGING_DIR}                                                          ;
 BACKUP_DIR=${WORKING_DIR}/backup/                                            ;
 echo ${BACKUP_DIR}                                                           ;
 
-startingTime=$(date +%s)                                                     ;
-
-end=Time=$(date +%s)              ;
-echo "Execution time was $(expr $end - $start) seconds."    ;
+SECONDS=0     ;
 
 cd ${WORKING_DIR}                                                            ;
 pwd                                                                          ;
@@ -161,7 +158,9 @@ echo $(date)                                                                    
 
 grep ERROR   ${LOGGING_DIR}/*.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR'  | grep -v  grep                               ;
 
-echo "Execution time was $(expr $(date +%s) - $startingTime) seconds."                                                                                            ;
+t=$SECONDS  ;
+printf 'Time taken: %d hours, %d minutes\n' "$(( t/3600 ))" "$(( t/60 - 1440*(t/86400) ))"   ;
+
 
 echo "finished $0 !"       ;
 
