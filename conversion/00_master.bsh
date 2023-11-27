@@ -41,6 +41,8 @@ function process_section {
 
 
 echo 'Starting 00_master.bsh conversion process.'                            ;
+date                                                                         ;
+startDate=date                                                               ;
 
 WORKING_DIR=/root/comptonTransAnlys-conversion/conversion/                   ;
 echo ${WORKING_DIR}                                                          ;
@@ -51,7 +53,7 @@ echo ${LOGGING_DIR}                                                          ;
 BACKUP_DIR=${WORKING_DIR}/backup/                                            ;
 echo ${BACKUP_DIR}                                                           ;
 
-SECONDS=0     ;
+
 
 cd ${WORKING_DIR}                                                            ;
 pwd                                                                          ;
@@ -158,20 +160,12 @@ echo $(date)                                                                    
 
 grep ERROR   ${LOGGING_DIR}/*.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR'  | grep -v  grep                               ;
 
-t=$SECONDS  ;
-hours=$(( ${t} / 3600)) ;
-minutes=$(( ( ${t} % 3600 ) / 60 )) ;
-seconds=$(( ( ${t} % 3600 ) % 60 )) ;
-printf 'Time taken: %d hours, %d minutes %d seconds\n'   ${hours}   ${minutes}   ${seconds}    ;
 
-    #printf 'Time taken: %d hours, %d minutes\n' "$(( t/3600 ))" "$(( t/60 - 1440*(t/86400) ))"   ;
+echo 'Started: ' $startDate        ;
+echo 'Ended:   ' $(date)           ;
+echo "finished $0 !"               ;
 
-#printf 'Time taken: %d hours, %d minutes\n' "$(( t/3600 ))" "$(( t/60 - 1440*(t/86400) ))"   ;
-
-
-echo "finished $0 !"       ;
-
-exit  1 ;
+exit  1                            ;
 
 #
 
