@@ -42,7 +42,8 @@ function process_section {
 
 echo 'Starting 00_master.bsh conversion process.'                            ;
 date                                                                         ;
-startDate=date                                                               ;
+startDate=$(date)                                                            ;
+echo $startDate                                                              ;
 
 WORKING_DIR=/root/comptonTransAnlys-conversion/conversion/                   ;
 echo ${WORKING_DIR}                                                          ;
