@@ -159,7 +159,14 @@ echo $(date)                                                                    
 grep ERROR   ${LOGGING_DIR}/*.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR'  | grep -v  grep                               ;
 
 t=$SECONDS  ;
-printf 'Time taken: %d hours, %d minutes\n' "$(( t/3600 ))" "$(( t/60 - 1440*(t/86400) ))"   ;
+hours=$(( ${t} / 3600)) ;
+minutes=$(( ( ${t} % 3600 ) / 60 )) ;
+seconds=$(( ( ${t} % 3600 ) % 60 )) ;
+printf 'Time taken: %d hours, %d minutes %d seconds\n'   ${hours}   ${minutes}   ${seconds}    ;
+
+    #printf 'Time taken: %d hours, %d minutes\n' "$(( t/3600 ))" "$(( t/60 - 1440*(t/86400) ))"   ;
+
+#printf 'Time taken: %d hours, %d minutes\n' "$(( t/3600 ))" "$(( t/60 - 1440*(t/86400) ))"   ;
 
 
 echo "finished $0 !"       ;
