@@ -51,7 +51,10 @@ echo ${LOGGING_DIR}                                                          ;
 BACKUP_DIR=${WORKING_DIR}/backup/                                            ;
 echo ${BACKUP_DIR}                                                           ;
 
+startingTime=$(date +%s)                                                     ;
 
+end=Time=$(date +%s)              ;
+echo "Execution time was $(expr $end - $start) seconds."    ;
 
 cd ${WORKING_DIR}                                                            ;
 pwd                                                                          ;
@@ -156,7 +159,9 @@ grep  --line-number   '^COUNT:'                                                 
 
 echo $(date)                                                                                                                                              ;
 
-grep ERROR   ${LOGGING_DIR}/*.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR'  | grep -v  grep                        ;
+grep ERROR   ${LOGGING_DIR}/*.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR'  | grep -v  grep                               ;
+
+echo "Execution time was $(expr $(date +%s) - $startingTime) seconds."                                                                                            ;
 
 echo "finished $0 !"       ;
 
