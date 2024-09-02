@@ -4,6 +4,7 @@
 #
 #   2022-11-08 - remove the default timestamp
 #   2022-05-16 - the EXTENDED-INSERT may not be necessary anymore
+#   2024-09-02 - remove the first line   ""enable the sandbox mode""
 #
 #	set fileformat=unix
 #
@@ -18,8 +19,12 @@ sed --in-place  --expression="s/dipthong/diphthong/g;  s/ON DELETE NO ACTION/ON 
     ###  2022-11-08   for whatever bizarre reason, dates are getting lost - so remove timestamp default suring conversion process
 sed  --in-place --expression="s/timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()/TIMESTAMP NULL /;"      ./comptonTransAnlys.sql  ;
 
-    ###   2022-11-28 - remove all of these, there is some weird conflict giving me PESL-kannedono@comcast.net-vtalasek@alteryx.com invalid key!
-sed   --in-place --expression="/'vojta talasek'/d;"                                                                                   ./comptonTransAnlys.sql  ;   
+    ###   2024-09-02 -- we now have a new FIRST line ""enable the sandbox mode"" that needs to be removed!
+sed  --in-place --expression="/\/\*M.*\\- enable the sandbox mode \*\//d"                                                           ./comptonTransAnlys.sql  ;   
+
+
+
+enable the sandbox mode
     #####   PESL-mary@underwoodaccentreduction.com-panassayagagnon@gmail.com
 
 
