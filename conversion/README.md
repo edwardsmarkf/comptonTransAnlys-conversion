@@ -7,6 +7,13 @@ current server:
 
 outputFile='/home/comptonpeslonline.com/comptonTransAnlys.sql' ;
 /usr/bin/mariadb-dump --extended-insert=FALSE --user=root --password='!zzyzx15zzyzx!' comptonTransAnlys > $outputFile; 
+
+this MIGHT be necessary:  (2024-09-09)
+
+    REPAIR TABLE mysql.proc;
+
+from:  https://serverfault.com/questions/361838/mysql-cannot-load-from-mysql-proc-the-table-is-probably-corrupted
+
  
 /usr/bin/gzip  --force  $outputFile   ;
      
