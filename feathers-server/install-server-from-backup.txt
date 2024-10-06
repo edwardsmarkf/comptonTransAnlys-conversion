@@ -1,0 +1,48 @@
+mkdir  phonetic-transcription-test   && cd  $_
+
+
+feathers generate app ;  // no security!
+npm  install knex  feathers-knex  mysql2    ;
+
+
+
+
+cp   --verbose ../tmp/*.tar   .    ;      ## double-check where the tar backup is (or is it a gzipped file??? )
+tar -xf  *.tar ;
+
+mv  --verbose  ./src/  ./src-ORIGINAL/  ;
+mv  --verbose   ./home/mark/feathers/src/  .  ;
+cp --verbose   ./src-ORIGINAL/*.js  ./src/  ;
+
+mv  --verbose   ./config/  ./config-ORIGINAL/  ;
+mv  --verbose   ./home/mark/feathers/config/  .  ;
+
+mkdir  ./src/middleware/ ;
+
+cat      <<EOF  >   ./src//middleware//index.js ;
+// eslint-disable-next-line no-unused-vars
+module.exports = function (app) {
+  // Add your custom middleware here. Remember that
+  // in Express, the order matters.
+};
+EOF
+
+cat  <<EOF  >  ./src/knex.js   ;
+const knex = require('knex');
+
+module.exports = function (app) {
+  const { client, connection } = app.get('mysql');
+  const db = knex({ client, connection });
+
+  app.set('knexClient', db);
+};
+EOF
+
+
+sed --in-place -f -     ./src/app.js <<EOF
+/const channels = require('.\/channels');/a const knex = require('./knex');  // added by mark
+/app.configure(socketio());/a  app.configure(knex); //added by mark
+EOF
+
+DEBIUG=*   npm  start ;
+
