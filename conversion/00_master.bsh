@@ -12,6 +12,10 @@
 #   2023-02-23 -  added 30_stimword_ordering
 #   2023-11-17 -  added 08bb_final_sed_rename.bsh to deal with matching key issue 
 
+## to run in batch mode:
+##
+##               echo  'y'  |  bash -vx  ./00_master.bsh   >  00_master.bsh.log   2>&1  &   
+
 
 if  [[ "$1" != "PASS" ]]; then 
            # https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script
