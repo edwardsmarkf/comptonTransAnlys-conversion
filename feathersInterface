@@ -1,0 +1,21 @@
+[ '//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'
+, '//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js'
+].forEach( (src) => {
+    let script = document.createElement('script'); script.src = src; script.async = false;
+    document.head.appendChild(script);
+});
+const app = feathers();    const socket = io();    app.configure(feathers.socketio(socket));
+
+async function stimwordPosition(id) {      /* get(GET) (just one by index) */
+  console.log( 'id: ' + id); 
+  let getResult = await app.service('stimword-position').get(id); 
+  console.log('stimwordPosition function: ' + JSON.stringify(getResult) ); 
+  return getResult; 
+};
+
+let stimwordPositionResult = null; let key = 1;   // assuming your row ID is one
+stimwordPosition(key).then( value => {      /* get(GET) */ 
+  stimwordPositionResult = value; 
+  console.log('stimwordPosition(' + key + ') : ' + JSON.stringify(stimwordPositionResult) ); 
+});
+
