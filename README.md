@@ -1,3 +1,13 @@
+
+get current file from server:
+```
+  cd  /home/comptonpeslonline.com/ ;
+  pwd ;
+  /usr/bin/mariadb-dump --extended-insert=TRUE   --user=root --password='!zzyzx15zzyzx!' comptonTransAnlys    > ./comptonTransAnlys.sql  ;
+  rm -f    ./comptonTransAnlys.sql.gz                                                                                                    ;
+  gzip --verbose  ./comptonTransAnlys.sql                                                                                                ;
+```
+
 # comptonTransAnlys-conversion
 Compton Phonetic transcription conversion
 
