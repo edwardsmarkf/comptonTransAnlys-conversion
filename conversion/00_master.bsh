@@ -35,7 +35,7 @@ fi
 function process_section {
     SECONDS=0                                                                                                       ;
     echo $(date) " - STARTING - ${1}.bsh "                                                                          ;
-    bash -vx  ${WORKING_DIR}/${1}.bsh                                >      ${LOGGING_DIR}/${1}.bsh.log       2>&1  ;
+    bash -vx  ${WORKING_DIR}/${1}.bsh                                &>     ${LOGGING_DIR}/${1}.bsh.log             ;
     grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'              ${LOGGING_DIR}/${1}.bsh.log             ;
     /usr/bin/mariadb-dump             comptonTransAnlys              >      ${BACKUP_DIR}/${1}.bsh.sql              ;
     gzip                                                                    ${BACKUP_DIR}/${1}.bsh.sql              ;
@@ -132,12 +132,12 @@ process_section '23d_resize_primary_keys'    ;
 
 ## 2022-11-03
 echo $(date) ' - fixStimwordPosition!'                                                                                                                     ;
-bash -vx  ${WORKING_DIR}/fixStimwordPosition/fixStimwordPosition.bsh      >           ${LOGGING_DIR}/fixStimwordPosition.bsh.log                      2>&1 ;
+bash -vx  ${WORKING_DIR}/fixStimwordPosition/fixStimwordPosition.bsh      &>           ${LOGGING_DIR}/fixStimwordPosition.bsh.log                          ;
 grep ERROR ${LOGGING_DIR}/fixStimwordPosition.bsh.log                                                                                                      ;
 
 ## 2022-08-01
 echo $(date) ' - errorSoundsTooltip!'                                                                                                                      ;
-bash -vx  ${WORKING_DIR}/errorSoundsTooltip/errorSoundsTooltip.bsh        >          ${LOGGING_DIR}/errorSoundsTooltip.bsh.log                       2>&1  ;
+bash -vx  ${WORKING_DIR}/errorSoundsTooltip/errorSoundsTooltip.bsh        &>          ${LOGGING_DIR}/errorSoundsTooltip.bsh.log                            ;
 grep ERROR ${LOGGING_DIR}/errorSoundsTooltip.bsh.log                                                                                                       ;
 
 
