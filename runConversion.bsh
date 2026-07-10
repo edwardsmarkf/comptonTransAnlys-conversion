@@ -7,22 +7,33 @@ ln --symbolic     /bin/mysqldump     /usr/bin/mariadb-dump                      
 #
 rm -Rf  ./comptonTransAnlys-conversion/                                                         ;
 #
+```
 dnf  --assumeyes  install git                                                                   ;
 git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion                         ;
+```
 #
+```
 WORKING_DIR=/root//comptonTransAnlys-conversion/conversion/                                     ;
+```
 #
+```
 cp  --verbose  ./comptonTransAnlys.sql.gz                                                       \
             ${WORKING_DIR}/comptonTransAnlys.sql.gz                                             ;
+```
 #
+```
 gzip --verbose  -d  ${WORKING_DIR}/comptonTransAnlys.sql.gz                                     ;
+```
 #
 #
+```
 nohup nice time bash -vx ${WORKING_DIR}/00_master.bsh PASS &> ./00_master.bsh.log               &
+```
 #
+```
 mariadb-show  --count         comptonTransAnlys                                                 ;
 du  --summarize  --human-readable  /var/lib/mysql/                                              ;
-
+```
 
 exit                                                                                            ;
 
