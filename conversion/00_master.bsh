@@ -159,7 +159,8 @@ grep  --line-number   '^COUNT:'                                                 
 process_section '55_count_by_keys'                                                                                                                          ;
 grep  --line-number   '^COUNT:'                                                         ${LOGGING_DIR}/55_count_by_keys.bsh.log                             ;
 
-
+du  --summarize  --human-readable  /var/lib/mysql/                            ;     ## check for total size   915 megabytes
+mariadb-show --count                                                          ;     ## spot-check the number of rows!
 
 echo $(date)                                                                                                                                              ;
 
