@@ -20,7 +20,7 @@ gzip --verbose  -d  ${WORKING_DIR}/comptonTransAnlys.sql.gz                     
 #
 nohup nice time bash -vx ${WORKING_DIR}/00_master.bsh PASS &> ./00_master.bsh.log               &
 #
-mariadb-show  --count                                                                           ;
+mariadb-show  --count         comptonTransAnlys                                                 ;
 du  --summarize  --human-readable  /var/lib/mysql/                                              ;
 
 
