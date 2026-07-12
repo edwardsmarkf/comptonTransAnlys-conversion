@@ -15,7 +15,7 @@ npm install --global @feathersjs/cli                     ;
 feathers  --version                                      ;   ## 5.0.46 at the time of this writing
 
 
-
+## get hold of  /home/comptonpeslonline.com/public_html/newTranscriptionInterface/backup/feathers-server-backup-2023-10-15.tar.gz
 
 mkdir  phonetic-transcription-test   && cd  $_
 
