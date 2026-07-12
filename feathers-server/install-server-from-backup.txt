@@ -1,3 +1,22 @@
+
+
+##  in case npm/feathers is NOT installed yet:
+
+curl -fsSL https://rpm.nodesource.com/setup_26.x | sudo bash -    ;
+dnf    --assumeyes  install nodejs                       ;
+npm install --global  pm@12.0.1                          ;
+
+node  --version                                          ;
+npm   --version                                          ;
+
+npm install @feathersjs/feathers --save                  ;
+npm install --global @feathersjs/cli                     ;
+
+feathers  --version                                      ;   ## 5.0.46 at the time of this writing
+
+
+
+
 mkdir  phonetic-transcription-test   && cd  $_
 
 
