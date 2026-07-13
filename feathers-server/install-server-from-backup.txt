@@ -4,7 +4,7 @@
 
 curl -fsSL https://rpm.nodesource.com/setup_26.x | sudo bash -    ;
 dnf    --assumeyes  install nodejs                       ;
-npm install --global  pm@12.0.1                          ;
+npm install --global  npm@12.0.1                         ;
 
 node  --version                                          ;
 npm   --version                                          ;
