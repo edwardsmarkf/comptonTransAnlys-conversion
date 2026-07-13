@@ -10,6 +10,13 @@ node  --version                                          ;
 npm   --version                                          ;
 
 npm install @feathersjs/feathers --save                  ;
+
+npm   --yes  create feathers@latest my-app   ;
+
+
+
+
+
 npm install --global @feathersjs/cli                     ;
 
 feathers  --version                                      ;   ## 5.0.46 at the time of this writing
