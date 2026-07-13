@@ -2,16 +2,18 @@
 
 ##  in case npm/feathers is NOT installed yet:
 
-curl -fsSL https://rpm.nodesource.com/setup_26.x | sudo bash -    ;
-dnf    --assumeyes  install nodejs                       ;
-npm install --global  npm@12.0.1                         ;
 
-node  --version                                          ;
-npm   --version                                          ;
+curl --fail --silent --show-error  --location https://rpm.nodesource.com/setup_26.x | sudo bash -    ;
+dnf    --assumeyes  install    expect   nodejs                    ;
+npm install --global  npm@12.0.1                                  ;
 
-npm install @feathersjs/feathers --save                  ;
+node  --version                                                   ;
+npm   --version                                                   ;
 
-npm   --yes  create feathers@latest my-app   ;
+npm install @feathersjs/feathers --save                           ;
+
+npm   --yes  create feathers@latest my-app                        ;
+
 
 
 
