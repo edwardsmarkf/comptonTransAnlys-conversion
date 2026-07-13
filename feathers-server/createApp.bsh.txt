@@ -1,0 +1,57 @@
+#! /bin/bash -w
+
+export ScriptName="${BASH_SOURCE[0]##*/}"                                               ;
+export TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                                          ;
+
+expect <(cat <<'END_OF_GENERATE_APP'
+        #       generates an application, taking ALL the defaults
+
+        set timeout -1                                                                  ;
+
+        set UPARROW     \x1B\[A                                                         ;
+        set DOWNARROW   \x1B\[B                                                         ;
+        set SPACE       \x20                                                            ;
+        set RETURN      \x0d                                                            ;
+
+        spawn npm   --yes  create feathers@latest my-app                                ;
+
+        expect -re ".*Do you want to use JavaScript or TypeScript.*"                    ;
+        send -- "${DOWNARROW}${RETURN}"                                                 ;
+                        ## selects javascript
+
+        expect -re ".*Write a short description.*"                                      ;
+        send -- "$env(TimeStamp) -- Auto-creating app using $env(ScriptName)${RETURN}"  ;
+
+        expect -re ".*Which HTTP framework do you want to use.*"                        ;
+        send -- "${RETURN}"                                                             ;
+
+        expect -re ".*What APIs do you want to offer.*"                                 ;
+        send -- "${RETURN}"                                                             ;
+
+        expect -re ".*Which package manager are you using.*"                            ;
+        send -- "${RETURN}"                                                             ;
+
+        expect -re ".*Generate client.*"                                                ;
+        send -- "n${RETURN}"                                                            ;
+
+        expect -re ".*What is your preferred schema \\(model\\) definition format.*"    ;
+        send -- "${RETURN}"                                                             ;
+                        ##  TypeBox (recommended)
+
+        expect -re ".*Which database are you connecting to.*"                           ;
+        send -- "${DOWNARROW}${DOWNARROW}${DOWNARROW}${RETURN}"                         ;
+                        ##  MySQL/MariaDB
+
+        expect -re ".*Enter your database connection string.*"                          ;
+        send -- "${RETURN}"                                                             ;
+                        ## defaults to 'mysql://root:@localhost:3306/my-app'
+                        ## which will be edited later
+
+expect eof
+
+END_OF_GENERATE_APP
+)       ## end of feathers generate app
+
+exit ;
+
+
