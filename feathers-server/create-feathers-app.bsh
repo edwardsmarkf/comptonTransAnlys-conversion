@@ -1,5 +1,10 @@
 #! /bin/bash -w
 
+##   create-feathers-app.bsh   -- 2026-07-13
+
+##   create the feathers app using tcl/expect
+
+
 export ScriptName="${BASH_SOURCE[0]##*/}"                                               ;
 export TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                                          ;
 
