@@ -1,27 +1,9 @@
 
 
-##  in case npm/feathers is NOT installed yet:
 
+## npm install --global @feathersjs/cli                     ;
 
-curl --fail --silent --show-error  --location https://rpm.nodesource.com/setup_26.x | sudo bash -    ;
-dnf    --assumeyes  install    expect   nodejs                    ;
-npm install --global  npm@12.0.1                                  ;
-
-node  --version                                                   ;
-npm   --version                                                   ;
-
-npm install @feathersjs/feathers --save                           ;
-
-npm   --yes  create feathers@latest my-app                        ;
-
-
-
-
-
-
-npm install --global @feathersjs/cli                     ;
-
-feathers  --version                                      ;   ## 5.0.46 at the time of this writing
+## feathers  --version                                      ;   ## 5.0.46 at the time of this writing
 
 
 ## get hold of  /home/comptonpeslonline.com/public_html/newTranscriptionInterface/backup/feathers-server-backup-2023-10-15.tar.gz
