@@ -12,7 +12,7 @@ mkdir  phonetic-transcription-test   && cd  $_
 
 
 feathers generate app ;  // no security!
-npm  install knex  feathers-knex  mysql2    ;
+## run script instead              npm  install knex  feathers-knex  mysql2    ;
 
 
 
