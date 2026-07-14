@@ -14,6 +14,8 @@ mkdir  phonetic-transcription-test   && cd  $_
 feathers generate app ;  // no security!
 ## run script instead              npm  install knex  feathers-knex  mysql2    ;
 
+## figure out which files have been edited:
+ find  .  -name  '*.js'  -type f  -exec  ls -l  {}  \; | sed --expression='s/^.*mark mark //;' | sort  --numeric-sort
 
 
 
