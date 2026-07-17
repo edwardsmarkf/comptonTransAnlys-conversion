@@ -57,6 +57,43 @@ expect eof
 END_OF_GENERATE_APP
 )       ## end of feathers generate app
 
+npx feathers generate service   --name messages --path messages --type knex  ;
+sed  --expression="s/name: 'my-test-service'/name: 'clientContext', id: 'clientContextAutoIncr'/;"    my-test-service.class.js ;
+
+
+npx feathers generate hook  -- ??
+
+             hook content example:
+
+module.exports = (options = {}) => {
+  return async context => {
+
+        const knexClient =   context.app.get('knexClient') ;
+
+        const query = context.service.createQuery(context.params) ;
+
+        // https://knexjs.org/guide/query-builder.html#knex
+        query   .clear  ('select')  // remove ALL existing columns from queryBuilder
+                .select (       { 'contextAutoIncr'             : 'contextAutoIncr'                             }
+                        ,       knexClient.raw('CONCAT(`contextPosition` , "-" , `soundPhoneme`) AS positionSound')
+                        ,       { 'frequency'                   : 'frequency'                                   }
+                        ,       { 'clientContextErrorSound'     : 'clientContextErrorSound'                     }
+                        ,       { 'clientContextErrorCount'     : 'clientContextErrorCount'                     }
+                        ,       { 'clientContextErrorNotes'     : 'clientContextErrorNotes'                     }
+                        ,       { 'clientContextAutoIncr'       : 'clientContextAutoIncr'                       }
+                        )
+                .orderBy('contextAutoIncr')
+                ;
+
+        context.params.knex = query ;
+
+    return context;
+  };
+};
+
+
+
+
 exit ;
 
 
