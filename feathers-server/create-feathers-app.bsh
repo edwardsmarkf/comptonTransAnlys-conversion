@@ -7,6 +7,7 @@
 
 export ScriptName="${BASH_SOURCE[0]##*/}"                                               ;
 export TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                                          ;
+export appName='my-feathers-app'                                                        ;
 
 expect <(cat <<'END_OF_GENERATE_APP'
         #       generates an application, taking ALL the defaults
@@ -18,7 +19,7 @@ expect <(cat <<'END_OF_GENERATE_APP'
         set SPACE       \x20                                                            ;
         set RETURN      \x0d                                                            ;
 
-        spawn npm   --yes  create feathers@latest my-app                                ;
+        spawn npm   --yes  create feathers@latest $env(appName)                         ;
 
         expect -re ".*Do you want to use JavaScript or TypeScript.*"                    ;
         send -- "${DOWNARROW}${RETURN}"                                                 ;
@@ -48,8 +49,8 @@ expect <(cat <<'END_OF_GENERATE_APP'
                         ##  MySQL/MariaDB
 
         expect -re ".*Enter your database connection string.*"                          ;
-        send -- "${RETURN}"                                                             ;
-                        ## defaults to 'mysql://root:@localhost:3306/my-app'
+        send -- "mysql://mark:mark@localhost:3306/comptonTransAnlys${RETURN}"           ;
+                        ## defaults to 'mysql://root@localhost:3306/my-app'
                         ## which will be edited later
 
 expect eof
@@ -57,8 +58,8 @@ expect eof
 END_OF_GENERATE_APP
 )       ## end of feathers generate app
 
-npx feathers generate service   --name messages --path messages --type knex  ;
-sed  --expression="s/name: 'my-test-service'/name: 'clientContext', id: 'clientContextAutoIncr'/;"    my-test-service.class.js ;
+npx feathers generate service   --name client-context --path client-context --type knex  ;
+sed  --expression="s/name: 'client-context'/name: 'clientContext', id: 'clientContextAutoIncr'/;"    my-test-service.class.js ;
 
 
 npx feathers generate hook  -- ??
