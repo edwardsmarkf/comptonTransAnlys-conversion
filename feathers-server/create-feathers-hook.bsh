@@ -6,3 +6,6 @@ npx feathers generate    hook  --name client-context-before-find   --type  regul
 export const clientContextBeforeFind = async context => {
   console.log(`Running hook client-context-before-find on ${context.path}.${context.method}`)
 }
+
+   ### notice change!
+sed  --expression='context.app.get('knexClient')/context.app.get('mysqlClient')/'  ;
