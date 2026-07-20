@@ -7,5 +7,21 @@ export const clientContextBeforeFind = async context => {
   console.log(`Running hook client-context-before-find on ${context.path}.${context.method}`)
 }
 
+./src/services/client-context/client-context.js:
+    import { clientContextBeforeFind }   from  '../../hooks/client-context-before-find.js
+    .....
+        before: {
+      all: [
+        schemaHooks.validateQuery(clientContextQueryValidator),
+        schemaHooks.resolveQuery(clientContextQueryResolver)
+      ],
+      find: [clientContextBeforeFind],
+
+
+
    ### notice change!
 sed  --expression='context.app.get('knexClient')/context.app.get('mysqlClient')/'  ;
+
+   ## add code here:
+/my-test-app/src/hooks/client-context-before-find.js
+
