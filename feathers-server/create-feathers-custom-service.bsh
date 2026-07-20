@@ -1,0 +1,22 @@
+#! /bin/bash
+
+ npx feathers generate service   --name    knex-generic-raw --path  knex-generic-raw  --type custom   ;
+
+ ? Does this service require authentication? No
+? Which schema definition format do you want to use?  No schema
+
+
+
+// This is a skeleton for a custom service class. Remove or add the methods you need here
+
+export class KnexGenericRawService {
+  constructor(options = {} ) {                          // added:  "= {} "
+    this.options = options
+    this.app = options.app;                             // new line
+  }
+
+  async find(_params) {
+    const knexClient = this.app.get('mysqlClient');     
+    const [rows] =  await knexClient.raw( 'SELECT VERSION() ;'  ,   _params.query);
+    return rows;
+  }
