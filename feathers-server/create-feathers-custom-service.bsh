@@ -23,7 +23,7 @@ export class KnexGenericRawService {
   async find(_params) {
 
                 /*      postman testing:
-                                http://192.168.100.144:3030/knex-generic-raw/?knexSQL=selectVersionNow
+                                http://192.168.100.144:3030/knex-generic-raw/?knexSQL=serverVersionNow
                                 http://192.168.100.144:3030/knex-generic-raw/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL
                 */
         const knexClient = this.options.app.get('mysqlClient');
