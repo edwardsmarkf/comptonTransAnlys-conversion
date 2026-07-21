@@ -7,6 +7,35 @@
 
 
 
+
+// This is a skeleton for a custom service class. Remove or add the methods you need here
+
+import { returnSqlStatement }  from './knex-generic-raw.custom.js';             // new - added entire line
+
+export class KnexGenericRawService {
+  constructor(options) {
+    this.options = options
+    this.app = options.app;                             // new line
+  }
+
+  async find(_params) {
+
+                /*      postman testing:
+                                http://192.168.100.144:3030/knex-generic-raw/?knexSQL=selectVersion
+                                http://192.168.100.144:3030/knex-generic-raw/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL
+                */
+        const knexClient = this.app.get('mysqlClient');         // old way: const knexClient = this.app.get('knexClient');
+        const sqlStatement = returnSqlStatement(_params.query.knexSQL)  ;
+        const [result] =  await knexClient.raw( sqlStatement );
+        return result;
+
+
+
+
+
+
+
+
 // This is a skeleton for a custom service class. Remove or add the methods you need here
 
 export class KnexGenericRawService {
