@@ -38,3 +38,5 @@ sed  --in-place  --expression="s/name: '${serviceName}'/name: '${tableName}', id
         ./src/services/${serviceName}/${serviceName}.class.js                                                           ;
 
 exit;
+
+#
