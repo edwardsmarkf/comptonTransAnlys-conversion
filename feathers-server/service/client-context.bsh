@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-##   create-feathers-service.bsh   -- 2026-07-19
+##   client-context.bsh   -- 2026-07-19
 
 ##   create the feathers service using tcl/expect
 
