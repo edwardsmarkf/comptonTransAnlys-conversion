@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-##   client-context.bsh   -- 2026-07-19
+##   create-stimword.bsh   -- 2026-07-22
 
 ##   create the feathers service using tcl/expect
 
