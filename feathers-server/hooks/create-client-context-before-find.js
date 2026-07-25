@@ -1,7 +1,7 @@
 #!  /bin/bash
 #
 #
-#      create-client-context-before-find.js    2026-022
+#      create-client-context-before-find.js    2026-07-25
 
 
 ##   create the feathers service using tcl/expect
@@ -25,14 +25,6 @@ expect <(cat <<'END_OF_GENERATE_APP'
 
         spawn npx feathers generate hook   --name  $env(hookName)         --type $env(hookType)   ;
 
-        ##expect -re ".* What kind of hook is it.*"                                                                       ;
-        ##sent -- "${DOWNARROW}${RETURN}"                                                                                  ;
-
-        ##expect -re ".*Does this service require authentication.*"                                                       ;
-        ##send -- "n${RETURN}"                                                                                            ;
-
-        ##expect -re ".*Which schema definition format do you want to use.*"                                              ;
-        ##send -- "${RETURN}"                                                                                             ;
 
 expect eof
 
@@ -73,3 +65,14 @@ sed --in-place  --expression='s/^       find: \\[],$/      find: [clientContextB
 exit  ;
 
 #
+
+
+
+        ##expect -re ".* What kind of hook is it.*"                                                                       ;
+        ##sent -- "${DOWNARROW}${RETURN}"                                                                                  ;
+
+        ##expect -re ".*Does this service require authentication.*"                                                       ;
+        ##send -- "n${RETURN}"                                                                                            ;
+
+        ##expect -re ".*Which schema definition format do you want to use.*"                                              ;
+        ##send -- "${RETURN}"                                                                                             ;
