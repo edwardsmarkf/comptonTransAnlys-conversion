@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-##   create-error-sounds-tooltip.bsh   -- 2026-07-24
+##   create-error-sounds-tooltip.bsh   -- 2026-07-22
 
 ##   create the feathers service using tcl/expect
 
@@ -33,16 +33,16 @@ END_OF_GENERATE_APP
 )       ## end of feathers generate app
 
 
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SED ;
 
+2i                                                                                                                      \\
+                                                                                                                        \\
+ import { readFile } from 'fs/promises';        /* added by mark */                                                     \\
+                                                                                                                        \\
+#
 
-/usr/bin/sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<EOF ;
-#
-s/return\[]/return result;/;
-#
-/export class KnexGenericRawService {/i\import { readFile } from 'fs/promises';\n
-
-#
-/export class KnexGenericRawService {/a\\
+/^  async find(_params) {$/a                                                                                            \\
+                                                                                                                        \\
             /*      postman testing:                                                                                    \\
                         http://192.168.100.144:3030/knex-generic-raw/?knexSQL=serverVersionNow?                         \\
                         http://192.168.100.144:3030/knex-generic-raw/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL   \\
@@ -50,7 +50,7 @@ s/return\[]/return result;/;
       const knexClient = this.options.app.get('mysqlClient');                                                           \\
       const sqlFile    = process.cwd() + '/src/services/knex-generic-raw/sql/' + _params.query.knexSQL   + '.sql'  ;    \\
       const sqlStatement = await readFile(sqlFile, 'utf8');                                                             \\
-      const [sqlResult] =  await knexClient.raw( sqlStatement.replaceAll("\\\n",' '), _params.query );                  \\
+      const [sqlResult] =  await knexClient.raw( sqlStatement.replaceAll("\\\\n",' '), _params.query );                 \\
                                                                                                                         \\
       let result;                                                                                                       \\
       if  ( typeof sqlResult[0].JSON_ARRAYAGG       == 'string' )        {                                              \\
@@ -61,7 +61,10 @@ s/return\[]/return result;/;
               result = sqlResult;                                                                                       \\
       }                                                                                                                 \\
 
-EOF
+
+s/return \[]/return result;/;
+
+END_OF_SED
 
 
 exit;
