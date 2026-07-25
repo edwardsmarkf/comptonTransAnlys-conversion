@@ -9,7 +9,7 @@
 
 export hookName='client-stimword'                                                                                     ;
 
-export serviceType='regular'                                                                                               ;
+export hookType='regular'                                                                                               ;
 
 expect <(cat <<'END_OF_GENERATE_APP'
         #       generates a feathers service
@@ -21,7 +21,7 @@ expect <(cat <<'END_OF_GENERATE_APP'
         set SPACE       \x20                                                                                            ;
         set RETURN      \x0d                                                                                            ;
 
-        spawn npx feathers generate hook   --name  $env(hookName)         --type $env(serviceType)   ;
+        spawn npx feathers generate hook   --name  $env(hookName)         --type $env(hookType)   ;
 
         expect -re ".* What kind of hook is it.*"                                                                       ;
         sent -- "${DOWNARROW}${RETURN}"                                                                                  ;
