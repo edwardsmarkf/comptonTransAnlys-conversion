@@ -24,7 +24,7 @@ expect <(cat <<'END_OF_GENERATE_APP'
         spawn npx feathers generate hook   --name  $env(hookName)         --type $env(serviceType)   ;
 
         expect -re ".* What kind of hook is it.*"                                                                       ;
-        sed -- "${DOWNARROW}${RETURN}"                                                                                  ;
+        sent -- "${DOWNARROW}${RETURN}"                                                                                  ;
 
         expect -re ".*Does this service require authentication.*"                                                       ;
         send -- "n${RETURN}"                                                                                            ;
@@ -65,7 +65,7 @@ sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
 END_OF_SED
 
 
-sed --in-place  --expression='s/^       find: [],$/      find: [clientContextBeforeFind],';/    \\
+sed --in-place  --expression='s/^       find: \\[],$/      find: [clientContextBeforeFind],';/    \\
          /home/mark/my-new-app/src/services/client-context/client-context.js                         ;
 
 exit  ;
