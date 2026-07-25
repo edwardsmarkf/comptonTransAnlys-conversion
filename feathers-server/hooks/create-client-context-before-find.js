@@ -68,7 +68,7 @@ END_OF_SED
 
 
 sed --in-place  --expression='s/^       find: \\[],$/      find: [clientContextBeforeFind],';/    \\
-         /home/mark/my-new-app/src/services/client-context/client-context.js                         ;
+         /home/mark/my-new-app/src/services/${hookName}/${hookName}.js                         ;
 
 exit  ;
 
