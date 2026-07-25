@@ -23,6 +23,9 @@ expect <(cat <<'END_OF_GENERATE_APP'
 
         spawn npx feathers generate hook   --name  $env(serviceName)         --type $env(serviceType)   ;
 
+        expect -re ".* What kind of hook is it.*"                                                                       ;
+        sed -- "${DOWNARROW}${RETURN}"                                                                                  ;
+
         expect -re ".*Does this service require authentication.*"                                                       ;
         send -- "n${RETURN}"                                                                                            ;
 
@@ -35,6 +38,30 @@ END_OF_GENERATE_APP
 )       ## end of feathers generate app
 
 
+sed --in-place  --file=-  ./src/hooks/${serviceName}.js   <<END_OF_SED ;
+s/console.log(`Running hook shit on ${context.path}.${context.method}`)/s                                               \\
+        const knexClient =   context.app.get('mysqlClient') ;                                                           \\
+                                                                                                                        \\
+        const query = context.service.createQuery(context.params) ;                                                     \\
+                                                                                                                        \\
+        // https://knexjs.org/guide/query-builder.html#knex                                                             \\
+        query   .clear  ('select')  // remove ALL existing columns from queryBuilder                                    \\
+                .select (       { 'contextAutoIncr'             : 'contextAutoIncr'                             }       \\
+                        ,       knexClient.raw('CONCAT(`contextPosition` , "-" , `soundPhoneme`) AS positionSound')     \\
+                        ,       { 'frequency'                   : 'frequency'                                   }       \\
+                        ,       { 'clientContextErrorSound'     : 'clientContextErrorSound'                     }       \\
+                        ,       { 'clientContextErrorCount'     : 'clientContextErrorCount'                     }       \\
+                        ,       { 'clientContextErrorNotes'     : 'clientContextErrorNotes'                     }       \\
+                        ,       { 'clientContextAutoIncr'       : 'clientContextAutoIncr'                       }       \\
+                        )                                                                                               \\
+                .orderBy('contextAutoIncr')                                                                             \\
+                ;                                                                                                       \\
+                                                                                                                        \\
+        context.params.knex = query ;                                                                                   \\
+                                                                                                                        \\
+        return context;                                                                                                 \\
+
+END_OF_SED
 
 
 sed --in-place  --expression='s/^       find: [],$/      find: [clientContextBeforeFind],';;   /home/mark/my-new-app/src/services/client-context/client-context.js
