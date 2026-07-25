@@ -7,7 +7,7 @@
 ##   create the feathers service using tcl/expect
 
 
-export hookName='client-stimword'                                                                                     ;
+export hookName='client-context'                                                                                     ;
 
 export hookType='regular'                                                                                               ;
 
