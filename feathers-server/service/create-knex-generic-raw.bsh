@@ -35,31 +35,32 @@ END_OF_GENERATE_APP
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<EOF ;
 #
-/export class KnexGenericRawService {/i\import { readFile } from 'fs/promises'
+/return[\\]/d     ;
+#
+/export class KnexGenericRawService {/i\\import { readFile } from 'fs/promises'
 
 #
-/return [\]/i\
-            /*      postman testing:                                                                                    \
-                        http://192.168.100.144:3030/knex-generic-raw/?knexSQL=serverVersionNow?                         \
-                        http://192.168.100.144:3030/knex-generic-raw/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL   \
-            */                                                                                                          \
-      const knexClient = this.options.app.get('mysqlClient');                                                           \
-      const sqlFile    = process.cwd() + '/src/services/knex-generic-raw/sql/' + _params.query.knexSQL   + '.sql'  ;    \
-      const sqlStatement = await readFile(sqlFile, 'utf8');                                                             \
-      const [sqlResult] =  await knexClient.raw( sqlStatement.replaceAll("\n",' '), _params.query );                    \
-                                                                                                                        \
-      let result;                                                                                                       \
-      if  ( typeof sqlResult[0].JSON_ARRAYAGG       == 'string' )        {                                              \
-              result = sqlResult[0].JSON_ARRAYAGG   ;                                                                   \
-      } else if ( typeof sqlResult[0] == 'object' )        {                                                            \
-              result = sqlResult[0];                                                                                    \
-      } else {                                                                                                          \
-              result = sqlResult;                                                                                       \
-      }                                                                                                                 \
-      return result;                                                                                                    \
+/export class KnexGenericRawService {/a\\
+            /*      postman testing:                                                                                    \\
+                        http://192.168.100.144:3030/knex-generic-raw/?knexSQL=serverVersionNow?                         \\
+                        http://192.168.100.144:3030/knex-generic-raw/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL   \\
+            */                                                                                                          \\
+      const knexClient = this.options.app.get('mysqlClient');                                                           \\
+      const sqlFile    = process.cwd() + '/src/services/knex-generic-raw/sql/' + _params.query.knexSQL   + '.sql'  ;    \\
+      const sqlStatement = await readFile(sqlFile, 'utf8');                                                             \\
+      const [sqlResult] =  await knexClient.raw( sqlStatement.replaceAll("\n",' '), _params.query );                    \\
+                                                                                                                        \\
+      let result;                                                                                                       \\
+      if  ( typeof sqlResult[0].JSON_ARRAYAGG       == 'string' )        {                                              \\
+              result = sqlResult[0].JSON_ARRAYAGG   ;                                                                   \\
+      } else if ( typeof sqlResult[0] == 'object' )        {                                                            \\
+              result = sqlResult[0];                                                                                    \\
+      } else {                                                                                                          \\
+              result = sqlResult;                                                                                       \\
+      }                                                                                                                 \\
+      return result;                                                                                                    \\
 
-#
-/return[\]/d     ;
+EOF
 
 
 exit;
