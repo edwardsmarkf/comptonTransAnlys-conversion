@@ -7,12 +7,13 @@
 ##   create the feathers service using tcl/expect
 
 
-export hookName='client-context'                                                                                     ;
+export serviceName='client-context'                                                                                     ;
+export hookSuffix='-before-find'                                                                                     ;
 
 export hookType='regular'                                                                                               ;
 
 expect <(cat <<'END_OF_GENERATE_APP'
-        #       generates a feathers service
+        #       generates a feathers hook
 
         ##   debugging:   exp_internal 1
 
@@ -23,16 +24,17 @@ expect <(cat <<'END_OF_GENERATE_APP'
         set SPACE       \x20                                                                                            ;
         set RETURN      \x0d                                                                                            ;
 
-        spawn npx feathers generate hook   --name  $env(hookName)         --type $env(hookType)   ;
-
+        spawn npx feathers generate hook   --name  $env(serviceName)$env(hookSuffix)         --type $env(hookType)   ;
 
 expect eof
 
 END_OF_GENERATE_APP
-)       ## end of feathers generate app
+)       ## end of feathers generate hook
 
 
-sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
+
+
+sed --in-place  --file=-  ./src/hooks/${serviceName}${hookSuffix}.js   <<END_OF_SED ;
 /console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
                                                                                                                         \\
         const knexClient =   context.app.get('mysqlClient') ;                                                           \\
@@ -58,13 +60,16 @@ sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
 
 END_OF_SED
 
-
-sed --in-place  --expression='s/^       find: \\[],$/      find: [clientContextBeforeFind],';/    \\
-         /home/mark/my-new-app/src/services/${hookName}/${hookName}.js                         ;
+sed --in-place  --expression='s?find: \[]?find: [clientContextBeforeFind]?'                     \
+        /home/mark/my-new-app/src/services/${serviceName}/${serviceName}.js                     ;
 
 exit  ;
 
 #
+
+
+
+
 
 
 
@@ -75,4 +80,4 @@ exit  ;
         ##send -- "n${RETURN}"                                                                                            ;
 
         ##expect -re ".*Which schema definition format do you want to use.*"                                              ;
-        ##send -- "${RETURN}"                                                                                             ;
+        ##send -- "${RETURN}"
