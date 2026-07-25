@@ -33,11 +33,13 @@ END_OF_GENERATE_APP
 )       ## end of feathers generate app
 
 
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<EOF ;
+
+
+/usr/bin/sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<EOF ;
 #
-/return\[]/d     ;
+s/return\[]/return result;/;
 #
-/export class KnexGenericRawService {/i\\import { readFile } from 'fs/promises'
+/export class KnexGenericRawService {/i\import { readFile } from 'fs/promises';\n
 
 #
 /export class KnexGenericRawService {/a\\
@@ -48,7 +50,7 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
       const knexClient = this.options.app.get('mysqlClient');                                                           \\
       const sqlFile    = process.cwd() + '/src/services/knex-generic-raw/sql/' + _params.query.knexSQL   + '.sql'  ;    \\
       const sqlStatement = await readFile(sqlFile, 'utf8');                                                             \\
-      const [sqlResult] =  await knexClient.raw( sqlStatement.replaceAll("\n",' '), _params.query );                    \\
+      const [sqlResult] =  await knexClient.raw( sqlStatement.replaceAll("\\\n",' '), _params.query );                  \\
                                                                                                                         \\
       let result;                                                                                                       \\
       if  ( typeof sqlResult[0].JSON_ARRAYAGG       == 'string' )        {                                              \\
@@ -58,7 +60,6 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
       } else {                                                                                                          \\
               result = sqlResult;                                                                                       \\
       }                                                                                                                 \\
-      return result;                                                                                                    \\
 
 EOF
 
