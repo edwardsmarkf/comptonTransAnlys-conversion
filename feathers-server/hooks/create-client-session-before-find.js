@@ -1,3 +1,4 @@
+
 #!  /bin/bash
 #
 #
@@ -47,7 +48,7 @@ sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
 END_OF_SED
 
 
-sed --in-place  --expression='s/^       find: \\[],$/      find: [clientSessionBeforeFind],';/    \\
+sed --in-place  --expression='s/find: \[]/find: [clientSessionBeforeFind]/;'    \
          /home/mark/my-new-app/src/services/${hookName}/${hookName}.js                         ;
 
 exit  ;
@@ -58,4 +59,4 @@ exit  ;
         #expect -re ".*Does this service require authentication.*"                                                       ;
         #send -- "n${RETURN}"                                                                                           ;
         ##expect -re ".*Which schema definition format do you want to use.*"                                              ;
-        ##send -- "${RETURN}"                                                                                             ;
+        ##send -- "${RETURN}"                                                                  
