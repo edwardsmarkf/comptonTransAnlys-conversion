@@ -14,6 +14,8 @@ export hookType='regular'                                                       
 expect <(cat <<'END_OF_GENERATE_APP'
         #       generates a feathers service
 
+        ##   debugging:   exp_internal 1
+
         set timeout -1                                                                                                  ;
 
         set UPARROW     \x1B\[A                                                                                         ;
