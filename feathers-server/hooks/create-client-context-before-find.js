@@ -39,7 +39,8 @@ END_OF_GENERATE_APP
 
 
 sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
-/console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/c                                            \\
+/console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
+                                                                                                                        \\
         const knexClient =   context.app.get('mysqlClient') ;                                                           \\
                                                                                                                         \\
         const query = context.service.createQuery(context.params) ;                                                     \\
