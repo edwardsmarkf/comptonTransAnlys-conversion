@@ -60,8 +60,8 @@ sed --in-place  --file=-  ./src/hooks/${serviceName}${hookSuffix}.js   <<END_OF_
 
 END_OF_SED
 
-sed --in-place  --expression='s?find: \[]?find: [clientContextBeforeFind]?'                     \
-        /home/mark/my-new-app/src/services/${serviceName}/${serviceName}.js                     ;
+sed --in-place  --expression='s/find: \[]/find: [clientContextBeforeFind]/;'                     \
+        /home/mark/my-new-app/src/services/${serviceName}/${serviceName}.js                      ;
 
 exit  ;
 
