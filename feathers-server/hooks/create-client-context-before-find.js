@@ -23,14 +23,14 @@ expect <(cat <<'END_OF_GENERATE_APP'
 
         spawn npx feathers generate hook   --name  $env(hookName)         --type $env(hookType)   ;
 
-        expect -re ".* What kind of hook is it.*"                                                                       ;
-        sent -- "${DOWNARROW}${RETURN}"                                                                                  ;
+        ##expect -re ".* What kind of hook is it.*"                                                                       ;
+        ##sent -- "${DOWNARROW}${RETURN}"                                                                                  ;
 
-        expect -re ".*Does this service require authentication.*"                                                       ;
-        send -- "n${RETURN}"                                                                                            ;
+        ##expect -re ".*Does this service require authentication.*"                                                       ;
+        ##send -- "n${RETURN}"                                                                                            ;
 
-        expect -re ".*Which schema definition format do you want to use.*"                                              ;
-        send -- "${RETURN}"                                                                                             ;
+        ##expect -re ".*Which schema definition format do you want to use.*"                                              ;
+        ##send -- "${RETURN}"                                                                                             ;
 
 expect eof
 
