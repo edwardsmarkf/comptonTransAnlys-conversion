@@ -7,7 +7,7 @@
 ##   create the feathers service using tcl/expect
 
 
-export serviceName='client-stimword'                                                                                     ;
+export hookName='client-stimword'                                                                                     ;
 
 export serviceType='regular'                                                                                               ;
 
@@ -21,7 +21,7 @@ expect <(cat <<'END_OF_GENERATE_APP'
         set SPACE       \x20                                                                                            ;
         set RETURN      \x0d                                                                                            ;
 
-        spawn npx feathers generate hook   --name  $env(serviceName)         --type $env(serviceType)   ;
+        spawn npx feathers generate hook   --name  $env(hookName)         --type $env(serviceType)   ;
 
         expect -re ".* What kind of hook is it.*"                                                                       ;
         sed -- "${DOWNARROW}${RETURN}"                                                                                  ;
@@ -38,8 +38,8 @@ END_OF_GENERATE_APP
 )       ## end of feathers generate app
 
 
-sed --in-place  --file=-  ./src/hooks/${serviceName}.js   <<END_OF_SED ;
-s/console.log(`Running hook shit on ${context.path}.${context.method}`)/s                                               \\
+sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
+/console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/c                                            \\
         const knexClient =   context.app.get('mysqlClient') ;                                                           \\
                                                                                                                         \\
         const query = context.service.createQuery(context.params) ;                                                     \\
@@ -47,7 +47,7 @@ s/console.log(`Running hook shit on ${context.path}.${context.method}`)/s       
         // https://knexjs.org/guide/query-builder.html#knex                                                             \\
         query   .clear  ('select')  // remove ALL existing columns from queryBuilder                                    \\
                 .select (       { 'contextAutoIncr'             : 'contextAutoIncr'                             }       \\
-                        ,       knexClient.raw('CONCAT(`contextPosition` , "-" , `soundPhoneme`) AS positionSound')     \\
+                        ,       knexClient.raw('CONCAT(\`contextPosition\` , "-" , \`soundPhoneme\`) AS positionSound')     \\
                         ,       { 'frequency'                   : 'frequency'                                   }       \\
                         ,       { 'clientContextErrorSound'     : 'clientContextErrorSound'                     }       \\
                         ,       { 'clientContextErrorCount'     : 'clientContextErrorCount'                     }       \\
