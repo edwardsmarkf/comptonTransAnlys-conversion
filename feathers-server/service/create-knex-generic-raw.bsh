@@ -35,7 +35,7 @@ END_OF_GENERATE_APP
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<EOF ;
 #
-/return[\\]/d     ;
+/return\[]/d     ;
 #
 /export class KnexGenericRawService {/i\\import { readFile } from 'fs/promises'
 
