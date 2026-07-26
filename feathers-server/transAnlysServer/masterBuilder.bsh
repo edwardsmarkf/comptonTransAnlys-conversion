@@ -4,7 +4,14 @@
 #
 #       (re)construct the phonetic analysis server
 #
-bash -vx        ./createApp.bsh         transAnlysServer                ;
+#
+export SERVER_NAME=$1;                                                  ;
+#
+#
+#
+#
+bash -vx        ./createApp.bsh         ${SERVER_NAME}                  ;
+#
 #
 bash -vx        ./services/create-session-names.bsh                     ;
 bash -vx        ./services/create-error-sounds-tooltip.bsh              ;
@@ -22,4 +29,3 @@ bash -vx        ./hooks/create-client-context-before-find.bsh           ;
 #
 exit;
 #
-~
