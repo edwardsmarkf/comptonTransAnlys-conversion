@@ -62,7 +62,7 @@ s/get: \[]/get: [${hookVarName}]     \/* added by mark  \//    ;
 
 /patch: \[/a                                                                                                \\
                                                                                                             \\
-     ${hookVarName},    /* added by mark */                                                                 \\
+            ${hookVarName},    /* added by mark */                                                                 \\
 
 END_OF_SERVICE_SED
 
