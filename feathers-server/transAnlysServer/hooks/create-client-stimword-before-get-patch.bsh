@@ -33,7 +33,7 @@ END_OF_GENERATE_HOOK
 
 
 
-sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
+sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
 /console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
   return async context => {                                                                                             \\
         context.params.query = {                        // added by mark                                                \\
@@ -47,14 +47,12 @@ sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
 
 import { $env(hookVarName) }  from '../../hooks/$env(hookName).js';
 
-
-END_OF_SED
-
-
-###   import { clientStimwordBeforeGetPatch}  from '../../hooks/client-stimword-before-get-patch.js'; /* added by mark   */
+END_OF_HOOK_SED
 
 
-sed  --in-place  --file=-  ./src/services/$env(serviceName)/$env(serviceName).js    <<END_OF_SED  ;
+
+
+sed  --in-place  --file=-  ./src/services/${serviceName}/${serviceName}.js    <<END_OF_SERVICE_SED  ;
 
 /^import {$/i
 import { $env(hookVarName)}  from '../../hooks/$env(serviceName)$env(hookName).js'; /* added by mark   */
@@ -63,14 +61,14 @@ s/get: \[]/get: [$env(hookVarName)]     \/* added by mark  \//;
 /patch: \[/a
      $env(hookVarName),    /* added by mark */
 
-
-END_OF_SED
+END_OF_SERVICE_SED
 
 exit  ;
 
 #
 
 
+###   import { clientStimwordBeforeGetPatch}  from '../../hooks/client-stimword-before-get-patch.js'; /* added by mark   */
 
 
         #expect -re ".* What kind of hook is it.*"                                                                       ;
