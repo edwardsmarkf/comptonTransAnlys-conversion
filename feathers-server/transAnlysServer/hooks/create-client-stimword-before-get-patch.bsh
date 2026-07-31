@@ -7,9 +7,13 @@
 ##   create the feathers service using tcl/expect
 
 export serviceName='client-stimword'                                                                                   ;
-export hookSuffix='-before-get-patch'                                                                                    ;
+export hookSuffix='-before-get-patch'                                                                                  ;
 export serviceType='regular'                                                                                           ;
 export hookVarName='clientStimwordBeforeGetPatch'                                                                      ;
+
+
+
+export hookName=${hookName}                                                                             ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
         #       generates a feathers service
@@ -23,7 +27,7 @@ expect <(cat <<'END_OF_GENERATE_HOOK'
         set SPACE       \x20                                                                                            ;
         set RETURN      \x0d                                                                                            ;
 
-        spawn npx feathers generate hook --name $env(serviceName)$env(hookSuffix)  --type $env(serviceType)               ;
+        spawn npx feathers generate hook --name $env(hookName)  --type $env(serviceType)               ;
 
 
 expect eof
@@ -33,7 +37,7 @@ END_OF_GENERATE_HOOK
 
 
 
-sed --in-place  --file=-  ./src/hooks/${serverName}${hookSuffix}.js   <<END_OF_HOOK_SED ;
+sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
 /console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
   return async context => {                                                                                             \\
         context.params.query = {                        // added by mark                                                \\
@@ -53,7 +57,7 @@ sed  --in-place  --file=-  ./src/services/${serviceName}/${serviceName}.js    <<
 
 /^import {$/i                                                                                               \\
                                                                                                             \\
-    import { ${hookVarName} }  from '../../hooks/${serviceName}${hookSuffix}.js'; /* added by mark   */       \\
+    import { ${hookVarName} }  from '../../hooks/${hookName}.js';                                           \\
 
 s/get: \[]/get: [${hookVarName}]          ;
 
