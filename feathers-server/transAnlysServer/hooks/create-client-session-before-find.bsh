@@ -48,7 +48,7 @@ END_OF_HOOK_SED
 
 sed --in-place  --file=-  ./src/services/${serviceName}.js   <<END_OF_SERVICE_SED ;
 
-s/find: \[]/find: [$env(hookVarName)]/  ;
+s/find: \[]/find: [${hookVarName}]/  ;
 
 /^import {$/i
 
