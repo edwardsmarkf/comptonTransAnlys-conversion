@@ -58,11 +58,14 @@ sed  --in-place  --file=-  ./src/services/${serviceName}/${serviceName}.js    <<
                                                                                                             \\
     import { ${hookVarName} }  from '../../hooks/${serviceName}${hookName}.js'; /* added by mark   */       \\
 
-s/get: \[]/get: [${hookVarName}]     \/* added by mark  \//;
-/patch: \[/a
-     ${hookVarName},    /* added by mark */
+s/get: \[]/get: [${hookVarName}]     \/* added by mark  \//    ;
+
+/patch: \[/a                                                                                                \\
+                                                                                                            \\
+     ${hookVarName},    /* added by mark */                                                                 \\
 
 END_OF_SERVICE_SED
+
 
 exit  ;
 
