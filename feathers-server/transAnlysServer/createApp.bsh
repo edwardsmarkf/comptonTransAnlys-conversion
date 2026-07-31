@@ -1,6 +1,6 @@
 #! /bin/bash -w
 
-export appName='my-tester-app'                                                        ;
+export appName=$1                                                                       ;
 
 
 export ScriptName="${BASH_SOURCE[0]##*/}"                                               ;
