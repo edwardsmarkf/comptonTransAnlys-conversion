@@ -13,7 +13,7 @@ export hookVarName='clientStimwordBeforeGetPatch'                               
 
 
 
-export hookName=${hookName}                                                                             ;
+export hookName=${serviceName}${hookSuffix}                                                                            ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
         #       generates a feathers service
