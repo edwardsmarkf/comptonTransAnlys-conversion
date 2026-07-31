@@ -39,7 +39,6 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
                                                                                                                         \\
  import { readFile } from 'fs/promises';        /* added by mark */                                                     \\
                                                                                                                         \\
-#
 
 /^  async find(_params) {$/a                                                                                            \\
                                                                                                                         \\
