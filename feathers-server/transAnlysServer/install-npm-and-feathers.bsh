@@ -6,9 +6,10 @@
 ##  in case npm/feathers is NOT installed yet:
 
 
-curl --fail --silent --show-error  --location https://rpm.nodesource.com/setup_26.x | sudo bash -    ;
-dnf    --assumeyes  install    expect   nodejs                    ;
-npm install --global  npm@12.0.1                                  ;
+sudo  curl --fail --silent --show-error  --location https://rpm.nodesource.com/setup_26.x | sudo bash -    ;
+sudo  dnf    --assumeyes  install    expect   nodejs                    ;
+sudo  npm install --global  npm@12.0.1                                  ;
+
 
 node  --version                                                   ;
 npm   --version                                                   ;
