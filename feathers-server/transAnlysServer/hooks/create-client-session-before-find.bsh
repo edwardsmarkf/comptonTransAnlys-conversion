@@ -50,9 +50,9 @@ sed --in-place  --file=-  ./src/services/${serviceName}.js   <<END_OF_SERVICE_SE
 
 s/find: \[]/find: [${hookVarName}]/  ;
 
-/^import {$/i                                                                                                             \\
-                                                                                                                          \\
-import { $hookVarName}  }  from '../../hooks/${serviceName}${hookName}.js';   \/*  added by mark  *\/                     \\
+/^import {$/i                                                                                                            \\
+                                                                                                                         \\
+import { $hookVarName}  }  from '../../hooks/${serviceName}${hookName}.js';                                              \\
 
 END_OF_SERVICE_SED
 
