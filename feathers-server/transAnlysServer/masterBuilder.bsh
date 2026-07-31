@@ -5,13 +5,14 @@
 #       (re)construct the phonetic analysis server
 #
 #
-export SERVER_NAME=$1;                                                  ;
+export FEATHERS_SERVER_NAME=$1;                                                  ;
 #
 #
 #
 #
-bash -vx        ./createApp.bsh         ${SERVER_NAME}                  ;
+bash -vx        ./createApp.bsh         ${FEATHERS_SERVER_NAME}                  ;
 #
+cd ${FEATHERS_SERVER_NAME}
 #
 bash -vx        ./services/create-session-names.bsh                     ;
 bash -vx        ./services/create-error-sounds-tooltip.bsh              ;
