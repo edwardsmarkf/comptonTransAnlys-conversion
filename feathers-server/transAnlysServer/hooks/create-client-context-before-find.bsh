@@ -8,8 +8,8 @@
 
 
 export serviceName='client-context'                                                                                     ;
-export hookSuffix='-before-find'                                                                                     ;
-
+export hookSuffix='-before-find'                                                                                        ;
+export hookVarName='clientContextBeforeFind'                                                                            ;
 export hookType='regular'                                                                                               ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
@@ -34,7 +34,7 @@ END_OF_GENERATE_HOOK
 
 
 
-sed --in-place  --file=-  ./src/hooks/${serviceName}${hookSuffix}.js   <<END_OF_SED ;
+sed --in-place  --file=-  ./src/hooks/${serviceName}${hookSuffix}.js   <<END_OF_HOOK_SED ;
 /console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
                                                                                                                         \\
         const knexClient =   context.app.get('mysqlClient') ;                                                           \\
@@ -58,10 +58,16 @@ sed --in-place  --file=-  ./src/hooks/${serviceName}${hookSuffix}.js   <<END_OF_
                                                                                                                         \\
         return context;                                                                                                 \\
 
-END_OF_SED
+END_OF_HOOK_SED
 
-sed --in-place  --expression='s?find: \[]?find: [clientContextBeforeFind]?'                     \
-        /home/mark/my-new-app/src/services/${serviceName}/${serviceName}.js                     ;
+sed --in-place  --file=-   ./src/services/${serviceName}/${serviceName}.js          <<END_OF_SERVICE_SED           ;
+s?find: \[]?find: [$env(hookVarName)]?;
+
+/^import {$/i
+
+import { $env(hookVarname)}  from '../../hooks/${serviceName}/${serviceName}.js';
+
+END_OF_SERVICE_SED
 
 exit  ;
 
