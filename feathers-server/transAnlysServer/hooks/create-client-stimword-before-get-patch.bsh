@@ -47,10 +47,18 @@ sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
 END_OF_SED
 
 
+###   import { clientStimwordBeforeGetPatch}  from '../../hooks/client-stimword-before-get-patch.js'; /* added by mark   */
+
+
 sed  --in-place  --file=-  ./src/services/client-stimword/client-stimword.js    <<END_OF_SED  ;
 
+/^import {$/i
+import { clientStimwordBeforeGetPatch}  from '../../hooks/$env(hookName).js'; /* added by mark   */
+
+
+
 s/get: \[]/get: [clientStimwordBeforeGetPatch]/;
-s/patch: \[]/patch: [clientStimwordBeforeGetPatch]/;
+s/patch: \[/patch: [clientStimwordBeforeGetPatch,/;
 
 END_OF_SED
 
