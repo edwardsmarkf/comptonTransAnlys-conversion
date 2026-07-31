@@ -7,9 +7,9 @@
 ##   create the feathers service using tcl/expect
 
 
-export hookName='client-stimword-before-get-patch'                                                                                     ;
-
-export serviceType='regular'                                                                                               ;
+export hookName='client-stimword-before-get-patch'                                                                     ;
+export serviceType='regular'                                                                                           ;
+export hookVarName='clientStimwordBeforeGetPatch'                                                                      ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
         #       generates a feathers service
@@ -41,7 +41,12 @@ sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
           ...context.params.query,                      // added by mark                                                \\
           \$select: ['clientStimwordNotes']              // added by mark                                                \\
         }                                               // added by mark                                                \\
-    return context;                                                                                                     \\
+    return context;                                     // added by mark                                                \\
+  ?                                                     // added by mark                                                \\
+
+/^import{$/i
+
+import { $env(hookVarName) }  from '../../hooks/$env(hookName).js';
 
 
 END_OF_SED
