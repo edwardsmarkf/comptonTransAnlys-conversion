@@ -65,7 +65,7 @@ s?find: \[]?find: [${hookVarName}]?;
 
 /^import {$/i                                                                                                           \\
                                                                                                                         \\
-   import { ${hookVarName} }  from '../../hooks/${serviceName}${hookName}.js';                                            \\
+   import { ${hookVarName} }  from '../../hooks/${serviceName}${hookSuffix}.js';                                            \\
                                                                                                                         \\
 
 END_OF_SERVICE_SED
