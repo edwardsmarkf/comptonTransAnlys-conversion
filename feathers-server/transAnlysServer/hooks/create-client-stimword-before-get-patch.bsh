@@ -57,8 +57,10 @@ import { clientStimwordBeforeGetPatch}  from '../../hooks/$env(hookName).js'; /*
 
 
 
-s/get: \[]/get: [clientStimwordBeforeGetPatch]/;
-s/patch: \[/patch: [clientStimwordBeforeGetPatch,/;
+s/get: \[]/get: [clientStimwordBeforeGetPatch]     \/* added by mark  \//;
+/patch: \[/a
+     clientStimwordBeforeGetPatch,    /* added by mark */
+
 
 END_OF_SED
 
