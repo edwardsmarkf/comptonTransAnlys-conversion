@@ -55,17 +55,19 @@ END_OF_HOOK_SED
 sed  --in-place  --file=-  ./src/services/${serviceName}/${serviceName}.js    <<END_OF_SERVICE_SED  ;
 
 /^import {$/i
-import { $env(hookVarName)}  from '../../hooks/$env(serviceName)$env(hookName).js'; /* added by mark   */
+import { ${hookVarName} }  from '../../hooks/$env(serviceName)$env(hookName).js'; /* added by mark   */
 
-s/get: \[]/get: [$env(hookVarName)]     \/* added by mark  \//;
+s/get: \[]/get: [${hookVarName}]     \/* added by mark  \//;
 /patch: \[/a
-     $env(hookVarName),    /* added by mark */
+     ${hookVarName},    /* added by mark */
 
 END_OF_SERVICE_SED
 
 exit  ;
 
 #
+
+
 
 
 ###   import { clientStimwordBeforeGetPatch}  from '../../hooks/client-stimword-before-get-patch.js'; /* added by mark   */
