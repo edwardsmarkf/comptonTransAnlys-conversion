@@ -43,9 +43,6 @@ sed --in-place  --file=-  ./src/hooks/${serverName}${hookSuffix}.js   <<END_OF_H
     return context;                                     // added by mark                                                \\
   ?                                                     // added by mark                                                \\
 
-/^import{$/i
-
-import { ${hookVarName} }  from '../../hooks/${serviceName}${hookSuffix}).js';
 
 END_OF_HOOK_SED
 
