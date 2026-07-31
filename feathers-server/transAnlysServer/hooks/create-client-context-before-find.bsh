@@ -65,7 +65,7 @@ s?find: \[]?find: [$env(hookVarName)]?;
 
 /^import {$/i
 
- import { $env(hookVarName)}  from '../../hooks/${serviceName}/${serviceName}.js';
+ import { ${hookVarName} }  from '../../hooks/${serviceName}/${serviceName}.js';
 
 END_OF_SERVICE_SED
 
