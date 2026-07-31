@@ -40,19 +40,13 @@ END_OF_GENERATE_HOOK
 
 sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
 /console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
-                                                                                                                        \\
-        const knexClient =   context.app.get('mysqlClient') ;                                                           \\
-                                                                                                                        \\
-        const query = context.service.createQuery(context.params) ;                                                     \\
-                                                                                                                        \\
-        // https://knexjs.org/guide/query-builder.html#knex                                                             \\
-        query   .clear  ('select')  // remove ALL existing columns from queryBuilder                                    \\
-????????????????????????????????????????
-                ;                                                                                                       \\
-                                                                                                                        \\
-        context.params.knex = query ;                                                                                   \\
-                                                                                                                        \\
+        context.params.query = {                // added by mark                                                        \\
+          ...context.params.query,              // added by mark                                                        \\
+          $select: ['sessionName', 'sessionReplicate', 'sessionNamesShow66Words', 'sessionNamesAutoIncr' ],             // added by mark    \\
+          $sort: { 'sessionOrderNbr' : 1 }                      // added by mark                                        \\  
+        }                                       // added by mark                                                        \\
         return context;                                                                                                 \\
+
 
 END_OF_HOOK_SED
 
