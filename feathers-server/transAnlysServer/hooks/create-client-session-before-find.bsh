@@ -7,9 +7,10 @@
 ##   create the feathers service using tcl/expect
 
 
-export hookName='client-session'                                                                                     ;
-
-export serviceType='regular'                                                                                               ;
+export serviceName='client-session'                                                                                     ;
+export hookName='=before-find'                                                                                          ;
+export hookVarName='clientSessionBeforeFind'                                                                            ;
+export serviceType='regular'                                                                                             ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
         #       generates a feathers service
@@ -23,7 +24,7 @@ expect <(cat <<'END_OF_GENERATE_HOOK'
         set SPACE       \x20                                                                                            ;
         set RETURN      \x0d                                                                                            ;
 
-        spawn npx feathers generate hook   --name  $env(hookName)         --type $env(serviceType)                      ;
+        spawn npx feathers generate hook --name  $env(serviceName)$env(hookName)  --type $env(serviceType)              ;
 
 
 expect eof
@@ -33,7 +34,7 @@ END_OF_GENERATE_HOOK
 
 
 
-sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
+sed --in-place  --file=-  ./src/hooks/${serviceName}${hookName}.js   <<END_OF_HOOK_SED ;
 /console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
         context.params.query = {                // added by mark                                                        \\
           ...context.params.query               // added by mark                                                        \\
@@ -41,11 +42,19 @@ sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_SED ;
         return context;                                                                                                 \\
 
 
-END_OF_SED
+END_OF_HOOK_SED
 
 
-sed --in-place  --expression='s/find: \[]/find: [clientSessionBeforeFind]/;'    \
-         /home/mark/my-new-app/src/services/${hookName}/${hookName}.js                         ;
+
+sed --in-place  --file=-  ./src/services/${serviceName}.js   <<END_OF_SERVICE_SED ;
+
+s/find: \[]/find: [$env(hookVarName)]/  ;
+
+/^import {$/i
+
+import { $env(hookVarName)}  from '../../hooks/${serviceName}${hookName}.js';
+
+END_OF_SERVICE_SED
 
 exit  ;
 
