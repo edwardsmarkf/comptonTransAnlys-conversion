@@ -1,0 +1,75 @@
+#!  /bin/bash
+#
+#
+#      create-language-norms-before-find.js    2026-07-25
+
+
+##   create the feathers service using tcl/expect
+
+
+export serviceName='language-norms'                                                                                     ;
+export hookSuffix='-before-find'                                                                                        ;
+export hookVarName='languageNormsBeforeFind'                                                                            ;
+export hookType='regular'                                                                                               ;
+
+
+
+export hookName=${serviceName}${hookSuffix}                                                                             ;
+
+expect <(cat <<'END_OF_GENERATE_HOOK'
+        #       generates a feathers hook
+
+        ##   debugging:   exp_internal 1
+
+        set timeout -1                                                                                                  ;
+
+        set UPARROW     \x1B\[A                                                                                         ;
+        set DOWNARROW   \x1B\[B                                                                                         ;
+        set SPACE       \x20                                                                                            ;
+        set RETURN      \x0d                                                                                            ;
+
+        spawn npx feathers generate hook   --name  $env(hookName)         --type $env(hookType)   ;
+
+expect eof
+
+END_OF_GENERATE_HOOK
+)       ## end of feathers generate hook
+
+
+
+
+sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
+/console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
+                                                                                                                        \\
+        const knexClient =   context.app.get('mysqlClient') ;                                                           \\
+                                                                                                                        \\
+        const query = context.service.createQuery(context.params) ;                                                     \\
+                                                                                                                        \\
+        // https://knexjs.org/guide/query-builder.html#knex                                                             \\
+        query   .clear  ('select')  // remove ALL existing columns from queryBuilder                                    \\
+                .select( 'languageNormsName')                                                                           \\
+                .distinct()                                                                                             \\
+                .orderBy('languageNormsName')                                                                           \\
+                ;                                                                                                       \\
+                                                                                                                        \\
+        context.params.knex = query ;                                                                                   \\
+                                                                                                                        \\
+        return context;                                                                                                 \\
+
+END_OF_HOOK_SED
+
+sed --in-place  --file=-   ./src/services/${serviceName}/${serviceName}.js          <<END_OF_SERVICE_SED           ;
+s?find: \[]?find: [${hookVarName}]?;
+
+/^import {$/i                                                                                                           \\
+                                                                                                                        \\
+   import { ${hookVarName} }  from '../../hooks/${hookName}.js';                                                        \\
+                                                                                                                        \\
+
+END_OF_SERVICE_SED
+
+exit  ;
+
+#
+
+
