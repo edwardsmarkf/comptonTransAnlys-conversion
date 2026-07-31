@@ -12,21 +12,21 @@ export FEATHERS_SERVER_NAME=$1                                         ;
 #
 bash -vx        ./createApp.bsh         ${FEATHERS_SERVER_NAME}        ;
 #
-cd ${FEATHERS_SERVER_NAME}
+cd ${FEATHERS_SERVER_NAME}                                             ;
 #
-bash -vx        ../services/create-session-names.bsh                    ;
-bash -vx        ../services/create-error-sounds-tooltip.bsh             ;
-bash -vx        ../services/create-client-context.bsh                   ;
-bash -vx        ../services/create-client-context-stimword.bsh          ;
-bash -vx        ../services/create-knex-generic-raw.bsh                 ;
-bash -vx        ../services/create-stimword.bsh                         ;
-bash -vx        ../services/create-client-stimword.bsh                  ;
-bash -vx        ../services/create-frequency-list.bsh                   ;
+bash -vx        ../services/create-session-names.bsh                   ;
+bash -vx        ../services/create-error-sounds-tooltip.bsh            ;
+bash -vx        ../services/create-client-context.bsh                  ;
+bash -vx        ../services/create-client-context-stimword.bsh         ;
+bash -vx        ../services/create-knex-generic-raw.bsh                ;
+bash -vx        ../services/create-stimword.bsh                        ;
+bash -vx        ../services/create-client-stimword.bsh                 ;
+bash -vx        ../services/create-frequency-list.bsh                  ;
 #
 #
-bash -vx        ../hooks/create-client-session-before-find.bsh          ;
-bash -vx        ../hooks/create-client-stimword-before-get-patch.bsh    ;
-bash -vx        ../hooks/create-client-context-before-find.bsh          ;
+bash -vx        ../hooks/create-client-session-before-find.bsh         ;
+bash -vx        ../hooks/create-client-stimword-before-get-patch.bsh   ;
+bash -vx        ../hooks/create-client-context-before-find.bsh         ;
 #
-exit;
+exit                                                                    ;
 #
