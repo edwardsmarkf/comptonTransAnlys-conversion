@@ -46,10 +46,10 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
                         http://192.168.100.144:3030/knex-generic-raw/?knexSQL=serverVersionNow?                         \\
                         http://192.168.100.144:3030/knex-generic-raw/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL   \\
             */                                                                                                          \\
-      const knexClient = this.options.app.get('mysqlClient');                                                           \\
-      const sqlFile    = process.cwd() + '/sql/' + _params.query.knexSQL   + '.sql'  ;                                  \\
+      const knexClient   = this.options.app.get('mysqlClient');                                                         \\
+      const sqlFile      = process.cwd() + '/src/sql/' + _params.query.knexSQL   + '.sql'  ;                            \\
       const sqlStatement = await readFile(sqlFile, 'utf8');                                                             \\
-      const [sqlResult] =  await knexClient.raw( sqlStatement.replaceAll("\\\\n",' '), _params.query );                 \\
+      const [sqlResult]   =  await knexClient.raw( sqlStatement.replaceAll("\\\\n",' '), _params.query );               \\
                                                                                                                         \\
       let result;                                                                                                       \\
       if  ( typeof sqlResult[0].JSON_ARRAYAGG       == 'string' )        {                                              \\
