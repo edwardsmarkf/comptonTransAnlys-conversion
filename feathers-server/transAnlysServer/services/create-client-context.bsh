@@ -2,12 +2,23 @@
 
 ##   create-client-context.bsh   -- 2026-07-19
 
-##   create the feathers service using tcl/expect
+##   create the feathers service using template-create.bsh
 
 
-export serviceName='client-context'                                                                                     ;
-export tableName='clientContext'                                                                                        ;
-export serviceType='knex'                                                                                               ;
+export serviceName='client-context'                                           ;
+export tableName='clientContext'                                              ;
+export serviceType='knex'                                                     ;
+
+./template-create.bsh    ${serviceName}  ${tableName}   ${serviceType}        ;
+
+exit                                                                          ;
+
+
+
+
+
+
+
 
 expect <(cat <<'END_OF_GENERATE_SERVICE'
         #       generates a feathers service
