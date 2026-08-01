@@ -1,7 +1,49 @@
 #! /bin/bash
 
 
-##   create-error-sounds-tooltip.bsh   -- 2026-07-22
+##   modify-error-sounds-tooltip.bsh   -- 2026-07-22
+
+export serviceName='error-sounds-tooltip'                                                                     ;
+
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED     ;
+
+2i                                                                                                                      \\
+                                                                                                                        \\
+                           // import { getClientsEmail } from 'fs/promises';        /* added by mark */                                                     \\
+                                                                                                                        \\
+/^  async find(_params) {$/a                                                                                            \\
+                                                                                                                        \\
+      const knexClient   = this.options.app.get('mysqlClient');                                                         \\
+      const { readClientsEmail}        = process.cwd() + '/src/custom/' + 'getClientsEmail.js'              ;           \\
+      const [emailResult]   =  await readClientsEmail(_params)                                                          \\
+      return emailResult                                                                                                \\
+ 
+END_OF_SERVICE_SED
+
+
+exit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##   create the feathers service using tcl/expect
 
@@ -31,23 +73,3 @@ expect eof
 
 END_OF_GENERATE_SERVICE
 )       ## end of feathers generate app
-
-
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED     ;
-
-2i                                                                                                                      \\
-                                                                                                                        \\
-                           // import { getClientsEmail } from 'fs/promises';        /* added by mark */                                                     \\
-                                                                                                                        \\
-
-/^  async find(_params) {$/a                                                                                            \\
-                                                                                                                        \\
-      const knexClient   = this.options.app.get('mysqlClient');                                                         \\
-      const { readClientsEmail}        = process.cwd() + '/src/custom/' + 'getClientsEmail.js'              ;           \\
-      const [emailResult]   =  await readClientsEmail(_params)                                                          \\
-      return emailResult                                                                                                \\
- 
-END_OF_SERVICE_SED
-
-
-exit;
