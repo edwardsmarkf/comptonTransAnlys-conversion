@@ -3,6 +3,7 @@
 
 ##   modify-client-process-stimword   -- 2026-07-22
 
+export serviceName='client-context-stimword'                                                          ;
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED      ;
 
