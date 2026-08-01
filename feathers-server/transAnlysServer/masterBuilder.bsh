@@ -27,6 +27,7 @@ bash -vx        ../services/create-session-names.bsh                      ;
 bash -vx        ../services/create-error-sounds-tooltip.bsh               ;
 bash -vx        ../services/create-client-context.bsh                     ;
 bash -vx        ../services/create-client-context-stimword.bsh            ;
+bash -vx        ../services/create-get-clients-emails.bsh                 ;
 bash -vx        ../services/create-knex-generic-raw.bsh                   ;
 bash -vx        ../services/create-language-norms.bsh                     ;
 bash -vx        ../services/create-stimword.bsh                           ;
