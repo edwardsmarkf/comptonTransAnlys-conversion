@@ -36,7 +36,7 @@ bash -vx        ../services/create-knex-generic-raw.bsh                   ;
 bash -vx  ../services/template-create.bsh    language-norms  languageNorms  ;        ############bash -vx        ../services/create-language-norms.bsh                     ;
 bash -vx  ../services/template-create.bsh    session-names  sessionNames  ;        ############bash -vx        ../services/create-session-names.bsh                      ;
 bash -vx  ../services/template-create.bsh    stimword  stimword     ;        ############bash -vx        ../services/create-stimword.bsh                           ;
-bash -vx        ../services/create-teacher.bsh                            ;
+bash -vx  ../services/template-create.bsh    teacher    teacher  ;        ############bash -vx        ../services/create-teacher.bsh                            ;
 #
 #
 bash -vx        ../hooks/create-client-context-before-find.bsh            ;
