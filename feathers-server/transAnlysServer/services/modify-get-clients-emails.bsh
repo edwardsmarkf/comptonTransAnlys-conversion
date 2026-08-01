@@ -3,14 +3,14 @@
 
 ##   modify-error-sounds-tooltip.bsh   -- 2026-07-22
 
-export serviceName='error-sounds-tooltip'                                                                     ;
+export serviceName='get-clients-emails'                                                                           ;
 
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED     ;
 
 2i                                                                                                                      \\
                                                                                                                         \\
-                           // import { getClientsEmail } from 'fs/promises';        /* added by mark */                                                     \\
+                           // import { getClientsEmail } from 'fs/promises';        /* added by mark */                 \\
                                                                                                                         \\
 /^  async find(_params) {$/a                                                                                            \\
                                                                                                                         \\
