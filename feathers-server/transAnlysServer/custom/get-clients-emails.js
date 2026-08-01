@@ -1,6 +1,15 @@
 
-export funtion getClientsEmails {
 
+import { readFile } from 'fs/promises';        /* added by mark */
+
+
+export class  getClientsEmails {
+  constructor(options) {
+    this.options = options
+  }
+
+
+        
         const fs = require('fs');
         const knexClient = this.app.get('knexClient');
 
@@ -8,8 +17,8 @@ export funtion getClientsEmails {
 
 
                 /* first look in the Mariadb clientMaster table */
-readFile.......
-        let  clientMasterEmailJSON =  await knexClient.raw( clientMasterEmailSql , params.query   );
+        const sqlStatement = await readFile(sqlFile??????????????????????????????????????????????   , 'utf8');
+        let  clientMasterEmailJSON =  await knexClient.raw( sqlStatement , params.query   );
 
         let clientMasterEmailObj        = JSON.parse(clientMasterEmailJSON[0][0]['JSON_OBJECTAGG']);
         clientMasterEmailJSON           = null;
