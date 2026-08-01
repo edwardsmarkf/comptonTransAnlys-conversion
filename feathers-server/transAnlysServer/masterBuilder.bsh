@@ -28,6 +28,7 @@ bash -vx        ../services/create-error-sounds-tooltip.bsh               ;
 bash -vx        ../services/create-client-context.bsh                     ;
 bash -vx        ../services/create-client-context-stimword.bsh            ;
 bash -vx        ../services/create-knex-generic-raw.bsh                   ;
+bash -vx        ../services/create-language-norms.bsh                     ;
 bash -vx        ../services/create-stimword.bsh                           ;
 bash -vx        ../services/create-client-stimword.bsh                    ;
 bash -vx        ../services/create-frequency-list.bsh                     ;
@@ -40,6 +41,8 @@ bash -vx        ../hooks/create-language-norms-before-find.bsh            ;
 bash -vx        ../hooks/create-session-names-before-find.bsh             ;
 bash -vx        ../hooks/create-stimword-before-find.bsh                  ;
 #
+#
+find  .  -type f  -name  '*.bsh' -exec grep  'export serviceName='  {}  \;    | sed --expression="s/export serviceName='//;s/'.*$//;"  ;
 #
 exit                                                                      ;
 #
