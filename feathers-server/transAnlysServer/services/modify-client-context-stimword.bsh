@@ -45,7 +45,7 @@ exit;
 ##   create the feathers service using tcl/expect
 
 
-export serviceName='client-process-stimword'                                                                            ;
+export serviceName='client-??????????????????????????-stimword'                                                                            ;
 export serviceType='custom'                                                                                             ;
 
 expect <(cat <<'END_OF_GENERATE_SERVICE'
