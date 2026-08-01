@@ -44,7 +44,8 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
 /^  async find(_params) {$/a                                                                                            \\
                                                                                                                         \\
         const knexClient = this.options.app.get('mysqlClient');                                                         \\
-        let returnVal = await processClientContextStimword(knexClient, command.query)                                   \\
+        const { processClientStimword } =  process.cwd() + '/src/custom/' + 'processClientStimword.js' ;                \\
+        let returnVal = await processClientStimword(knexClient, command.query)                                          \\
         return { ...command.query, ...returnVal };                                                                      \\
 
 #
