@@ -9,7 +9,7 @@ export serviceName='client-context'                                           ;
 export tableName='clientContext'                                              ;
 export serviceType='knex'                                                     ;
 
-./template-create.bsh    ${serviceName}  ${tableName}   ${serviceType}        ;
+./services/template-create.bsh    ${serviceName}  ${tableName}   ${serviceType}        ;
 
 exit                                                                          ;
 
