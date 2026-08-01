@@ -17,9 +17,8 @@ mv     --verbose  ./custom/  ./sql/  ./${FEATHERS_SERVER_NAME}/src/   ;
 #
 #
 cd ${FEATHERS_SERVER_NAME}                                                ;
-#
 
-
+# services:
 
 for service-name in   client-context        \
                       client-master         \
@@ -32,15 +31,16 @@ for service-name in   client-context        \
                       stimword              \
                       teacher               \
 ; do
-    echo "service name: ${service-name}"                         ;
-    bash -vx  ../services/template-create.bsh   ${service-name}  ;
+    echo "Service name:                         ${service-name}"   ;
+    bash -vx  ../services/template-create.bsh   ${service-name}    ;
 done
-                                                                                        
+#
 bash -vx  ../services/create-client-context-stimword.bsh          ;
 bash -vx  ../services/create-get-clients-emails.bsh               ;
 bash -vx  ../services/create-knex-generic-raw.bsh                 ;
 
-#
+#  hooks:
+
 bash -vx   ../hooks/create-client-context-before-find.bsh         ;
 bash -vx   ../hooks/create-client-session-before-find.bsh         ;
 bash -vx   ../hooks/create-client-stimword-before-get-patch.bsh   ;
