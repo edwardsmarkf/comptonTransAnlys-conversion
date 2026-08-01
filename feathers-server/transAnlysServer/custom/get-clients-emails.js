@@ -11,7 +11,7 @@ export class  getClientsEmails {
   async getClientsEmails(_params) {
         
         const fs = require('fs');
-        const knexClient = this.app.get('knexClient');
+        const knexClient = this.app.get('mysqlClient');
 
         const voiceFileDirectory        =       '/home/mark/voicefiles/'        ;
 
