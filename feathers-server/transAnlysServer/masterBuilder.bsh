@@ -31,6 +31,7 @@ bash -vx        ../hooks/create-language-norms-before-find.bsh         ;
 bash -vx        ../hooks/create-session-names-before-find.bsh          ;
 bash -vx        ../hooks/create-stimword-before-find.bsh               ;
 
-#
+#  move custom and sql to proper locations...  and maybe change the default directories??
+
 exit                                                                    ;
 #
