@@ -20,19 +20,19 @@ cd ${FEATHERS_SERVER_NAME}                                                ;
 
 # services:
 
-for service-name in   client-context        \
+for serviceName in    client-context        \
                       client-master         \
                       client-session        \
                       client-stimword       \
                       error-sounds-tooltip  \
-                      frequency-linst       \
+                      frequency-list        \
                       language-norms        \
                       session-names         \
                       stimword              \
                       teacher               \
 ; do
-    echo "Service name:                         ${service-name}"   ;
-    bash -vx  ../services/template-create.bsh   ${service-name}    ;
+    echo "Service name:                         ${serviceName}"   ;
+    bash -vx  ../services/template-create.bsh   ${serviceName}    ;
 done
 #
 bash -vx  ../services/create-client-context-stimword.bsh          ;
