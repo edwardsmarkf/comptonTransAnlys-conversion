@@ -8,7 +8,7 @@ export funtion getClientsEmails {
 
 
                 /* first look in the Mariadb clientMaster table */
-
+readFile.......
         let  clientMasterEmailJSON =  await knexClient.raw( clientMasterEmailSql , params.query   );
 
         let clientMasterEmailObj        = JSON.parse(clientMasterEmailJSON[0][0]['JSON_OBJECTAGG']);
