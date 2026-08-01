@@ -1,7 +1,45 @@
 #! /bin/bash
 
 
-##   create-client-process-stimword   -- 2026-07-22
+##   modify-client-process-stimword   -- 2026-07-22
+
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED      ;
+
+2i                                                                                                                      \\
+                                                                                                                        \\
+ import { readFile } from 'fs/promises';        /* added by mark */                                                     \\
+                                                                                                                        \\
+
+/^  async find(_params) {$/a                                                                                            \\
+                                                                                                                        \\
+        const knexClient = this.options.app.get('mysqlClient');                                                         \\
+        const { processClientStimword } =  process.cwd() + '/src/custom/' + 'processClientStimword.js' ;                \\
+        let returnVal = await processClientStimword(knexClient, command.query)                                          \\
+        return { ...command.query, ...returnVal };                                                                      \\
+
+#
+s/return \[]/return result;/;
+
+END_OF_SERVICE_SED
+
+
+exit;
+
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##   create the feathers service using tcl/expect
 
@@ -33,27 +71,3 @@ END_OF_GENERATE_SERVICE
 )       ## end of feathers generate app
 
 
-
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED      ;
-
-2i                                                                                                                      \\
-                                                                                                                        \\
- import { readFile } from 'fs/promises';        /* added by mark */                                                     \\
-                                                                                                                        \\
-
-/^  async find(_params) {$/a                                                                                            \\
-                                                                                                                        \\
-        const knexClient = this.options.app.get('mysqlClient');                                                         \\
-        const { processClientStimword } =  process.cwd() + '/src/custom/' + 'processClientStimword.js' ;                \\
-        let returnVal = await processClientStimword(knexClient, command.query)                                          \\
-        return { ...command.query, ...returnVal };                                                                      \\
-
-#
-s/return \[]/return result;/;
-
-END_OF_SERVICE_SED
-
-
-exit;
-
-#
