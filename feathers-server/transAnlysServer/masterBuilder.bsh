@@ -5,33 +5,41 @@
 #       (re)construct the phonetic analysis server
 #
 #
-export FEATHERS_SERVER_NAME=$1                                         ;
+export FEATHERS_SERVER_NAME=$1                                            ;
 #
 #
 #
 #
-bash -vx        ./createApp.bsh         ${FEATHERS_SERVER_NAME}        ;
-#
-cd ${FEATHERS_SERVER_NAME}                                             ;
-#
-bash -vx        ../services/create-session-names.bsh                   ;
-bash -vx        ../services/create-error-sounds-tooltip.bsh            ;
-bash -vx        ../services/create-client-context.bsh                  ;
-bash -vx        ../services/create-client-context-stimword.bsh         ;
-bash -vx        ../services/create-knex-generic-raw.bsh                ;
-bash -vx        ../services/create-stimword.bsh                        ;
-bash -vx        ../services/create-client-stimword.bsh                 ;
-bash -vx        ../services/create-frequency-list.bsh                  ;
+bash -vx        ./createApp.bsh         ${FEATHERS_SERVER_NAME}           ;
 #
 #
-bash -vx        ../hooks/create-client-context-before-find.bsh         ;
-bash -vx        ../hooks/create-client-session-before-find.bsh         ;
-bash -vx        ../hooks/create-client-stimword-before-get-patch.bsh   ;
-bash -vx        ../hooks/create-language-norms-before-find.bsh         ;
-bash -vx        ../hooks/create-session-names-before-find.bsh          ;
-bash -vx        ../hooks/create-stimword-before-find.bsh               ;
-
-#  move custom and sql to proper locations...  and maybe change the default directories??
-
-exit                                                                    ;
+mkdir  --verbose                  ./${FEATHERS_SERVER_NAME}/src/custom/   ;
+mv     --verbose  ./custom/*.js   ./${FEATHERS_SERVER_NAME}/src/custom/   ;
+#
+#
+mkdir  --verbose                 ./${FEATHERS_SERVER_NAME}/src/sql/       ;
+mv     --verbose   ./sql/*.sql   ./${FEATHERS_SERVER_NAME}/src/sql/       ;
+#
+#
+cd ${FEATHERS_SERVER_NAME}                                                ;
+#
+bash -vx        ../services/create-session-names.bsh                      ;
+bash -vx        ../services/create-error-sounds-tooltip.bsh               ;
+bash -vx        ../services/create-client-context.bsh                     ;
+bash -vx        ../services/create-client-context-stimword.bsh            ;
+bash -vx        ../services/create-knex-generic-raw.bsh                   ;
+bash -vx        ../services/create-stimword.bsh                           ;
+bash -vx        ../services/create-client-stimword.bsh                    ;
+bash -vx        ../services/create-frequency-list.bsh                     ;
+#
+#
+bash -vx        ../hooks/create-client-context-before-find.bsh            ;
+bash -vx        ../hooks/create-client-session-before-find.bsh            ;
+bash -vx        ../hooks/create-client-stimword-before-get-patch.bsh      ;
+bash -vx        ../hooks/create-language-norms-before-find.bsh            ;
+bash -vx        ../hooks/create-session-names-before-find.bsh             ;
+bash -vx        ../hooks/create-stimword-before-find.bsh                  ;
+#
+#
+exit                                                                      ;
 #
