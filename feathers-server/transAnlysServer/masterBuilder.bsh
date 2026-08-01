@@ -13,41 +13,50 @@ export FEATHERS_SERVER_NAME=$1                                            ;
 bash -vx        ./createApp.bsh         ${FEATHERS_SERVER_NAME}           ;
 #
 #
-                                      ################mkdir  --verbose                  ./${FEATHERS_SERVER_NAME}/src/custom/   ;
-mv     --verbose  ./custom/   ./${FEATHERS_SERVER_NAME}/src/   ;
-#
-#
-                                           #############################mkdir  --verbose                 ./${FEATHERS_SERVER_NAME}/src/sql/       ;
-mv     --verbose   ./sql/   ./${FEATHERS_SERVER_NAME}/src/       ;
+mv     --verbose  ./custom/  ./sql/  ./${FEATHERS_SERVER_NAME}/src/   ;
 #
 #
 cd ${FEATHERS_SERVER_NAME}                                                ;
 #
-                                                                                          ############################bash -vx        ../services/create-client-context.bsh                     ;
-bash -vx  ../services/template-create.bsh    client-context  clientContext      ;
-bash -vx        ../services/create-client-context-stimword.bsh            ;
-bash -vx  ../services/template-create.bsh    client-master   clientMaster  ;        ############bash -vx        ../services/create-client-master.bsh                      ;
-bash -vx  ../services/template-create.bsh    client-session  clientSession  ;        ############bash -vx        ../services/create-client-session.bsh                     ;
-bash -vx  ../services/template-create.bsh    client-stimword  clientStimword  ;        ############bash -vx        ../services/create-client-stimword.bsh                    ;
-bash -vx  ../services/template-create.bsh    error-sounds-tooltip  errorSoundsTooltip  ;        ############bash -vx        ../services/create-error-sounds-tooltip.bsh               ;
-bash -vx  ../services/template-create.bsh    frequency-list  frequencyList  ;        ############bash -vx        ../services/create-frequency-list.bsh                     ;
-bash -vx        ../services/create-get-clients-emails.bsh                 ;
-bash -vx        ../services/create-knex-generic-raw.bsh                   ;
-bash -vx  ../services/template-create.bsh    language-norms  languageNorms  ;        ############bash -vx        ../services/create-language-norms.bsh                     ;
-bash -vx  ../services/template-create.bsh    session-names  sessionNames  ;        ############bash -vx        ../services/create-session-names.bsh                      ;
-bash -vx  ../services/template-create.bsh    stimword  stimword     ;        ############bash -vx        ../services/create-stimword.bsh                           ;
-bash -vx  ../services/template-create.bsh    teacher    teacher  ;        ############bash -vx        ../services/create-teacher.bsh                            ;
+                                                                                        
+bash -vx  ../services/template-create.bsh                          client-context         clientContext      ;
+bash -vx  ../services/create-client-context-stimword.bsh                                                     ;
+bash -vx  ../services/template-create.bsh                          client-master          clientMaster       ;       
+bash -vx  ../services/template-create.bsh                          client-session         clientSession      ;       
+bash -vx  ../services/create-get-clients-emails.bsh                                                          ;
+bash -vx  ../services/template-create.bsh                          client-stimword        clientStimword     ;        
+bash -vx  ../services/template-create.bsh                          error-sounds-tooltip   errorSoundsTooltip ;        
+bash -vx  ../services/template-create.bsh                          frequency-list         frequencyList      ;        
+bash -vx  ../services/create-knex-generic-raw.bsh                                                            ;
+bash -vx  ../services/template-create.bsh                          language-norms         languageNorms      ;        
+bash -vx  ../services/template-create.bsh                          session-names          sessionNames       ;       
+bash -vx  ../services/template-create.bsh                          stimword               stimword           ;        
+bash -vx  ../services/template-create.bsh                          teacher                teacher            ;        
 #
 #
-bash -vx        ../hooks/create-client-context-before-find.bsh            ;
-bash -vx        ../hooks/create-client-session-before-find.bsh            ;
-bash -vx        ../hooks/create-client-stimword-before-get-patch.bsh      ;
-bash -vx        ../hooks/create-language-norms-before-find.bsh            ;
-bash -vx        ../hooks/create-session-names-before-find.bsh             ;
-bash -vx        ../hooks/create-stimword-before-find.bsh                  ;
+bash -vx   ../hooks/create-client-context-before-find.bsh            ;
+bash -vx   ../hooks/create-client-session-before-find.bsh            ;
+bash -vx   ../hooks/create-client-stimword-before-get-patch.bsh      ;
+bash -vx   ../hooks/create-language-norms-before-find.bsh            ;
+bash -vx   ../hooks/create-session-names-before-find.bsh             ;
+bash -vx   ../hooks/create-stimword-before-find.bsh                  ;
 #
 #
 find  .  -type f  -name  '*.bsh' -exec grep  'export serviceName='  {}  \;    | sed --expression="s/export serviceName='//;s/'.*$//;"  ;
 #
 exit                                                                      ;
 #
+
+
+
+
+############bash -vx        ../services/create-teacher.bsh                            ;
+############bash -vx        ../services/create-stimword.bsh                           ;
+ ############bash -vx        ../services/create-session-names.bsh                      ;
+############bash -vx        ../services/create-language-norms.bsh                     ;
+############bash -vx        ../services/create-frequency-list.bsh                     ;
+############bash -vx        ../services/create-error-sounds-tooltip.bsh               ;
+############bash -vx        ../services/create-client-stimword.bsh                    ;
+ ############bash -vx        ../services/create-client-session.bsh                     ;
+  ############################bash -vx        ../services/create-client-context.bsh                     ;
+ ############bash -vx        ../services/create-client-master.bsh                      ;
