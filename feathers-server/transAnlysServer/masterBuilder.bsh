@@ -20,24 +20,27 @@ cd ${FEATHERS_SERVER_NAME}                                                ;
 
 # services:
 
-for serviceName in    client-context        \
-                      client-master         \
-                      client-session        \
-                      client-stimword       \
-                      error-sounds-tooltip  \
-                      frequency-list        \
-                      language-norms        \
-                      session-names         \
-                      stimword              \
-                      teacher               \
+for serviceName in    client-context           \
+                      client-context-stimword  \
+                      client-master            \
+                      client-session           \
+                      client-stimword          \
+                      error-sounds-tooltip     \
+                      frequency-list           \
+                      get-clients-emails       \
+                      knex-generic-raw         \
+                      language-norms           \
+                      session-names            \
+                      stimword                 \
+                      teacher                  \
 ; do
     echo "Service name:                         ${serviceName}"   ;
     bash -vx  ../services/template-create.bsh   ${serviceName}    ;
 done
 #
-bash -vx  ../services/create-client-context-stimword.bsh          ;
-bash -vx  ../services/create-get-clients-emails.bsh               ;
-bash -vx  ../services/create-knex-generic-raw.bsh                 ;
+bash -vx  ../services/modify-client-context-stimword.bsh          ;
+bash -vx  ../services/modify-get-clients-emails.bsh               ;
+bash -vx  ../services/modify-knex-generic-raw.bsh                 ;
 
 #  hooks:
 
