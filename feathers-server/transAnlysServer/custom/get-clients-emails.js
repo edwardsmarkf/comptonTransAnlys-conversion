@@ -5,10 +5,10 @@ import { readFile } from 'fs/promises';        /* added by mark */
 
 export class  getClientsEmails {
   constructor(options) {
-    this.options = options
+    this.options = options;
   }
 
-
+  async getClientsEmails(_params) {
         
         const fs = require('fs');
         const knexClient = this.app.get('knexClient');
@@ -17,8 +17,8 @@ export class  getClientsEmails {
 
 
                 /* first look in the Mariadb clientMaster table */
-        const sqlStatement = await readFile(sqlFile??????????????????????????????????????????????   , 'utf8');
-        let  clientMasterEmailJSON =  await knexClient.raw( sqlStatement , params.query   );
+        const clientMasterSqlStatement = await readFile(  process.cwd() + '/src/sql/' 'clientMasterEmail.sql'   , 'utf8');
+        let  clientMasterEmailJSON      =  await knexClient.raw( clientMasterSqlStatement , params.query   );
 
         let clientMasterEmailObj        = JSON.parse(clientMasterEmailJSON[0][0]['JSON_OBJECTAGG']);
         clientMasterEmailJSON           = null;
