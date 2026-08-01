@@ -20,23 +20,25 @@ cd ${FEATHERS_SERVER_NAME}                                                ;
 
 # services:
 
-for serviceName in    client-context           \
-                      client-context-stimword  \
-                      client-master            \
-                      client-session           \
-                      client-stimword          \
-                      error-sounds-tooltip     \
-                      frequency-list           \
-                      get-clients-emails       \
-                      knex-generic-raw         \
-                      language-norms           \
-                      session-names            \
-                      stimword                 \
-                      teacher                  \
-; do
-    echo "Service name:                         ${serviceName}"   ;
-    bash -vx  ../services/template-create.bsh   ${serviceName}    ;
-done
+while read -r serviceName specialProcess; do
+    echo "Service name:                         ${serviceName}"                    ;
+    bash -vx  ../services/template-create.bsh   ${serviceName}  ${specialProcess}  ;
+done <<END_OF_FILE ;
+  client-context
+  client-context-stimword         YES
+  client-master
+  client-session           
+  client-stimword          
+  error-sounds-tooltip     
+  frequency-list           
+  get-clients-emails              YES  
+  knex-generic-raw                YES
+  language-norms           
+  session-names            
+  stimword
+  teacher
+END_OF_FILE                 
+
 #
 bash -vx  ../services/modify-client-context-stimword.bsh          ;
 bash -vx  ../services/modify-get-clients-emails.bsh               ;
