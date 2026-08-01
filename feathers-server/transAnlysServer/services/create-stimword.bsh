@@ -6,9 +6,19 @@
 ##   create the feathers service using tcl/expect
 
 
-export serviceName='stimword'                                                                                     ;
-export tableName='stimword'                                                                                                ;
-export serviceType='knex'                                                                                               ;
+export serviceName='stimword'                                                              ;
+export tableName='stimword'                                                                ;
+export serviceType='knex'                                                                  ;
+
+bash -vx  ../services/template-create.bsh    ${serviceName}  ${tableName}   ${serviceType}  ;
+
+exit                                                                                        ;
+
+
+
+
+
+
 
 expect <(cat <<'END_OF_GENERATE_SERVICE'
         #       generates a feathers service
