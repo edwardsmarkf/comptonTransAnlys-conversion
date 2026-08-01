@@ -5,13 +5,13 @@
 ##   create the feathers service using template-create.bsh
 
 
-export serviceName='client-context'                                           ;
-export tableName='clientContext'                                              ;
-export serviceType='knex'                                                     ;
+export serviceName='client-context'                                               ;
+export tableName='clientContext'                                                  ;
+export serviceType='knex'                                                         ;
 
-./services/template-create.bsh    ${serviceName}  ${tableName}   ${serviceType}        ;
+../services/template-create.bsh    ${serviceName}  ${tableName}   ${serviceType}  ;
 
-exit                                                                          ;
+exit                                                                              ;
 
 
 
