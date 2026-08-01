@@ -7,7 +7,7 @@
 
 
 export serviceName='client-stimword'                                                        ;
-export tableName='sessionNames'                                                             ;
+export tableName='session?????????????????????Names'                                                             ;
 export serviceType='knex'                                                                   ;
 
 bash -vx  ../services/template-create.bsh    ${serviceName}  ${tableName}   ${serviceType}  ;
