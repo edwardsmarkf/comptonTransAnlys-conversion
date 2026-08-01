@@ -21,8 +21,8 @@ cd ${FEATHERS_SERVER_NAME}                                                ;
 # services:
 
 while read -r serviceName specialProcess; do
-    echo "Service name:                         ${serviceName}"                    ;
-    bash -vx  ../services/template-create.bsh   ${serviceName}  ${specialProcess}  ;
+    echo "Service name:                         "https://$(hostname -I)/${serviceName}/"        ;
+    bash -vx  ../services/template-create.bsh   ${serviceName}  ${specialProcess}               ;
 done <<END_OF_FILE ;
   client-context
   client-context-stimword         YES
