@@ -1,0 +1,53 @@
+#! /bin/bash
+
+
+##   create-error-sounds-tooltip.bsh   -- 2026-07-22
+
+##   create the feathers service using tcl/expect
+
+
+export serviceName='get-clients-emails'                                                                                    ;
+export serviceType='custom'                                                                                              ;
+
+expect <(cat <<'END_OF_GENERATE_SERVICE'
+        #       generates a feathers service
+
+        set timeout -1                                                                                                  ;
+
+        set UPARROW     \x1B\[A                                                                                         ;
+        set DOWNARROW   \x1B\[B                                                                                         ;
+        set SPACE       \x20                                                                                            ;
+        set RETURN      \x0d                                                                                            ;
+
+        spawn npx feathers generate service   --name  $env(serviceName)   --path $env(serviceName)   --type $env(serviceType)   ;
+
+        expect -re ".*Does this service require authentication.*"                                                       ;
+        send -- "n${RETURN}"                                                                                            ;
+
+        expect -re ".*Which schema definition format do you want to use.*"                                              ;
+        send -- "${RETURN}"                                                                                             ;
+
+expect eof
+
+END_OF_GENERATE_SERVICE
+)       ## end of feathers generate app
+
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED     ;
+
+2i                                                                                                                      \\
+                                                                                                                        \\
+                           // import { getClientsEmail } from 'fs/promises';        /* added by mark */                                                     \\
+                                                                                                                        \\
+
+/^  async find(_params) {$/a                                                                                            \\
+                                                                                                                        \\
+      const knexClient   = this.options.app.get('mysqlClient');                                                         \\
+      const { readClientsEmail}        = process.cwd() + '/src/custom/' + 'getClientsEmail.js'              ;           \\
+      const [emailResult]   =  await readClientsEmail(_params)                                                          \\
+      return emailResult                                                                                                \\
+ 
+END_OF_SERVICE_SED
+
+
+exit;
