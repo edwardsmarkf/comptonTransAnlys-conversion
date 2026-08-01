@@ -13,12 +13,12 @@ export FEATHERS_SERVER_NAME=$1                                            ;
 bash -vx        ./createApp.bsh         ${FEATHERS_SERVER_NAME}           ;
 #
 #
-mkdir  --verbose                  ./${FEATHERS_SERVER_NAME}/src/custom/   ;
-mv     --verbose  ./custom/*.js   ./${FEATHERS_SERVER_NAME}/src/custom/   ;
+                                      ################mkdir  --verbose                  ./${FEATHERS_SERVER_NAME}/src/custom/   ;
+mv     --verbose  ./custom/   ./${FEATHERS_SERVER_NAME}/src/   ;
 #
 #
-mkdir  --verbose                 ./${FEATHERS_SERVER_NAME}/src/sql/       ;
-mv     --verbose   ./sql/*.sql   ./${FEATHERS_SERVER_NAME}/src/sql/       ;
+                                           #############################mkdir  --verbose                 ./${FEATHERS_SERVER_NAME}/src/sql/       ;
+mv     --verbose   ./sql/   ./${FEATHERS_SERVER_NAME}/src/       ;
 #
 #
 cd ${FEATHERS_SERVER_NAME}                                                ;
