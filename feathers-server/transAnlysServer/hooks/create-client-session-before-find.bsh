@@ -8,7 +8,7 @@
 
 
 export serviceName='client-session'                                                                                     ;
-export hookSuffix='=before-find'                                                                                        ;
+export hookSuffix='-before-find'                                                                                        ;
 export hookVarName='clientSessionBeforeFind'                                                                            ;
 export serviceType='regular'                                                                                            ;
 
