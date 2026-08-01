@@ -23,7 +23,8 @@ mv     --verbose   ./sql/   ./${FEATHERS_SERVER_NAME}/src/       ;
 #
 cd ${FEATHERS_SERVER_NAME}                                                ;
 #
-bash -vx        ../services/create-client-context.bsh                     ;
+                                                                                          ############################bash -vx        ../services/create-client-context.bsh                     ;
+bash -vx  ../services/template-create.bsh    client-context  clientContext      ;
 bash -vx        ../services/create-client-context-stimword.bsh            ;
 bash -vx        ../services/create-client-master.bsh                      ;
 bash -vx        ../services/create-client-session.bsh                     ;
