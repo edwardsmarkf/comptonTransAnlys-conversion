@@ -28,7 +28,7 @@ bash -vx  ../services/template-create.bsh    client-context  clientContext      
 bash -vx        ../services/create-client-context-stimword.bsh            ;
 bash -vx  ../services/template-create.bsh    client-master   clientMaster  ;        ############bash -vx        ../services/create-client-master.bsh                      ;
 bash -vx  ../services/template-create.bsh    client-session  clientSession  ;        ############bash -vx        ../services/create-client-session.bsh                     ;
-bash -vx        ../services/create-client-stimword.bsh                    ;
+bash -vx  ../services/template-create.bsh    client-stimword  clientStimword  ;        ############bash -vx        ../services/create-client-stimword.bsh                    ;
 bash -vx        ../services/create-error-sounds-tooltip.bsh               ;
 bash -vx        ../services/create-frequency-list.bsh                     ;
 bash -vx        ../services/create-get-clients-emails.bsh                 ;
