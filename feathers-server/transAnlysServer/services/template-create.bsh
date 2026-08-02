@@ -3,7 +3,8 @@
 #   generic template to do the single-table services      2026-08-01
 #
 #
-export serviceName=$1  ;
+export serviceName=$1     ;
+export specialProcess=$2  ;
 
 expect <(cat <<'END_OF_GENERATE_SERVICE'
         #       generates a feathers service
@@ -29,9 +30,9 @@ END_OF_GENERATE_SERVICE
 )       ## end of feathers generate app
 
 
-if [ -n "${2}" ]; then
+if [ -n "${specialProcess}" ]; then
     echo "Special modification for service ${serviceName)."                                                           ;
-    bash -vx  ../services/${2}.bsh                                                                                    ;
+    bash -vx  ../services/${specialProcess}.bsh                                                                       ;
 else
     export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g'  ; )  ;
     sed  --in-place  --expression="s/name: '${serviceName}'/name: '${tableName}', id: '${tableName}AutoIncr'/;"        \
