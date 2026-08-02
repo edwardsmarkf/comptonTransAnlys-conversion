@@ -25,14 +25,14 @@ while read -r serviceName specialProcess; do
     bash -vx  ../services/template-create.bsh   ${serviceName}  ${specialProcess}               ;
 done <<END_OF_FILE ;
   client-context
-  client-context-stimword         YES
+  client-context-stimword         modify-client-context-stimword
   client-master
   client-session           
   client-stimword          
   error-sounds-tooltip     
   frequency-list           
-  get-clients-emails              YES  
-  knex-generic-raw                YES
+  get-clients-emails              modify-get-clients-emails  
+  knex-generic-raw                modify-knex-generic-raw
   language-norms           
   session-names            
   stimword
@@ -40,9 +40,9 @@ done <<END_OF_FILE ;
 END_OF_FILE                 
 
 #
-bash -vx  ../services/modify-client-context-stimword.bsh          ;
-bash -vx  ../services/modify-get-clients-emails.bsh               ;
-bash -vx  ../services/modify-knex-generic-raw.bsh                 ;
+                             ########bash -vx  ../services/modify-client-context-stimword.bsh          ;
+                          #############################bash -vx  ../services/modify-get-clients-emails.bsh               ;
+                          ######################bash -vx  ../services/modify-knex-generic-raw.bsh                 ;
 
 #  hooks:
 
