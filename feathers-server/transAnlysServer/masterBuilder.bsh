@@ -37,7 +37,7 @@ done <<END_OF_FILE ;
   session-names            
   stimword
   teacher
-END_OF_FILE                 
+END_OF_FILE
 
 #
                              ########bash -vx  ../services/modify-client-context-stimword.bsh          ;
