@@ -36,14 +36,10 @@ if [ -n "${specialProcess}" ]; then
 else
 
      export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)           ; 
-##   export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)           ;
 
       echo ${tableName} ; 
-   ## echo  ${tableName}                                                                                                ;
-
 
       sed  --debug  --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', id: '${tableName}AutoIncr'|;" ./src/services/${serviceName}/${serviceName}.class.js ;
-   ## sed  --debug  --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', id: '${tableName}AutoIncr'|;" ./src/services/${serviceName}/${serviceName}.class.js                                                                    ;
 
 
 
