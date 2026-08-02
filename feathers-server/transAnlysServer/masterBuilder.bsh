@@ -54,7 +54,7 @@ bash -vx   ../hooks/create-session-names-before-find.bsh          ;
 bash -vx   ../hooks/create-stimword-before-find.bsh               ;
 #
 #
-find  .  -type f  -name  '*.bsh' -exec grep  'export serviceName='  {}  \;    | sed --expression="s?export serviceName='?https://localhost/?;s?'.*$?/?; "  ;
+find  .  -type f  -name  '*.bsh' -exec grep  'export serviceName='  {}  \;    | sed --expression="s?export serviceName='?https://localhost/?; s|'.*$|/|; "  ;
 #
 exit                                                                      ;
 #
