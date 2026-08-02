@@ -31,15 +31,14 @@ END_OF_GENERATE_SERVICE
 
 
 if [ -n "${specialProcess}" ]; then
-    echo "Special modification for service ${serviceName)."                                                           ;
+    echo "Special modification for service ${serviceName}...!"                                                           ;
     bash -vx  ../services/${specialProcess}.bsh                                                                       ;
 else
 
-     export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)           ; 
+    export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                                ; 
 
-      echo ${tableName} ; 
-
-      sed  --debug  --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', id: '${tableName}AutoIncr'|;" ./src/services/${serviceName}/${serviceName}.class.js ;
+    sed  --debug  --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', id: '${tableName}AutoIncr'|;"   \
+              ./src/services/${serviceName}/${serviceName}.class.js                                                        ;
 
 
 
