@@ -28,12 +28,14 @@ expect eof
 END_OF_GENERATE_SERVICE
 )       ## end of feathers generate app
 
-if [ ! -v ${2} ]; then
+
+if [ -n "${2}" ]; then
+    echo "Special modification for service ${serviceName)."                                                           ;
+    bash -vx  ../services/${2}.bsh                                                                                    ;
+else
     export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g'  ; )  ;
     sed  --in-place  --expression="s/name: '${serviceName}'/name: '${tableName}', id: '${tableName}AutoIncr'/;"        \
             ./src/services/${serviceName}/${serviceName}.class.js                                                      ;
-else
-    echo "Skipping modification for service ${serviceName)."                                                           ;
 fi
 
 exit 1;
