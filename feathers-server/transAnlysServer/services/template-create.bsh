@@ -45,7 +45,7 @@ else
 
 
 
-    sed  --in-place  --expression="s|name: \'${serviceName}\'|name: \'${tableName}\', id: \'${tableName}AutoIncr'\|;"       \
+    sed  --debug  --in-place  --expression="s|name: \'${serviceName}\'|name: \'${tableName}\', id: \'${tableName}AutoIncr'\|;"       \
             ./src/services/${serviceName}/${serviceName}.class.js                                                      ;
 
 
