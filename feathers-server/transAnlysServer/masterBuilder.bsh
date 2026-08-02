@@ -22,7 +22,7 @@ cd ${FEATHERS_SERVER_NAME}                                                ;
 
 while read -r serviceName specialProcess; do
     echo "Service name:   https://$(hostname -I | sed --expression='s/ //g;')/${serviceName}/"        ;
-    find  .  -type f  -name  template-create.bsh  -print ;
+    find  ..  -type f  -name  template-create.bsh  -print ;
     bash -vx  ./services/template-create.bsh   ${serviceName}  ${specialProcess}               ;
 done <<END_OF_FILE ;
   client-context
