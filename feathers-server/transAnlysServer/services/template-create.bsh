@@ -4,25 +4,28 @@
 #
 #
 export serviceName=$1     ;
-export specialProcess=$2  ;
+export serviceType=$2     ;
+export specialProcess=$3  ;
 
 expect <(cat <<'END_OF_GENERATE_SERVICE'
         #       generates a feathers service
 
-        set timeout -1                                                                                            ;
+        set timeout -1                                                             ;
 
-        set UPARROW     \x1B\[A                                                                                   ;
-        set DOWNARROW   \x1B\[B                                                                                   ;
-        set SPACE       \x20                                                                                      ;
-        set RETURN      \x0d                                                                                      ;
+        set UPARROW     \x1B\[A                                                    ;
+        set DOWNARROW   \x1B\[B                                                    ;
+        set SPACE       \x20                                                       ;
+        set RETURN      \x0d                                                       ;
 
-        spawn npx feathers generate service   --name  $env(serviceName)   --path $env(serviceName)   --type knex   ;
+        spawn npx feathers generate service   --name  $env(serviceName)             \
+                                              --path  $env(serviceName)             \
+                                              --type $env(serviceType)              ;
 
-        expect -re ".*Does this service require authentication.*"                                                  ;
-        send -- "n${RETURN}"                                                                                       ;
+        expect -re ".*Does this service require authentication.*"                   ;
+        send -- "n${RETURN}"                                                        ;
 
-        expect -re ".*Which schema definition format do you want to use.*"                                         ;
-        send -- "${RETURN}"                                                                                        ;
+        expect -re ".*Which schema definition format do you want to use.*"          ;
+        send -- "${RETURN}"                                                         ;
 
 expect eof
 
