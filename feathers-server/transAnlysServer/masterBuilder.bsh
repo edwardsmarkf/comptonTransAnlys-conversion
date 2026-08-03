@@ -47,7 +47,7 @@ END_OF_SERVICE_FILE
 #  hooks:
 
 while read -r serviceName hookNameSuffix hookType; do
-    echo "Hook name:   ${serviceName-${hookNameSuffix}"                                      ;
+    echo "Hook name:   ${serviceName}-${hookNameSuffix}"                                     ;
     bash -vx  ../hooks/template-create.bsh   ${serviceName}  ${hookNameSuffix} ${hookType}   ;
 done <<END_OF_HOOKS_FILE ;
          client-context   before-find        regular
