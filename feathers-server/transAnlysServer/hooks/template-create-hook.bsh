@@ -4,6 +4,7 @@
 
 export serviceName=$1  ;
 export hookSuffix=$2   ;
+export hookType=$3     ;
 
 export hookName=${serviceName}${hookSuffix}                                                                             ;
 
@@ -26,3 +27,5 @@ expect eof
 END_OF_GENERATE_HOOK
 )       ## end of feathers generate hook
 
+exit;
+#
