@@ -10,32 +10,6 @@
 export serviceName='client-context'                                                                                     ;
 export hookSuffix='-before-find'                                                                                        ;
 export hookVarName='clientContextBeforeFind'                                                                            ;
-export hookType='regular'                                                                                               ;
-
-
-
-export hookName=${serviceName}${hookSuffix}                                                                             ;
-
-expect <(cat <<'END_OF_GENERATE_HOOK'
-        #       generates a feathers hook
-
-        ##   debugging:   exp_internal 1
-
-        set timeout -1                                                                                                  ;
-
-        set UPARROW     \x1B\[A                                                                                         ;
-        set DOWNARROW   \x1B\[B                                                                                         ;
-        set SPACE       \x20                                                                                            ;
-        set RETURN      \x0d                                                                                            ;
-
-        spawn npx feathers generate hook   --name  $env(hookName)         --type $env(hookType)   ;
-
-expect eof
-
-END_OF_GENERATE_HOOK
-)       ## end of feathers generate hook
-
-
 
 
 sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
@@ -77,6 +51,36 @@ END_OF_SERVICE_SED
 exit  ;
 
 #
+
+
+
+
+
+
+
+
+export hookName=${serviceName}${hookSuffix}                                                                             ;
+
+expect <(cat <<'END_OF_GENERATE_HOOK'
+        #       generates a feathers hook
+
+        ##   debugging:   exp_internal 1
+
+        set timeout -1                                                                                                  ;
+
+        set UPARROW     \x1B\[A                                                                                         ;
+        set DOWNARROW   \x1B\[B                                                                                         ;
+        set SPACE       \x20                                                                                            ;
+        set RETURN      \x0d                                                                                            ;
+
+        spawn npx feathers generate hook   --name  $env(hookName)         --type $env(hookType)   ;
+
+expect eof
+
+END_OF_GENERATE_HOOK
+)       ## end of feathers generate hook
+
+
 
 
 
