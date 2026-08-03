@@ -7,13 +7,48 @@
 ##   create the feathers service using tcl/expect
 
 
-export serviceName='client-session'                                                                                     ;
+export serviceName=${1}                 ##'client-session'                                                                                     ;
+export hookName=${2}            ;
+export hookVarName=${3}         ;       ##'clientSessionBeforeFind'                                                                            ;
+
+
+sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
+/console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
+        context.params.query = {                // added by mark                                                        \\
+          ...context.params.query               // added by mark                                                        \\
+        }                                       // added by mark                                                        \\
+        return context;                                                                                                 \\
+
+END_OF_HOOK_SED
+
+
+sed --in-place  --file=-  ./src/services/${serviceName}/${serviceName}.js   <<END_OF_SERVICE_SED ;
+
+s/find: \[]/find: [${hookVarName}]/  ;
+
+/^import {$/i                                                                                                            \\
+                                                                                                                         \\
+import { $hookVarName}  }  from '../../hooks/${hookName}.js';                                                            \\
+
+END_OF_SERVICE_SED
+
+exit  ;
+
+#
+
+
+
+
+        #expect -re ".* What kind of hook is it.*"                                                                       ;
+        #send -- "${DOWNARROW}${RETURN}"                                                                                  ;
+        #expect -re ".*Does this service require authentication.*"                                                       ;
+        #send -- "n${RETURN}"                                                                                           ;
+        ##expect -re ".*Which schema definition format do you want to use.*"                                              ;
+        ##send -- "${RETURN}"                                                                                             ;
+
+
 export hookSuffix='-before-find'                                                                                        ;
-export hookVarName='clientSessionBeforeFind'                                                                            ;
 export serviceType='regular'                                                                                            ;
-
-
-
 export hookName=${serviceName}${hookSuffix}                                                                              ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
@@ -36,38 +71,3 @@ expect eof
 END_OF_GENERATE_HOOK
 )       ## end of feathers generate app
 
-
-
-sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
-/console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
-        context.params.query = {                // added by mark                                                        \\
-          ...context.params.query               // added by mark                                                        \\
-        }                                       // added by mark                                                        \\
-        return context;                                                                                                 \\
-
-
-END_OF_HOOK_SED
-
-
-
-sed --in-place  --file=-  ./src/services/${serviceName}/${serviceName}.js   <<END_OF_SERVICE_SED ;
-
-s/find: \[]/find: [${hookVarName}]/  ;
-
-/^import {$/i                                                                                                            \\
-                                                                                                                         \\
-import { $hookVarName}  }  from '../../hooks/${hookName}.js';                                                            \\
-
-END_OF_SERVICE_SED
-
-exit  ;
-
-#
-
-
-        #expect -re ".* What kind of hook is it.*"                                                                       ;
-        #send -- "${DOWNARROW}${RETURN}"                                                                                  ;
-        #expect -re ".*Does this service require authentication.*"                                                       ;
-        #send -- "n${RETURN}"                                                                                           ;
-        ##expect -re ".*Which schema definition format do you want to use.*"                                              ;
-        ##send -- "${RETURN}"                                                                                             ;
