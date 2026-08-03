@@ -59,7 +59,7 @@ sed  --in-place  --file=-  ./src/services/${serviceName}/${serviceName}.js    <<
                                                                                                             \\
     import { ${hookVarName} }  from '../../hooks/${hookName}.js';                                           \\
 
-s/get: \[]/get: [${hookVarName}]          ;
+s/get: \[]/get: [${hookVarName}]/      ;
 
 /patch: \[/a                                                                                                \\
                                                                                                             \\
