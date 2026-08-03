@@ -40,9 +40,6 @@ done <<END_OF_SERVICE_FILE ;
 END_OF_SERVICE_FILE
 
 #
-                             ########bash -vx  ../services/modify-client-context-stimword.bsh          ;
-                          #############################bash -vx  ../services/modify-get-clients-emails.bsh               ;
-                          ######################bash -vx  ../services/modify-knex-generic-raw.bsh                 ;
 
 #  hooks:
 
@@ -70,6 +67,11 @@ exit                                                                      ;
 
 
 
+
+
+                             ########bash -vx  ../services/modify-client-context-stimword.bsh          ;
+                          #############################bash -vx  ../services/modify-get-clients-emails.bsh               ;
+                          ######################bash -vx  ../services/modify-knex-generic-raw.bsh                 ;
 
 ###bash -vx   ../hooks/create-client-context-before-find.bsh         ;
 ###bash -vx   ../hooks/create-client-session-before-find.bsh         ;
