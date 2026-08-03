@@ -17,9 +17,8 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
       const knexClient   = this.options.app.get('mysqlClient');                                                         \\
       const { readClientsEmail}        = process.cwd() + '/src/custom/' + 'getClientsEmail.js'              ;           \\
       const [emailResult]   =  await readClientsEmail(_params)                                                          \\
-      return emailResult                                                                                                \\
 
-/return \[]/d  ;
+s/return \[]/return emailResult  ;
  
 END_OF_SERVICE_SED
 
