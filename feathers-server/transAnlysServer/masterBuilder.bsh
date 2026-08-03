@@ -24,7 +24,7 @@ while read -r serviceName serviceType specialProcess; do
     bash -vx  ../services/template-create.bsh   ${serviceName}   ${serviceType}  ${specialProcess}    ;
 done <<END_OF_SERVICE_FILE ;
   client-context                knex
-  client-context-stimword       knex       client-context-stimword
+  client-context-stimword       custom      client-context-stimword
   client-master                 knex
   client-session                knex
   client-stimword               knex
