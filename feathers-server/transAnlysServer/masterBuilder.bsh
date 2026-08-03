@@ -47,16 +47,16 @@ END_OF_SERVICE_FILE
 
 #  hooks:
 
-while read -r hookNamePrefix hookNameSuffix; do
-    echo "Hook name:   ${hookNamePrefix-${hookNameSuffix}"                             ;
-    bash -vx  ../hooks/template-create.bsh   ${hookNamePrefix}  ${hookNameSuffix}      ;
+while read -r hookNamePrefix hookNameSuffix hookType; do
+    echo "Hook name:   ${hookNamePrefix-${hookNameSuffix}"                                     ;
+    bash -vx  ../hooks/template-create.bsh   ${hookNamePrefix}  ${hookNameSuffix} ${hookType}   ;
 done <<END_OF_HOOKS_FILE ;
-         client-context   before-find
-         client-session   before-find
-         client-stimword  before-get-patch
-         language-norms   before-find
-         session-names    before-find
-         stimword         before-find
+         client-context   before-find        regular
+         client-session   before-find        regular
+         client-stimword  before-get-patch   regular
+         language-norms   before-find        regular
+         session-names    before-find        regular
+         stimword         before-find        regular
 END_OF_HOOKS_FILE
 
 
