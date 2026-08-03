@@ -20,24 +20,24 @@ cd ${FEATHERS_SERVER_NAME}                                                ;
 
 # services:
 
-while read -r serviceName specialProcess; do
+while read -r serviceName serviceType specialProcess; do
     echo "Service name:   https://$(hostname -I | sed --expression='s/ //g;')/${serviceName}/"        ;
        ##  find  ..  -type f  -name  template-create.bsh  -print ;
     bash -vx  ../services/template-create.bsh   ${serviceName}  ${specialProcess}               ;
 done <<END_OF_FILE ;
-  client-context
-  client-context-stimword         modify-client-context-stimword
-  client-master
-  client-session           
-  client-stimword          
-  error-sounds-tooltip     
-  frequency-list           
-  get-clients-emails              modify-get-clients-emails  
-  knex-generic-raw                modify-knex-generic-raw
-  language-norms           
-  session-names            
-  stimword
-  teacher
+  client-context                    knex
+  client-context-stimword           knex       modify-client-context-stimword
+  client-master                     knex
+  client-session                    knex
+  client-stimword                   knex
+  error-sounds-tooltip              knex
+  frequency-list                    knex
+  get-clients-emails                custom      modify-get-clients-emails  
+  knex-generic-raw                  custom      modify-knex-generic-raw
+  language-norms                    knex
+  session-names                     knex
+  stimword                          knex
+  teacher                           knex
 END_OF_FILE
 
 #
