@@ -8,7 +8,6 @@
 
 
 export serviceName='client-context'                                                                                     ;
-export hookSuffix='-before-find'                                                                                        ;
 export hookVarName='clientContextBeforeFind'                                                                            ;
 
 
@@ -58,7 +57,7 @@ exit  ;
 
 
 
-
+export hookSuffix='-before-find'                                                                                        ;
 export hookName=${serviceName}${hookSuffix}                                                                             ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
