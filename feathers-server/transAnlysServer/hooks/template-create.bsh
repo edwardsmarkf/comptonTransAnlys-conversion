@@ -6,6 +6,8 @@ export serviceName=$1  ;
 export hookSuffix=$2   ;
 export hookType=$3     ;
 
+export camelName=$(echo "${serviceName}-${hookSuffix}" | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                   ;
+
 export hookName=${serviceName}${hookSuffix}                                                                             ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
