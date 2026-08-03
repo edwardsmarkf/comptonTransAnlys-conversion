@@ -1,6 +1,6 @@
 #!  /bin/bash  -w
 #
-#    template-create-hook.bsh   2026-08-02
+#    template-create.bsh   2026-08-02
 
 export serviceName=$1  ;
 export hookSuffix=$2   ;
