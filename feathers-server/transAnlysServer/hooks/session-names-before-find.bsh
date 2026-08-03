@@ -7,13 +7,44 @@
 ##   create the feathers service using tcl/expect
 
 
-export serviceName='session-names'                                                                                     ;
-export hookSuffix='-before-find'                                                                                        ;
-export hookVarName='sessionNamesBeforeFind'                                                                            ;
+export serviceName=${1}                        ;                #        'session-names'                                                                                     ;
+export hookName=${2}                           ;
+export hookVarName=${3}                        ;                #        'sessionNamesBeforeFind'                                                                            ;
+
+
+sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
+/console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
+        context.params.query = {                // added by mark                                                        \\
+          ...context.params.query,              // added by mark                                                        \\
+          $select: ['sessionName', 'sessionReplicate', 'sessionNamesShow66Words', 'sessionNamesAutoIncr' ],             // added by mark    \\
+          $sort: { 'sessionOrderNbr' : 1 }                      // added by mark                                        \\  
+        }                                       // added by mark                                                        \\
+        return context;                                                                                                 \\
+
+END_OF_HOOK_SED
+
+sed --in-place  --file=-   ./src/services/${serviceName}/${serviceName}.js          <<END_OF_SERVICE_SED           ;
+s?find: \[]?find: [${hookVarName}]?;
+
+/^import {$/i                                                                                                           \\
+                                                                                                                        \\
+   import { ${hookVarName} }  from '../../hooks/${hookName}.js';                                                        \\
+                                                                                                                        \\
+
+END_OF_SERVICE_SED
+
+exit  ;
+
+#
+
+
+
+
+
+
+
+
 export hookType='regular'                                                                                               ;
-
-
-
 export hookName=${serviceName}${hookSuffix}                                                                             ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
@@ -37,29 +68,3 @@ END_OF_GENERATE_HOOK
 
 
 
-
-sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
-/console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
-        context.params.query = {                // added by mark                                                        \\
-          ...context.params.query,              // added by mark                                                        \\
-          $select: ['sessionName', 'sessionReplicate', 'sessionNamesShow66Words', 'sessionNamesAutoIncr' ],             // added by mark    \\
-          $sort: { 'sessionOrderNbr' : 1 }                      // added by mark                                        \\  
-        }                                       // added by mark                                                        \\
-        return context;                                                                                                 \\
-
-
-END_OF_HOOK_SED
-
-sed --in-place  --file=-   ./src/services/${serviceName}/${serviceName}.js          <<END_OF_SERVICE_SED           ;
-s?find: \[]?find: [${hookVarName}]?;
-
-/^import {$/i                                                                                                           \\
-                                                                                                                        \\
-   import { ${hookVarName} }  from '../../hooks/${hookName}.js';                                                        \\
-                                                                                                                        \\
-
-END_OF_SERVICE_SED
-
-exit  ;
-
-#
