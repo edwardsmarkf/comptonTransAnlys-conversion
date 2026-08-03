@@ -7,10 +7,7 @@ export hookSuffix=$2   ;
 export hookType=$3     ;
 
 
-
-
 export hookName="${serviceName}-${hookSuffix}"                                                   ;
-export camelName=$(echo ${hookName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)               ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
         #       generates a feathers hook
@@ -30,6 +27,12 @@ expect eof
 
 END_OF_GENERATE_HOOK
 )       ## end of feathers generate hook
+
+
+scriptName="./hooks/${hookName}.bsh"  ;
+export hookVarName=$(echo ${hookName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)               ;
+
+bash -vx  ${scriptName}  ${serviceName}  ${hookName}   ${hookVarName}  ;
 
 exit;
 #
