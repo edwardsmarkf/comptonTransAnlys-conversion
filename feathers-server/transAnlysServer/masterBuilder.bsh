@@ -64,17 +64,17 @@ exit                                                                      ;
 
 
 
-bash -vx  ../services/template-create.bsh                   client-context          ;
-bash -vx  ../services/template-create.bsh                   client-context          ;
-bash -vx  ../services/template-create.bsh                   client-context          ;
-bash -vx  ../services/template-create.bsh                   client-session          ;       
-bash -vx  ../services/template-create.bsh                   client-stimword         ;        
-bash -vx  ../services/template-create.bsh                   error-sounds-tooltip    ;        
-bash -vx  ../services/template-create.bsh                   frequency-list          ;     
-bash -vx  ../services/template-create.bsh                   language-norms          ;        
-bash -vx  ../services/template-create.bsh                   session-names           ;       
-bash -vx  ../services/template-create.bsh                   stimword                ;        
-bash -vx  ../services/template-create.bsh                   teacher                 ;        
+##bash -vx  ../services/template-create.bsh                   client-context          ;
+##bash -vx  ../services/template-create.bsh                   client-context          ;
+##bash -vx  ../services/template-create.bsh                   client-context          ;
+##bash -vx  ../services/template-create.bsh                   client-session          ;       
+##bash -vx  ../services/template-create.bsh                   client-stimword         ;        
+##bash -vx  ../services/template-create.bsh                   error-sounds-tooltip    ;        
+##bash -vx  ../services/template-create.bsh                   frequency-list          ;     
+##bash -vx  ../services/template-create.bsh                   language-norms          ;        
+##bash -vx  ../services/template-create.bsh                   session-names           ;       
+##bash -vx  ../services/template-create.bsh                   stimword                ;        
+##bash -vx  ../services/template-create.bsh                   teacher                 ;        
 #
 ############bash -vx        ../services/create-teacher.bsh                            ;
 ############bash -vx        ../services/create-stimword.bsh                           ;
