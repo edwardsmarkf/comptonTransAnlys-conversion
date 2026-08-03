@@ -21,7 +21,6 @@ cd ${FEATHERS_SERVER_NAME}                                                ;
 # services:
 
 while read -r serviceName serviceType specialProcess; do
-    echo "Service name:   https://$(hostname -I | sed --expression='s/ //g;')/${serviceName}/"        ;
     bash -vx  ../services/template-create.bsh   ${serviceName}   ${serviceType}  ${specialProcess}    ;
 done <<END_OF_SERVICE_FILE ;
   client-context                knex
