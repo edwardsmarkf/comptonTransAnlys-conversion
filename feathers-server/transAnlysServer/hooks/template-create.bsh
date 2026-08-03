@@ -6,21 +6,23 @@ export serviceName=$1  ;
 export hookSuffix=$2   ;
 export hookType=$3     ;
 
-export camelName=$(echo "${serviceName}-${hookSuffix}" | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                   ;
 
-export hookName=${serviceName}${hookSuffix}                                                                             ;
+
+
+export hookName="${serviceName}-${hookSuffix}"                                                   ;
+export camelName=$(echo ${hookName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)               ;
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
         #       generates a feathers hook
 
         ##   debugging:   exp_internal 1
 
-        set timeout -1                                                                                                  ;
+        set timeout -1                                                                            ;
 
-        set UPARROW     \x1B\[A                                                                                         ;
-        set DOWNARROW   \x1B\[B                                                                                         ;
-        set SPACE       \x20                                                                                            ;
-        set RETURN      \x0d                                                                                            ;
+        set UPARROW     \x1B\[A                                                                   ;
+        set DOWNARROW   \x1B\[B                                                                   ;
+        set SPACE       \x20                                                                      ;
+        set RETURN      \x0d                                                                      ;
 
         spawn npx feathers generate hook   --name  $env(hookName)         --type $env(hookType)   ;
 
