@@ -24,7 +24,7 @@ while read -r serviceName serviceType specialProcess; do
     echo "Service name:   https://$(hostname -I | sed --expression='s/ //g;')/${serviceName}/"        ;
        ##  find  ..  -type f  -name  template-create.bsh  -print ;
     bash -vx  ../services/template-create.bsh   ${serviceName}  ${specialProcess}               ;
-done <<END_OF_FILE ;
+done <<END_OF_SERVICE_FILE ;
   client-context                    knex
   client-context-stimword           knex       modify-client-context-stimword
   client-master                     knex
@@ -38,7 +38,7 @@ done <<END_OF_FILE ;
   session-names                     knex
   stimword                          knex
   teacher                           knex
-END_OF_FILE
+END_OF_SERVICE_FILE
 
 #
                              ########bash -vx  ../services/modify-client-context-stimword.bsh          ;
@@ -47,13 +47,19 @@ END_OF_FILE
 
 #  hooks:
 
-bash -vx   ../hooks/create-client-context-before-find.bsh         ;
-bash -vx   ../hooks/create-client-session-before-find.bsh         ;
-bash -vx   ../hooks/create-client-stimword-before-get-patch.bsh   ;
-bash -vx   ../hooks/create-language-norms-before-find.bsh         ;
-bash -vx   ../hooks/create-session-names-before-find.bsh          ;
-bash -vx   ../hooks/create-stimword-before-find.bsh               ;
-#
+while read -r hookNamePrefix hookNameSuffix; do
+    echo "Hook name:   ${hookNamePrefix-${hookNameSuffix}"                             ;
+    bash -vx  ../hooks/template-create.bsh   ${hookNamePrefix}  ${hookNameSuffix}      ;
+done <<END_OF_HOOKS_FILE ;
+         client-context   before-find
+         client-session   before-find
+         client-stimword  before-get-patch
+         language-norms   before-find
+         session-names    before-find
+         stimword         before-find
+END_OF_HOOKS_FILE
+
+
 #
 find  .  -type f  -name  '*.bsh' -exec grep  'export serviceName='  {}  \;    | sed --expression="s?export serviceName='?https://localhost/?; s|'.*$|/|; "  ;
 #
@@ -63,6 +69,16 @@ exit                                                                      ;
 
 
 
+
+
+
+###bash -vx   ../hooks/create-client-context-before-find.bsh         ;
+###bash -vx   ../hooks/create-client-session-before-find.bsh         ;
+###bash -vx   ../hooks/create-client-stimword-before-get-patch.bsh   ;
+###bash -vx   ../hooks/create-language-norms-before-find.bsh         ;
+###bash -vx   ../hooks/create-session-names-before-find.bsh          ;
+###bash -vx   ../hooks/create-stimword-before-find.bsh               ;
+#
 
 ##bash -vx  ../services/template-create.bsh                   client-context          ;
 ##bash -vx  ../services/template-create.bsh                   client-context          ;
