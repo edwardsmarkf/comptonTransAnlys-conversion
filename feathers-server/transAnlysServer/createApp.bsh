@@ -46,9 +46,9 @@ expect <(cat <<'END_OF_GENERATE_APP'
                         ##  MySQL/MariaDB
 
         expect -re ".*Enter your database connection string.*"                          ;
-        send -- "${RETURN}"                                                             ;
+        send -- "mysql://mark:mark@localhost:3306/comptonTransAnlys${RETURN}"            ;
                         ## defaults to 'mysql://root:@localhost:3306/my-app'
-                        ## which will be edited later
+                        ## which will be edited later ( or now!)
 
 expect eof
 
