@@ -9,15 +9,16 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
 
 2i                                                                                                                      \\
                                                                                                                         \\
- import { readFile } from 'fs/promises';        /* added by mark */                                                     \\
+import { processClientStimword } from  '../../custom/processClientStimword.js' ;                                        \\
+
+
                                                                                                                         \\
 
 /^  async find(_params) {$/a                                                                                            \\
                                                                                                                         \\
         const knexClient = this.options.app.get('mysqlClient');                                                         \\
-        const { processClientStimword } =  process.cwd() + '/src/custom/' + 'processClientStimword.js' ;                \\
-        let returnVal = await processClientStimword(knexClient, command.query)                                          \\
-        return { ...command.query, ...returnVal };                                                                      \\
+        let returnVal = await processClientStimword(knexClient, _params.query)                                          \\
+        return { ..._params.query, ...returnVal };                                                                      \\
 
 #
 s/return \[]/return result;/;
@@ -36,6 +37,10 @@ exit;
 
 
 
+
+
+import { processClientStimword } from  '../../custom/processClientStimword.js' ;
+        const { processClientStimword } =  process.cwd() + '/src/custom/' + 'processClientStimword.js' ;                \\
 
 
 
