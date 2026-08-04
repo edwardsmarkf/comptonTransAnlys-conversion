@@ -67,6 +67,7 @@ class ExitEarly extends Error {
     }
 }
 
+    /*   //export function processClientStimword (knexClient, argObj)    ??  */
 export const processClientStimword = async (knexClient, argObj) => {
 
         const   parmClientSessionAutoIncr               = argObj.clientSessionAutoIncr          ;
