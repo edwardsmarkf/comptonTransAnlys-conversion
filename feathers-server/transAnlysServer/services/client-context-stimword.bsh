@@ -1,30 +1,24 @@
 #! /bin/bash
 
-
 ##   modify-client-process-stimword   -- 2026-07-22
 
-export serviceName='client-context-stimword'                                                          ;
+export serviceName='client-context-stimword'        ;
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED      ;
-
 2i                                                                                                                      \\
                                                                                                                         \\
-import { processClientStimword } from  '../../custom/processClientStimword.js' ;                                        \\
-
-
-                                                                                                                        \\
+import { processClientStimword } from  '../../custom/processClientStimword.js' ;    /* added by mark */                 \\
 
 /^  async find(_params) {$/a                                                                                            \\
                                                                                                                         \\
-        const knexClient = this.options.app.get('mysqlClient');                                                         \\
-        let returnVal = await processClientStimword(knexClient, _params.query)                                          \\
-        return { ..._params.query, ...returnVal };                                                                      \\
+        const knexClient = this.options.app.get('mysqlClient');                     /* added by mark */                 \\
+        let returnVal = await processClientStimword(knexClient, _params.query) ;    /* added by mark */                 \\
+                        \\
 
 #
-s/return \[]/return result;/;
+s|return \[]|return { ..._params.query, ...returnVal };                       /* added by mark */ |;
 
 END_OF_SERVICE_SED
-
 
 exit;
 
