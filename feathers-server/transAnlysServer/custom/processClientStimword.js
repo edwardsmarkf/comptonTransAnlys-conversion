@@ -82,7 +82,12 @@ export const processClientStimword = async (knexClient, argObj) => {
                         return;
                 })
                 .then( val =>   {
-
+                        
+                        if  ( typeof val == 'undefined' )  {
+                                console.err('contextAutoIncr cannot be undefined!')
+                                throw new ExitEarly ( 'quitting this procedure!' );
+                        }
+                        
                         let contextAutoIncr = val.contextAutoIncr ;
                         var clientContextAutoIncr;
 
