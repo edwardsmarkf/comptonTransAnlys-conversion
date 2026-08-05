@@ -174,17 +174,6 @@ export const processClientStimword = async (knexClient, argObj) => {
                                                                 return;
                                                         }
                                                 })
-                                                                                                                                                        /*
-                                                                                                                                                        .finally( val => {
-                                                                                                                                                                console.info('finally finally finally');
-                                                                                                                                                                console.info(val);
-                                                                                                                                                                console.info(typeof val);
-                                                                                                                                                                console.info(JSON.stringify(val));
-                                                                                                                                                                console.info('finally finally exit');
-                                                                                                                                                                return val;
-                                                                                                                                                        })
-                                                                                                                                                        */
-                                                ;
 
                                         break;
                                 }
