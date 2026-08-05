@@ -575,14 +575,8 @@ function returnSqlStatement(filePrefix)        {
   return  sqlStatement.replaceAll("\\\\n" ,' ')                                   ;
 }
 
-
 // insertIntoClientContextSQL
 function returnInsertClientContextStatement()   {
-
-  const sqlFile      = process.cwd() + '/src/sql/insertIntoClientContextSQL.sql'  ;
-  const sqlStatement = await readFile(sqlFile, 'utf8')                            ;
-  return  sqlStatement.replaceAll("\\\\n" ,' ')                                   ;
-        
 
 let returnVar =
         `
@@ -630,8 +624,6 @@ let returnVar =
 
 
 function        returnInsertClientStimwordStatement()   {
-
-
         
 let returnVar =
         `
