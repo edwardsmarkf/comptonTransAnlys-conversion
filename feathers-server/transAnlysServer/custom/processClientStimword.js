@@ -571,6 +571,11 @@ function deleteChildlessClientContext(knexClient, contextAutoIncr, clientContext
 
 function returnInsertClientContextStatement()   {
 
+  const sqlFile      = process.cwd() + '/src/sql/insertIntoClientContextSQL.sql'  ;
+  const sqlStatement = await readFile(sqlFile, 'utf8')                            ;
+  return  sqlStatement.replaceAll("\\\\n" ,' ')                                   ;
+        
+
 let returnVar =
         `
         INSERT INTO \`clientContext\`
