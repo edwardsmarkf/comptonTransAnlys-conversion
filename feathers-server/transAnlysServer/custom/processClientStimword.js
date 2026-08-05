@@ -575,7 +575,7 @@ function returnSqlStatement(filePrefix)        {
   return  sqlStatement.replaceAll("\\\\n" ,' ')                                   ;
 }
 
-// insertIntoClientContextSQL
+// insertClientContextSQL
 function returnInsertClientContextStatement()   {
 
 let returnVar =
@@ -622,7 +622,7 @@ let returnVar =
     return returnVar;
 };
 
-
+//  insertClientStimwordSQL
 function        returnInsertClientStimwordStatement()   {
         
 let returnVar =
