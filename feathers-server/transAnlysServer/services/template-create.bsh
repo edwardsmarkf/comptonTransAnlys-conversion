@@ -17,9 +17,9 @@ expect <(cat <<'END_OF_GENERATE_SERVICE'
         set SPACE       \x20                                                       ;
         set RETURN      \x0d                                                       ;
 
-        spawn npx feathers generate service   --name  $env(serviceName)             \
-                                              --path  $env(serviceName)             \
-                                              --type $env(serviceType)              ;
+        spawn npx feathers generate service   --name  $env(serviceName)            \
+                                              --path  $env(serviceName)            \
+                                              --type $env(serviceType)             ;
 
         expect -re ".*Does this service require authentication.*"                   ;
         send -- "n${RETURN}"                                                        ;
