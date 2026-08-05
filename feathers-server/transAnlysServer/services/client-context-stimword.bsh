@@ -6,7 +6,7 @@ export serviceName='client-context-stimword'        ;
 
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED ;
-s/^  { additionalProperties: false }/  { additionalProperties: true }/;
+s|^  { additionalProperties: false }|  { additionalProperties: true }  /* changed from false to true by mark  */   |;
 END_OF_SCHEMA_SED
 
 
