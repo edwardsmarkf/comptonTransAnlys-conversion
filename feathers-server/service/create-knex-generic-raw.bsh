@@ -33,7 +33,12 @@ END_OF_GENERATE_APP
 )       ## end of feathers generate app
 
 
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SED ;
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED ;
+s/\{ additionalProperties: false \}/{ additionalProperties: true }/;
+END_OF_SCHEMA_SED
+
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_CLASS_SED ;
 
 2i                                                                                                                      \\
                                                                                                                         \\
@@ -61,10 +66,9 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
               result = sqlResult;                                                                                       \\
       }                                                                                                                 \\
 
-
 s/return \[]/return result;/;
 
-END_OF_SED
+END_OF_CLASS_SED
 
 
 exit;
