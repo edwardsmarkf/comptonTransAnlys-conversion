@@ -16,8 +16,8 @@ export class  getClientsEmails {
         const voiceFileDirectory        =       '/home/mark/voicefiles/'        ;
 
 
-                /* first look in the Mariadb clientMaster table */
-        const clientMasterSqlStatement = await readFile(  process.cwd() + '/src/sql/' 'clientMasterEmail.sql'   , 'utf8');
+                /* first look in the Mariadb clientMaster table */                           /*process.cwd() +*/
+        const clientMasterSqlStatement = await readFile(   './src/sql/clientMasterEmail.sql'   , 'utf8');
         let  clientMasterEmailJSON      =  await knexClient.raw( clientMasterSqlStatement , params.query   );
 
         let clientMasterEmailObj        = JSON.parse(clientMasterEmailJSON[0][0]['JSON_OBJECTAGG']);
