@@ -470,8 +470,8 @@ function insertClientContext(knexClient, val, clientContextErrorSound, contextAu
                 ,       'clientContextErrorNotes'               :       null
                 }
                 ;
-
-        return knexClient.raw(returnInsertClientContextStatement(), insertClientContextParms);
+                return kenxClient.raw(returnSqlStatement('insertClientContextSQL'), , insertClientContextParms);
+                                                                                                                                    //  2026-08-04        return knexClient.raw(returnInsertClientContextStatement(), insertClientContextParms);
 }
 
 function insertClientStimword(knexClient, clientContextAutoIncr, stimwordPositionAutoIncr)     {
@@ -481,7 +481,8 @@ function insertClientStimword(knexClient, clientContextAutoIncr, stimwordPositio
                 ,       'stimwordPositionAutoIncr'              :       stimwordPositionAutoIncr
                 }
                 ;
-        return knexClient.raw(returnInsertClientStimwordStatement(), insertClientStimwordParms);
+        return kenxClient.raw(returnSqlStatement('insertClientStimwordSQL'), , insertClientStimwordParms);
+                                                                                                                 //   2026-08-04   return knexClient.raw(returnInsertClientStimwordStatement(), insertClientStimwordParms);
 }
 
 
@@ -575,97 +576,98 @@ function returnSqlStatement(filePrefix)        {
   return  sqlStatement.replaceAll("\\\\n" ,' ')                                   ;
 }
 
-// insertClientContextSQL
-function returnInsertClientContextStatement()   {
+// 2026-08-04      // insertClientContextSQL
+// 2026-08-04      function returnInsertClientContextStatement()   {
+// 2026-08-04      
+// 2026-08-04      let returnVar =
+// 2026-08-04              `
+// 2026-08-04              INSERT INTO \`clientContext\`
+// 2026-08-04              (               \`layoutName\`
+// 2026-08-04              ,               \`teacherEmail\`
+// 2026-08-04              ,               \`clientMasterEmail\`
+// 2026-08-04              ,               \`sessionName\`
+// 2026-08-04              ,               \`clientSessionAutoIncr\`
+// 2026-08-04              ,               \`soundPhoneme\`
+// 2026-08-04              ,               \`contextPosition\`
+// 2026-08-04              ,               \`contextAutoIncr\`
+// 2026-08-04              ,               \`clientContextErrorSound\`
+// 2026-08-04              ,               \`clientContextErrorCount\`
+// 2026-08-04              ,               \`frequency\`
+// 2026-08-04              ,               \`frequencyListAutoIncr\`
+// 2026-08-04              ,               \`clientContextErrorNotes\`
+// 2026-08-04              )
+// 2026-08-04              (       SELECT  \`clientSession\`.\`layoutName\`
+// 2026-08-04                      ,               \`clientSession\`.\`teacherEmail\`
+// 2026-08-04                      ,               \`clientSession\`.\`clientMasterEmail\`
+// 2026-08-04                      ,               \`clientSession\`.\`sessionName\`
+// 2026-08-04                      ,               \`clientSession\`.\`clientSessionAutoIncr\`
+// 2026-08-04                      ,               \`context\`.\`soundPhoneme\`
+// 2026-08-04                      ,               \`context\`.\`contextPosition\`
+// 2026-08-04                      ,               \`context\`.\`contextAutoIncr\`
+// 2026-08-04                      ,               :clientContextErrorSound
+// 2026-08-04                      ,               :clientContextErrorCount
+// 2026-08-04                      ,               ''
+// 2026-08-04                      ,               1
+// 2026-08-04                      ,               :clientContextErrorNotes
+// 2026-08-04                      FROM    \`clientSession\`
+// 2026-08-04                      INNER JOIN              \`context\`
+// 2026-08-04                              ON              1
+// 2026-08-04                              AND             \`context\`.\`contextAutoIncr\`         = :contextAutoIncr
+// 2026-08-04                              AND             \`clientSession\`.\`layoutName\`        = \`context\`.\`layoutName\`
+// 2026-08-04                      WHERE   1
+// 2026-08-04                      AND     \`clientSession\`.\`clientSessionAutoIncr\`             = :clientSessionAutoIncr
+// 2026-08-04              )
+// 2026-08-04              RETURNING \`clientContextAutoIncr\`
+// 2026-08-04              ;
+// 2026-08-04              `;
+// 2026-08-04          return returnVar;
+// 2026-08-04      };
+// 2026-08-04      
+// 2026-08-04      //  insertClientStimwordSQL
+// 2026-08-04      function        returnInsertClientStimwordStatement()   {
+// 2026-08-04              
+// 2026-08-04      let returnVar =
+// 2026-08-04              `
+// 2026-08-04              INSERT INTO \`clientStimword\`
+// 2026-08-04              (       \`layoutName\`
+// 2026-08-04              ,       \`teacherEmail\`
+// 2026-08-04              ,       \`clientMasterEmail\`
+// 2026-08-04              ,       \`sessionName\`
+// 2026-08-04              ,       \`soundPhoneme\`
+// 2026-08-04              ,       \`contextPosition\`
+// 2026-08-04              ,       \`clientContextErrorSound\`
+// 2026-08-04              ,       \`stimwordPlacement\`
+// 2026-08-04              ,       \`stimwordOrderNbr\`
+// 2026-08-04              ,       \`stimwordWord\`
+// 2026-08-04              ,       \`stimwordPositionNbr\`
+// 2026-08-04              ,       \`stimwordPositionSetting\`
+// 2026-08-04              ,       \`clientContextAutoIncr\`
+// 2026-08-04              ,       \`stimwordPositionAutoIncr\`
+// 2026-08-04              )
+// 2026-08-04              (       SELECT  \`clientContext\`.\`layoutName\`
+// 2026-08-04                      ,       \`clientContext\`.\`teacherEmail\`
+// 2026-08-04                      ,       \`clientContext\`.\`clientMasterEmail\`
+// 2026-08-04                      ,       \`clientContext\`.\`sessionName\`
+// 2026-08-04                      ,       \`stimwordPosition\`.\`soundPhoneme\`
+// 2026-08-04                      ,       \`stimwordPosition\`.\`contextPosition\`
+// 2026-08-04                      ,       \`clientContext\`.\`clientContextErrorSound\`
+// 2026-08-04                      ,       \`stimwordPosition\`.\`stimwordPlacement\`
+// 2026-08-04                      ,       \`stimwordPosition\`.\`stimwordOrderNbr\`
+// 2026-08-04                      ,       \`stimwordPosition\`.\`stimwordWord\`
+// 2026-08-04                      ,       \`stimwordPosition\`.\`stimwordPositionNbr\`
+// 2026-08-04                      ,       \`stimwordPosition\`.\`stimwordPositionSetting\`
+// 2026-08-04                      ,       \`clientContext\`.\`clientContextAutoIncr\`
+// 2026-08-04                      ,       \`stimwordPosition\`.\`stimwordPositionAutoIncr\`
+// 2026-08-04                      FROM    \`clientContext\`
+// 2026-08-04                      INNER JOIN      \`stimwordPosition\`
+// 2026-08-04                              ON      1
+// 2026-08-04                              AND     \`stimwordPosition\`.\`stimwordPositionAutoIncr\`       = :stimwordPositionAutoIncr
+// 2026-08-04                              AND     \`clientContext\`.\`layoutName\`                        = \`stimwordPosition\`.\`layoutName\`
+// 2026-08-04                      WHERE   1
+// 2026-08-04                      AND             \`clientContext\`.\`clientContextAutoIncr\`             = :clientContextAutoIncr
+// 2026-08-04              )
+// 2026-08-04              RETURNING \`clientStimwordAutoIncr\`
+// 2026-08-04              `;
+// 2026-08-04          return returnVar;
+// 2026-08-04      };
 
-let returnVar =
-        `
-        INSERT INTO \`clientContext\`
-        (               \`layoutName\`
-        ,               \`teacherEmail\`
-        ,               \`clientMasterEmail\`
-        ,               \`sessionName\`
-        ,               \`clientSessionAutoIncr\`
-        ,               \`soundPhoneme\`
-        ,               \`contextPosition\`
-        ,               \`contextAutoIncr\`
-        ,               \`clientContextErrorSound\`
-        ,               \`clientContextErrorCount\`
-        ,               \`frequency\`
-        ,               \`frequencyListAutoIncr\`
-        ,               \`clientContextErrorNotes\`
-        )
-        (       SELECT  \`clientSession\`.\`layoutName\`
-                ,               \`clientSession\`.\`teacherEmail\`
-                ,               \`clientSession\`.\`clientMasterEmail\`
-                ,               \`clientSession\`.\`sessionName\`
-                ,               \`clientSession\`.\`clientSessionAutoIncr\`
-                ,               \`context\`.\`soundPhoneme\`
-                ,               \`context\`.\`contextPosition\`
-                ,               \`context\`.\`contextAutoIncr\`
-                ,               :clientContextErrorSound
-                ,               :clientContextErrorCount
-                ,               ''
-                ,               1
-                ,               :clientContextErrorNotes
-                FROM    \`clientSession\`
-                INNER JOIN              \`context\`
-                        ON              1
-                        AND             \`context\`.\`contextAutoIncr\`         = :contextAutoIncr
-                        AND             \`clientSession\`.\`layoutName\`        = \`context\`.\`layoutName\`
-                WHERE   1
-                AND     \`clientSession\`.\`clientSessionAutoIncr\`             = :clientSessionAutoIncr
-        )
-        RETURNING \`clientContextAutoIncr\`
-        ;
-        `;
-    return returnVar;
-};
-
-//  insertClientStimwordSQL
-function        returnInsertClientStimwordStatement()   {
-        
-let returnVar =
-        `
-        INSERT INTO \`clientStimword\`
-        (       \`layoutName\`
-        ,       \`teacherEmail\`
-        ,       \`clientMasterEmail\`
-        ,       \`sessionName\`
-        ,       \`soundPhoneme\`
-        ,       \`contextPosition\`
-        ,       \`clientContextErrorSound\`
-        ,       \`stimwordPlacement\`
-        ,       \`stimwordOrderNbr\`
-        ,       \`stimwordWord\`
-        ,       \`stimwordPositionNbr\`
-        ,       \`stimwordPositionSetting\`
-        ,       \`clientContextAutoIncr\`
-        ,       \`stimwordPositionAutoIncr\`
-        )
-        (       SELECT  \`clientContext\`.\`layoutName\`
-                ,       \`clientContext\`.\`teacherEmail\`
-                ,       \`clientContext\`.\`clientMasterEmail\`
-                ,       \`clientContext\`.\`sessionName\`
-                ,       \`stimwordPosition\`.\`soundPhoneme\`
-                ,       \`stimwordPosition\`.\`contextPosition\`
-                ,       \`clientContext\`.\`clientContextErrorSound\`
-                ,       \`stimwordPosition\`.\`stimwordPlacement\`
-                ,       \`stimwordPosition\`.\`stimwordOrderNbr\`
-                ,       \`stimwordPosition\`.\`stimwordWord\`
-                ,       \`stimwordPosition\`.\`stimwordPositionNbr\`
-                ,       \`stimwordPosition\`.\`stimwordPositionSetting\`
-                ,       \`clientContext\`.\`clientContextAutoIncr\`
-                ,       \`stimwordPosition\`.\`stimwordPositionAutoIncr\`
-                FROM    \`clientContext\`
-                INNER JOIN      \`stimwordPosition\`
-                        ON      1
-                        AND     \`stimwordPosition\`.\`stimwordPositionAutoIncr\`       = :stimwordPositionAutoIncr
-                        AND     \`clientContext\`.\`layoutName\`                        = \`stimwordPosition\`.\`layoutName\`
-                WHERE   1
-                AND             \`clientContext\`.\`clientContextAutoIncr\`             = :clientContextAutoIncr
-        )
-        RETURNING \`clientStimwordAutoIncr\`
-        `;
-    return returnVar;
-};
