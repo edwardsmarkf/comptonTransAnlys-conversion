@@ -29,7 +29,8 @@ END_OF_GENERATE_HOOK
 )       ## end of feathers generate hook
 
 
-scriptName="./hooks/${hookName}.bsh"  ;
+                                          ##bash -vx  ../services/${specialProcess}.bsh
+scriptName="../hooks/${hookName}.bsh"  ;
 export hookVarName=$(echo ${hookName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)               ;
 
 bash -vx  ${scriptName}  ${serviceName}  ${hookName}   ${hookVarName}  ;
