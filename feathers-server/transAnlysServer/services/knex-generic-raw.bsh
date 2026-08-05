@@ -7,6 +7,11 @@
 export serviceName='knex-generic-raw'                                                                                    ;
 
 
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED ;
+s/^  { additionalProperties: false }/  { additionalProperties: true }/;
+END_OF_SCHEMA_SED
+
+
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED     ;
 
 2i                                                                                                                      \\
@@ -43,6 +48,9 @@ END_OF_SERVICE_SED
 exit;
 
 #
+
+
+
 
 
 
