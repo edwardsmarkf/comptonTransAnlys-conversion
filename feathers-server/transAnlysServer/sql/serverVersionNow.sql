@@ -1,1 +1,4 @@
-SELECT VERSION(), NOW();
+SELECT  VERSION()  "Server Version"
+  ,     NOW()      "Server Time"
+  ,     :param     "Input Parm"
+  ;
