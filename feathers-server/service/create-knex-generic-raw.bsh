@@ -34,7 +34,7 @@ END_OF_GENERATE_APP
 
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED ;
-s/\{ additionalProperties: false \}/{ additionalProperties: true }/;
+s/^  { additionalProperties: false }/  { additionalProperties: true }/;
 END_OF_SCHEMA_SED
 
 
