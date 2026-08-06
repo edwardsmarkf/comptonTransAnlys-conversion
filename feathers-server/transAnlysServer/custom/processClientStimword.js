@@ -470,7 +470,7 @@ function insertClientContext(knexClient, val, clientContextErrorSound, contextAu
                 ,       'clientContextErrorNotes'               :       null
                 }
                 ;
-                return kenxClient.raw(returnSqlStatement('insertClientContextSQL'), , insertClientContextParms);
+                return kenxClient.raw(returnSqlStatement('insertClientContextSQL'), insertClientContextParms);
                                                                                                                                     //  2026-08-04        return knexClient.raw(returnInsertClientContextStatement(), insertClientContextParms);
 }
 
