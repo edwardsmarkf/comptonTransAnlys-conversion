@@ -58,9 +58,9 @@ END_OF_HOOKS_FILE
 #
 #
 
-for serviceName in $(ls   ./src/services |  grep -v  index.js ; ) ;   do
-    echo  "http://$(hostname  --all-ip-address | sed --expression='s/ //;' ;):3030/${serviceName}"/  ; 
-done
+#for serviceName in $(ls   ./src/services |  grep -v  index.js ; ) ;   do
+#    echo  "http://$(hostname  --all-ip-address | sed --expression='s/ //;' ;):3030/${serviceName}"/  ; 
+#done
 
 #
 exit                                                                      ;
