@@ -1,4 +1,4 @@
-SELECT  VERSION()  "Server Version:"
-  ,     NOW()      "Server Time:"
-  ,     :param     "Parameter:"
+SELECT  VERSION()  "Server Version"
+  ,     NOW()      "Server Time"
+  ,     :param     "Parameter"
   ;
