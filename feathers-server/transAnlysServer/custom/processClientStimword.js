@@ -84,7 +84,7 @@ export const processClientStimword = async (knexClient, argObj) => {
                 .then( val =>   {
                         
                         if  ( typeof val == 'undefined' )  {
-                                console.err('contextAutoIncr cannot be undefined!')
+                                console.error('contextAutoIncr cannot be undefined!')
                                 throw new ExitEarly ( 'quitting this procedure!' );
                         }
                         
@@ -571,9 +571,9 @@ function deleteChildlessClientContext(knexClient, contextAutoIncr, clientContext
 
 
 function returnSqlStatement(filePrefix)        {
-  const sqlFile      = process.cwd() + '/src/sql/' + filePrefix + '.sql'          ;
-  const sqlStatement = await readFile(sqlFile, 'utf8')                            ;
-  return  sqlStatement.replaceAll("\\\\n" ,' ')                                   ;
+  const sqlFile      = process.cwd() + '/src/sql/' + filePrefix + '.sql'    ;
+  const sqlStatement = readFile(sqlFile, 'utf8')                            ;
+  return  sqlStatement.replaceAll("\\\\n" ,' ')                             ;
 }
 
 // 2026-08-04      // insertClientContextSQL
