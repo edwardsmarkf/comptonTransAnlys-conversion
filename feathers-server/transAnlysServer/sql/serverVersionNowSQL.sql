@@ -1,4 +1,4 @@
 SELECT  VERSION()  "Server Version"
   ,     NOW()      "Server Time"
-  ,     :param     "Input Parm"
+  ,     :param     "Input Parameter Testing!"
   ;
