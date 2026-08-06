@@ -33,7 +33,13 @@ END_OF_GENERATE_HOOK
 scriptName="../hooks/${hookName}.bsh"  ;
 export hookVarName=$(echo ${hookName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)               ;
 
-bash -vx  ${scriptName}  ${serviceName}  ${hookName}   ${hookVarName}  ;
+if [ -f "${scriptName}" ]; then
+    echo "${scriptName} - File exists."                                    ;
+    bash -vx  ${scriptName}  ${serviceName}  ${hookName}   ${hookVarName}  ;
+    exit 1                                                                 ;
+else
+    echo "${scriptName} - File does NOT exist....!"                        ;
+    exit 0                                                                 ;
+fi
 
-exit;
 #
