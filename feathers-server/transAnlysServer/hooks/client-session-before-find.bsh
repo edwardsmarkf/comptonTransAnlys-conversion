@@ -28,7 +28,7 @@ s/find: \[]/find: [${hookVarName}]/  ;
 
 /^import {$/i                                                                                                            \\
                                                                                                                          \\
-import { $hookVarName}  }  from '../../hooks/${hookName}.js';                                                            \\
+import { $hookVarName}    from '../../hooks/${hookName}.js';        /* added by mark */                                  \\
 
 END_OF_SERVICE_SED
 
