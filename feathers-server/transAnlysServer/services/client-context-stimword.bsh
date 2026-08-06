@@ -26,6 +26,8 @@ s|return \[]|return { ..._params.query, ...returnVal };                       /*
 
 END_OF_SERVICE_SED
 
+echo "http://$(hostname --all-ip-addresses | sed --expression='s/ //;' )/${serviceName}/?stimwordPositionAutoIncr=5" ;
+
 exit;
 
 #
