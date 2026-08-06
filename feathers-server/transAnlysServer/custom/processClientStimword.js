@@ -481,7 +481,7 @@ function insertClientStimword(knexClient, clientContextAutoIncr, stimwordPositio
                 ,       'stimwordPositionAutoIncr'              :       stimwordPositionAutoIncr
                 }
                 ;
-        return kenxClient.raw(returnSqlStatement('insertClientStimwordSQL'), , insertClientStimwordParms);
+        return kenxClient.raw(returnSqlStatement('insertClientStimwordSQL'), insertClientStimwordParms);
                                                                                                                  //   2026-08-04   return knexClient.raw(returnInsertClientStimwordStatement(), insertClientStimwordParms);
 }
 
