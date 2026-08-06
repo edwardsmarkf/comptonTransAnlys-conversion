@@ -16,10 +16,10 @@ sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
   return async context => {                                                                                             \\
         context.params.query = {                        // added by mark                                                \\
           ...context.params.query,                      // added by mark                                                \\
-          \$select: ['clientStimwordNotes']              // added by mark                                                \\
+          \$select: ['clientStimwordNotes']              // added by mark                                               \\
         }                                               // added by mark                                                \\
-    return context;                                     // added by mark                                                \\
-  ?                                                     // added by mark                                                \\
+        return context;                                 // added by mark                                                \\
+  }                                                     // added by mark                                                \\
 
 
 END_OF_HOOK_SED
