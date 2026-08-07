@@ -5,7 +5,12 @@
 #       (re)construct the phonetic analysis server
 #
 #
-export FEATHERS_SERVER_NAME=$1                                            ;
+export FEATHERS_SERVER_NAME=$1                                          ;
+#
+#
+ScriptName="${BASH_SOURCE[0]##*/}"                                      ;
+TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                                 ;
+globalComment="/* added ${TimeStamp} by ${ScriptName} */                ;
 #
 #
 #
@@ -21,7 +26,7 @@ cd ${FEATHERS_SERVER_NAME}                                                ;
 # services:
 
 while read -r serviceName serviceType specialProcess; do
-    bash -vx  ../services/template-create.bsh   ${serviceName}   ${serviceType}  ${specialProcess}    ;
+    bash -vx  ../services/template-create.bsh   ${serviceName}   ${serviceType}  ${globalComment} ${specialProcess}    ;
 done <<END_OF_SERVICE_FILE ;
   client-context                knex
   client-context-stimword       custom      client-context-stimword
