@@ -4,40 +4,41 @@
 ##   knex-generic-raw.bsh   -- 2026-07-22
 
 
+export globalComment=${1}                                                                                                ;
 export serviceName='knex-generic-raw'                                                                                    ;
 
 
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED           ;
-s|^  { additionalProperties: false }|  { additionalProperties: true }  /* changed from false to true by mark  */   |;
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED                   ;
+s|^  { additionalProperties: false }|  { additionalProperties: true }  ${globalComment}                                     |;
 END_OF_SCHEMA_SED
 
 
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED     ;
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED                   ;
 
-2i                                                                                                                      \\
-                                                                                                                        \\
- import { readFile } from 'fs/promises';        /* added by mark */                                                     \\
-                                                                                                                        \\
+2i                                                                                                                          \\
+                                                                                                                            \\
+ import { readFile } from 'fs/promises';        ${globalComment}                                                            \\
+                                                                                                                            \\
 
-/^  async find(_params) {$/a                                                                                            \\
-                                                                                                                        \\
-            /*      postman testing:                                                                                    \\
-                        http://192.168.100.144:3030/knex-generic-raw/?knexSQL=serverVersionNow                          \\
-                        http://192.168.100.144:3030/knex-generic-raw/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL   \\
-            */                                                                                                          \\
-      const knexClient   = this.options.app.get('mysqlClient');                                                         \\
-      const sqlFile      = process.cwd() + '/src/sql/' + _params.query.knexSQL   + '.sql'  ;                            \\
-      const sqlStatement = await readFile(sqlFile, 'utf8');                                                             \\
-      const [sqlResult]   =  await knexClient.raw( sqlStatement.replaceAll("\\\\n",' '), _params.query );               \\
-                                                                                                                        \\
-      let result;                                                                                                       \\
-      if  ( typeof sqlResult[0].JSON_ARRAYAGG       == 'string' )        {                                              \\
-              result = sqlResult[0].JSON_ARRAYAGG   ;                                                                   \\
-      } else if ( typeof sqlResult[0] == 'object' )        {                                                            \\
-              result = sqlResult[0];                                                                                    \\
-      } else {                                                                                                          \\
-              result = sqlResult;                                                                                       \\
-      }                                                                                                                 \\
+/^  async find(_params) {$/a                                                                                                \\
+                                                                                                                            \\
+            /*      postman testing:                                                                                        \\
+                        http://192.168.100.144:3030/knex-generic-raw/?knexSQL=serverVersionNow                              \\
+                        http://192.168.100.144:3030/knex-generic-raw/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL       \\
+            */                                                                                                              \\
+      const knexClient   = this.options.app.get('mysqlClient');                                           ${globalComment}  \\
+      const sqlFile      = process.cwd() + '/src/sql/' + _params.query.knexSQL   + '.sql'  ;              ${globalComment}  \\
+      const sqlStatement = await readFile(sqlFile, 'utf8');                                               ${globalComment}  \\
+      const [sqlResult]   =  await knexClient.raw( sqlStatement.replaceAll("\\\\n",' '), _params.query ); ${globalComment}  \\
+                                                                                                          ${globalComment}  \\
+      let result;                                                                                         ${globalComment}  \\
+      if  ( typeof sqlResult[0].JSON_ARRAYAGG       == 'string' )        {                                ${globalComment}  \\
+              result = sqlResult[0].JSON_ARRAYAGG   ;                                                     ${globalComment}  \\
+      } else if ( typeof sqlResult[0] == 'object' )        {                                              ${globalComment}  \\
+              result = sqlResult[0];                                                                      ${globalComment}  \\
+      } else {                                                                                            ${globalComment}  \\
+              result = sqlResult;                                                                         ${globalComment}  \\
+      }                                                                                                   ${globalComment}  \\
 
 
 s/return \[]/return result;/;
