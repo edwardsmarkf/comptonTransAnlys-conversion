@@ -3,33 +3,39 @@
 
 ##   modify-error-sounds-tooltip.bsh   -- 2026-07-22
 
+export globalComment=${1}                                                                                         ;
 export serviceName='get-clients-emails'                                                                           ;
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED         ;
-s|^  { additionalProperties: false }|  { additionalProperties: true }  /* changed from false to true by mark  */   |;
+s|^  { additionalProperties: false }|  { additionalProperties: true }     ${globalComment}                       |;
 END_OF_SCHEMA_SED
 
 
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED         ;
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_CLASS_SED       ;
 
-2i                                                                                                                \\
-                                                                                                                  \\
-                           // import { getClientsEmail } from 'fs/promises';        /* added by mark */           \\
-                                                                                                                  \\
-/^  async find(_params) {$/a                                                                                      \\
-                                                                                                                  \\
-      const knexClient   = this.options.app.get('mysqlClient');                                                   \\
-      const { readClientsEmail}        = process.cwd() + '/src/custom/' + 'getClientsEmail.js'              ;     \\
-      const [emailResult]   =  await readClientsEmail(_params)                                                    \\
+/^  async find(_params) {$/a                                                                                          \\
+                                                                                               ;  ${globalComment}    \\
+      const knexClient   = this.options.app.get('mysqlClient')                                 ;  ${globalComment}    \\
+      const { readClientsEmail}        = process.cwd() + '/src/custom/' + 'getClientsEmail.js' ;  ${globalComment}    \\
+      const [emailResult]   =  await readClientsEmail(_params)                                 ;  ${globalComment}    \\
 
 s/return \[]/return emailResult  ;
  
-END_OF_SERVICE_SED
+END_OF_SERVICE_CLASS_SED
 
 
 exit;
 
 
+
+
+
+
+
+2i                                                                                                                \\
+                                                                                                                      \\
+                           // import { getClientsEmail } from 'fs/promises';        /* added by mark */               \\
+                                                                                                                      \\
 
 
 
