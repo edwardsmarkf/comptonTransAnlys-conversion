@@ -7,29 +7,29 @@
 ##   create the feathers service using tcl/expect
 
 
-export serviceName=${1}                                ;   ###  'language-norms'  
+export serviceName=${1}                                ;
 export hookName=${2}                                   ;
-export hookVarName=${3}                                ;   ###   'languageNormsBeforeFind'
-export globalComment={4}                                      ;
+export hookVarName=${3}                                ;
+export globalComment={4}                                ;
 
 
 sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
 /console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
                                                                                                                         \\
         const knexClient =   context.app.get('mysqlClient') ;                                                           \\
-                                                                                                                        \\
-        const query = context.service.createQuery(context.params) ;                                                     \\
-                                                                                                                        \\
-        // https://knexjs.org/guide/query-builder.html#knex                                                             \\
-        query   .clear  ('select')  // remove ALL existing columns from queryBuilder                                    \\
-                .select( 'languageNormsName')                                                                           \\
-                .distinct()                                                                                             \\
-                .orderBy('languageNormsName')                                                                           \\
-                ;                                                                                                       \\
-                                                                                                                        \\
-        context.params.knex = query ;                                                                                   \\
-                                                                                                                        \\
-        return context;                                                                                                 \\
+                                                                                              ${globalComment}          \\
+        const query = context.service.createQuery(context.params) ;                           ${globalComment}           \\
+                                                                                              ${globalComment}          \\
+        // https://knexjs.org/guide/query-builder.html#knex                                   ${globalComment}          \\
+        query   .clear  ('select')  // remove ALL existing columns from queryBuilder          ${globalComment}          \\
+                .select( 'languageNormsName')                                                 ${globalComment}          \\
+                .distinct()                                                                   ${globalComment}          \\
+                .orderBy('languageNormsName')                                                 ${globalComment}          \\
+                ;                                                                             ${globalComment}          \\
+                                                                                              ${globalComment}          \\
+        context.params.knex = query ;                                                         ${globalComment}          \\
+                                                                                              ${globalComment}          \\
+        return context;                                                                       ${globalComment}          \\
 
 END_OF_HOOK_SED
 
@@ -38,7 +38,7 @@ s?find: \[]?find: [${hookVarName}]?;
 
 /^import {$/i                                                                                                           \\
                                                                                                                         \\
-   import { ${hookVarName} }  from '../../hooks/${hookName}.js';                                                        \\
+   import { ${hookVarName} }  from '../../hooks/${hookName}.js'   ;                      ${globalComment}               \\
                                                                                                                         \\
 
 END_OF_SERVICE_SED
