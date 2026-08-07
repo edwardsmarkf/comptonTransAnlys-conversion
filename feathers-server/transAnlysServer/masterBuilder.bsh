@@ -26,7 +26,7 @@ cd ${FEATHERS_SERVER_NAME}                                                ;
 # services:
 
 while read -r serviceName serviceType specialProcess; do
-    bash -vx  ../services/template-create.bsh   ${serviceName}   ${serviceType}  ${globalComment} ${specialProcess}    ;
+    bash -vx  ../services/template-create.bsh   ${serviceName}   ${serviceType}  ${globalComment}  ${specialProcess}    ;
 done <<END_OF_SERVICE_FILE ;
   client-context                knex
   client-context-stimword       custom      client-context-stimword
@@ -48,8 +48,8 @@ END_OF_SERVICE_FILE
 #  hooks:
 
 while read -r serviceName hookNameSuffix hookType; do
-    echo "Hook name:   ${serviceName}-${hookNameSuffix}"                                        ;
-    bash -vx  ../hooks/template-create.bsh   ${serviceName}  ${hookNameSuffix} ${hookType}   ;
+    echo "Hook name:   ${serviceName}-${hookNameSuffix}"                                                     ;
+    bash -vx  ../hooks/template-create.bsh   ${serviceName}  ${hookNameSuffix} ${hookType}  ${globalComment} ;
 done <<END_OF_HOOKS_FILE ;
          client-context   before-find        regular
          client-session   before-find        regular
