@@ -2,9 +2,10 @@
 #
 #    template-create.bsh   2026-08-02
 
-export serviceName=$1  ;
-export hookSuffix=$2   ;
-export hookType=$3     ;
+export serviceName=${1}        ;
+export hookSuffix=${2}         ;
+export hookType=${3}           ;
+export globalComment={4}       ;
 
 
 export hookName="${serviceName}-${hookSuffix}"                                                   ;
@@ -34,12 +35,12 @@ scriptName="../hooks/${hookName}.bsh"  ;
 export hookVarName=$(echo ${hookName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)               ;
 
 if [ -f "${scriptName}" ]; then
-    echo "${scriptName} - File exists."                                    ;
-    bash -vx  ${scriptName}  ${serviceName}  ${hookName}   ${hookVarName}  ;
-    exit 1                                                                 ;
+    echo "${scriptName} - File exists."                                                            ;
+    bash -vx  ${scriptName}  ${serviceName}  ${hookName}   ${hookVarName}  ${globalComment}        ;
+    exit 1                                                                                         ;
 else
-    echo "${scriptName} - File does NOT exist....!"                        ;
-    exit 0                                                                 ;
+    echo "${scriptName} - File does NOT exist....!"                                                ;
+    exit 0                                                                                         ;
 fi
 
 #
