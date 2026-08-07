@@ -3,7 +3,7 @@
 ##   modify-client-process-stimword   -- 2026-07-22
 
 
-export globalComment=$1                             ;
+export globalComment=${1}                           ;
 
 export serviceName='client-context-stimword'        ;
 
@@ -13,21 +13,21 @@ s|^  { additionalProperties: false }|  { additionalProperties: true }    ${globa
 END_OF_SCHEMA_SED
 
 
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED              ;
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_CLASS_SED      ;
 2i                                                                                                                   \\
                                                                                                                      \\
 import { processClientStimword } from  '../../custom/processClientStimword.js' ;    ${globalComment}                 \\
 
 /^  async find(_params) {$/a                                                                                         \\
                                                                                                                      \\
-        const knexClient = this.options.app.get('mysqlClient');                     ${globalComment}                 \\
+        const knexClient = this.options.app.get('mysqlClient')                 ;    ${globalComment}                 \\
         let returnVal = await processClientStimword(knexClient, _params.query) ;    ${globalComment}                 \\
                         \\
 
 #
-s|return \[]|return { ..._params.query, ...returnVal };                       /* added by mark */ |;
+s|return \[]|return { ..._params.query, ...returnVal }                         ;    ${globalComment}                  |;
 
-END_OF_SERVICE_SED
+END_OF_SERVICE_CLASS_SED
 
 echo "http://$(hostname --all-ip-addresses | sed --expression='s/ //;' )/${serviceName}:3030/?stimwordPositionAutoIncr=5" ;
 
