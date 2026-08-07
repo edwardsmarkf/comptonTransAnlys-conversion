@@ -10,7 +10,7 @@ export FEATHERS_SERVER_NAME=$1                                          ;
 #
 ScriptName="${BASH_SOURCE[0]##*/}"                                      ;
 TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                                 ;
-globalComment="/* added ${TimeStamp} by ${ScriptName} */                ;
+globalComment="/* Added ${TimeStamp} by ${ScriptName} */"               ;
 #
 #
 #
