@@ -66,7 +66,7 @@ END_OF_HOOKS_FILE
 #
 #
 
-find  ./src/   -type f -name  '*.js'                                                                        \
+find  ./src/   -type f -name  '*.js'  -print                                                                  \
       -exec sed --in-place --expression="s|${globalComment}|/* ${ScriptName} -- ${TimeStamp} */|  ;"  {}  \;  ;
 
 
