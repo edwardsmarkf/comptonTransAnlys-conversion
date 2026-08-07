@@ -5,13 +5,14 @@
 #       (re)construct the phonetic analysis server
 #
 #
-export FEATHERS_SERVER_NAME=$1                                          ;
+export FEATHERS_SERVER_NAME=${1}                                        ;
 #
 #
 ScriptName="${BASH_SOURCE[0]##*/}"                                      ;
 TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                                 ;
 
-export globalComment='GLOBAL_COMMENT_TO_BE_REPLACED_AT_THE_END'         ;  ##  globalComment="/* Added ${TimeStamp} by ${ScriptName} */"               ;
+export globalComment='GLOBAL_COMMENT_TO_BE_REPLACED_AT_THE_END'         ;
+
 
 #
 #
@@ -65,9 +66,9 @@ END_OF_HOOKS_FILE
 #
 #
 
-#for serviceName in $(ls   ./src/services |  grep -v  index.js ; ) ;   do
-#    echo  "http://$(hostname  --all-ip-address | sed --expression='s/ //;' ;):3030/${serviceName}"/  ; 
-#done
+find  ./${FEATHERS_SERVER_NAME}/src/   -type f -name  '*.js'  -exec sed --in-place --expression='s|${globalComment}|/* $ScriptName}  ${TimeStamp} */|;'  {}  \;  ;
+
+
 
 #
 exit                                                                      ;
@@ -113,4 +114,9 @@ exit                                                                      ;
 ############bash -vx        ../services/create-client-stimword.bsh                    ;
  ############bash -vx        ../services/create-client-session.bsh                     ;
   ############################bash -vx        ../services/create-client-context.bsh                     ;
- ############bash -vx        ../services/create-client-master.bsh                      ;
+
+
+#for serviceName in $(ls   ./src/services |  grep -v  index.js ; ) ;   do
+#    echo  "http://$(hostname  --all-ip-address | sed --expression='s/ //;' ;):3030/${serviceName}"/  ; 
+#done
+############bash -vx        ../services/create-client-master.bsh                      ;
