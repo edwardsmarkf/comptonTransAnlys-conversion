@@ -41,10 +41,10 @@ END_OF_HOOK_SED
 sed --in-place  --file=-   ./src/services/${serviceName}/${serviceName}.js          <<END_OF_SERVICE_SED           ;
 s?find: \[]?find: [${hookVarName}]?;
 
-/^import {$/i                                                                                                           \\
-                                                                                                                        \\
-   import { ${hookVarName} }  from '../../hooks/${hookName}.js';                                                        \\
-                                                                                                                        \\
+/^import {$/i                                                                                                       \\
+                                                                                                                    \\
+   import { ${hookVarName} }  from '../../hooks/${hookName}.js'  ;          ${globalComment}                        \\
+                                                                                                                    \\
 
 END_OF_SERVICE_SED
 
