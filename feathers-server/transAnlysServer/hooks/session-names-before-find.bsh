@@ -7,9 +7,10 @@
 ##   create the feathers service using tcl/expect
 
 
-export serviceName=${1}                        ;                #        'session-names'                                                                                     ;
+export serviceName=${1}                        ;                #        'session-names' 
 export hookName=${2}                           ;
-export hookVarName=${3}                        ;                #        'sessionNamesBeforeFind'                                                                            ;
+export hookVarName=${3}                        ;                #        'sessionNamesBeforeFind'
+export globalComment={4}                                      ;
 
 
 sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
