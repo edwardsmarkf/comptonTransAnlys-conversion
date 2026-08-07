@@ -7,34 +7,34 @@
 ##   create the feathers service using tcl/expect
 
 
-export serviceName=${1}                                       ;   ##'client-context'                                                                                     ;
+export serviceName=${1}                                       ;
 export hookName=${2}                                          ;
-export hookVarName=${3}                                       ;   ## 'clientContextBeforeFind'                                                                            ;
+export hookVarName=${3}                                       ;
 export globalComment={4}                                      ;
 
 sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
-/console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                              \\
-                                                                                                                        \\
-        const knexClient =   context.app.get('mysqlClient') ;                                                           \\
-                                                                                                                        \\
-        const query = context.service.createQuery(context.params) ;                                                     \\
-                                                                                                                        \\
-        // https://knexjs.org/guide/query-builder.html#knex                                                             \\
-        query   .clear  ('select')  // remove ALL existing columns from queryBuilder                                    \\
-                .select (       { 'contextAutoIncr'             : 'contextAutoIncr'                             }       \\
-                        ,       knexClient.raw('CONCAT(\`contextPosition\` , "-" , \`soundPhoneme\`) AS positionSound')     \\
-                        ,       { 'frequency'                   : 'frequency'                                   }       \\
-                        ,       { 'clientContextErrorSound'     : 'clientContextErrorSound'                     }       \\
-                        ,       { 'clientContextErrorCount'     : 'clientContextErrorCount'                     }       \\
-                        ,       { 'clientContextErrorNotes'     : 'clientContextErrorNotes'                     }       \\
-                        ,       { 'clientContextAutoIncr'       : 'clientContextAutoIncr'                       }       \\
-                        )                                                                                               \\
-                .orderBy('contextAutoIncr')                                                                             \\
-                ;                                                                                                       \\
-                                                                                                                        \\
-        context.params.knex = query ;                                                                                   \\
-                                                                                                                        \\
-        return context;                                                                                                 \\
+/console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                                                 \\
+                                                                                                                                           \\
+        const knexClient =   context.app.get('mysqlClient') ;                                                            ${globalComment}  \\
+                                                                                                                         ${globalComment}  \\
+        const query = context.service.createQuery(context.params) ;                                                      ${globalComment}  \\
+                                                                                                                         ${globalComment}  \\
+        // https://knexjs.org/guide/query-builder.html#knex                                                              ${globalComment}  \\
+        query   .clear  ('select')  // remove ALL existing columns from queryBuilder                                     ${globalComment}  \\
+                .select (       { 'contextAutoIncr'             : 'contextAutoIncr'                             }        ${globalComment}  \\
+                        ,       knexClient.raw('CONCAT(\`contextPosition\` , "-" , \`soundPhoneme\`) AS positionSound')  ${globalComment}  \\
+                        ,       { 'frequency'                   : 'frequency'                                   }        ${globalComment}  \\
+                        ,       { 'clientContextErrorSound'     : 'clientContextErrorSound'                     }        ${globalComment}  \\
+                        ,       { 'clientContextErrorCount'     : 'clientContextErrorCount'                     }        ${globalComment}  \\
+                        ,       { 'clientContextErrorNotes'     : 'clientContextErrorNotes'                     }        ${globalComment}  \\
+                        ,       { 'clientContextAutoIncr'       : 'clientContextAutoIncr'                       }        ${globalComment}  \\
+                        )                                                                                                ${globalComment}  \\
+                .orderBy('contextAutoIncr')                                                                              ${globalComment}  \\
+                ;                                                                                                        ${globalComment}  \\
+                                                                                                                         ${globalComment}  \\
+        context.params.knex = query ;                                                                                    ${globalComment}  \\
+                                                                                                                         ${globalComment}  \\
+        return context;                                                                                                  ${globalComment}  \\
 
 END_OF_HOOK_SED
 
