@@ -7,10 +7,10 @@
 ##   create the feathers service using tcl/expect
 
 
-export serviceName=${1}                        ;                ##        'stimword'                                                                                     ;
+export serviceName=${1}                        ;                ##        'stimword'  
 export hookName=${2}                           ;
 export hookVarName=${3}                        ;
-
+export globalComment={4}                        ;
 
 
 
