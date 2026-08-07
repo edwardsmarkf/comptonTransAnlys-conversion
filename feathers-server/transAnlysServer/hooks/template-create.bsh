@@ -5,10 +5,17 @@
 export serviceName=${1}        ;
 export hookSuffix=${2}         ;
 export hookType=${3}           ;
-export globalComment={4}       ;
+export globalComment=${4}      ;
 
 
-export hookName="${serviceName}-${hookSuffix}"                                                   ;
+export hookName="${serviceName}-${hookSuffix}"                                      ;
+
+export scriptName="${BASH_SOURCE[0]##*/}"                                           ;
+
+echo  "Beginning ${scriptName}"                                                     ;
+echo  ${serviceName}  ${hookSuffix}  ${hookType}  ${globalComment}                  ;
+echo  '-----------------------'                                                     ;
+
 
 expect <(cat <<'END_OF_GENERATE_HOOK'
         #       generates a feathers hook
