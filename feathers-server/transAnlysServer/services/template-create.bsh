@@ -3,10 +3,15 @@
 #   generic template to do the single-table services      2026-08-01
 #
 #
-export serviceName=$1     ;
-export serviceType=$2     ;
-export globalComment=$3   ;
-export specialProcess=$4  ;
+export serviceName=${1}     ;
+export serviceType=${2}     ;
+export globalComment=${3}   ;
+export specialProcess=${4}  ;
+
+
+echo  $
+echo  ${serviceName}  ${serviceType}  ${globalComment}  ${specialProcess}   ;
+
 
 expect <(cat <<'END_OF_GENERATE_SERVICE'
         #       generates a feathers service
