@@ -7,8 +7,9 @@ export serviceName=${1}     ;
 export serviceType=${2}     ;
 export globalComment=${3}   ;
 export specialProcess=${4}  ;
-export ScriptName="${BASH_SOURCE[0]##*/}"                                           ;
 
+
+export scriptName="${BASH_SOURCE[0]##*/}"                                           ;
 
 echo  "Beginning ${scriptName}"                                                     ;
 echo  ${serviceName}  ${serviceType}  ${globalComment}  ${specialProcess}           ;
