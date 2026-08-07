@@ -5,13 +5,13 @@
 #       (re)construct the phonetic analysis server
 #
 #
-export FEATHERS_SERVER_NAME=${1}                                        ;
+export FEATHERS_SERVER_NAME=${1}                             ;
 #
 #
-ScriptName="${BASH_SOURCE[0]##*/}"                                      ;
-TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                                 ;
+ScriptName="${BASH_SOURCE[0]##*/}"                           ;
+TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                      ;
 
-export globalComment='GLOBAL_COMMENT_TO_BE_REPLACED_AT_THE_END'         ;
+export globalComment='GLOBAL_COMMENT_TO_BE_REPLACED'         ;
 
 
 #
