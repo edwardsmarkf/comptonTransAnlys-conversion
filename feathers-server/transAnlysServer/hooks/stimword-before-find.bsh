@@ -7,31 +7,30 @@
 ##   create the feathers service using tcl/expect
 
 
-export serviceName=${1}                        ;                ##        'stimword'  
+export serviceName=${1}                        ; 
 export hookName=${2}                           ;
 export hookVarName=${3}                        ;
-export globalComment={4}                        ;
+export globalComment={4}                       ;
 
 
 
 sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
 /console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                                                 \\
-        context.params.query = {                // added by mark                                                                           \\
-          ...context.params.query,              // added by mark                                                                           \\
-          \$select: ['stimwordWord', 'stimwordPhonetic', 'stimwordClass', 'stimwordPlacement', 'stimwordOrderNbr' ],     // added by mark  \\
-          \$sort: { 'stimwordPlacement' : 1, 'stimwordOrderNbr' : 1 }                                    // added by mark                  \\
-        }                                       // added by mark                                                                           \\
-        return context;                                                                                                                    \\
-
+        context.params.query = {                                                                                         ${globalComment}  \\
+          ...context.params.query,                                                                                       ${globalComment}  \\
+          \$select: ['stimwordWord', 'stimwordPhonetic', 'stimwordClass', 'stimwordPlacement', 'stimwordOrderNbr' ],     ${globalComment}  \\
+          \$sort: { 'stimwordPlacement' : 1, 'stimwordOrderNbr' : 1 }                                                    ${globalComment}  \\
+        }                                                                                                                ${globalComment}  \\
+        return context;                                                                                                  ${globalComment}  \\
 
 END_OF_HOOK_SED
 
-sed --in-place  --file=-   ./src/services/${serviceName}/${serviceName}.js          <<END_OF_SERVICE_SED           ;
+sed --in-place  --file=-   ./src/services/${serviceName}/${serviceName}.js          <<END_OF_SERVICE_SED                 ;
 s?find: \[]?find: [${hookVarName}]?;
 
 /^import {$/i                                                                                                           \\
                                                                                                                         \\
-   import { ${hookVarName} }  from '../../hooks/${hookName}.js';                                                        \\
+   import { ${hookVarName} }  from '../../hooks/${hookName}.js'             ${globalComment}                            \\
                                                                                                                         \\
 
 END_OF_SERVICE_SED
