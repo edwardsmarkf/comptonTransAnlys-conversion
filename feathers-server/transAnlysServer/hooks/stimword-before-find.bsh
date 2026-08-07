@@ -30,7 +30,7 @@ s?find: \[]?find: [${hookVarName}]?;
 
 /^import {$/i                                                                                                                              \\
                                                                                                                                            \\
-   import { ${hookVarName} }  from '../../hooks/${hookName}.js'             ${globalComment}                                               \\
+   import { ${hookVarName} }  from '../../hooks/${hookName}.js'    ;        ${globalComment}                                               \\
                                                                                                                                            \\
 
 END_OF_SERVICE_SED
