@@ -7,9 +7,10 @@
 ##   create the feathers service using tcl/expect
 
 
-export serviceName=${1}                                ;   ###  'language-norms'                                                                                     ;
+export serviceName=${1}                                ;   ###  'language-norms'  
 export hookName=${2}                                   ;
-export hookVarName=${3}                                ;   ###   'languageNormsBeforeFind'                                                                            ;
+export hookVarName=${3}                                ;   ###   'languageNormsBeforeFind'
+export globalComment={4}                                      ;
 
 
 sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
