@@ -2,23 +2,26 @@
 
 ##   modify-client-process-stimword   -- 2026-07-22
 
+
+export globalComment=$1                             ;
+
 export serviceName='client-context-stimword'        ;
 
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED ;
-s|^  { additionalProperties: false }|  { additionalProperties: true }  /* changed from false to true by mark  */   |;
+s|^  { additionalProperties: false }|  { additionalProperties: true }    ${globalComment}                          |;
 END_OF_SCHEMA_SED
 
 
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED      ;
-2i                                                                                                                      \\
-                                                                                                                        \\
-import { processClientStimword } from  '../../custom/processClientStimword.js' ;    /* added by mark */                 \\
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_SED              ;
+2i                                                                                                                   \\
+                                                                                                                     \\
+import { processClientStimword } from  '../../custom/processClientStimword.js' ;    ${globalComment}                 \\
 
-/^  async find(_params) {$/a                                                                                            \\
-                                                                                                                        \\
-        const knexClient = this.options.app.get('mysqlClient');                     /* added by mark */                 \\
-        let returnVal = await processClientStimword(knexClient, _params.query) ;    /* added by mark */                 \\
+/^  async find(_params) {$/a                                                                                         \\
+                                                                                                                     \\
+        const knexClient = this.options.app.get('mysqlClient');                     ${globalComment}                 \\
+        let returnVal = await processClientStimword(knexClient, _params.query) ;    ${globalComment}                 \\
                         \\
 
 #
