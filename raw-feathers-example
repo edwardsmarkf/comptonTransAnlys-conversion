@@ -1,14 +1,11 @@
 ##   Feathers Knex Raw Sql Examples
             2022-11-10
 
-
 0)    npm install @feathersjs/feathers --save ;
-
 
 1)    npm init --yes ; 
       npm install knex   feathers-knex ;
        
-
 2) create a username/password:
 
     DROP USER IF EXISTS 'knexUser'@'localhost'                              ;
@@ -23,12 +20,10 @@
     # to test:
     # mariadb  --host=localhost --user=knexUser  --password=knexPassword    comptonTransAnlys    ;
 
-
 3) feathers:
      feathers generate app    ;
      feathers generate  service ;  
           ##    create custom service named "my-custom-service" type knex
-
 
 4) modify ./config/default.json to reflect the database access:
 
@@ -44,7 +39,6 @@
               , "database"  : "comptonTransAnlys"
               }
           }
-
 
 5) change:  ./src/services/my-custom-service/my-custom-service.class.js  :
 
@@ -93,45 +87,12 @@
 
 
 
-##   S E Q U E L I Z E:
-
-0) npm install sequelize
-
-1) create sequelize CUSTOM SERVICE named:  "my-custom-service"
-
-2) edit  ./src/sequelize.js change logging false to logging true
-
-3) change:  src/services/my-custom-service/my-custom-service.class.js  :
-
-/* eslint-disable no-unused-vars */
-const { QueryTypes } = require('sequelize');
-
-exports.MyCustomService = class MyCustomService {
-  constructor (options, app) {
-    this.options = options || {};
-    this.app = app;
-  }
-
-async find (key) {
-    const sequelize = this.app.get('sequelizeClient');
-    const stimwordPositionSelectFind    = 
-                        'SELECT * FROM stimwordPosition WHERE 1 AND stimwordPositionWord = $stimwordPositionWord;'            ;
-    const stimwordPositionSelectParms   =       
-                        {       'stimwordPositionWord'  :       JSON.parse(key.query).stimwordPositionWord      }       ;
-    const rows = await sequelize.query
-                        (       stimwordPositionSelectFind
-                        ,       {       'bind'  :       stimwordPositionSelectParms }
-                        );
-    return rows;
-  }
-};
-
 
 ################################  browser-console:
 
 in browser console (common initial setup for all examples)
 
-first visit  http://123.123.123.123:3030/ to "initialize" chrome
+first visit  http://123.123.123.123:3030/ to "initialize" chrome   better to go to "about:blank"   !
 
 ##################  OLD ############################################
 [ '//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'
@@ -239,3 +200,60 @@ stimwordPositionFind(key).then( value => {      /* get(GET) */
   stimwordPositionResult = value; 
   console.log('stimwordPosition(' + key + ') : ' + JSON.stringify(stimwordPositionResult) ); 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##   S E Q U E L I Z E:
+
+0) npm install sequelize
+
+1) create sequelize CUSTOM SERVICE named:  "my-custom-service"
+
+2) edit  ./src/sequelize.js change logging false to logging true
+
+3) change:  src/services/my-custom-service/my-custom-service.class.js  :
+
+/* eslint-disable no-unused-vars */
+const { QueryTypes } = require('sequelize');
+
+exports.MyCustomService = class MyCustomService {
+  constructor (options, app) {
+    this.options = options || {};
+    this.app = app;
+  }
+
+async find (key) {
+    const sequelize = this.app.get('sequelizeClient');
+    const stimwordPositionSelectFind    = 
+                        'SELECT * FROM stimwordPosition WHERE 1 AND stimwordPositionWord = $stimwordPositionWord;'            ;
+    const stimwordPositionSelectParms   =       
+                        {       'stimwordPositionWord'  :       JSON.parse(key.query).stimwordPositionWord      }       ;
+    const rows = await sequelize.query
+                        (       stimwordPositionSelectFind
+                        ,       {       'bind'  :       stimwordPositionSelectParms }
+                        );
+    return rows;
+  }
+};
+
