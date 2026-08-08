@@ -11,7 +11,7 @@ export FEATHERS_SERVER_NAME=${1}                             ;
 ScriptName="${BASH_SOURCE[0]##*/}"                           ;
 TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                      ;
 
-export globalComment='GLOBAL_COMMENT_TO_BE_REPLACED'         ;
+export globalComment='__GLOBAL_COMMENT_TO_BE_REPLACED__'     ;
 
 
 #
@@ -29,6 +29,7 @@ cd ${FEATHERS_SERVER_NAME}                                                ;
 # services:
 
 while read -r serviceName serviceType specialProcess; do
+    echo  "Service name:  ${serviceName}"                                                                               ;
     bash -vx  ../services/template-create.bsh   ${serviceName}   ${serviceType}  ${globalComment}  ${specialProcess}    ;
 done <<END_OF_SERVICE_FILE ;
   client-context                knex
@@ -66,9 +67,12 @@ END_OF_HOOKS_FILE
 #
 #
 
+find  ./src/   -type f -name  '*.js'  -exec grep ${globalComment} {}  \;     | wc --lines    ;
+
 find  ./src/   -type f -name  '*.js'  -print                                                                  \
       -exec sed --in-place --expression="s|${globalComment}|/* ${ScriptName} -- ${TimeStamp} */|  ;"  {}  \;  ;
 
+find  ./src/   -type f -name  '*.js'  -exec grep ${TimeStamp} {}  \;     | wc --lines    ;
 
 
 #
