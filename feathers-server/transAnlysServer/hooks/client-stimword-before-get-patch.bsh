@@ -9,7 +9,7 @@
 export serviceName=${1}                                        ; 
 export hookName=${2}                                           ;
 export hookVarName=${3}                                        ; 
-export globalComment={4}                                       ;
+export globalComment=${4}                                      ;
 
 
 sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
