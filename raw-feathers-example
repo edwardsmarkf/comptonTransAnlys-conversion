@@ -133,12 +133,41 @@ in browser console (common initial setup for all examples)
 
 first visit  http://123.123.123.123:3030/ to "initialize" chrome
 
+##################  OLD ############################################
 [ '//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'
 , '//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js'
 ].forEach( (src) => {
     let script = document.createElement('script'); script.src = src; script.async = false;
     document.head.appendChild(script);
 });
+####################################### NEW ############################################
+
+const policyNames = ['webui-test-script', 'static-types', 'lottie-worker-script-loader'];
+
+if (window.trustedTypes) {
+  for (const name of policyNames) {
+    try {
+      scriptPolicy = window.trustedTypes.createPolicy(name, {
+        createScriptURL: (url) => url
+      });
+      break; // Stop loop once a policy is successfully created
+    } catch (e) {
+      // Policy name might already exist or is blocked; try next
+    }
+  }
+}
+[ 'https://cdn.socket.io/4.8.3/socket.io.min.js'
+, 'https://unpkg.com/@feathersjs/client@^5.0.0/dist/feathers.js'
+].forEach( (src) => {
+    let script = document.createElement('script');
+    script.src = scriptPolicy ? scriptPolicy.createScriptURL(src) : src;
+    document.head.appendChild(script);
+});
+//const app = feathers();    const socket = io();    app.configure(feathers.socketio(socket));
+
+
+
+
 const app = feathers();    const socket = io();    app.configure(feathers.socketio(socket));
 
 // optional if trying to run on another http[s] webpage rather than at http://123.123.123.123:3030:
