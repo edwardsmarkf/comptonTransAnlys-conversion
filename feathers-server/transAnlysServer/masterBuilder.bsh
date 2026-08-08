@@ -8,11 +8,11 @@
 export FEATHERS_SERVER_NAME=${1}                             ;
 #
 #
-ScriptName="${BASH_SOURCE[0]##*/}"                           ;
-TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                      ;
 
-export globalComment='__GLOBAL_COMMENT_TO_BE_REPLACED__'     ;
-
+export globalComment='__GLOBAL_COMMENT_TO_BE_REPLACED__'             ;
+ScriptName="${BASH_SOURCE[0]##*/}"                                   ;
+TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                              ;
+export Final_Comment="/* Added by ${ScriptName} -- ${TimeStamp} */"  ;
 
 #
 #
@@ -69,10 +69,10 @@ END_OF_HOOKS_FILE
 
 find  ./src/   -type f -name  '*.js'  -exec grep ${globalComment} {}  \;     | wc --lines    ;
 
-find  ./src/   -type f -name  '*.js'  -print                                                                  \
-      -exec sed --in-place --expression="s|${globalComment}|/* ${ScriptName} -- ${TimeStamp} */|  ;"  {}  \;  ;
+find  ./src/   -type f -name  '*.js'  -print                                                 \
+      -exec sed --in-place --expression="s|${globalComment}|${Final_Comment}|  ;"  {}  \;    ;
 
-find  ./src/   -type f -name  '*.js'  -exec grep ${TimeStamp} {}  \;     | wc --lines    ;
+find  ./src/   -type f -name  '*.js'  -exec grep ${TimeStamp} {}  \;     | wc --lines        ;
 
 
 #
