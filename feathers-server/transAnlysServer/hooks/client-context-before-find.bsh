@@ -12,7 +12,7 @@ export hookName=${2}                                          ;
 export hookVarName=${3}                                       ;
 export globalComment=${4}                                     ;
 
-sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED ;
+sed --in-place  --file=-  ./src/hooks/${hookName}.js   <<END_OF_HOOK_SED                                                                   ;
 /console.log..Running hook .* on $.context\.path}\.\${context\.method}.*/a                                                                 \\
                                                                                                                                            \\
         const knexClient =   context.app.get('mysqlClient') ;                                                            ${globalComment}  \\
