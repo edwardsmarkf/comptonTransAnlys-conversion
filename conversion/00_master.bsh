@@ -14,7 +14,7 @@
 
 ## to run in batch mode:
 ##
-##               echo  'y'  |  bash -vx  ./00_master.bsh   >  00_master.bsh.log   2>&1  &   
+##               echo  'y'  |  bash -vx  ./00_master.bsh   &>  00_master.bsh.log   &   
 
 
 if  [[ "$1" != "PASS" ]]; then 
