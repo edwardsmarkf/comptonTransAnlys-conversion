@@ -8,20 +8,22 @@ import { readFile } from 'fs/promises';    // needed to read the sql statement.
 
 
 export class  getClientsEmails {
-  constructor(options) {
-    this.options = options;
+  constructor(app) {
+    this.app = app;
   }
 
   async getClientsEmails(_params) {
         
-                                                              //  const fs = require('fs');
-        const knexClient = this.app.get('mysqlClient');
+        const currentApp = this.app || _params.app;  // suggested by google-AI  2026-08-09
+
+        const knexClient = currentApp.get('mysqlClient');
 
         const voiceFileDirectory        =       '/home/mark/voicefiles/'        ;
 
 
-                /* first look in the Mariadb clientMaster table */                           /*process.cwd() +*/
-        const clientMasterSqlStatement = await readFile(   './src/sql/clientMasterEmail.sql'   , 'utf8');
+                /* first look in the Mariadb clientMaster table */ 
+        const clientMasterSqlStatement = await readFile( ./src/sql/clientMasterEmail.sql'   , 'utf8');
+       
         let  clientMasterEmailJSON      =  await knexClient.raw( clientMasterSqlStatement , _params.query   );
 
         let clientMasterEmailObj        = JSON.parse(clientMasterEmailJSON[0][0]['JSON_OBJECTAGG']);
