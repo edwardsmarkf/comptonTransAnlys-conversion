@@ -19,7 +19,7 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
       const { readClientsEmail}        = process.cwd() + '/src/custom/' + 'getClientsEmail.js' ;  ${globalComment}    \\
       const [emailResult]   =  await readClientsEmail(_params)                                 ;  ${globalComment}    \\
 
-s/return \[]/return emailResult  ;
+s/return \[]/return emailResult/  ;
  
 END_OF_SERVICE_CLASS_SED
 
