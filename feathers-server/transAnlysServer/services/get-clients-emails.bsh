@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-##   modify-error-sounds-tooltip.bsh   -- 2026-07-22
+##   get-clients-emails.bsh   -- 2026-07-22
 
 export globalComment=${1}                                                                                         ;
 export serviceName='get-clients-emails'                                                                           ;
