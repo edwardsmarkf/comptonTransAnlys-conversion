@@ -1,6 +1,10 @@
+/*
+     getClientsEmails.js    -- 2026-08-09
+
+*/
 
 
-import { readFile } from 'fs/promises';        /* added by mark */
+import { readFile } from 'fs/promises';    // needed to read the sql statement.
 
 
 export class  getClientsEmails {
