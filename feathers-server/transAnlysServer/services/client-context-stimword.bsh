@@ -22,7 +22,6 @@ import { processClientStimword } from  '../../custom/processClientStimword.js' ;
                                                                                                                      \\
         const knexClient = this.options.app.get('mysqlClient')                 ;    ${globalComment}                 \\
         let returnVal = await processClientStimword(knexClient, _params.query) ;    ${globalComment}                 \\
-                        \\
 
 #
 s|return \[]|return { ..._params.query, ...returnVal }                         ;    ${globalComment}                  |;
