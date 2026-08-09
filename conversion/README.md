@@ -1,4 +1,11 @@
 
+add this:
+
+ALTER TABLE users 
+ADD COLUMN email VARCHAR(255) NOT NULL UNIQUE 
+CHECK (email LIKE '_%@_%._%');
+
+
 current server:
 
 ##   DID NOT WORK 2023-05-15 - changed --extended-insert=FALSE  to   --extended-insert=TRUE  since the bug appears to be fixed now.  (NOT!)
