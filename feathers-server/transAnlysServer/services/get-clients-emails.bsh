@@ -20,10 +20,8 @@ import { getClientsEmails } from  '../../custom/getClientsEmails.js' ;    ${glob
 
 
 /^  async find(_params) {$/a                                                                                          \\
-                                                                                               ;  ${globalComment}    \\
-      const { readClientsEmail}        = process.cwd() + '/src/custom/' + 'getClientsEmail.js' ;  ${globalComment}    \\
+                                                                                                                      \\
       const [emailResult]   =  await getClientsEmail(_params.query)                            ;  ${globalComment}    \\
-            // let returnVal = await getClientsEmails(_params.query) ;    ${globalComment}                       \\
 
 
 s/return \[]/return emailResult/  ;
