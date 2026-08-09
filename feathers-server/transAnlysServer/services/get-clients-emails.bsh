@@ -12,30 +12,19 @@ END_OF_SCHEMA_SED
 
 
 
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_CLASS_SED      ;
-2i                                                                                                                   \\
-                                                                                                                     \\
-import { getClientsEmails } from  '../../custom/getClientsEmails.js' ;    ${globalComment}                           \\
-
-/^  async find(_params) {$/a                                                                                         \\
-                                                                                                                     \\
-        const knexClient = this.options.app.get('mysqlClient')                 ;    ${globalComment}                 \\
-        let returnVal = await getClientsEmails(knexClient, _params.query) ;    ${globalComment}                      \\
-                                                                                                                     \\
-
-s|return \[]|return { ..._params.query, ...returnVal }                         ;    ${globalComment}                  |;
-
-END_OF_SERVICE_CLASS_SED
-
-
-
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_CLASS_SED       ;
+
+2i                                                                                                                    \\
+                                                                                                                      \\
+import { getClientsEmails } from  '../../custom/getClientsEmails.js' ;    ${globalComment}                            \\
+
 
 /^  async find(_params) {$/a                                                                                          \\
                                                                                                ;  ${globalComment}    \\
-      const knexClient   = this.options.app.get('mysqlClient')                                 ;  ${globalComment}    \\
       const { readClientsEmail}        = process.cwd() + '/src/custom/' + 'getClientsEmail.js' ;  ${globalComment}    \\
-      const [emailResult]   =  await readClientsEmail(_params)                                 ;  ${globalComment}    \\
+      const [emailResult]   =  await getClientsEmail(_params.query)                            ;  ${globalComment}    \\
+            // let returnVal = await getClientsEmails(_params.query) ;    ${globalComment}                       \\
+
 
 s/return \[]/return emailResult/  ;
  
