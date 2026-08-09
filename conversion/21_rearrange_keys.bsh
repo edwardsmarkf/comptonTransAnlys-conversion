@@ -7,7 +7,7 @@
 #
 #       2023-11-16        - release of mariadb 10.5.23 is enforcing rules that were previously unenforced.  the foreign keys have to match EXACTLY!
 #       2023-11-17        - removed fix of 2023-11-16   
-#       2026-08-09        - changed email from 120 to 255
+#       2026-08-09        - changed email from 120 to 255 and added email checking
 
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
@@ -23,9 +23,11 @@ ALTER TABLE \`languageNorms\`   MODIFY COLUMN \`languageNormsName\`  VARCHAR(30)
 -- teacher
 
 ALTER TABLE \`teacher\`         MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                   FIRST                           ;
+ALTER TABLE \`teacher\`         MODIFY COLUMN \`teacherEmail\`       VARCHAR(255) NOT NULL CONSTRAINT validateTeacherEmail CHECK (\`teacherEmail\`       REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')   ;
 
 
 -- clientMaster
+ALTER TABLE \`clientMaster\`    MODIFY COLUMN \`clientMasterEmail\`  VARCHAR(255) NOT NULL CONSTRAINT validateClientEmail  CHECK (\`clientMasterEmail\`  REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')   ;
 
 ALTER TABLE \`clientMaster\`   MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                    FIRST                           ;
 ALTER TABLE \`clientMaster\`   MODIFY COLUMN \`teacherEmail\` VARCHAR(255) NOT NULL                                                             AFTER \`layoutName\`            ;
