@@ -21,7 +21,7 @@ import { getClientsEmails } from  '../../custom/getClientsEmails.js' ;    ${glob
 
 /^  async find(_params) {$/a                                                                                          \\
                                                                                                                       \\
-      const [emailResult]   =  await getClientsEmail(_params.query)                            ;  ${globalComment}    \\
+      const [emailResult]   =  await getClientsEmails(_params.query)                            ;  ${globalComment}    \\
 
 
 s/return \[]/return emailResult/  ;
