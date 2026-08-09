@@ -11,6 +11,24 @@ s|^  { additionalProperties: false }|  { additionalProperties: true }     ${glob
 END_OF_SCHEMA_SED
 
 
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_CLASS_SED      ;
+2i                                                                                                                   \\
+                                                                                                                     \\
+import { getClientsEmails } from  '../../custom/getClientsEmails.js' ;    ${globalComment}                           \\
+
+/^  async find(_params) {$/a                                                                                         \\
+                                                                                                                     \\
+        const knexClient = this.options.app.get('mysqlClient')                 ;    ${globalComment}                 \\
+        let returnVal = await getClientsEmails(knexClient, _params.query) ;    ${globalComment}                      \\
+                                                                                                                     \\
+
+s|return \[]|return { ..._params.query, ...returnVal }                         ;    ${globalComment}                  |;
+
+END_OF_SERVICE_CLASS_SED
+
+
+
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_CLASS_SED       ;
 
 /^  async find(_params) {$/a                                                                                          \\
