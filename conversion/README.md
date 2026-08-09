@@ -2,8 +2,14 @@
 add this:
 
 ALTER TABLE users 
-ADD COLUMN email VARCHAR(255) NOT NULL UNIQUE 
-CHECK (email LIKE '_%@_%._%');
+ADD COLUMN email VARCHAR(255) NOT NULL UNIQUE CHECK (email LIKE '_%@_%._%');
+
+
+CONSTRAINT chk_email CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')
+
+
+ADD CONSTRAINT chk_email 
+CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$');
 
 
 current server:
