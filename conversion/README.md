@@ -6,7 +6,7 @@
     cd  ~/comptonTransAnlys-conversion/conversion/                                  ;  \
     pwd                                                                             ;  \
     cp --verbose  ~/comptonTransAnlys.sql  .                                        ;  \
-    echo  'y'  |  nohup time  bash -vx  ./00_master.bsh  &>   ./00_master.bsh.log      &
+    echo  'y'  |  nohup   bash -vx  ./00_master.bsh  &>   ./00_master.bsh.log          &
 
 
  
