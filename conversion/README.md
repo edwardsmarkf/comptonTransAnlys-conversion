@@ -9,18 +9,19 @@
     echo  'y'  |  nohup   bash -vx  ./00_master.bsh  &>   ./00_master.bsh.log          &
 
 
+consider:
+    SELECT Teacher_email from Teacher GROUP BY Teacher_email HAVING COUNT(Teacher_email) > 1 ;
+    SELECT COUNT(Teacher_email)  from Teacher GROUP BY Teacher_email HAVING COUNT(Teacher_email) > 1 ;
+
+
  
 2026-08-09  added this:
 
-ALTER TABLE users 
-ADD COLUMN email VARCHAR(255) NOT NULL UNIQUE CHECK (email LIKE '_%@_%._%');
+    ALTER TABLE users ADD COLUMN email VARCHAR(255) NOT NULL UNIQUE CHECK (email LIKE '_%@_%._%');
 
-
-CONSTRAINT chk_email CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')
-
-
-ADD CONSTRAINT chk_email 
-CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$');
+but not:
+     CONSTRAINT chk_email CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')
+     ADD CONSTRAINT chk_email CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$');
 
 
 current server:
