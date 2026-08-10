@@ -1,5 +1,9 @@
 
-add this:
+
+cd  ~ ; rm -Rf  ~/comptonTransAnlys-conversion; git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion  ; cd  ~/comptonTransAnlys-conversion/conversion/  ;  pwd  ;  cp -v  ~/comptonTransAnlys.sql  .  ;
+ echo  'y'  |  nohup  bash -vx  ./00_master.bsh  &>   ./00_master.bsh.log   &
+
+2026-08-09  add this:
 
 ALTER TABLE users 
 ADD COLUMN email VARCHAR(255) NOT NULL UNIQUE CHECK (email LIKE '_%@_%._%');
