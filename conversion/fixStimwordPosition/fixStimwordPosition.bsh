@@ -1,7 +1,10 @@
 #!  /bin/bash 
 
+#    fixStimwordPosition.bsh    
+#
+#
 
-mariadb --verbose < ./fixStimwordPosition/createKnexUsername.sql ;    ## 2026-08-09
+mariadb --verbose < ./fixStimwordPosition/createKnexUser.sql ;    ## 2026-08-09
 
 
 mariadb --verbose < ./fixStimwordPosition/fixStimwordPosition.sql ;
