@@ -11,6 +11,7 @@
 #   2023-02-08 -  added 40_misc_cleanup
 #   2023-02-23 -  added 30_stimword_ordering
 #   2023-11-17 -  added 08bb_final_sed_rename.bsh to deal with matching key issue 
+#   2026-08-09 -  added 'time' to 'bash' command to see more statistics
 
 ## to run in batch mode:
 ##
@@ -35,7 +36,7 @@ fi
 function process_section {
     SECONDS=0                                                                                                       ;
     echo $(date) " - STARTING - ${1}.bsh "                                                                          ;
-    bash -vx  ${WORKING_DIR}/${1}.bsh                                &>     ${LOGGING_DIR}/${1}.bsh.log             ;
+    time   bash -vx  ${WORKING_DIR}/${1}.bsh                         &>     ${LOGGING_DIR}/${1}.bsh.log             ;
     grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'              ${LOGGING_DIR}/${1}.bsh.log             ;
     /usr/bin/mariadb-dump             comptonTransAnlys              >      ${BACKUP_DIR}/${1}.bsh.sql              ;
     gzip                                                                    ${BACKUP_DIR}/${1}.bsh.sql              ;
