@@ -1,12 +1,12 @@
+# To Run:
 
-
-cd  ~                                                                      ;  \
-rm -Rf  ~/comptonTransAnlys-conversion                                     ;  \
-git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion    ;  \
-cd  ~/comptonTransAnlys-conversion/conversion/                             ;  \
-pwd                                                                        ;  \
-cp --verbose  ~/comptonTransAnlys.sql  .                                   ;  \
-echo  'y'  |  nohup  bash -vx  ./00_master.bsh  &>   ./00_master.bsh.log   &
+    cd  ~                                                                           ;  \
+    rm -Rf  ~/comptonTransAnlys-conversion                                          ;  \
+    git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion         ;  \
+    cd  ~/comptonTransAnlys-conversion/conversion/                                  ;  \
+    pwd                                                                             ;  \
+    cp --verbose  ~/comptonTransAnlys.sql  .                                        ;  \
+    echo  'y'  |  nohup time  bash -vx  ./00_master.bsh  &>   ./00_master.bsh.log      &
 
 
  
