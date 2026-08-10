@@ -10,9 +10,8 @@
 #       KEY teacherEmail (teacherEmail
 #       KEY clientMasterMiscKeys_2_clientContext
 #   2022-11-27 -- try deleting all space-space-key-tilde lines
+#   2026-08-10 -- added check for teacherEmail and clientEmail to validate email address format
 #
-#   
-########cp   --verbose    ./comptonTransAnlys_22_remove_constraint_keys.sql   ./comptonTransAnlys_22_remove_constraint_keys-COPY-BEFORE-KEY-REMOVAL.sql  ;
 #
 #
 ls -l     ./comptonTransAnlys_22_remove_constraint_keys.sql   ;
@@ -20,28 +19,23 @@ ls -l     ./comptonTransAnlys_22_remove_constraint_keys.sql   ;
 sed   --in-place   --file=-    ./comptonTransAnlys_22_remove_constraint_keys.sql   <<EOF ;
 #
 #
+#       teacher
+#                                             added 2026-08-10
+/PRIMARY KEY (\`teacherEmail\`),/a                                                            \\
+ADD CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`     LIKE '%@%._%' ),          \\
+
+
 #       clientContext
 #
-##2022-11-27## /  KEY \`clientContextAutoIncr_2_clientContext\` (\`clientSessionAutoIncr\`),/d;
-##2022-11-27## /  KEY \`contextMiscKeys_2_clientContext\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
-##2022-11-27## /  KEY \`contextAutoIncr_2_clientContext\` (\`contextAutoIncr\`),/d;
-##2022-11-27## /  KEY \`frequencyList_2_clientContext\` (\`frequency\`),/d;
-##2022-11-27## /  KEY \`clientSessionAutoIncr_2_clientContext\` (\`clientSessionAutoIncr\`),/d;
-##2022-11-27## /  KEY \`clientSessionMiscKeys_2_clientContext\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`),/d;
-###   added 2022-11-27:
-##2022-11-27## /  KEY \`clientMasterAutoIncr_2_clientContext\` (\`clientMasterAutoIncr\`),/d;
 s/\`clientContextSoundsUniqueIndex\`/\`clientContextUniqueKey\`/;
 s/\`clientContextUniqueIndex\`/\`clientContextUniqueKey\`/;
 #
 #
 #       clientMaster
-#
-##2022-11-27## /  KEY \`teacherAutoIncr_2_clientMaster\` (\`teacherAutoIncr\`),/d;
-##2022-11-27## /  KEY \`teacherMiscKeys_2_clientMaster\` (\`layoutName\`,\`teacherEmail\`),/d;
-##2022-11-27## /  KEY \`sessionNames_2_clientMaster\` (\`sessionName\`),/d;
-##2022-11-27## /  KEY \`sessionNames_2_clientSession\` (\`sessionName\`),/d;
-#
-#
+#                                                       2026-08-10
+/PRIMARY KEY (\`clientMasterAutoIncrement\`),/a                                                 \\
+ADD CONSTRAINT \`validateClientEmail\` CHECK (\`clientEmail\`               LIKE '%@%._%' ),    \\
+
 #       clientSession
 #
 #   2022-11-28 - both of these FOREIGN_KEY statements should have been removed earlier....  ?!?!?
@@ -95,17 +89,7 @@ s/  KEY \`frequency\` (\`frequency\`),/  UNIQUE KEY \`frequencyListUniqueKey\` (
 s/  KEY \`languageNormsNonUniqueKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`,\`soundPhoneme\`),\
 /  UNIQUE KEY \`languageNormsUniqueKey\` (\`layoutName\`,\`soundPhoneme\`,\`contextPosition\`,\`languageNormsName\`,\`languageNormsError\`),/
 #
-#  now done at the very beginning of 22a_remove_contraint_keys.bsh
-######s/INSERT INTO \`languageNorms\` VALUES ('PESL','t','middle','Hebrew','t&',0,8,'2021-11-30 20:47:47','2021-11-30 21:25:32',92029);/   -- &/;
-######s/INSERT INTO \`languageNorms\` VALUES ('PESL','n','final','Hindi','ø',52,24,'2021-11-30 20:47:47','2021-11-30 21:25:32',93972);/   -- &/;
-######s/INSERT INTO \`languageNorms\` VALUES ('PESL','ð','final','Indonesian','θ',0,38,'2021-11-30 20:47:47','2021-11-30 21:25:32',94146);/   -- &/;
-#######
-######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','t','middle','Hebrew','t&',0,1685,'2021-11-30 20:47:47','2021-11-30 21:25:32',129141);/   -- &/;
-#######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','t','middle','Hebrew','t&',0,1685,'2021-11-30 20:47:47','2021-11-30 21:25:32',129141);/   -- &/;
-#######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','t','middle','Hebrew','t&',0,1685,'2021-11-30 20:47:47','2021-11-30 21:25:32',129141);/   -- &/;
-######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','n','final','Hindi','ø',52,1701,'2021-11-30 20:47:47','2021-11-30 21:25:32',131084);/   -- &/;
-######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','ð','final','Indonesian','θ',0,1715,'2021-11-30 20:47:47','2021-11-30 21:25:32',131258);/   -- &/;
-#
+
 #
 #
 #       languageSpec  - 2022-11-28
@@ -176,4 +160,41 @@ echo "Done with $0!";
 
 exit 1;
 
+#
+
+
+
+
+
+
+
+
+
+#  now done at the very beginning of 22a_remove_contraint_keys.bsh
+######s/INSERT INTO \`languageNorms\` VALUES ('PESL','t','middle','Hebrew','t&',0,8,'2021-11-30 20:47:47','2021-11-30 21:25:32',92029);/   -- &/;
+######s/INSERT INTO \`languageNorms\` VALUES ('PESL','n','final','Hindi','ø',52,24,'2021-11-30 20:47:47','2021-11-30 21:25:32',93972);/   -- &/;
+######s/INSERT INTO \`languageNorms\` VALUES ('PESL','ð','final','Indonesian','θ',0,38,'2021-11-30 20:47:47','2021-11-30 21:25:32',94146);/   -- &/;
+#######
+######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','t','middle','Hebrew','t&',0,1685,'2021-11-30 20:47:47','2021-11-30 21:25:32',129141);/   -- &/;
+#######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','t','middle','Hebrew','t&',0,1685,'2021-11-30 20:47:47','2021-11-30 21:25:32',129141);/   -- &/;
+#######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','t','middle','Hebrew','t&',0,1685,'2021-11-30 20:47:47','2021-11-30 21:25:32',129141);/   -- &/;
+######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','n','final','Hindi','ø',52,1701,'2021-11-30 20:47:47','2021-11-30 21:25:32',131084);/   -- &/;
+######s/INSERT INTO \`languageNorms\` VALUES ('ACAD','ð','final','Indonesian','θ',0,1715,'2021-11-30 20:47:47','2021-11-30 21:25:32',131258);/   -- &/;
+#
+
+##2022-11-27## /  KEY \`teacherAutoIncr_2_clientMaster\` (\`teacherAutoIncr\`),/d;
+##2022-11-27## /  KEY \`teacherMiscKeys_2_clientMaster\` (\`layoutName\`,\`teacherEmail\`),/d;
+##2022-11-27## /  KEY \`sessionNames_2_clientMaster\` (\`sessionName\`),/d;
+##2022-11-27## /  KEY \`sessionNames_2_clientSession\` (\`sessionName\`),/d;
+#
+
+
+##2022-11-27## /  KEY \`clientContextAutoIncr_2_clientContext\` (\`clientSessionAutoIncr\`),/d;
+##2022-11-27## /  KEY \`contextMiscKeys_2_clientContext\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`contextAutoIncr_2_clientContext\` (\`contextAutoIncr\`),/d;
+##2022-11-27## /  KEY \`frequencyList_2_clientContext\` (\`frequency\`),/d;
+##2022-11-27## /  KEY \`clientSessionAutoIncr_2_clientContext\` (\`clientSessionAutoIncr\`),/d;
+##2022-11-27## /  KEY \`clientSessionMiscKeys_2_clientContext\` (\`layoutName\`,\`teacherEmail\`,\`clientMasterEmail\`,\`sessionName\`),/d;
+###   added 2022-11-27:
+##2022-11-27## /  KEY \`clientMasterAutoIncr_2_clientContext\` (\`clientMasterAutoIncr\`),/d;
 #
