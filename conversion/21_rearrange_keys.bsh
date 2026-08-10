@@ -7,7 +7,7 @@
 #
 #       2023-11-16        - release of mariadb 10.5.23 is enforcing rules that were previously unenforced.  the foreign keys have to match EXACTLY!
 #       2023-11-17        - removed fix of 2023-11-16   
-#       2026-08-09        - changed email from 120 to 255 and added email checking
+#       2026-08-09        - changed email from 120 to 255 and added email checking  " LIKE '%@%._%' "
 
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
@@ -24,7 +24,7 @@ ALTER TABLE \`languageNorms\`   MODIFY COLUMN \`languageNormsName\`  VARCHAR(30)
 
 ALTER TABLE \`teacher\`         MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                   FIRST                           ;
 ALTER TABLE \`teacher\`         MODIFY COLUMN \`teacherEmail\`      VARCHAR(255) NOT NULL                                                       AFTER  \`layoutName\`           ;
-ALTER TABLE \`teacher\`         ADD CONSTRAINT validateTeacherEmail CHECK (\`teacherEmail\`       LIKE '%@%._%' )                                                               ;
+ALTER TABLE \`teacher\`         ADD CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`       LIKE '%@%._%' )                                                           ;
 
 
 -- clientMaster
@@ -32,7 +32,7 @@ ALTER TABLE \`teacher\`         ADD CONSTRAINT validateTeacherEmail CHECK (\`tea
 ALTER TABLE \`clientMaster\`    MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                    FIRST                           ;
 ALTER TABLE \`clientMaster\`    MODIFY COLUMN \`teacherEmail\` VARCHAR(255) NOT NULL                                                             AFTER \`layoutName\`            ;
 ALTER TABLE \`clientMaster\`    MODIFY COLUMN \`clientMasterEmail\` VARCHAR(255) NOT NULL                                                        AFTER \`teacherEmail\`          ;
-ALTER TABLE \`clientMaster\`    ADD CONSTRAINT validateClientEmail  CHECK (\`clientMasterEmail\`  LIKE '%@%._%' )                                                                ;
+ALTER TABLE \`clientMaster\`    ADD CONSTRAINT \`validateClientEmail\`  CHECK (\`clientMasterEmail\`  LIKE '%@%._%' )                                                            ;
 
 
 -- clientSession
