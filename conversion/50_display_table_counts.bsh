@@ -5,6 +5,10 @@
 ##      set fileencoding=ASCII
 ##      set fileformat=unix
 
+du --summarize --human-readable /var/lib/mysql/ ; 
+
+mariadb-show --count ; ## spot-check the number of rows!
+
 
 /usr/bin/mariadb    --verbose  --skip-column-names      comptonTransAnlys  <<END ;
 
