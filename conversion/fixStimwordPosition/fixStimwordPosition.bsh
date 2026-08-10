@@ -1,6 +1,9 @@
 #!  /bin/bash 
 
 
+mariadb --verbose < ./fixStimwordPosition/createKnexUsername.sql ;    ## 2026-08-09
+
+
 mariadb --verbose < ./fixStimwordPosition/fixStimwordPosition.sql ;
 
 npm install mysql knex                                            ;
