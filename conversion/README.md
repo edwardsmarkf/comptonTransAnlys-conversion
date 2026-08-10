@@ -10,6 +10,7 @@ echo  'y'  |  nohup  bash -vx  ./00_master.bsh  &>   ./00_master.bsh.log   &
 
 ADD THIS!
  du  --summarize  --human-readable  /var/lib/mysql/                                                                        ;     ## check for total size   1.4 gigs
+
  mariadb-show --count ;   ## spot-check the number of rows!
  
 2026-08-09  added this:
