@@ -5,11 +5,14 @@
 #   2022-11-08 - remove the default timestamp
 #   2022-05-16 - the EXTENDED-INSERT may not be necessary anymore
 #   2024-09-02 - remove the first line   ""enable the sandbox mode""
-#
+#   2024-08-09 - removed  ./comptonTransAnlys.sql  ;
 #	set fileformat=unix
 #
 #
 
+
+## 2026-08-09
+sed  --in-place  --expression="/'jlarson','6dk4wLELxDgbg'/d;           "                                                           ./comptonTransAnlys.sql  ;
 
 ####  2023-05-16 - this MAY not be necessary anymore
 ###grep  'INSERT INTO'  comptonTransAnlys.sql   |  wc  --lines ;   ## we need to be SURE that  "mariadb-dump  --extended-insert=FALSE"   was used!
@@ -24,7 +27,7 @@ sed  --in-place --expression="/\/\*M.*\\- enable the sandbox mode \*\//d"       
 
 
 
-enable the sandbox mode
+                                                                                                   ###    ??????  enable the sandbox mode
     #####   PESL-mary@underwoodaccentreduction.com-panassayagagnon@gmail.com
 
 
