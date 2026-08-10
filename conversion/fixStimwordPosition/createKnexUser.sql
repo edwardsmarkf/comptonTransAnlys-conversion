@@ -1,3 +1,7 @@
+##
+##  createKnexUser.sql  -- 2026-08-09
+##
+
 DROP USER IF EXISTS 'knexUser'@'localhost'				                    ;
 CREATE USER 'knexUser'@'localhost' IDENTIFIED BY 'knexPassword'       ;
 
