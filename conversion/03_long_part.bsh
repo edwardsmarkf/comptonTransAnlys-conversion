@@ -105,6 +105,11 @@ echo '006';
 mariadb    --verbose  comptonTransAnlys  <<END ;
 
   SELECT '006';
+
+  SELECT 'Checking for DUPLICATE email addresses!'                                                         ;
+  SELECT COUNT(*)          FROM \`Teacher\` GROUP BY \`Teacher_email\` HAVING COUNT(\`Teacher_email\`) > 1 ;
+  SELECT \`Teacher_email\` FROM \`Teacher\` GROUP BY \`Teacher_email\` HAVING COUNT(\`Teacher_email\`) > 1 ;
+
   ## create a legacy column for the teacher username ((??))
   ### 2021-09-05  change VARCHAR(50) to VARCHAR(120)
   ALTER TABLE Teacher ADD COLUMN Teacher_legacy_name  VARCHAR(120)  NOT NULL AFTER Teacher_security_level ;
