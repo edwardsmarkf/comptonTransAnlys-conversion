@@ -2,12 +2,16 @@
 
 #    fixStimwordPosition.bsh    
 #
-#
+#   2026-08-10 - installing npm & node
 
-mariadb --verbose < ./fixStimwordPosition/createKnexUser.sql ;    ## 2026-08-09
+mariadb --verbose < ./fixStimwordPosition/createKnexUser.sql      ;    ## 2026-08-09
 
 
 mariadb --verbose < ./fixStimwordPosition/fixStimwordPosition.sql ;
+
+dnf  --assumeyes  install npm                                     ;    ## 2026-08-10
+npm  --version                                                    ;    ## 2026-08-10
+node  --version                                                   ;    ## 2026-08-10
 
 npm install mysql knex                                            ;
 
@@ -15,7 +19,7 @@ node ./fixStimwordPosition/fixStimwordPosition.js > ./temp.sql    ;
 
 mariadb --verbose comptonTransAnlys < ./temp.sql                  ;
 
-rm --verbose ./temp.sql                                            ;
+rm --verbose ./temp.sql                                           ;
 
 
 echo "Done with $0!";
