@@ -10,7 +10,7 @@
 #       KEY teacherEmail (teacherEmail
 #       KEY clientMasterMiscKeys_2_clientContext
 #   2022-11-27 -- try deleting all space-space-key-tilde lines
-#   2026-08-10 -- added check for teacherEmail and clientEmail to validate email address format and increased size (AGAIN) from 120 to 255, not in the 03_long_part.bsh but here instead
+
 #
 #
 #
@@ -26,12 +26,9 @@ s/\`clientContextUniqueIndex\`/\`clientContextUniqueKey\`/;
 #
 #
 #       clientMaster
-#                                                       2026-08-10
+#
 s/\`clientMasterEmail\` varchar(120) NOT NULL,/\`clientMasterEmail\` VARCHAR(255) NOT NULL,/;
 #
-/PRIMARY KEY (\`clientMasterAutoIncr\`),/a                                              \\
-CONSTRAINT \`validateClientEmail\` CHECK (\`clientMasterEmail\`     LIKE '%@%._%' ),    \\
-
 
 #
 #       clientSession
@@ -117,10 +114,6 @@ s/\`teacherEmail\` varchar(120) NOT NULL,/\`teacherEmail\` VARCHAR(255) NOT NULL
 s/  \`teacherEmail\` varchar(100) NOT NULL,/  \`teacherEmail\` varchar(120) NOT NULL,/;
 s/  UNIQUE KEY \`teacherMiscKeys\` (\`layoutName\`,\`teacherEmail\`),/  UNIQUE KEY \`teacherUniqueKey\` (\`layoutName\`,\`teacherEmail\`),/;
 #       teacher
-#                                             added 2026-08-10
-/PRIMARY KEY (\`teacherAutoIncr\`),/a                                                  \\
-CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`     LIKE '%@%._%' ),       \\
-
 
 #  
 #
@@ -147,6 +140,28 @@ exit 1;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#   2026-08-10 -- added check for teacherEmail and clientEmail to validate email address format and increased size (AGAIN) from 120 to 255, not in the 03_long_part.bsh but here instead
+
+#                                             added 2026-08-10
+#/PRIMARY KEY (\`teacherAutoIncr\`),/a                                                  \\
+#CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`     LIKE '%@%._%' ),       \\
+
+#/PRIMARY KEY (\`clientMasterAutoIncr\`),/a                                              \\
+#CONSTRAINT \`validateClientEmail\` CHECK (\`clientMasterEmail\`     LIKE '%@%._%' ),    \\
 
 
 
