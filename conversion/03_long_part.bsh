@@ -8,7 +8,7 @@
 ##  2021-09-05  - removed all the ALTER TABLE for email and changed VARCHAR(50) to VARCHAR(120)
 ##  2023-04-08  - added Eval_master_timestamp
 ##  2023-06-25  - strange problem with the Client_master_email tripping over the Teacher foreign key...?
-
+##  2026-08-11  - changed (120) to (256)  from 2021-09-05
 
 ##	set fileencoding=ASCII
 ##	set fileformat=unix
@@ -42,7 +42,7 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
 
   ## 2021-09-05 - no longer needed   ALTER TABLE Teacher              MODIFY COLUMN Teacher_name            VARCHAR(320) NOT NULL; 
   ## 2021-09-05 - no longer needed   ALTER TABLE Client_master        MODIFY COLUMN Client_master_teacher_name     VARCHAR(320) NOT NULL;
-  ALTER TABLE Client_master        MODIFY COLUMN Client_master_client_name     VARCHAR(120) NOT NULL;
+  ALTER TABLE Client_master        MODIFY COLUMN Client_master_client_name     VARCHAR(256) NOT NULL;
      ## 2021-05-09  ALTER TABLE Client_master        MODIFY COLUMN Client_master_script_name  VARCHAR(200) NOT NULL;
 
   ## 2021-09-05 - no longer needed   ALTER TABLE Client_anlys_detail        MODIFY COLUMN Client_anlys_detail_teacher_name    VARCHAR(320) NOT NULL;
@@ -77,8 +77,8 @@ mariadb    --verbose  comptonTransAnlys  <<END ;
 
   SELECT '004' ;
   ## create *NEW* client name column:
-   ### 2021-09-05  change VARCHAR(50) to VARCHAR(120) 
-  ALTER TABLE Client_master   ADD COLUMN Client_master_name  VARCHAR(120) NOT NULL 
+   ### 2021-09-05  change VARCHAR(50) to VARCHAR(256) 
+  ALTER TABLE Client_master   ADD COLUMN Client_master_name  VARCHAR(256) NOT NULL 
        AFTER  Client_master_spec_language ;
 
   ## copy existing client names from the "keyed" field into the new Client_master_name column
