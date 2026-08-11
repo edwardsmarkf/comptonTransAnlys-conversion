@@ -10,7 +10,7 @@
 #       KEY teacherEmail (teacherEmail
 #       KEY clientMasterMiscKeys_2_clientContext
 #   2022-11-27 -- try deleting all space-space-key-tilde lines
-#   2026-08-10 -- added check for teacherEmail and clientEmail to validate email address format
+#   2026-08-10 -- added check for teacherEmail and clientEmail to validate email address format and increased size (AGAIN) from 120 to 255, not in the 03_long_part.bsh but here instead
 #
 #
 #
@@ -27,8 +27,11 @@ s/\`clientContextUniqueIndex\`/\`clientContextUniqueKey\`/;
 #
 #       clientMaster
 #                                                       2026-08-10
+s/\`clientMasterEmail\` varchar(120) NOT NULL,/\`clientMasterEmail\` VARCHAR(255) NOT NULL,/;
+#
 /PRIMARY KEY (\`clientMasterAutoIncr\`),/a                                              \\
 CONSTRAINT \`validateClientEmail\` CHECK (\`clientMasterEmail\`     LIKE '%@%._%' ),    \\
+
 
 #
 #       clientSession
@@ -108,7 +111,7 @@ s/  KEY \`stimword_2_stimwordPosition\`/  UNIQUE KEY \`stimwordUniqueKey\`/;
 #
 #       teacher
 #
-####################s/\`teacherEmail\` varchar(120) NOT NULL,/\`teacherEmail\` varchar(255) NOT NULL,/;
+s/\`teacherEmail\` varchar(120) NOT NULL,/\`teacherEmail\` VARCHAR(255) NOT NULL,/;
 #
 /  UNIQUE KEY \`teacherEmailUniqueIndex\` (\`teacherEmail\`),/d;
 s/  \`teacherEmail\` varchar(100) NOT NULL,/  \`teacherEmail\` varchar(120) NOT NULL,/;
