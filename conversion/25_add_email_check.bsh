@@ -1,0 +1,12 @@
+#!  /bin/bash
+
+##        25_add_email_check.bsh    2026-08-11
+#
+#
+mariadb  --verbose  comptonTransAnlys  <<END ;
+
+    ALTER TABLE \`teacher\`         ADD CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`      LIKE '%@%._%' )     ;                                                  ;
+
+    ALTER TABLE \`clientMaster\`    ADD CONSTRAINT \`validateClientEmail\`  CHECK (\`clientMasterEmail\` LIKE '%@%._%' )     ; 
+
+END
