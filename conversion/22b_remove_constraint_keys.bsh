@@ -27,7 +27,6 @@ s/\`clientContextUniqueIndex\`/\`clientContextUniqueKey\`/;
 #
 #       clientMaster
 #
-s/\`clientMasterEmail\` varchar(120) NOT NULL,/\`clientMasterEmail\` VARCHAR(255) NOT NULL,/;
 #
 
 #
@@ -108,10 +107,9 @@ s/  KEY \`stimword_2_stimwordPosition\`/  UNIQUE KEY \`stimwordUniqueKey\`/;
 #
 #       teacher
 #
-s/\`teacherEmail\` varchar(120) NOT NULL,/\`teacherEmail\` VARCHAR(255) NOT NULL,/;
 #
 /  UNIQUE KEY \`teacherEmailUniqueIndex\` (\`teacherEmail\`),/d;
-s/  \`teacherEmail\` varchar(100) NOT NULL,/  \`teacherEmail\` varchar(120) NOT NULL,/;
+
 s/  UNIQUE KEY \`teacherMiscKeys\` (\`layoutName\`,\`teacherEmail\`),/  UNIQUE KEY \`teacherUniqueKey\` (\`layoutName\`,\`teacherEmail\`),/;
 #       teacher
 
@@ -155,6 +153,11 @@ exit 1;
 
 
 #   2026-08-10 -- added check for teacherEmail and clientEmail to validate email address format and increased size (AGAIN) from 120 to 255, not in the 03_long_part.bsh but here instead
+##############   now done in 03_long_part.bsh         s/\`clientMasterEmail\` varchar(120) NOT NULL,/\`clientMasterEmail\` VARCHAR(255) NOT NULL,/;
+##############   now done in 03_long_part.bsh              s/  \`teacherEmail\` varchar(100) NOT NULL,/  \`teacherEmail\` varchar(120) NOT NULL,/;
+##############   now done in 03_long_part.bsh        s/\`teacherEmail\` varchar(120) NOT NULL,/\`teacherEmail\` VARCHAR(255) NOT NULL,/;
+
+
 
 #                                             added 2026-08-10
 #/PRIMARY KEY (\`teacherAutoIncr\`),/a                                                  \\
