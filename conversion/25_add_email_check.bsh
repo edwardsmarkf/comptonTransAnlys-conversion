@@ -5,8 +5,10 @@
 #
 mariadb  --verbose  comptonTransAnlys  <<END ;
 
-    ALTER TABLE \`teacher\`         ADD CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`      LIKE '%@%._%' )     ;                                                  ;
+    ALTER TABLE \`teacher\`         MODIFY \`teacherEmail\`        VARCHAR(256)                                              ;
+    ALTER TABLE \`teacher\`         ADD CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`      LIKE '%@%._%' )     ;
 
+    ALTER TABLE \`clientMaster\`    MODIFY \`clientMasterEmail\`    VARCHAR(256)                                             ;
     ALTER TABLE \`clientMaster\`    ADD CONSTRAINT \`validateClientEmail\`  CHECK (\`clientMasterEmail\` LIKE '%@%._%' )     ; 
 
 END
