@@ -19,12 +19,6 @@ ls -l     ./comptonTransAnlys_22_remove_constraint_keys.sql   ;
 sed   --in-place   --file=-    ./comptonTransAnlys_22_remove_constraint_keys.sql   <<EOF ;
 #
 #
-#       teacher
-#                                             added 2026-08-10
-/PRIMARY KEY (\`teacherAutoIncr\`),/a                                                         \\
-ADD CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`     LIKE '%@%._%' ),          \\
-
-
 #       clientContext
 #
 s/\`clientContextSoundsUniqueIndex\`/\`clientContextUniqueKey\`/;
@@ -33,9 +27,10 @@ s/\`clientContextUniqueIndex\`/\`clientContextUniqueKey\`/;
 #
 #       clientMaster
 #                                                       2026-08-10
-/PRIMARY KEY (\`clientMasterAutoIncr\`),/a                                                 \\
-ADD CONSTRAINT \`validateClientEmail\` CHECK (\`clientMasterEmail\`     LIKE '%@%._%' ),    \\
+/PRIMARY KEY (\`clientMasterAutoIncr\`),/a                                              \\
+CONSTRAINT \`validateClientEmail\` CHECK (\`clientMasterEmail\`     LIKE '%@%._%' ),    \\
 
+#
 #       clientSession
 #
 #   2022-11-28 - both of these FOREIGN_KEY statements should have been removed earlier....  ?!?!?
@@ -46,7 +41,6 @@ ADD CONSTRAINT \`validateClientEmail\` CHECK (\`clientMasterEmail\`     LIKE '%@
 #       clientStimword
 #
 s/\`clientStimwordUniqueIndex\`/\`clientStimwordUniqueKey\`/;
-
 #
 #
 #       context
@@ -57,34 +51,23 @@ s/\`clientStimwordUniqueIndex\`/\`clientStimwordUniqueKey\`/;
 #
 #
 #
-#
 #       fontTable  -- added 2022-11-28
 #
 s/  \`fontTableAutoIncrement\` smallint(5) unsigned NOT NULL AUTO_INCREMENT,/& PRIMARY  KEY \`fontTableAutoIncrement\` (\`fontTableAutoIncrement\`)/;
 #
 #
 #
-#
 #       frequencyList
 #
-                ######      2023-08-19 - added a frequencyListAutoIncr primary key
 #
 #       we HAVE to remove the trailing comma from this line (and change the key name):
 s/  KEY \`frequency\` (\`frequency\`),/  UNIQUE KEY \`frequencyListUniqueKey\` (\`frequency\`)/;
-               ######/PRIMARY KEY (\`frequencyOrder\`)/d;
-               ######/  \`frequency\` varchar(15) NOT NULL,/a\\
-               ###### \`frequencyListAutoIncr\` SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
-##2022-11-27## /  KEY \`frequencyList_2_clientContext\`/d;
-##2022-11-27## /  KEY \`frequencyList_2_clientContext\`/d;
 #
 #
 #       languageNorms
 #
-##2022-11-27## /  KEY \`languageNormsKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
-##2022-11-27## /  KEY \`contextMiscKeys_2_languageNorms\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
-##2022-11-27## /  KEY \`contextAutoIncr_2_languageNorms\` (\`contextAutoIncr\`),/d;
-##2022-11-27## /  KEY \`languageNormsLayoutName\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
+
 #
 s/  KEY \`languageNormsNonUniqueKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`,\`soundPhoneme\`),\
 /  UNIQUE KEY \`languageNormsUniqueKey\` (\`layoutName\`,\`soundPhoneme\`,\`contextPosition\`,\`languageNormsName\`,\`languageNormsError\`),/
@@ -100,24 +83,18 @@ s/  PRIMARY KEY (\`langSpecAutoIncr\`),/  PRIMARY KEY (\`langSpecAutoIncr\`)/;
 #
 #       layout
 #
-##2022-11-27## /  KEY \`layout_2_sound\` (\`layoutName\`),/d;
-##2022-11-27## /  KEY \`layout_2_stimword\` (\`layoutName\`),/d;
-##2022-11-27## /  KEY \`languageNormsUniqueKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
+
 s/  KEY \`layout_key\` (\`layoutName\`)/  UNIQUE KEY \`layoutUniqueKey\` (\`layoutName\`)/;
 #
 #
 #       sessionNames
 #
-##2022-11-27## /  KEY \`sessionName\` (\`sessionName\`)/d;
-##2022-11-27## /  KEY \`sessionName\` (\`sessionName\`)/d;
+
 s/  UNIQUE KEY \`sessionNameUniqueIndex\` (\`sessionName\`),/  UNIQUE KEY \`sessionNamesUniqueKey\` (\`sessionName\`)/;
 #
 #       sound
 #
-##2022-11-27## /  KEY \`sound_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
-##2022-11-27## /  KEY \`sound_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
-####################s/  UNIQUE KEY \`soundUniqueKey\` (\`layoutName\`,\`soundPhoneme\`),/  UNIQUE KEY \`soundUniqueKey\` (\`layoutName\`,\`soundPhoneme\`)/;
-#
+
 #
 #       stimword (notice RENAME and not DELETE)
 #
@@ -126,21 +103,22 @@ s/  KEY \`stimword_2_stimwordPosition\`/  UNIQUE KEY \`stimwordUniqueKey\`/;
 #
 #       stimwordPosition
 #
-##2022-11-27## /  KEY \`contextMiscKeys_2_StimwordPosition\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
-##2022-11-27## /  KEY \`contextAutoIncr_2_StimwordPosition\` (\`contextAutoIncr\`),/d;
-##2022-11-27## /  KEY \`stimwordPosition_2_clientStimword\` (\`layoutName\`,\`stimwordPageNbr\`,\`stimwordLineNbr\`,\`stimwordWord\`,\`contextPosition\`,\`stimwordPositionNbr\`,\`stimwordPositionSetting\`,\`soundPhoneme\`),/d;
-##2022-11-27## /  KEY \`stimwordAutoIntr_2_stimwordPosition\` (\`stimwordAutoIncr\`),/d;
-##2022-11-27## /  KEY \`stimwordPositionAutoIncr\` (\`stimwordPositionAutoIncr\`),/d;
 /\`stimwordPositionSecondaryKey\`/d;
 #
 #
 #       teacher
 #
-##2022-11-27## /  KEY \`layout_2_teacher\` (\`layoutName\`),/d;
-##2022-11-27## /  KEY \`teacherMiscKeys_2_clientMaster\`/d;
+####################s/\`teacherEmail\` varchar(120) NOT NULL,/\`teacherEmail\` varchar(255) NOT NULL,/;
+#
 /  UNIQUE KEY \`teacherEmailUniqueIndex\` (\`teacherEmail\`),/d;
 s/  \`teacherEmail\` varchar(100) NOT NULL,/  \`teacherEmail\` varchar(120) NOT NULL,/;
 s/  UNIQUE KEY \`teacherMiscKeys\` (\`layoutName\`,\`teacherEmail\`),/  UNIQUE KEY \`teacherUniqueKey\` (\`layoutName\`,\`teacherEmail\`),/;
+#       teacher
+#                                             added 2026-08-10
+/PRIMARY KEY (\`teacherAutoIncr\`),/a                                                  \\
+CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`     LIKE '%@%._%' ),       \\
+
+
 #  
 #
 ####   2022-11-27 - delete ALL lines that start with space-space-KEY-tilde!
@@ -155,12 +133,13 @@ echo 'compare this result to one from above and make SURE its smaller!' ;
 ls -l     ./comptonTransAnlys_22_remove_constraint_keys.sql   ;
 
 
-
 echo "Done with $0!";
 
 exit 1;
 
 #
+
+
 
 
 
@@ -198,3 +177,42 @@ exit 1;
 ###   added 2022-11-27:
 ##2022-11-27## /  KEY \`clientMasterAutoIncr_2_clientContext\` (\`clientMasterAutoIncr\`),/d;
 #
+
+                ######      2023-08-19 - added a frequencyListAutoIncr primary key
+
+
+               ######/PRIMARY KEY (\`frequencyOrder\`)/d;
+               ######/  \`frequency\` varchar(15) NOT NULL,/a\\
+               ###### \`frequencyListAutoIncr\` SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+##2022-11-27## /  KEY \`frequencyList_2_clientContext\`/d;
+##2022-11-27## /  KEY \`frequencyList_2_clientContext\`/d;
+
+##2022-11-27## /  KEY \`contextMiscKeys_2_StimwordPosition\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`contextAutoIncr_2_StimwordPosition\` (\`contextAutoIncr\`),/d;
+##2022-11-27## /  KEY \`stimwordPosition_2_clientStimword\` (\`layoutName\`,\`stimwordPageNbr\`,\`stimwordLineNbr\`,\`stimwordWord\`,\`contextPosition\`,\`stimwordPositionNbr\`,\`stimwordPositionSetting\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`stimwordAutoIntr_2_stimwordPosition\` (\`stimwordAutoIncr\`),/d;
+##2022-11-27## /  KEY \`stimwordPositionAutoIncr\` (\`stimwordPositionAutoIncr\`),/d;
+
+##2022-11-27## /  KEY \`layout_2_sound\` (\`layoutName\`),/d;
+##2022-11-27## /  KEY \`layout_2_stimword\` (\`layoutName\`),/d;
+##2022-11-27## /  KEY \`languageNormsUniqueKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
+
+
+##2022-11-27## /  KEY \`layout_2_teacher\` (\`layoutName\`),/d;
+##2022-11-27## /  KEY \`teacherMiscKeys_2_clientMaster\`/d;
+
+##2022-11-27## /  KEY \`sound_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`sound_2_context\` (\`layoutName\`,\`soundPhoneme\`),/d;
+####################s/  UNIQUE KEY \`soundUniqueKey\` (\`layoutName\`,\`soundPhoneme\`),/  UNIQUE KEY \`soundUniqueKey\` (\`layoutName\`,\`soundPhoneme\`)/;
+#
+
+
+
+##2022-11-27## /  KEY \`sessionName\` (\`sessionName\`)/d;
+##2022-11-27## /  KEY \`sessionName\` (\`sessionName\`)/d;
+
+##2022-11-27## /  KEY \`languageNormsKey\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
+##2022-11-27## /  KEY \`contextMiscKeys_2_languageNorms\` (\`layoutName\`,\`contextPosition\`,\`soundPhoneme\`),/d;
+##2022-11-27## /  KEY \`contextAutoIncr_2_languageNorms\` (\`contextAutoIncr\`),/d;
+##2022-11-27## /  KEY \`languageNormsLayoutName\` (\`layoutName\`,\`languageNormsName\`,\`contextPosition\`),/d;
