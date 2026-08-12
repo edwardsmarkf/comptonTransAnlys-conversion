@@ -16,10 +16,10 @@
 
 #
 
-/usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  >comptonTransAnlysSedChanges.sql ;
+/usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  >04-comptonTransAnlysSedChanges.sql ;
 
 
-sed   --in-place   --file=-    comptonTransAnlysSedChanges.sql   <<EOF ;
+sed   --in-place   --file=-    04-comptonTransAnlysSedChanges.sql   <<EOF ;
 ##
 s/Eval_master_context/Eval_master_setting/g;
 s/Client_eval_detail_context/Client_eval_detail_setting/g;
