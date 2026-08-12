@@ -1,0 +1,9 @@
+#!  /bin/bash
+
+#	04c_sed_changes.bsh  -- 2026-08-12
+#
+
+
+sed   --in-place   --file=-    04-comptonTransAnlysSedChanges.sql   <<EOF ;
+
+EOF
