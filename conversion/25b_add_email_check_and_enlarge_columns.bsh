@@ -3,6 +3,24 @@
 ##        25_add_email_check.bsh    2026-08-11
 #
 #
+
+
+
+
+
+exit;
+
+
+
+
+
+
+
+
+
+
+
+
 mariadb  --verbose  comptonTransAnlys  <<END ;
 
     ALTER TABLE \`teacher\`         MODIFY \`teacherEmail\`        VARCHAR(256)                                              ;
