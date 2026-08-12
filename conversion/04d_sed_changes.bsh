@@ -3,12 +3,15 @@
 ##	04_sed_changes.bsh
 
 
+ls -l     04-comptonTransAnlysSedChanges.sql                                                                           ;
+
+
 /usr/bin/mariadb  --verbose --execute='DROP DATABASE IF EXISTS comptonTransAnlys ; CREATE DATABASE comptonTransAnlys'  ;
 
 /usr/bin/mariadb                 comptonTransAnlys   < 04-comptonTransAnlysSedChanges.sql ;
 
-gzip   04-comptonTransAnlysSedChanges.sql ;
 
+gzip    04-comptonTransAnlysSedChanges.sql            ;
 
 echo "end of $0 !" ;
 #
