@@ -7,6 +7,12 @@
 #
 #       2023-11-16        - release of mariadb 10.5.23 is enforcing rules that were previously unenforced.  the foreign keys have to match EXACTLY!
 #       2023-11-17        - removed fix of 2023-11-16   
+#       2026-08-12        - made the email column format an exported var
+
+
+
+export EMAIL_FORMAT='VARCHAR(255) NOT NULL'                                                       ;
+
 
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
@@ -22,36 +28,36 @@ ALTER TABLE \`languageNorms\`   MODIFY COLUMN \`languageNormsName\`  VARCHAR(30)
 -- teacher
 
 ALTER TABLE \`teacher\`         MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                   FIRST                           ;
-ALTER TABLE \`teacher\`         MODIFY COLUMN \`teacherEmail\`      VARCHAR(120) NOT NULL                                                       AFTER  \`layoutName\`           ;
+ALTER TABLE \`teacher\`         MODIFY COLUMN \`teacherEmail\`                                      ${EMAIL_FORMAT}                             AFTER  \`layoutName\`           ;
 
 
 -- clientMaster
 
 ALTER TABLE \`clientMaster\`    MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                    FIRST                           ;
-ALTER TABLE \`clientMaster\`    MODIFY COLUMN \`teacherEmail\` VARCHAR(120) NOT NULL                                                             AFTER \`layoutName\`            ;
-ALTER TABLE \`clientMaster\`    MODIFY COLUMN \`clientMasterEmail\` VARCHAR(120) NOT NULL                                                        AFTER \`teacherEmail\`          ;
+ALTER TABLE \`clientMaster\`    MODIFY COLUMN \`teacherEmail\`                                      ${EMAIL_FORMAT}                              AFTER \`layoutName\`            ;
+ALTER TABLE \`clientMaster\`    MODIFY COLUMN \`clientMasterEmail\`                                 ${EMAIL_FORMAT}                              AFTER \`teacherEmail\`          ;
 
 
 -- clientSession
 
 ALTER TABLE \`clientSession\`  MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                    FIRST                           ;
-ALTER TABLE \`clientSession\`  MODIFY COLUMN \`teacherEmail\` VARCHAR(120) NOT NULL                                                             AFTER \`layoutName\`            ;
-ALTER TABLE \`clientSession\`  MODIFY COLUMN \`clientMasterEmail\` VARCHAR(120) NOT NULL                                                        AFTER \`teacherEmail\`          ;
+ALTER TABLE \`clientSession\`  MODIFY COLUMN \`teacherEmail\`                                       ${EMAIL_FORMAT}                             AFTER \`layoutName\`            ;
+ALTER TABLE \`clientSession\`  MODIFY COLUMN \`clientMasterEmail\`                                  ${EMAIL_FORMAT}                             AFTER \`teacherEmail\`          ;
 
 
 --  clientContext
 
 ALTER TABLE \`clientContext\`  MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                    FIRST                           ;
-ALTER TABLE \`clientContext\`  MODIFY COLUMN \`teacherEmail\` VARCHAR(120) NOT NULL                                                             AFTER \`layoutName\`            ;
-ALTER TABLE \`clientContext\`  MODIFY COLUMN \`clientMasterEmail\` VARCHAR(120) NOT NULL                                                        AFTER \`teacherEmail\`          ;
+ALTER TABLE \`clientContext\`  MODIFY COLUMN \`teacherEmail\`                                       ${EMAIL_FORMAT}                             AFTER \`layoutName\`            ;
+ALTER TABLE \`clientContext\`  MODIFY COLUMN \`clientMasterEmail\`                                  ${EMAIL_FORMAT}                             AFTER \`teacherEmail\`          ;
 ALTER TABLE \`clientContext\`  MODIFY COLUMN \`sessionName\` VARCHAR(30) NOT NULL                                                               AFTER \`clientMasterEmail\`     ;
 
 
 -- clientStimword
 
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`layoutName\` CHAR(4) NOT NULL                                                                   FIRST                           ;
-ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`teacherEmail\` VARCHAR(120) NOT NULL                                                            AFTER \`layoutName\`            ;
-ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`clientMasterEmail\` VARCHAR(120) NOT NULL                                                       AFTER \`teacherEmail\`          ;
+ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`teacherEmail\`                                     ${EMAIL_FORMAT}                              AFTER \`layoutName\`            ;
+ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`clientMasterEmail\`                                ${EMAIL_FORMAT}                              AFTER \`teacherEmail\`          ;
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`sessionName\` VARCHAR(30) NOT NULL                                                              AFTER \`clientMasterEmail\`     ;
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`soundPhoneme\` CHAR(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT ''            AFTER \`sessionName\`           ;
 ALTER TABLE \`clientStimword\`  MODIFY COLUMN \`contextPosition\` VARCHAR(20) NOT NULL                                                          AFTER \`soundPhoneme\`          ;
