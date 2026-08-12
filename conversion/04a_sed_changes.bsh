@@ -5,4 +5,6 @@
 
 /usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > 04-comptonTransAnlysSedChanges.sql  ;
 
+ls -l     04-comptonTransAnlysSedChanges.sql            ;
+
 exit ;
