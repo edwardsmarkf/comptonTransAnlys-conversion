@@ -1,0 +1,17 @@
+#! /bin/bash  -w
+
+# 25a_add_email_check_and_enlarge_columns.bsh   -- 2026-08-11
+
+
+/usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > ./comptonTransAnlys_25_add_email_check_and_enlarge_columns.sql ;
+
+ls -l  ./comptonTransAnlys_25_add_email_check_and_enlarge_columns.sql;
+
+cp   --verbose    ./comptonTransAnlys_25_add_email_check_and_enlarge_columns.sql   ./comptonTransAnlys_25_add_email_check_and_enlarge_columns.sql-COPY-BEFORE-EMAIL-RESIZE.sql  ;
+
+ls -l  ./comptonTransAnlys_25_add_email_check_and_enlarge_columns.sql   ./comptonTransAnlys_25_add_email_check_and_enlarge_columns.sql-COPY-BEFORE-EMAIL-RESIZE.sql  ;
+
+
+echo "Done with $0!";
+
+exit 1;
