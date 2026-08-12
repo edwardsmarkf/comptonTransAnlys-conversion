@@ -11,7 +11,7 @@
 
 
 
-export EMAIL_FORMAT='VARCHAR(255) NOT NULL'                                                       ;
+export EMAIL_FORMAT='VARCHAR(255) NOT NULL'                                                 ;    ## 2026-08-12 - default mail size
 
 
 
