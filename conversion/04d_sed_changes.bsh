@@ -7,7 +7,7 @@
 
 /usr/bin/mariadb                 comptonTransAnlys   < 04-comptonTransAnlysSedChanges.sql ;
 
-gzip   comptonTransAnlysSedChanges.sql ;
+gzip   04-comptonTransAnlysSedChanges.sql ;
 
 
 echo "end of $0 !" ;
