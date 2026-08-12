@@ -40,6 +40,8 @@ function process_section {
     grep   --line-number  --only-matching  'ERROR [0-9][0-9]*'              ${LOGGING_DIR}/${1}.bsh.log             ;
     /usr/bin/mariadb-dump             comptonTransAnlys              >      ${BACKUP_DIR}/${1}.bsh.sql              ;
     gzip                                                                    ${BACKUP_DIR}/${1}.bsh.sql              ;
+    mariadb-show --count                                                                                            ;     ## spot-check the number of rows!
+
     echo $(date) " - ENDING - ${1}.bsh "                                                                            ;
     echo "Elapsed time: $((SECONDS/3600))h $(((SECONDS/60)%60))m $((SECONDS%60))s";
 }
