@@ -2,8 +2,44 @@
 
 #	04c_sed_changes.bsh  -- 2026-08-12
 #
+#  this only changes all the email addresses
+
+
+cp  --verbose  04-comptonTransAnlysSedChanges.sql   04-comptonTransAnlysSedChanges-COPIED.sql        ;
 
 
 sed   --in-place   --file=-    04-comptonTransAnlysSedChanges.sql   <<EOF ;
 
+
+###  Client_context:
+
+s/\`Client_context_teacher_email\` varchar(120) DEFAULT NULL,/\`Client_context_teacher_email\` VARCHAR(255) DEFAULT NULL,/           ;
+
+s/\`Client_context_client_email\` varchar(120) DEFAULT NULL,/\`Client_context_client_email\` VARCHAR(255) DEFAULT NULL,/             ;
+
+
+###  Client_master
+s/\`Client_master_teacher_email\` varchar(120) DEFAULT NULL,/\`Client_master_teacher_email\` VARCHAR(255) DEFAULT NULL,/             ;
+
+s/\`Client_master_client_email\` varchar(120) NOT NULL,/`Client_master_client_email` VARCHAR(255) NOT NULL,/                         ;
+
+
+### Client_stimword
+
+s/\`Client_stimword_teacher_email\` varchar(120) DEFAULT NULL,/\`Client_stimword_teacher_email\` VARCHAR(255) DEFAULT NULL,/         ;
+
+s/\`Client_stimword_client_email\` varchar(120) DEFAULT NULL,/`Client_stimword_client_email` VARCHAR(255) DEFAULT NULL,/             ;
+
+### Teacher 
+
+s/\`Teacher_email\` varchar(100) NOT NULL,/ \`Teacher_email\` VARCHAR(255) NOT NULL,/                                                ;
+
+
 EOF
+
+
+diff 04-comptonTransAnlysSedChanges.sql   04-comptonTransAnlysSedChanges-COPIED.sql        ;
+
+rm  --verbose    04-comptonTransAnlysSedChanges-COPIED.sql        ;
+
+exit
