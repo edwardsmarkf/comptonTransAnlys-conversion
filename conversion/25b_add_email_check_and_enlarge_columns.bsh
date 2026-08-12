@@ -1,13 +1,14 @@
 #!  /bin/bash
 
-##        25_add_email_check.bsh    2026-08-11
+##        25b_add_email_check_and_enlarge_columns.bsh    2026-08-11
 #
 #
 
 
+sed --in-place --file=-   .   /comptonTransAnlys_25_add_email_check_and_enlarge_columns.sql    <<EOF  ;
 
 
-
+EOF
 exit;
 
 
