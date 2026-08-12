@@ -5,41 +5,42 @@
 #  this only changes all the email addresses
 
 
-cp  --verbose  04-comptonTransAnlysSedChanges.sql   04-comptonTransAnlysSedChanges-TEMP.sql        ;
+cp  --verbose  04-comptonTransAnlysSedChanges.sql   04c-comptonTransAnlysSedChanges-START.sql        ;
 
+export NEW_MAIL_FORMAT='VARCHAR(255) NOT NULL'                                                       ;
 
-sed   --in-place   --file=-    04-comptonTransAnlysSedChanges.sql   <<EOF                          ;
+sed   --in-place   --file=-    04-comptonTransAnlysSedChanges.sql   <<EOF                            ;
 
 
 ###  Client_context:
 
-s/\`Client_context_teacher_email\` varchar(120) DEFAULT NULL,/\`Client_context_teacher_email\` VARCHAR(255) DEFAULT NULL,/           ;
+s/\`Client_context_teacher_email\` varchar(120) DEFAULT NULL,/\`Client_context_teacher_email\` ${NEW_MAIL_FORMAT},/                    ;
 
-s/\`Client_context_client_email\` varchar(120) DEFAULT NULL,/\`Client_context_client_email\` VARCHAR(255) DEFAULT NULL,/             ;
+s/\`Client_context_client_email\` varchar(120) DEFAULT NULL,/\`Client_context_client_email\` ${NEW_MAIL_FORMAT},/                       ;
 
 
 ###  Client_master
-s/\`Client_master_teacher_email\` varchar(120) DEFAULT NULL,/\`Client_master_teacher_email\` VARCHAR(255) DEFAULT NULL,/             ;
+s/\`Client_master_teacher_email\` varchar(120) DEFAULT NULL,/\`Client_master_teacher_email\` ${NEW_MAIL_FORMAT},/                       ;
 
-s/\`Client_master_client_email\` varchar(120) NOT NULL,/`Client_master_client_email` VARCHAR(255) NOT NULL,/                         ;
+s/\`Client_master_client_email\` varchar(120) NOT NULL,/`Client_master_client_email` VARCHAR(255) ${NEW_MAIL_FORMAT},/                  ;
 
 
 ### Client_stimword
 
-s/\`Client_stimword_teacher_email\` varchar(120) DEFAULT NULL,/\`Client_stimword_teacher_email\` VARCHAR(255) DEFAULT NULL,/         ;
+s/\`Client_stimword_teacher_email\` varchar(120) DEFAULT NULL,/\`Client_stimword_teacher_email\` VARCHAR(255) ${NEW_MAIL_FORMAT},/      ;
 
-s/\`Client_stimword_client_email\` varchar(120) DEFAULT NULL,/`Client_stimword_client_email` VARCHAR(255) DEFAULT NULL,/             ;
+s/\`Client_stimword_client_email\` varchar(120) DEFAULT NULL,/`Client_stimword_client_email` VARCHAR(255) ${NEW_MAIL_FORMAT},/          ;
 
 ### Teacher 
 
-s/\`Teacher_email\` varchar(100) NOT NULL,/ \`Teacher_email\` VARCHAR(255) NOT NULL,/                                                ;
+s/\`Teacher_email\` varchar(100) NOT NULL,/ \`Teacher_email\` ${NEW_MAIL_FORMAT},/                                                      ;
 
 
 EOF
 
 
-diff 04-comptonTransAnlysSedChanges.sql   04-comptonTransAnlysSedChanges-TEMP.sql        ;
+diff 04-comptonTransAnlysSedChanges.sql   04c-comptonTransAnlysSedChanges-START.sql        ;
 
-rm  --verbose    04-comptonTransAnlysSedChanges-TEMP.sql                                 ;
+gzip   04c-comptonTransAnlysSedChanges-START.sql                                 ;
 
 exit
