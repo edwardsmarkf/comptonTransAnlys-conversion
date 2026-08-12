@@ -1,0 +1,10 @@
+#!  /bin/bash
+#	   04a_sed_changes.bsh  -- 2018-02-21
+#
+
+
+#
+
+/usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > 04-comptonTransAnlysSedChanges.sql  ;
+
+exit ;
