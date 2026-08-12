@@ -7,7 +7,7 @@
 
 /usr/bin/mariadb  --verbose --execute='DROP DATABASE IF EXISTS comptonTransAnlys ; CREATE DATABASE comptonTransAnlys'  ;
 
-/usr/bin/mariadb                 comptonTransAnlys   < comptonTransAnlysSedChanges.sql ;
+/usr/bin/mariadb                 comptonTransAnlys   < 04-comptonTransAnlysSedChanges.sql ;
 
 gzip   comptonTransAnlysSedChanges.sql ;
 
