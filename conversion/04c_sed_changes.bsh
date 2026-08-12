@@ -22,7 +22,7 @@ s/\`Client_context_client_email\` varchar(120) DEFAULT NULL,/\`Client_context_cl
 ###  Client_master
 s/\`Client_master_teacher_email\` varchar(120) DEFAULT NULL,/\`Client_master_teacher_email\` ${NEW_MAIL_FORMAT},/                       ;
 
-s/\`Client_master_client_email\` varchar(120) NOT NULL,/`Client_master_client_email` VARCHAR(255) ${NEW_MAIL_FORMAT},/                  ;
+s/\`Client_master_client_email\` varchar(120) NOT NULL,/\`Client_master_client_email\` VARCHAR(255) ${NEW_MAIL_FORMAT},/                ;
 
 
 ### Client_stimword
