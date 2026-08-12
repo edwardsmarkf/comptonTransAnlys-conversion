@@ -76,9 +76,12 @@ process_section '02d_initial_preparation' ;
 
 process_section '03_long_part' ;
 
-process_section '04_sed_changes' ;
+process_section '04a_sed_changes' ;
+process_section '04b_sed_changes' ;
+process_section '04c_sed_changes' ;
+process_section '04d_sed_changes' ;
 
-process_section '05_convert_back_to_mariadb' ;
+                                              ########################################process_section '05_convert_back_to_mariadb' ;
 
 process_section '06_concat_phonemes' ;
 
