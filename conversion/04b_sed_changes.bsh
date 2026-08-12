@@ -4,19 +4,21 @@
 
   
  
-#	04_sed_changes.bsh  -- 2018-02-21
+#	04b_sed_changes.bsh  -- 2018-02-21
 #
 # 2021-04-26 -- changed to utf8mb4_unicode_ci and added longer command-line switches
 # 2021-05-09 -- needed to remove extra UNSIGNED value, not sure why this became an issue?
 # 2021-05-09 -- changed all varbinary() to char(1) COLLATE utf8mb4_bin
 # 2022-06-10 -- &#8592; and &#9552; are NOT seem to be converting , missing semicolon
+# 2026-08-12 -- renamed to 04b_sed_changes.bsh
+#
 #
 ##	set fileencoding=ASCII
 ##	set fileformat=unix
 
 #
 
-/usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  >04-comptonTransAnlysSedChanges.sql ;
+###############  2026-08-12 - this is now done in 04a_sed_changes.bsh     /usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  >04-comptonTransAnlysSedChanges.sql ;
 
 
 sed   --in-place   --file=-    04-comptonTransAnlysSedChanges.sql   <<EOF ;
