@@ -5,6 +5,10 @@
 #  this only changes all the email addresses
 
 
+ls -l     04-comptonTransAnlysSedChanges.sql            ;
+
+
+
 cp  --verbose  04-comptonTransAnlysSedChanges.sql   04c-comptonTransAnlysSedChanges-START.sql        ;
 
 export NEW_MAIL_FORMAT='VARCHAR(255) NOT NULL'                                                       ;
@@ -39,8 +43,12 @@ s/\`Teacher_email\` varchar(100) NOT NULL,/ \`Teacher_email\` ${NEW_MAIL_FORMAT}
 EOF
 
 
+
 diff 04-comptonTransAnlysSedChanges.sql   04c-comptonTransAnlysSedChanges-START.sql        ;
 
-gzip   04c-comptonTransAnlysSedChanges-START.sql                                 ;
+gzip   04c-comptonTransAnlysSedChanges-START.sql                                           ;
+
+ls -l     04-comptonTransAnlysSedChanges.sql                                               ; 
+ 
 
 exit
