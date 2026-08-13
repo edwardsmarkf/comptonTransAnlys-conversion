@@ -7,9 +7,9 @@
 
 ls -l  ./comptonTransAnlys_25_add_email_check.sql;
 
-cp   --verbose    ./comptonTransAnlys_25_add_email_check.sql   ./comptonTransAnlys_25_add_email_check.sql-COPY-BEFORE-EMAIL.sql  ;
+cp   --verbose    ./comptonTransAnlys_25_add_email_check.sql   ./comptonTransAnlys_25_add_email_check-COPY-BEFORE-EMAIL.sql  ;
 
-ls -l  ./comptonTransAnlys_25_add_email_check.sql   ./comptonTransAnlys_25_add_email_check.sql-COPY-BEFORE-EMAIL.sql  ;
+ls -l  ./comptonTransAnlys_25_add_email_check.sql   ./comptonTransAnlys_25_add_email_check-COPY-BEFORE-EMAIL.sql  ;
 
 
 echo "Done with $0!";
