@@ -17,4 +17,12 @@ gzip   ./comptonTransAnlys_25_add_email_check.sql                    ;
 gzip   ./comptonTransAnlys_25_add_email_check-COPY-BEFORE-EMAIL.sql  ;
 
 
+/usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
+
+    SHOW CREATE TABLE  \`teacher\` ;
+
+    SHOW CREATE TABLE  \`clientMaster\` ;
+
+END
+
 exit;
