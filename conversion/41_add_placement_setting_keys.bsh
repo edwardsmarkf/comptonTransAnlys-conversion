@@ -6,7 +6,7 @@
 ##
 ##	2023-08-25 - initial writing 
 ##
-##
+##  2026-08-13 -- redid the positionSettings since the labels and keys did NOT match.
 
 /usr/bin/mariadb    --verbose  comptonTransAnlys  <<END ;
 
@@ -32,8 +32,9 @@ CREATE TABLE   \`positionSettings\`
    )   ENGINE=InnoDB DEFAULT CHARSET=latin1
    ;
 
+###   2026-08-13 - reordered & fixed below on UPDATE
 INSERT INTO \`positionSettings\` ( \`positionSetting\`, \`positionSettingsAutoIncr\`)
-    VALUES ( 'sentence', 1), ('word', 2), ('reading', 3)
+    VALUES    ('word', 1), ( 'sentence', 2), ('reading', 3)
     ;
 
 ALTER TABLE \`stimwordPosition\` ADD COLUMN \`positionSettingsAutoIncr\` TINYINT(2)   UNSIGNED NOT NULL AFTER \`updatedAt\`                 ;
@@ -43,6 +44,7 @@ UPDATE   \`stimwordPosition\`  SET \`positionSetting\`          = \`stimwordPosi
 UPDATE   \`stimwordPosition\`  SET \`positionSettingsAutoIncr\` = 1 WHERE 1 AND \`positionSetting\` = 'word'      ;
 UPDATE   \`stimwordPosition\`  SET \`positionSettingsAutoIncr\` = 2 WHERE 1 AND \`positionSetting\` = 'sentence'  ;
 UPDATE   \`stimwordPosition\`  SET \`positionSettingsAutoIncr\` = 3 WHERE 1 AND \`positionSetting\` = 'reading'   ;
+
 
 ALTER TABLE \`stimwordPosition\` ADD KEY \`positionSettingKey\` (\`positionSetting\`)                           ;
 ALTER TABLE \`stimwordPosition\` ADD KEY \`positionSetting_2_stimwordPosition\` (\`positionSettingsAutoIncr\`) ;
