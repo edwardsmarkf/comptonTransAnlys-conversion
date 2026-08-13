@@ -1,6 +1,6 @@
 #! /bin/bash  -w
 
-# 25a_add_email_check_and_enlarge_columns.bsh   -- 2026-08-11
+# 25a_add_email_check.bsh   -- 2026-08-11
 
 
 /usr/bin/mariadb-dump   --extended-insert=FALSE  comptonTransAnlys  > ./comptonTransAnlys_25_add_email_check_and_enlarge_columns.sql ;
