@@ -1,0 +1,14 @@
+
+#!  /bin/bash 
+#
+#
+# 25c_add_email_check.bsh
+#
+#
+#
+diff  ./comptonTransAnlys_25_add_email_check_and_enlarge_columns.sql   ./comptonTransAnlys_25_add_email_check.sql-COPY-BEFORE-EMAIL.sql  ;
+#
+mariadb comptonTransAnlys   <   ./comptonTransAnlys_25_add_email_check.sql ;
+#
+#
+exit;
