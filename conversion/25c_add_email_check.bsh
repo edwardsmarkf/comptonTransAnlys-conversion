@@ -11,7 +11,10 @@ diff  ./comptonTransAnlys_25_add_email_check.sql   ./comptonTransAnlys_25_add_em
 mariadb comptonTransAnlys   <   ./comptonTransAnlys_25_add_email_check.sql ;
 #
 #
-gzip   ./comptonTransAnlys_25_add_email_check.sql     ;
+echo $?
+
+gzip   ./comptonTransAnlys_25_add_email_check.sql                    ;
 gzip   ./comptonTransAnlys_25_add_email_check-COPY-BEFORE-EMAIL.sql  ;
+
 
 exit;
