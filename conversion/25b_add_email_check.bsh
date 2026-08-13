@@ -5,7 +5,7 @@
 #
 
 
-sed --in-place --file=-   .   /comptonTransAnlys_25_add_email_check.sql    <<EOF  ;
+sed --in-place --file=-   ./comptonTransAnlys_25_add_email_check.sql    <<EOF  ;
 
 #                                             added 2026-08-10
 /PRIMARY KEY (\`teacherAutoIncr\`),/a                                                        \\
