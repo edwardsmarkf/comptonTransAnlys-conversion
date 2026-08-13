@@ -135,7 +135,11 @@ process_section '23b_resize_primary_keys'    ;
 process_section '23c_resize_primary_keys'    ;
 process_section '23d_resize_primary_keys'    ;
 
-##########  will need to dump, use sed, then reload!   process_section '25_add_email_check'         ;   ## 2026-08-11
+
+  ## 2026-08-12
+process_section '25a_add_email_check'         ;   ## 2026-08-12
+process_section '25b_add_email_check'         ;   ## 2026-08-12
+process_section '25c_add_email_check'         ;   ## 2026-08-12
 
 
 ## 2022-11-03
