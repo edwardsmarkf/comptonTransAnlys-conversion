@@ -1,14 +1,12 @@
 #!  /bin/bash
 
-##        25b_add_email_check_and_enlarge_columns.bsh    2026-08-11
+##        25b_add_email_check.bsh    2026-08-11
 #
 #
 
 
-sed --in-place --file=-   .   /comptonTransAnlys_25_add_email_check_and_enlarge_columns.sql    <<EOF  ;
-#
-s/\`clientMasterEmail\` varchar(120) NOT NULL,/\`clientMasterEmail\` VARCHAR(255) NOT NULL,/  ;
-s/\`teacherEmail\` varchar(120) NOT NULL,/\`teacherEmail\` VARCHAR(255) NOT NULL,/            ;
+sed --in-place --file=-   .   /comptonTransAnlys_25_add_email_check.sql    <<EOF  ;
+
 #                                             added 2026-08-10
 /PRIMARY KEY (\`teacherAutoIncr\`),/a                                                        \\
 CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`     LIKE '%@%._%' ),             \\
@@ -32,10 +30,10 @@ exit;
 
 mariadb  --verbose  comptonTransAnlys  <<END ;
 
-    ALTER TABLE \`teacher\`         MODIFY \`teacherEmail\`        VARCHAR(256)                                              ;
+   
     ALTER TABLE \`teacher\`         ADD CONSTRAINT \`validateTeacherEmail\` CHECK (\`teacherEmail\`      LIKE '%@%._%' )     ;
 
-    ALTER TABLE \`clientMaster\`    MODIFY \`clientMasterEmail\`    VARCHAR(256)                                             ;
+    
     ALTER TABLE \`clientMaster\`    ADD CONSTRAINT \`validateClientEmail\`  CHECK (\`clientMasterEmail\` LIKE '%@%._%' )     ; 
 
 END
