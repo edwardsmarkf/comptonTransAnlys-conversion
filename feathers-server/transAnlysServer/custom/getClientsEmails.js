@@ -36,7 +36,7 @@ export class  getClientsEmails {
                         /* now check the clients directory (email address) for any Eval_ voicefiles */
 
         const rootDirName       =       voiceFileDirectory
-                        +       params.query['TEACHER_EMAIL']
+                        +       _params.query['TEACHER_EMAIL']
                         +       '/'
                         ;
 
