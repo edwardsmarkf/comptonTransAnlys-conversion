@@ -35,10 +35,12 @@ export class  getClientsEmails {
 
                         /* now check the clients directory (email address) for any Eval_ voicefiles */
 
-        const rootDirName       =       voiceFileDirectory
-                        +       _params.query['TEACHER_EMAIL']
-                        +       '/'
-                        ;
+        const rootDirName    =       voiceFileDirectory
+                             +       _params.query['TEACHER_EMAIL']
+                             +       '/'
+                             ;
+
+        console.log('Looking up: ' + rootDirName);
 
         let directoryNames = [];
                                 //      https://www.geeksforgeeks.org/node-js-fs-readdirsync-method/
