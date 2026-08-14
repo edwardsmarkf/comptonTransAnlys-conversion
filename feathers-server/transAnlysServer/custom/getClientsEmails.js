@@ -22,7 +22,7 @@ export class  getClientsEmails {
 
 
                 /* first look in the Mariadb clientMaster table */ 
-        const clientMasterSqlStatement = await readFile( ./src/sql/clientMasterEmail.sql'   , 'utf8');
+        const clientMasterSqlStatement = await readFile( './src/sql/clientMasterEmail.sql'   , 'utf8');
        
         let  clientMasterEmailJSON      =  await knexClient.raw( clientMasterSqlStatement , _params.query   );
 
