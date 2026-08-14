@@ -47,6 +47,7 @@ END_OF_SERVICE_CLASS_SED
 
 echo "http://$(hostname --all-ip-addresses | sed --expression='s/ //;' ):3030/${serviceName}/?knexSQL=serverVersionNowSQL&param=parameter test" ;
 
+echo "http://$(hostname --all-ip-addresses | sed --expression='s/ //;' ):3030/${serviceName}/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL" ; 
 
 exit;
 
