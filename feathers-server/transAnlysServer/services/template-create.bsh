@@ -47,7 +47,7 @@ if [ -n "${specialProcess}" ]; then
 else
     export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                                                       ; 
 
-    sed  --debug  --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', id: '${tableName}AutoIncr'   ${globalComment } |; "  \
+    sed  --debug  --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', id: '${tableName}AutoIncr'   ${globalComment} |; "   \
               ./src/services/${serviceName}/${serviceName}.class.js                                                                             ;
     echo "http://$(hostname --all-ip-addresses | sed --expression='s/ //;' ):3030/${serviceName}/"                                              ;
 
