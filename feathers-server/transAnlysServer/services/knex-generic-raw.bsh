@@ -23,8 +23,8 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
 /^  async find(_params) {$/a                                                                                                \\
                                                                                                                             \\
             /*      postman testing:                                                                                        \\
-                        http://192.168.100.144:3030/knex-generic-raw/?knexSQL=serverVersionNow                              \\
-                        http://192.168.100.144:3030/knex-generic-raw/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL       \\
+                        http://localhost:3030/knex-generic-raw/?knexSQL=serverVersionNow                              \\
+                        http://localhost:3030/knex-generic-raw/?knexSQL=soundSelectorSelectSQL&LAYOUT_NAME=PESL       \\
             */                                                                                                              \\
       const knexClient   = this.options.app.get('mysqlClient');                                           ${globalComment}  \\
       const sqlFile      = process.cwd() + '/src/sql/' + _params.query.knexSQL   + '.sql'  ;              ${globalComment}  \\
