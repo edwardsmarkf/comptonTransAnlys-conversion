@@ -8,6 +8,16 @@
 export FEATHERS_SERVER_NAME=${1}                             ;
 #
 #
+port=3030                ;
+export FEATHERS_URL="http://$(hostname  --all-ip-address | sed --expression='s/ //;' ;):${port}/"  ;
+
+echo  $FEATHERS_URL
+echo  $FEATHERS_URL
+
+
+echo  $FEATHERS_URL
+
+echo  $FEATHERS_URL
 
 export globalComment='GLOBAL_COMMENT_TO_BE_REPLACED_AT_END'          ;
 ScriptName="${BASH_SOURCE[0]##*/}"                                   ;
