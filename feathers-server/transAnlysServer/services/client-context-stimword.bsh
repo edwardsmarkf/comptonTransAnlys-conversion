@@ -28,7 +28,7 @@ s|return \[]|return { ..._params.query, ...returnVal }                         ;
 
 END_OF_SERVICE_CLASS_SED
 
-echo "http://$(hostname --all-ip-addresses | sed --expression='s/ //;' ):3030/${serviceName}/?stimwordPositionAutoIncr=5" ;
+echo "Testing:  ${FEATHERS_URL}${serviceName}/?stimwordPositionAutoIncr=5" ;
 
 exit;
 
