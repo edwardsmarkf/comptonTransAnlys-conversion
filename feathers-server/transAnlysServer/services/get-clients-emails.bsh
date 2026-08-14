@@ -44,7 +44,7 @@ s/return \[]/return emailResult/  ;
  
 END_OF_SERVICE_CLASS_SED
 
-echo "${FEATHERS_URL}${serviceName}/?LAYOUT_NAME=PESL&TEACHER_EMAIL=info@englishwithoutaccent.com" ;
+echo "Testing:  ${FEATHERS_URL}${serviceName}/?LAYOUT_NAME=PESL&TEACHER_EMAIL=info@englishwithoutaccent.com" ;
 
 exit;
 
