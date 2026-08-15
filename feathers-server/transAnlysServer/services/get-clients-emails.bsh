@@ -19,28 +19,12 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
 import { getClientsEmails } from  '../../custom/getClientsEmails.js' ;    ${globalComment}                            \\
 
 
-/^  async find(_params) {$/a                                                                                                     \\
-    // 1. Log structural diagnostics to your terminal console                                                                    \\
-    console.log('--- DIAGNOSTIC START ---');                                                                                     \\
-    console.log('this.options keys:', Object.keys(this.options || {}));                                                          \\
-    console.log('_params keys:', Object.keys(_params || {}));                                                                    \\
-    if (_params?.route) console.log('_params.route:', _params.route);                                                            \\
-    if (_params?.connection) console.log('Has connection:', !!_params.connection);                                               \\
-    console.log('--- DIAGNOSTIC END ---');                                                                                       \\
-                                                                                                                                 \\
-    // 2. Try an aggressive deep look to see if Feathers tucked app into an options container                                    \\
-    const appInstance = this.options?.app || _params?.app;                                                                       \\
-                                                                                                                                 \\
-    // If it's still missing, let's look for alternative injection spots                                                         \\
-    if (!appInstance || typeof appInstance.get !== 'function') {                                                                 \\
-      throw new Error(`Feathers app context not found on expected injection objects. Inspect your console logs above.`);         \\
-    }                                                                                                                            \\
-                                                                                                                                 \\
-    const getEmailsInstance = new getClientsEmails(appInstance);                                                                 \\
-    const [emailResult] = await getEmailsInstance.getClientsEmails(_params);                                                     \\
-                                                                                                                                 \\
+/^  async find(_params) {$/a                                                                                          \\
+                                                                                                                      \\
+    const getEmailsInstance = new getClientsEmails(appInstance);                                                      \\
+    const emailResult = await getEmailsInstance.getClientsEmails(_params);                                            \\
 
-s/return \[]/return emailResult/  ;
+s/return \[]/return [emailResult]/  ;
  
 END_OF_SERVICE_CLASS_SED
 
