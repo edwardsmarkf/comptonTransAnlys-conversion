@@ -44,6 +44,8 @@ END_OF_CONFIG_DEFAULT_JSON
 #
 cd ${FEATHERS_SERVER_NAME}                                                ;
 
+pwd;
+
 # services:
 
 while read -r serviceName serviceType specialProcess; do
