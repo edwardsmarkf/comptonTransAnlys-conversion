@@ -9,6 +9,9 @@
 */
 import fs, { readFile } from 'fs'; // Note: readFile here is callback-based, use fs.promises.readFile for promises (from  AI)
 
+import { app } from '../app.js';
+
+
 
 export class  getClientsEmails {
   constructor(app) {
@@ -22,8 +25,10 @@ export class  getClientsEmails {
 
         const knexClient = currentApp.get('mysqlClient');
 
-        const voiceFileDirectory        =       '/home/mark/voicefiles/'        ;
+                                     //     const voiceFileDirectory        =       '/home/mark/voicefiles/'        ;
 
+        const voiceFileDirectory = app.get('voiceFileDirectory'); 
+       
 
                 /* first look in the Mariadb clientMaster table */ 
         const clientMasterSqlStatement = await readFile( './src/sql/clientMasterEmail.sql'   , 'utf8');
