@@ -4,13 +4,13 @@
 */
 
 
-import { readFile } from 'fs/promises';    // needed to read the sql statement.
-
-
+import { readFile } from 'fs/promises'  ;       // needed to read the directory structure.
+import fs from 'fs'                     ;       // added 2026-08-15
 export class  getClientsEmails {
   constructor(app) {
     this.app = app;
   }
+
 
   async getClientsEmails(_params) {
         
