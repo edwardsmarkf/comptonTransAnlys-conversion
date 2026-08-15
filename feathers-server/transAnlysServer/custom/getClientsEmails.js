@@ -25,14 +25,10 @@ export class  getClientsEmails {
 
         const knexClient = currentApp.get('mysqlClient');
 
-                                     //     const voiceFileDirectory        =       '/home/mark/voicefiles/'        ;
-
-        const voiceFileDirectory = app.get('voiceFileDirectory'); 
-       
                 /* first look in the Mariadb clientMaster table */ 
-        const clientMasterSqlStatement = await readFile( './src/sql/clientMasterEmail.sql'   , 'utf8');
+        const clientMasterSqlStatement  = await readFile( './src/sql/clientMasterEmail.sql'   , 'utf8');
        
-        let  clientMasterEmailJSON      =  await knexClient.raw( clientMasterSqlStatement , _params.query   );
+        let  clientMasterEmailJSON      = await knexClient.raw( clientMasterSqlStatement , _params.query   );
 
         let clientMasterEmailObj        = JSON.parse(clientMasterEmailJSON[0][0]['JSON_OBJECTAGG']);
         clientMasterEmailJSON           = null;
@@ -40,8 +36,10 @@ export class  getClientsEmails {
         let clientMasterEmailKeys       = Object.keys(clientMasterEmailObj);
 
 
-
                         /* now check the clients directory (email address) for any Eval_ voicefiles */
+
+        const voiceFileDirectory = app.get('voiceFileDirectory'); 
+
 
         const rootDirName    =       voiceFileDirectory
                              +       _params.query['TEACHER_EMAIL']
