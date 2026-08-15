@@ -3,11 +3,13 @@
 
 */
 
-/*
-    import { readFile } from 'fs/promises'  ;       // needed to read the directory structure.
-    import fs from 'fs'                     ;       // added 2026-08-15
-*/
-import fs, { readFile } from 'fs'; // Note: readFile here is callback-based, use fs.promises.readFile for promises (from  AI)
+
+
+import { readFile } from 'fs/promises'  ;       // needed to read the directory structure.
+import fs from 'fs'                     ;       // added 2026-08-15
+//import fs, { readFile } from 'fs'; // Note: readFile here is callback-based, use fs.promises.readFile for promises (from  AI)
+
+
 
 import { app } from '../app.js';
 
