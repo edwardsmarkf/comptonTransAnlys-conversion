@@ -28,11 +28,17 @@ export Final_Comment="/* Added by ${ScriptName} -- ${TimeStamp} */"  ;
 #
 #
 #
-bash -vx        ./createApp.bsh         ${FEATHERS_SERVER_NAME}           ;
+bash -vx        ./createApp.bsh         ${FEATHERS_SERVER_NAME}          ;
 #
 #
 mv     --verbose  ./custom/  ./sql/  ./${FEATHERS_SERVER_NAME}/src/   ;
 #
+sed --in-place  --file=-    ./config/default.json    <<END_OF_CONFIG_DEFAULT_JSON ;
+/^{$/a                                                    \\
+    "voiceFileDirectory": '/home/mark/voicefiles/'  ,     \\
+
+END_OF_CONFIG_DEFAULT_JSON
+
 #
 cd ${FEATHERS_SERVER_NAME}                                                ;
 
