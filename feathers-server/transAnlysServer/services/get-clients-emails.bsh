@@ -21,6 +21,12 @@ import { getClientsEmails } from  '../../custom/getClientsEmails.js' ;    ${glob
 
 /^  async find(_params) {$/a                                                                                          \\
                                                                                                                       \\
+    const appInstance = this.options?.app || _params?.app;                                                            \\
+                                                                                                                      \\
+    if (!appInstance || typeof appInstance.get !== 'function') {                                                      \\
+      throw new Error();                                                                                              \\
+    }                                                                                                                 \\
+                                                                                                                      \\
     const getEmailsInstance = new getClientsEmails(appInstance);                                                      \\
     const emailResult = await getEmailsInstance.getClientsEmails(_params);                                            \\
 
