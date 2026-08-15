@@ -29,7 +29,6 @@ export class  getClientsEmails {
 
         const voiceFileDirectory = app.get('voiceFileDirectory'); 
        
-
                 /* first look in the Mariadb clientMaster table */ 
         const clientMasterSqlStatement = await readFile( './src/sql/clientMasterEmail.sql'   , 'utf8');
        
