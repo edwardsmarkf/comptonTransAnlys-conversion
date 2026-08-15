@@ -3,17 +3,9 @@
 
 */
 
-
-
-import fs from 'fs'                     ;      // added 2026-08-15
-const { readFile } from 'fs/promises'  ;       // needed to read the directory structure.
-
-
-
-
-import { app } from '../app.js';
-
-
+import fs                from 'fs'                ;      // added 2026-08-15
+import { readFile }      from 'fs/promises'       ;       // needed to read the directory structure.
+import { app }           from '../app.js'         ;
 
 export class  getClientsEmails {
   constructor(app) {
