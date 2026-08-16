@@ -1,5 +1,5 @@
 /*
-     getClientsEmails.js    -- 2026-08-09
+     getClientEmails.js    -- 2026-08-09
 
 */
 
@@ -7,13 +7,13 @@ import fs                from 'fs'                ;      // added 2026-08-15
 import { readFile }      from 'fs/promises'       ;       // needed to read the directory structure.
 import { app }           from '../app.js'         ;
 
-export class  getClientsEmails {
+export class  getClientEmails {
   constructor(app) {
     this.app = app;
   }
 
 
-  async getClientsEmails(_params) {
+  async getClientEmails(_params) {
         
         const currentApp = this.app || _params.app;  // suggested by google-AI  2026-08-09
 
