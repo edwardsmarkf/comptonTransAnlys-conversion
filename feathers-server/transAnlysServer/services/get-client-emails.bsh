@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-##   get-clients-emails.bsh   -- 2026-07-22
+##   get-client-emails.bsh   -- 2026-07-22
 
 export globalComment=${1}                                                                                         ;
 export serviceName='get-clients-emails'                                                                           ;
@@ -16,7 +16,7 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
 
 2i                                                                                                                    \\
                                                                                                                       \\
-import { getClientsEmails } from  '../../custom/getClientsEmails.js' ;    ${globalComment}                            \\
+import { getClientEmails } from  '../../custom/getClientEmails.js' ;    ${globalComment}                              \\
 
 
 /^  async find(_params) {$/a                                                                                          \\
@@ -27,8 +27,8 @@ import { getClientsEmails } from  '../../custom/getClientsEmails.js' ;    ${glob
       throw new Error();                                                                                              \\
     }                                                                                                                 \\
                                                                                                                       \\
-    const getEmailsInstance = new getClientsEmails(appInstance);                                                      \\
-    const emailResult = await getEmailsInstance.getClientsEmails(_params);                                            \\
+    const getEmailsInstance = new getClientEmails(appInstance);                                                      \\
+    const emailResult = await getEmailsInstance.getClientEmails(_params);                                            \\
 
 s/return \[]/return [emailResult]/  ;
  
@@ -46,7 +46,7 @@ exit;
 
 2i                                                                                                                \\
                                                                                                                       \\
-                           // import { getClientsEmail } from 'fs/promises';        /* added by mark */               \\
+                           // import { getClientEmail } from 'fs/promises';        /* added by mark */               \\
                                                                                                                       \\
 
 
