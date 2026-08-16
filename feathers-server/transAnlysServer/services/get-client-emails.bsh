@@ -4,7 +4,7 @@
 ##   get-client-emails.bsh   -- 2026-07-22
 
 export globalComment=${1}                                                                                         ;
-export serviceName='get-clients-emails'                                                                           ;
+export serviceName='get-client-emails'                                                                            ;
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED         ;
 s|^  { additionalProperties: false }|  { additionalProperties: true }     ${globalComment}                       |;
@@ -71,7 +71,7 @@ exit;
 ##   create the feathers service using tcl/expect
 
 
-export serviceName='get-clients-emails'                                                                                    ;
+export serviceName='get-client -emails'                                                                                    ;
 export serviceType='custom'                                                                                              ;
 
 expect <(cat <<'END_OF_GENERATE_SERVICE'
