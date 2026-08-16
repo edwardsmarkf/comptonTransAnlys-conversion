@@ -14,7 +14,7 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
     const datetime = new Date().toString();                                                                              \\
     console.log(datetime);                                                                                               \\
 
-s/return \[]/ return [{datetime:datetime}];/          ;
+s/return \[]/ return [{datetime}];/          ;
 
 END_OF_SERVICE_CLASS_SED
 
