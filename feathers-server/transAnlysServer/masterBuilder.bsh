@@ -112,7 +112,7 @@ exit                                                                      ;
 
 
                              ########bash -vx  ../services/modify-client-context-stimword.bsh          ;
-                          #############################bash -vx  ../services/modify-get-clients-emails.bsh               ;
+                          #############################bash -vx  ../services/modify-get-client -emails.bsh               ;
                           ######################bash -vx  ../services/modify-knex-generic-raw.bsh                 ;
 
 ###bash -vx   ../hooks/create-client-context-before-find.bsh         ;
