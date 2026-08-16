@@ -66,6 +66,7 @@ done <<END_OF_SERVICE_FILE ;
   get-clients-emails            custom      get-clients-emails  
   knex-generic-raw              custom      knex-generic-raw
   language-norms                knex
+  layout                        knex
   session-names                 knex
   stimword                      knex
   teacher                       knex
