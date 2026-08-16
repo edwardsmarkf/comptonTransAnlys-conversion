@@ -11,10 +11,10 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
 
 /^  async find(_params) {$/a                                                                                             \\
                                                                                                                          \\
-    const datetime = new Date().toString();                                                                              \\
-    console.log(datetime);                                                                                               \\
+    const datetime = new Date().toString();     ${globalComment}                                                         \\
+    console.log(datetime);                      ${globalComment}                                                         \\
 
-s/return \[]/ return [{datetime}];/          ;
+s/return \[]/ return [{datetime}];   ${globalComment}/                                                                   ;
 
 END_OF_SERVICE_CLASS_SED
 
