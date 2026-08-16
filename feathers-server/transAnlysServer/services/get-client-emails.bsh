@@ -6,11 +6,6 @@
 export globalComment=${1}                                                                                         ;
 export serviceName='get-client-emails'                                                                            ;
 
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED         ;
-s|^  { additionalProperties: false }|  { additionalProperties: true }     ${globalComment}                       |;
-END_OF_SCHEMA_SED
-
-
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_CLASS_SED       ;
 
