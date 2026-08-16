@@ -63,7 +63,7 @@ done <<END_OF_SERVICE_FILE ;
   date-time                     custom      date-time
   error-sounds-tooltip          knex
   frequency-list                knex
-  get-clients-emails            custom      get-clients-emails  
+  get-client -emails            custom      get-client-emails  
   knex-generic-raw              custom      knex-generic-raw
   language-norms                knex
   layout                        knex
