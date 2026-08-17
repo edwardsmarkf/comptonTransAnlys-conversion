@@ -30,7 +30,7 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.
                                                                                                           ${globalComment}  \\
       let result;                                                                                         ${globalComment}  \\
       if  ( typeof sqlResult[0].JSON_ARRAYAGG       == 'string' )        {                                ${globalComment}  \\
-              result = sqlResult[0].JSON_ARRAYAGG   ;                                                     ${globalComment}  \\
+              result = JSON.parse(sqlResult[0].JSON_ARRAYAGG)   ;                                         ${globalComment}  \\
       } else if ( typeof sqlResult[0] == 'object' )        {                                              ${globalComment}  \\
               result = sqlResult[0];                                                                      ${globalComment}  \\
       } else {                                                                                            ${globalComment}  \\
