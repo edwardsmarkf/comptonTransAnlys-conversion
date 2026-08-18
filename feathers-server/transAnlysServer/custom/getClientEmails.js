@@ -79,7 +79,7 @@ export class  getClientEmails {
 
                 if  ( clientMasterEmailObj[element] )     {
                           tmpObj.language = clientMasterEmailObj[element] ;
-                ];
+                };
                      
                 clientMasterReturnObj.push      ( tmpObj );
                                                                         /**********************************
