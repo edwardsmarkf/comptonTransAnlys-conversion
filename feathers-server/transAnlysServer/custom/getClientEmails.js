@@ -69,12 +69,17 @@ export class  getClientEmails {
         {
                 clientMasterReturnObj.push      (       {       'group'         :       'Transcribed Emails'
                                                         ,       'label'         :       element
+                                                        ,       'value'         :       element
+                                                        ,      ' language'      :       clientMasterEmailObj[element]   // 2026-08-18 new
+                                                             
+                                                         /**********  2018-08-18  removed
                                                         ,       'value'         :       JSON.stringify(
                                                                                                 {       'email'         :       element
                                                                                                 ,       'language'      :       clientMasterEmailObj[element]
                                                                                                 }
                                                                                         )
                                                         }
+                                                        *****************/
                                                 )
         };
         clientMasterEmailObj    = null;
@@ -88,7 +93,7 @@ export class  getClientEmails {
         {
                 untranscribedEmailObj.push      (       {       'group' :       'Untranscribed Emails'
                                                         ,       'label' :       element
-                                                        ,       'value' :       JSON.stringify({ 'email' : element })
+                                                        ,       'value' :       element                                  // 2026-08-18  JSON.stringify({ 'email' : element })
                                                         }
                                                 )
         };
