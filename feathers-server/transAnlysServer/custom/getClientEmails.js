@@ -77,14 +77,15 @@ export class  getClientEmails {
                                                         ,       'value'         :       element
                                                         ,      ' language'      :       clientMasterEmailObj[element]   // 2026-08-18 new
                                                              
-                                                         /**********  2018-08-18  removed
-                                                        ,       'value'         :       JSON.stringify(
-                                                                                                {       'email'         :       element
-                                                                                                ,       'language'      :       clientMasterEmailObj[element]
-                                                                                                }
-                                                                                        )
+                                                                         /**********  2018-08-18  removed
+                                                                                  ,       'value'         :       JSON.stringify(
+                                                                                                           {       'email'         :       element
+                                                                                                           ,       'language'      :       clientMasterEmailObj[element]
+                                                                                                           }
+                                                                                                    )
+                                                                          *****************/
                                                         }
-                                                        *****************/
+                                                        
                                                 )
         };
         clientMasterEmailObj    = null;
