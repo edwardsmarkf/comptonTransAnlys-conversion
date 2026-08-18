@@ -94,10 +94,11 @@ export class  getClientEmails {
                                                                                                            ,       'language'      :       clientMasterEmailObj[element]
                                                                                                            }
                                                                                                     )
-                                                                          *****************/
-                                                        }
+                                                                    
+                                                                           }
                                                         
-                                                )
+                                                                           )
+                                                      *****************/
         };
         clientMasterEmailObj    = null;
         clientMasterEmailKeys   = null;
