@@ -3,6 +3,11 @@
 
 */
 
+const TRANSCRIPTED_EMAILS       = 'Transribed Emails'   ;
+const UNTRANSCRIPTED_EMAILS     = 'Untransribed Emails' ;
+
+
+
 import fs                from 'fs'                ;      // added 2026-08-15
 import { readFile }      from 'fs/promises'       ;       // needed to read the directory structure.
 import { app }           from '../app.js'         ;
@@ -67,7 +72,7 @@ export class  getClientEmails {
         let clientMasterReturnObj = new Array();
         for (const element of clientMasterEmailKeys.sort() )
         {
-                clientMasterReturnObj.push      (       {       'group'         :       'Transcribed Emails'
+                clientMasterReturnObj.push      (       {       'group'         :       TRANSCRIPTED_EMAILS
                                                         ,       'label'         :       element
                                                         ,       'value'         :       element
                                                         ,      ' language'      :       clientMasterEmailObj[element]   // 2026-08-18 new
@@ -91,7 +96,7 @@ export class  getClientEmails {
         let untranscribedEmailObj = new Array();
         for (const element of untranscribedEmail.sort() )
         {
-                untranscribedEmailObj.push      (       {       'group' :       'Untranscribed Emails'
+                untranscribedEmailObj.push      (       {       'group' :       UNTRANSCRIPTED_EMAILS
                                                         ,       'label' :       element
                                                         ,       'value' :       element                                  // 2026-08-18  JSON.stringify({ 'email' : element })
                                                         }
