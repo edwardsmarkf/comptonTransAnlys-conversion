@@ -72,10 +72,21 @@ export class  getClientEmails {
         let clientMasterReturnObj = new Array();
         for (const element of clientMasterEmailKeys.sort() )
         {
-                clientMasterReturnObj.push      (       {       'group'         :       TRANSCRIBED_EMAILS
-                                                        ,       'label'         :       element
-                                                        ,       'value'         :       element
-                                                        ,       'language'      :       clientMasterEmailObj[element]   // 2026-08-18 new
+                let tmpObj =    {       'group'  :   TRANSCRIBED_EMAILS
+                                ,       'label'  :   element
+                                ,       'value'  :   element
+                                };
+
+                if  ( clientMasterEmailObj[element] )     {
+                          tmpObj.language = clientMasterEmailObj[element] ;
+                ];
+                     
+                clientMasterReturnObj.push      ( tmpObj );
+                                                                        /**********************************
+                                                                        {       'group'         :       TRANSCRIBED_EMAILS
+                                                                        ,       'label'         :       element
+                                                                        ,       'value'         :       element
+                                                                        ,       'language'      :       clientMasterEmailObj[element]   // 2026-08-18 new
                                                              
                                                                          /**********  2018-08-18  removed
                                                                                   ,       'value'         :       JSON.stringify(
