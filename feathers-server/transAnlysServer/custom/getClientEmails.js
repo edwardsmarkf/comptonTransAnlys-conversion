@@ -72,7 +72,7 @@ export class  getClientEmails {
         let clientMasterReturnObj = new Array();
         for (const element of clientMasterEmailKeys.sort() )
         {
-             clientMasterReturnObj.push   
+             clientMasterReturnObj.push(   
                     {       'group'         :       TRANSCRIBED_EMAILS
                     ,       'label'         :       element
                     ,       'value'         :       element
@@ -82,6 +82,7 @@ export class  getClientEmails {
                                                         }
                                                     )
                     }
+               )
         };
         clientMasterEmailObj    = null;
         clientMasterEmailKeys   = null;
@@ -94,7 +95,7 @@ export class  getClientEmails {
         {
                 untranscribedEmailObj.push      (       {       'group' :       UNTRANSCRIBED_EMAILS
                                                         ,       'label' :       element
-                                                        ,       'value' :       element                                  // 2026-08-18  JSON.stringify({ 'email' : element })
+                                                        ,       'value' :       JSON.stringify({ 'email' : element })
                                                         }
                                                 )
         };
