@@ -72,33 +72,28 @@ export class  getClientEmails {
         let clientMasterReturnObj = new Array();
         for (const element of clientMasterEmailKeys.sort() )
         {
-                let tmpObj =    {       'group'  :   TRANSCRIBED_EMAILS
-                                ,       'label'  :   element
-                                ,       'value'  :   element
-                                };
+                        /***********
+                          let tmpObj =    {       'group'  :   TRANSCRIBED_EMAILS
+                                          ,       'label'  :   element
+                                        ,       'value'  :   element
+                                      };
 
-                if  ( clientMasterEmailObj[element] )     {
-                          tmpObj.language = clientMasterEmailObj[element] ;
-                };
-                     
-                clientMasterReturnObj.push      ( tmpObj );
-                                                                        /**********************************
-                                                                        {       'group'         :       TRANSCRIBED_EMAILS
-                                                                        ,       'label'         :       element
-                                                                        ,       'value'         :       element
-                                                                        ,       'language'      :       clientMasterEmailObj[element]   // 2026-08-18 new
-                                                             
-                                                                         /**********  2018-08-18  removed
-                                                                                  ,       'value'         :       JSON.stringify(
-                                                                                                           {       'email'         :       element
-                                                                                                           ,       'language'      :       clientMasterEmailObj[element]
-                                                                                                           }
-                                                                                                    )
-                                                                    
-                                                                           }
-                                                        
-                                                                           )
-                                                      *****************/
+                              if  ( clientMasterEmailObj[element] )     {
+                                     tmpObj.language = clientMasterEmailObj[element] ;
+                            }           
+                            clientMasterReturnObj.push      ( tmpObj );
+                           ********/
+                                                                       
+             clientMasterReturnObj.push   
+                    {       'group'         :       TRANSCRIBED_EMAILS
+                    ,       'label'         :       element
+                    ,       'value'         :       element
+                    ,       'value'         :       JSON.stringify
+                                                    (   {       'email'     :  element
+                                                        ,       'language'  :  clientMasterEmailObj[element]
+                                                        }
+                                                    )
+                    }
         };
         clientMasterEmailObj    = null;
         clientMasterEmailKeys   = null;
