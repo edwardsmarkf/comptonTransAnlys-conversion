@@ -75,7 +75,6 @@ export class  getClientEmails {
              clientMasterReturnObj.push(   
                     {       'group'         :       TRANSCRIBED_EMAILS
                     ,       'label'         :       element
-                    ,       'value'         :       element
                     ,       'value'         :       JSON.stringify
                                                     (   {       'email'     :  element
                                                         ,       'language'  :  clientMasterEmailObj[element]
