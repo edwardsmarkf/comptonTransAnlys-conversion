@@ -57,6 +57,14 @@
                 //                      const     myArgs                               = JSON.parse(process.argv.slice(2)[0])  ;
 
 
+
+
+
+import fs                        from 'fs'                ;        // added 2026-08-15
+import { readFile }              from 'fs/promises'       ;        // needed to read the directory structure.
+
+
+
 class ExitEarly extends Error {
         /*      2023-08-04      https://www.sitepoint.com/community/t/early-exit-from-a-javascript-promise/422703/3
          *
