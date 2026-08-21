@@ -470,7 +470,7 @@ function insertClientContext(knexClient, val, clientContextErrorSound, contextAu
                 ,       'clientContextErrorNotes'               :       null
                 }
                 ;
-        return kenxClient.raw(returnSqlStatement('insertClientContextSQL'), insertClientContextParms);
+        return knexClient.raw(returnSqlStatement('insertClientContextSQL'), insertClientContextParms);
                                                                                                                                     //  2026-08-04        return knexClient.raw(returnInsertClientContextStatement(), insertClientContextParms);
 }
 
@@ -481,7 +481,7 @@ function insertClientStimword(knexClient, clientContextAutoIncr, stimwordPositio
                 ,       'stimwordPositionAutoIncr'              :       stimwordPositionAutoIncr
                 }
                 ;
-        return kenxClient.raw(returnSqlStatement('insertClientStimwordSQL'), insertClientStimwordParms);
+        return knexClient.raw(returnSqlStatement('insertClientStimwordSQL'), insertClientStimwordParms);
                                                                                                                  //   2026-08-04   return knexClient.raw(returnInsertClientStimwordStatement(), insertClientStimwordParms);
 }
 
