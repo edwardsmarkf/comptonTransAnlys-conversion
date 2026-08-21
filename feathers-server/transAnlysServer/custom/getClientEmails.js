@@ -111,10 +111,7 @@ export class  getClientEmails {
 
                         /* return the results */
         let returnArray = [];
-        if  ( untranscribedEmailObj.length )    {
-
-                                          ?????? ? ? ? ? ? ? ?? ? ? ??????????????
-                                               
+        if  ( untranscribedEmailObj.length )    {                                               
                 returnArray =   [       ...untranscribedEmailObj
                                 ,       ...clientMasterReturnObj
                                 ]
