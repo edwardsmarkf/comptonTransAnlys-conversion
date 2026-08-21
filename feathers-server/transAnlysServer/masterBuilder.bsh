@@ -45,6 +45,8 @@ sed --in-place  --file=-    ./config/default.json    <<END_OF_CONFIG_DEFAULT_JSO
 /^{$/a                                                       \\
     'voiceFileDirectory'   : '/home/mark/voicefiles/'  ,     \\
 
+s/"default": 10,/"default": 10000,/;
+
 END_OF_CONFIG_DEFAULT_JSON
 
 
