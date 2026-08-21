@@ -3,8 +3,8 @@
 
 */
 
-const TRANSCRIBED_EMAILS       = 'Transribed Emails'   ;
-const UNTRANSCRIBED_EMAILS     = 'Untransribed Emails' ;
+const TRANSCRIBED_EMAILS       = 'Transcribed Emails'   ;
+const UNTRANSCRIBED_EMAILS     = 'Untransribed Emails'  ;
 
 
 
