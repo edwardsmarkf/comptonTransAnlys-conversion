@@ -579,10 +579,55 @@ function deleteChildlessClientContext(knexClient, contextAutoIncr, clientContext
 
 
 function returnSqlStatement(filePrefix)        {
-  const sqlFile      = process.cwd() + '/src/sql/' + filePrefix + '.sql'    ;
-  const sqlStatement = readFile(sqlFile, 'utf8')                            ;
-  return  sqlStatement.replaceAll("\\\\n" ,' ')                             ;
+  const        sqlFile      = process.cwd() + '/src/sql/' + filePrefix + '.sql'    ;
+                                                                                                  //   const sqlStatement = readFile(sqlFile, 'utf8')                            ;
+  const        sqlStatement = await readFile(sqlFile, 'utf8');
+  return       sqlStatement.replaceAll("\\\\n" ,' ')                             ;
 }
+
+
+/*
+             const knexClient   = this.options.app.get('mysqlClient');
+      const sqlFile      = process.cwd() + '/src/sql/' + _params.query.knexSQL   + '.sql'  ;
+      const sqlStatement = await readFile(sqlFile, 'utf8');
+      const [sqlResult]   =  await knexClient.raw( sqlStatement.replaceAll("\\\\n",' '), _params.query );
+                                                                                                   
+      let result;                                                                                        
+      if  ( typeof sqlResult[0].JSON_ARRAYAGG       == 'string' )        {         
+              result = JSON.parse(sqlResult[0].JSON_ARRAYAGG)   ;   
+      } else if ( typeof sqlResult[0] == 'object' )        {  
+              result = sqlResult[0];  
+      } else { 
+              result = sqlResult;
+      } 
+
+s/return \[]/return result;/;
+
+*/
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 2026-08-04      // insertClientContextSQL
 // 2026-08-04      function returnInsertClientContextStatement()   {
