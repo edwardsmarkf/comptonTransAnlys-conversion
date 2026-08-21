@@ -72,6 +72,12 @@ export class  getClientEmails {
         let clientMasterReturnObj = new Array();
         for (const element of clientMasterEmailKeys.sort() )
         {
+/**  must look like this:
+             document.querySelector('smart-combo-box#test').dataSource = [
+    { label: 'United States', value: 'US' },
+    { label: 'United Kingdom', value: 'UK' }
+];
+**/
              clientMasterReturnObj.push(   
                     {       'group'         :       TRANSCRIBED_EMAILS
                     ,       'label'         :       element
@@ -106,6 +112,9 @@ export class  getClientEmails {
                         /* return the results */
         let returnArray = [];
         if  ( untranscribedEmailObj.length )    {
+
+                                          ?????? ? ? ? ? ? ? ?? ? ? ??????????????
+                                               
                 returnArray =   [       ...untranscribedEmailObj
                                 ,       ...clientMasterReturnObj
                                 ]
