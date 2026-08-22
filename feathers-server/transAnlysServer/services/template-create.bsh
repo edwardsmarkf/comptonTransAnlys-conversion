@@ -42,9 +42,11 @@ END_OF_GENERATE_SERVICE
 
 
 
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED                   ;
-s|^  { additionalProperties: false }|  { additionalProperties: true }  ${globalComment}                                     |;
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED        ;
+s|additionalProperties: false|additionalProperties: true ${globalComment} |                                      ;
 END_OF_SCHEMA_SED
+
+####s|^  { additionalProperties: false }|  { additionalProperties: true }  ${globalComment}                                     |;
 
 
 if [ -n "${specialProcess}" ]; then
