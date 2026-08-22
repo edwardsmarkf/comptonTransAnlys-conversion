@@ -580,7 +580,7 @@ function deleteChildlessClientContext(knexClient, contextAutoIncr, clientContext
 }
 
 
-function returnSqlStatement(filePrefix)        {
+async function returnSqlStatement(filePrefix)        {
   const sqlFile      = process.cwd() + '/src/sql/' + filePrefix + '.sql'    ;
   try {
         const sqlStatement = await readFile(sqlFile, 'utf8')                            ;
