@@ -467,7 +467,7 @@ async function selectClientContext(knexClient, clientContextErrorSound, clientSe
 }
 
 
-function insertClientContext(knexClient, val, clientContextErrorSound, contextAutoIncr, clientSessionAutoIncr)   {
+async function insertClientContext(knexClient, val, clientContextErrorSound, contextAutoIncr, clientSessionAutoIncr)   {
 
         let insertClientContextParms =
                 {       'clientContextErrorSound'               :       clientContextErrorSound
@@ -478,19 +478,21 @@ function insertClientContext(knexClient, val, clientContextErrorSound, contextAu
                 ,       'clientContextErrorNotes'               :       null
                 }
                 ;
-        return knexClient.raw(returnSqlStatement('insertClientContextSQL'), insertClientContextParms);
-                                                                                                                                    //  2026-08-04        return knexClient.raw(returnInsertClientContextStatement(), insertClientContextParms);
+        const sqlStatement =  await  returnSqlStatement('insertClientContextSQL')                  ;
+        const result       =  await  knexClient.raw(sqlStatement, insertClientContextParms)        ;
+        return result                                                                              ;
 }
 
-function insertClientStimword(knexClient, clientContextAutoIncr, stimwordPositionAutoIncr)     {
+async function insertClientStimword(knexClient, clientContextAutoIncr, stimwordPositionAutoIncr)     {
 
         let insertClientStimwordParms =
                 {       'clientContextAutoIncr'                 :       clientContextAutoIncr
                 ,       'stimwordPositionAutoIncr'              :       stimwordPositionAutoIncr
                 }
                 ;
-        return knexClient.raw(returnSqlStatement('insertClientStimwordSQL'), insertClientStimwordParms);
-                                                                                                                 //   2026-08-04   return knexClient.raw(returnInsertClientStimwordStatement(), insertClientStimwordParms);
+        const sqlStatement =  await  returnSqlStatement('insertClientStimwordSQL')                    ;
+        const result       =  await knexClient.raw(sqlStatement, insertClientStimwordParms)           ;
+        return result                                                                                 ;
 }
 
 
@@ -579,11 +581,41 @@ function deleteChildlessClientContext(knexClient, contextAutoIncr, clientContext
 
 
 function returnSqlStatement(filePrefix)        {
-  const        sqlFile      = process.cwd() + '/src/sql/' + filePrefix + '.sql'    ;
-                                                                                                  //   const sqlStatement = readFile(sqlFile, 'utf8')                            ;
-  const        sqlStatement = await readFile(sqlFile, 'utf8');
-  return       sqlStatement.replaceAll("\\\\n" ,' ')                             ;
+  const sqlFile      = process.cwd() + '/src/sql/' + filePrefix + '.sql'    ;
+  try {
+        const sqlStatement = await readFile(sqlFile, 'utf8')                            ;
+        return  sqlStatement.replaceAll("\n" ,' ').replace(/\s+/g, ' ')                 ;
+  } catch (error) {
+        console.error('fail');
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -605,29 +637,6 @@ s/return \[]/return result;/;
 
 */
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // 2026-08-04      // insertClientContextSQL
 // 2026-08-04      function returnInsertClientContextStatement()   {
