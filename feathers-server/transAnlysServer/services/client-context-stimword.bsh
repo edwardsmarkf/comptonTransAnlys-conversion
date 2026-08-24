@@ -1,11 +1,12 @@
 #! /bin/bash
 
-##   modify-client-process-stimword   -- 2026-07-22
+##   client-process-stimword   -- 2026-07-22
 
 
-export globalComment=${1}                           ;
+serviceName=${1}              ;          
+globalComment=${2}            ;
 
-export serviceName='client-context-stimword'        ;
+              ######     export serviceName='client-context-stimword'        ;
 
 
 
