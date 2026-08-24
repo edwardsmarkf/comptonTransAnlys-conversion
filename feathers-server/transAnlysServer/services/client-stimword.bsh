@@ -2,11 +2,16 @@
 
 #      client-stimword.bsh    2026-08-23
 
-export serviceName=${1}     ;
-export globalComment=${2}   ;
+serviceName=${1}     ;
+globalComment=${2}   ;
+
+tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                                                                             ; 
+
+sed    --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', id: '${tableName}AutoIncr'  , multi: ['patch']   ${globalComment} |; "     \
+                        ./src/services/${serviceName}/${serviceName}.class.js                                                                              ;
 
 
-
+echo "Testing:  ${FEATHERS_URL}${serviceName}/"                                              ;
 
 
 
