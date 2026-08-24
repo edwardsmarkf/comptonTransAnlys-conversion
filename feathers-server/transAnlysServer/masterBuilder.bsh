@@ -62,7 +62,7 @@ done <<END_OF_SERVICE_FILE ;
   client-context-stimword       custom      client-context-stimword
   client-master                 knex
   client-session                knex
-  client-stimword               knex
+  client-stimword               custom      client-stimword
   date-time                     custom      date-time
   error-sounds-tooltip          knex
   frequency-list                knex
