@@ -3,8 +3,9 @@
 
 ##   get-client-emails.bsh   -- 2026-07-22
 
-export globalComment=${1}                                                                                         ;
-export serviceName='get-client-emails'                                                                            ;
+serviceName=${1}       ;   
+globalComment=${2}     ;
+                                 ####################export serviceName='get-client-emails'                                                                            ;
 
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_CLASS_SED       ;
