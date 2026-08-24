@@ -3,9 +3,9 @@
 
 ##   knex-generic-raw.bsh   -- 2026-07-22
 
-
-export globalComment=${1}                                                                                                ;
-export serviceName='knex-generic-raw'                                                                                    ;
+serviceName=${1}              ;   
+globalComment=${1}            ;
+                       ######################################export serviceName='knex-generic-raw'                                                                                    ;
 
 
 
