@@ -2,7 +2,8 @@
 
 #      client-stimword.bsh    2026-08-23
 
-
+export serviceName=${1}     ;
+export globalComment=${2}   ;
 
 
 
