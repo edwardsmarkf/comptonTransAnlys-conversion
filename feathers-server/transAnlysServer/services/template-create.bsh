@@ -50,8 +50,8 @@ END_OF_SCHEMA_SED
 
 
 if [ -n "${specialProcess}" ]; then
-    echo "Special modification for service ${serviceName} using special process: ${specialProcess}.bsh...!"                ;
-    bash -vx  ../services/${specialProcess}.bsh   ${globalComment}                                                         ;
+    echo "Special modification for service ${serviceName} using special process: ${specialProcess}.bsh...!"                                ;
+    bash -vx  ../services/${specialProcess}.bsh    ${serviceName}  ${globalComment}                                                        ;
 else
     export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                                                  ; 
 
