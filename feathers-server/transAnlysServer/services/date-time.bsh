@@ -4,7 +4,7 @@
 ##   date-time.bsh   -- 2026-08-15
 
 serviceName=${1}              ;   
-globalComment=${1}            ;
+globalComment=${2}            ;
                                                ############################################export serviceName='date-time'                                                                                           ;
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.class.js   <<END_OF_SERVICE_CLASS_SED          ;
