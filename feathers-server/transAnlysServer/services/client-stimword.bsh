@@ -61,6 +61,30 @@ s/\['text']/                                          \\
 /                                                     ;
 #
 #
+#
+s/\['id, 'text']/                                     \\
+  [  'clientStimwordnAutoIncr'      ${globalComment}  \\
+  ,  'layoutName'                   ${globalComment}  \\
+  ,  'teacherEmail'                 ${globalComment}  \\
+  ,  'clientMasterEmail'            ${globalComment}  \\
+  ,  'sessionName'                  ${globalComment}  \\
+  ,  'soundPhoneme'                 ${globalComment}  \\
+  ,  'contextPosition'              ${globalComment}  \\
+  ,  'clientContextErrorSound'      ${globalComment}  \\
+  ,  'stimwordPlacement'            ${globalComment}  \\
+  ,  'stimwordOrderNbr'             ${globalComment}  \\
+  ,  `stimwordWord'                 ${globalComment}  \\
+  ,  'stimwordPositionNbr'          ${globalComment}  \\
+  ,  'stimwordPositionSetting'      ${globalComment}  \\
+  ,  'clientStimwordNotes'          ${globalComment}  \\
+  ,  'createdAt'                    ${globalComment}  \\
+  ,  'updatedAt'                    ${globalComment}  \\
+  ,  'stimwordPositionAutoIncr'     ${globalComment}  \\
+  ,  'clientContextAutoIncr'        ${globalComment}  \\
+  ]                                                   \\
+/                                                     ;
+#
+#
 END_OF_SCHEMA_SED
 
 
