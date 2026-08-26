@@ -29,6 +29,15 @@ s/\['text']/                                \\
 /                                            ;
 #
 #
+s/\['id', 'text']/                          \\
+  [  'layoutAutoIncr'     ${globalComment}  \\
+  ,  'layoutName'         ${globalComment}  \\
+  ,  'createdAt'          ${globalComment}  \\
+  ,  'updatedAt'          ${globalComment}  \\
+  ]                                         \\
+/                                            ;
+#
+#
 END_OF_SCHEMA_SED
 
 
