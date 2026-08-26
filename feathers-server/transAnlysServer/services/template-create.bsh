@@ -6,13 +6,13 @@
 export serviceName=${1}     ;
 export serviceType=${2}     ;
 export globalComment=${3}   ;
-export specialProcess=${4}  ;
+                                            ############export specialProcess=${4}  ;
 
 
 export scriptName="${BASH_SOURCE[0]##*/}"                                           ;
 
 echo  "Beginning ${scriptName}"                                                     ;
-echo  ${serviceName}  ${serviceType}  ${globalComment}  ${specialProcess}           ;
+echo  ${serviceName}  ${serviceType}  ${globalComment}                              ;
 echo  '-----------------------'                                                     ;
 
 expect <(cat <<'END_OF_GENERATE_SERVICE'
@@ -49,9 +49,10 @@ END_OF_SCHEMA_SED
 ####s|^  { additionalProperties: false }|  { additionalProperties: true }  ${globalComment}                                     |;
 
 
-if [ -n "${specialProcess}" ]; then
-    echo "Special modification for service ${serviceName} using special process: ${specialProcess}.bsh...!"                                ;
-    bash -vx  ../services/${specialProcess}.bsh    ${serviceName}  ${globalComment}                                                        ;
+                                                        #####################################if [ -n "${specialProcess}" ]; then
+if  [ -f ../services/${serviceName}.bsh ]; then
+    echo "Special modification for service ${serviceName} using special process: ${serviceName}.bsh...!"                                ;
+    bash -vx  ../services/${serviceName}.bsh    ${serviceName}  ${globalComment}                                                        ;
 else
     export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                                                  ; 
 
