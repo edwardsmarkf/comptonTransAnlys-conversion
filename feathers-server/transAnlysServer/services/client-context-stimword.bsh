@@ -3,7 +3,7 @@
 ##   client-process-stimword   -- 2026-07-22
 
 
-serviceName=${1}              ;   
+###serviceName=${1}              ;   
 serviceName=$(basename "${0%.*}")  ;
 globalComment=${2}            ;
 
