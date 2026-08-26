@@ -26,7 +26,7 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema
     ,  contextAutoIncr                 : Type.Integer()                                        ${globalComment}  \\
     ,  clientSessionAutoIncr           : Type.Integer()                                        ${globalComment}  \\
     ,  clientContextAutoIncr           : Type.Optional(Type.Integer())                         ${globalComment}  \\
-  }                                                                                                              \\
+                                                                                                                 \\
 /}                                                                                                               ;
 #
 #
