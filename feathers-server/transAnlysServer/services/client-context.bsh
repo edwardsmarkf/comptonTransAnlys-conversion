@@ -41,6 +41,8 @@ s/\['text']/                                          \\
   ,  'clientContextErrorSound'      ${globalComment}  \\
   ,  'clientContextErrorCount'      ${globalComment}  \\
   ,  'clientContextErrorNotes'      ${globalComment}  \\
+  ,  'createdAt'                    ${globalComment}  \\
+  ,  'updatedAt'                    ${globalComment}  \\
   ,  'frequencyListAutoIncr'        ${globalComment}  \\
   ,  'contextAutoIncr'              ${globalComment}  \\
   ,  'clientSessionAutoIncr'        ${globalComment}  \\
