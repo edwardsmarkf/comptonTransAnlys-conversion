@@ -42,16 +42,10 @@ END_OF_GENERATE_SERVICE
 
 
 
-        ####sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED        ;
-        ####s|additionalProperties: false|additionalProperties: true ${globalComment} |                                      ;
-        ####END_OF_SCHEMA_SED
-        ####s|^  { additionalProperties: false }|  { additionalProperties: true }  ${globalComment}                                     |;
-
-
                                                         #####################################if [ -n "${specialProcess}" ]; then
 if  [ -f ../services/${serviceName}.bsh ]; then
-    echo "Special modification for service ${serviceName} using special process: ${serviceName}.bsh...!"                                ;
-    bash -vx  ../services/${serviceName}.bsh    ${serviceName}  ${globalComment}                                                        ;
+    echo "Special modification for service ${serviceName} using special process: ${serviceName}.bsh...!"                  ;
+    bash -vx  ../services/${serviceName}.bsh      ${globalComment}                                                        ;
 else
     export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                                                  ; 
 
@@ -62,5 +56,15 @@ else
 fi
 
 exit 1;
+
+
+
+
+        ####sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED        ;
+        ####s|additionalProperties: false|additionalProperties: true ${globalComment} |                                      ;
+        ####END_OF_SCHEMA_SED
+        ####s|^  { additionalProperties: false }|  { additionalProperties: true }  ${globalComment}                          |;
+
+
 
 #
