@@ -14,10 +14,9 @@ sed    --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', 
 
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
-sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
 
 /    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                 ${globalComment}  \\
-       layoutName                       : Type.String({ maxLength: 4 })                         ${globalComment}  \\
+       layoutName                       : Type.String({ maxLength: 4 })                        ${globalComment}  \\
     ,  teacherEmail                     : Type.String({ maxLength: 255 })                      ${globalComment}  \\
     ,  clientMasterEmail                : Type.String({ maxLength: 255 })                      ${globalComment}  \\
     ,  sessionName                      : Type.String({ maxLength: 30 })                       ${globalComment}  \\
@@ -46,18 +45,22 @@ s/\['text']/                                          \\
   ,  'sessionName'                  ${globalComment}  \\
   ,  'soundPhoneme'                 ${globalComment}  \\
   ,  'contextPosition'              ${globalComment}  \\
-  ,  'frequency'                    ${globalComment}  \\
   ,  'clientContextErrorSound'      ${globalComment}  \\
-  ,  'clientContextErrorCount'      ${globalComment}  \\
-  ,  'clientContextErrorNotes'      ${globalComment}  \\
-  ,  'frequencyListAutoIncr'        ${globalComment}  \\
-  ,  'contextAutoIncr'              ${globalComment}  \\
-  ,  'clientSessionAutoIncr'        ${globalComment}  \\
+  ,  'stimwordPlacement'            ${globalComment}  \\
+  ,  'stimwordOrderNbr'             ${globalComment}  \\
+  ,  `stimwordWord'                 ${globalComment}  \\
+  ,  'stimwordPositionNbr'          ${globalComment}  \\
+  ,  'stimwordPositionSetting'      ${globalComment}  \\
+  ,  'clientStimwordNotes'          ${globalComment}  \\
+  ,  'createdAt'                    ${globalComment}  \\
+  ,  'updatedAt'                    ${globalComment}  \\
+  ,  'stimwordPositionAutoIncr'     ${globalComment}  \\
+  ,  'clientContextAutoIncr'        ${globalComment}  \\
+  ,  'clientStimwordnAutoIncr'      ${globalComment}  \\
   ]                                                   \\
 /                                                     ;
 #
-
-END_OF_SCHEMA_SED
+#
 END_OF_SCHEMA_SED
 
 
