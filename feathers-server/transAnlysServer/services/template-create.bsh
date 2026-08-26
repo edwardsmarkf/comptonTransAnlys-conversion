@@ -46,7 +46,10 @@ END_OF_GENERATE_SERVICE
 if  [ -f ../services/${serviceName}.bsh ]; then
     echo "Special modification for service ${serviceName} using special process: ${serviceName}.bsh...!"                  ;
     bash -vx  ../services/${serviceName}.bsh      ${globalComment}                                                        ;
-else
+fi
+
+if  [ "${serviceType}" == 'knex' ]; then
+
     export tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                                                  ; 
 
     sed    --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', id: '${tableName}AutoIncr'   ${globalComment} |; "     \
