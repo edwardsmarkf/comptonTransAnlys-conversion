@@ -15,7 +15,7 @@ sed    --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', 
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
 
-/    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                 ${globalComment}  \\
+/    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                                   \\
        layoutName                       : Type.String({ maxLength: 4 })                        ${globalComment}  \\
     ,  teacherEmail                     : Type.String({ maxLength: 255 })                      ${globalComment}  \\
     ,  clientMasterEmail                : Type.String({ maxLength: 255 })                      ${globalComment}  \\
