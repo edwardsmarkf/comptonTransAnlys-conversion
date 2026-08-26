@@ -3,7 +3,7 @@
 
 ##   knex-generic-raw.bsh   -- 2026-07-22
 
-serviceName=${1}              ;   
+serviceName=$(basename "${0%.*}")  ;            ##############    serviceName=${1}              ;   
 globalComment=${2}            ;
                        ######################################export serviceName='knex-generic-raw'                                                                                    ;
 
