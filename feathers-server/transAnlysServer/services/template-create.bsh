@@ -58,6 +58,11 @@ if  [ "${serviceType}" == 'knex' ]; then
 
 fi
 
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED        ;
+s|additionalProperties: false|additionalProperties: true ${globalComment} |                                      ;
+END_OF_SCHEMA_SED
+
 exit 1;
 
 
