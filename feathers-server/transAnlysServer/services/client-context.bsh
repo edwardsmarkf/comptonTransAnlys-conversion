@@ -49,6 +49,27 @@ s/\['text']/                                          \\
   ]                                                   \\
 /                                                     ;
 #
+#
+#
+s/\['id, 'text']/                                     \\
+  [  'clientSessionAutoIncr'        ${globalComment}  \\
+  ,  'layoutName'                   ${globalComment}  \\
+  ,  'teacherEmail'                 ${globalComment}  \\
+  ,  'clientMasterEmail'            ${globalComment}  \\
+  ,  'sessionName'                  ${globalComment}  \\
+  ,  'soundPhoneme'                 ${globalComment}  \\
+  ,  'contextPosition'              ${globalComment}  \\
+  ,  'frequency'                    ${globalComment}  \\
+  ,  'clientContextErrorSound'      ${globalComment}  \\
+  ,  'clientContextErrorCount'      ${globalComment}  \\
+  ,  'clientContextErrorNotes'      ${globalComment}  \\
+  ,  'createdAt'                    ${globalComment}  \\
+  ,  'updatedAt'                    ${globalComment}  \\
+  ,  'frequencyListAutoIncr'        ${globalComment}  \\
+  ,  'contextAutoIncr'              ${globalComment}  \\
+  ]                                                   \\
+/                                                     ;
+#
 
 END_OF_SCHEMA_SED
 
