@@ -2,7 +2,8 @@
 
 #      client-stimword.bsh    2026-08-23
 
-serviceName=${1}     ;
+##serviceName=${1}     ;
+serviceName=$(basename "${0%.*}")  ;
 globalComment=${2}   ;
 
 tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                                                                             ; 
