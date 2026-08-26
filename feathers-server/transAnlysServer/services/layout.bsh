@@ -1,0 +1,47 @@
+#!  /bin/bash
+
+#      layout.bsh    2026-08-26
+
+
+globalComment=${1}                 ;
+
+serviceName=$(basename "${0%.*}")  ;
+
+tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)                                                                             ; 
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
+
+/    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                \\
+       layoutName        : Type.String({ minLength: 4, maxLength: 4 })       ${globalComment} \\
+    ,  createdAt         : Type.String({ format: 'date-time' })              ${globalComment} \\
+    ,  updatedAt         : Type.String({ format: 'date-time' })              ${globalComment} \\
+    ,  layoutAutoIncr    : Type.Integer({ minimum: 0, maximum: 255 })        ${globalComment} \\
+/}                                                                                             ;
+#
+#
+#
+s/\['text']/                                \\
+  [  'layoutName'         ${globalComment}  \\
+  ,  'createdAt'          ${globalComment}  \\
+  ,  'updatedAt'          ${globalComment}  \\
+  ,  'layoutAutoIncr'     ${globalComment}  \\
+  ]                                         \\
+/                                            ;
+#
+#
+END_OF_SCHEMA_SED
+
+
+echo "Testing:  ${FEATHERS_URL}${serviceName}/"                                              ;
+
+
+
+
+
+
+
+
+
+
+
+exit;
