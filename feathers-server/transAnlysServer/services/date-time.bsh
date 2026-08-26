@@ -3,7 +3,7 @@
 
 ##   date-time.bsh   -- 2026-08-15
 
-serviceName=${1}              ;   
+serviceName=$(basename "${0%.*}")  ;      ##serviceName=${1}              ;   
 globalComment=${2}            ;
                                                ############################################export serviceName='date-time'                                                                                           ;
 
