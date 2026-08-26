@@ -44,7 +44,7 @@ s/\['text']/                                          \\
   ,  'contextAutoIncr'              ${globalComment}  \\
   ,  'clientSessionAutoIncr'        ${globalComment}  \\
   ],
-                                    ;
+/                                    ;
 #
 
 END_OF_SCHEMA_SED
