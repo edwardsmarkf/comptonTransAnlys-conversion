@@ -2,9 +2,9 @@
 
 ##   client-context   -- 2026-08-25
 
-##serviceName=${1}              ;          
+globalComment=${1}            ;
+                                                               ##serviceName=${1}              ;          
 serviceName=$(basename "${0%.*}")  ;
-globalComment=${2}            ;
 
 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
