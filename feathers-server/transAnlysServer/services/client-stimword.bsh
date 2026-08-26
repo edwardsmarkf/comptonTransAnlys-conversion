@@ -13,12 +13,12 @@ sed    --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', 
                         ./src/services/${serviceName}/${serviceName}.class.js                                                                              ;
 
 
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
+
+END_OF_SCHEMA_SED
+
+
 echo "Testing:  ${FEATHERS_URL}${serviceName}/"                                              ;
-
-
-
-
-
 
 
 
