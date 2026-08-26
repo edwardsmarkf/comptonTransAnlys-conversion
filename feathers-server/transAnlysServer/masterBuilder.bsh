@@ -54,20 +54,21 @@ END_OF_CONFIG_DEFAULT_JSON
 
 # services:
 
+                                                    ##    while read -r serviceName serviceType specialProcess; do
 while read -r serviceName serviceType specialProcess; do
-    echo  "Service name:  ${serviceName}"                                                                               ;
-    bash -vx  ../services/template-create.bsh   ${serviceName}   ${serviceType}  ${globalComment}  ${specialProcess}    ;
+    echo  "Service name:  ${serviceName}"                                                             ;
+    bash -vx  ../services/template-create.bsh   ${serviceName}   ${serviceType}  ${globalComment}     ;
 done <<END_OF_SERVICE_FILE ;
   client-context                knex
-  client-context-stimword       custom      client-context-stimword
+  client-context-stimword       custom      #############client-context-stimword
   client-master                 knex
   client-session                knex
-  client-stimword               knex        client-stimword
-  date-time                     custom      date-time
+  client-stimword               knex        ##################client-stimword
+  date-time                     custom      ##################date-time
   error-sounds-tooltip          knex
   frequency-list                knex
-  get-client-emails             custom      get-client-emails  
-  knex-generic-raw              custom      knex-generic-raw
+  get-client-emails             custom      ###############get-client-emails  
+  knex-generic-raw              custom      ##################knex-generic-raw
   language-norms                knex
   layout                        knex
   session-names                 knex
