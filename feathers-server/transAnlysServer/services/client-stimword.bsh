@@ -48,7 +48,7 @@ s/\['text']/                                          \\
   ,  'clientContextErrorSound'      ${globalComment}  \\
   ,  'stimwordPlacement'            ${globalComment}  \\
   ,  'stimwordOrderNbr'             ${globalComment}  \\
-  ,  `stimwordWord'                 ${globalComment}  \\
+  ,  'stimwordWord'                 ${globalComment}  \\
   ,  'stimwordPositionNbr'          ${globalComment}  \\
   ,  'stimwordPositionSetting'      ${globalComment}  \\
   ,  'clientStimwordNotes'          ${globalComment}  \\
@@ -73,7 +73,7 @@ s/\['id, 'text']/                                     \\
   ,  'clientContextErrorSound'      ${globalComment}  \\
   ,  'stimwordPlacement'            ${globalComment}  \\
   ,  'stimwordOrderNbr'             ${globalComment}  \\
-  ,  `stimwordWord'                 ${globalComment}  \\
+  ,  'stimwordWord'                 ${globalComment}  \\
   ,  'stimwordPositionNbr'          ${globalComment}  \\
   ,  'stimwordPositionSetting'      ${globalComment}  \\
   ,  'clientStimwordNotes'          ${globalComment}  \\
