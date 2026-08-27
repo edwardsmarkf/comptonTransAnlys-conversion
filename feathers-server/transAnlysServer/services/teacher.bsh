@@ -42,7 +42,7 @@ s/\['text']/                                          \\
 #
 #
 #
-s/\['text']/                                          \\
+s/\['id', 'text']/                                    \\
   [  'teacherAutoIncr'              ${globalComment}  \\
   ,  'layoutName'                   ${globalComment}  \\
   ,  'teacherEmail'                 ${globalComment}  \\
