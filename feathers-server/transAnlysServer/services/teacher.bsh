@@ -1,6 +1,6 @@
 #! /bin/bash
 
-##   client-master   -- 2026-08-26
+##   teacher.bsh   -- 2026-08-26
 
 globalComment=${1}            ;
 
