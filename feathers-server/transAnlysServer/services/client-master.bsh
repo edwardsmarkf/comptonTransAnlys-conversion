@@ -40,7 +40,24 @@ s/\['text']/                                          \\
   ]                                                   \\
 /                                                     ;
 #
-
+#
+#
+s/\['text']/                                          \\
+  [  'teacherAutoIncr'              ${globalComment}  \\
+  ,  'layoutName'                   ${globalComment}  \\
+  ,  'teacherEmail'                 ${globalComment}  \\
+  ,  'tacherPassword'               ${globalComment}  \\
+  ,  'teacherFirstName'             ${globalComment}  \\
+  ,  'teacherLastName'              ${globalComment}  \\
+  ,  'teacherLegacyName'            ${globalComment}  \\
+  ,  'teacherSecurityLevel'         ${globalComment}  \\
+  ,  'createdAt'                    ${globalComment}  \\
+  ,  'updatedAt'                    ${globalComment}  \\
+  ,  'layoutAutoIncr'               ${globalComment}  \\
+  ]                                                   \\
+/                                                     ;
+#
+#
 END_OF_SCHEMA_SED
 
 exit;
