@@ -1,0 +1,76 @@
+#! /bin/bash
+
+##   client-session   -- 2026-08-25
+
+globalComment=${1}            ;
+                                                               ##serviceName=${1}              ;          
+serviceName=$(basename "${0%.*}")  ;
+
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
+
+/    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                 ${globalComment}  \\
+       layoutName                      : Type.String({ maxLength: 4 })                         ${globalComment}  \\
+    ,  teacherEmail                    : Type.String({ maxLength: 255 })                       ${globalComment}  \\
+    ,  clientMasterEmail               : Type.String({ maxLength: 255 })                       ${globalComment}  \\
+    ,  sessionName                     : Type.String({ maxLength: 30 })                        ${globalComment}  \\
+    ,  soundPhoneme                    : Type.String({ maxLength: 3 })                         ${globalComment}  \\
+XXXXXXXXXXXXXXXXXXXXXXXXXXXX    ,  frequency                       : Type.String({ maxLength: 15 })                        ${globalComment}  \\
+    ,  clientContextErrorSound         : Type.String({ maxLength: 4 })                         ${globalComment}  \\
+    ,  clientContextErrorCount         : Type.Integer({ minimum: 0 })                          ${globalComment}  \\
+    ,  clientContextErrorNotes         : Type.Optional(Type.String())                          ${globalComment}  \\
+    ,  createdAt                       : Type.Optional(Type.String({ format: 'date-time' }))   ${globalComment}  \\
+    ,  updatedAt                       : Type.Optional(Type.String({ format: 'date-time' }))   ${globalComment}  \\
+    ,  frequencyListAutoIncr           : Type.Integer()                                        ${globalComment}  \\
+    ,  contextAutoIncr                 : Type.Integer()                                        ${globalComment}  \\
+    ,  clientSessionAutoIncr           : Type.Integer()                                        ${globalComment}  \\
+    ,  clientContextAutoIncr           : Type.Optional(Type.Integer())                         ${globalComment}  \\
+/}                                                                                                               ;
+#
+#
+#
+s/\['text']/                                          \\
+  [  'layoutName'                   ${globalComment}  \\
+  ,  'teacherEmail'                 ${globalComment}  \\
+  ,  'clientMasterEmail'            ${globalComment}  \\
+  ,  'sessionName'                  ${globalComment}  \\
+  ,  'soundPhoneme'                 ${globalComment}  \\
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+  ,  'contextPosition'              ${globalComment}  \\
+  ,  'frequency'                    ${globalComment}  \\
+  ,  'clientContextErrorSound'      ${globalComment}  \\
+  ,  'clientContextErrorCount'      ${globalComment}  \\
+  ,  'clientContextErrorNotes'      ${globalComment}  \\
+  ,  'createdAt'                    ${globalComment}  \\
+  ,  'updatedAt'                    ${globalComment}  \\
+  ,  'frequencyListAutoIncr'        ${globalComment}  \\
+  ,  'contextAutoIncr'              ${globalComment}  \\
+  ,  'clientSessionAutoIncr'        ${globalComment}  \\
+  ]                                                   \\
+/                                                     ;
+#
+#
+#
+s/\['id', 'text']/                                    \\
+  [  'clientSessionAutoIncr'        ${globalComment}  \\
+  ,  'layoutName'                   ${globalComment}  \\
+  ,  'teacherEmail'                 ${globalComment}  \\
+  ,  'clientMasterEmail'            ${globalComment}  \\
+  ,  'sessionName'                  ${globalComment}  \\
+  ,  'soundPhoneme'                 ${globalComment}  \\
+  ,  'contextPosition'              ${globalComment}  \\
+  ,  'frequency'                    ${globalComment}  \\
+  ,  'clientContextErrorSound'      ${globalComment}  \\
+  ,  'clientContextErrorCount'      ${globalComment}  \\
+  ,  'clientContextErrorNotes'      ${globalComment}  \\
+  ,  'createdAt'                    ${globalComment}  \\
+  ,  'updatedAt'                    ${globalComment}  \\
+  ,  'frequencyListAutoIncr'        ${globalComment}  \\
+  ,  'contextAutoIncr'              ${globalComment}  \\
+  ]                                                   \\
+/                                                     ;
+#
+
+END_OF_SCHEMA_SED
+
+exit;
