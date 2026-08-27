@@ -62,7 +62,7 @@ s/\['text']/                                          \\
 #
 #
 #
-s/\['id, 'text']/                                     \\
+s/\['id', 'text']/                                    \\
   [  'clientStimwordnAutoIncr'      ${globalComment}  \\
   ,  'layoutName'                   ${globalComment}  \\
   ,  'teacherEmail'                 ${globalComment}  \\
