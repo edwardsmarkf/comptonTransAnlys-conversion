@@ -11,7 +11,7 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema
 
 /    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                                        \\
        layoutName                      : Type.String({ maxLength: 4 })                              ${globalComment}  \\
-    ,  teacherEmail                    : Type.String({ maxLength: 255 })                            ${globalComment}  \\
+    ,  teacherEmail                    : Type.String({ format: 'email', maxLength: 255 })           ${globalComment}  \\
     ,  teacherPassword                 : Type.Union([Type.String({ maxLength: 30 }), Type.Null()])  ${globalComment}  \\
     ,  teacherFirstName                : Type.String({ maxLength: 30 })                             ${globalComment}  \\
     ,  teacherLastName                 : Type.String({ maxLength: 30 })                             ${globalComment}  \\
