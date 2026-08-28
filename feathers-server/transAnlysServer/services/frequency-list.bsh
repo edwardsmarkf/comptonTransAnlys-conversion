@@ -1,0 +1,40 @@
+#! /bin/bash
+
+##   frequency-list.bsh   -- 2026-08-28
+
+globalComment=${1}            ;
+
+serviceName=$(basename "${0%.*}")  ;
+
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
+
+/    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                     \\
+   frequencyOrder              : Type.Integer({ minimum: 0, maximum: 65535 })    ${globalComment}  \\
+,  frequency                   : Type.String({ maxLength: 15 })                  ${globalComment}  \\
+,  frequencyListAutoIncr       : Type.Integer({ maximum: 32767 })                ${globalComment}  \\
+/}                                                                                                 ;
+#
+#
+#
+s/\['text']/                                         \\
+  [  'frequencyOrder'              ${globalComment}  \\
+  ,  'frequency'                   ${globalComment}  \\
+  ,  'frequencyAutoIncr'           ${globalComment}  \\
+  ]                                                  \\
+/                                                    ;
+#
+#
+#
+s/\['id', 'text']/                                   \\
+  [  'frequencyAutoIncr'           ${globalComment}  \\
+  ,  'frequencyOrder'              ${globalComment}  \\
+  ,  'frequency'                   ${globalComment}  \\
+  ]                                                  \\
+/                                                    ;
+#
+#
+END_OF_SCHEMA_SED
+
+exit;
+#
