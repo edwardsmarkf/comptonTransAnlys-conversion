@@ -17,8 +17,8 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema
 
 /    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                                   \\
        layoutName                       : Type.String({ maxLength: 4 })                        ${globalComment}  \\
-    ,  teacherEmail                     : Type.String({ maxLength: 255 })                      ${globalComment}  \\
-    ,  clientMasterEmail                : Type.String({ maxLength: 255 })                      ${globalComment}  \\
+    ,  teacherEmail                     : Type.String({ format: 'email', maxLength: 255 })     ${globalComment}  \\
+    ,  clientMasterEmail                : Type.String({ format: 'email', maxLength: 255 })     ${globalComment}  \\
     ,  sessionName                      : Type.String({ maxLength: 30 })                       ${globalComment}  \\
     ,  soundPhoneme                     : Type.String({ maxLength: 3 })                        ${globalComment}  \\
     ,  contextPosition                  : Type.String({ maxLength: 20 })                       ${globalComment}  \\
