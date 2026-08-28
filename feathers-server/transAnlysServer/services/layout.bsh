@@ -12,10 +12,10 @@ tableName=$(echo ${serviceName} | sed --regexp-extended 's/-([a-z])/\U\1/g' ;)  
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
 
 /    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                \\
-       layoutName        : Type.String({ minLength: 4, maxLength: 4 })       ${globalComment} \\
-    ,  createdAt         : Type.String({ format: 'date-time' })              ${globalComment} \\
-    ,  updatedAt         : Type.String({ format: 'date-time' })              ${globalComment} \\
-    ,  layoutAutoIncr    : Type.Integer({ minimum: 0, maximum: 255 })        ${globalComment} \\
+       'layoutName'      : Type.String({ minLength: 4, maxLength: 4 })       ${globalComment} \\
+    ,  'createdAt'       : Type.String({ format: 'date-time' })              ${globalComment} \\
+    ,  'updatedAt'       : Type.String({ format: 'date-time' })              ${globalComment} \\
+    ,  'layoutAutoIncr'  : Type.Integer({ minimum: 0, maximum: 255 })        ${globalComment} \\
 /}                                                                                             ;
 #
 #
