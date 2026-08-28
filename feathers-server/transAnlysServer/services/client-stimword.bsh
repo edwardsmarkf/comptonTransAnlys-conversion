@@ -16,24 +16,24 @@ sed    --in-place  --expression="s|name: '${serviceName}'|name: '${tableName}', 
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
 
 /    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                                   \\
-       layoutName                       : Type.String({ maxLength: 4 })                        ${globalComment}  \\
-    ,  teacherEmail                     : Type.String({ format: 'email', maxLength: 255 })     ${globalComment}  \\
-    ,  clientMasterEmail                : Type.String({ format: 'email', maxLength: 255 })     ${globalComment}  \\
-    ,  sessionName                      : Type.String({ maxLength: 30 })                       ${globalComment}  \\
-    ,  soundPhoneme                     : Type.String({ maxLength: 3 })                        ${globalComment}  \\
-    ,  contextPosition                  : Type.String({ maxLength: 20 })                       ${globalComment}  \\
-    ,  clientContextErrorSound          : Type.String({ maxLength: 4 })                        ${globalComment}  \\
-    ,  stimwordPlacement                : Type.Number()                                        ${globalComment}  \\
-    ,  stimwordOrderNbr                 : Type.Number()                                        ${globalComment}  \\
-    ,  stimwordWord                     : Type.String({ maxLength: 25 })                       ${globalComment}  \\
-    ,  stimwordPositionNbr              : Type.Number()                                        ${globalComment}  \\
-    ,  stimwordPositionSetting          : Type.String({ maxLength: 20 })                       ${globalComment}  \\
-    ,  clientStimwordNotes              : Type.Optional(Type.String())                         ${globalComment}  \\
-    ,  createdAt                        : Type.String({ format: 'date-time' })                 ${globalComment}  \\
-    ,  updatedAt                        : Type.String({ format: 'date-time' })                 ${globalComment}  \\
-    ,  stimwordPositionAutoIncr         : Type.Number()                                        ${globalComment}  \\
-    ,  clientContextAutoIncr            : Type.Number()                                        ${globalComment}  \\
-    ,  clientStimwordAutoIncr           : Type.Optional(Type.Integer())                        ${globalComment}  \\
+       'layoutName'                     : Type.String({ maxLength: 4 })                        ${globalComment}  \\
+    ,  'teacherEmail'                   : Type.String({ format: 'email', maxLength: 255 })     ${globalComment}  \\
+    ,  'clientMasterEmail'              : Type.String({ format: 'email', maxLength: 255 })     ${globalComment}  \\
+    ,  'sessionName'                    : Type.String({ maxLength: 30 })                       ${globalComment}  \\
+    ,  'soundPhoneme'                   : Type.String({ maxLength: 3 })                        ${globalComment}  \\
+    ,  'contextPosition'                : Type.String({ maxLength: 20 })                       ${globalComment}  \\
+    ,  'clientContextErrorSound'        : Type.String({ maxLength: 4 })                        ${globalComment}  \\
+    ,  'stimwordPlacement'              : Type.Number()                                        ${globalComment}  \\
+    ,  'stimwordOrderNbr'               : Type.Number()                                        ${globalComment}  \\
+    ,  'stimwordWord'                   : Type.String({ maxLength: 25 })                       ${globalComment}  \\
+    ,  'stimwordPositionNbr'            : Type.Number()                                        ${globalComment}  \\
+    ,  'stimwordPositionSetting'        : Type.String({ maxLength: 20 })                       ${globalComment}  \\
+    ,  'clientStimwordNotes'            : Type.Optional(Type.String())                         ${globalComment}  \\
+    ,  'createdAt'                      : Type.String({ format: 'date-time' })                 ${globalComment}  \\
+    ,  'updatedAt'                      : Type.String({ format: 'date-time' })                 ${globalComment}  \\
+    ,  'stimwordPositionAutoIncr'       : Type.Number()                                        ${globalComment}  \\
+    ,  'clientContextAutoIncr'          : Type.Number()                                        ${globalComment}  \\
+    ,  'clientStimwordAutoIncr'         : Type.Optional(Type.Integer())                        ${globalComment}  \\
 /}                                                                                                               ;
 #
 #
