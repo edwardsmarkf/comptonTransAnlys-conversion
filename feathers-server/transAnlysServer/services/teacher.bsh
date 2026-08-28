@@ -10,17 +10,17 @@ serviceName=$(basename "${0%.*}")  ;
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
 
 /    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                                        \\
-       layoutName                      : Type.String({ maxLength: 4 })                              ${globalComment}  \\
-    ,  teacherEmail                    : Type.String({ format: 'email', maxLength: 255 })           ${globalComment}  \\
-    ,  teacherPassword                 : Type.Union([Type.String({ maxLength: 30 }), Type.Null()])  ${globalComment}  \\
-    ,  teacherFirstName                : Type.String({ maxLength: 30 })                             ${globalComment}  \\
-    ,  teacherLastName                 : Type.String({ maxLength: 30 })                             ${globalComment}  \\
-    ,  teacherLegacyName               : Type.String({ maxLength: 120 })                            ${globalComment}  \\
-    ,  teacherSecurityLevel            : Type.Integer({ minimum: 0, maximum: 255 })                 ${globalComment}  \\
-    ,  createdAt                       : Type.Optional(Type.String({ format: 'date-time' }))        ${globalComment}  \\
-    ,  updatedAt                       : Type.Optional(Type.String({ format: 'date-time' }))        ${globalComment}  \\
-    ,  layoutAutoIncr                  : Type.Integer({ minimum: 0, maximum: 255, default: 0 })     ${globalComment}  \\
-    ,  teacherAutoIncr                 : Type.Optional(Type.Integer())                              ${globalComment}  \\
+       'layoutName'                    : Type.String({ maxLength: 4 })                              ${globalComment}  \\
+    ,  'teacherEmail'                  : Type.String({ format: 'email', maxLength: 255 })           ${globalComment}  \\
+    ,  'teacherPassword'               : Type.Union([Type.String({ maxLength: 30 }), Type.Null()])  ${globalComment}  \\
+    ,  'teacherFirstName'              : Type.String({ maxLength: 30 })                             ${globalComment}  \\
+    ,  'teacherLastName'               : Type.String({ maxLength: 30 })                             ${globalComment}  \\
+    ,  'teacherLegacyName'             : Type.String({ maxLength: 120 })                            ${globalComment}  \\
+    ,  'teacherSecurityLevel'          : Type.Integer({ minimum: 0, maximum: 255 })                 ${globalComment}  \\
+    ,  'createdAt'                     : Type.Optional(Type.String({ format: 'date-time' }))        ${globalComment}  \\
+    ,  'updatedAt'                     : Type.Optional(Type.String({ format: 'date-time' }))        ${globalComment}  \\
+    ,  'layoutAutoIncr'                : Type.Integer({ minimum: 0, maximum: 255, default: 0 })     ${globalComment}  \\
+    ,  'teacherAutoIncr'               : Type.Optional(Type.Integer())                              ${globalComment}  \\
 /}                                                                                                                    ;
 #
 #
