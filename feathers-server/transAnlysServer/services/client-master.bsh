@@ -10,17 +10,17 @@ serviceName=$(basename "${0%.*}")  ;
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
 
 /    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                                                        \\
-      layoutName                         : Type.String({ minLength: 4, maxLength: 4 })                                ${globalComment}  \\
-  ,   teacherEmail                       : Type.String({ format: 'email', maxLength: 255 })                           ${globalComment}  \\
-  ,   clientMasterEmail                  : Type.String({ format: 'email', maxLength: 255 })                           ${globalComment}  \\
-  ,   clientMasterName                   : Type.String({ maxLength: 120, default: '' })                               ${globalComment}  \\
-  ,   clientMasterSpecLanguage           : Type.Union([Type.String({ maxLength: 30 }), Type.Null()])                  ${globalComment}  \\
-  ,   clientMasterNotes                  : Type.Union([Type.String(), Type.Null()])                                   ${globalComment}  \\
-  ,   clientMasterActiveFlag             : Type.Union([Type.Integer({ minimum: -128, maximum: 127 }), Type.Null()])   ${globalComment}  \\
-  ,   createdAt                          : Type.String({ format: 'date-time' })                                       ${globalComment}  \\
-  ,   updatedAt                          : Type.String({ format: 'date-time' })                                       ${globalComment}  \\
-  ,   teacherAutoIncr                    : Type.Integer({ minimum: 0, maximum: 65535 })                               ${globalComment}  \\
-  ,   clientMasterAutoIncr               : Type.Integer({ minimum: 0, maximum: 65535 })                               ${globalComment}  \\
+      'layoutName'                     : Type.String({ minLength: 4, maxLength: 4 })                                ${globalComment}  \\
+  ,   'teacherEmail'                   : Type.String({ format: 'email', maxLength: 255 })                           ${globalComment}  \\
+  ,   'clientMasterEmail'              : Type.String({ format: 'email', maxLength: 255 })                           ${globalComment}  \\
+  ,   'clientMasterName'               : Type.String({ maxLength: 120, default: '' })                               ${globalComment}  \\
+  ,   'clientMasterSpecLanguage'       : Type.Union([Type.String({ maxLength: 30 }), Type.Null()])                  ${globalComment}  \\
+  ,   'clientMasterNotes'              : Type.Union([Type.String(), Type.Null()])                                   ${globalComment}  \\
+  ,   'clientMasterActiveFlag'         : Type.Union([Type.Integer({ minimum: -128, maximum: 127 }), Type.Null()])   ${globalComment}  \\
+  ,   'createdAt'                      : Type.String({ format: 'date-time' })                                       ${globalComment}  \\
+  ,   'updatedAt'                      : Type.String({ format: 'date-time' })                                       ${globalComment}  \\
+  ,   'teacherAutoIncr'                : Type.Integer({ minimum: 0, maximum: 65535 })                               ${globalComment}  \\
+  ,   'clientMasterAutoIncr'           : Type.Integer({ minimum: 0, maximum: 65535 })                               ${globalComment}  \\
 /}                                                                                                                    ;
 #
 #
