@@ -10,16 +10,16 @@ serviceName=$(basename "${0%.*}")  ;
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
 
 /    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                 ${globalComment}  \\
-     layoutName                    : Type.String({ minLength: 4, maxLength: 4 })               ${globalComment}  \\
-  ,  teacherEmail                  : Type.String({ format: 'email', maxLength: 255 })          ${globalComment}  \\
-  ,  clientMasterEmail             : Type.String({ format: 'email', maxLength: 255 })          ${globalComment}  \\
-  ,  sessionName                   : Type.String({ maxLength: 30 })                            ${globalComment}  \\
-  ,  clientSessionNotes            : Type.Union([Type.String(), Type.Null()])                  ${globalComment}  \\
-  ,  createdAt                     : Type.String({ format: 'date-time' })                      ${globalComment}  \\
-  ,  updatedAt                     : Type.String({ format: 'date-time' })                      ${globalComment}  \\
-  ,  sessionNamesAutoIncr          : Type.Integer({maximum: 255 })                             ${globalComment}  \\
-  ,  clientMasterAutoIncr          : Type.Integer({maximum: 65535 })                           ${globalComment}  \\
-  ,  clientSessionAutoIncr         : Type.Integer({ maximum: 65535 })                          ${globalComment}  \\
+     'layoutName'                  : Type.String({ minLength: 4, maxLength: 4 })               ${globalComment}  \\
+  ,  'teacherEmail'                : Type.String({ format: 'email', maxLength: 255 })          ${globalComment}  \\
+  ,  'clientMasterEmail'           : Type.String({ format: 'email', maxLength: 255 })          ${globalComment}  \\
+  ,  'sessionName'                 : Type.String({ maxLength: 30 })                            ${globalComment}  \\
+  ,  'clientSessionNotes'          : Type.Union([Type.String(), Type.Null()])                  ${globalComment}  \\
+  ,  'createdAt'                   : Type.String({ format: 'date-time' })                      ${globalComment}  \\
+  ,  'updatedAt'                   : Type.String({ format: 'date-time' })                      ${globalComment}  \\
+  ,  'sessionNamesAutoIncr'        : Type.Integer({maximum: 255 })                             ${globalComment}  \\
+  ,  'clientMasterAutoIncr'        : Type.Integer({maximum: 65535 })                           ${globalComment}  \\
+  ,  'clientSessionAutoInc'r       : Type.Integer({ maximum: 65535 })                          ${globalComment}  \\
 /}                                                                                                               ;
 #
 #
