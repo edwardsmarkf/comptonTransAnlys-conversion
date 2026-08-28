@@ -1,0 +1,61 @@
+#! /bin/bash
+
+##   language-norms.bsh   -- 2026-08-28
+
+globalComment=${1}            ;
+
+serviceName=$(basename "${0%.*}")  ;
+
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
+
+/    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                                             \\
+     contextAutoIncr            : Type.Integer({ minimum: 0, maximum: 65535 })                           ${globalComment}  \\
+  ,  layoutName                 : Type.String({ minLength: 4, maxLength: 4 })                            ${globalComment}  \\
+  ,  soundPhoneme               : Type.String({ minLength: 3, maxLength: 3, default: '' })               ${globalComment}  \\
+  ,  contextPosition            : Type.String({ maxLength: 20 })                                         ${globalComment}  \\
+  ,  languageNormsName          : Type.String({ maxLength: 30 })                                         ${globalComment}  \\
+  ,  languageNormsError         : Type.String({ minLength: 4, maxLength: 4, default: '' })               ${globalComment}  \\
+  ,  languageNormsPercent       : Type.Union([Type.Integer({ minimum: 0, maximum: 255 }), Type.Null()])  ${globalComment}  \\
+  ,  createdAt                  : Type.String({ format: 'date-time' })                                   ${globalComment}  \\
+  ,  updatedAt                  : Type.String({ format: 'date-time' })                                   ${globalComment}  \\
+  ,  languageNormsAutoIncr      : Type.Integer({ minimum: 0, maximum: 65535 })                           ${globalComment}  \\
+/}                                                                                                 ;
+#
+#
+#
+s/\['text']/                                         \\
+  [  'contextAutoIncr'             ${globalComment}  \\
+  ,  'layoutName'                  ${globalComment}  \\
+  ,  'soundPhoneme'                ${globalComment}  \\
+  ,  'contextPosition'             ${globalComment}  \\
+  ,  'languageNormsName'           ${globalComment}  \\
+  ,  'languageNormsError'          ${globalComment}  \\
+  ,  'languageNormsPercent'        ${globalComment}  \\
+  ,  'createdAt'                   ${globalComment}  \\
+  ,  'updatedAt'                   ${globalComment}  \\
+  ,  'languageNormsAutoIncr'       ${globalComment}  \\
+  ]                                                  \\
+/                                                    ;
+#
+#
+#
+s/\['id', 'text']/                                   \\
+  [  'languageNormsAutoIncr'       ${globalComment}  \\
+  ,  'contextAutoIncr'             ${globalComment}  \\
+  ,  'layoutName'                  ${globalComment}  \\
+  ,  'soundPhoneme'                ${globalComment}  \\
+  ,  'contextPosition'             ${globalComment}  \\
+  ,  'languageNormsName'           ${globalComment}  \\
+  ,  'languageNormsError'          ${globalComment}  \\
+  ,  'languageNormsPercent'        ${globalComment}  \\
+  ,  'createdAt'                   ${globalComment}  \\
+  ,  'updatedAt'                   ${globalComment}  \\
+  ]                                                  \\
+/                                                    ;
+#
+#
+END_OF_SCHEMA_SED
+
+exit;
+#
