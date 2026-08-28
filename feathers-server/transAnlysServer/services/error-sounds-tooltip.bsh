@@ -1,0 +1,46 @@
+#! /bin/bash
+
+##   error-sounds-tooltip.bsh   -- 2026-08-28
+
+globalComment=${1}            ;
+
+serviceName=$(basename "${0%.*}")  ;
+
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
+
+/    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                                            \\
+   layoutName                            : Type.String({ minLength: 4, maxLength: 4 })                  ${globalComment}  \\
+,  errorSound                            : Type.String({ minLength: 1, maxLength: 1, default: '' })     ${globalComment}  \\
+,  rowNbr                                : Type.Integer({ maximum: 256 })                               ${globalComment}  \\
+,  toolTip                               : Type.Union([Type.String({ maxLength: 50 }), Type.Null()])    ${globalComment}  \\
+,  errorSoundsTooltipAutoIncr            : Type.Integer({ minimum: -128, maximum: 127 })                ${globalComment}  \\
+/}                                                                                                                        ;
+#
+#
+#
+s/\['text']/                                         \\
+  [  'layoutName'                  ${globalComment}  \\
+  ,  'errorSound'                  ${globalComment}  \\
+  ,  'rowNbr'                      ${globalComment}  \\
+  ,  'toolTip'                     ${globalComment}  \\
+  ,  'errorSoundsTooltipAutoIncr'  ${globalComment}  \\
+  ]                                                  \\
+/                                                     ;
+#
+#
+#
+s/\['id', 'text']/                                    \\
+  [  'errorSoundsTooltipAutoIncr'   ${globalComment}  \\
+  ,  'layoutName'                   ${globalComment}  \\
+  ,  'errorSound'                   ${globalComment}  \\
+  ,  'rowNbr'                       ${globalComment}  \\
+  ,  'toolTip'                      ${globalComment}  \\
+  ]                                                   \\
+/                                                     ;
+#
+#
+END_OF_SCHEMA_SED
+
+exit;
+#
