@@ -10,9 +10,9 @@ serviceName=$(basename "${0%.*}")  ;
 sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
 
 /    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                     \\
-   frequencyOrder              : Type.Integer({ minimum: 0, maximum: 65535 })    ${globalComment}  \\
-,  frequency                   : Type.String({ maxLength: 15 })                  ${globalComment}  \\
-,  frequencyListAutoIncr       : Type.Integer({ maximum: 32767 })                ${globalComment}  \\
+   'frequencyOrder'            : Type.Integer({ minimum: 0, maximum: 65535 })    ${globalComment}  \\
+,  'frequency'                 : Type.String({ maxLength: 15 })                  ${globalComment}  \\
+,  'frequencyListAutoIncr'     : Type.Integer({ maximum: 32767 })                ${globalComment}  \\
 /}                                                                                                 ;
 #
 #
