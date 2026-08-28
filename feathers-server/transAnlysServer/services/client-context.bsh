@@ -19,7 +19,7 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema
     ,  frequency                       : Type.String({ maxLength: 15 })                        ${globalComment}  \\
     ,  clientContextErrorSound         : Type.String({ maxLength: 4 })                         ${globalComment}  \\
     ,  clientContextErrorCount         : Type.Integer({ minimum: 0 })                          ${globalComment}  \\
-    ,  clientContextErrorNotes         : Type.Optional(Type.String())                          ${globalComment}  \\
+    ,  clientContextErrorNotes         : Type.Union([Type.String(), Type.Null()])              ${globalComment}  \\
     ,  createdAt                       : Type.Optional(Type.String({ format: 'date-time' }))   ${globalComment}  \\
     ,  updatedAt                       : Type.Optional(Type.String({ format: 'date-time' }))   ${globalComment}  \\
     ,  frequencyListAutoIncr           : Type.Integer()                                        ${globalComment}  \\
