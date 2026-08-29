@@ -1,0 +1,66 @@
+#! /bin/bash
+
+##   stimword   -- 2026-08-29
+
+globalComment=${1}            ;
+                                                               ##serviceName=${1}              ;          
+serviceName=$(basename "${0%.*}")  ;
+
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
+
+/    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                                                 \\
+     'layoutName'                : Type.String({ minLength: 4, maxLength: 4 })                               ${globalComment}  \\
+  ,  'stimwordPlacement'         : Type.Integer({ minimum: 0, maximum: 255 })                                ${globalComment}  \\
+  ,  'stimwordOrderNbr'          : Type.Integer({ minimum: 0, maximum: 255 })                                ${globalComment}  \\
+  ,  'stimwordPhonetic'          : Type.String({ maxLength: 50, default: '' })                               ${globalComment}  \\
+  ,  'stimwordWord'              : Type.String({ minLength: 1, maxLength: 25 })                              ${globalComment}  \\
+  ,  'stimwordClass'             : Type.String({ maxLength: 20 })                                            ${globalComment}  \\
+  ,  'stimword_page_nbr_legacy'  : Type.Union([Type.Integer({ minimum: -128, maximum: 127 }), Type.Null()])  ${globalComment}  \\
+  ,  'stimword_line_nbr_legacy'  : Type.Union([Type.Integer({ minimum: -2147483648, maximum: 2147483647 })   ${globalComment}  \\
+  ,  'createdAt'                 : Type.String({ format: 'date-time' })                                      ${globalComment}  \\
+  ,  'updatedAt'                 : Type.String({ format: 'date-time' })                                      ${globalComment}  \\
+  ,  'layoutAutoIncr'            : Type.Integer({ minimum: 0, maximum: 255, default: 0 })                    ${globalComment}  \\
+  ,  'stimwordAutoIncr'          : Type.Integer({ minimum: 0, maximum: 65535 })                              ${globalComment}  \\
+/}                                                                                                                            ;
+#
+#
+#
+s/\['text']/                                        \\
+  [  'layoutName'                 ${globalComment}  \\
+  ,  'stimwordPlacement'          ${globalComment}  \\
+  ,  'stimwordOrderNbr'           ${globalComment}  \\
+  ,  'stimwordPhonetic'           ${globalComment}  \\
+  ,  'stimwordWord'               ${globalComment}  \\
+  ,  'stimwordClass'              ${globalComment}  \\
+  ,  'stimword_page_nbr_legacy'   ${globalComment}  \\
+  ,  'stimword_line_nbr_legacy'   ${globalComment}  \\
+  ,  'createdAt'                  ${globalComment}  \\
+  ,  'updatedAt'                  ${globalComment}  \\
+  ,  'layoutAutoIncr'             ${globalComment}  \\
+  ,  'stimwordAutoIncr'           ${globalComment}  \\
+  ]                                                 \\
+/                                                   ;
+#
+#
+#
+s/\['id', 'text']/                                  \\
+  [  'stimwordAutoIncr'           ${globalComment}  \\
+  ,  'layoutName'                 ${globalComment}  \\
+  ,  'stimwordPlacement'          ${globalComment}  \\
+  ,  'stimwordOrderNbr'           ${globalComment}  \\
+  ,  'stimwordPhonetic'           ${globalComment}  \\
+  ,  'stimwordWord'               ${globalComment}  \\
+  ,  'stimwordClass'              ${globalComment}  \\
+  ,  'stimword_page_nbr_legacy'   ${globalComment}  \\
+  ,  'stimword_line_nbr_legacy'   ${globalComment}  \\
+  ,  'createdAt'                  ${globalComment}  \\
+  ,  'updatedAt'                  ${globalComment}  \\
+  ,  'layoutAutoIncr'             ${globalComment}  \\
+  ]                                                 \\
+/                                                     ;
+#
+
+END_OF_SCHEMA_SED
+
+exit;
