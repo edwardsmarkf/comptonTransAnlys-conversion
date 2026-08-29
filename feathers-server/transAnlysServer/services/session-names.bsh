@@ -1,0 +1,69 @@
+#! /bin/bash
+
+##   session-names   -- 2026-08-29
+
+globalComment=${1}            ;
+                                                               ##serviceName=${1}              ;          
+serviceName=$(basename "${0%.*}")  ;
+
+
+sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema.js   <<END_OF_SCHEMA_SED      ;
+
+/    id: Type.Number(),/{N; s/    id: Type.Number(),\n    text: Type.String()/                                           \\
+     layoutName                     : Type.String({ minLength: 4, maxLength: 4, default: 'PESL' })     ${globalComment}  \\
+  ,  sessionOrderNbr                : Type.Integer({ minimum: 0, maximum: 255 })                       ${globalComment}  \\
+  ,  sessionName                    : Type.String({ maxLength: 30 })                                   ${globalComment}  \\
+  ,  sessionReplicate               : Type.String({ maxLength: 30 })                                   ${globalComment}  \\
+  ,  sessionNamesShow66Words        : Type.Integer({ minimum: 0, maximum: 1 })                         ${globalComment}  \\
+  ,  sessionBeginLineNbr            : Type.Integer({ minimum: 0, maximum: 255 })                       ${globalComment}  \\
+  ,  sessionEndLineNbr              : Type.Integer({ minimum: 0, maximum: 255 })                       ${globalComment}  \\
+  ,  sessionErrorsCssNormalClass    : Type.String({ maxLength: 50 })                                   ${globalComment}  \\
+  ,  sessionErrorsCssReplicateClass : Type.String({ maxLength: 50 })                                   ${globalComment}  \\
+  ,  createdAt                      : Type.String({ format: 'date-time' })                             ${globalComment}  \\
+  ,  updatedAt                      : Type.String({ format: 'date-time' })                             ${globalComment}  \\
+  ,  layoutAutoIncr                 : Type.Integer({ minimum: 0, maximum: 255 })                       ${globalComment}  \\
+  ,  sessionNamesAutoIncr           : Type.Integer({ minimum: 0, maximum: 255 })                       ${globalComment}  \\
+/}                                                                                                                       ;
+#
+#
+#
+s/\['text']/                                               \\
+  [  'layoutName'                        ${globalComment}  \\
+  ,  'sessionOrderNbr'                   ${globalComment}  \\
+  ,  'sessionName'                       ${globalComment}  \\
+  ,  'sessionReplicate'                  ${globalComment}  \\
+  ,  'sessionNameShow66Words'            ${globalComment}  \\
+  ,  'sessionBeginLineNbr'               ${globalComment}  \\
+  ,  'sessionEndLineNbr'                 ${globalComment}  \\
+  ,  'sessionErrorsCssNormalClass'       ${globalComment}  \\
+  ,  'sessionErrorsCssReplicateClass'    ${globalComment}  \\
+  ,  'createdAt'                         ${globalComment}  \\
+  ,  'updatedAt'                         ${globalComment}  \\
+  ,  'layoutAutoIncr'                    ${globalComment}  \\
+  ,  'sessionNamesAutoIncr'              ${globalComment}  \\
+  ]                                                        \\
+/                                                          ;
+#
+#
+#
+s/\['id', 'text']/                                         \\
+  [  'sessionNamesAutoIncr'              ${globalComment}  \\
+  ,  'layoutName'                        ${globalComment}  \\
+  ,  'sessionOrderNbr'                   ${globalComment}  \\
+  ,  'sessionName'                       ${globalComment}  \\
+  ,  'sessionReplicate'                  ${globalComment}  \\
+  ,  'sessionNameShow66Words'            ${globalComment}  \\
+  ,  'sessionBeginLineNbr'               ${globalComment}  \\
+  ,  'sessionEndLineNbr'                 ${globalComment}  \\
+  ,  'sessionErrorsCssNormalClass'       ${globalComment}  \\
+  ,  'sessionErrorsCssReplicateClass'    ${globalComment}  \\
+  ,  'createdAt'                         ${globalComment}  \\
+  ,  'updatedAt'                         ${globalComment}  \\
+  ,  'layoutAutoIncr'                    ${globalComment}  \\
+  ]                                                        \\
+/                                                     ;
+#
+
+END_OF_SCHEMA_SED
+
+exit;
