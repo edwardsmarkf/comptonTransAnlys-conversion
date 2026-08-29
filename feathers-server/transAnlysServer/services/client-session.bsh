@@ -19,7 +19,7 @@ sed   --in-place   --file=-  ./src/services/${serviceName}/${serviceName}.schema
   ,  'updatedAt'                   : Type.String({ format: 'date-time' })                      ${globalComment}  \\
   ,  'sessionNamesAutoIncr'        : Type.Integer({maximum: 255 })                             ${globalComment}  \\
   ,  'clientMasterAutoIncr'        : Type.Integer({maximum: 65535 })                           ${globalComment}  \\
-  ,  'clientSessionAutoInc'r       : Type.Integer({ maximum: 65535 })                          ${globalComment}  \\
+  ,  'clientSessionAutoInc'        : Type.Integer({ maximum: 65535 })                          ${globalComment}  \\
 /}                                                                                                               ;
 #
 #
