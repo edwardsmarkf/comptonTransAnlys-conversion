@@ -16,7 +16,7 @@ echo  $FEATHERS_URL
 #
 export globalComment='GLOBAL_COMMENT_TO_BE_REPLACED_AT_END'          ;
 ScriptName="${BASH_SOURCE[0]##*/}"                                   ;
-TimeStamp=$(date +'%Y-%m-%d_%H-%M-%S';)                              ;
+TimeStamp=$(date +'%Y-%m-%d_%H:%M:%S';)                              ;
 export Final_Comment="/* Added by ${ScriptName} -- ${TimeStamp} */"  ;
 
 #
@@ -55,15 +55,15 @@ while read -r serviceName serviceType specialProcess; do
     bash -vx  ../services/template-create.bsh   ${serviceName}   ${serviceType}  ${globalComment}     ;
 done <<END_OF_SERVICE_FILE ;
   client-context                knex
-  client-context-stimword       custom      #############client-context-stimword
+  client-context-stimword       custom
   client-master                 knex
   client-session                knex
-  client-stimword               knex        ##################client-stimword
-  date-time                     custom      ##################date-time
+  client-stimword               knex
+  date-time                     custom
   error-sounds-tooltip          knex
   frequency-list                knex
-  get-client-emails             custom      ###############get-client-emails  
-  knex-generic-raw              custom      ##################knex-generic-raw
+  get-client-emails             custom
+  knex-generic-raw              custom
   language-norms                knex
   layout                        knex
   session-names                 knex
