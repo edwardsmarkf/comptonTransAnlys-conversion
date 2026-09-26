@@ -1,3 +1,4 @@
+####   SELECT  GROUP_CONCAT( DISTINCT  stimwordPosition.stimwordWord ORDER BY stimwordPosition.stimwordWord  SEPARATOR ', ' )  FROM     stimwordPosition WHERE 1  AND stimwordPosition.contextAutoIncr = 6;
 SELECT
         JSON_ARRAYAGG
         (       JSON_OBJECT
