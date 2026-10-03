@@ -18,7 +18,7 @@ SELECT
                                                 (       SELECT  GROUP_CONCAT( DISTINCT  `stimwordPosition`.`stimwordWord` ORDER BY `stimwordPosition`.`stimwordWord`  SEPARATOR ', ' )
                                                         FROM     `stimwordPosition`
                                                         WHERE 1
-                                                         /*and `stimword`.`stimwordClass` = 'SIXTYSIX_WORDS'   schema is missing                     */
+                                                         /*and `stimword`.`stimwordClass` = 'SIXTYSIX_WORDS'    2026-10-03  schema is missing                     */
                                                         AND `stimwordPosition`.`contextAutoIncr` = `context`.`contextAutoIncr`
                                                 )
 
