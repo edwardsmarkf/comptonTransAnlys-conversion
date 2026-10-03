@@ -14,6 +14,13 @@ SELECT
                                                         AND     `context`.`contextAutoIncr` = `stimwordPosition`.`contextAutoIncr`
                                                         AND     `stimwordPosition`.`stimwordPositionSetting` IN ( 'word','sentence')
                                                 )
+                        ,       'stimwords'                     ,
+                                                (       SELECT  GROUP_CONCAT( DISTINCT  stimwordPosition.stimwordWord ORDER BY stimwordPosition.stimwordWord  SEPARATOR ', ' )
+                                                        FROM     stimwordPosition
+                                                        WHERE 1
+                                                        AND stimwordPosition.contextAutoIncr = context.contextAutoIncr
+                                                )
+
                         ,       'positionSound'                  ,
                                         CONCAT
                                         (        `context`.`soundPhoneme`
