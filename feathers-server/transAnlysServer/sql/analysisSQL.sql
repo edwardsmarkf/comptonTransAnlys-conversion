@@ -1,3 +1,5 @@
+####  http://192.168.100.117:3030/knex-generic-raw/?knexSQL=analysisSQL&LAYOUT_NAME=PESL&TEACHER_EMAIL=info@englishwithoutaccent.com&CLIENT_MASTER_EMAIL=adelaideXX@noemail.com&SESSION_NAME=Time1&CLIENT_SESSION_AUTO_INCR=6
+####
 ####   SELECT  GROUP_CONCAT( DISTINCT  stimwordPosition.stimwordWord ORDER BY stimwordPosition.stimwordWord  SEPARATOR ', ' )  FROM     stimwordPosition WHERE 1  AND stimwordPosition.contextAutoIncr = 6;
 SELECT
         JSON_ARRAYAGG
