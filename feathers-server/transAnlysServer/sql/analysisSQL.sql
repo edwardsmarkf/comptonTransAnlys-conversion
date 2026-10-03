@@ -15,10 +15,11 @@ SELECT
                                                         AND     `stimwordPosition`.`stimwordPositionSetting` IN ( 'word','sentence')
                                                 )
                         ,       'stimwords'                     ,
-                                                (       SELECT  GROUP_CONCAT( DISTINCT  stimwordPosition.stimwordWord ORDER BY stimwordPosition.stimwordWord  SEPARATOR ', ' )
-                                                        FROM     stimwordPosition
+                                                (       SELECT  GROUP_CONCAT( DISTINCT  `stimwordPosition`.`stimwordWord` ORDER BY `stimwordPosition`.`stimwordWord`  SEPARATOR ', ' )
+                                                        FROM     `stimwordPosition`
                                                         WHERE 1
-                                                        AND stimwordPosition.contextAutoIncr = context.contextAutoIncr
+                                                         /*and `stimword`.`stimwordClass` = 'SIXTYSIX_WORDS'   schema is missing                     */
+                                                        AND `stimwordPosition`.`contextAutoIncr` = `context`.`contextAutoIncr`
                                                 )
 
                         ,       'positionSound'                  ,
