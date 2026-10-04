@@ -15,13 +15,14 @@ SELECT
                                                         AND     `stimwordPosition`.`stimwordPositionSetting` IN ( 'word','sentence')
                                                 )
                         ,       'stimwords'                     ,
-                                                (       SELECT  GROUP_CONCAT( DISTINCT  `stimwordPosition`.`stimwordWord` ORDER BY `stimwordPosition`.`stimwordWord`  SEPARATOR ', ' )
-                                                        FROM     `stimwordPosition`
+                                               (       SELECT  GROUP_CONCAT( DISTINCT  `stimword`.`stimwordWord` ORDER BY `stimword`.`stimwordWord`  SEPARATOR ', ' )
+                                                        FROM    `stimwordPosition`
+                                                        ,       `stimword`
                                                         WHERE 1
-                                                         /*and `stimword`.`stimwordClass` = 'SIXTYSIX_WORDS'    2026-10-03  schema is missing                     */
-                                                        AND `stimwordPosition`.`contextAutoIncr` = `context`.`contextAutoIncr`
+                                                        AND     `stimwordPosition`.`contextAutoIncr`    =       `context`.`contextAutoIncr`
+                                                        AND     `stimwordPosition`.`stimwordAutoIncr`   =       `stimword`.`stimwordAutoIncr`
+                                                        AND     `stimword`.`stimwordClass`              =       'SIXTYSIX_WORDS'
                                                 )
-
                         ,       'positionSound'                  ,
                                         CONCAT
                                         (        `context`.`soundPhoneme`
