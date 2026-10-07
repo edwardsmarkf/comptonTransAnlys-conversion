@@ -6,6 +6,7 @@ SELECT
                         (       'soundOrder'                    ,       `sound`.`soundOrder`
                         ,       'soundTitle'                    ,       `sound`.`soundTitle`
                         ,       'soundSubTitle'                 ,       `sound`.`soundSubTitle`
+           /*************************
                         ,       'occurences'                    ,
                                                (       SELECT  COUNT( DISTINCT `stimword`.`stimwordWord` )
                                                         FROM    `stimwordPosition`
@@ -15,6 +16,7 @@ SELECT
                                                         AND     `stimwordPosition`.`stimwordAutoIncr`   =       `stimword`.`stimwordAutoIncr`
                                                         AND     `stimword`.`stimwordClass`              =       'SIXTYSIX_WORDS'
                                                 )
+                     *********************************/
                         ,       'stimwords'                     ,
                                                (       SELECT  GROUP_CONCAT( DISTINCT  `stimword`.`stimwordWord` ORDER BY `stimword`.`stimwordWord`  SEPARATOR ',' )
                                                         FROM    `stimwordPosition`
