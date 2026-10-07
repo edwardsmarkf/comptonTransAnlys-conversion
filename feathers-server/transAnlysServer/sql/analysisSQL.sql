@@ -7,14 +7,16 @@ SELECT
                         ,       'soundTitle'                    ,       `sound`.`soundTitle`
                         ,       'soundSubTitle'                 ,       `sound`.`soundSubTitle`
                         ,       'occurences'                    ,
-                                                (       SELECT  COUNT(*)
+                                               (       SELECT  COUNT( DISTINCT `stimword`.`stimwordWord` )
                                                         FROM    `stimwordPosition`
+                                                        ,       `stimword`
                                                         WHERE   1
-                                                        AND     `context`.`contextAutoIncr` = `stimwordPosition`.`contextAutoIncr`
-                                                        AND     `stimwordPosition`.`stimwordPositionSetting` IN ( 'word','sentence')
+                                                        AND     `stimwordPosition`.`contextAutoIncr`    =       `context`.`contextAutoIncr`
+                                                        AND     `stimwordPosition`.`stimwordAutoIncr`   =       `stimword`.`stimwordAutoIncr`
+                                                        AND     `stimword`.`stimwordClass`              =       'SIXTYSIX_WORDS'
                                                 )
                         ,       'stimwords'                     ,
-                                               (       SELECT  GROUP_CONCAT( DISTINCT  `stimword`.`stimwordWord` ORDER BY `stimword`.`stimwordWord`  SEPARATOR ', ' )
+                                               (       SELECT  GROUP_CONCAT( DISTINCT  `stimword`.`stimwordWord` ORDER BY `stimword`.`stimwordWord`  SEPARATOR ',' )
                                                         FROM    `stimwordPosition`
                                                         ,       `stimword`
                                                         WHERE 1
