@@ -18,7 +18,7 @@ systemctl  start   mariadb.service ;
 firewall-cmd --permanent --add-port=3030/tcp ;
 firewall-cmd --reload                        ;
 
-git clone  https://github.com/edwardsmarkf/omptonTransAnlys-conversion/  ;
+git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion/  ;
 ```
 ```
 DROP USER IF EXISTS 'knexUser'@'localhost'				;
