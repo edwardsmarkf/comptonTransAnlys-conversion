@@ -30,11 +30,12 @@ CREATE DATABASE IF NOT EXISTS `comptonTransAnlys` 			;
 GRANT ALL PRIVILEGES ON `comptonTransAnlys`.* TO 'knexUser'@'localhost'	;
 -- mariadb  --host=localhost --user=knexUser  --password=knexPassword    comptonTransAnlys    ;   
 ```
-
+```
 bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/install-npm-and-feathers.bsh   ;
-
-bash  -vx    ./masterBuilder.bsh  2026-10-11   ## parm is the server name
-
+```
+```
+bash  -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/masterBuilder.bsh/  2026-10-11   ## the date(parm) will be the server name
+```
 testing:
 http://192.168.100.157:3030/date-time/    
 http://192.168.100.157:3030/knex-generic-raw/?knexSQL=serverVersionNowSQL&param=Testing
