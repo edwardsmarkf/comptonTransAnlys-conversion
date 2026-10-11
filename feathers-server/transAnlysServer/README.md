@@ -4,13 +4,15 @@ to get the existing voicefiles directory structure for testing:
 
  find ~/public_html/voicefiles -type d -print0  | tar --create --verbose --file=voicefileStructure.tar --null --no-recursion --files-from=-
 
-systemctl  enable  mariadb.service ;
-systemctl  start   mariadb.service ;
+
 
 
 dnf  --assumeyes  install  git  expect  mariadb-server;
 
-
+systemctl  enable  mariadb.service ;
+systemctl  start   mariadb.service ;
+firewall-cmd --permanent --add-port=3030/tcp ;
+firewall-cmd --reload                        ;
 
 bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/install-npm-and-feathers.bsh   ;
 
