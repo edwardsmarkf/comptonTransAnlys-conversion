@@ -28,7 +28,7 @@ WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MA
 CREATE DATABASE IF NOT EXISTS `comptonTransAnlys` 			;
 GRANT ALL PRIVILEGES ON `comptonTransAnlys`.* TO 'knexUser'@'localhost'	;
 
--- mariadb  --host=localhost --user=knexUser  --password=knexPassword    comptonTransAnlys    ;   
+mariadb  --host=localhost --user=knexUser  --password=knexPassword    comptonTransAnlys    ;   
 
 
 bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/install-npm-and-feathers.bsh   ;
