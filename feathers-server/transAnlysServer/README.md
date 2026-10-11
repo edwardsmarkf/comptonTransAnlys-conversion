@@ -6,12 +6,12 @@ to get the existing voicefiles directory structure for testing:
 
 
 
-
+```
 dnf  --assumeyes  install  
            git 
            expect  
            mariadb-server;
-
+```
 systemctl  enable  mariadb.service ;
 systemctl  start   mariadb.service ;
 firewall-cmd --permanent --add-port=3030/tcp ;
