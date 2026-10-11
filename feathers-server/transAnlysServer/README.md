@@ -34,7 +34,8 @@ GRANT ALL PRIVILEGES ON `comptonTransAnlys`.* TO 'knexUser'@'localhost'	;
 bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/install-npm-and-feathers.bsh   ;
 ```
 ```
-bash  -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/masterBuilder.bsh  2026-10-11   ## the date(parm) will be the server name
+cd      /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/    ;
+bash  -vx   ./masterBuilder.bsh  2026-10-11   ## the date(parm) will be the server name
 ```
 testing:
 http://192.168.100.157:3030/date-time/    
