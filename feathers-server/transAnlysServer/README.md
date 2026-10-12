@@ -43,8 +43,16 @@ bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysSer
 ```
 ```
 cd      /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/    ;
-bash  -vx   ./masterBuilder.bsh  2026-10-11   ## the date(parm) will be the server name
+bash  -vx   ./masterBuilder.bsh  2026-10-12   ## the date(parm) will be the server name
+```
+```
+cd   ./2026-10-12  ;
+npm start ;
 ```
 testing:
-http://192.168.100.157:3030/date-time/    
+```
+http://192.168.100.157:3030/date-time/
+```
+```
 http://192.168.100.157:3030/knex-generic-raw/?knexSQL=serverVersionNowSQL&param=Testing
+```
