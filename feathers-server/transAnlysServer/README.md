@@ -7,7 +7,9 @@ to get the existing voicefiles directory structure for testing:
 
 
 ```
-dnf  --assumeyes  update   ;
+dnf  --assumeyes  update   ;   ### optional!
+```
+```
 dnf  --assumeyes  install  \
            git             \
            expect          \
