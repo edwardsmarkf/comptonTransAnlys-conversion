@@ -8,7 +8,7 @@ these files go into "/home/mark/voicefiles/" as specified in ./config/default.js
 
 
 
-# to build the new server:
+# To build the new server:
 ```
 dnf  --assumeyes  update   ;   ### optional!
 ```
