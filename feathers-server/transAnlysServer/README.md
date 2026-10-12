@@ -42,7 +42,7 @@ GRANT ALL PRIVILEGES ON `comptonTransAnlys`.* TO 'knexUser'@'localhost'	;
 test the mariadb connection using last line above.
 then install npm and feathers:
 ```
-bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/install-npm-and-feathers.bsh   ;
+sudo bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/install-npm-and-feathers.bsh   ;
 ```
 ```
 cd      /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/    ;
