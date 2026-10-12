@@ -3,5 +3,5 @@
 ***/
 SELECT  VERSION()  "Server Version"
   ,     NOW()      "Server Time"
-  ,     :param     "Parameter Test "
+  ,     :param     "  -  Parameter Test"
   ;
