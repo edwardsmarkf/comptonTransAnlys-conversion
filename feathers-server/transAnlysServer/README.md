@@ -17,7 +17,9 @@ systemctl  enable  mariadb.service ;
 systemctl  start   mariadb.service ;
 firewall-cmd --permanent --add-port=3030/tcp ;
 firewall-cmd --reload                        ;
-
+```
+be in user directory:
+```
 git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion/  ;
 ```
 ```
