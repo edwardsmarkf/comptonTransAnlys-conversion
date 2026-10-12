@@ -16,7 +16,8 @@ dnf  --assumeyes  update   ;   ### optional!
 dnf  --assumeyes  install  \
            git             \
            expect          \
-           mariadb-server  ;
+           mariadb-server  \
+           tar             ;
 
 systemctl  enable  mariadb.service ;
 systemctl  start   mariadb.service ;
