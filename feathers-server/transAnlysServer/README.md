@@ -22,6 +22,11 @@ be in user directory:
 ```
 git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion/  ;
 ```
+log into mariadb:
+```
+mariadb ;
+```
+run these commands in mariadb:
 ```
 DROP USER IF EXISTS 'knexUser'@'localhost'				;
 CREATE USER 'knexUser'@'localhost' IDENTIFIED BY 'knexPassword';
@@ -32,6 +37,7 @@ CREATE DATABASE IF NOT EXISTS `comptonTransAnlys` 			;
 GRANT ALL PRIVILEGES ON `comptonTransAnlys`.* TO 'knexUser'@'localhost'	;
 -- mariadb  --host=localhost --user=knexUser  --password=knexPassword    comptonTransAnlys    ;   
 ```
+test the mariadb connection.
 ```
 bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/install-npm-and-feathers.bsh   ;
 ```
