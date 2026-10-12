@@ -4,8 +4,11 @@ to get the existing voicefiles directory structure for testing:
 ```
  find ~/public_html/voicefiles -type d -print0  | tar --create --verbose --file=voicefileStructure.tar --null --no-recursion --files-from=-
 ```
+these files go into "/home/mark/voicefiles/" as specified in ./config/default.json
 
-to build the new server:
+
+
+#to build the new server:
 ```
 dnf  --assumeyes  update   ;   ### optional!
 ```
