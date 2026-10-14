@@ -179,7 +179,13 @@ echo $(date)                                                                    
 
 grep ERROR   ${LOGGING_DIR}/*.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR'  | grep -v  grep                               ;
 
-mariadb-show   comptonTransAnlys   --count ;    ## 2026-10-14
+
+mariadb-show   comptonTransAnlys   --count                                                                                                         ;    ## 2026-10-14
+############ consider a new mariadb-dump command here
+cp    --verbose  /root/comptonTransAnlys-conversion/conversion/backup/55_count_by_keys.bsh.sql.gz  /home/mark/comptonTransAnlys-converted.sql.gz   ;    ## 2026-10-14  
+chown --verbose   mark:mark                                                                        /home/mark/comptonTransAnlys-converted.sql.gz   ;    ## 2026-10-14
+echo  'ok to download                                                                              /home/mark/comptonTransAnlys-converted.sql.gz'  ;    ## 2026-10-14
+
 
 echo 'Started: ' $startDate        ;
 echo 'Ended:   ' $(date)           ;
