@@ -1,5 +1,5 @@
 /*  
-       http://192.168.100.117:3030/knex-generic-raw/?knexSQL=analysisSQL&LAYOUT_NAME=PESL&TEACHER_EMAIL=info@englishwithoutaccent.com&CLIENT_MASTER_EMAIL=adelaideXX@noemail.com&SESSION_NAME=Time1&CLIENT_SESSION_AUTO_INCR=6
+       http://192.168.100.117:3030/knex-generic-raw/   QUESTION MARK   knexSQL=analysisSQL&LAYOUT_NAME=PESL&TEACHER_EMAIL=info  XXX   @englishwithoutaccent XXX .com&CLIENT_MASTER_EMAIL=adelaide XXX  @noemail  XXX  .com&SESSION_NAME=Time1&CLIENT_SESSION_AUTO_INCR=6
 */
 SELECT
         JSON_ARRAYAGG
