@@ -12,6 +12,7 @@
 #   2023-02-23 -  added 30_stimword_ordering
 #   2023-11-17 -  added 08bb_final_sed_rename.bsh to deal with matching key issue 
 #   2026-08-09 -  added 'time' to 'bash' command to see more statistics
+#   2026-10-14 -  added       # mariadb-show   comptonTransAnlys   --count ;
 
 ## to run in batch mode:
 ##
@@ -178,6 +179,7 @@ echo $(date)                                                                    
 
 grep ERROR   ${LOGGING_DIR}/*.log  | grep -v ERRORS | grep -v  'ERROR LINKING' | grep -v  'SEMANTIC ERROR'  | grep -v  grep                               ;
 
+mariadb-show   comptonTransAnlys   --count ;    ## 2026-10-14
 
 echo 'Started: ' $startDate        ;
 echo 'Ended:   ' $(date)           ;
