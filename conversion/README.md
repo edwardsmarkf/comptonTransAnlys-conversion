@@ -1,7 +1,10 @@
 # To Run:
 
+    ## these may need to be done on a new installation:                                \
+    set -o vi                                                                       ;  \
     dnf  -y  install mariadb-server                                                 ;  \
     systemctl enable --now mariadb                                                  ;  \
+    ## 
     cd  ~                                                                           ;  \
     rm -Rf  ~/comptonTransAnlys-conversion                                          ;  \
     git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion         ;  \
