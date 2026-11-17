@@ -46,14 +46,16 @@ GRANT ALL PRIVILEGES ON `comptonTransAnlys`.* TO 'knexUser'@'localhost'	;
 test the mariadb connection using last line above (its currently commented out
 
 
-install npm and feathers:
+install npm and feathers as root(sudo):
 ```
 sudo bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/install-npm-and-feathers.bsh   ;
 ```
+build the feathers server as NON-root user:
 ```
 cd      /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/    ;
 bash  -vx   ./masterBuilder.bsh  feathers-server-$(date +%F)   &>  ./masterBuilder.bsh.log  ;    ## the date(parm) will be the server name in this example
 ```
+start the server (hopefully):
 ```
 cd   ./feathers-server-$(date +%F)  ;
 npm start ;
