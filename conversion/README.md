@@ -1,5 +1,6 @@
 # To Run:
 
+    dnf  -y  install mariadb-server                                                 ;  \
     cd  ~                                                                           ;  \
     rm -Rf  ~/comptonTransAnlys-conversion                                          ;  \
     git clone  https://github.com/edwardsmarkf/comptonTransAnlys-conversion         ;  \
