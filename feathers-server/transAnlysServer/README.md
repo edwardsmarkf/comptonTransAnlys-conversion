@@ -67,3 +67,6 @@ http://192.168.100.157:3030/date-time/
 ```
 http://192.168.100.157:3030/knex-generic-raw/?knexSQL=serverVersionNowSQL&param=Testing
 ```
+```
+http://136.85.242.145:3030/get-client-emails/?LAYOUT_NAME=PESL&TEACHER_EMAIL=info@comptonpeslonline.com
+```
