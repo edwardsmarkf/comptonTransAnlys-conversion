@@ -52,10 +52,10 @@ sudo bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnl
 ```
 ```
 cd      /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/    ;
-bash  -vx   ./masterBuilder.bsh  2026-10-12   ## the date(parm) will be the server name
+bash  -vx   ./masterBuilder.bsh  feathers-server-2026-11-17   &>  ./masterBuilder.bsh.log  ;    ## the date(parm) will be the server name in this example
 ```
 ```
-cd   ./2026-10-12  ;
+cd   ./feathers-server-2026-11-17  ;
 npm start ;
 ```
 testing:
