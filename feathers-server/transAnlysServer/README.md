@@ -43,8 +43,10 @@ CREATE DATABASE IF NOT EXISTS `comptonTransAnlys` 			;
 GRANT ALL PRIVILEGES ON `comptonTransAnlys`.* TO 'knexUser'@'localhost'	;
 -- mariadb  --host=localhost --user=knexUser  --password=knexPassword    comptonTransAnlys    ;   
 ```
-test the mariadb connection using last line above.
-then install npm and feathers:
+test the mariadb connection using last line above (its currently commented out
+
+
+install npm and feathers:
 ```
 sudo bash -vx   /home/mark/comptonTransAnlys-conversion/feathers-server/transAnlysServer/install-npm-and-feathers.bsh   ;
 ```
